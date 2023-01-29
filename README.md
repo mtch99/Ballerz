@@ -14,5 +14,10 @@ There must be three different games on three different courts, two at the moment
 [x] Init use cases
     - [x] Feed use case with initial feed items
 
+[ ] Init Feed Page
+    - [ ] Feed Model
+    - [ ] Feed View
+    - [ ] Feed Controller
+
 
 
