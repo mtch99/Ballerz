@@ -3,7 +3,7 @@ import { IFeedItem, IUserProfile } from "./types";
 
 export class FeedUseCase {
 
-    static getFeed(): IFeedItem[] {
+    getFeed(): IFeedItem[] {
         return getInitialFeedItems()
     }
 }
