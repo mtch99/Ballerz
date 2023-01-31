@@ -13,11 +13,13 @@ There must be three different games on three different courts, two at the moment
 
 [x] Init use cases
     - [x] Feed use case with initial feed items
+    - [ ] Feed store, to listen to the Feed use case events
 
 [ ] Init Feed Page
-    - [ ] Feed Model
+    - [ ] Feed Model, used for data transfer betweeen controller and view
+    - [ ] Feed Controller, only calls the use case to execute requests for view data. View data is a state managed by the store, which listen to the use case for updates. Controller renders the view
     - [ ] Feed View
-    - [ ] Feed Controller
-    - [ ] Feed Screen
+
+    - [ ] Feed Screen, contains the controller(s)
 
 
