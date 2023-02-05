@@ -1,25 +1,40 @@
 export interface IFeedItem {
-    id?: string;
+    id: string;
     place: IPlace
     startingTime: Date
     endingTime: Date
-    attendants: IUserProfile[]
+    attendants: IUserProfileList
 }
+
 
 
 export interface IPlace {
+    id: string;
     name: string
 }
+
+
 
 
 export interface IUserProfile {
     id: string
     username: string
-    badges: IBadge[]
+    badges: IBadgeList
 }
+
+export interface IUserProfileList {
+    items: IUserProfile[]
+}
+
+
 
 
 export interface IBadge {
     name: string
     symbol: string
 }
+
+export interface IBadgeList {
+    items: IBadge[]
+}
+
