@@ -12,5 +12,7 @@ export class FeedController {
         this.feedItems = this.feedUseCase.getFeed()
     }
 
+    
+
 
 }

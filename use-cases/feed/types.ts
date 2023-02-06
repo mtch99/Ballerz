@@ -1,3 +1,8 @@
+export interface IFeed {
+    items: IFeedItem[];
+}
+
+
 export interface IFeedItem {
     id: string;
     place: IPlace
@@ -23,10 +28,8 @@ export interface IUserProfile {
 }
 
 export interface IUserProfileList {
-    items: IUserProfile[]
+    items: IUserProfileData[]
 }
-
-
 
 
 export interface IBadge {
@@ -34,7 +37,13 @@ export interface IBadge {
     symbol: string
 }
 
+
 export interface IBadgeList {
     items: IBadge[]
 }
 
+
+
+export interface IUserProfileData extends Partial<IUserProfile> {
+    id: string;
+}

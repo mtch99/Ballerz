@@ -18,7 +18,7 @@ There must be three different games on three different courts, two at the moment
         - [ ] Implementation
             - [x] feedItem interface in Usecases
             - [x] feedInterface interface in UseCases
-            - [ ] define actions on feed 
+            - [x] define actions feed feature actions 
             - [ ] Create a reducer function to handle the actions and update the state
             - [ ] Add the list state and the reducer to the root reducer
         

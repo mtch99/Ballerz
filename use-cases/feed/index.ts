@@ -1,10 +1,11 @@
-import { IFeedItem, IUserProfile } from "./types";
+import { IFeed, IFeedItem, IUserProfile } from "./types";
 
 
 export class FeedUseCase {
 
-    getFeed(): IFeedItem[] {
-        return getInitialFeedItems()
+    async getFeed(): Promise<IFeed> {
+        const items = await getInitialFeedItems()
+        return {items}
     }
 }
 
@@ -13,7 +14,7 @@ function getInitialUsers(): IUserProfile[] {
     return initialUserProfiles
 }
 
-function getInitialFeedItems(): IFeedItem[] {
+async function getInitialFeedItems(): Promise<IFeedItem[]> {
     return initialFeedItems
 }
 
