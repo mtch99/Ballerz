@@ -14,13 +14,13 @@ There must be three different games on three different courts, two at the moment
 [x] Init use cases
     - [x] Feed use case with initial feed items
     - [ ] Feed store, to listen to the Feed use case events
-        - [ ] How to handle list state with redux?
-        - [ ] Implementation
+        - [x] How to handle list state with redux?
+        - [x] Feed slice Implementation
             - [x] feedItem interface in Usecases
             - [x] feedInterface interface in UseCases
             - [x] define actions feed feature actions 
             - [x] Create a reducer function to handle the actions and update the state
-            - [ ] Add the list state and the reducer to the root reducer
+            - [x] Add the list state and the reducer to the root reducer
         
 
 

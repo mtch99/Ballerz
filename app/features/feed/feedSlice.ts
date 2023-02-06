@@ -1,5 +1,5 @@
 import { IFeedState } from "./interface";
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { ActionCreatorWithPayload, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../store'
 import { feedReducers } from "./reducers";
 
@@ -12,10 +12,14 @@ const initialState: IFeedState = {
 }
 
 export const feedSlice = createSlice({
-  name: 'posts',
+  name: 'feed',
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
-  reducers: feedReducers
+  reducers: {
+    "ADD_ITEM": feedReducers.ADD_ITEM,
+    "REMOVE_ITEM": feedReducers.REMOVE_ITEM,
+    "CHECK_IN": feedReducers.CHECK_IN
+  }
 })
 
 
