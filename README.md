@@ -13,17 +13,8 @@ There must be three different games on three different courts, two at the moment
 
 [x] Init use cases
     - [x] Feed use case with initial feed items
-    - [ ] Feed store, to listen to the Feed use case events
-        - [x] How to handle list state with redux?
-        - [x] Feed slice Implementation
-            - [x] feedItem interface in Usecases
-            - [x] feedInterface interface in UseCases
-            - [x] define actions feed feature actions 
-            - [x] Create a reducer function to handle the actions and update the state
-            - [x] Add the list state and the reducer to the root reducer
+    - [x] Feed store, to listen to the Feed use case events
         
-
-
 [ ] Init Feed Page
     - [ ] Feed Model, used for data transfer betweeen controller and view
     - [ ] Feed Controller, only calls the use case to execute requests for view data. View data is a state managed by the store, which listen to the use case for updates. Controller renders the view
