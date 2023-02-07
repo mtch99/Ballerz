@@ -1,11 +1,22 @@
+import { IFeedEventObserver, IFeedUseCase } from "./interface";
 import { IFeed, IFeedItem, IUserProfile } from "./types";
 
 
-export class FeedUseCase {
+export class FeedUseCase implements IFeedUseCase {
+
+    // An object whose reponsibilty is to dispatch feed use case events to the right subscribers
+    private observer: IFeedEventObserver;
+
+    private feed = initialFeed
+
+    constructor(observer: IFeedEventObserver){
+        this.observer = observer;
+    }
 
     async getFeed(): Promise<IFeed> {
-        const items = await getInitialFeedItems()
-        return items
+        const result = this.feed
+        this.observer.newFeedEventHandler(this.feed)
+        return result
     }
 }
 
@@ -15,7 +26,7 @@ function getInitialUsers(): IUserProfile[] {
 }
 
 async function getInitialFeedItems(): Promise<IFeedItem[]> {
-    return initialFeedItems
+    return initialFeed
 }
 
 
@@ -92,7 +103,7 @@ const initialUserProfiles: IUserProfile[] = [
 ]
 
 
-const initialFeedItems: IFeedItem[] = [
+const initialFeed: IFeedItem[] = [
     {
         id: "sevenPlayerGameId",
         place: {

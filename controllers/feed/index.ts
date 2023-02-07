@@ -1,14 +1,29 @@
+import { IFeed, IFeedItem } from "./../../use-cases/feed/types";
+import IFeedModel from "../../app/features/feed/adapter/interface";
 import { FeedUseCase } from "../../use-cases/feed"
-import { IFeedItem } from "../../use-cases/feed/types";
+import { IFeedEventObserver, IFeedUseCase } from "../../use-cases/feed/interface";
+import IFeedController from "./interface";
 
 
-export class FeedController {
+export class FeedController implements IFeedController{
 
-    feedUseCase = new FeedUseCase();
-    feedItems: IFeedItem[] = []
+    private feedUseCase: IFeedUseCase
 
-    constructor(){
-        this.feedItems = this.feedUseCase.getFeed()
+    constructor(feedModel: IFeedModel ){
+        const feedEventObserver = this.createObserver(feedModel)
+        this.feedUseCase = new FeedUseCase(feedEventObserver)
     }
 
+    async getFeed(): Promise<IFeedItem[]>{
+        const result = await this.feedUseCase.getFeed()
+        return result
+    }
+
+    private createObserver(feedModel: IFeedModel): IFeedEventObserver {
+        return {
+            newFeedEventHandler: feedModel.newFeedEventHandler
+        }
+    }
 }
+
+
