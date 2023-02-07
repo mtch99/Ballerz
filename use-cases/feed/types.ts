@@ -1,6 +1,4 @@
-export interface IFeed {
-    items: IFeedItem[];
-}
+export interface IFeed extends Array<IFeedItem>{}
 
 
 export interface IFeedItem {
@@ -8,7 +6,7 @@ export interface IFeedItem {
     place: IPlace
     startingTime: Date
     endingTime: Date
-    attendants: IUserProfileList
+    attendants: IUserProfile[]
 }
 
 
@@ -27,9 +25,8 @@ export interface IUserProfile {
     badges: IBadgeList
 }
 
-export interface IUserProfileList {
-    items: IUserProfileData[]
-}
+
+
 
 
 export interface IBadge {

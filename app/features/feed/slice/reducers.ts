@@ -1,5 +1,5 @@
 import { IFeedItemState, IFeedState } from "./interface";
-import { IAddItemAction, IAddItemActionPayload, ICheckInActionPayload, IRemoveItemActionPayload, feedActions} from "./actions";
+import { IAddItemAction, IAddItemActionPayload, ICheckInActionPayload, INewFeedActionPayload, IRemoveItemActionPayload, feedActions} from "./actions";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 
@@ -21,6 +21,7 @@ enum FeedActionType {
 	ADD_ITEM='ADD_ITEM',
 	REMOVE_ITEM="REMOVE_ITEM",
 	CHECK_IN="CHECK_IN",
+	NEW_FEED = 'NEW_FEED',
 }
 export type FeedActionString = keyof typeof FeedActionType
 
@@ -50,18 +51,23 @@ const removeItemReducer: FeedReducer<IRemoveItemActionPayload> = (state, action)
 
 const checkInReducer: FeedReducer<ICheckInActionPayload> = (state, action) => {
 	const currentItems = state.items
-            const {keyToUpdate, userProfileData} = action.payload
-            const newItems: IFeedItemState[] = currentItems.map(item => {
-                if (item.id === keyToUpdate) {
-                    const newFeedItem = addAttendantToFeedItem(item, userProfileData)
-					return newFeedItem
-                }  
-                return item
-            })
-            return {
-                ...state,
-                items: newItems
-            }
+    const {keyToUpdate, userProfileData} = action.payload
+    const newItems: IFeedItemState[] = currentItems.map(item => {
+        if (item.id === keyToUpdate) {
+            const newFeedItem = addAttendantToFeedItem(item, userProfileData)
+			return newFeedItem
+        }  
+        return item
+    })
+    return {
+        ...state,
+        items: newItems
+    }
+}
+
+
+const newFeedReducer: FeedReducer<INewFeedActionPayload> = (state, action) => {
+	return action.payload
 }
 
 
@@ -71,17 +77,18 @@ const checkInReducer: FeedReducer<ICheckInActionPayload> = (state, action) => {
 export const feedReducers = {
 	"ADD_ITEM": addItemReducer,
 	"CHECK_IN": checkInReducer,
-	"REMOVE_ITEM": removeItemReducer
+	"REMOVE_ITEM": removeItemReducer,
+	"NEW_FEED": newFeedReducer,
 } 
 
 
 function addAttendantToFeedItem(feedItem: IFeedItemState, userProfileData: ICheckInActionPayload['userProfileData']): IFeedItemState {
-	const currentAttendants = feedItem.attendants.items
+	const currentAttendants = feedItem.attendants
 	currentAttendants.push(userProfileData)
 
 	return {
 		...feedItem,
-		attendants: {items: currentAttendants}
+		attendants: currentAttendants
 	}
 }
 
