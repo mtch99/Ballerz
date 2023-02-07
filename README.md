@@ -14,16 +14,12 @@ There must be three different games on three different courts, two at the moment
 [x] Init use cases
     - [x] Feed use case with initial feed items
     - [x] Feed store, to listen to the Feed use case events
-        
+
 [ ] Init Feed Page
     - [x] Feed Model, used for data transfer from UseCase and React native view. The model is the state of the app. Model update is triggered by FeedUseCaseEvent
-        - [x] define IFeedUseCaseEvent
-            - [x] newFeedEvent: Happens when the getFeed function is called
-        - [x] define the FeedModel as a IFeedEventObserver only implementing the newFeedEventListener. It will contain other specialised obsewrvers how are Partial <'IFeedEventObserver>'. For now, there will be one for navigation and one for the state.
-            - [x] The feed model provider will provide feed model context
-        
+    - [x] Feed Controller, only calls the use case to execute requests for view data. View data is a state managed by the feed model, which listen to the use case for updates. Controller create the use case intercator with its different event listeners
 
-    - [ ] Feed Controller, only calls the use case to execute requests for view data. View data is a state managed by the store, which listen to the use case for updates. Controller renders the view
+
     - [ ] Feed View
 
     - [ ] Feed Screen, contains the controller(s)
