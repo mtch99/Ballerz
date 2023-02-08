@@ -22,6 +22,22 @@ There must be three different games on three different courts, two at the moment
     - [x] FeedScreen, inherits controller from the provider
     - [x] FeedScreen requests the feed on mount
 
+[ ] FeedView display 
+    - [ ] FeedItemView
+        - [ ] FeedItemViewProps
+        - [ ] Refactor 
+        - [ ] DateDisplay
+    - [ ] Flatlist
+        - [ ] Props
+        - [ ] Implement in FeedView
+
+    - [ ] FeedView props
+        - [ ]
+
+[ ] Define initial games
+
+[ ] Define Times
+
 
 
 
