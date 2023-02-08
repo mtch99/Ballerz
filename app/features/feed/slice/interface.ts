@@ -9,8 +9,8 @@ export interface IFeedState {
 export interface IFeedItemState  {
     id: string;
     place: IPlaceData
-    startingTime: Date
-    endingTime: Date
+    startingTime: string
+    endingTime: string
     attendants: IUserProfileData[]
 }
 

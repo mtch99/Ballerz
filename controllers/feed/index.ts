@@ -3,9 +3,10 @@ import IFeedModel from "../../app/features/feed/adapter/interface";
 import { FeedUseCase } from "../../use-cases/feed"
 import { IFeedEventObserver, IFeedUseCase } from "../../use-cases/feed/interface";
 import IFeedController from "./interface";
+import React from "react";
 
 
-export class FeedController implements IFeedController{
+export class FeedController implements IFeedController {
 
     private feedUseCase: IFeedUseCase
 

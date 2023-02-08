@@ -18,12 +18,9 @@ There must be three different games on three different courts, two at the moment
 [ ] Init Feed Page
     - [x] Feed Model, used for data transfer from UseCase and React native view. The model is the state of the app. Model update is triggered by FeedUseCaseEvent
     - [x] Feed Controller, only calls the use case to execute requests for view data. View data is a state managed by the feed model, which listen to the use case for updates. Controller create the use case intercator with its different event listeners
-    - [x] Feed View
-        - [x] Prototype with Builder x
-        - [x] Copy and paste code
-        - [x] Test the rendering
-
-    - [ ] Feed Screen, inherits controllers from the providers
+    - [x] init Feed View
+    - [x] FeedScreen, inherits controller from the provider
+    - [x] FeedScreen requests the feed on mount 
 
 
 

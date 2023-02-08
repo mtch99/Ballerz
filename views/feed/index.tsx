@@ -3,20 +3,19 @@ import { StyleSheet, View, Text } from "react-native";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import MaterialIconsIcon from "react-native-vector-icons/MaterialIcons";
+import { IFeedState } from "../../app/features/feed/slice/interface";
 
 
 interface IProps {
-    placeName: string
-    playerCount: number
-    badgeCount: number
-    date: string
-    startingTime: number
-    endingTime: number  
+    feedState: IFeedState
 }
 
 
-class FeedView extends React.Component<IProps | {}> {
-  
+class FeedView extends React.Component<IProps> {
+
+    componentDidMount(): void {
+        
+    }
   
     render(){
         return (
@@ -71,6 +70,7 @@ class FeedView extends React.Component<IProps | {}> {
                   </View>
                 </View>
               </View>
+              <Text>{JSON.stringify(this.props.feedState)}</Text>
             </View>
         )
     }
