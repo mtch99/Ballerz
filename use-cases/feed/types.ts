@@ -33,6 +33,7 @@ export interface IUserProfile {
 export interface IBadge {
     name: string
     symbol: string
+    description: string
 }
 
 
