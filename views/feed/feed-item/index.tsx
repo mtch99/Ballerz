@@ -3,7 +3,8 @@ import { StyleSheet, View, Text, FlatList } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { IFeedItemState, IFeedState } from "../../../app/features/feed/slice/interface";
 import { Thasadith_400Regular } from "@expo-google-fonts/dev";
-import { ActionsContainer } from "./actionsContainer/actionsContainer";
+import { ActionsContainer } from "./Bottom/Actions/actionsContainer";
+import Bottom from "./Bottom";
 
 interface IFeedViewProps{
   feedItem: IFeedItemState;
@@ -281,14 +282,7 @@ function GoodAlignment(feedItem: IFeedItemState): ReactElement {
           </View>
         </View>
       </View>
-      <View style={goodAlignmentStyle.rect2}>
-        <ActionsContainer/>
-        <View style={goodAlignmentStyle.friendsThereContainer}>
-            <Text style={goodAlignmentStyle.friendsThereText}>
-              username1 et 2 autres y vont
-            </Text>
-        </View>
-      </View>
+      <Bottom/>
     </View>
   );
 }

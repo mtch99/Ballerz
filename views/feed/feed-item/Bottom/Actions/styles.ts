@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 
+
 export const styles = StyleSheet.create({
     container: {
         width: 127,
@@ -9,22 +10,23 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
       },
-    jouer4: {
+    playText: {
         fontFamily: "roboto-regular",
         color: "#121212",
-        borderColor: "red",
-        borderWidth:4
+        // borderColor: "red",
+        // borderWidth:4
       },
       commentIcon: {
         color: "rgba(128,128,128,1)",
         fontSize: 16,
-        borderColor: "yellow",
-        borderWidth:4
+        // borderColor: "yellow",
+        // borderWidth:4
       },
-      inviter: {
+      inviteText: {
         fontFamily: "roboto-regular",
         color: "#121212",
       },
 })
+
 
 export default styles

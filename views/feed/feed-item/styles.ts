@@ -114,66 +114,11 @@ export const goodAlignmentStyle = StyleSheet.create({
       flex: 1,
       justifyContent: "center"
     },
-    bodyLeftContainerRow: {
+    bodyContainer: {
       height: 60,
       flexDirection: "row",
       marginTop: 4,
       marginLeft: 38,
       marginRight: 132
     },
-    rect2: {
-      width: 375,
-      height: 28,
-      backgroundColor: "#E6E6E6",
-      flexDirection: "row",
-    },
-    actionsContainer: {
-      width: 127,
-      height: 28,
-      backgroundColor: "#E6E6E6",
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "center"
-    },
-    jouer4: {
-      fontFamily: "roboto-regular",
-      color: "#121212",
-    //   marginTop: 6,
-    //   marginLeft: 5,
-      borderColor: "red",
-      borderWidth:4
-    },
-    commentIcon: {
-      color: "rgba(128,128,128,1)",
-      fontSize: 16,
-    //   marginLeft: 47,
-      borderColor: "yellow",
-      borderWidth:4
-    },
-    inviter: {
-      fontFamily: "roboto-regular",
-      color: "#121212",
-    //   marginLeft: 75
-    },
-    friendsThereContainer: {
-      width: 145,
-      height: 15,
-      backgroundColor: "#E6E6E6",
-      marginLeft: 75,
-      marginTop: 8
-    },
-    friendsThereText: {
-      fontFamily: "roboto-regular",
-      color: "#121212",
-      fontSize: 11,
-      marginTop: -1,
-      marginLeft: 2
-    },
-    actionsContainerRow: {
-      height: 28,
-      flexDirection: "row",
-      flex: 1,
-      marginRight: 7,
-      marginLeft: 21
-    }
   });
