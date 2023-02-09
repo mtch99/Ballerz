@@ -1,5 +1,5 @@
 import React from "react";
-import { FeedContext, IFeedContext } from "./provider";
+import { FeedContext, IFeedContext } from "../../controllers/feed/provider";
 import FeedView from "../../views/feed";
 import { IFeedState } from "../../app/features/feed/slice/interface";
 import IFeedScreen from "./interface";

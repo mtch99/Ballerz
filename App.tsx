@@ -3,15 +3,20 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux'
 import FeedView from './views/feed';
 import { FeedScreen } from './screens/feed';
-import FeedModelProvider from './app/features/feed/adapter';
 import { store } from './app/store';
-import FeedProvider from './screens/feed/provider';
+import FeedProvider from './controllers/feed/provider';
 
 
 export default function App() {
   return (
-    app2()
-  );
+    <Provider store = {store}>
+      <FeedProvider
+        navigation={{}}
+      >
+        <FeedScreen/>
+      </FeedProvider>
+    </Provider>
+  )
 }
 
 const styles = StyleSheet.create({

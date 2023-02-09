@@ -1,278 +1,475 @@
-import React, { Component } from "react";
-import { StyleSheet, View, Text } from "react-native";
-import FeatherIcon from "react-native-vector-icons/Feather";
-import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
-import MaterialIconsIcon from "react-native-vector-icons/MaterialIcons";
-import { IFeedItemState} from "../../../app/features/feed/slice/interface";
+import React, { Component, ReactElement } from "react";
+import { StyleSheet, View, Text, FlatList } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { IFeedItemState, IFeedState } from "../../../app/features/feed/slice/interface";
+import { Thasadith_400Regular } from "@expo-google-fonts/dev";
+import { ActionsContainer } from "./actionsContainer/actionsContainer";
 
-interface IProps {
-  feedState: IFeedItemState
+interface IFeedViewProps{
+  feedItem: IFeedItemState;
 }
 
+export const FeedItem:React.FC<IFeedViewProps> = (props) => {
 
-class FeedItemView extends React.Component<IProps> {
+    const feedItem: IFeedItemState = props.feedItem
 
-  feedState = this.props.feedState
-  playersCount: number = this.feedState.attendants.length
-  badgesCount: number = this.feedState.badges.length
-  
+    return GoodAlignment(feedItem)
+}
 
-  componentDidMount(): void {
-      
+const badAlignmenetStyleSheet = StyleSheet.create({
+  container: {
+    backgroundColor: "#E6E6E6",
+    width: 375,
+    height: 114
+  },
+  header: {
+    width: 375,
+    height: 22
+  },
+  placeNameContainer: {
+    width: 375,
+    height: 22,
+    backgroundColor: "#E6E6E6"
+  },
+  placeName: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    marginTop: 6,
+    marginLeft: 8
+  },
+  bodyLeftContainer: {
+    width: 68,
+    height: 60,
+    backgroundColor: "#E6E6E6"
+  },
+  playerNumContainer: {
+    width: 68,
+    height: 30,
+    backgroundColor: "#E6E6E6",
+    alignSelf: "center"
+  },
+  playersNumText: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    fontSize: 17,
+    marginTop: 5,
+    marginLeft: 6
+  },
+  playersText1: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    fontSize: 11,
+    marginLeft: 26
+  },
+  playersTextContainer: {
+    flex: 1,
+    justifyContent: "center"
+  },
+  badgeNumContainer: {
+    width: 68,
+    height: 30,
+    backgroundColor: "#E6E6E6"
+  },
+  badgeNumText: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    fontSize: 17,
+    marginTop: 5,
+    marginLeft: 6
+  },
+  playersText3: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    fontSize: 11,
+    marginLeft: 26
+  },
+  BadgeTextContainer: {
+    flex: 1,
+    justifyContent: "center"
+  },
+  dateTimeContatiner: {
+    width: 137,
+    height: 48,
+    backgroundColor: "#E6E6E6",
+    marginTop: 6
+  },
+  dayText: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    alignSelf: "center"
+  },
+  timeContainer: {
+    width: 132,
+    height: 29,
+    backgroundColor: "#E6E6E6",
+    marginTop: 19,
+    marginLeft: 5
+  },
+  startingHourText: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    fontSize: 17,
+    marginTop: 2
+  },
+  trait_separator: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    fontSize: 22,
+    marginTop: -2,
+    marginLeft: 51
+  },
+  startingHourTextColumn: {
+    width: 51,
+    marginTop: 3,
+    marginLeft: 15
+  },
+  endingHourText: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    fontSize: 16,
+    marginLeft: 80
+  },
+  endingHourTextContainer: {
+    flex: 1,
+    justifyContent: "center"
+  },
+  bodyLeftContainerRow: {
+    height: 60,
+    flexDirection: "row",
+    marginTop: 4,
+    marginLeft: 38,
+    marginRight: 132
+  },
+  bottomContainer: {
+    width: 375,
+    height: 28,
+    backgroundColor: "#E6E6E6",
+    flexDirection: "row"
+  },
+  actionsContainer: {
+    width: 127,
+    height: 28,
+    backgroundColor: "#E6E6E6"
+  },
+  jouer4: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    marginTop: 6,
+    marginLeft: 5
+  },
+  commentIcon: {
+    color: "rgba(128,128,128,1)",
+    fontSize: 16,
+    marginLeft: 47
+  },
+  inviter: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    marginLeft: 75
+  },
+  friendsThereContainer: {
+    width: 145,
+    height: 15,
+    backgroundColor: "#E6E6E6",
+    marginLeft: 75,
+    marginTop: 8
+  },
+  friendsThereText: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    fontSize: 11,
+    marginTop: -1,
+    marginLeft: 2
+  },
+  actionsContainerRow: {
+    height: 28,
+    flexDirection: "row",
+    flex: 1,
+    marginRight: 7,
+    marginLeft: 21
   }
-
-  render(){
-      return (
-          <View style={styles.container}>
-            <View style={styles.rectStack}>
-              <View style={styles.rect}>
-                <View style={styles.rect3Stack}>
-                  <View style={styles.rect3}>
-                    <Text style={styles.loremIpsum}>{this.props.feedState.attendants.length}</Text>
-                  </View>
-                  <View style={styles.rect4}>
-                    <View style={styles.rect5}>
-                      <Text style={styles.joueurs}>joueurs</Text>
-                      <View style={styles.loremIpsum2Row}>
-                        <Text style={styles.loremIpsum2}>0</Text>
-                        <Text style={styles.badges}>badges</Text>
-                      </View>
-                    </View>
-                  </View>
-                  <View style={styles.rect10}>
-                    <View style={styles.iconRow}>
-                      <FeatherIcon
-                        name="user-check"
-                        style={styles.icon}
-                      ></FeatherIcon>
-                      <FontAwesomeIcon
-                        name="comment-o"
-                        style={styles.icon1}
-                      ></FontAwesomeIcon>
-                      <MaterialIconsIcon
-                        name="group"
-                        style={styles.icon2}
-                      ></MaterialIconsIcon>
-                    </View>
-                  </View>
-                </View>
-              </View>
-              <View style={styles.rect2}>
-                <Text style={styles.byfarCentreSportif}>Byfar centre sportif</Text>
-              </View>
-              <View style={styles.rect6}>
-                <Text style={styles.mardi1207}>mardi 12/07</Text>
-                <View style={styles.rect7StackRow}>
-                  <View style={styles.rect7Stack}>
-                    <View style={styles.rect7}></View>
-                    <Text style={styles.loremIpsum3}>15:00</Text>
-                  </View>
-                  <Text style={styles.loremIpsum5}>-</Text>
-                  <View style={styles.rect9}>
-                    <Text style={styles.loremIpsum7}>18:00</Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-            <Text>{JSON.stringify(this.props.feedState)}</Text>
-          </View>
-      )
-  }
-}
-
-const styles = StyleSheet.create({
-container: {
-  flex: 1
-},
-rect: {
-  top: 0,
-  left: 0,
-  width: 375,
-  height: 155,
-  position: "absolute",
-  backgroundColor: "rgba(255,255,255,1)"
-},
-rect3: {
-  top: 0,
-  left: 0,
-  width: 375,
-  height: 65,
-  position: "absolute",
-  backgroundColor: "rgba(255,255,255,1)"
-},
-loremIpsum: {
-  fontFamily: "roboto-regular",
-  color: "#121212",
-  fontSize: 32,
-  marginLeft: 53
-},
-rect4: {
-  top: 5,
-  left: 2,
-  width: 188,
-  height: 66,
-  position: "absolute",
-  backgroundColor: "rgba(255,255,255,1)"
-},
-rect5: {
-  width: 188,
-  height: 62,
-  backgroundColor: "rgba(255,255,255,1)",
-  marginTop: 3
-},
-joueurs: {
-  fontFamily: "roboto-regular",
-  color: "#121212",
-  marginTop: 6,
-  marginLeft: 87
-},
-loremIpsum2: {
-  fontFamily: "roboto-regular",
-  color: "#121212",
-  fontSize: 25
-},
-badges: {
-  fontFamily: "roboto-regular",
-  color: "#121212",
-  marginLeft: 4,
-  marginTop: 7
-},
-loremIpsum2Row: {
-  height: 29,
-  flexDirection: "row",
-  marginTop: 9,
-  marginLeft: 51,
-  marginRight: 73
-},
-rect10: {
-  top: 68,
-  left: 0,
-  width: 375,
-  height: 33,
-  position: "absolute",
-  backgroundColor: "rgba(255,255,255,1)",
-  flexDirection: "row"
-},
-icon: {
-  color: "rgba(229,145,42,1)",
-  fontSize: 30,
-  opacity: 0.33,
-  height: 30,
-  width: 30,
-  marginTop: 2
-},
-icon1: {
-  color: "rgba(229,145,42,1)",
-  fontSize: 30,
-  opacity: 0.33,
-  height: 30,
-  width: 30,
-  marginLeft: 9
-},
-icon2: {
-  color: "rgba(229,145,42,1)",
-  fontSize: 30,
-  opacity: 0.33,
-  height: 30,
-  width: 30,
-  marginLeft: 7,
-  marginTop: 3
-},
-iconRow: {
-  height: 33,
-  flexDirection: "row",
-  flex: 1,
-  marginRight: 256,
-  marginLeft: 13
-},
-rect3Stack: {
-  width: 375,
-  height: 101,
-  marginTop: 29
-},
-rect2: {
-  top: 0,
-  left: 2,
-  width: 375,
-  height: 32,
-  position: "absolute",
-  backgroundColor: "rgba(255,255,255,1)"
-},
-byfarCentreSportif: {
-  fontFamily: "roboto-regular",
-  color: "#121212",
-  fontSize: 18,
-  marginTop: 8,
-  marginLeft: 11
-},
-rect6: {
-  top: 20,
-  left: 188,
-  width: 188,
-  height: 80,
-  position: "absolute",
-  backgroundColor: "rgba(255,255,255,1)"
-},
-mardi1207: {
-  fontFamily: "roboto-900",
-  color: "#121212",
-  fontSize: 17,
-  marginTop: 8,
-  marginLeft: 37
-},
-rect7: {
-  top: 0,
-  left: 0,
-  width: 72,
-  height: 37,
-  position: "absolute",
-  backgroundColor: "rgba(255,255,255,1)"
-},
-loremIpsum3: {
-  top: 3,
-  left: 12,
-  position: "absolute",
-  fontFamily: "roboto-regular",
-  color: "#121212",
-  fontSize: 27
-},
-rect7Stack: {
-  width: 79,
-  height: 37
-},
-loremIpsum5: {
-  fontFamily: "roboto-regular",
-  color: "#121212",
-  letterSpacing: 0,
-  fontSize: 25,
-  marginLeft: 5,
-  marginTop: 3
-},
-rect9: {
-  width: 72,
-  height: 37,
-  backgroundColor: "rgba(255,255,255,1)",
-  marginLeft: 4,
-  marginTop: 2
-},
-loremIpsum7: {
-  fontFamily: "roboto-regular",
-  color: "#121212",
-  fontSize: 27,
-  marginTop: 2,
-  marginLeft: 3
-},
-rect7StackRow: {
-  height: 39,
-  flexDirection: "row",
-  marginTop: 3,
-  marginRight: 21
-},
-rectStack: {
-  width: 377,
-  height: 155,
-  marginTop: 170
-}
 });
 
-export default FeedItemView;
+function BadAlignment(feedItem: IFeedItemState): ReactElement{
+
+  return(
+    <View style={badAlignmenetStyleSheet.container}>
+      <View style={badAlignmenetStyleSheet.header}>
+        <View style={badAlignmenetStyleSheet.placeNameContainer}>
+          <Text style={badAlignmenetStyleSheet.placeName}>{feedItem?.place.name}</Text>
+        </View>
+      </View>
+      <View style={badAlignmenetStyleSheet.bodyLeftContainerRow}>
+        <View style={badAlignmenetStyleSheet.bodyLeftContainer}>
+          <View style={badAlignmenetStyleSheet.playerNumContainer}>
+            <Text style={badAlignmenetStyleSheet.playersNumText}>20</Text>
+            <View style={badAlignmenetStyleSheet.playersTextContainer}>
+              <Text style={badAlignmenetStyleSheet.playersText1}>joueurs</Text>
+            </View>
+          </View>
+          <View style={badAlignmenetStyleSheet.badgeNumContainer}>
+            <Text style={badAlignmenetStyleSheet.badgeNumText}>0</Text>
+            <View style={badAlignmenetStyleSheet.BadgeTextContainer}>
+              <Text style={badAlignmenetStyleSheet.playersText3}>badges</Text>
+            </View>
+          </View>
+        </View>
+        <View style={badAlignmenetStyleSheet.dateTimeContatiner}>
+          <Text style={badAlignmenetStyleSheet.dayText}>Mardi</Text>
+          <View style={badAlignmenetStyleSheet.timeContainer}>
+            <View style={badAlignmenetStyleSheet.startingHourTextColumn}>
+              <Text style={badAlignmenetStyleSheet.startingHourText}>15:00</Text>
+              <Text style={badAlignmenetStyleSheet.trait_separator}>-</Text>
+            </View>
+            <View style={badAlignmenetStyleSheet.endingHourTextContainer}>
+              <Text style={badAlignmenetStyleSheet.endingHourText}>15:00</Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View style={badAlignmenetStyleSheet.bottomContainer}>
+        <View style={badAlignmenetStyleSheet.actionsContainerRow}>
+          <View style={badAlignmenetStyleSheet.actionsContainer}>
+            <Text style={badAlignmenetStyleSheet.jouer4}>jouer</Text>
+            <Icon name="commenting-o" style={badAlignmenetStyleSheet.commentIcon}></Icon>
+            <Text style={badAlignmenetStyleSheet.inviter}>inviter</Text>
+          </View>
+          <View style={badAlignmenetStyleSheet.friendsThereContainer}>
+            <Text style={badAlignmenetStyleSheet.friendsThereText}>
+              username1 et 2 autres y vont
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  )
+}
+
+
+
+function GoodAlignment(feedItem: IFeedItemState): ReactElement {
+  return (
+    <View style={goodAlignmentStyle.container}>
+      <View style={goodAlignmentStyle.header}>
+        <View style={goodAlignmentStyle.placeNameContainer}>
+          <Text style={goodAlignmentStyle.placeName}>{feedItem?.place.name}</Text>
+        </View>
+      </View>
+      <View style={goodAlignmentStyle.bodyLeftContainerRow}>
+        <View style={goodAlignmentStyle.bodyLeftContainer}>
+          <View style={goodAlignmentStyle.playerNumContainer}>
+            <Text style={goodAlignmentStyle.playersNumText1}>20</Text>
+            <Text style={goodAlignmentStyle.playersText1}>joueurs</Text>
+          </View>
+          <View style={goodAlignmentStyle.badgeNumContainer}>
+            <Text style={goodAlignmentStyle.playersNumText3}>20</Text>
+            <View style={goodAlignmentStyle.playersNumText3Filler}>
+              <Text style={goodAlignmentStyle.playersText3}>joueurs</Text>
+            </View>
+          </View>
+        </View>
+        <View style={goodAlignmentStyle.dateTimeContatiner}>
+          <Text style={goodAlignmentStyle.mardi}>Mardi</Text>
+          <View style={goodAlignmentStyle.timeContainer}>
+            <View style={goodAlignmentStyle.startingHourTextColumn}>
+              <Text style={goodAlignmentStyle.startingHourText}>15:00</Text>
+              <Text style={goodAlignmentStyle.trait_separator}>-</Text>
+            </View>
+            <View style={goodAlignmentStyle.startingHourTextColumnFiller}>
+              <Text style={goodAlignmentStyle.endingHourText1}>15:00</Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View style={goodAlignmentStyle.rect2}>
+        <ActionsContainer/>
+        <View style={goodAlignmentStyle.friendsThereContainer}>
+            <Text style={goodAlignmentStyle.friendsThereText}>
+              username1 et 2 autres y vont
+            </Text>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+const goodAlignmentStyle = StyleSheet.create({
+  container: {
+    backgroundColor: "#E6E6E6",
+    width: 375,
+    height: 114
+  },
+  header: {
+    width: 375,
+    height: 22
+  },
+  placeNameContainer: {
+    width: 375,
+    height: 22,
+    backgroundColor: "#E6E6E6"
+  },
+  placeName: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    marginTop: 6,
+    marginLeft: 8
+  },
+  bodyLeftContainer: {
+    width: 68,
+    height: 60,
+    backgroundColor: "#E6E6E6"
+  },
+  playerNumContainer: {
+    width: 68,
+    height: 30,
+    backgroundColor: "#E6E6E6",
+    alignSelf: "center"
+  },
+  playersNumText1: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    fontSize: 17,
+    marginTop: 5,
+    marginLeft: 6
+  },
+  playersText1: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    fontSize: 11,
+    marginTop: 3,
+    marginLeft: 26
+  },
+  badgeNumContainer: {
+    width: 68,
+    height: 30,
+    backgroundColor: "#E6E6E6"
+  },
+  playersNumText3: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    fontSize: 17,
+    marginTop: 5,
+    marginLeft: 6
+  },
+  playersText3: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    fontSize: 11,
+    marginLeft: 26
+  },
+  playersNumText3Filler: {
+    flex: 1,
+    justifyContent: "center"
+  },
+  dateTimeContatiner: {
+    width: 137,
+    height: 48,
+    backgroundColor: "#E6E6E6",
+    marginTop: 6
+  },
+  mardi: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    alignSelf: "center"
+  },
+  timeContainer: {
+    width: 132,
+    height: 29,
+    backgroundColor: "#E6E6E6",
+    marginTop: 19,
+    marginLeft: 5
+  },
+  startingHourText: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    fontSize: 17,
+    marginTop: 2
+  },
+  trait_separator: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    fontSize: 22,
+    marginTop: -2,
+    marginLeft: 51
+  },
+  startingHourTextColumn: {
+    width: 51,
+    marginTop: 3,
+    marginLeft: 15
+  },
+  endingHourText1: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    fontSize: 16,
+    marginLeft: 80
+  },
+  startingHourTextColumnFiller: {
+    flex: 1,
+    justifyContent: "center"
+  },
+  bodyLeftContainerRow: {
+    height: 60,
+    flexDirection: "row",
+    marginTop: 4,
+    marginLeft: 38,
+    marginRight: 132
+  },
+  rect2: {
+    width: 375,
+    height: 28,
+    backgroundColor: "#E6E6E6",
+    flexDirection: "row"
+  },
+  actionsContainer: {
+    width: 127,
+    height: 28,
+    backgroundColor: "#E6E6E6"
+  },
+  jouer4: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    marginTop: 6,
+    marginLeft: 5
+  },
+  commentIcon: {
+    color: "rgba(128,128,128,1)",
+    fontSize: 16,
+    marginLeft: 47
+  },
+  inviter: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    marginLeft: 75
+  },
+  friendsThereContainer: {
+    width: 145,
+    height: 15,
+    backgroundColor: "#E6E6E6",
+    marginLeft: 75,
+    marginTop: 8
+  },
+  friendsThereText: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    fontSize: 11,
+    marginTop: -1,
+    marginLeft: 2
+  },
+  actionsContainerRow: {
+    height: 28,
+    flexDirection: "row",
+    flex: 1,
+    marginRight: 7,
+    marginLeft: 21
+  }
+});
+
+
+
+export default FeedItem
+
+
+
+
+
+

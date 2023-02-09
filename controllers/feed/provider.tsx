@@ -1,10 +1,10 @@
 import React from "react"
 import { IFeedState } from "../../app/features/feed/slice/interface"
-import IFeedController from "../../controllers/feed/interface"
+import IFeedController from "./interface"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { NEW_FEED, selectFeed } from "../../app/features/feed/slice"
-import { FeedModel, createFeedModel } from "../../app/features/feed/adapter"
-import { FeedController } from "../../controllers/feed"
+import { createFeedModel } from "../../app/features/feed/adapter"
+import { FeedController } from "."
 
 
 export interface IFeedContext {
@@ -56,10 +56,5 @@ export default function FeedProvider (props: IProps) {
         </FeedContext.Provider>
     )
 }
-
-
-
-
-
 
 
