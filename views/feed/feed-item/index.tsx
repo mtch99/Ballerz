@@ -5,6 +5,7 @@ import { IFeedItemState, IFeedState } from "../../../app/features/feed/slice/int
 import { Thasadith_400Regular } from "@expo-google-fonts/dev";
 import { ActionsContainer } from "./Bottom/Actions/actionsContainer";
 import Bottom from "./Bottom";
+import Header from "./Header";
 
 interface IFeedViewProps{
   feedItem: IFeedItemState;
@@ -251,11 +252,9 @@ function BadAlignment(feedItem: IFeedItemState): ReactElement{
 function GoodAlignment(feedItem: IFeedItemState): ReactElement {
   return (
     <View style={goodAlignmentStyle.container}>
-      <View style={goodAlignmentStyle.header}>
-        <View style={goodAlignmentStyle.placeNameContainer}>
-          <Text style={goodAlignmentStyle.placeName}>{feedItem?.place.name}</Text>
-        </View>
-      </View>
+      <Header
+        text={feedItem?(feedItem.place.name):""}
+      />
       <View style={goodAlignmentStyle.bodyLeftContainerRow}>
         <View style={goodAlignmentStyle.bodyLeftContainer}>
           <View style={goodAlignmentStyle.playerNumContainer}>
