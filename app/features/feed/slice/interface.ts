@@ -1,3 +1,4 @@
+import { IBadge, IFeedItem } from "./../../../../use-cases/feed/types";
 import { IFeed, IPlace, IUserProfile } from "../../../../use-cases/feed/types";
 
 
@@ -6,8 +7,9 @@ export interface IFeedState {
 }
 
 
-export interface IFeedItemState  {
+export interface IFeedItemState {
     id: string;
+    badges: IBadgesData[]
     place: IPlaceData
     startingTime: string
     endingTime: string
@@ -16,14 +18,20 @@ export interface IFeedItemState  {
 
 
 export interface IUserProfileData extends Partial<IUserProfile>{
-    id: string;
-    username: string;
+    id: IUserProfile['id'];
+    username: IUserProfile['username'];
 }
 
 export interface IPlaceData extends Partial<IPlace>{
-    id: string;
-    name: string;
+    id: IPlace['id'];
+    name: IPlace['name'];
 }
+
+export interface IBadgesData extends Partial<IBadge>{
+    name: IBadge['name']
+    symbol: IBadge['symbol']
+}
+
 
 
 

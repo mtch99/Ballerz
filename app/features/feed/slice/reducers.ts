@@ -1,5 +1,5 @@
 import { IFeedItemState, IFeedState } from "./interface";
-import { IAddItemAction, IAddItemActionPayload, ICheckInActionPayload, INewFeedActionPayload, IRemoveItemActionPayload, feedActions} from "./actions";
+import {IAddItemActionPayload, ICheckInActionPayload, INewFeedActionPayload, IRemoveItemActionPayload} from "./actions";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 

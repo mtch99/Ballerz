@@ -7,6 +7,7 @@ export interface IFeedItem {
     startingTime: Date
     endingTime: Date
     attendants: IUserProfile[]
+    badges: IBadge[]
 }
 
 

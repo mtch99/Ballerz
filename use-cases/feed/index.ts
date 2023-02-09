@@ -106,13 +106,14 @@ const initialUserProfiles: IUserProfile[] = [
 const initialFeed: IFeedItem[] = [
     {
         id: "sevenPlayerGameId",
+        badges: [],
         place: {
             id: "ByfarId",
             name: "ByFar centre sportif"
         },
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
-        attendants: getInitialUsers()
+        attendants: getInitialUsers(),
     },
 
     {
@@ -123,7 +124,8 @@ const initialFeed: IFeedItem[] = [
         },
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
-        attendants: getInitialUsers()
+        attendants: getInitialUsers(),
+        badges: []
     },
 
     {
@@ -134,7 +136,8 @@ const initialFeed: IFeedItem[] = [
         },
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
-        attendants: getInitialUsers().slice(0, 2)
+        attendants: getInitialUsers().slice(0, 2),
+        badges: []
     },
 
     {
@@ -145,6 +148,7 @@ const initialFeed: IFeedItem[] = [
         },
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
-        attendants: []
+        attendants: [],
+        badges: []
     },
 ]
