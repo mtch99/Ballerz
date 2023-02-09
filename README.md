@@ -2,8 +2,13 @@
 The app for finding basketball pickup games
 
 ## Branch Purpose
-Test this scenario: 
+Test these scenarios: 
 1) I want to search troughout the feed screen to find basketball pickup
+2) I want to inspect look at the top game and see the badges
+3) I want to know badges meanings
+4) I want to see the attendants list
+5) I want to be acknowledged that I have to make friends in order to view their attendances
+
 
 
 There must be three different games on three different courts, two at the moment, and one other on saturday
@@ -24,8 +29,8 @@ There must be three different games on three different courts, two at the moment
 
 [ ] FeedView display 
     - [ ] FeedItemView
-        - [ ] FeedItemViewProps
-        - [ ] Refactor 
+        - [x] FeedItemViewProps
+        - [x] Refactor 
         - [ ] DateDisplay
     - [ ] Flatlist
         - [ ] Props
