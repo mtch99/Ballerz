@@ -6,6 +6,7 @@ import { Thasadith_400Regular } from "@expo-google-fonts/dev";
 import { ActionsContainer } from "./Bottom/Actions/actionsContainer";
 import Bottom from "./Bottom";
 import Header from "./Header";
+import { Body } from "./Body";
 
 interface IFeedViewProps{
   feedItem: IFeedItemState;
@@ -255,32 +256,7 @@ function GoodAlignment(feedItem: IFeedItemState): ReactElement {
       <Header
         text={feedItem?(feedItem.place.name):""}
       />
-      <View style={goodAlignmentStyle.bodyLeftContainerRow}>
-        <View style={goodAlignmentStyle.bodyLeftContainer}>
-          <View style={goodAlignmentStyle.playerNumContainer}>
-            <Text style={goodAlignmentStyle.playersNumText1}>20</Text>
-            <Text style={goodAlignmentStyle.playersText1}>joueurs</Text>
-          </View>
-          <View style={goodAlignmentStyle.badgeNumContainer}>
-            <Text style={goodAlignmentStyle.playersNumText3}>20</Text>
-            <View style={goodAlignmentStyle.playersNumText3Filler}>
-              <Text style={goodAlignmentStyle.playersText3}>joueurs</Text>
-            </View>
-          </View>
-        </View>
-        <View style={goodAlignmentStyle.dateTimeContatiner}>
-          <Text style={goodAlignmentStyle.mardi}>Mardi</Text>
-          <View style={goodAlignmentStyle.timeContainer}>
-            <View style={goodAlignmentStyle.startingHourTextColumn}>
-              <Text style={goodAlignmentStyle.startingHourText}>15:00</Text>
-              <Text style={goodAlignmentStyle.trait_separator}>-</Text>
-            </View>
-            <View style={goodAlignmentStyle.startingHourTextColumnFiller}>
-              <Text style={goodAlignmentStyle.endingHourText1}>15:00</Text>
-            </View>
-          </View>
-        </View>
-      </View>
+      <Body/>
       <Bottom/>
     </View>
   );

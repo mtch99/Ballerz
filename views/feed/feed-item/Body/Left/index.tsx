@@ -6,7 +6,7 @@ import React from "react"
 export interface IActionContainerProps{}
 
 
-export class ActionsContainer extends React.Component<IActionContainerProps> {
+export default class LeftBody extends React.Component<IActionContainerProps> {
     
   render() {
     return(
