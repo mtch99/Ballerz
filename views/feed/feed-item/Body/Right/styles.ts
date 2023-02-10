@@ -19,8 +19,6 @@ const style = StyleSheet.create({
         width: 132,
         height: 29,
         backgroundColor: "#E6E6E6",
-        borderColor: "red",
-        borderWidth: 3,
         flexDirection: "row",
         alignItems: "center",
     },
@@ -43,16 +41,12 @@ const style = StyleSheet.create({
 
     //   marginTop: -2,
     //   marginLeft: 51,
-      borderColor: "green",
-      borderWidth: 3,
     },
     startingHourTextColumn: {
     //   width: 51,
     //   marginTop: 3,
     //   marginLeft: 15,
       flex: 1,
-      borderColor: "yellow",
-      borderWidth: 3,
       flexDirection: "row"
     },
     endingHourText1: {
@@ -65,8 +59,6 @@ const style = StyleSheet.create({
     startingHourTextColumnFiller: {
       flex: 1,
       justifyContent: "center",
-      borderColor: "red",
-      borderWidth: 3,
     },
 })
 

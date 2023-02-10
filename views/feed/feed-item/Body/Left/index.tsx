@@ -13,13 +13,13 @@ export default class LeftBody extends React.Component<IActionContainerProps> {
 
         <View style={styles.container}>
               <View style={styles.playerNumContainer}>
-                <Text style={styles.playersNumText1}>20</Text>
-                <Text style={styles.playersText1}>joueurs</Text>
+                <Text style={styles.playersNum}>20</Text>
+                <Text style={styles.playersText}>joueurs</Text>
               </View>
               <View style={styles.badgeNumContainer}>
-                <Text style={styles.playersNumText3}>20</Text>
-                <View style={styles.playersNumText3Filler}>
-                  <Text style={styles.playersText3}>joueurs</Text>
+                <Text style={styles.badgeNum}>20</Text>
+                <View style={styles.badgesTextContainer}>
+                  <Text style={styles.badgesText}>badges</Text>
                 </View>
               </View>
         </View>

@@ -11,43 +11,49 @@ export const styles = StyleSheet.create({
         width: 68,
         height: 30,
         backgroundColor: "#E6E6E6",
-        alignSelf: "center"
+        alignSelf: "center",
+        alignItems: "center",
+        flexDirection: "row",
     },
-    playersNumText1: {
+    playersNum: {
         fontFamily: "roboto-regular",
         color: "#121212",
-        fontSize: 17,
-        marginTop: 5,
-        marginLeft: 6
+        fontSize: 16,
+        // marginTop: 5,
+        // marginLeft: 6,
     },
-    playersText1: {
+    playersText: {
         fontFamily: "roboto-regular",
         color: "#121212",
+        flexGrow:1,
         fontSize: 11,
-        marginTop: 3,
-        marginLeft: 26
+        // marginTop: 3,
+        marginLeft: 2,
     },
     badgeNumContainer: {
         width: 68,
         height: 30,
-        backgroundColor: "#E6E6E6"
+        backgroundColor: "#E6E6E6",
+        flexDirection: "row",
     },
-    playersNumText3: {
+    badgeNum: {
         fontFamily: "roboto-regular",
         color: "#121212",
         fontSize: 17,
         marginTop: 5,
         marginLeft: 6
     },
-    playersText3: {
+    badgesTextContainer: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    badgesText: {
         fontFamily: "roboto-regular",
         color: "#121212",
         fontSize: 11,
-        marginLeft: 26
-    },
-    playersNumText3Filler: {
-      flex: 1,
-      justifyContent: "center"
+        // flexGrow: 1,
+        // marginLeft: 26
     },
 })
 
