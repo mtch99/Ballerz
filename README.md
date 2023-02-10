@@ -7,7 +7,7 @@ Test this scenario:
 
 ## Next 
 Test these scenarios:
-    3) I want to know badges meanings
+    3) I want to know badges meanings // I am curious about the badges
     4) I want to see the attendants list
     5) I want to be acknowledged that I have to make friends in order to view   their attendances
 
