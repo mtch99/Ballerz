@@ -1,15 +1,52 @@
 # Ballerz
 The app for finding basketball pickup games
 
-## Repository Purpose
-This repository is dedicated to quickly test product hypothesis by testing sessions conducted with qualified early adopters.
-For this purpose, the project will be back-end-less, testing scenarios are mocked on the client side.
+## Branch Purpose
+Test this scenario: 
+    2) I want to inspect look at the top game and see the badges
 
-### Scenarios
-1) I want to search troughout the feed screen to find basketball pickup
-2) I want to signal other players when and where i am going to play  (check-in)
-3) I want to be informed that i can will notified of a player attending a game if we are friends
-4) I want to be informed that i can create a group chat with my friends and invite the group to play
-5) After creating the group i want to be informed that i can get a badge by getting the group members to accept my invitations
+## Next 
+Test these scenarios:
+    3) I want to know badges meanings // I am curious about the badges
+    4) I want to see the attendants list
+    5) I want to be acknowledged that I have to make friends in order to view   their attendances
+
+
+
+There must be three different games on three different courts, two at the moment, and one other on saturday
+
+
+## How? (technical)
+
+[ ] Define Badges
+    - [x] IBadge description field
+    - [x] Merge with the scenario-1
+
+[ ] Define badges description and symbol
+    - [ ] Think of progression systems based on the mastery job stories
+        - [x] NewBie Badge
+            - [x] Test that the symbol is correctly displayed on ios
+
+[x] Define initial games
+    - [x] two games with a badge 
+        - [x] Rendering logic for badged games
+
+
+[ ] Define Times
+
+[ ] BadgesDescription Page
+    - [x] Init Navigation
+    - [x] The FeedScreen must be injected a mavigation controller
+        - [x] Create feedScreenWrapper to wrap the FeedScreen in the navigator
+            - [x] added a proptype without controller to the feed screen to bind the navigator screen props to the feed screen natural props 
+
+
+
+
+
+
+
+
+
 
 
