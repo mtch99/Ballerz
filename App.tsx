@@ -1,10 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux'
-import FeedView from './views/feed';
-import { FeedScreen } from './screens/feed';
 import { store } from './app/store';
 import FeedProvider from './controllers/feed/provider';
+import Navigation from './navigation';
 
 
 export default function App() {
@@ -13,7 +12,9 @@ export default function App() {
       <FeedProvider
         navigation={{}}
       >
-        <FeedScreen/>
+        <Navigation
+          colorScheme={"light"}
+        />
       </FeedProvider>
     </Provider>
   )
@@ -27,19 +28,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-
-function app2 (): React.ReactNode{
-
-
-  return (
-    <Provider store = {store}>
-      <FeedProvider
-        navigation={{}}
-      >
-        <FeedScreen/>
-      </FeedProvider>
-    </Provider>
-  )
-}
 

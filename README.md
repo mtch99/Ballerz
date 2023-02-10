@@ -34,6 +34,11 @@ There must be three different games on three different courts, two at the moment
 
 [ ] Define Times
 
+[ ] BadgesDescription Page
+    - [x] Init Navigation
+        
+    - [ ] Define NavigationController for each screen
+
 
 
 
