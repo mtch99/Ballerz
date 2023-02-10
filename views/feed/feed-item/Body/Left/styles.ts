@@ -16,14 +16,14 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
     },
     playersNum: {
-        fontFamily: "roboto-regular",
+        fontFamily: "Cochin",
         color: "#121212",
         fontSize: 16,
         // marginTop: 5,
         // marginLeft: 6,
     },
     playersText: {
-        fontFamily: "roboto-regular",
+        fontFamily: "Cochin",
         color: "#121212",
         flexGrow:1,
         fontSize: 11,
@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
     },
     badgeNum: {
-        fontFamily: "roboto-regular",
+        fontFamily: "Cochin",
         color: "#121212",
         fontSize: 17,
         marginTop: 5,
@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
       alignItems: "center",
     },
     badgesText: {
-        fontFamily: "roboto-regular",
+        fontFamily: "Cochin",
         color: "#121212",
         fontSize: 11,
         // flexGrow: 1,

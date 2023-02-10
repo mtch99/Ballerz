@@ -11,7 +11,7 @@ const style = StyleSheet.create({
 
     },
     mardi: {
-        fontFamily: "roboto-regular",
+        fontFamily: "Cochin",
         color: "#121212",
         alignSelf: "center",
     },

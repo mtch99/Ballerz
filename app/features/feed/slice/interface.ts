@@ -9,7 +9,7 @@ export interface IFeedState {
 
 export interface IFeedItemState {
     id: string;
-    badges: IBadgesData[]
+    badges: IBadgeData[]
     place: IPlaceData
     startingTime: string
     endingTime: string
@@ -27,7 +27,7 @@ export interface IPlaceData extends Partial<IPlace>{
     name: IPlace['name'];
 }
 
-export interface IBadgesData extends Partial<IBadge>{
+export interface IBadgeData extends Partial<IBadge>{
     name: IBadge['name']
     symbol: IBadge['symbol']
 }

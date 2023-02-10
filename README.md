@@ -25,10 +25,11 @@ There must be three different games on three different courts, two at the moment
 [ ] Define badges description and symbol
     - [ ] Think of progression systems based on the mastery job stories
         - [x] NewBie Badge
-            - [ ] Test that the symbol is correctly displayed on ios
+            - [x] Test that the symbol is correctly displayed on ios
 
-[ ] Define initial games
-    - [ ]
+[x] Define initial games
+    - [x] two games with a badge 
+        - [x] Rendering logic for badged games
 
 
 [ ] Define Times
