@@ -5,14 +5,15 @@
  */
 import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as React from 'react';
+import { NavigationContainer, DefaultTheme, DarkTheme, useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp, createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
 import { ColorSchemeName, Pressable, View } from 'react-native';
 
 
-import { RootStackParamList } from './types';
+import { RootStackNavigationProp, RootStackParamList } from './types';
 import { FeedScreen } from '../screens/feed';
+import { FeedScreenWrapper } from './wrappers';
 // import LinkingConfiguration from './LinkingConfiguration';
 
 
@@ -36,26 +37,62 @@ const OnboardingStack = () => {
  */
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-export class RootStackNavigator extends React.Component {
+// export class RootStackNavigator extends React.Component {
 
-  _initialRouteName: keyof RootStackParamList= 'FeedScreen'
+//   _initialRouteName: keyof RootStackParamList= 'FeedScreen'
   
-  render(): React.ReactNode{
-    return (
-      <Stack.Navigator
-        initialRouteName={this._initialRouteName}
-      >
+//   render(): React.ReactNode{
+//     return (
+//       <Stack.Navigator
+//         initialRouteName={this._initialRouteName}
+//       >
 
-        <Stack.Screen
-          name='FeedScreen'
-          options={{
-            headerShown: false
-          }}
-          component={FeedScreen}
-        />
+//         <Stack.Screen
+//           name='FeedScreen'
+//           options={{
+//             headerShown: false
+//           }}
+//           component={FeedScreen}
+// 		  initialParams={}
+//         />
 
-      </Stack.Navigator>
-    )
-  }
+//       </Stack.Navigator>
+//     )
+//   }
 
+// }
+
+
+export function RootStackNavigator(): JSX.Element {
+
+	const _initialRouteName: keyof RootStackParamList= 'FeedScreen'
+	
+	  return (
+		<Stack.Navigator
+		  initialRouteName={_initialRouteName}
+		>
+  
+		  <Stack.Screen
+			name='FeedScreen'
+			options={{
+			  headerShown: false
+			}}
+			component={FeedScreenWrapper}
+			initialParams={{}}
+		  />
+  
+		</Stack.Navigator>
+	  )
 }
+  
+
+
+
+// const navigationProvider = (): JSX.Element => {
+
+// 	const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>
+	
+// 	// const NavigationController = navigation().navigate('FeedScreen', {})
+// 	const NavigationController = navigation().
+
+// }

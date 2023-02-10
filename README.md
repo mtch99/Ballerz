@@ -36,9 +36,7 @@ There must be three different games on three different courts, two at the moment
 
 [ ] BadgesDescription Page
     - [x] Init Navigation
-        
-    - [ ] Define NavigationController for each screen
-
+    - [ ] The FeedScreen must implement FeedScreenNavigationEventEmitter
 
 
 

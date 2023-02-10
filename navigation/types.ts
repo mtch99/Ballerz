@@ -1,3 +1,4 @@
+import { IFeedScreenPropsWithoutNavigation } from "./../screens/feed/index";
 import { IBadgeData } from "./../app/features/feed/slice/interface";
 /**
  * Learn more about using TypeScript with React Navigation:
@@ -8,6 +9,7 @@ import React from 'react';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
+import { IFeedScreenProps } from "../screens/feed";
 
  
 declare global {
@@ -18,7 +20,7 @@ declare global {
 
 export type RootStackParamList = {
   BadgeListScreen: IBadgeData;
-  FeedScreen: undefined;
+  FeedScreen: IFeedScreenPropsWithoutNavigation;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

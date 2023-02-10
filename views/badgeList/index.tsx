@@ -1,7 +1,7 @@
 import React from "react";
 import { FeedContext, IFeedContext } from "../../controllers/feed/provider";
 import FeedView from "../../views/feed";
-import { IFeedItemState, IFeedState } from "../../app/features/feed/slice/interface";
+import { IFeedState } from "../../app/features/feed/slice/interface";
 import IFeedScreen, { IFeedScreenNavigationController } from "./interface";
 
 
@@ -31,16 +31,6 @@ export class FeedScreen extends React.Component<IFeedScreenProps> implements IFe
     getFeed() {
         this.context.controller.getFeed()
     }
-
-    handleBadgeClick(feedItem: IFeedItemState): void {
-        this.viewBadgeList(feedItem.badges)
-    }
-
-    viewBadgeList(badgeList: IFeedItemState['badges']): void {
-        this.navigationController.goToBadgeListScreen(badgeList)
-    }
-
-
 
     render() {
         return (
