@@ -36,7 +36,9 @@ There must be three different games on three different courts, two at the moment
 
 [ ] BadgesDescription Page
     - [x] Init Navigation
-    - [ ] The FeedScreen must implement FeedScreenNavigationEventEmitter
+    - [x] The FeedScreen must be injected a mavigation controller
+        - [x] Create feedScreenWrapper to wrap the FeedScreen in the navigator
+            - [x] added a proptype without controller to the feed screen to bind the navigator screen props to the feed screen natural props 
 
 
 
