@@ -1,3 +1,4 @@
+import { IBadgeListScreenPropsWithoutNavigation } from "./../screens/badgeList/index";
 import { IFeedScreenPropsWithoutNavigation } from "./../screens/feed/index";
 import { IBadgeData } from "./../app/features/feed/slice/interface";
 /**
@@ -19,8 +20,8 @@ declare global {
 }
 
 export type RootStackParamList = {
-  BadgeListScreen: IBadgeData;
   FeedScreen: IFeedScreenPropsWithoutNavigation;
+  BadgeListScreen: IBadgeListScreenPropsWithoutNavigation;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
