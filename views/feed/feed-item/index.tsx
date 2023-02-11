@@ -7,32 +7,75 @@ import { ActionsContainer } from "./Bottom/Actions/actionsContainer";
 import Bottom from "./Bottom";
 import Header from "./Header";
 import { Body } from "./Body";
+import IFeedScreen from "../../../screens/feed/interface";
 
 interface IFeedViewProps{
-  feedItem: IFeedItemState;
+  feedItem: IFeedItemState
+  handleBadgeClick: IFeedScreen['handleBadgeClick']
 }
 
-export const FeedItem:React.FC<IFeedViewProps> = (props) => {
+export class FeedItem extends React.Component<IFeedViewProps>{
 
-    const feedItem: IFeedItemState = props.feedItem
+	feedItem: IFeedItemState = props.feedItem
+	handleBadgeClick = props.handleBadgeClick
+	
+	constructor(props: IFeedViewProps) {
+		super(props);
+		// onBadgeClick.bind(this)
+	}
 
-    return CreateFeedItem(feedItem)
+	onBadgeClick(){
+		// console.warn(this)
+		handleBadgeClick(feedItem)
+	}
+
+	render(): React.ReactNode {
+		return (
+
+	  		<View style={style.container}>
+	  		  <Header
+	  		    text={feedItem?(feedItem.place.name):""}
+	  		  />
+	  		  <Body
+	  		    onBadgeClick={() => {onBadgeClick()}}
+	  		    badgeList={feedItem.badges}
+	  		  />
+	  		  <Bottom/>
+	  		</View>
+		)
+	}
+
+
 }
 
 
-function CreateFeedItem(feedItem: IFeedItemState): ReactElement {
-  return (
-    <View style={style.container}>
-      <Header
-        text={feedItem?(feedItem.place.name):""}
-      />
-      <Body
-        badgeList={feedItem.badges}
-      />
-      <Bottom/>
-    </View>
-  );
+export function aaa(props: IFeedViewProps){
+	
+	const feedItem = props.feedItem
+	const handleBadgeClick = props.handleBadgeClick
+	const onBadgeClick= () => {
+		// console.warn(this)
+		handleBadgeClick(feedItem)
+	}
+
+
+		return (
+
+	  		<View style={style.container}>
+	  		  <Header
+	  		    text={feedItem?(feedItem.place.name):""}
+	  		  />
+	  		  <Body
+	  		    onBadgeClick={() => {onBadgeClick()}}
+	  		    badgeList={feedItem.badges}
+	  		  />
+	  		  <Bottom/>
+	  		</View>
+		)
+
 }
+
+
 
 const style = StyleSheet.create({
   container: {
@@ -44,7 +87,7 @@ const style = StyleSheet.create({
 
 
 
-export default FeedItem
+export default aaa
 
 
 

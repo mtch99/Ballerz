@@ -1,15 +1,27 @@
 import React from "react";
 import {FlatList, SafeAreaView } from "react-native";
-import { IFeedState } from "../../app/features/feed/slice/interface";
+import { IFeedItemState, IFeedState } from "../../app/features/feed/slice/interface";
 import FeedItemView from "./feed-item/index";
+import IFeedScreen from "../../screens/feed/interface";
 
 
 interface IProps {
     feedState: IFeedState
+	handleBadgeClick: IFeedScreen['handleBadgeClick']
 }
 
 
 class FeedView extends React.Component<IProps> {
+
+	handleBadgeClick(item: IFeedItemState) {
+		this.props.handleBadgeClick(item)
+	}
+
+	constructor(props: IProps) {
+		super(props);
+		this.handleBadgeClick.bind(this)
+
+	}
 
     componentDidMount(): void {
         
@@ -24,6 +36,7 @@ class FeedView extends React.Component<IProps> {
 						return(
 							<FeedItemView
 								feedItem={item}
+								handleBadgeClick={() => {this.handleBadgeClick(item)}}
 							/>
 						)
 					}}

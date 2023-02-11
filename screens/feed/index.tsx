@@ -5,6 +5,7 @@ import { IFeedItemState, IFeedState } from "../../app/features/feed/slice/interf
 import IFeedScreen, { IFeedScreenNavigationController } from "./interface";
 
 
+
 export interface IFeedScreenPropsWithoutNavigation {
 
 }
@@ -15,13 +16,15 @@ export interface IFeedScreenProps extends IFeedScreenPropsWithoutNavigation{
 
 
 export class FeedScreen extends React.Component<IFeedScreenProps> implements IFeedScreen{
+
     
-    navigationController: IFeedScreenNavigationController;
+    navigationController: IFeedScreenNavigationController = this.props.navigationController;
     
     static contextType = FeedContext
     constructor(props: IFeedScreenProps){
         super(props);
-        this.navigationController = props.navigationController
+        this.viewBadgeList.bind(this)
+        this.handleBadgeClick.bind(this)
     }
     context: React.ContextType<typeof FeedContext> = {} as IFeedContext
     componentDidMount(): void {
@@ -32,7 +35,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps> implements IFe
         this.context.controller.getFeed()
     }
 
-    handleBadgeClick(feedItem: IFeedItemState): void {
+    handleBadgeClick = (feedItem: IFeedItemState): void => {
         this.viewBadgeList(feedItem.badges)
     }
 
@@ -40,12 +43,13 @@ export class FeedScreen extends React.Component<IFeedScreenProps> implements IFe
         this.navigationController.goToBadgeListScreen(badgeList)
     }
 
-
+    
 
     render() {
         return (
             <FeedView
                 feedState={this.context.feedState}
+                handleBadgeClick={this.handleBadgeClick}
             />
         )
     }

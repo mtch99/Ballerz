@@ -103,7 +103,7 @@ rect3: {
   backgroundColor: "rgba(255,255,255,1)"
 },
 loremIpsum: {
-  fontFamily: "roboto-regular",
+  fontFamily: "Cochin",
   color: "#121212",
   fontSize: 32,
   marginLeft: 53
@@ -123,18 +123,18 @@ rect5: {
   marginTop: 3
 },
 joueurs: {
-  fontFamily: "roboto-regular",
+  fontFamily: "Cochin",
   color: "#121212",
   marginTop: 6,
   marginLeft: 87
 },
 loremIpsum2: {
-  fontFamily: "roboto-regular",
+  fontFamily: "Cochin",
   color: "#121212",
   fontSize: 25
 },
 badges: {
-  fontFamily: "roboto-regular",
+  fontFamily: "Cochin",
   color: "#121212",
   marginLeft: 4,
   marginTop: 7
@@ -201,7 +201,7 @@ rect2: {
   backgroundColor: "rgba(255,255,255,1)"
 },
 byfarCentreSportif: {
-  fontFamily: "roboto-regular",
+  fontFamily: "Cochin",
   color: "#121212",
   fontSize: 18,
   marginTop: 8,
@@ -234,7 +234,7 @@ loremIpsum3: {
   top: 3,
   left: 12,
   position: "absolute",
-  fontFamily: "roboto-regular",
+  fontFamily: "Cochin",
   color: "#121212",
   fontSize: 27
 },
@@ -243,7 +243,7 @@ rect7Stack: {
   height: 37
 },
 loremIpsum5: {
-  fontFamily: "roboto-regular",
+  fontFamily: "Cochin",
   color: "#121212",
   letterSpacing: 0,
   fontSize: 25,
@@ -258,7 +258,7 @@ rect9: {
   marginTop: 2
 },
 loremIpsum7: {
-  fontFamily: "roboto-regular",
+  fontFamily: "Cochin",
   color: "#121212",
   fontSize: 27,
   marginTop: 2,

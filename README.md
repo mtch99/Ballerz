@@ -3,11 +3,11 @@ The app for finding basketball pickup games
 
 ## Branch Purpose
 Test this scenario: 
-    2) I want to inspect look at the top game and see the badges
+    3) I want to know badges meanings // I am curious about the badges
+    
 
 ## Next 
 Test these scenarios:
-    3) I want to know badges meanings // I am curious about the badges
     4) I want to see the attendants list
     5) I want to be acknowledged that I have to make friends in order to view   their attendances
 
@@ -18,23 +18,13 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 
-[ ] Define Badges
-    - [x] IBadge description field
-    - [x] Merge with the scenario-1
+- [x] Badge Click event on FeedItem
+    - [x] handle BadgeClick in FeedScreen
+    - [x] emit badgeClick event in FeedView
+        -  [x] Wrap badgeNumView with a touchable opacity
+        -  [x] Emit BadgeClick event in BadgeNumView
 
-[ ] Define badges description and symbol
-    - [ ] Think of progression systems based on the mastery job stories
-        - [x] NewBie Badge
-            - [x] Test that the symbol is correctly displayed on ios
-
-[x] Define initial games
-    - [x] two games with a badge 
-        - [x] Rendering logic for badged games
-
-
-[ ] Define Times
-
-[ ] BadgesDescription Page
+- [x] init BadgeListScreen Page
     - [x] Init Navigation
     - [x] The FeedScreen must be injected a mavigation controller
         - [x] Create feedScreenWrapper to wrap the FeedScreen in the navigator

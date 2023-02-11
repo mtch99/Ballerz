@@ -1,13 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
-import { FeedScreen } from "../screens/feed";
-import React from "react";
+import { FeedScreen, IFeedScreenProps } from "../screens/feed";
+import React, { useEffect } from "react";
 import { RootStackNavigationProp, RootStackParamList, RootStackScreenProps } from "./types";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { IFeedScreenNavigationController } from "../screens/feed/interface";
 import { IBadgeData } from "../app/features/feed/slice/interface";
 import { ComingSoon_400Regular } from "@expo-google-fonts/dev";
+import BadgeListScreen from "../screens/badgeList";
 
-interface IFeedScreenProps extends RootStackScreenProps<'FeedScreen'>{}
+interface IBadgeListScreenProps extends RootStackScreenProps<'FeedScreen'>{}
 
 
 
@@ -22,7 +23,8 @@ export function FeedScreenWrapper(props: IFeedScreenProps): JSX.Element {
 
     const navigationController: IFeedScreenNavigationController = {
         goToBadgeListScreen: (badgeList: IBadgeData[]) => {
-            console.warn("Attempted to go to the badge list screen")
+            console.warn(`Attempted to navigae to badeg list screen with payload: \n ${JSON.stringify(badgeList)}`)
+            navigation.navigate('BadgeListScreen', {badgeList})
         }
     }
 
@@ -35,4 +37,21 @@ export function FeedScreenWrapper(props: IFeedScreenProps): JSX.Element {
         />
     )
 
+}
+
+/**
+ * Provides a navigation controller to the BadgeListScreen
+ * @param props BadgeListScreen props without navigation
+ * @returns A BadgeListScreen
+ */
+ export function BadgeListScreenWrapper(props: RootStackScreenProps<'BadgeListScreen'>): JSX.Element {
+
+    const navigation = useNavigation<RootStackNavigationProp<'BadgeListScreen'>>()
+
+
+    return (
+        <BadgeListScreen
+            badgeList={props.route.params.badgeList}
+        />
+    )
 }

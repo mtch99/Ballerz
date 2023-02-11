@@ -13,7 +13,8 @@ import { ColorSchemeName, Pressable, View } from 'react-native';
 
 import { RootStackNavigationProp, RootStackParamList } from './types';
 import { FeedScreen } from '../screens/feed';
-import { FeedScreenWrapper } from './wrappers';
+import { BadgeListScreenWrapper, FeedScreenWrapper } from './wrappers';
+import BadgeListScreen from '../screens/badgeList';
 // import LinkingConfiguration from './LinkingConfiguration';
 
 
@@ -37,62 +38,39 @@ const OnboardingStack = () => {
  */
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-// export class RootStackNavigator extends React.Component {
-
-//   _initialRouteName: keyof RootStackParamList= 'FeedScreen'
-  
-//   render(): React.ReactNode{
-//     return (
-//       <Stack.Navigator
-//         initialRouteName={this._initialRouteName}
-//       >
-
-//         <Stack.Screen
-//           name='FeedScreen'
-//           options={{
-//             headerShown: false
-//           }}
-//           component={FeedScreen}
-// 		  initialParams={}
-//         />
-
-//       </Stack.Navigator>
-//     )
-//   }
-
-// }
-
-
+ 
 export function RootStackNavigator(): JSX.Element {
 
-	const _initialRouteName: keyof RootStackParamList= 'FeedScreen'
+	const _initialRouteName: keyof RootStackParamList = 'FeedScreen'
 	
 	  return (
 		<Stack.Navigator
 		  initialRouteName={_initialRouteName}
 		>
   
-		  <Stack.Screen
-			name='FeedScreen'
-			options={{
-			  headerShown: false
-			}}
-			component={FeedScreenWrapper}
-			initialParams={{}}
-		  />
+			<Stack.Screen
+				name='BadgeListScreen'
+				options={{
+					headerShown: true,
+					headerTitle: 'Badges',
+					headerBackButtonMenuEnabled: true
+				}}
+				component={BadgeListScreenWrapper}
+				initialParams={{badgeList: []}}
+
+			/>
+			<Stack.Screen
+				name='FeedScreen'
+				options={{
+				  headerShown: false
+				}}
+				component={FeedScreenWrapper}
+				initialParams={{}}
+			/>	
+
   
 		</Stack.Navigator>
 	  )
 }
   
 
-
-
-// const navigationProvider = (): JSX.Element => {
-
-// 	const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>
-	
-// 	// const NavigationController = navigation().navigate('FeedScreen', {})
-// 	const NavigationController = navigation().
-
-// }
