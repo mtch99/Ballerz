@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { FeedScreen, IFeedScreenProps } from "../screens/feed";
+import { FeedScreen, IFeedScreenProps, IFeedScreenPropsWithoutNavigation } from "../screens/feed";
 import React, { useEffect } from "react";
 import { RootStackNavigationProp, RootStackParamList, RootStackScreenProps } from "./types";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -17,7 +17,7 @@ interface IBadgeListScreenProps extends RootStackScreenProps<'FeedScreen'>{}
  * @param props FeedScreen props without navigation
  * @returns A FeedScreen
  */
-export function FeedScreenWrapper(props: IFeedScreenProps): JSX.Element {
+export function FeedScreenWrapper(props: IFeedScreenPropsWithoutNavigation): JSX.Element {
 
     const navigation = useNavigation<RootStackNavigationProp<'FeedScreen'>>()
 
