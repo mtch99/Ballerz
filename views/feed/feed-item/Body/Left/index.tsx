@@ -1,29 +1,29 @@
-import { View, Text } from "react-native"
+import { View, Text, TouchableOpacity } from "react-native"
 import Icon from "react-native-vector-icons/FontAwesome"
 import {styles} from "./styles"
 import React from "react"
 import { IBadgeData } from "../../../../../app/features/feed/slice/interface"
+import IFeedScreen from "../../../../../screens/feed/interface"
 
 export interface ILeftBodyProps{
   badgeList: IBadgeData[]
+  onBadgeClick: () => void
 }
 
 
-export default class LeftBody extends React.Component<ILeftBodyProps> {
+export default function LeftBody(props: ILeftBodyProps) {
 
 
-	badgeList: IBadgeData[]
-
-  	constructor(props: ILeftBodyProps){
-		super(props)
-		this.badgeList = props.badgeList
-  	}
-
-	componentDidMount(): void {
-		// this.badgeList = 
+	const badgeList = props.badgeList
+	const handleBadgeClick = props.onBadgeClick
+	  
+	const onBadgeClick = () => {
+		// console.error(this)
+		handleBadgeClick()
 	}
+
     
-  	render() {
+
   		return(
 
   		    <View style={styles.container}>
@@ -31,37 +31,57 @@ export default class LeftBody extends React.Component<ILeftBodyProps> {
   		          <Text style={styles.playersNum}>20</Text>
   		          <Text style={styles.playersText}>joueurs</Text>
   		        </View>
-  		        {/* <View style={styles.badgeNumContainer}>
-  		          <Text style={styles.badgeNum}>20</Text>
-  		          <View style={styles.badgesTextContainer}>
-  		            <Text style={styles.badgesText}>badges</Text>
-  		          </View>
-  		        </View> */}
-			  {generateBadgeNumView(this.badgeList)}
-  		    </View>
+			  	{
+					badgeList.length>0?(
+						<TouchableOpacity style={styles.badgeNumContainer}
+							onPress={() => {
+								onBadgeClick()
+							}}
+						>
+							<Text>
+								{badgeList[0].symbol?badgeList[0].symbol:233}
+							</Text>
+       					</TouchableOpacity>
+					):(
+						<TouchableOpacity style={styles.badgeNumContainer}>
+        				    <Text style={styles.badgeNum}>0</Text>
+        				    <View style={styles.badgesTextContainer}>
+        				      <Text style={styles.badgesText}>badges</Text>
+        				    </View>
+        				</TouchableOpacity>
+					)
+				}
 
+  		    </View>
 		)
-  	}
+
+
 }
 
 
-function generateBadgeNumView(badgeList: IBadgeData[]): JSX.Element {
+function generateBadgeNumView(badgeList: IBadgeData[], onBadgeClick: ILeftBodyProps['onBadgeClick']): JSX.Element {
 
 	if(badgeList.length > 0) {
 		return (
-			<View style={styles.badgeNumContainer}>
+			<TouchableOpacity style={styles.badgeNumContainer}
+				onPress={() => {
+					onBadgeClick()
+				}}
+			>
 				<Text>
 					{badgeList[0].symbol?badgeList[0].symbol:233}
 				</Text>
-       		</View>
+       		</TouchableOpacity>
 		)
 	}
+
+	
 	return(
-		<View style={styles.badgeNumContainer}>
+		<TouchableOpacity style={styles.badgeNumContainer}>
             <Text style={styles.badgeNum}>0</Text>
             <View style={styles.badgesTextContainer}>
               <Text style={styles.badgesText}>badges</Text>
             </View>
-        </View>
+        </TouchableOpacity>
 	)
 }

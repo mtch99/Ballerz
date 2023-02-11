@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#E6E6E6"
       },
       placeName: {
-        fontFamily: "roboto-regular",
+        fontFamily: "Cochin",
         color: "#121212",
         marginTop: 6,
         marginLeft: 8

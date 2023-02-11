@@ -22,9 +22,11 @@ export function FeedScreenWrapper(props: IFeedScreenProps): JSX.Element {
 
     const navigationController: IFeedScreenNavigationController = {
         goToBadgeListScreen: (badgeList: IBadgeData[]) => {
-            console.warn("Attempted to go to the badge list screen")
+            console.warn(`Attempted to navigae to badeg list screen with payload: \n ${JSON.stringify(badgeList)}`)
         }
     }
+
+
 
 
     return (
