@@ -34,6 +34,9 @@ export default class BadgeListScreen extends React.Component<IBadgeListScreenPro
                                     <Text>
                                         {item.name}
                                     </Text>
+                                    <Text>
+                                        {item.description}
+                                    </Text>
                                 </View>
                             )
                         }}
