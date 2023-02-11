@@ -10,7 +10,8 @@ import React from 'react';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
-import { IFeedScreenProps } from "../screens/feed";
+import { IUserProfileListScreenPropsWithoutNavigation } from "../screens/userProfile/userProfileList";
+
 
  
 declare global {
@@ -20,13 +21,14 @@ declare global {
 }
 
 export type RootStackParamList = {
-  FeedScreen: IFeedScreenPropsWithoutNavigation;
-  BadgeListScreen: IBadgeListScreenPropsWithoutNavigation;
+	FeedScreen: IFeedScreenPropsWithoutNavigation;
+	BadgeListScreen: IBadgeListScreenPropsWithoutNavigation;
+	AttendantsListScreen: IUserProfileListScreenPropsWithoutNavigation;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
-  RootStackParamList,
-  Screen
+	RootStackParamList,
+	Screen
 >;
 
 export type RootStackNavigationProp<Screen extends keyof RootStackParamList> = NativeStackNavigationProp<RootStackParamList, Screen>

@@ -16,7 +16,9 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 - [x] Init UserProfileListScreen
-- [ ] Add UserProfileListScreen to the rootStack navigator
-- [ ] implement UserProfileListScreen in the rootStack navigator
-- [ ] Init UserProfileListView
+- [x] Add UserProfileListScreen to the rootStack navigator
+- [x] implement UserProfileListScreen in the rootStack navigator
+- [x] Init UserProfileListView
+- [x] implement AttendantsListScreen which is an extension of the UserProfileListScreen
+- [x] Init AttendantsListView
 - [ ] Handle the click on friendsThere

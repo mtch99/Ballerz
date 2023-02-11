@@ -7,6 +7,8 @@ import { IFeedScreenNavigationController } from "../screens/feed/interface";
 import { IBadgeData } from "../app/features/feed/slice/interface";
 import { ComingSoon_400Regular } from "@expo-google-fonts/dev";
 import BadgeListScreen from "../screens/badgeList";
+import UserProfileListScreen from "../screens/userProfile/userProfileList";
+import AttendantsList from "../screens/userProfile/attendantsList";
 
 interface IBadgeListScreenProps extends RootStackScreenProps<'FeedScreen'>{}
 
@@ -52,6 +54,16 @@ export function FeedScreenWrapper(props: IFeedScreenPropsWithoutNavigation): JSX
     return (
         <BadgeListScreen
             badgeList={props.route.params.badgeList}
+        />
+    )
+}
+
+
+export function AttendantsListScreenWrapper(props: RootStackScreenProps<'AttendantsListScreen'>){
+
+    return(
+        <AttendantsList
+            userProfileList={props.route.params.userProfileList}
         />
     )
 }

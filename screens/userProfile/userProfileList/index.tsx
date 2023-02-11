@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, SafeAreaView, FlatList } from "react-native";
-import {IUserProfileData } from "../../app/features/feed/slice/interface";
+import {IUserProfileData } from "../../../app/features/feed/slice/interface";
 
 
 export interface IUserProfileListScreenPropsWithoutNavigation {
