@@ -25,8 +25,8 @@ There must be three different games on three different courts, two at the moment
         - [x] No, Thanks
         - [x] Make friends
 
-- [ ] On click invite button, display a modal which aknowledges the user that he can only invite friends
-    - [ ] Invite Button in actionn container
-        - [ ] Define the prop here
-        - [ ] Drill it up to the feedItem view 
-    - [ ] handle InvitePress in feed screen controller
+- [x] On click invite button, display a modal which aknowledges the user that he can only invite friends
+    - [x] Invite Button in actionn container
+        - [x] Define the prop here
+        - [x] Drill it up to the feedItem view 
+    - [x] handle InvitePress in feed screen controller

@@ -11,6 +11,7 @@ interface IFeedItemViewProps{
   feedItem: IFeedItemState
   handleBadgeClick: IFeedScreen['handleBadgeClick']
   handleFriendsTherePress: IFeedScreen['handleFriendsTherePress']
+  handleInvitePress: IFeedScreen['handleInvitePress']
 }
 
 
@@ -25,6 +26,9 @@ export default function FeedItemView(props: IFeedItemViewProps){
 	const onPressFriendsThere = () => {
 		handleFriendsTherePress(feedItem)
 	}
+	const onPressInvite = () => {
+		props.handleInvitePress(props.feedItem)
+	}
 	
 	return (
 		<View style={style.container}>
@@ -37,6 +41,7 @@ export default function FeedItemView(props: IFeedItemViewProps){
 			/>
 			<BottomView
 				onPressFriendsThere={() => {onPressFriendsThere()}}
+				onPressInvite={() => {onPressInvite()}}
 			/>
 		</View>
 	)

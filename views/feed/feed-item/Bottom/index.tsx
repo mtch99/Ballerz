@@ -7,13 +7,16 @@ import { ActionsContainer } from "./Actions/actionsContainer";
 
 interface IBottomViewProps{
     onPressFriendsThere: () => void
+    onPressInvite: () => void
 }
 
 export default function BottomView(props: IBottomViewProps) {
 
     return(
         <View style={styles.container}>
-            <ActionsContainer/>
+            <ActionsContainer
+                onPressInvite={() => {props.onPressInvite()}}
+            />
             <FriendsThereView
                 onPress={() => {props.onPressFriendsThere()}}
             />
