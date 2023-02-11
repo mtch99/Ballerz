@@ -15,7 +15,7 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 - [x] Write 0 friends here instead in the friends there component
-- [ ] On click friends there, display a modal which acknowledges the user that he has to make friends to be able to see where they are playing
+- [x] On click friends there, display a modal which acknowledges the user that he has to make friends to be able to see where they are playing
     - [x] Add FriendsThere field in the feedItem
         - [x] Add in usecase Data model
         - [x] Add in FeedModel data model
@@ -24,3 +24,9 @@ There must be three different games on three different courts, two at the moment
     - [x] Add Actions
         - [x] No, Thanks
         - [x] Make friends
+
+- [ ] On click invite button, display a modal which aknowledges the user that he can only invite friends
+    - [ ] Invite Button in actionn container
+        - [ ] Define the prop here
+        - [ ] Drill it up to the feedItem view 
+    - [ ] handle InvitePress in feed screen controller
