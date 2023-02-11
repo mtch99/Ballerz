@@ -14,13 +14,13 @@ There must be three different games on three different courts, two at the moment
 
 
 ## How? (technical)
-- [ ] Write 0 friends here instead in the friends there component
+- [x] Write 0 friends here instead in the friends there component
 - [ ] On click friends there, display a modal which acknowledges the user that he has to make friends to be able to see where they are playing
     - [x] Add FriendsThere field in the feedItem
         - [x] Add in usecase Data model
         - [x] Add in FeedModel data model
-    - [ ] Write rendering logic in the feedScreen
-    - [ ] Display a modal with the text
-    - [ ] Add Actions
-        - [ ] No, Thanks
-        - [ ] Make friends
+    - [x] Write rendering logic in the feedScreen
+    - [x] Display an Alert with the text
+    - [x] Add Actions
+        - [x] No, Thanks
+        - [x] Make friends
