@@ -1,21 +1,21 @@
 import React from "react";
 import { View, Text, SafeAreaView, FlatList } from "react-native";
-import { IBadgeData } from "../../app/features/feed/slice/interface";
+import {IUserProfileData } from "../../app/features/feed/slice/interface";
 
 
-export interface IBadgeListScreenPropsWithoutNavigation {
-    badgeList: IBadgeData[]
+export interface IUserProfileListScreenPropsWithoutNavigation {
+    userProfileList: IUserProfileData[]
 }
 
 
-export interface IBadgeListScreenProps extends IBadgeListScreenPropsWithoutNavigation{
+export interface IUserProfileListScreenProps extends IUserProfileListScreenPropsWithoutNavigation{
     
 }
 
 
-export default class BadgeListScreen extends React.Component<IBadgeListScreenProps>{
+export default class UserProfileListScreen extends React.Component<IUserProfileListScreenProps>{
 
-    constructor(props: IBadgeListScreenProps) {
+    constructor(props: IUserProfileListScreenProps) {
         super(props);
         console.log(this.props)
     }
@@ -24,17 +24,17 @@ export default class BadgeListScreen extends React.Component<IBadgeListScreenPro
     render(): React.ReactNode {
         return(
             <SafeAreaView>
-                {this.props.badgeList.length > 0?(
+                {this.props.userProfileList.length > 0?(
                     <FlatList
-                        data={this.props.badgeList}
+                        data={this.props.userProfileList}
                         renderItem={({item, index}) =>{
                             return(
                                 <View>
                                     <Text>
-                                        {item.name}
+                                        {item.username}
                                     </Text>
                                     <Text>
-                                        {item.description}
+                                        {item.id}
                                     </Text>
                                 </View>
                             )

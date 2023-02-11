@@ -3,7 +3,7 @@ The app for finding basketball pickup games
 
 ## Branch Purpose
 Test this scenario: 
-    4) I want to see the attendants list    
+    4) I want to see the UserProfile list    
 
 ## Next 
 Test these scenarios:
@@ -15,8 +15,8 @@ There must be three different games on three different courts, two at the moment
 
 
 ## How? (technical)
-- [ ] InitAttendantsListScreen
-- [ ] Add AttendantsListScreen to the rootStack navigator
-- [ ] implement AttendantsListScreen in the rootStack navigator
-- [ ] Init AttendantsListView
-- [ ] Handle the click on attendants list
+- [x] Init UserProfileListScreen
+- [ ] Add UserProfileListScreen to the rootStack navigator
+- [ ] implement UserProfileListScreen in the rootStack navigator
+- [ ] Init UserProfileListView
+- [ ] Handle the click on friendsThere
