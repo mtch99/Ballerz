@@ -5,14 +5,18 @@ import FriendsThereView from "./FriendsThere";
 import { ActionsContainer } from "./Actions/actionsContainer";
 
 
-export default class Bottom extends React.Component {
+interface IBottomViewProps{
+    onPressFriendsThere: () => void
+}
 
-    render(): React.ReactNode {
-        return(
-            <View style={styles.container}>
-                <ActionsContainer/>
-                <FriendsThereView/>
-            </View>
-        )
-    }
+export default function BottomView(props: IBottomViewProps) {
+
+    return(
+        <View style={styles.container}>
+            <ActionsContainer/>
+            <FriendsThereView
+                onPress={() => {props.onPressFriendsThere()}}
+            />
+        </View>
+    )
 }

@@ -7,7 +7,7 @@ Test this scenario:
 
 ## Next 
 Test these scenarios:
-    5) I want to be acknowledged that I have to make friends in order to view   their attendances
+    5) I want to be acknowledged that I have to make friends in order to view their attendances
 
 
 
@@ -21,4 +21,4 @@ There must be three different games on three different courts, two at the moment
 - [x] Init UserProfileListView
 - [x] implement AttendantsListScreen which is an extension of the UserProfileListScreen
 - [x] Init AttendantsListView
-- [ ] Handle the click on friendsThere
+- [x] Handle the click on friendsThere

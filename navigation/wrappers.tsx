@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { RootStackNavigationProp, RootStackParamList, RootStackScreenProps } from "./types";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { IFeedScreenNavigationController } from "../screens/feed/interface";
-import { IBadgeData } from "../app/features/feed/slice/interface";
+import { IBadgeData, IUserProfileData } from "../app/features/feed/slice/interface";
 import { ComingSoon_400Regular } from "@expo-google-fonts/dev";
 import BadgeListScreen from "../screens/badgeList";
 import UserProfileListScreen from "../screens/userProfile/userProfileList";
@@ -27,6 +27,10 @@ export function FeedScreenWrapper(props: IFeedScreenPropsWithoutNavigation): JSX
         goToBadgeListScreen: (badgeList: IBadgeData[]) => {
             console.warn(`Attempted to navigae to badeg list screen with payload: \n ${JSON.stringify(badgeList)}`)
             navigation.navigate('BadgeListScreen', {badgeList})
+        },
+        goToAttendantsScreen: (userProfileList: IUserProfileData[]) => {
+            console.warn(`Attempted to navigae to attendants list screen with payload: \n ${JSON.stringify(userProfileList)}`)
+            navigation.navigate('AttendantsListScreen', {userProfileList})
         }
     }
 

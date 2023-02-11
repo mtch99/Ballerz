@@ -8,6 +8,7 @@ import IFeedScreen from "../../screens/feed/interface";
 interface IProps {
     feedState: IFeedState
 	handleBadgeClick: IFeedScreen['handleBadgeClick']
+	handleFriendsTherePress: IFeedScreen['handleFriendsTherePress']
 }
 
 
@@ -17,10 +18,13 @@ class FeedView extends React.Component<IProps> {
 		this.props.handleBadgeClick(item)
 	}
 
+	handleFriendsTherePress(item: IFeedItemState) {
+		console.warn("FeedView" + `${JSON.stringify(this.props.feedState)}`)
+		this.props.handleFriendsTherePress(item)
+	}
+
 	constructor(props: IProps) {
 		super(props);
-		this.handleBadgeClick.bind(this)
-
 	}
 
     componentDidMount(): void {
@@ -37,6 +41,7 @@ class FeedView extends React.Component<IProps> {
 							<FeedItemView
 								feedItem={item}
 								handleBadgeClick={() => {this.handleBadgeClick(item)}}
+								handleFriendsTherePress={() => {this.handleFriendsTherePress(item)}}
 							/>
 						)
 					}}

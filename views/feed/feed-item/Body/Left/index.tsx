@@ -11,7 +11,7 @@ export interface ILeftBodyProps{
 }
 
 
-export default function LeftBody(props: ILeftBodyProps) {
+export default function LeftBodyView(props: ILeftBodyProps) {
 
 
 	const badgeList = props.badgeList

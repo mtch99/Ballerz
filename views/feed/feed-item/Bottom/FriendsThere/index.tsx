@@ -1,17 +1,27 @@
 import styles from "./styles"
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 
 
-export default class FriendsThereView extends React.Component {
+interface IFriendsThereViewProps {
+    onPress: () => void;
+}
 
-    render(): React.ReactNode {
-        return(
-            <View style={styles.friendsThereContainer}>
-                <Text style={styles.friendsThereText}>
-                  username1 et 2 autres y vont
-                </Text>
-            </View>
-        )
+export default function FriendsThereView(props: IFriendsThereViewProps) {
+    
+    const handlePress = props.onPress
+    
+    const onPress = () => {
+        handlePress()
     }
+    return(
+        <TouchableOpacity 
+            style={styles.friendsThereContainer}
+            onPress={() => {onPress()}}
+        >
+            <Text style={styles.friendsThereText}>
+              username1 et 2 autres y vont
+            </Text>
+        </TouchableOpacity>
+    )
 }

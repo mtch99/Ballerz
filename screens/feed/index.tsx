@@ -1,9 +1,8 @@
 import React from "react";
 import { FeedContext, IFeedContext } from "../../controllers/feed/provider";
 import FeedView from "../../views/feed";
-import { IFeedItemState, IFeedState } from "../../app/features/feed/slice/interface";
+import { IFeedItemState} from "../../app/features/feed/slice/interface";
 import IFeedScreen, { IFeedScreenNavigationController } from "./interface";
-
 
 
 export interface IFeedScreenPropsWithoutNavigation {
@@ -17,14 +16,12 @@ export interface IFeedScreenProps extends IFeedScreenPropsWithoutNavigation{
 
 export class FeedScreen extends React.Component<IFeedScreenProps> implements IFeedScreen{
 
-    
     navigationController: IFeedScreenNavigationController = this.props.navigationController;
     
     static contextType = FeedContext
     constructor(props: IFeedScreenProps){
         super(props);
-        this.viewBadgeList.bind(this)
-        this.handleBadgeClick.bind(this)
+        this.handleFriendsTherePress.bind(this)
     }
     context: React.ContextType<typeof FeedContext> = {} as IFeedContext
     componentDidMount(): void {
@@ -39,19 +36,23 @@ export class FeedScreen extends React.Component<IFeedScreenProps> implements IFe
         this.viewBadgeList(feedItem.badges)
     }
 
+    handleFriendsTherePress(feedItem: IFeedItemState): void {
+        console.warn("Feed screen handle friends there press " + `${this.props}`)
+        this.navigationController.goToAttendantsScreen(feedItem.attendants)
+    }
+
     viewBadgeList(badgeList: IFeedItemState['badges']): void {
         this.navigationController.goToBadgeListScreen(badgeList)
     }
-
     
 
     render() {
         return (
             <FeedView
                 feedState={this.context.feedState}
-                handleBadgeClick={this.handleBadgeClick}
+                handleBadgeClick={(item) => {this.handleBadgeClick(item)}}
+                handleFriendsTherePress={(item) => {this.handleFriendsTherePress(item)}}
             />
         )
     }
-
 }
