@@ -18,13 +18,13 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 
-- [ ] Badge Click event on FeedItem
-    - [ ] handle BadgeClick in FeedScreen
-    - [ ] emit badgeClick event in FeedView
-        -  [ ] Wrap badgeNumView with a touchable opacity
-        -  [ ] Emit BadgeClick event in BadgeNumView
+- [x] Badge Click event on FeedItem
+    - [x] handle BadgeClick in FeedScreen
+    - [x] emit badgeClick event in FeedView
+        -  [x] Wrap badgeNumView with a touchable opacity
+        -  [x] Emit BadgeClick event in BadgeNumView
 
-- [ ] BadgeListScreen Page
+- [x] init BadgeListScreen Page
     - [x] Init Navigation
     - [x] The FeedScreen must be injected a mavigation controller
         - [x] Create feedScreenWrapper to wrap the FeedScreen in the navigator
