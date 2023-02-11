@@ -25,6 +25,7 @@ const initialFeed: IFeedItem[] = [
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
         attendants: initialUserProfiles,
+        friendsThere: initialUserProfiles.slice(0, 2)
     },
 
     {
@@ -36,7 +37,8 @@ const initialFeed: IFeedItem[] = [
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
         attendants: initialUserProfiles,
-        badges: []
+        badges: [],
+        friendsThere: []
     },
 
     {
@@ -48,7 +50,8 @@ const initialFeed: IFeedItem[] = [
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
         attendants: initialUserProfiles.slice(0, 2),
-        badges: fivePlayerGameBadges
+        badges: fivePlayerGameBadges,
+        friendsThere: []
     },
 
     {
@@ -60,7 +63,8 @@ const initialFeed: IFeedItem[] = [
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
         attendants: [],
-        badges: []
+        badges: [],
+        friendsThere: []
     },
 ]
 
