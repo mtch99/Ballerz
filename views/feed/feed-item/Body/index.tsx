@@ -2,7 +2,7 @@ import { View, Text } from "react-native"
 import Icon from "react-native-vector-icons/FontAwesome"
 import {styles} from "./styles"
 import React from "react"
-import LeftBody from "./Left"
+import LeftBodyView from "./Left"
 import BodyRightView from "./Right"
 import { IBadgeData } from "../../../../app/features/feed/slice/interface"
 import IFeedScreen from "../../../../screens/feed/interface"
@@ -31,7 +31,7 @@ export class Bodyyy extends React.Component<IBodyContainerProps> {
 	render() {
 		return(
 		    <View style={styles.container}>
-		        <LeftBody 
+		        <LeftBodyView 
 					onBadgeClick={() => {this.onBadgeClick()}}
 					badgeList={this.props.badgeList}
 		        />
@@ -43,13 +43,11 @@ export class Bodyyy extends React.Component<IBodyContainerProps> {
 }
 
 
-export function Body(props: IBodyContainerProps){
-
-
+export function BodyView(props: IBodyContainerProps){
 
 	return(
 	    <View style={styles.container}>
-	        <LeftBody 
+	        <LeftBodyView 
 				onBadgeClick={() => {props.onBadgeClick()}}
 				badgeList={props.badgeList}
 	        />
