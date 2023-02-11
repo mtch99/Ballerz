@@ -21,7 +21,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps> implements IFe
     static contextType = FeedContext
     constructor(props: IFeedScreenProps){
         super(props);
-        this.handleFriendsTherePress.bind(this)
+        // this.handleFriendsTherePress.bind(this)
     }
     context: React.ContextType<typeof FeedContext> = {} as IFeedContext
     componentDidMount(): void {
@@ -38,13 +38,27 @@ export class FeedScreen extends React.Component<IFeedScreenProps> implements IFe
 
     handleFriendsTherePress(feedItem: IFeedItemState): void {
         console.warn("Feed screen handle friends there press " + `${this.props}`)
-        this.navigationController.goToAttendantsScreen(feedItem.attendants)
+        // this.navigationController.goToAttendantsScreen(feedItem.attendants)
+        this.viewFriendsThere(feedItem)
+
     }
 
     viewBadgeList(badgeList: IFeedItemState['badges']): void {
         this.navigationController.goToBadgeListScreen(badgeList)
     }
+
+    viewFriendsThere(feedItem: IFeedItemState): void {
+        const friendsThereList = feedItem.friendsThere
+        if(friendsThereList.length>0){
+            this.navigationController.goToAttendantsScreen(feedItem.friendsThere)
+        }else{
+            this.displayNoFriendsHereModal()
+        }
+    }
     
+    private displayNoFriendsHereModal(): void {
+        console.error("No friends here")
+    }
 
     render() {
         return (
