@@ -3,42 +3,35 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
-        width: 68,
-        height: 60,
-        backgroundColor: "#E6E6E6"
+        height: 60,     
     },
     playerNumContainer: {
-        width: 68,
         height: 30,
-        backgroundColor: "#E6E6E6",
         alignSelf: "center",
         alignItems: "center",
         flexDirection: "row",
     },
-    playersNum: {
-        fontFamily: "Cochin",
-        color: "#121212",
-        fontSize: 16,
-        // marginTop: 5,
-        // marginLeft: 6,
+    playersNumText: {
+        color: "#F5F8FA",
+        fontSize: 23,
+        fontWeight: "300",
+        marginLeft: 6,
     },
     playersText: {
-        fontFamily: "Cochin",
-        color: "#121212",
+        color: "#F7F7F7",
         flexGrow:1,
-        fontSize: 11,
-        // marginTop: 3,
         marginLeft: 2,
+        fontSize: 10,
     },
     badgeNumContainer: {
         width: 68,
         height: 30,
-        backgroundColor: "#E6E6E6",
         flexDirection: "row",
+        justifyContent: "center",
     },
     badgeNum: {
         fontFamily: "Cochin",
-        color: "#121212",
+        color: "#F7F7F7",
         fontSize: 17,
         marginTop: 5,
         marginLeft: 6
@@ -50,12 +43,24 @@ export const styles = StyleSheet.create({
     },
     badgesText: {
         fontFamily: "Cochin",
-        color: "#121212",
+        color: "#F7F7F7",
         fontSize: 11,
-        // flexGrow: 1,
-        // marginLeft: 26
     },
 })
 
 
 export default styles
+
+
+const style_Group_2760 =  {
+    position: "absolute",
+    width: 147,
+    height: 55,
+    transform: [
+        {translateX: 17},
+        {translateY: 42},
+        {rotate: "0deg"},
+    ],
+    overflow: "hidden",
+    backgroundColor: "rgba(0,0,0,0)",
+}

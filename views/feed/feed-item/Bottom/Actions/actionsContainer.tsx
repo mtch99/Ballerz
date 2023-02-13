@@ -1,20 +1,25 @@
-import { View, Text } from "react-native"
+import { View, Text, TouchableOpacity } from "react-native"
 import Icon from "react-native-vector-icons/FontAwesome"
 import {styles} from "./styles"
 import React from "react"
 
-export interface IActionContainerProps{}
+export interface IActionContainerProps{
+	onPressInvite: () => void
+}
 
 
-export class ActionsContainer extends React.Component<IActionContainerProps> {
+export function ActionsContainer(props:IActionContainerProps) {
     
-  render() {
+
     return(
       <View style={styles.container}>
         <Text style={styles.playText}>jouer</Text>
         <Icon name="commenting-o" style={styles.commentIcon}></Icon>
-        <Text style={styles.inviteText}>inviter</Text>
+		<TouchableOpacity
+			onPress={() => {props.onPressInvite()}}
+		>
+        	<Text style={styles.inviteText}>inviter</Text>
+		</TouchableOpacity>
       </View>
     )
-  }
 }

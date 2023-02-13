@@ -8,6 +8,7 @@ export interface IFeedItem {
     endingTime: Date
     attendants: IUserProfile[]
     badges: IBadge[]
+    friendsThere: IUserProfile[]
 }
 
 

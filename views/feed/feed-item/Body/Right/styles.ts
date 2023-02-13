@@ -3,31 +3,23 @@ import { StyleSheet} from "react-native";
 
 const style = StyleSheet.create({
     dateTimeContatiner: {
-        width: 137,
         height: 48,
-        backgroundColor: "#E6E6E6",
-        marginTop: 6,
+        backgroundColor: "#F12F12F12",
         flexDirection: "column",
-
+        marginLeft: 20,
+        alignItems: "center",
+        justifyContent: "center",
+        flexGrow: 1
     },
     mardi: {
-        fontFamily: "Cochin",
-        color: "#121212",
+        color: "#F5F8FA",
         alignSelf: "center",
+        fontWeight: "500"
     },
     timeContainer: {
         width: 132,
-        height: 29,
-        backgroundColor: "#E6E6E6",
+        backgroundColor: "#F12F12F12",
         flexDirection: "row",
-        alignItems: "center",
-    },
-    startingHourText: {
-      fontFamily: "Cochin",
-      color: "#121212",
-      fontSize: 17,
-      flex: 1,
-    //   marginTop: 2,
     },
     traitSeparatorContainer:{
         flex: 1,
@@ -35,29 +27,27 @@ const style = StyleSheet.create({
     },
     traitSeperator: {
       fontFamily: "Cochin",
-      color: "#121212",
-    //   fontSize: 22,
+      color: "#F7F7F7",
       flexGrow: 1,
-
-    //   marginTop: -2,
-    //   marginLeft: 51,
     },
-    startingHourTextColumn: {
-    //   width: 51,
-    //   marginTop: 3,
-    //   marginLeft: 15,
-      flex: 1,
-      flexDirection: "row"
+    startingHourTextContainer: {
+      flexDirection: "row",
+      alignSelf: "center",
+      marginLeft: 15
+    },
+    startingHourText: {
+      fontFamily: "Cochin",
+      color: "#F5F8FA",
+      fontSize: 17,
+      alignSelf: "center",
     },
     endingHourText1: {
       fontFamily: "Cochin",
-      color: "#121212",
+      color: "#F5F8FA",
       fontSize: 16,
-    //   marginLeft: 80,
-      flex: 1
     },
-    startingHourTextColumnFiller: {
-      flex: 1,
+    endingHourTextContainer: {
+      marginRight: 15,
       justifyContent: "center",
     },
 })

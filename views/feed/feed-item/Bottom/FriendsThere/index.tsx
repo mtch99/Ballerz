@@ -20,7 +20,10 @@ export default function FriendsThereView(props: IFriendsThereViewProps) {
             onPress={() => {onPress()}}
         >
             <Text style={styles.friendsThereText}>
-              username1 et 2 autres y vont
+              0 amis 
+            </Text>
+            <Text style={styles.hereText}>
+                here
             </Text>
         </TouchableOpacity>
     )

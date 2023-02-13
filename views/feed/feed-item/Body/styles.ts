@@ -6,8 +6,8 @@ export const styles = StyleSheet.create({
         height: 60,
         flexDirection: "row",
         marginTop: 4,
-        marginLeft: 38,
-        marginRight: 132
+        marginLeft: 15,
+        // marginRight: 132
     },
 })
 

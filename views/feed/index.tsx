@@ -9,6 +9,7 @@ interface IProps {
     feedState: IFeedState
 	handleBadgeClick: IFeedScreen['handleBadgeClick']
 	handleFriendsTherePress: IFeedScreen['handleFriendsTherePress']
+	handleInvitePress: IFeedScreen['handleInvitePress']
 }
 
 
@@ -23,6 +24,10 @@ class FeedView extends React.Component<IProps> {
 		this.props.handleFriendsTherePress(item)
 	}
 
+	handleInvitePress(item: IFeedItemState) {
+		this.props.handleInvitePress(item)
+	}
+
 	constructor(props: IProps) {
 		super(props);
 	}
@@ -33,7 +38,6 @@ class FeedView extends React.Component<IProps> {
   
     render(): React.ReactNode {
 		return(
-			<SafeAreaView>
 				<FlatList
 					data={this.props.feedState.items}
 					renderItem={({item, index}) => {
@@ -42,16 +46,13 @@ class FeedView extends React.Component<IProps> {
 								feedItem={item}
 								handleBadgeClick={() => {this.handleBadgeClick(item)}}
 								handleFriendsTherePress={() => {this.handleFriendsTherePress(item)}}
+								handleInvitePress={() => {this.handleInvitePress(item)}}
 							/>
 						)
 					}}
 					extraData={this.props.feedState.items}
+					style={{backgroundColor: "#121212", flexGrow:1}}
 				/>
-        {/** This component is used to test that the feedView renders correctly */}
-				{/* <FeedItemView
-					feedItem={this.props.feedState.items[0]}
-				/> */}
-			</SafeAreaView>
 		)
     }
 }

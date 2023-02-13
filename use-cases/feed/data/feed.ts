@@ -25,6 +25,7 @@ const initialFeed: IFeedItem[] = [
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
         attendants: initialUserProfiles,
+        friendsThere: initialUserProfiles.slice(0, 2)
     },
 
     {
@@ -36,7 +37,8 @@ const initialFeed: IFeedItem[] = [
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
         attendants: initialUserProfiles,
-        badges: []
+        badges: [],
+        friendsThere: []
     },
 
     {
@@ -48,20 +50,22 @@ const initialFeed: IFeedItem[] = [
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
         attendants: initialUserProfiles.slice(0, 2),
-        badges: fivePlayerGameBadges
+        badges: fivePlayerGameBadges,
+        friendsThere: []
     },
 
-    {
-        id: "noPlayersGameId",
-        place: {
-            id: "VictoriaId",
-            name: "Parc Victoria"
-        },
-        startingTime: todayWithHour(17),
-        endingTime: todayWithHour(21),
-        attendants: [],
-        badges: []
-    },
+    // {
+    //     id: "noPlayersGameId",
+    //     place: {
+    //         id: "VictoriaId",
+    //         name: "Parc Victoria"
+    //     },
+    //     startingTime: todayWithHour(17),
+    //     endingTime: todayWithHour(21),
+    //     attendants: [],
+    //     badges: [],
+    //     friendsThere: []
+    // },
 ]
 
 export default initialFeed

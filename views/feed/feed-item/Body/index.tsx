@@ -13,36 +13,6 @@ export interface IBodyContainerProps{
 }
 
 
-export class Bodyyy extends React.Component<IBodyContainerProps> {
-
-	handleBadgeClick = this.props.onBadgeClick
-
-	constructor(props: IBodyContainerProps) {
-		super(props)
-		this.onBadgeClick.bind(this)
-
-	}
-
-	onBadgeClick() {
-		console.warn(this.props)
-		this.handleBadgeClick()
-	}
-    
-	render() {
-		return(
-		    <View style={styles.container}>
-		        <LeftBodyView 
-					onBadgeClick={() => {this.onBadgeClick()}}
-					badgeList={this.props.badgeList}
-		        />
-		        <BodyRightView/>
-		    </View>
-		)
-    }
-
-}
-
-
 export function BodyView(props: IBodyContainerProps){
 
 	return(
@@ -51,8 +21,7 @@ export function BodyView(props: IBodyContainerProps){
 				onBadgeClick={() => {props.onBadgeClick()}}
 				badgeList={props.badgeList}
 	        />
-	        <BodyRightView/>
+			<BodyRightView/>
 	    </View>
 	)
-
 }
