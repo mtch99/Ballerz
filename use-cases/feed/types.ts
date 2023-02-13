@@ -1,6 +1,12 @@
 export interface IFeed extends Array<IFeedItem>{}
 
 
+
+export interface IComment{
+    id: string;
+    author: IUserProfileData
+    text: string;
+}
 export interface IFeedItem {
     id: string;
     place: IPlace
@@ -9,6 +15,7 @@ export interface IFeedItem {
     attendants: IUserProfile[]
     badges: IBadge[]
     friendsThere: IUserProfile[]
+    comments: IComment[]
 }
 
 
