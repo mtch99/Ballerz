@@ -1,9 +1,7 @@
 import { View, Text, TouchableOpacity } from "react-native"
-import Icon from "react-native-vector-icons/FontAwesome"
 import {styles} from "./styles"
 import React from "react"
 import { IBadgeData } from "../../../../../app/features/feed/slice/interface"
-import IFeedScreen from "../../../../../screens/feed/interface"
 
 export interface ILeftBodyProps{
   badgeList: IBadgeData[]
@@ -56,32 +54,4 @@ export default function LeftBodyView(props: ILeftBodyProps) {
 		)
 
 
-}
-
-
-function generateBadgeNumView(badgeList: IBadgeData[], onBadgeClick: ILeftBodyProps['onBadgeClick']): JSX.Element {
-
-	if(badgeList.length > 0) {
-		return (
-			<TouchableOpacity style={styles.badgeNumContainer}
-				onPress={() => {
-					onBadgeClick()
-				}}
-			>
-				<Text>
-					{badgeList[0].symbol?badgeList[0].symbol:233}
-				</Text>
-       		</TouchableOpacity>
-		)
-	}
-
-	
-	return(
-		<TouchableOpacity style={styles.badgeNumContainer}>
-            <Text style={styles.badgeNum}>0</Text>
-            <View style={styles.badgesTextContainer}>
-              <Text style={styles.badgesText}>badges</Text>
-            </View>
-        </TouchableOpacity>
-	)
 }

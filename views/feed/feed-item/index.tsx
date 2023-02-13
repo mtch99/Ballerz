@@ -42,6 +42,7 @@ export default function FeedItemView(props: IFeedItemViewProps){
 				badgeList={feedItem.badges}
 			/>
 			<BottomView
+				friendsThere={feedItem.friendsThere}
 				onPressFriendsThere={() => {onPressFriendsThere()}}
 				onPressInvite={() => {onPressInvite()}}
 			/>
