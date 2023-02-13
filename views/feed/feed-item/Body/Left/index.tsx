@@ -7,6 +7,7 @@ import IFeedScreen from "../../../../../screens/feed/interface"
 
 export interface ILeftBodyProps{
   badgeList: IBadgeData[]
+  playersNum: number
   onBadgeClick: () => void
 }
 
@@ -15,6 +16,7 @@ export default function LeftBodyView(props: ILeftBodyProps) {
 
 
 	const badgeList = props.badgeList
+	const playerNum = props.playersNum
 	const handleBadgeClick = props.onBadgeClick
 	  
 	const onBadgeClick = () => {
@@ -22,13 +24,11 @@ export default function LeftBodyView(props: ILeftBodyProps) {
 		handleBadgeClick()
 	}
 
-    
-
   		return(
 
   		    <View style={styles.container}>
   		        <View style={styles.playerNumContainer}>
-  		          <Text style={styles.playersNumText}>20</Text>
+  		          <Text style={styles.playersNumText}>{props.playersNum}</Text>
   		          <Text style={styles.playersText}>JOUEURS</Text>
   		        </View>
 			  	{

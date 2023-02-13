@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, SafeAreaView, FlatList } from "react-native";
 import { IBadgeData } from "../../app/features/feed/slice/interface";
+import { BadgeListView } from "../../views/badgeList";
 
 
 export interface IBadgeListScreenPropsWithoutNavigation {
@@ -25,22 +26,9 @@ export default class BadgeListScreen extends React.Component<IBadgeListScreenPro
         return(
             <SafeAreaView>
                 {this.props.badgeList.length > 0?(
-                    <FlatList
-                        data={this.props.badgeList}
-                        renderItem={({item, index}) =>{
-                            return(
-                                <View>
-                                    <Text>
-                                        {item.name}
-                                    </Text>
-                                    <Text>
-                                        {item.description}
-                                    </Text>
-                                </View>
-                            )
-                        }}
+                    <BadgeListView
+                        badgeList={this.props.badgeList}
                     />
-
                 ):(
                     <></>
                 )}

@@ -9,6 +9,7 @@ import IFeedScreen from "../../../../screens/feed/interface"
 
 export interface IBodyContainerProps{
 	badgeList: IBadgeData[]
+	playerNum: number
 	onBadgeClick: () => void
 }
 
@@ -18,6 +19,7 @@ export function BodyView(props: IBodyContainerProps){
 	return(
 	    <View style={styles.container}>
 	        <LeftBodyView 
+				playersNum={props.playerNum}
 				onBadgeClick={() => {props.onBadgeClick()}}
 				badgeList={props.badgeList}
 	        />

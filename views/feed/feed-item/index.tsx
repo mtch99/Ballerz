@@ -37,6 +37,7 @@ export default function FeedItemView(props: IFeedItemViewProps){
 				text={feedItem?(feedItem.place.name):""}
 			/>
 			<BodyView
+				playerNum={props.feedItem.attendants.length}
 				onBadgeClick={() => {onBadgeClick()}}
 				badgeList={feedItem.badges}
 			/>

@@ -29,12 +29,11 @@ export default class UserProfileListScreen extends React.Component<IUserProfileL
                         data={this.props.userProfileList}
                         renderItem={({item, index}) =>{
                             return(
-                                <View>
-                                    <Text>
+                                <View style={{borderBottomColor:"#657786", borderBottomWidth:3, marginTop: 4}}>
+                                    <Text
+                                        style={{color:"#F5F8FA", fontSize:26}}
+                                    >
                                         {item.username}
-                                    </Text>
-                                    <Text>
-                                        {item.id}
                                     </Text>
                                 </View>
                             )

@@ -57,7 +57,7 @@ export function RootStackNavigator(): JSX.Element {
 				name='BadgeListScreen'
 				options={{
 					headerShown: true,
-					headerTitle: 'Badges',
+					headerTitle: 'Amis présents',
 					headerBackButtonMenuEnabled: true,
 				}}
 				component={BadgeListScreenWrapper}

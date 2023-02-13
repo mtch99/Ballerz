@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#F12F12F12",
         flexDirection: "row",
         borderBottomColor: "#657786",
-        borderBottomWidth: 1
+        borderBottomWidth: 0.2
     },
 })
 

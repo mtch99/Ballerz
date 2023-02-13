@@ -50,17 +50,3 @@ export const styles = StyleSheet.create({
 
 
 export default styles
-
-
-const style_Group_2760 =  {
-    position: "absolute",
-    width: 147,
-    height: 55,
-    transform: [
-        {translateX: 17},
-        {translateY: 42},
-        {rotate: "0deg"},
-    ],
-    overflow: "hidden",
-    backgroundColor: "rgba(0,0,0,0)",
-}
