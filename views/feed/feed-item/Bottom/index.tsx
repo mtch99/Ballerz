@@ -10,6 +10,7 @@ interface IBottomViewProps{
     friendsThere: IUserProfileData[]
     onPressFriendsThere: () => void
     onPressInvite: () => void
+    onPressPlay: () => void
 }
 
 export default function BottomView(props: IBottomViewProps) {
@@ -18,6 +19,7 @@ export default function BottomView(props: IBottomViewProps) {
         <View style={styles.container}>
             <ActionsContainer
                 onPressInvite={() => {props.onPressInvite()}}
+                onPressPlay={() => {props.onPressPlay()}}
             />
             <FriendsThereView
                 friendsHere={props.friendsThere}

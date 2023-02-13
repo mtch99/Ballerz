@@ -25,11 +25,9 @@ export function FeedScreenWrapper(props: IFeedScreenPropsWithoutNavigation): JSX
 
     const navigationController: IFeedScreenNavigationController = {
         goToBadgeListScreen: (badgeList: IBadgeData[]) => {
-            console.warn(`Attempted to navigae to badeg list screen with payload: \n ${JSON.stringify(badgeList)}`)
             navigation.navigate('BadgeListScreen', {badgeList})
         },
         goToAttendantsScreen: (userProfileList: IUserProfileData[]) => {
-            console.warn(`Attempted to navigae to attendants list screen with payload: \n ${JSON.stringify(userProfileList)}`)
             navigation.navigate('AttendantsListScreen', {userProfileList})
         }
     }

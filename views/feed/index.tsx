@@ -10,6 +10,7 @@ interface IProps {
 	handleBadgeClick: IFeedScreen['handleBadgeClick']
 	handleFriendsTherePress: IFeedScreen['handleFriendsTherePress']
 	handleInvitePress: IFeedScreen['handleInvitePress']
+	handlePlayButtonPress: IFeedScreen['handlePlayButtonPress']
 }
 
 
@@ -20,12 +21,15 @@ class FeedView extends React.Component<IProps> {
 	}
 
 	handleFriendsTherePress(item: IFeedItemState) {
-		console.warn("FeedView" + `${JSON.stringify(this.props.feedState)}`)
 		this.props.handleFriendsTherePress(item)
 	}
 
 	handleInvitePress(item: IFeedItemState) {
 		this.props.handleInvitePress(item)
+	}
+
+	handlePlayButtonPress(item: IFeedItemState) {
+		this.props.handlePlayButtonPress(item)
 	}
 
 	constructor(props: IProps) {
@@ -47,6 +51,7 @@ class FeedView extends React.Component<IProps> {
 								handleBadgeClick={() => {this.handleBadgeClick(item)}}
 								handleFriendsTherePress={() => {this.handleFriendsTherePress(item)}}
 								handleInvitePress={() => {this.handleInvitePress(item)}}
+								handlePlayButtonPress={() => {this.handlePlayButtonPress(item)}}
 							/>
 						)
 					}}

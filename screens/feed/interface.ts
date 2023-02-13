@@ -6,6 +6,7 @@ export default interface IFeedScreen {
     handleBadgeClick(feedItem: IFeedItemState): void
     handleFriendsTherePress(feedItem: IFeedItemState): void
     handleInvitePress(feedItem: IFeedItemState): void
+    handlePlayButtonPress(feedItem: IFeedItemState): void
 }
 
 

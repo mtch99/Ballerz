@@ -1,7 +1,7 @@
 import initialFeed from "./data/feed";
 import initialUserProfiles from "./data/userProfile";
-import { IFeedEventObserver, IFeedUseCase } from "./interface";
-import { IFeed, IFeedItem, IUserProfile } from "./types";
+import { ICheckinEventPayload, IFeedEventObserver, IFeedUseCase } from "./interface";
+import { IFeed, IFeedItem, IUserProfile, IUserProfileData } from "./types";
 
 
 export class FeedUseCase implements IFeedUseCase {
@@ -19,5 +19,10 @@ export class FeedUseCase implements IFeedUseCase {
         const result = this.feed
         this.observer.newFeedEventHandler(this.feed)
         return result
+    }
+
+    async checkIn(payload: ICheckinEventPayload): Promise<boolean> {
+        this.observer.checkInEventHandler(payload)
+        return true
     }
 }

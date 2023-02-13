@@ -1,13 +1,15 @@
-import { IFeed, IFeedItem } from "./../../use-cases/feed/types";
-import IFeedModel from "../../app/features/feed/adapter/interface";
+import { ICheckinEventPayload } from "./../../use-cases/feed/interface";
+import { IFeed, IFeedItem, IUserProfileData } from "./../../use-cases/feed/types";
 import { FeedUseCase } from "../../use-cases/feed"
-import { IFeedEventObserver, IFeedUseCase } from "../../use-cases/feed/interface";
+import IFeedModel, { IFeedEventObserver, IFeedUseCase } from "../../use-cases/feed/interface";
 import IFeedController from "./interface";
 
 
 export class FeedController implements IFeedController {
 
     private feedUseCase: IFeedUseCase
+    
+
 
     constructor(feedModel: IFeedModel ){
         const feedEventObserver = this.createObserver(feedModel)
@@ -19,9 +21,15 @@ export class FeedController implements IFeedController {
         return result
     }
 
+    async checkIn(payload: ICheckinEventPayload): Promise<boolean>{
+        return this.feedUseCase.checkIn(payload)
+    }
+ 
+
     private createObserver(feedModel: IFeedModel): IFeedEventObserver {
         return {
-            newFeedEventHandler: feedModel.newFeedEventHandler
+            newFeedEventHandler: feedModel.newFeedEventHandler,
+            checkInEventHandler: feedModel.checkInEventHandler
         }
     }
 }

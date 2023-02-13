@@ -50,15 +50,17 @@ const removeItemReducer: FeedReducer<IRemoveItemActionPayload> = (state, action)
 }
 
 const checkInReducer: FeedReducer<ICheckInActionPayload> = (state, action) => {
-	const currentItems = state.items
+	const currentItems = [...state.items]
+	const newItems: IFeedItemState[] = []
     const {keyToUpdate, userProfileData} = action.payload
-    const newItems: IFeedItemState[] = currentItems.map(item => {
-        if (item.id === keyToUpdate) {
-            const newFeedItem = addAttendantToFeedItem(item, userProfileData)
-			return newFeedItem
-        }  
-        return item
-    })
+    for(let feedItem of currentItems) {
+		if(feedItem.id == keyToUpdate){
+			const newItem = addAttendantToFeedItem(feedItem, userProfileData)
+			newItems.push(newItem)
+		}else{
+			newItems.push(feedItem)
+		}
+	}
     return {
         ...state,
         items: newItems
@@ -83,7 +85,7 @@ export const feedReducers = {
 
 
 function addAttendantToFeedItem(feedItem: IFeedItemState, userProfileData: ICheckInActionPayload['userProfileData']): IFeedItemState {
-	const currentAttendants = feedItem.attendants
+	const currentAttendants = [...feedItem.attendants]
 	currentAttendants.push(userProfileData)
 
 	return {
@@ -91,7 +93,3 @@ function addAttendantToFeedItem(feedItem: IFeedItemState, userProfileData: IChec
 		attendants: currentAttendants
 	}
 }
-
-
-
-

@@ -5,6 +5,7 @@ import React from "react"
 
 export interface IActionContainerProps{
 	onPressInvite: () => void
+	onPressPlay: () => void
 }
 
 
@@ -13,7 +14,11 @@ export function ActionsContainer(props:IActionContainerProps) {
 
     return(
       <View style={styles.container}>
-        <Text style={styles.playText}>jouer</Text>
+		<TouchableOpacity
+			onPress={() => {props.onPressPlay()}}
+		>
+			<Text style={styles.playText}>jouer</Text>
+		</TouchableOpacity>
         <Icon name="commenting-o" style={styles.commentIcon}></Icon>
 		<TouchableOpacity
 			onPress={() => {props.onPressInvite()}}

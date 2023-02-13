@@ -1,13 +1,13 @@
 import React from "react";
-import IFeedModel from "./interface";
-import { DispatchFunc, useAppDispatch, useAppSelector } from "../../../hooks";
+import { useAppSelector } from "../../../hooks";
 import { IFeed, IFeedItem } from "../../../../use-cases/feed/types";
-import { NEW_FEED, selectFeed } from "../slice";
+import { CHECK_IN, NEW_FEED, selectFeed } from "../slice";
 import { IFeedItemState, IFeedState } from "../slice/interface";
 import { useSelector } from "react-redux";
 import { AppDispatch } from "../../../store";
-import { INewFeedActionPayload } from "../slice/actions";
+import { ICheckInActionPayload, INewFeedActionPayload } from "../slice/actions";
 import { feedReducers } from "../slice/reducers";
+import IFeedModel, { ICheckinEventPayload } from "../../../../use-cases/feed/interface";
 
 
 
@@ -23,6 +23,10 @@ export const createFeedModel = (input: IFeedModelInput): IFeedModel => {
         newFeedEventHandler(payload: IFeed): void {
             const newFeedActionPayload: INewFeedActionPayload = FeedModelAdapter.parseNewFeedEventPayload(payload)
             input.dispatchFunc(NEW_FEED(newFeedActionPayload))
+        },
+        checkInEventHandler(payload: ICheckinEventPayload): void{
+            const checkInActionPayload: ICheckInActionPayload = FeedModelAdapter.parseCheckinEventPayload(payload)
+            input.dispatchFunc(CHECK_IN(checkInActionPayload))
         }
     }
 }
@@ -41,6 +45,13 @@ class FeedModelAdapter {
 
         return {items: feed}
     } 
+
+    static parseCheckinEventPayload(payload: ICheckinEventPayload): ICheckInActionPayload {
+        return {
+            keyToUpdate: payload.id,
+            userProfileData: payload.userProfile
+        }
+    }
 }
 
 

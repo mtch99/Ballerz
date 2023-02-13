@@ -13,22 +13,24 @@ interface IFeedItemViewProps{
   handleBadgeClick: IFeedScreen['handleBadgeClick']
   handleFriendsTherePress: IFeedScreen['handleFriendsTherePress']
   handleInvitePress: IFeedScreen['handleInvitePress']
+  handlePlayButtonPress: IFeedScreen['handlePlayButtonPress']
 }
 
 
 export default function FeedItemView(props: IFeedItemViewProps){
 	const feedItem = props.feedItem
 	const handleBadgeClick = props.handleBadgeClick
-	const handleFriendsTherePress = props.handleFriendsTherePress
 	const onBadgeClick = () => {
-		// console.warn(this)
 		handleBadgeClick(feedItem)
 	}
 	const onPressFriendsThere = () => {
-		handleFriendsTherePress(feedItem)
+		props.handleFriendsTherePress(feedItem)
 	}
 	const onPressInvite = () => {
-		props.handleInvitePress(props.feedItem)
+		props.handleInvitePress(feedItem)
+	}
+	const onPressPlay = () => {
+		props.handlePlayButtonPress(feedItem)
 	}
 	
 	return (
@@ -42,6 +44,7 @@ export default function FeedItemView(props: IFeedItemViewProps){
 				badgeList={feedItem.badges}
 			/>
 			<BottomView
+				onPressPlay={() => {onPressPlay()}}
 				friendsThere={feedItem.friendsThere}
 				onPressFriendsThere={() => {onPressFriendsThere()}}
 				onPressInvite={() => {onPressInvite()}}
