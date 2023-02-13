@@ -5,26 +5,21 @@ export const styles = StyleSheet.create({
     container: {
         width: 127,
         height: 28,
-        backgroundColor: "#E6E6E6",
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "space-between",
+        marginLeft: 12
       },
-    playText: {
-        fontFamily: "roboto-regular",
-        color: "#121212",
-        // borderColor: "red",
-        // borderWidth:4
+      playText: {
+        color: "#b26700",
+        fontWeight: "500",
       },
       commentIcon: {
         color: "rgba(128,128,128,1)",
         fontSize: 16,
-        // borderColor: "yellow",
-        // borderWidth:4
       },
       inviteText: {
-        fontFamily: "roboto-regular",
-        color: "#121212",
+        color: "#b26700",
       },
 })
 

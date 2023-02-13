@@ -4,9 +4,12 @@ const styles = StyleSheet.create({
     container: {
         width: 375,
         height: 28,
-        backgroundColor: "#E6E6E6",
+        backgroundColor: "#F12F12F12",
         flexDirection: "row",
+        borderBottomColor: "#657786",
+        borderBottomWidth: 1
     },
 })
 
 export default styles;
+

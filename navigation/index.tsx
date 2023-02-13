@@ -22,15 +22,12 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
   return (
     <NavigationContainer
       // linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      theme={DarkTheme}>
       <RootStackNavigator />
     </NavigationContainer>
   );
 }
 
-const OnboardingStack = () => {
-  return (<></>)
-}
 
 /**
  * A root stack navigator is often used for displaying modals on top of all other content.
@@ -61,7 +58,7 @@ export function RootStackNavigator(): JSX.Element {
 				options={{
 					headerShown: true,
 					headerTitle: 'Badges',
-					headerBackButtonMenuEnabled: true
+					headerBackButtonMenuEnabled: true,
 				}}
 				component={BadgeListScreenWrapper}
 				initialParams={{badgeList: []}}

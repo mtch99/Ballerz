@@ -6,6 +6,7 @@ import BottomView from "./Bottom";
 import Header from "./Header";
 import { BodyView } from "./Body";
 import IFeedScreen from "../../../screens/feed/interface";
+import { style } from "./styles";
 
 interface IFeedItemViewProps{
   feedItem: IFeedItemState
@@ -48,10 +49,3 @@ export default function FeedItemView(props: IFeedItemViewProps){
 }
 
 
-const style = StyleSheet.create({
-  container: {
-    backgroundColor: "#E6E6E6",
-    width: 375,
-    height: 114
-  },
-});

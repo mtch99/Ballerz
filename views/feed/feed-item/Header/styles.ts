@@ -3,18 +3,19 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         width: 375,
-        height: 22
+        height: 22,
       },
       placeNameContainer: {
         width: 375,
         height: 22,
-        backgroundColor: "#E6E6E6"
       },
-      placeName: {
-        fontFamily: "Cochin",
-        color: "#121212",
+      placeNameText: {
+        // fontFamily: "Manrope",
+        fontStyle:'italic',
         marginTop: 6,
-        marginLeft: 8
+        marginLeft: 12,
+        fontWeight: "400",
+        color: '#AAB8C2'
       },
 })
 

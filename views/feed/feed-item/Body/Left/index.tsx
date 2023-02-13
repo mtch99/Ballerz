@@ -28,8 +28,8 @@ export default function LeftBodyView(props: ILeftBodyProps) {
 
   		    <View style={styles.container}>
   		        <View style={styles.playerNumContainer}>
-  		          <Text style={styles.playersNum}>20</Text>
-  		          <Text style={styles.playersText}>joueurs</Text>
+  		          <Text style={styles.playersNumText}>20</Text>
+  		          <Text style={styles.playersText}>JOUEURS</Text>
   		        </View>
 			  	{
 					badgeList.length>0?(

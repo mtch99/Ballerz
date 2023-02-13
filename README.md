@@ -30,3 +30,5 @@ There must be three different games on three different courts, two at the moment
         - [x] Define the prop here
         - [x] Drill it up to the feedItem view 
     - [x] handle InvitePress in feed screen controller
+
+- [x] Style feed View

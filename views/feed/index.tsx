@@ -38,7 +38,6 @@ class FeedView extends React.Component<IProps> {
   
     render(): React.ReactNode {
 		return(
-			<SafeAreaView>
 				<FlatList
 					data={this.props.feedState.items}
 					renderItem={({item, index}) => {
@@ -52,12 +51,8 @@ class FeedView extends React.Component<IProps> {
 						)
 					}}
 					extraData={this.props.feedState.items}
+					style={{backgroundColor: "#121212", flexGrow:1}}
 				/>
-        {/** This component is used to test that the feedView renders correctly */}
-				{/* <FeedItemView
-					feedItem={this.props.feedState.items[0]}
-				/> */}
-			</SafeAreaView>
 		)
     }
 }

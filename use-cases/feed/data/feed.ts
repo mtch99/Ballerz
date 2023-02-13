@@ -54,18 +54,18 @@ const initialFeed: IFeedItem[] = [
         friendsThere: []
     },
 
-    {
-        id: "noPlayersGameId",
-        place: {
-            id: "VictoriaId",
-            name: "Parc Victoria"
-        },
-        startingTime: todayWithHour(17),
-        endingTime: todayWithHour(21),
-        attendants: [],
-        badges: [],
-        friendsThere: []
-    },
+    // {
+    //     id: "noPlayersGameId",
+    //     place: {
+    //         id: "VictoriaId",
+    //         name: "Parc Victoria"
+    //     },
+    //     startingTime: todayWithHour(17),
+    //     endingTime: todayWithHour(21),
+    //     attendants: [],
+    //     badges: [],
+    //     friendsThere: []
+    // },
 ]
 
 export default initialFeed

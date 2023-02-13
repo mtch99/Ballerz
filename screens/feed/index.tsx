@@ -91,23 +91,23 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
 
     render() {
         return (
-            <View>
+            <SafeAreaView
+                style={{backgroundColor:"#14171A", flexGrow:1}}
+            >
                 <FeedView
                     feedState={this.context.feedState}
                     handleBadgeClick={(item) => {this.handleBadgeClick(item)}}
                     handleFriendsTherePress={(item) => {this.handleFriendsTherePress(item)}}
                     handleInvitePress={(item) => {this.handleInvitePress(item)}}
                 />
-                <Modal
+                {/* <Modal
                     visible={this.state.modalVisible}
                 >
-                    <SafeAreaView>
-                        <Text>
-                            NoFreidns here
-                        </Text>
-                    </SafeAreaView>
-                </Modal>
-            </View>
+                    <Text>
+                        NoFreidns here
+                    </Text>
+                </Modal> */}
+            </SafeAreaView>
         )
     }
 }

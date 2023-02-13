@@ -14,7 +14,7 @@ export default class Header extends React.Component<IProps> {
         return(
             <View style={styles.container}>
                 <View style={styles.placeNameContainer}>
-                  <Text style={styles.placeName}>{this.props.text}</Text>
+                  <Text style={styles.placeNameText}>{this.props.text}</Text>
                 </View>
             </View>
         )
