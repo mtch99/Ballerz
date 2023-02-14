@@ -14,6 +14,6 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 - [x] Implements comments in FeedUseCase input model
-- [ ] Implement comments in Slice
+- [x] Implement comments in Slice
 - [ ] Implement comments in FeedScreen
-- [ ] Implement comments in FeedView
+- [x] Implement comments in FeedView

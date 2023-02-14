@@ -15,6 +15,7 @@ export interface IFeedItemState {
     endingTime: string
     attendants: IUserProfileData[],
     friendsThere: IUserProfileData[],
+    comments: IFeedItem['comments']
 }
 
 

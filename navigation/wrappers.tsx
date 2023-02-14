@@ -29,7 +29,12 @@ export function FeedScreenWrapper(props: IFeedScreenPropsWithoutNavigation): JSX
         },
         goToAttendantsScreen: (userProfileList: IUserProfileData[]) => {
             navigation.navigate('AttendantsListScreen', {userProfileList})
-        }
+        },
+        goToCommentScreen(feedItem) {
+            console.error('attempted to go to comments scrren')
+            navigation.navigate('AttendantsListScreen', {userProfileList: feedItem.attendants})
+        },
+        
     }
 
 

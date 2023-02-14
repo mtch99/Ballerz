@@ -28,4 +28,13 @@ export interface ICheckInActionPayload {
 export interface ICheckInAction extends PayloadAction<ICheckInActionPayload>{}
 
 
+export interface ICommentActionPayload {
+	itemId: IFeedItem['id']
+	author: IUserProfileData
+	text: string
+}
+export interface ICommentAction extends PayloadAction<ICommentActionPayload>{
+}
+
+
 export interface INewFeedActionPayload extends IFeedState{}

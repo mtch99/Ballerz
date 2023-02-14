@@ -23,7 +23,7 @@ export const feedSlice = createSlice({
 
 
 
-export const {ADD_ITEM, REMOVE_ITEM, CHECK_IN, NEW_FEED} = feedSlice.actions
+export const {ADD_ITEM, REMOVE_ITEM, CHECK_IN, NEW_FEED, COMMENT} = feedSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectFeed = (state: RootState) => state.feed

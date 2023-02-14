@@ -11,6 +11,7 @@ interface IBottomViewProps{
     onPressFriendsThere: () => void
     onPressInvite: () => void
     onPressPlay: () => void
+    onPressCommentButton: () => void
 }
 
 export default function BottomView(props: IBottomViewProps) {
@@ -18,6 +19,7 @@ export default function BottomView(props: IBottomViewProps) {
     return(
         <View style={styles.container}>
             <ActionsContainer
+                onPressCommentButton={() => {props.onPressCommentButton()}}
                 onPressInvite={() => {props.onPressInvite()}}
                 onPressPlay={() => {props.onPressPlay()}}
             />
