@@ -3,12 +3,21 @@ import { IFeed, IFeedItem, IUserProfileData } from "./../../use-cases/feed/types
 import { FeedUseCase } from "../../use-cases/feed"
 import IFeedModel, { IFeedEventObserver, IFeedUseCase } from "../../use-cases/feed/interface";
 import IFeedController from "./interface";
+import ICommentsController from "./Comments/interface";
 
 
 export class FeedController implements IFeedController {
 
     private feedUseCase: IFeedUseCase
     
+    commentsController: ICommentsController = {
+        postComment: this.postComment
+    }
+
+
+    private async postComment(payload: ICommentInput): Promise<boolean> {
+        return true
+    }
 
 
     constructor(feedModel: IFeedModel ){

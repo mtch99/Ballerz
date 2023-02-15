@@ -1,3 +1,4 @@
+import { ICommentScreenPropsWithoutNavigation } from "./../screens/feed/Comments/index";
 import { IBadgeListScreenPropsWithoutNavigation } from "./../screens/badgeList/index";
 import { IFeedScreenPropsWithoutNavigation } from "./../screens/feed/index";
 import { IBadgeData } from "./../app/features/feed/slice/interface";
@@ -24,6 +25,7 @@ export type RootStackParamList = {
 	FeedScreen: IFeedScreenPropsWithoutNavigation;
 	BadgeListScreen: IBadgeListScreenPropsWithoutNavigation;
 	AttendantsListScreen: IUserProfileListScreenPropsWithoutNavigation;
+	CommentsScreen: ICommentScreenPropsWithoutNavigation;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

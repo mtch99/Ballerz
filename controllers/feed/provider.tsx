@@ -5,16 +5,18 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { NEW_FEED, selectFeed } from "../../app/features/feed/slice"
 import { createFeedModel } from "../../app/features/feed/adapter"
 import { FeedController } from "."
+import ICommentsController from "./Comments/interface"
 
 
 export interface IFeedContext {
     controller: IFeedController
+    // commentsController: ICommentsController
     feedState: IFeedState
 }
 
 export const FeedContext = React.createContext<IFeedContext>({
     controller: {} as IFeedController,
-    feedState: {items: []}
+    feedState: {items: []},
 })
 
 

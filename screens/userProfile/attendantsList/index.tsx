@@ -4,7 +4,7 @@ import { SafeAreaView as View } from "react-native-safe-area-context";
 import { Text } from "react-native";
 
 
-export default class AttendantsList extends UserProfileListScreen {
+export default class AttendantsListScreen extends UserProfileListScreen {
 
     render(): ReactNode {
         if(this.props.userProfileList.length>0){
