@@ -10,7 +10,7 @@ const NewBieBadge: IBadge = {
 
 const GMBadge: IBadge = {
     name: "General Manager",
-    symbol: '',
+    symbol: '👔',
     description: "Vous devez être le créateur d'un groupe qui compte plus de 15 joueurs"
 }
 

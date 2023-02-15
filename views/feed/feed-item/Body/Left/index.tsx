@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native"
+import { View, Text, TouchableOpacity, FlatList } from "react-native"
 import {styles} from "./styles"
 import React from "react"
 import { IBadgeData } from "../../../../../app/features/feed/slice/interface"
@@ -14,11 +14,10 @@ export default function LeftBodyView(props: ILeftBodyProps) {
 
 
 	const badgeList = props.badgeList
-	const playerNum = props.playersNum
 	const handleBadgeClick = props.onBadgeClick
-	  
+	
+
 	const onBadgeClick = () => {
-		// console.error(this)
 		handleBadgeClick()
 	}
 
@@ -36,9 +35,25 @@ export default function LeftBodyView(props: ILeftBodyProps) {
 								onBadgeClick()
 							}}
 						>
-							<Text>
-								{badgeList[0].symbol?badgeList[0].symbol:233}
+							<Text
+								style={{color: "#AAB8C2"}}
+							>
+								badges:
 							</Text>
+							<FlatList
+								data={badgeList}
+								renderItem={({item, index}) => {
+										return(
+											<Text>
+												{item.symbol}
+											</Text>
+										)
+								}}
+								style={{flexDirection: "row"}}
+							/>
+							{/* <Text>
+								{badgeList[0].symbol?badgeList[0].symbol:233}
+							</Text> */}
        					</TouchableOpacity>
 					):(
 						<TouchableOpacity style={styles.badgeNumContainer}>
