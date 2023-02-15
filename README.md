@@ -1,7 +1,6 @@
 # Ballerz
 The app for finding basketball pickup games
 
-TODO: Display all badges on feedItem
 
 ## Branch Purpose
     5) I want to be acknowledged that I have to make friends in order to view their attendances
@@ -34,3 +33,9 @@ There must be three different games on three different courts, two at the moment
     - [x] handle InvitePress in feed screen controller
 
 - [x] Style feed View
+
+
+
+## Post-Testing Adjustments
+- [x] Fix header on badgelist Screen
+- [x] Display all badges on the feed item
