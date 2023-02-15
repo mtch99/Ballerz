@@ -18,6 +18,7 @@ There must be three different games on three different courts, two at the moment
 - [x] Implement comments in Model
 - [x] Implement comments in FeedView
 - [x] Create comments screen 
+- [ ] Add comments view on 
 
 
 ## Post-Testing Adjustments
