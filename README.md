@@ -1,6 +1,7 @@
 # Ballerz
 The app for finding basketball pickup games
 
+
 ## Branch Purpose
     6) I want to see game comments
 
@@ -18,3 +19,7 @@ There must be three different games on three different courts, two at the moment
 - [x] Implement comments in FeedView
 - [x] Create comments screen 
 
+
+## Post-Testing Adjustments
+- [x] Fix header on badgelist Screen
+- [x] Display all badges on the feed item

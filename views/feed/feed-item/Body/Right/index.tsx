@@ -12,7 +12,7 @@ export default class BodyRightView extends React.Component {
                 <Text style={style.mardi}>Mardi</Text>
                 <View style={style.timeContainer}>
                     <View style={style.startingHourTextContainer}>
-                      <Text style={style.startingHourText}>15:00</Text>
+                      <Text style={style.startingHourText}>17:00</Text>
                     </View>
 
                     <View style={style.traitSeparatorContainer}>  
@@ -20,7 +20,7 @@ export default class BodyRightView extends React.Component {
                     </View> 
 
                     <View style={style.endingHourTextContainer}>
-                      <Text style={style.endingHourText1}>15:00</Text>
+                      <Text style={style.endingHourText1}>21:00</Text>
                     </View>
                 </View>
             </View>
