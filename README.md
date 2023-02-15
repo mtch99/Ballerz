@@ -1,6 +1,8 @@
 # Ballerz
 The app for finding basketball pickup games
 
+TODO: Display all badges on feedItem
+
 ## Branch Purpose
     5) I want to be acknowledged that I have to make friends in order to view their attendances
        I want to be acknowledged that I can only invite my friends 

@@ -85,7 +85,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
     }
     
     private displayNoFriendsHereModal(): void {
-        console.error("No friends here")
+        // console.error("No friends here")
         this.showNoFriendsAlert()
     }
 
