@@ -2,9 +2,10 @@ import React, { ContextType } from "react";
 import { FeedContext, IFeedContext } from "../../controllers/feed/provider";
 import FeedView from "../../views/feed";
 import { IFeedItemState} from "../../app/features/feed/slice/interface";
-import IFeedScreen, { IFeedScreenNavigationController } from "./interface";
+import IFeedScreen, { IFeedScreenNavigationController, IPostCommentInput } from "./interface";
 import { Modal, View, Text, SafeAreaView, Alert } from "react-native";
 import IFeedController from "../../controllers/feed/interface";
+import { ICommentInput } from "../../use-cases/feed/interface";
 
 
 export interface IFeedScreenPropsWithoutNavigation {
@@ -83,6 +84,23 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
             this.displayNoFriendsHereModal()
         }
     }
+
+    
+    postComment(input: IPostCommentInput): void{
+        const commentInput: ICommentInput = {
+            feedItemId: input.feedItem.id,
+            author: {
+                id: "moiId",
+                username: "moi"
+            },
+            text: input.commentText
+        }
+        this.feedController.comment(commentInput)
+    }
+
+    handleCommentButtonPress(input: IFeedItemState): void {
+        this.navigationController.goToCommentScreen(input)
+    }
     
     private displayNoFriendsHereModal(): void {
         // console.error("No friends here")
@@ -128,6 +146,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
                     handleFriendsTherePress={(item) => {this.handleFriendsTherePress(item)}}
                     handleInvitePress={(item) => {this.handleInvitePress(item)}}
                     handlePlayButtonPress={(item) => {this.handlePlayButtonPress(item)}}
+                    handleCommentButtonPress={(input: IFeedItemState) => {this.handleCommentButtonPress(input)}}
                 />
                 {/* <Modal
                     visible={this.state.modalVisible}

@@ -13,7 +13,7 @@ import { ColorSchemeName, Pressable, View } from 'react-native';
 
 import { RootStackNavigationProp, RootStackParamList } from './types';
 import { FeedScreen } from '../screens/feed';
-import { AttendantsListScreenWrapper, BadgeListScreenWrapper, FeedScreenWrapper } from './wrappers';
+import { AttendantsListScreenWrapper, BadgeListScreenWrapper, CommentsScreenWrapper, FeedScreenWrapper } from './wrappers';
 import BadgeListScreen from '../screens/badgeList';
 // import LinkingConfiguration from './LinkingConfiguration';
 
@@ -51,7 +51,6 @@ export function RootStackNavigator(): JSX.Element {
 				  headerShown: false
 				}}
 				component={FeedScreenWrapper}
-				initialParams={{}}
 			/>	
 			<Stack.Screen
 				name='BadgeListScreen'
@@ -62,18 +61,16 @@ export function RootStackNavigator(): JSX.Element {
 				}}
 				component={BadgeListScreenWrapper}
 				initialParams={{badgeList: []}}
-
 			/>
 
 			<Stack.Screen
-				name='AttendantsListScreen'
+				name='CommentsScreen'
 				options={{
 					headerShown: true,
-					headerTitle: 'Amis présents',
+					headerTitle: 'Commentaires',
 					headerBackButtonMenuEnabled: true
 				}}
-				component={AttendantsListScreenWrapper}
-				initialParams={{userProfileList:[]}}
+				component={CommentsScreenWrapper}
 			/>
 
   

@@ -2,7 +2,8 @@ import React from "react";
 import {FlatList, SafeAreaView } from "react-native";
 import { IFeedItemState, IFeedState } from "../../app/features/feed/slice/interface";
 import FeedItemView from "./feed-item/index";
-import IFeedScreen from "../../screens/feed/interface";
+import IFeedScreen, { IPostCommentInput } from "../../screens/feed/interface";
+import { RedHatDisplay_300Light } from "@expo-google-fonts/dev";
 
 
 interface IProps {
@@ -11,6 +12,8 @@ interface IProps {
 	handleFriendsTherePress: IFeedScreen['handleFriendsTherePress']
 	handleInvitePress: IFeedScreen['handleInvitePress']
 	handlePlayButtonPress: IFeedScreen['handlePlayButtonPress']
+	// handlePostComment: IFeedScreen['postComment']
+	handleCommentButtonPress: (item: IFeedItemState) => void
 }
 
 
@@ -30,6 +33,11 @@ class FeedView extends React.Component<IProps> {
 
 	handlePlayButtonPress(item: IFeedItemState) {
 		this.props.handlePlayButtonPress(item)
+	}
+
+
+	handleCommentButtonPress(item: IFeedItemState){
+		this.props.handleCommentButtonPress(item)
 	}
 
 	constructor(props: IProps) {
@@ -52,6 +60,7 @@ class FeedView extends React.Component<IProps> {
 								handleFriendsTherePress={() => {this.handleFriendsTherePress(item)}}
 								handleInvitePress={() => {this.handleInvitePress(item)}}
 								handlePlayButtonPress={() => {this.handlePlayButtonPress(item)}}
+								onPressCommentButton={() => {this.handleCommentButtonPress(item)}}
 							/>
 						)
 					}}

@@ -25,7 +25,14 @@ const initialFeed: IFeedItem[] = [
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
         attendants: initialUserProfiles,
-        friendsThere: initialUserProfiles.slice(0, 2)
+        friendsThere: initialUserProfiles.slice(0, 2),
+        comments: [
+            {
+                id:"firstTestCommentId",
+                author: initialUserProfiles[0],
+                text: "5v5 tout-terrain ce soir 🔥"
+            }
+        ],
     },
 
     {
@@ -38,7 +45,8 @@ const initialFeed: IFeedItem[] = [
         endingTime: todayWithHour(21),
         attendants: initialUserProfiles,
         badges: [],
-        friendsThere: []
+        friendsThere: [],
+        comments: [],
     },
 
     {
@@ -51,7 +59,8 @@ const initialFeed: IFeedItem[] = [
         endingTime: todayWithHour(21),
         attendants: initialUserProfiles.slice(0, 2),
         badges: fivePlayerGameBadges,
-        friendsThere: []
+        friendsThere: [],
+        comments: [],
     },
 
     // {

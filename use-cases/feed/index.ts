@@ -1,7 +1,8 @@
+import uuid from "uuid";
 import initialFeed from "./data/feed";
 import initialUserProfiles from "./data/userProfile";
-import { ICheckinEventPayload, IFeedEventObserver, IFeedUseCase } from "./interface";
-import { IFeed, IFeedItem, IUserProfile, IUserProfileData } from "./types";
+import { ICheckinEventPayload, ICommentEventPayload, ICommentInput, IFeedEventObserver, IFeedUseCase } from "./interface";
+import { IComment, IFeed, IFeedItem, IUserProfile, IUserProfileData } from "./types";
 
 
 export class FeedUseCase implements IFeedUseCase {
@@ -23,6 +24,21 @@ export class FeedUseCase implements IFeedUseCase {
 
     async checkIn(payload: ICheckinEventPayload): Promise<boolean> {
         this.observer.checkInEventHandler(payload)
+        return true
+    }
+
+    async comment(input: ICommentInput): Promise<boolean> {
+        const comment: IComment = {
+            id: uuid.v4(),
+            author: input.author,
+            text: input.text
+        }
+        const commentEventPayload: ICommentEventPayload = {
+            feedItemId: input.feedItemId,
+            comment
+        }
+        this.observer.commentEventHandler(commentEventPayload)
+
         return true
     }
 }

@@ -1,6 +1,8 @@
+import { IComment, IFeedItem } from "./../../../../use-cases/feed/types";
 import { IFeedItemState, IFeedState } from "./interface";
-import {IAddItemActionPayload, ICheckInActionPayload, INewFeedActionPayload, IRemoveItemActionPayload} from "./actions";
+import {IAddItemActionPayload, ICheckInActionPayload, ICommentActionPayload, INewFeedActionPayload, IRemoveItemActionPayload} from "./actions";
 import { PayloadAction } from "@reduxjs/toolkit";
+import uuid from "uuid"
 
 
 /**
@@ -21,7 +23,8 @@ enum FeedActionType {
 	ADD_ITEM='ADD_ITEM',
 	REMOVE_ITEM="REMOVE_ITEM",
 	CHECK_IN="CHECK_IN",
-	NEW_FEED = 'NEW_FEED',
+	NEW_FEED ='NEW_FEED',
+	COMMENT='COMMENT',
 }
 export type FeedActionString = keyof typeof FeedActionType
 
@@ -72,6 +75,26 @@ const newFeedReducer: FeedReducer<INewFeedActionPayload> = (state, action) => {
 	return action.payload
 }
 
+const commentReducer: FeedReducer<ICommentActionPayload> = (state, action) => {
+	const currentItems = [...state.items]
+	const newItems: IFeedItemState[] = []
+    const {itemId, author, text} = action.payload
+    for(let feedItem of currentItems) {
+		if(feedItem.id == itemId){
+			const newItem = addCommentToFeedItem(feedItem, {
+				author, text, id: uuid.v4()
+			})
+			newItems.push(newItem)
+		}else{
+			newItems.push(feedItem)
+		}
+	}
+    return {
+        ...state,
+        items: newItems
+    }
+}
+
 
 /**
  * An object containing all the reducers
@@ -81,6 +104,7 @@ export const feedReducers = {
 	"CHECK_IN": checkInReducer,
 	"REMOVE_ITEM": removeItemReducer,
 	"NEW_FEED": newFeedReducer,
+	"COMMENT": commentReducer,
 } 
 
 
@@ -91,5 +115,16 @@ function addAttendantToFeedItem(feedItem: IFeedItemState, userProfileData: IChec
 	return {
 		...feedItem,
 		attendants: currentAttendants
+	}
+}
+
+
+function addCommentToFeedItem(feedItem: IFeedItemState, comment: IComment): IFeedItemState {
+	const currentComments = [...feedItem.comments]
+	currentComments.push(comment)
+
+	return {
+		...feedItem,
+		comments: currentComments
 	}
 }

@@ -8,7 +8,8 @@ import { IBadgeData, IUserProfileData } from "../app/features/feed/slice/interfa
 import { ComingSoon_400Regular } from "@expo-google-fonts/dev";
 import BadgeListScreen from "../screens/badgeList";
 import UserProfileListScreen from "../screens/userProfile/userProfileList";
-import AttendantsList from "../screens/userProfile/attendantsList";
+import AttendantsListScreen from "../screens/userProfile/attendantsList";
+import CommentScreen from "../screens/feed/Comments";
 
 interface IBadgeListScreenProps extends RootStackScreenProps<'FeedScreen'>{}
 
@@ -29,7 +30,12 @@ export function FeedScreenWrapper(props: IFeedScreenPropsWithoutNavigation): JSX
         },
         goToAttendantsScreen: (userProfileList: IUserProfileData[]) => {
             navigation.navigate('AttendantsListScreen', {userProfileList})
-        }
+        },
+        goToCommentScreen(feedItem) {
+            console.error('attempted to go to comments scrren')
+            navigation.navigate('CommentsScreen', {feedItem: feedItem, comments: feedItem.comments})
+        },
+        
     }
 
 
@@ -64,8 +70,24 @@ export function FeedScreenWrapper(props: IFeedScreenPropsWithoutNavigation): JSX
 export function AttendantsListScreenWrapper(props: RootStackScreenProps<'AttendantsListScreen'>){
 
     return(
-        <AttendantsList
+        <AttendantsListScreen
             userProfileList={props.route.params.userProfileList}
+        />
+    )
+}
+
+
+export function CommentsScreenWrapper(props: RootStackScreenProps<'CommentsScreen'>){
+
+    const feedItem = props.route.params.feedItem
+    const comments = props.route.params.comments
+
+
+    return(
+        <CommentScreen
+            navigationController={{}}
+            feedItem={feedItem}
+            comments={comments}
         />
     )
 }
