@@ -14,9 +14,9 @@ There must be three different games on three different courts, two at the moment
 
 
 ## How? (technical)
-- [ ] Define the group chats use case
-    - [ ] Define and implement group chat use case
-    - [ ] Create group chats initial data
+- [x] Define the group chats use case
+    - [x] Define and implement group chat use case
+    - [x] Create group chats initial data
 - [ ] Implement Group chats in model
     - [ ] Add group chats to the store
     - [ ] Implement IGroupChatModel
