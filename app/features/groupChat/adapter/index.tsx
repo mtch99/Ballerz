@@ -16,7 +16,7 @@ interface IGroupChatModelInput {
     selectorFunc: typeof useAppSelector
 }
 
-interface IGroupChatModel extends IGroupChatModelEventListener{}
+export interface IGroupChatModel extends IGroupChatModelEventListener{}
 
 
 export function createGroupChatModel (input: IGroupChatModelInput): IGroupChatModel {

@@ -20,7 +20,7 @@ There must be three different games on three different courts, two at the moment
 - [x] Implement Group chats in model
     - [x] Add group chats to the store
     - [x] Implement IGroupChatModel
-- [ ] Define and implement IGroupChatController
+- [x] Define and implement IGroupChatController
 - [ ] Change Root Stack navigator to a tab navigator
 - [ ] Produce group chat screen
 
