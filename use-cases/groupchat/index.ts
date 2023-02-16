@@ -1,6 +1,6 @@
 import initialGroupChatList from "./data/groupChatList";
 import IGroupChatUseCase, { IGroupChatModelEventListener } from "./interface";
-import { IGroupChat } from "./types";
+import { IGroupChat, IGroupChatList } from "./types";
 
 
 export default class GroupChatUseCase implements IGroupChatUseCase{
@@ -10,9 +10,9 @@ export default class GroupChatUseCase implements IGroupChatUseCase{
         this.modelEventListener = groupChatModel;
     }
 
-    getGroupChatList(): IGroupChat[] {
-        const groupChatList: IGroupChat[] = initialGroupChatList
-        this.modelEventListener.onNewGroupChatList(groupChatList)
+    getGroupChatList(): IGroupChatList {
+        const groupChatList: IGroupChatList = initialGroupChatList
+        this.modelEventListener.newGroupChatListEventHandler(groupChatList)
         return groupChatList
     }
 

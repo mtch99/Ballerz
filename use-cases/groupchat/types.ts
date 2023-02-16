@@ -1,6 +1,10 @@
 import { IFeedItem } from "./../feed/types";
 import { IUserProfile } from "../feed/types";
 
+
+export interface IGroupChatList{
+    items: IGroupChat[]
+}
 export interface IGroupChat {
     id: string;
     name: string;

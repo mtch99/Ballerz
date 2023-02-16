@@ -1,16 +1,20 @@
+import { IGroupChatList } from "./../types";
 import initialFeed from "../../feed/data/feed";
 import initialUserProfiles from "../../feed/data/userProfile";
 import { IGroupChat, IGroupChatMessage } from "../types";
 
 
-const initialGroupChatList: IGroupChat[] = [
-    {
-        id: "firstGroupChatId",
-        name: "Peps__Ballerz🔥🔥🔥",
-        members: initialUserProfiles.slice(0,3),
-        conversation: []
-    },
-]
+const initialGroupChatList: IGroupChatList = {
+    items: [
+        {
+            id: "firstGroupChatId",
+            name: "Peps__Ballerz🔥🔥🔥",
+            members: initialUserProfiles.slice(0,3),
+            conversation: []
+        },
+    ]
+}
+    
 
 
 const initialGroupChatMessageList: IGroupChatMessage[] = [

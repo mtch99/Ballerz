@@ -1,10 +1,10 @@
-import { IGroupChat } from "./types";
+import { IGroupChat, IGroupChatList } from "./types";
 
 export default interface IGroupChatUseCase {
-    getGroupChatList(): IGroupChat[]
+    getGroupChatList(): IGroupChatList
 }
 
 
 export interface IGroupChatModelEventListener {
-    onNewGroupChatList(groupChatList: IGroupChat[]): void
+    newGroupChatListEventHandler(groupChatList: IGroupChatList): void
 }
