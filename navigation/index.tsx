@@ -73,7 +73,16 @@ export function RootStackNavigator(): JSX.Element {
 				component={CommentsScreenWrapper}
 			/>
 
-  
+			<Stack.Screen
+				name='AttendantsListScreen'
+				options={{
+					headerShown: true,
+					headerTitle: 'Amis présents',
+					headerBackButtonMenuEnabled: true
+				}}
+				component={AttendantsListScreenWrapper}
+			/>
+
 		</Stack.Navigator>
 	  )
 }
