@@ -11,9 +11,9 @@ import React from 'react';
 import { ColorSchemeName, Pressable, View } from 'react-native';
 
 
-import { RootStackNavigationProp, RootStackParamList } from './types';
+import { RootTabNavigationProp, RootTabParamList } from './types';
 import { FeedScreen } from '../screens/feed';
-import { AttendantsListScreenWrapper, BadgeListScreenWrapper, CommentsScreenWrapper, FeedScreenWrapper } from './wrappers';
+import { AttendantsListScreenWrapper, BadgeListScreenWrapper, CommentsScreenWrapper, FeedScreenWrapper, FeedStackWrapper } from './wrappers';
 import BadgeListScreen from '../screens/badgeList';
 // import LinkingConfiguration from './LinkingConfiguration';
 
@@ -33,56 +33,28 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
  * A root stack navigator is often used for displaying modals on top of all other content.
  * https://reactnavigation.org/docs/modal
  */
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createBottomTabNavigator<RootTabParamList>();
 
- 
+//TODO: Tab bar icon 
+
 export function RootStackNavigator(): JSX.Element {
 
-	const _initialRouteName: keyof RootStackParamList = 'FeedScreen'
+	const _initialRouteName: keyof RootTabParamList = 'FeedStack'
 	
 	  return (
 		<Stack.Navigator
 		  initialRouteName={_initialRouteName}
 		>
-  
 			<Stack.Screen
-				name='FeedScreen'
-				options={{
-				  headerShown: false
-				}}
-				component={FeedScreenWrapper}
-			/>	
-			<Stack.Screen
-				name='BadgeListScreen'
+				name='FeedStack'
 				options={{
 					headerShown: true,
-					headerTitle: 'Badges',
-					headerBackButtonMenuEnabled: true,
+					headerTitle: 'Ballerz',
+					tabBarLabel: 'Games',
+					tabBarIcon: undefined
 				}}
-				component={BadgeListScreenWrapper}
-				initialParams={{badgeList: []}}
+				component={FeedStackWrapper}
 			/>
-
-			<Stack.Screen
-				name='CommentsScreen'
-				options={{
-					headerShown: true,
-					headerTitle: 'Commentaires',
-					headerBackButtonMenuEnabled: true
-				}}
-				component={CommentsScreenWrapper}
-			/>
-
-			<Stack.Screen
-				name='AttendantsListScreen'
-				options={{
-					headerShown: true,
-					headerTitle: 'Amis présents',
-					headerBackButtonMenuEnabled: true
-				}}
-				component={AttendantsListScreenWrapper}
-			/>
-
 		</Stack.Navigator>
 	  )
 }

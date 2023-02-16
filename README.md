@@ -21,7 +21,9 @@ There must be three different games on three different courts, two at the moment
     - [x] Add group chats to the store
     - [x] Implement IGroupChatModel
 - [x] Define and implement IGroupChatController
-- [ ] Change Root Stack navigator to a tab navigator
+- [x] Change Root Stack navigator to a tab navigator
+    - [x] Create Feed stack
+    - [x] Make it the first tab
 - [ ] Produce group chat screen
 
 

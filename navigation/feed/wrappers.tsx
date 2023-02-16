@@ -1,13 +1,13 @@
-import { useNavigation } from "@react-navigation/native";
-import { FeedScreen, IFeedScreenPropsWithoutNavigation } from "../screens/feed";
-import React from "react";
-import { RootTabNavigationProp, RootTabScreenProps } from "./types";
-import { IFeedScreenNavigationController } from "../screens/feed/interface";
-import { IBadgeData, IUserProfileData } from "../app/features/feed/slice/interface";
-import BadgeListScreen from "../screens/badgeList";
-import AttendantsListScreen from "../screens/userProfile/attendantsList";
-import CommentScreen from "../screens/feed/Comments";
-import {FeedStackNavigator} from "./feed"
+import { useNavigation } from "@react-navigation/native"
+import { IBadgeData } from "../../app/features/feed/slice/interface"
+import BadgeListScreen from "../../screens/badgeList"
+import { IFeedScreenPropsWithoutNavigation, FeedScreen } from "../../screens/feed"
+import CommentScreen from "../../screens/feed/Comments"
+import { IFeedScreenNavigationController } from "../../screens/feed/interface"
+import AttendantsListScreen from "../../screens/userProfile/attendantsList"
+import { IUserProfileData } from "../../use-cases/feed/types"
+import { RootTabScreenProps, RootTabNavigationProp } from "../types"
+
 interface IBadgeListScreenProps extends RootTabScreenProps<'FeedScreen'>{}
 
 
@@ -86,12 +86,5 @@ export function CommentsScreenWrapper(props: RootTabScreenProps<'CommentsScreen'
             feedItem={feedItem}
             comments={comments}
         />
-    )
-}
-
-
-export function FeedStackWrapper(){
-    return(
-        <FeedStackNavigator/>
     )
 }
