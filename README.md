@@ -18,8 +18,13 @@ There must be three different games on three different courts, two at the moment
 - [x] Implement comments in Model
 - [x] Implement comments in FeedView
 - [x] Create comments screen 
+- [x] Restyle Feed item component to show the number of comments
+    - [x] Comment footer component
+        - [x] Show the first comment 
+        - [x] See all comments button
 
 
 ## Post-Testing Adjustments
 - [x] Fix header on badgelist Screen
 - [x] Display all badges on the feed item
+TODO: Test if the comment icon is explicit, now that there is a feed item with a comments section

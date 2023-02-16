@@ -27,6 +27,7 @@ export function ActionsContainer(props:IActionContainerProps) {
 				onPress={() => {props.onPressCommentButton()}}
 			>
         		<Icon name="commenting-o" style={styles.commentIcon}></Icon>
+				{/* <Text style={styles.playText}> commenter </Text> */}
 			</TouchableOpacity>
 
 
