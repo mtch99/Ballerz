@@ -18,7 +18,10 @@ There must be three different games on three different courts, two at the moment
 - [x] Implement comments in Model
 - [x] Implement comments in FeedView
 - [x] Create comments screen 
-- [ ] Add comments view on 
+- [x] Restyle Feed item component to show the number of comments
+    - [x] Comment footer component
+        - [x] Show the first comment 
+        - [x] See all comments button
 
 
 ## Post-Testing Adjustments

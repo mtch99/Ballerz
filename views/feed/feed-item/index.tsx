@@ -6,6 +6,7 @@ import Header from "./Header";
 import { BodyView } from "./Body";
 import IFeedScreen, { IPostCommentInput } from "../../../screens/feed/interface";
 import { style } from "./styles";
+import CommentsView from "./Bottom/Comments";
 
 interface IFeedItemViewProps{
 	feedItem: IFeedItemState
@@ -62,6 +63,14 @@ export default function FeedItemView(props: IFeedItemViewProps){
 				onPressFriendsThere={() => {onPressFriendsThere()}}
 				onPressInvite={() => {onPressInvite()}}
 			/>
+			{
+				props.feedItem.comments.length>0?(
+					<CommentsView
+						onPressCommentsNumber={() => {props.onPressCommentButton()}}
+						comments={feedItem.comments}
+					/>
+				):(null)
+			}
 		</View>
 	)
 }
