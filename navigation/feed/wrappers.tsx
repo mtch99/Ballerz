@@ -6,10 +6,7 @@ import CommentScreen from "../../screens/feed/Comments"
 import { IFeedScreenNavigationController } from "../../screens/feed/interface"
 import AttendantsListScreen from "../../screens/userProfile/attendantsList"
 import { IUserProfileData } from "../../use-cases/feed/types"
-import { RootTabScreenProps, RootTabNavigationProp } from "../types"
-
-interface IBadgeListScreenProps extends RootTabScreenProps<'FeedScreen'>{}
-
+import { FeedStackScreenProps, FeedStackNavigationProp } from "./types"
 
 
 /**
@@ -19,7 +16,7 @@ interface IBadgeListScreenProps extends RootTabScreenProps<'FeedScreen'>{}
  */
 export function FeedScreenWrapper(props: IFeedScreenPropsWithoutNavigation): JSX.Element {
 
-    const navigation = useNavigation<RootTabNavigationProp<'FeedScreen'>>()
+    const navigation = useNavigation<FeedStackNavigationProp<'FeedScreen'>>()
 
     const navigationController: IFeedScreenNavigationController = {
         goToBadgeListScreen: (badgeList: IBadgeData[]) => {
@@ -51,9 +48,9 @@ export function FeedScreenWrapper(props: IFeedScreenPropsWithoutNavigation): JSX
  * @param props BadgeListScreen props without navigation
  * @returns A BadgeListScreen
  */
- export function BadgeListScreenWrapper(props: RootTabScreenProps<'BadgeListScreen'>): JSX.Element {
+ export function BadgeListScreenWrapper(props: FeedStackScreenProps<'BadgeListScreen'>): JSX.Element {
 
-    const navigation = useNavigation<RootTabNavigationProp<'BadgeListScreen'>>()
+    const navigation = useNavigation<FeedStackNavigationProp<'BadgeListScreen'>>()
 
 
     return (
@@ -64,7 +61,7 @@ export function FeedScreenWrapper(props: IFeedScreenPropsWithoutNavigation): JSX
 }
 
 
-export function AttendantsListScreenWrapper(props: RootTabScreenProps<'AttendantsListScreen'>){
+export function AttendantsListScreenWrapper(props: FeedStackScreenProps<'AttendantsListScreen'>){
 
     return(
         <AttendantsListScreen
@@ -74,7 +71,7 @@ export function AttendantsListScreenWrapper(props: RootTabScreenProps<'Attendant
 }
 
 
-export function CommentsScreenWrapper(props: RootTabScreenProps<'CommentsScreen'>){
+export function CommentsScreenWrapper(props: FeedStackScreenProps<'CommentsScreen'>){
 
     const feedItem = props.route.params.feedItem
     const comments = props.route.params.comments

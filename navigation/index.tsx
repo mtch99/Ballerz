@@ -3,18 +3,15 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme, DarkTheme, useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp, createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { ColorSchemeName, Pressable, View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer, DarkTheme} from '@react-navigation/native';
+import { ColorSchemeName } from 'react-native';
 
 
-import { RootTabNavigationProp, RootTabParamList } from './types';
-import { FeedScreen } from '../screens/feed';
-import { AttendantsListScreenWrapper, BadgeListScreenWrapper, CommentsScreenWrapper, FeedScreenWrapper, FeedStackWrapper } from './wrappers';
-import BadgeListScreen from '../screens/badgeList';
+import { RootTabParamList } from './types';
+import { FeedStackWrapper } from './wrappers';
+
 // import LinkingConfiguration from './LinkingConfiguration';
 
 

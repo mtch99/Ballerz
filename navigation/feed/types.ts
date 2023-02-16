@@ -29,9 +29,9 @@ export type FeedStackParamList = {
 };
 
 
-export type RootStackScreenProps<Screen extends keyof FeedStackParamList> = NativeStackScreenProps<
+export type FeedStackScreenProps<Screen extends keyof FeedStackParamList> = NativeStackScreenProps<
 	FeedStackParamList,
 	Screen
 >;
 
-export type RootStackNavigationProp<Screen extends keyof FeedStackParamList> = NativeStackNavigationProp<FeedStackParamList, Screen>
+export type FeedStackNavigationProp<Screen extends keyof FeedStackParamList> = NativeStackNavigationProp<FeedStackParamList, Screen>
