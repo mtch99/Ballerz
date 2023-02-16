@@ -18,7 +18,8 @@ export default function App() {
           navigation={{}}
         >
           <Navigation
-            colorScheme={"dark"} />
+            colorScheme={"dark"} 
+          />
         </FeedProvider>
       </Provider>
     </>
