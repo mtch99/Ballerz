@@ -27,3 +27,4 @@ There must be three different games on three different courts, two at the moment
 ## Post-Testing Adjustments
 - [x] Fix header on badgelist Screen
 - [x] Display all badges on the feed item
+TODO: Test if the comment icon is explicit, now that there is a feed item with a comments section
