@@ -14,6 +14,7 @@ There must be three different games on three different courts, two at the moment
 
 
 ## How? (technical)
+TODO: 
 - [x] Define the group chats use case
     - [x] Define and implement group chat use case
     - [x] Create group chats initial data
@@ -36,8 +37,19 @@ There must be three different games on three different courts, two at the moment
     - [x] Implement
     - [x] Add GroupChatListScreen to GroupChatStack
 
+- [ ] GroupChatListScreen v0.1
+    - [ ] Restyle GroupChatListScreen
+    - [ ] Define interface for GroupChatListScreen
+    - [ ] Define interface for GroupChatItem
+
+- [ ] GroupChatConversationScreen
+    - [ ] Define interface for GroupChatConversationScreen
+
+    
 ## Post-Testing Adjustments
 - [x] Fix header on badgelist Screen
 - [x] Display all badges on the feed item
 TODO: Test that comment icon is explicit, now that there is a feed item with a comments section
+
+
 
