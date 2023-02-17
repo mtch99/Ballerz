@@ -31,10 +31,10 @@ There must be three different games on three different courts, two at the moment
     - [x] cf FeedStackNavigator
     - [x] Add GroupChatListScreen
 
-- [ ] Navigation to group chat Conversation screen
-    - [ ] Define IGroupChatConversationScreen
-    - [ ] Implement
-    - [ ] Add GroupChatListScreen to GroupChatStack
+- [x] Navigation to group chat Conversation screen
+    - [x] Define IGroupChatConversationScreen
+    - [x] Implement
+    - [x] Add GroupChatListScreen to GroupChatStack
 
 ## Post-Testing Adjustments
 - [x] Fix header on badgelist Screen

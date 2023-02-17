@@ -9,5 +9,5 @@ export default interface  IGroupChatListScreen{
 
 
 export interface IGroupChatNavigationController {
-    goToGroupChatScreen(GroupChat: IGroupChatState): void
+    goToGroupChatConversationScreen(GroupChat: IGroupChatState): void
 }

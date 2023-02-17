@@ -1,7 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import GroupChatListScreen, { IGroupChatListScreenPropsWithoutNavigation } from "../../screens/groupChat";
-import { GroupChatStackNavigationProp } from "./types";
+import { GroupChatStackNavigationProp, GroupChatStackScreenProps } from "./types";
 import { IGroupChatNavigationController } from "../../screens/groupChat/interface";
+import GroupChatConversationScreen, { IGroupChatConversationScreenPropsWithoutNavigation } from "../../screens/groupChatConversation";
+import { IGroupChatConversationNavigationController } from "../../screens/groupChatConversation/interface";
+import { IGroupChatState } from "../../app/features/groupChat/slice/interface";
 
 
 
@@ -11,12 +14,26 @@ export function GroupChatListScreenWrapper(props: IGroupChatListScreenPropsWitho
     const navigation = useNavigation<GroupChatStackNavigationProp<'GroupChatListScreen'>>()
 
     const navigationController: IGroupChatNavigationController = {
-        goToGroupChatScreen(GroupChat) {
-            navigation.navigate('GroupChatListScreen', GroupChat);
+        goToGroupChatConversationScreen(groupChat: IGroupChatState) {
+            navigation.navigate('GroupChatConversationScreen', {groupChat});
         },
     }
 
     return (
         <GroupChatListScreen {...{navigationController}}/>
+    )
+}
+
+export function GroupChatConversationScreenWrapper(props: GroupChatStackScreenProps<'GroupChatConversationScreen'>): JSX.Element{
+
+    const navigation = useNavigation<GroupChatStackNavigationProp<'GroupChatConversationScreen'>>()
+    const groupChat = props.route.params.groupChat
+
+    const navigationController: IGroupChatConversationNavigationController = {
+
+    }
+
+    return (
+        <GroupChatConversationScreen {...{groupChat, navigationController}}/>
     )
 }

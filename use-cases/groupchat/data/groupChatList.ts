@@ -4,20 +4,9 @@ import initialUserProfiles from "../../feed/data/userProfile";
 import { IGroupChat, IGroupChatMessage } from "../types";
 
 
-const initialGroupChatList: IGroupChatList = {
-    items: [
-        {
-            id: "firstGroupChatId",
-            name: "Peps__Ballerz🔥🔥🔥",
-            members: initialUserProfiles.slice(0,3),
-            conversation: []
-        },
-    ]
-}
+
     
-
-
-const initialGroupChatMessageList: IGroupChatMessage[] = [
+export const initialGroupChatMessageList: IGroupChatMessage[] = [
     {
         id: "textMessage1Id",
         author: initialUserProfiles[0],
@@ -30,6 +19,21 @@ const initialGroupChatMessageList: IGroupChatMessage[] = [
         content: initialFeed[0]
     }
 ]
+
+
+
+const initialGroupChatList: IGroupChatList = {
+    items: [
+        {
+            id: "firstGroupChatId",
+            name: "Peps__Ballerz🔥🔥🔥",
+            members: initialUserProfiles.slice(0,3),
+            conversation: initialGroupChatMessageList
+        },
+    ]
+}
+
+
 
 export default initialGroupChatList 
 export {initialGroupChatMessageList as groupChatMessageList}

@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { GroupChatStackParamList } from "./types";
-import { GroupChatListScreenWrapper } from "./wrappers";
+import { GroupChatConversationScreenWrapper, GroupChatListScreenWrapper } from "./wrappers";
 
 const Stack = createNativeStackNavigator<GroupChatStackParamList>();
 
@@ -21,6 +21,17 @@ export function GroupChatStackNavigator(): JSX.Element {
                     headerBackVisible: false,
                 }}
                 component={GroupChatListScreenWrapper}
+            />
+
+            <Stack.Screen
+                name='GroupChatConversationScreen'
+                options={{
+                    headerShown: true,
+                    headerTitle: '',
+                    headerBackVisible: true,
+                }}
+                component={GroupChatConversationScreenWrapper}
+                initialParams={{}}
             />
         </Stack.Navigator>
     )
