@@ -10,7 +10,7 @@ import { ColorSchemeName } from 'react-native';
 
 
 import { RootTabParamList } from './types';
-import { FeedStackWrapper } from './wrappers';
+import { FeedStackWrapper, GroupChatStackWrapper } from './wrappers';
 
 // import LinkingConfiguration from './LinkingConfiguration';
 
@@ -45,12 +45,22 @@ export function RootStackNavigator(): JSX.Element {
 			<Stack.Screen
 				name='FeedStack'
 				options={{
-					headerShown: true,
-					headerTitle: 'Ballerz',
+					headerShown: false,
+					// headerTitle: 'Ballerz',
 					tabBarLabel: 'Games',
 					tabBarIcon: undefined
 				}}
 				component={FeedStackWrapper}
+			/>
+
+			<Stack.Screen
+				name='GroupChatStack'
+				options={{
+					headerShown: false,
+					tabBarLabel: 'Groupes',
+					tabBarIcon: undefined
+				}}
+				component={GroupChatStackWrapper}
 			/>
 		</Stack.Navigator>
 	  )

@@ -15,6 +15,7 @@ declare global {
 
 export type RootTabParamList = {
 	FeedStack: {}
+  GroupChatStack: {}
 };
 
 

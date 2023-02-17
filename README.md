@@ -24,12 +24,12 @@ There must be three different games on three different courts, two at the moment
 - [x] Change Root Stack navigator to a tab navigator
     - [x] Create Feed stack
     - [x] Make it the first tab
-- [ ] Produce group chat list screen
-    - [ ] Define IGroupChatListScreen interface
-    - [ ] Implement
-- [ ] Produce GroupChatStackNavigator
-    - [ ] cf FeedStackNavigator
-    - [ ] Add GroupChatListScreen
+- [x] Produce group chat list screen
+    - [x] Define IGroupChatListScreen interface
+    - [x] Implement
+- [x] Produce GroupChatStackNavigator
+    - [x] cf FeedStackNavigator
+    - [x] Add GroupChatListScreen
 
 
 ## Post-Testing Adjustments

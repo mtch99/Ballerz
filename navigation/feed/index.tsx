@@ -18,7 +18,8 @@ export function FeedStackNavigator(): JSX.Element {
 			<Stack.Screen
 				name='FeedScreen'
 				options={{
-				  headerShown: false
+				  headerShown: true,
+				  headerTitle: 'Ballerz'
 				}}
 				component={FeedScreenWrapper}
 			/>	
@@ -27,7 +28,7 @@ export function FeedStackNavigator(): JSX.Element {
 				options={{
 					headerShown: true,
 					headerTitle: 'Badges',
-					headerBackButtonMenuEnabled: true,
+					headerBackTitleVisible: false,
 				}}
 				component={BadgeListScreenWrapper}
 				initialParams={{badgeList: []}}
@@ -38,7 +39,7 @@ export function FeedStackNavigator(): JSX.Element {
 				options={{
 					headerShown: true,
 					headerTitle: 'Commentaires',
-					headerBackButtonMenuEnabled: true
+					headerBackTitleVisible: false,
 				}}
 				component={CommentsScreenWrapper}
 			/>
@@ -48,7 +49,7 @@ export function FeedStackNavigator(): JSX.Element {
 				options={{
 					headerShown: true,
 					headerTitle: 'Amis présents',
-					headerBackButtonMenuEnabled: true
+					headerBackTitleVisible: false,
 				}}
 				component={AttendantsListScreenWrapper}
 			/>
