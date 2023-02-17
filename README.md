@@ -37,15 +37,15 @@ TODO:
     - [x] Implement
     - [x] Add GroupChatListScreen to GroupChatStack
 
-- [ ] GroupChatListScreen v0.1
+- [ ] GroupChatListView v0.1
+    - [ ] Define interface for GroupChatListView
     - [ ] Restyle GroupChatListScreen
-    - [ ] Define interface for GroupChatListScreen
     - [ ] Define interface for GroupChatItem
 
 - [ ] GroupChatConversationScreen
     - [ ] Define interface for GroupChatConversationScreen
 
-    
+
 ## Post-Testing Adjustments
 - [x] Fix header on badgelist Screen
 - [x] Display all badges on the feed item
