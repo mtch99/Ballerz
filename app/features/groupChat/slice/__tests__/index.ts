@@ -1,5 +1,5 @@
 import initialGroupChatList from "../../../../../use-cases/groupchat/data/groupChatList"
-import { INewMessageChatListActionPayload } from "../actions"
+import { INewGroupChatMessageActionPayload } from "../actions"
 import { IGroupChatListState } from "../interface"
 import groupChatReducers from "../reducers"
 
@@ -32,7 +32,7 @@ describe("NEW_MESSAGE reducer tests", () => {
             ]
         }
 
-        const givenPayload: INewMessageChatListActionPayload = {
+        const givenPayload: INewGroupChatMessageActionPayload = {
             groupChatId: "groupChatId",
             message: {
                 id: 'newMessageId',

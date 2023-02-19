@@ -7,7 +7,7 @@ import { IGroupChat } from "../../../../use-cases/groupchat/types";
 export interface INewGroupChatListActionPayload extends IGroupChatListState{}
 
 
-export interface INewMessageChatListActionPayload {
+export interface INewGroupChatMessageActionPayload {
     groupChatId: IGroupChatState['id'] 
     message: IGroupChatMessageState
 }

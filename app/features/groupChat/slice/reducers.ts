@@ -1,4 +1,4 @@
-import {INewMessageChatListActionPayload, INewGroupChatListActionPayload } from "./actions";
+import {INewGroupChatMessageActionPayload, INewGroupChatListActionPayload } from "./actions";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { IGroupChatListState, IGroupChatMessageState, IGroupChatModelState, IGroupChatState} from "./interface";
 
@@ -38,7 +38,7 @@ const NewGroupChatListReducer: IGroupChatReducer<INewGroupChatListActionPayload>
 }
 
 
-const newMessageReducer: IGroupChatReducer<INewMessageChatListActionPayload> = (state, action) => {
+const newMessageReducer: IGroupChatReducer<INewGroupChatMessageActionPayload> = (state, action) => {
     
     const newGroupChatList = sortGroupChatList(state.groupChatList, action.payload)
     const newGroupChatRepo = updateGroupChatRepo(state.groupChatRepo, action.payload)
@@ -57,7 +57,7 @@ const newMessageReducer: IGroupChatReducer<INewMessageChatListActionPayload> = (
  * @param groupChatId 
  * @returns 
  */
-function sortGroupChatList(prevGroupChatList: IGroupChatListState, payload: INewMessageChatListActionPayload): IGroupChatListState {
+function sortGroupChatList(prevGroupChatList: IGroupChatListState, payload: INewGroupChatMessageActionPayload): IGroupChatListState {
     const groupChatId = payload.groupChatId
 
     const groupChatIndex: number = prevGroupChatList.items.findIndex(groupChat => groupChat.id==groupChatId)
@@ -77,7 +77,7 @@ function sortGroupChatList(prevGroupChatList: IGroupChatListState, payload: INew
 }
 
 
-function updateGroupChatRepo(groupChatRepo: IGroupChatModelState['groupChatRepo'], payload: INewMessageChatListActionPayload): IGroupChatModelState['groupChatRepo']{
+function updateGroupChatRepo(groupChatRepo: IGroupChatModelState['groupChatRepo'], payload: INewGroupChatMessageActionPayload): IGroupChatModelState['groupChatRepo']{
     const groupChat = groupChatRepo.get(payload.groupChatId)
     if(!groupChat){
         throw Error("Unexisting conversation")

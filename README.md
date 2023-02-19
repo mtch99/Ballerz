@@ -56,7 +56,9 @@ TODO:
 
 - [ ] Complete sendMessage feature 
     - [ ] Implement handleSendMessagePress in GroupChatConversationScreen
-        - [ ] Implement sendGroupChatMessage in the groupChat useCase and Controller
+        - [x] Implement sendGroupChatMessage in the groupChat useCase and Controller
+        - [ ] Refactor view interfaces 
+        - [ ] refactor view implementations
     - [ ] Send a message in a convo and see it added in the convo screen
 
 

@@ -1,11 +1,11 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks";
 import { IFeed, IFeedItem } from "../../../../use-cases/feed/types";
-import { NEW_GROUPCHATLIST } from "../slice";
+import { NEW_GROUPCHATLIST, NEW_MESSAGE } from "../slice";
 import { IGroupChatState, IGroupChatListState, IGroupChatMessageState } from "../slice/interface";
 import { useSelector } from "react-redux";
 import { AppDispatch } from "../../../store";
-import { INewGroupChatListActionPayload } from "../slice/actions";
+import { INewGroupChatListActionPayload, INewGroupChatMessageActionPayload } from "../slice/actions";
 import groupChatReducers from "../slice/reducers";
 import { IGroupChat, IGroupChatList, IGroupChatMessage } from "../../../../use-cases/groupchat/types";
 import { IGroupChatModelEventListener } from "../../../../use-cases/groupchat/interface";
@@ -20,11 +20,16 @@ interface IGroupChatModelInput {
 export interface IGroupChatModel extends IGroupChatModelEventListener{}
 
 
-export function createGroupChatModel (input: IGroupChatModelInput): IGroupChatModel {
+export function createGroupChatModel (modelInput: IGroupChatModelInput): IGroupChatModel {
     const model : IGroupChatModel = {
         newGroupChatListEventHandler: (groupChatList: IGroupChatList) => {
             const payload: INewGroupChatListActionPayload = GroupChatModelAdapter.parseGroupChatList(groupChatList)
-            input.dispatchFunc(NEW_GROUPCHATLIST(payload))
+            modelInput.dispatchFunc(NEW_GROUPCHATLIST(payload))
+        },
+        newGroupChatMessageEventHandler: (input) => {
+            const groupChatMessageState = GroupChatModelAdapter.parseGroupChatMessage(input.message)
+            const payload: INewGroupChatMessageActionPayload = {...input, message: groupChatMessageState}
+            modelInput.dispatchFunc(NEW_MESSAGE(payload))
         }
     }
 
@@ -49,6 +54,23 @@ class GroupChatModelAdapter{
         })
         
         return {items}
+    }
+
+    static parseGroupChatMessage(input: IGroupChatMessage): IGroupChatMessageState {
+        const content = input.content
+        if(typeof content != 'string'){
+            const feedItemState = this.parseFeedItem(content)
+            return {
+                ...input,
+                content: feedItemState
+            }
+        } else {
+            return {
+                ...input,
+                content
+            }
+        }
+        
     }
 
     private static parseGroupChatConversation(conversation: IGroupChat['conversation']): IGroupChatState['conversation']{
@@ -82,4 +104,6 @@ class GroupChatModelAdapter{
             endingTime: feedItem.endingTime.toLocaleDateString() 
         }
     }
+
+
 }

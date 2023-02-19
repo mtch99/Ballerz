@@ -6,11 +6,12 @@ export interface  IGroupChatConversationNavigationController{}
 export default interface IGroupChatConversationScreen {
     navigationController: IGroupChatConversationNavigationController;
     groupChat: IGroupChatState
+    handleSendMessagePress(groupChatId: string, messageContent: string): void
 }
 
 
 export interface IGroupChatConversationViewProps {
-    handleSendMessagePress(message: string): void;
+    handleSendMessagePress: IGroupChatConversationScreen['handleSendMessagePress']
     groupChat: IGroupChatState
 }
 

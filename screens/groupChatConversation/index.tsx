@@ -38,12 +38,13 @@ export default class GroupChatConversationScreen extends React.Component<IGroupC
 
 
     viewProps: IGroupChatConversationViewProps = {
-        handleSendMessagePress: (message: string) => { this.handleSendMessagePress(message)},
+        handleSendMessagePress: (message: string, groupChatId: string) => { this.handleSendMessagePress(groupChatId, message)},
         groupChat: this.groupChat
     }
     
     
-    handleSendMessagePress(message: string){
+    handleSendMessagePress(groupChatId: string, messageContent: string){
+        this.groupChatController.sendGroupChatMessage({groupChatId, messageContent, senderUserProfileId:'moiId'})
         console.error(`Implement handlemessagePress function in GroupChatConversationScreen`)
     }
     componentDidMount() {

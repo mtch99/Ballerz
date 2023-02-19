@@ -17,3 +17,16 @@ export interface IGroupChatMessage {
     author: IUserProfile;
     content: string | IFeedItem
 }
+
+
+export interface ISendGroupChatMessageInput {
+    groupChatId: string;
+    senderUserProfileId: string;
+    messageContent: IGroupChatMessage['content']
+}
+
+
+export interface INewGroupChatMessageEventHandlerInput{
+    groupChatId: string;
+    message: IGroupChatMessage
+}
