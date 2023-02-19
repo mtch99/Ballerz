@@ -45,7 +45,12 @@ TODO:
 - [x] GroupChatConversationScreen
     - [x] Define interface for GroupChatConversationScreen
 
-- [ ] GroupChatConversation
+
+* [ ] Refactor GroupChatConversationModel
+    - [ ] Two giellds for the GroupChatModelState
+        - [ ] One that contains a list of GroupChatListData, exempt of the conversations
+        - [ ] Another one that contains a dictionary of id:GroupChatState 
+
 
 
 
