@@ -1,13 +1,10 @@
 import React from "react"
 import { IGroupChatState } from "../../../app/features/groupChat/slice/interface"
 import { TouchableOpacity, View, Text } from "react-native"
+import { IGroupChatItemViewProps } from "../interface"
 
 
 
-export interface IGroupChatItemViewProps {
-    groupChat: IGroupChatState
-    onPressGroupChat: () => void
-}
 
 
 export class GroupChatItemView extends React.Component<IGroupChatItemViewProps>{

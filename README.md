@@ -38,7 +38,7 @@ TODO:
     - [x] Add GroupChatListScreen to GroupChatStack
 
 - [ ] GroupChatListView v0.1
-    - [ ] Define interface for GroupChatListView
+    - [x] Define interface for GroupChatListView
     - [ ] Restyle GroupChatListScreen
     - [ ] Define interface for GroupChatItem
 

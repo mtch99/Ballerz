@@ -34,6 +34,7 @@ export default class GroupChatListScreen extends React.Component<IGroupChatListS
     componentDidMount() {
         this.groupChatController = this.context.controller
         this.groupChatController.getGroupChatList()
+        // console.error(this.context.groupChatListState)
     }
 
     getGroupChatList() {

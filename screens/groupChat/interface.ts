@@ -1,4 +1,4 @@
-import { IGroupChatState } from "../../app/features/groupChat/slice/interface";
+import { IGroupChatListState, IGroupChatState } from "../../app/features/groupChat/slice/interface";
 
 
 export default interface  IGroupChatListScreen{
@@ -10,4 +10,10 @@ export default interface  IGroupChatListScreen{
 
 export interface IGroupChatNavigationController {
     goToGroupChatConversationScreen(GroupChat: IGroupChatState): void
+}
+
+
+export interface IGroupChatListViewProps {
+    groupChatList: IGroupChatListState
+    onPressGroupChat: (groupChat: IGroupChatState) => void
 }
