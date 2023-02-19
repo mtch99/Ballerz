@@ -39,6 +39,7 @@ TODO:
 
 - [ ] GroupChatListView v0.1
     - [x] Define interface for GroupChatListView
+    TODO: 
     - [ ] Restyle GroupChatListScreen
     - [ ] Define interface for GroupChatItem
 
@@ -51,6 +52,11 @@ TODO:
         - [x] One that contains a list of GroupChatListData, exempt of the conversations
         - [x] Another one that contains a dictionary of id:GroupChatState 
     - [x] Test that the groupChat stack behaves as expected
+
+
+- [ ] Complete sendMessage feature 
+    - [ ] Implement handleSendMessagePress in GroupChatConversationScreen
+    - [ ] Send a message in a convo and see it added in the convo screen
 
 
 
