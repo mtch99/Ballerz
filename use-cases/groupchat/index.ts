@@ -15,6 +15,5 @@ export default class GroupChatUseCase implements IGroupChatUseCase{
         this.modelEventListener.newGroupChatListEventHandler(groupChatList)
         return groupChatList
     }
-
 }
 

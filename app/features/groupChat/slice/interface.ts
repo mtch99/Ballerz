@@ -6,6 +6,12 @@ import { IFeedItemState } from "../../feed/slice/interface";
 
 
 
+
+export interface IGroupChatModelState{
+    groupChatList: IGroupChatListState;
+    groupChatRepo: Map<string, IGroupChatState>
+}
+
 export interface IGroupChatListState {
     items: IGroupChatState[]
 }

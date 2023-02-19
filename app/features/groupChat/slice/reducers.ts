@@ -1,6 +1,6 @@
 import {INewMessageChatListActionPayload, INewGroupChatListActionPayload } from "./actions";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { IGroupChatListState, IGroupChatMessageState, IGroupChatState} from "./interface";
+import { IGroupChatListState, IGroupChatMessageState, IGroupChatModelState, IGroupChatState} from "./interface";
 
 /**
  * New slice reducers protocol
@@ -25,9 +25,9 @@ import { IGroupChatListState, IGroupChatMessageState, IGroupChatState} from "./i
  * For each reducer, the (state parameter)'s type is set to the slice's state
  * steps 2 and 3
  */
-type FeedReducer<PayloadType> = (state: IGroupChatListState, action: PayloadAction<PayloadType>) => IGroupChatListState
+type IGroupChatReducer<PayloadType> = (state: IGroupChatModelState, action: PayloadAction<PayloadType>) => IGroupChatModelState
 
-const NewGroupChatListReducer: FeedReducer<INewGroupChatListActionPayload> = (state, action) => {
+const NewGroupChatListReducer: IGroupChatReducer<INewGroupChatListActionPayload> = (state, action) => {
 
     const items = action.payload.items
 
@@ -38,34 +38,64 @@ const NewGroupChatListReducer: FeedReducer<INewGroupChatListActionPayload> = (st
 }
 
 
-const newMessageReducer: FeedReducer<INewMessageChatListActionPayload> = (state, action) => {
+const newMessageReducer: IGroupChatReducer<INewMessageChatListActionPayload> = (state, action) => {
     
-    const groupChatId = action.payload.groupChatId
-    const newMessage: IGroupChatMessageState = action.payload.message
-    const prevGroupChatList = state.items
-    const prevGroupChatState: IGroupChatState | undefined = prevGroupChatList.find(groupChat => groupChat.id==groupChatId)
-    if(!prevGroupChatState) {
-        console.error("Unexisting group chat")
-        return {...state,}
-    } 
+    const newGroupChatList = sortGroupChatList(state.groupChatList, action.payload)
+    const newGroupChatRepo = updateGroupChatRepo(state.groupChatRepo, action.payload)
 
-    else {
-        const prevConversation: IGroupChatMessageState[] = prevGroupChatState.conversation
-        const newConversation: IGroupChatMessageState[] = addNewMessageToConversation(newMessage, prevConversation)
-        
-        try{
-            const newGroupChatState: IGroupChatState = updateGroupChatConversation(newConversation, prevGroupChatState)
-            const newGroupChatList = updateGroupChatList(newGroupChatState, prevGroupChatList)
-            return {
-                items: newGroupChatList
-            }
-        } catch (err) {
-            console.error(err)
-            return {...state}
-        } 
+    return {
+        groupChatList: newGroupChatList,
+        groupChatRepo: newGroupChatRepo
     }
 }
 
+
+/**
+ * Removes the item of specified id, updates its last message and place it at first position
+ * TODO: After changing the data contained in the IGoupChatListState, implemement the last message update, watch the upper comment for reminder
+ * @param prevGroupChatList 
+ * @param groupChatId 
+ * @returns 
+ */
+function sortGroupChatList(prevGroupChatList: IGroupChatListState, payload: INewMessageChatListActionPayload): IGroupChatListState {
+    const groupChatId = payload.groupChatId
+
+    const groupChatIndex: number = prevGroupChatList.items.findIndex(groupChat => groupChat.id==groupChatId)
+    if(groupChatIndex == -1) {
+        console.error("Unexisting group chat")
+        return {...prevGroupChatList}
+    } else {
+        const groupChat = prevGroupChatList.items[groupChatIndex]
+
+        const newItems = [...prevGroupChatList.items]
+        newItems.splice(groupChatIndex)
+        newItems.unshift(groupChat)
+
+        const result: IGroupChatListState = {items: newItems}
+        return result
+    }
+}
+
+
+function updateGroupChatRepo(groupChatRepo: IGroupChatModelState['groupChatRepo'], payload: INewMessageChatListActionPayload): IGroupChatModelState['groupChatRepo']{
+    const groupChat = groupChatRepo.get(payload.groupChatId)
+    if(!groupChat){
+        throw Error("Unexisting conversation")
+    } else {
+        const prevConvo = groupChat.conversation
+        const newConvo = [...prevConvo]
+        const newMessage = payload.message
+        newConvo.unshift(newMessage)
+        return {
+            ...groupChatRepo,
+            [payload.groupChatId]: {
+                ...prevConvo,
+                conversation: newConvo
+            }
+        }
+    }
+    
+}
 
 
 

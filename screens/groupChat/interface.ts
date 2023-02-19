@@ -3,7 +3,7 @@ import { IGroupChatListState, IGroupChatState } from "../../app/features/groupCh
 
 export default interface  IGroupChatListScreen{
     navigationController: IGroupChatNavigationController
-    handleGroupChatPress(GroupChat: IGroupChatState): void
+    handleGroupChatPress(id: string): void
     getGroupChatList(): void
 } 
 
@@ -15,5 +15,5 @@ export interface IGroupChatNavigationController {
 
 export interface IGroupChatListViewProps {
     groupChatList: IGroupChatListState
-    onPressGroupChat: (groupChat: IGroupChatState) => void
+    onPressGroupChat: IGroupChatListScreen['handleGroupChatPress']
 }

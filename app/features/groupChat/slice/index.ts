@@ -1,12 +1,13 @@
-import { IGroupChatState, IGroupChatListState } from "./interface";
+import { IGroupChatState, IGroupChatListState, IGroupChatModelState } from "./interface";
 import { ActionCreatorWithPayload, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../../store'
 import groupChatReducers  from "./reducers";
 
 
 
-const initialState: IGroupChatListState = {
-    items: []
+const initialState: IGroupChatModelState = {
+    groupChatList: {items: []},
+    groupChatRepo: new Map<string, IGroupChatState>()
 }
 
 
@@ -21,9 +22,10 @@ export const groupChatSlice = createSlice({
 
 
 
-export const {NEW_GROUPCHATLIST} = groupChatSlice.actions
+export const {NEW_GROUPCHATLIST, NEW_MESSAGE} = groupChatSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectgroupChat = (state: RootState) => state.groupChat
+export const selectgroupChatModelState = (state: RootState) => state.groupChat
+
 
 export default groupChatSlice.reducer

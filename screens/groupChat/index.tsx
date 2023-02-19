@@ -41,8 +41,13 @@ export default class GroupChatListScreen extends React.Component<IGroupChatListS
         this.groupChatController.getGroupChatList()
     }
 
-    handleGroupChatPress(groupChat: IGroupChatState): void {
-        this.navigationController.goToGroupChatConversationScreen(groupChat)
+    handleGroupChatPress(id: IGroupChatState['id']): void {
+        const groupChat = this.context.selectGroupChatById(id)
+        if(groupChat){
+            this.navigationController.goToGroupChatConversationScreen(groupChat)
+        } else {
+            console.error("Attempting to navigate to a groupChat absent from the groupChatModelRepo")
+        }
     }
 
     render(): React.ReactNode {
