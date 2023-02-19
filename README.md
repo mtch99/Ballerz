@@ -42,8 +42,11 @@ TODO:
     - [ ] Restyle GroupChatListScreen
     - [ ] Define interface for GroupChatItem
 
-- [ ] GroupChatConversationScreen
-    - [ ] Define interface for GroupChatConversationScreen
+- [x] GroupChatConversationScreen
+    - [x] Define interface for GroupChatConversationScreen
+
+- [ ] GroupChatConversation
+
 
 
 ## Post-Testing Adjustments

@@ -1,9 +1,10 @@
 import IGroupChatController from "../../controllers/groupChat/interface"
 import { GroupChatContext, IGroupChatContext } from "../../controllers/groupChat/provider"
 import {View, Text} from 'react-native'
-import IGroupChatConversationScreen from "./interface"
+import IGroupChatConversationScreen, { IGroupChatConversationViewProps } from "./interface"
 import React from "react"
 import { IGroupChatState } from "../../app/features/groupChat/slice/interface"
+import GroupChatConversationView from "../../views/groupChatConversation"
 
 
 
@@ -16,7 +17,9 @@ export interface IGroupChatConversationScreenProps extends IGroupChatConversatio
 }
 
 
-
+/**
+ * TODO: implement handlemessagePress function
+ */
 
 export default class GroupChatConversationScreen extends React.Component<IGroupChatConversationScreenProps> implements IGroupChatConversationScreen{
 
@@ -27,10 +30,22 @@ export default class GroupChatConversationScreen extends React.Component<IGroupC
     context: React.ContextType<typeof GroupChatContext> = {} as IGroupChatContext
     private groupChatController: IGroupChatController = this.context.controller
 
+
     constructor(props: IGroupChatConversationScreenProps){
         super(props)
+        this.handleSendMessagePress = this.handleSendMessagePress.bind(this)
     }
 
+
+    viewProps: IGroupChatConversationViewProps = {
+        handleSendMessagePress: (message: string) => { this.handleSendMessagePress(message)},
+        groupChat: this.groupChat
+    }
+    
+    
+    handleSendMessagePress(message: string){
+        console.error(`Implement handlemessagePress function in GroupChatConversationScreen`)
+    }
     componentDidMount() {
         this.groupChatController = this.context.controller
     }
@@ -38,13 +53,9 @@ export default class GroupChatConversationScreen extends React.Component<IGroupC
 
     render(): React.ReactNode {
         return(
-            <View>
-                <Text
-                    style={{color: 'white'}}
-                >
-                    {this.groupChat.conversation.length>0?(this.groupChat.conversation[0].author.username):(2)}
-                </Text>
-            </View>
+            <GroupChatConversationView
+                {...this.viewProps}
+            />
         )
     }
 }

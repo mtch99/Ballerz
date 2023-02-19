@@ -13,7 +13,6 @@ export default class GroupChatUseCase implements IGroupChatUseCase{
     getGroupChatList(): IGroupChatList {
         const groupChatList: IGroupChatList = initialGroupChatList
         this.modelEventListener.newGroupChatListEventHandler(groupChatList)
-        // console.error(`payload: ${JSON.stringify(groupChatList)}`)
         return groupChatList
     }
 
