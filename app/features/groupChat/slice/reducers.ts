@@ -1,6 +1,6 @@
 import {INewGroupChatMessageActionPayload, INewGroupChatListActionPayload } from "./actions";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { IGroupChatListState, IGroupChatMessageState, IGroupChatModelState, IGroupChatState} from "./interface";
+import { IGroupChatListState, IGroupChatMessageState, IGroupChatModelState, IGroupChatRepo, IGroupChatState} from "./interface";
 
 /**
  * New slice reducers protocol
@@ -30,11 +30,17 @@ type IGroupChatReducer<PayloadType> = (state: IGroupChatModelState, action: Payl
 const NewGroupChatListReducer: IGroupChatReducer<INewGroupChatListActionPayload> = (state, action) => {
 
     const items = action.payload.items
-    console.error(`Itemmmms: ${JSON.stringify(items)}`)
+    const groupChatList: IGroupChatListState = {items}
+    const groupChatRepo: IGroupChatRepo = {}
+    items.forEach((value) => {
+        const {id} = value
+        groupChatRepo[id] = value
+    })
 
     return {
         ...state,
-        groupChatList: {items}
+        groupChatList: {items},
+        groupChatRepo
     }
 }
 
