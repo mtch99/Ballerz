@@ -2,8 +2,8 @@ import React from "react";
 import IGroupChatListScreen, { IGroupChatNavigationController } from "./interface";
 import { IGroupChatListState, IGroupChatState } from "../../app/features/groupChat/slice/interface";
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
-import {GroupChatContext, IGroupChatContext} from "../../controllers/groupChat/provider"
-import IGroupChatController from "../../controllers/groupChat/interface";
+import {GroupChatContext} from "../../controllers/groupChat/provider"
+import IGroupChatController, { IGroupChatContext } from "../../controllers/groupChat/interface";
 import { GroupChatListView } from "../../views/groupChatList";
 
 
@@ -34,7 +34,7 @@ export default class GroupChatListScreen extends React.Component<IGroupChatListS
     componentDidMount() {
         this.groupChatController = this.context.controller
         this.groupChatController.getGroupChatList()
-        // console.error(this.context.groupChatListState)
+        console.error(this.context.groupChatListState)
     }
 
     getGroupChatList() {

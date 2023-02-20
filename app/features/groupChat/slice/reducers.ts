@@ -30,10 +30,11 @@ type IGroupChatReducer<PayloadType> = (state: IGroupChatModelState, action: Payl
 const NewGroupChatListReducer: IGroupChatReducer<INewGroupChatListActionPayload> = (state, action) => {
 
     const items = action.payload.items
+    console.error(`Itemmmms: ${JSON.stringify(items)}`)
 
     return {
         ...state,
-        items
+        groupChatList: {items}
     }
 }
 
@@ -78,19 +79,23 @@ function sortGroupChatList(prevGroupChatList: IGroupChatListState, payload: INew
 
 
 function updateGroupChatRepo(groupChatRepo: IGroupChatModelState['groupChatRepo'], payload: INewGroupChatMessageActionPayload): IGroupChatModelState['groupChatRepo']{
-    const groupChat = groupChatRepo.get(payload.groupChatId)
+    const groupChat = groupChatRepo[payload.groupChatId]
     if(!groupChat){
-        throw Error("Unexisting conversation")
+        console.error("Unexisting conversation")
+        return groupChatRepo
     } else {
         const prevConvo = groupChat.conversation
         const newConvo = [...prevConvo]
         const newMessage = payload.message
         newConvo.unshift(newMessage)
+
         return {
             ...groupChatRepo,
             [payload.groupChatId]: {
-                ...prevConvo,
-                conversation: newConvo
+                ...{
+                    ...groupChat,
+                    conversation: newConvo
+                }
             }
         }
     }

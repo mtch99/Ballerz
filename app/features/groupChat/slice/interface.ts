@@ -9,13 +9,16 @@ import { IFeedItemState } from "../../feed/slice/interface";
 
 export interface IGroupChatModelState{
     groupChatList: IGroupChatListState;
-    groupChatRepo: Map<string, IGroupChatState>
+    groupChatRepo: IGroupChatRepo
 }
 
 export interface IGroupChatListState {
     items: IGroupChatState[]
 }
 
+export interface IGroupChatRepo {
+    [key: string]: IGroupChatState
+}
 
 export interface IGroupChatState {
     id: IGroupChat['id'];
