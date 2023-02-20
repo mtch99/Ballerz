@@ -41,7 +41,7 @@ TODO:
     - [x] Define interface for GroupChatListView
     TODO: 
     - [ ] Restyle GroupChatListScreen
-    - [ ] Define interface for GroupChatItem
+    - [ ] Define interface for GroupChatItemView
 
 - [x] GroupChatConversationScreen
     - [x] Define interface for GroupChatConversationScreen
@@ -55,10 +55,11 @@ TODO:
 
 
 - [ ] Complete sendMessage feature 
-    - [ ] Implement handleSendMessagePress in GroupChatConversationScreen
+    - [x] Implement handleSendMessagePress in GroupChatConversationScreen
         - [x] Implement sendGroupChatMessage in the groupChat useCase and Controller
-        - [ ] Refactor view interfaces 
-        - [ ] refactor view implementations
+        - [x] Refactor view interfaces 
+        - [x] refactor view implementations
+
     - [ ] Send a message in a convo and see it added in the convo screen
 
 
