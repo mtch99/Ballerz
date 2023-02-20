@@ -42,7 +42,7 @@ export default class GroupChatListScreen extends React.Component<IGroupChatListS
     }
 
     handleGroupChatPress(id: IGroupChatState['id']): void {
-        const groupChat = this.context.selectGroupChatById(id)
+        const groupChat = this.context.groupChatRepo[id]
         if(groupChat){
             this.navigationController.goToGroupChatConversationScreen(groupChat)
         } else {

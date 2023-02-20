@@ -1,4 +1,4 @@
-import { IGroupChatListState, IGroupChatState } from "../../app/features/groupChat/slice/interface";
+import { IGroupChatListState, IGroupChatRepo, IGroupChatState } from "../../app/features/groupChat/slice/interface";
 import IGroupChatUseCase from "../../use-cases/groupchat/interface";
 
 
@@ -10,5 +10,5 @@ export default interface IGroupChatController {
 export interface IGroupChatContext {
     controller: IGroupChatController
     groupChatListState: IGroupChatListState
-    selectGroupChatById(id: string): IGroupChatState | null
+    groupChatRepo: IGroupChatRepo
 }

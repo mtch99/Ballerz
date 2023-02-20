@@ -11,7 +11,7 @@ import GroupChatController from ".";
 export const GroupChatContext = React.createContext<IGroupChatContext>({
     controller : {} as IGroupChatController,
     groupChatListState: {items: []},
-    selectGroupChatById: (id: string) => (null)
+    groupChatRepo: {}
 })
 
 
@@ -34,20 +34,22 @@ export default function GroupChatProvider (props: IProps) {
     })
     const controller = new GroupChatController(groupChatModel)
     const groupChatListState: IGroupChatListState = selector(selectgroupChatModelState).groupChatList
+    const groupChatRepo: IGroupChatRepo = selector(selectgroupChatModelState).groupChatRepo
+    // const selectGroupChatById = (id: string): IGroupChatState | null => {
+    //     const groupChat = selector(selectgroupChatModelState).groupChatRepo[id]
+    //     if(groupChat) {
+    //         return null
+    //     }
+    //     return groupChat
+    // }
 
-    const selectGroupChatById = (id: string): IGroupChatState | null => {
-        const groupChat = selector(selectgroupChatModelState).groupChatRepo[id]
-        if(groupChat) {
-            return null
-        }
-        return groupChat
-    }
+    
 
 
     const _contextValue: IGroupChatContext = {
         controller,
         groupChatListState,
-        selectGroupChatById
+        groupChatRepo
     }
 
     return (

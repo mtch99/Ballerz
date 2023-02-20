@@ -1,5 +1,5 @@
-import IGroupChatController from "../../controllers/groupChat/interface"
-import { GroupChatContext, IGroupChatContext } from "../../controllers/groupChat/provider"
+import IGroupChatController, { IGroupChatContext } from "../../controllers/groupChat/interface"
+import { GroupChatContext } from "../../controllers/groupChat/provider"
 import {View, Text} from 'react-native'
 import IGroupChatConversationScreen, { IGroupChatConversationViewProps } from "./interface"
 import React from "react"
