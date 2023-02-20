@@ -15,7 +15,7 @@ export default class GroupChatConversationView extends React.Component<IGroupCha
     messageInputViewProps: IMessageInputViewProps = {
         onPressSend: (textInput: string) => {
             const message = textInput
-            this.props.handleSendMessagePress(message)
+            this.props.handleSendMessagePress(this.groupChat.id, message)
         }
     } 
 
