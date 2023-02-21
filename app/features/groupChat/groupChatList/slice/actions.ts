@@ -1,6 +1,6 @@
 import { IGroupChatListState, IGroupChatMessageState, IGroupChatState } from "./interface";
-import { IGroupChatList } from "./../../../../use-cases/groupchat/types";
-import { IGroupChat } from "../../../../use-cases/groupchat/types";
+import { IGroupChatList } from "../../../../../use-cases/groupchat/types";
+import { IGroupChat } from "../../../../../use-cases/groupchat/types";
 
 
 

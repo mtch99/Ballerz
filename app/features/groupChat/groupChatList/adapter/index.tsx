@@ -1,15 +1,15 @@
 import React from "react";
-import { useAppSelector } from "../../../hooks";
-import { IFeed, IFeedItem } from "../../../../use-cases/feed/types";
+import { useAppSelector } from "../../../../hooks";
+import { IFeed, IFeedItem } from "../../../../../use-cases/feed/types";
 import { NEW_GROUPCHATLIST, NEW_MESSAGE } from "../slice";
 import { IGroupChatState, IGroupChatListState, IGroupChatMessageState } from "../slice/interface";
 import { useSelector } from "react-redux";
-import { AppDispatch } from "../../../store";
+import { AppDispatch } from "../../../../store";
 import { INewGroupChatListActionPayload, INewGroupChatMessageActionPayload } from "../slice/actions";
-import groupChatReducers from "../slice/reducers";
-import { IGroupChat, IGroupChatList, IGroupChatMessage } from "../../../../use-cases/groupchat/types";
-import { IGroupChatModelEventListener } from "../../../../use-cases/groupchat/interface";
-import { IFeedItemState } from "../../feed/slice/interface";
+import groupChatListReducers from "../slice/reducers";
+import { IGroupChat, IGroupChatList, IGroupChatMessage } from "../../../../../use-cases/groupchat/types";
+import { IGroupChatModelEventListener } from "../../../../../use-cases/groupchat/interface";
+import { IFeedItemState } from "../../../feed/slice/interface";
 
 
 interface IGroupChatModelInput {

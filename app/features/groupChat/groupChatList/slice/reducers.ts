@@ -30,18 +30,23 @@ type IGroupChatReducer<PayloadType> = (state: IGroupChatModelState, action: Payl
 const NewGroupChatListReducer: IGroupChatReducer<INewGroupChatListActionPayload> = (state, action) => {
 
     const items = action.payload.items
-    const groupChatList: IGroupChatListState = {items}
-    const groupChatRepo: IGroupChatRepo = {}
-    items.forEach((value) => {
-        const {id} = value
-        groupChatRepo[id] = value
-    })
+    const groupChatList: IGroupChatListState = {items:[...items]}
+    let groupChatRepo: IGroupChatRepo = {}
+    
+    for(const groupChat of items){
+        groupChatRepo = {
+            ...groupChatRepo,
+            [groupChat.id]: groupChat
+        }
+    }
 
-    return {
+    const result = {
         ...state,
-        groupChatList: {items},
+        groupChatList: groupChatList,
         groupChatRepo
     }
+
+    return result
 }
 
 
@@ -49,6 +54,8 @@ const newMessageReducer: IGroupChatReducer<INewGroupChatMessageActionPayload> = 
     
     const newGroupChatList = sortGroupChatList(state.groupChatList, action.payload)
     const newGroupChatRepo = updateGroupChatRepo(state.groupChatRepo, action.payload)
+
+    console.error("GroupChat Convo: \n " + JSON.stringify(newGroupChatRepo["firstGroupChatId"].conversation[0]))
 
     return {
         groupChatList: newGroupChatList,
@@ -171,9 +178,9 @@ function updateGroupChatList(newGroupChatState: IGroupChatState, prevGroupChatLi
 /**
  * Step 4
  */
-const groupChatReducers = {
+const groupChatListReducers = {
     NEW_GROUPCHATLIST: NewGroupChatListReducer,
     NEW_MESSAGE: newMessageReducer
 }
 
-export default groupChatReducers
+export default groupChatListReducers

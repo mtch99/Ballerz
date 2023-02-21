@@ -3,7 +3,7 @@ import { GroupChatContext } from "../../controllers/groupChat/provider"
 import {View, Text} from 'react-native'
 import IGroupChatConversationScreen, { IGroupChatConversationViewProps } from "./interface"
 import React from "react"
-import { IGroupChatState } from "../../app/features/groupChat/slice/interface"
+import { IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface"
 import GroupChatConversationView from "../../views/groupChatConversation"
 
 

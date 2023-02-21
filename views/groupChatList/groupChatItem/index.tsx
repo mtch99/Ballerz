@@ -1,5 +1,5 @@
 import React from "react"
-import { IGroupChatMessageState, IGroupChatState } from "../../../app/features/groupChat/slice/interface"
+import { IGroupChatMessageState, IGroupChatState } from "../../../app/features/groupChat/groupChatList/slice/interface"
 import { TouchableOpacity, View, Text } from "react-native"
 import {Image, StyleSheet} from "react-native";
 import { IGroupChatItemViewProps } from "../interface"

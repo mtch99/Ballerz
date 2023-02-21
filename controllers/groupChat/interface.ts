@@ -1,4 +1,4 @@
-import { IGroupChatListState, IGroupChatRepo, IGroupChatState } from "../../app/features/groupChat/slice/interface";
+import { IGroupChatListState, IGroupChatRepo, IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface";
 import IGroupChatUseCase from "../../use-cases/groupchat/interface";
 
 

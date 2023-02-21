@@ -1,9 +1,9 @@
 import React from "react";
-import { IGroupChatListState, IGroupChatRepo, IGroupChatState } from "../../app/features/groupChat/slice/interface";
+import { IGroupChatListState, IGroupChatRepo, IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface";
 import IGroupChatController, { IGroupChatContext } from "./interface";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { IGroupChatModel, createGroupChatModel } from "../../app/features/groupChat/adapter";
-import { selectgroupChatModelState } from "../../app/features/groupChat/slice";
+import { IGroupChatModel, createGroupChatModel } from "../../app/features/groupChat/groupChatList/adapter";
+import { selectgroupChatModelState } from "../../app/features/groupChat/groupChatList/slice";
 import GroupChatController from ".";
 
 

@@ -4,7 +4,7 @@ import { GroupChatStackNavigationProp, GroupChatStackScreenProps } from "./types
 import { IGroupChatNavigationController } from "../../screens/groupChat/interface";
 import GroupChatConversationScreen, { IGroupChatConversationScreenPropsWithoutNavigation } from "../../screens/groupChatConversation";
 import { IGroupChatConversationNavigationController } from "../../screens/groupChatConversation/interface";
-import { IGroupChatState } from "../../app/features/groupChat/slice/interface";
+import { IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface";
 
 
 

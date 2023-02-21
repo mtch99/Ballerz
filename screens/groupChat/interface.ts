@@ -1,4 +1,4 @@
-import { IGroupChatListState, IGroupChatState } from "../../app/features/groupChat/slice/interface";
+import { IGroupChatListState, IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface";
 
 
 export default interface  IGroupChatListScreen{
