@@ -95,7 +95,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
             },
             text: input.commentText
         }
-        this.feedController.comment(commentInput)
+        // this.feedController.comment(commentInput)
     }
 
     handleCommentButtonPress(input: IFeedItemState): void {

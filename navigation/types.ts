@@ -1,36 +1,27 @@
-import { ICommentScreenPropsWithoutNavigation } from "./../screens/feed/Comments/index";
-import { IBadgeListScreenPropsWithoutNavigation } from "./../screens/badgeList/index";
-import { IFeedScreenPropsWithoutNavigation } from "./../screens/feed/index";
-import { IBadgeData } from "./../app/features/feed/slice/interface";
+import { BottomTabNavigationProp, BottomTabScreenProps } from '@react-navigation/bottom-tabs'
+
 /**
  * Learn more about using TypeScript with React Navigation:
  * https://reactnavigation.org/docs/typescript/
  */
 
-import React from 'react';
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
-import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
-import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
-import { IUserProfileListScreenPropsWithoutNavigation } from "../screens/userProfile/userProfileList";
-
 
  
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
+    interface RootParamList extends RootTabParamList {}
   }
 }
 
-export type RootStackParamList = {
-	FeedScreen: IFeedScreenPropsWithoutNavigation;
-	BadgeListScreen: IBadgeListScreenPropsWithoutNavigation;
-	AttendantsListScreen: IUserProfileListScreenPropsWithoutNavigation;
-	CommentsScreen: ICommentScreenPropsWithoutNavigation;
+export type RootTabParamList = {
+	FeedStack: {}
+  GroupChatStack: {}
 };
 
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
-	RootStackParamList,
+
+export type RootTabScreenProps<Screen extends keyof RootTabParamList> = BottomTabScreenProps<
+	RootTabParamList,
 	Screen
 >;
 
-export type RootStackNavigationProp<Screen extends keyof RootStackParamList> = NativeStackNavigationProp<RootStackParamList, Screen>
+export type RootTabNavigationProp<Screen extends keyof RootTabParamList> = BottomTabNavigationProp<RootTabParamList, Screen>
