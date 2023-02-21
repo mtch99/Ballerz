@@ -19,6 +19,9 @@ export function GroupChatStackNavigator(): JSX.Element {
                     headerShown: true,
                     headerTitle: 'Mes Groupes',
                     headerBackVisible: false,
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                    }
                 }}
                 component={GroupChatListScreenWrapper}
             />
