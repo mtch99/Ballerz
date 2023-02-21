@@ -22,6 +22,7 @@ export class GroupChatListView extends React.Component<IGroupChatListViewProps>{
     render(): React.ReactNode {
         return(
             <FlatList
+                style={{backgroundColor: '#121212'}}
                 data={this.props.groupChatList.items}
                 extraData={this.props.groupChatList}
                 renderItem={({item}) => {
