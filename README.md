@@ -61,6 +61,10 @@ TODO:
         - [x] refactor view implementations
 
     - [ ] Send a message in a convo and see it added in the convo screen
+        * [ ] Refactor rootState to add groupChatStateMap slice
+        * [ ] Add a newChatReducer to the groupChatStateMap and the groupChatListState
+        * [ ] ReImplement the groupChatModel to interact with the two states
+
 
 
 
