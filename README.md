@@ -37,11 +37,11 @@ TODO:
     - [x] Implement
     - [x] Add GroupChatListScreen to GroupChatStack
 
-- [ ] GroupChatListView v0.1
+- [x] GroupChatListView v0.1
     - [x] Define interface for GroupChatListView
     TODO: 
-    - [ ] Restyle GroupChatListScreen
-    - [ ] Define interface for GroupChatItemView
+    - [x] Restyle GroupChatListScreen
+    - [x] Define interface for GroupChatItemView
 
 - [x] GroupChatConversationScreen
     - [x] Define interface for GroupChatConversationScreen
@@ -61,6 +61,14 @@ TODO:
         - [x] refactor view implementations
 
     - [ ] Send a message in a convo and see it added in the convo screen
+        * [x] Refactor rootState to add groupChatStateMap slice
+        * [x] Add a newChatReducer to the groupChatMapState and the groupChatListState
+            - [x] groupChatMapState
+            - [x] groupChatListState
+        * [ ] ReImplement the groupChatModel to interact with the two states
+            - [x] Add groupChatMap action on new message event
+            - [ ] Add groupChatMap action on new groupChatList event
+
 
 
 

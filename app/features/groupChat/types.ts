@@ -1,11 +1,5 @@
-import { IGroupChatMessage } from "./../../../../use-cases/groupchat/types";
-import { IUserProfileData } from "./../../../../use-cases/feed/types";
-import { IGroupChat } from "../../../../use-cases/groupchat/types";
-import { IUserProfile } from "../../../../use-cases/feed/types";
-import { IFeedItemState } from "../../feed/slice/interface";
-
-
-
+import { IGroupChat } from "../../../use-cases/groupchat/types";
+import { IFeedItemState, IUserProfileData } from "../feed/slice/interface";
 
 export interface IGroupChatModelState{
     groupChatList: IGroupChatListState;

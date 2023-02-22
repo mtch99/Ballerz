@@ -3,8 +3,9 @@ import { GroupChatContext } from "../../controllers/groupChat/provider"
 import {View, Text} from 'react-native'
 import IGroupChatConversationScreen, { IGroupChatConversationViewProps } from "./interface"
 import React from "react"
-import { IGroupChatState } from "../../app/features/groupChat/slice/interface"
+import { IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface"
 import GroupChatConversationView from "../../views/groupChatConversation"
+import IGroupChatMapState from "../../app/features/groupChat/groupChatMap/slice/interface"
 
 
 
@@ -17,14 +18,14 @@ export interface IGroupChatConversationScreenProps extends IGroupChatConversatio
 }
 
 
-/**
- * TODO: implement handlemessagePress function
- */
 
 export default class GroupChatConversationScreen extends React.Component<IGroupChatConversationScreenProps> implements IGroupChatConversationScreen{
 
     navigationController: IGroupChatConversationScreen['navigationController'] = this.props.navigationController
     groupChat: IGroupChatState = this.props.groupChat
+    groupChatMap: IGroupChatMapState = this.context.groupChatMap
+
+    
 
     static contextType = GroupChatContext
     context: React.ContextType<typeof GroupChatContext> = {} as IGroupChatContext
@@ -38,17 +39,17 @@ export default class GroupChatConversationScreen extends React.Component<IGroupC
 
 
     viewProps: IGroupChatConversationViewProps = {
-        handleSendMessagePress: (message: string, groupChatId: string) => { this.handleSendMessagePress(groupChatId, message)},
-        groupChat: this.groupChat
+        handleSendMessagePress: (message: string, groupChatId: string) => { this.handleSendMessagePress(message, groupChatId)},
+        groupChat: this.groupChatMap[this.groupChat.id]
     }
     
     
     handleSendMessagePress(groupChatId: string, messageContent: string){
         this.groupChatController.sendGroupChatMessage({groupChatId, messageContent, senderUserProfileId:'moiId'})
-        console.error(`Implement handlemessagePress function in GroupChatConversationScreen`)
     }
     componentDidMount() {
         this.groupChatController = this.context.controller
+        this.groupChatMap = this.context.groupChatMap
     }
 
 

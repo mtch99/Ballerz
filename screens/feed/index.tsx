@@ -68,7 +68,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
                 this.showXthGameThisMobthAlert()
             }
         }).catch(err => {
-            console.error(err)
+            // console.error(err)
         })
     }
 

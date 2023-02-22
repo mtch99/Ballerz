@@ -1,4 +1,4 @@
-import { IGroupChatMessageState, IGroupChatState } from "./../../app/features/groupChat/slice/interface";
+import { IGroupChatMessageState, IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface";
 import { IFeedItemState } from "./../../app/features/feed/slice/interface";
 
 

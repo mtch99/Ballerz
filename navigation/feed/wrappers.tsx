@@ -26,7 +26,7 @@ export function FeedScreenWrapper(props: IFeedScreenPropsWithoutNavigation): JSX
             navigation.navigate('AttendantsListScreen', {userProfileList})
         },
         goToCommentScreen(feedItem) {
-            console.error('attempted to go to comments scrren')
+            // console.error('attempted to go to comments scrren')
             navigation.navigate('CommentsScreen', {feedItem: feedItem, comments: feedItem.comments})
         },
         

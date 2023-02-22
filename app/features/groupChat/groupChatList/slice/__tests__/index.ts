@@ -1,9 +1,9 @@
-import initialGroupChatList from "../../../../../use-cases/groupchat/data/groupChatList"
+import initialGroupChatList from "../../../../../../use-cases/groupchat/data/groupChatList"
 import { INewGroupChatMessageActionPayload } from "../actions"
 import { IGroupChatListState } from "../interface"
-import groupChatReducers from "../reducers"
+import groupChatListReducers from "../reducers"
 
-const newMessageReducer = groupChatReducers.NEW_MESSAGE
+const newMessageReducer = groupChatListReducers.NEW_MESSAGE
 
 describe("NEW_MESSAGE reducer tests", () => {
 

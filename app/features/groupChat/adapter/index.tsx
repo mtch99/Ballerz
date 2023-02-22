@@ -1,12 +1,12 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks";
 import { IFeed, IFeedItem } from "../../../../use-cases/feed/types";
-import { NEW_GROUPCHATLIST, NEW_MESSAGE } from "../slice";
-import { IGroupChatState, IGroupChatListState, IGroupChatMessageState } from "../slice/interface";
+import * as GroupChatListSlice from "../groupChatList/slice";
+import * as GroupChatMapSlice from "../groupChatMap/slice"
+import { IGroupChatState, IGroupChatListState, IGroupChatMessageState } from "../groupChatList/slice/interface";
 import { useSelector } from "react-redux";
 import { AppDispatch } from "../../../store";
-import { INewGroupChatListActionPayload, INewGroupChatMessageActionPayload } from "../slice/actions";
-import groupChatReducers from "../slice/reducers";
+import { INewGroupChatListActionPayload, INewGroupChatMessageActionPayload } from "../groupChatList/slice/actions";
 import { IGroupChat, IGroupChatList, IGroupChatMessage } from "../../../../use-cases/groupchat/types";
 import { IGroupChatModelEventListener } from "../../../../use-cases/groupchat/interface";
 import { IFeedItemState } from "../../feed/slice/interface";
@@ -24,12 +24,13 @@ export function createGroupChatModel (modelInput: IGroupChatModelInput): IGroupC
     const model : IGroupChatModel = {
         newGroupChatListEventHandler: (groupChatList: IGroupChatList) => {
             const payload: INewGroupChatListActionPayload = GroupChatModelAdapter.parseGroupChatList(groupChatList)
-            modelInput.dispatchFunc(NEW_GROUPCHATLIST(payload))
+            modelInput.dispatchFunc(GroupChatListSlice.NEW_GROUPCHATLIST(payload))
         },
         newGroupChatMessageEventHandler: (input) => {
             const groupChatMessageState = GroupChatModelAdapter.parseGroupChatMessage(input.message)
             const payload: INewGroupChatMessageActionPayload = {...input, message: groupChatMessageState}
-            modelInput.dispatchFunc(NEW_MESSAGE(payload))
+            modelInput.dispatchFunc(GroupChatListSlice.NEW_MESSAGE(payload))
+            modelInput.dispatchFunc(GroupChatMapSlice.NEW_MESSAGE(payload))
         }
     }
 

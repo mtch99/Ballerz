@@ -1,4 +1,4 @@
-import uuid from "uuid";
+import uuid from "react-native-uuid";
 import initialFeed from "./data/feed";
 import initialUserProfiles from "./data/userProfile";
 import { ICheckinEventPayload, ICommentEventPayload, ICommentInput, IFeedEventObserver, IFeedUseCase } from "./interface";
@@ -29,7 +29,7 @@ export class FeedUseCase implements IFeedUseCase {
 
     async comment(input: ICommentInput): Promise<boolean> {
         const comment: IComment = {
-            id: uuid.v4(),
+            id: uuid.v4().toString(),
             author: input.author,
             text: input.text
         }
