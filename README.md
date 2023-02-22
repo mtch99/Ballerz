@@ -62,8 +62,12 @@ TODO:
 
     - [ ] Send a message in a convo and see it added in the convo screen
         * [x] Refactor rootState to add groupChatStateMap slice
-        * [ ] Add a newChatReducer to the groupChatStateMap and the groupChatListState
+        * [x] Add a newChatReducer to the groupChatMapState and the groupChatListState
+            - [x] groupChatMapState
+            - [x] groupChatListState
         * [ ] ReImplement the groupChatModel to interact with the two states
+            - [x] Add groupChatMap action on new message event
+            - [ ] Add groupChatMap action on new groupChatList event
 
 
 

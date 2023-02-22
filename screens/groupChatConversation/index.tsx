@@ -5,6 +5,7 @@ import IGroupChatConversationScreen, { IGroupChatConversationViewProps } from ".
 import React from "react"
 import { IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface"
 import GroupChatConversationView from "../../views/groupChatConversation"
+import IGroupChatMapState from "../../app/features/groupChat/groupChatMap/slice/interface"
 
 
 
@@ -22,6 +23,9 @@ export default class GroupChatConversationScreen extends React.Component<IGroupC
 
     navigationController: IGroupChatConversationScreen['navigationController'] = this.props.navigationController
     groupChat: IGroupChatState = this.props.groupChat
+    groupChatMap: IGroupChatMapState = this.context.groupChatMap
+
+    
 
     static contextType = GroupChatContext
     context: React.ContextType<typeof GroupChatContext> = {} as IGroupChatContext
@@ -36,7 +40,7 @@ export default class GroupChatConversationScreen extends React.Component<IGroupC
 
     viewProps: IGroupChatConversationViewProps = {
         handleSendMessagePress: (message: string, groupChatId: string) => { this.handleSendMessagePress(message, groupChatId)},
-        groupChat: this.groupChat
+        groupChat: this.groupChatMap[this.groupChat.id]
     }
     
     
@@ -45,6 +49,7 @@ export default class GroupChatConversationScreen extends React.Component<IGroupC
     }
     componentDidMount() {
         this.groupChatController = this.context.controller
+        this.groupChatMap = this.context.groupChatMap
     }
 
 

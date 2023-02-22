@@ -2,16 +2,18 @@ import React from "react";
 import { IGroupChatListState, IGroupChatRepo, IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface";
 import IGroupChatController, { IGroupChatContext } from "./interface";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { IGroupChatModel, createGroupChatModel } from "../../app/features/groupChat/groupChatList/adapter";
+import { IGroupChatModel, createGroupChatModel } from "../../app/features/groupChat/adapter";
 import { selectgroupChatModelState } from "../../app/features/groupChat/groupChatList/slice";
 import GroupChatController from ".";
+import { selectGroupChatMapState } from "../../app/features/groupChat/groupChatMap/slice";
+import IGroupChatMapState from "../../app/features/groupChat/groupChatMap/slice/interface";
 
 
 
 export const GroupChatContext = React.createContext<IGroupChatContext>({
     controller : {} as IGroupChatController,
-    groupChatListState: {items: []},
-    groupChatRepo: {}
+    groupChatList: {items: []},
+    groupChatMap: {}
 })
 
 
@@ -34,22 +36,13 @@ export default function GroupChatProvider (props: IProps) {
     })
     const controller = new GroupChatController(groupChatModel)
     const groupChatListState: IGroupChatListState = selector(selectgroupChatModelState).groupChatList
-    const groupChatRepo: IGroupChatRepo = selector(selectgroupChatModelState).groupChatRepo
-    // const selectGroupChatById = (id: string): IGroupChatState | null => {
-    //     const groupChat = selector(selectgroupChatModelState).groupChatRepo[id]
-    //     if(groupChat) {
-    //         return null
-    //     }
-    //     return groupChat
-    // }
-
-    
+    const groupChatMap: IGroupChatMapState = selector(selectGroupChatMapState)
 
 
     const _contextValue: IGroupChatContext = {
         controller,
-        groupChatListState,
-        groupChatRepo
+        groupChatList: groupChatListState,
+        groupChatMap: groupChatMap
     }
 
     return (
