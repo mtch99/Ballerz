@@ -55,11 +55,11 @@ t
             - [ ] Add groupChatMap action on new groupChatList event
 
 
-            
+
 
 - [ ] UserProfile feature
 
-    - [ ] UserProfile UseCase
+    - [x] UserProfile UseCase
 
     - [ ] UserProfile Model
 

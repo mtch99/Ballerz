@@ -1,5 +1,5 @@
 import { ICheckinEventPayload, ICommentInput } from "./../../use-cases/feed/interface";
-import { IFeed, IFeedItem, IUserProfileData } from "./../../use-cases/feed/types";
+import { IFeed, IFeedItem, IUserProfileData } from "../../use-cases/types";
 import { FeedUseCase } from "../../use-cases/feed"
 import IFeedModel, { IFeedEventObserver, IFeedUseCase } from "../../use-cases/feed/interface";
 import IFeedController from "./interface";

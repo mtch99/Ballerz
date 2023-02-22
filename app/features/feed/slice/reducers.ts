@@ -1,4 +1,4 @@
-import { IComment, IFeedItem } from "./../../../../use-cases/feed/types";
+import { IComment, IFeedItem } from "../../../../use-cases/types";
 import { IFeedItemState, IFeedState } from "./interface";
 import {IAddItemActionPayload, ICheckInActionPayload, ICommentActionPayload, INewFeedActionPayload, IRemoveItemActionPayload} from "./actions";
 import { PayloadAction } from "@reduxjs/toolkit";

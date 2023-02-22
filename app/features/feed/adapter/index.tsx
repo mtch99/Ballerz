@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks";
-import { IFeed, IFeedItem } from "../../../../use-cases/feed/types";
+import { IFeed, IFeedItem } from "../../../../use-cases/types";
 import { CHECK_IN, COMMENT, NEW_FEED, selectFeed } from "../slice";
 import { IFeedItemState, IFeedState } from "../slice/interface";
 import { useSelector } from "react-redux";

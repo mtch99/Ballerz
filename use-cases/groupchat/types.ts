@@ -1,5 +1,5 @@
-import { IFeedItem } from "./../feed/types";
-import { IUserProfile } from "../feed/types";
+import { IFeedItem } from "../types";
+import { IUserProfile } from "../types";
 
 
 export interface IGroupChatList{

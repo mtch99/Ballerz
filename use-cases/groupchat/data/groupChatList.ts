@@ -1,6 +1,6 @@
 import { IGroupChatList } from "./../types";
 import initialFeed from "../../feed/data/feed";
-import initialUserProfiles from "../../feed/data/userProfile";
+import initialUserProfiles from "../../data/userProfile";
 import { IGroupChat, IGroupChatMessage } from "../types";
 
 

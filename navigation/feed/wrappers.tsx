@@ -5,7 +5,7 @@ import { IFeedScreenPropsWithoutNavigation, FeedScreen } from "../../screens/fee
 import CommentScreen from "../../screens/feed/Comments"
 import { IFeedScreenNavigationController } from "../../screens/feed/interface"
 import AttendantsListScreen from "../../screens/userProfile/attendantsList"
-import { IUserProfileData } from "../../use-cases/feed/types"
+import { IUserProfileData } from "../../use-cases/types"
 import { FeedStackScreenProps, FeedStackNavigationProp } from "./types"
 
 

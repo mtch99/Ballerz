@@ -1,8 +1,8 @@
 import uuid from "react-native-uuid";
 import initialFeed from "./data/feed";
-import initialUserProfiles from "./data/userProfile";
+import initialUserProfiles from "../data/userProfile";
 import { ICheckinEventPayload, ICommentEventPayload, ICommentInput, IFeedEventObserver, IFeedUseCase } from "./interface";
-import { IComment, IFeed, IFeedItem, IUserProfile, IUserProfileData } from "./types";
+import { IComment, IFeed, IFeedItem, IUserProfile, IUserProfileData } from "../types";
 
 
 export class FeedUseCase implements IFeedUseCase {
