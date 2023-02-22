@@ -18,7 +18,7 @@ export default class BadgeListScreen extends React.Component<IBadgeListScreenPro
 
     constructor(props: IBadgeListScreenProps) {
         super(props);
-        console.log(this.props)
+        // console.log(this.props)
     }
 
 

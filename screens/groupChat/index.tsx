@@ -45,7 +45,7 @@ export default class GroupChatListScreen extends React.Component<IGroupChatListS
         if(groupChat){
             this.navigationController.goToGroupChatConversationScreen(groupChat)
         } else {
-            console.error("Attempting to navigate to a groupChat absent from the groupChatModelRepo")
+            // console.error("Attempting to navigate to a groupChat absent from the groupChatModelRepo")
         }
     }
 

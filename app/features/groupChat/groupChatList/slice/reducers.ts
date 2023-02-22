@@ -55,7 +55,7 @@ const newMessageReducer: IGroupChatReducer<INewGroupChatMessageActionPayload> = 
     const newGroupChatList = sortGroupChatList(state.groupChatList, action.payload)
     const newGroupChatRepo = updateGroupChatRepo(state.groupChatRepo, action.payload)
 
-    console.error("GroupChat Convo: \n " + JSON.stringify(newGroupChatRepo["firstGroupChatId"].conversation[0]))
+    // console.error("GroupChat Convo: \n " + JSON.stringify(newGroupChatRepo["firstGroupChatId"].conversation[0]))
 
     return {
         groupChatList: newGroupChatList,
@@ -76,7 +76,7 @@ function sortGroupChatList(prevGroupChatList: IGroupChatListState, payload: INew
 
     const groupChatIndex: number = prevGroupChatList.items.findIndex(groupChat => groupChat.id==groupChatId)
     if(groupChatIndex == -1) {
-        console.error("Unexisting group chat")
+        // console.error("Unexisting group chat")
         return {...prevGroupChatList}
     } else {
         const groupChat = prevGroupChatList.items[groupChatIndex]
@@ -94,7 +94,7 @@ function sortGroupChatList(prevGroupChatList: IGroupChatListState, payload: INew
 function updateGroupChatRepo(groupChatRepo: IGroupChatModelState['groupChatRepo'], payload: INewGroupChatMessageActionPayload): IGroupChatModelState['groupChatRepo']{
     const groupChat = groupChatRepo[payload.groupChatId]
     if(!groupChat){
-        console.error("Unexisting conversation")
+        // console.error("Unexisting conversation")
         return groupChatRepo
     } else {
         const prevConvo = groupChat.conversation
