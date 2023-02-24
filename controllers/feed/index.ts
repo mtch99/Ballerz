@@ -3,27 +3,20 @@ import { IFeed, IFeedItem, IUserProfileData } from "../../use-cases/types";
 import { FeedUseCase } from "../../use-cases/feed"
 import IFeedModel, { IFeedEventObserver, IFeedUseCase } from "../../use-cases/feed/interface";
 import IFeedController from "./interface";
-import ICommentsController from "./Comments/interface";
+import { IFeedState } from "../../app/features/feed/slice/interface";
 
 
 export class FeedController implements IFeedController {
 
     private feedUseCase: IFeedUseCase
-    
-    commentsController: ICommentsController = {
-        postComment: this.postComment
+
+    feed: IFeedState;
+
+    constructor(feedModel: IFeedModel, feedState: IFeedState ){
+        this.feedUseCase = new FeedUseCase(feedModel)
+        this.feed = feedState
     }
 
-
-    private async postComment(payload: ICommentInput): Promise<boolean> {
-        return true
-    }
-
-
-    constructor(feedModel: IFeedModel ){
-        const feedEventObserver = this.createObserver(feedModel)
-        this.feedUseCase = new FeedUseCase(feedEventObserver)
-    }
 
     async getFeed(): Promise<IFeedItem[]>{
         const result = await this.feedUseCase.getFeed()
@@ -39,10 +32,6 @@ export class FeedController implements IFeedController {
         return
     }
  
-
-    private createObserver(feedModel: IFeedModel): IFeedEventObserver {
-        return feedModel
-    }
 }
 
 

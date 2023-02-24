@@ -62,6 +62,11 @@ t
     - [x] UserProfile UseCase
 
     - [ ] UserProfile Model
+        - [ ] Refactor RootState to support a userProfileList state
+            - [x] Define userProfileList slice actions, for now just the newUserProfileList
+            - [x] Implement its reducer
+
+        - [ ] Define and implement userProfileModel
 
     - [ ] UserProfile Controller
 

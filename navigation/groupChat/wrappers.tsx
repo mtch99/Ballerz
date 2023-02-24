@@ -15,7 +15,8 @@ export function GroupChatListScreenWrapper(props: IGroupChatListScreenPropsWitho
 
     const navigationController: IGroupChatNavigationController = {
         goToGroupChatConversationScreen(groupChat: IGroupChatState) {
-            navigation.navigate('GroupChatConversationScreen', {groupChat});
+            const groupChatId = groupChat.id
+            navigation.navigate('GroupChatConversationScreen', {groupChatId});
         },
     }
 
@@ -27,13 +28,13 @@ export function GroupChatListScreenWrapper(props: IGroupChatListScreenPropsWitho
 export function GroupChatConversationScreenWrapper(props: GroupChatStackScreenProps<'GroupChatConversationScreen'>): JSX.Element{
 
     const navigation = useNavigation<GroupChatStackNavigationProp<'GroupChatConversationScreen'>>()
-    const groupChat = props.route.params.groupChat
+    const groupChatId = props.route.params.groupChatId
 
     const navigationController: IGroupChatConversationNavigationController = {
 
     }
 
     return (
-        <GroupChatConversationScreen {...{groupChat, navigationController}}/>
+        <GroupChatConversationScreen {...{groupChatId, navigationController}}/>
     )
 }

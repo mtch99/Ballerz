@@ -4,6 +4,8 @@ import { Provider } from 'react-redux'
 import { store } from './app/store';
 import FeedProvider from './controllers/feed/provider';
 import Navigation from './navigation';
+import React from 'react';
+import AppProvider from './controllers/provider';
 
 
 
@@ -15,13 +17,13 @@ export default function App() {
         barStyle={'light-content'}
       />
         <Provider store={store}>
-          <FeedProvider
+          <AppProvider
             navigation={{}}
           >
             <Navigation
               colorScheme={"dark"} 
             />
-          </FeedProvider>
+          </AppProvider>
         </Provider>
     </>
   )

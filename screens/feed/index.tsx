@@ -1,11 +1,12 @@
 import React, { ContextType } from "react";
 import { FeedContext, IFeedContext } from "../../controllers/feed/provider";
 import FeedView from "../../views/feed";
-import { IFeedItemState} from "../../app/features/feed/slice/interface";
+import { IFeedItemState, IFeedState} from "../../app/features/feed/slice/interface";
 import IFeedScreen, { IFeedScreenNavigationController, IPostCommentInput } from "./interface";
 import { Modal, View, Text, SafeAreaView, Alert } from "react-native";
 import IFeedController from "../../controllers/feed/interface";
 import { ICommentInput } from "../../use-cases/feed/interface";
+import { AppContext, IAppContext } from "../../controllers/provider";
 
 
 export interface IFeedScreenPropsWithoutNavigation {
@@ -28,20 +29,25 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
     state = {
         modalVisible: false,
     }
-    
-    static contextType = FeedContext
+
+    private feedController: IFeedController = {} as IFeedController
+    private feed: IFeedState = {items: []} 
+    static contextType = AppContext
+    context: React.ContextType<typeof AppContext> = {} as IAppContext
     constructor(props: IFeedScreenProps){
         super(props);
+        this.getFeed = this.getFeed.bind(this)
     }
-    context: React.ContextType<typeof FeedContext> = {} as IFeedContext
-    private feedController: IFeedController = this.context.controller
+
     componentDidMount(): void {
-        this.feedController = this.context.controller
+        this.feedController = this.context.feedController
         this.getFeed();
+        this.feed = this.context.feedState
+        console.error(JSON.stringify(this.feed))
     }
 
     getFeed() {
-        this.context.controller.getFeed()
+        this.feedController.getFeed()
     }
 
     handleBadgeClick = (feedItem: IFeedItemState): void => {
