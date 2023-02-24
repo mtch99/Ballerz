@@ -1,4 +1,4 @@
-import { IComment, IFeed, IFeedItem, IUserProfileData } from "./types";
+import { IComment, IFeed, IFeedItem, IUserProfileData } from "../types";
 
 export interface IFeedEventObserver {
     newFeedEventHandler: (payload: IFeed) => any

@@ -16,42 +16,27 @@ There must be three different games on three different courts, two at the moment
 ## How? (technical)
 TODO: 
 - [x] Define the group chats use case
-    - [x] Define and implement group chat use case
-    - [x] Create group chats initial data
+
 - [x] Implement Group chats in model
-    - [x] Add group chats to the store
-    - [x] Implement IGroupChatModel
+
 - [x] Define and implement IGroupChatController
+
 - [x] Change Root Stack navigator to a tab navigator
-    - [x] Create Feed stack
-    - [x] Make it the first tab
+
 - [x] Produce group chat list screen
-    - [x] Define IGroupChatListScreen interface
-    - [x] Implement
+t
 - [x] Produce GroupChatStackNavigator
-    - [x] cf FeedStackNavigator
-    - [x] Add GroupChatListScreen
+
 
 - [x] Navigation to group chat Conversation screen
-    - [x] Define IGroupChatConversationScreen
-    - [x] Implement
-    - [x] Add GroupChatListScreen to GroupChatStack
+
 
 - [x] GroupChatListView v0.1
-    - [x] Define interface for GroupChatListView
-    TODO: 
-    - [x] Restyle GroupChatListScreen
-    - [x] Define interface for GroupChatItemView
 
 - [x] GroupChatConversationScreen
-    - [x] Define interface for GroupChatConversationScreen
 
 
 * [x] Refactor GroupChatConversationModel
-    - [x] Two giellds for the GroupChatModelState
-        - [x] One that contains a list of GroupChatListData, exempt of the conversations
-        - [x] Another one that contains a dictionary of id:GroupChatState 
-    - [x] Test that the groupChat stack behaves as expected
 
 
 - [ ] Complete sendMessage feature 
@@ -68,6 +53,25 @@ TODO:
         * [ ] ReImplement the groupChatModel to interact with the two states
             - [x] Add groupChatMap action on new message event
             - [ ] Add groupChatMap action on new groupChatList event
+
+
+
+
+- [x] UserProfile feature
+
+    - [x] UserProfile UseCase
+
+    - [x] UserProfile Model
+        - [x] Refactor RootState to support a userProfileList state
+            - [x] Define userProfileList slice actions, for now just the newUserProfileList
+            - [x] Implement its reducer
+
+        - [x] Define and implement userProfileModel
+
+    - [x] UserProfile Controller
+
+    - [x] UserProfile View
+        - [x] init userProfileView
 
 
 

@@ -6,11 +6,12 @@ import React from "react"
 import { IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface"
 import GroupChatConversationView from "../../views/groupChatConversation"
 import IGroupChatMapState from "../../app/features/groupChat/groupChatMap/slice/interface"
+import { AppContext, IAppContext } from "../../controllers/provider"
 
 
 
 export interface IGroupChatConversationScreenPropsWithoutNavigation {
-    groupChat: IGroupChatState
+    groupChatId: string
 }
 
 export interface IGroupChatConversationScreenProps extends IGroupChatConversationScreenPropsWithoutNavigation {
@@ -22,14 +23,14 @@ export interface IGroupChatConversationScreenProps extends IGroupChatConversatio
 export default class GroupChatConversationScreen extends React.Component<IGroupChatConversationScreenProps> implements IGroupChatConversationScreen{
 
     navigationController: IGroupChatConversationScreen['navigationController'] = this.props.navigationController
-    groupChat: IGroupChatState = this.props.groupChat
-    groupChatMap: IGroupChatMapState = this.context.groupChatMap
-
+    groupChat: IGroupChatState = {} as IGroupChatState
+    groupChatMap: IGroupChatMapState = {} as IGroupChatMapState
     
-
-    static contextType = GroupChatContext
-    context: React.ContextType<typeof GroupChatContext> = {} as IGroupChatContext
-    private groupChatController: IGroupChatController = this.context.controller
+    
+    
+    static contextType = AppContext
+    context: React.ContextType<typeof AppContext> = {} as IAppContext
+    private groupChatController: IGroupChatController = this.context.groupChatController
 
 
     constructor(props: IGroupChatConversationScreenProps){
@@ -48,8 +49,9 @@ export default class GroupChatConversationScreen extends React.Component<IGroupC
         this.groupChatController.sendGroupChatMessage({groupChatId, messageContent, senderUserProfileId:'moiId'})
     }
     componentDidMount() {
-        this.groupChatController = this.context.controller
-        this.groupChatMap = this.context.groupChatMap
+        this.groupChatController = this.context.groupChatController
+        this.groupChatMap = this.context.groupChatController.groupChatMap
+        this.groupChat = this.groupChatMap[this.props.groupChatId]
     }
 
 

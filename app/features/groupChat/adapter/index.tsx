@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks";
-import { IFeed, IFeedItem } from "../../../../use-cases/feed/types";
+import { IFeed, IFeedItem } from "../../../../use-cases/types";
 import * as GroupChatListSlice from "../groupChatList/slice";
 import * as GroupChatMapSlice from "../groupChatMap/slice"
 import { IGroupChatState, IGroupChatListState, IGroupChatMessageState } from "../groupChatList/slice/interface";

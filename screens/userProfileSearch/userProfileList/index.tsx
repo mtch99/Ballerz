@@ -17,7 +17,6 @@ export default class UserProfileListScreen extends React.Component<IUserProfileL
 
     constructor(props: IUserProfileListScreenProps) {
         super(props);
-        console.log(this.props)
     }
 
 

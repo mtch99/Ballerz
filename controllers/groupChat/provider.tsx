@@ -34,8 +34,8 @@ export default function GroupChatProvider (props: IProps) {
         dispatchFunc: dispatch,
         selectorFunc: selector
     })
-    const controller = new GroupChatController(groupChatModel)
     const groupChatListState: IGroupChatListState = selector(selectgroupChatModelState).groupChatList
+    const controller = new GroupChatController(groupChatModel, groupChatListState)
     const groupChatMap: IGroupChatMapState = selector(selectGroupChatMapState)
 
 

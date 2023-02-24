@@ -1,4 +1,4 @@
-import { IBadge } from "./../types";
+import { IBadge } from "../types";
 
 
 

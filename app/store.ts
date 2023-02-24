@@ -2,13 +2,15 @@ import { configureStore } from '@reduxjs/toolkit'
 import feedSliceReducer from "./features/feed/slice"
 import groupChatSliceReducer from './features/groupChat/groupChatList/slice'
 import groupChatMapSliceReducer from './features/groupChat/groupChatMap/slice'
+import userProfileSliceReducer from './features/userProfile/slice'
 // ...
 
 export const store = configureStore({
   reducer: {
     feed: feedSliceReducer,
     groupChat: groupChatSliceReducer,
-    groupChatMap: groupChatMapSliceReducer
+    groupChatMap: groupChatMapSliceReducer,
+    userProfile: userProfileSliceReducer
   }
 })
 

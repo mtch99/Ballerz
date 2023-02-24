@@ -47,6 +47,10 @@ class FeedView extends React.Component<IProps> {
     componentDidMount(): void {
         
     }
+
+	// componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<{}>, snapshot?: any): void {
+	// 	console.error(`FeedItemView updated: \n \n Pevious props: ${JSON.stringify(prevProps)}`)
+	// }
   
     render(): React.ReactNode {
 		return(
