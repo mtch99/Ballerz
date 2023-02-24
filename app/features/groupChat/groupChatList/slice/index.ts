@@ -22,7 +22,7 @@ export const groupChatListSlice = createSlice({
 
 
 
-export const {NEW_GROUPCHATLIST, NEW_MESSAGE} = groupChatListSlice.actions
+export const {NEW_GROUPCHATLIST, GROUPCHATLIST_NEW_MESSAGE} = groupChatListSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectgroupChatModelState = (state: RootState) => state.groupChat

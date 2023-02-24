@@ -45,7 +45,7 @@ t
         - [x] Refactor view interfaces 
         - [x] refactor view implementations
 
-    - [ ] Send a message in a convo and see it added in the convo screen
+    - [x] Send a message in a convo and see it added in the convo screen
         * [x] Refactor rootState to add groupChatStateMap slice
         * [x] Add a newChatReducer to the groupChatMapState and the groupChatListState
             - [x] groupChatMapState
@@ -53,7 +53,12 @@ t
         * [x] ReImplement the groupChatModel to interact with the two states
             - [x] Add groupChatMap action on new message event
             - [x] Add groupChatMap action on new groupChatList event
-        * [ ] `Bug: ` The groupChatList delete elements on newGroupChatMessae
+        * [x] `Bug: ` The groupChatList delete elements on newGroupChatMessage
+            * [x] This was caused by a cinflict in two reducer names in twi different slices
+
+    * [ ] Fix groupChatListView
+        - [ ] it should display the last message instead of the first one
+
 
 
 

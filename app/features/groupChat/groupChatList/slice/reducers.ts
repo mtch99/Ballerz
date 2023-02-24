@@ -82,7 +82,7 @@ function sortGroupChatList(prevGroupChatList: IGroupChatListState, payload: INew
         const groupChat = prevGroupChatList.items[groupChatIndex]
 
         const newItems = [...prevGroupChatList.items]
-        newItems.splice(groupChatIndex)
+        newItems.splice(groupChatIndex,1)
         newItems.unshift(groupChat)
 
         const result: IGroupChatListState = {items: newItems}
@@ -180,7 +180,7 @@ function updateGroupChatList(newGroupChatState: IGroupChatState, prevGroupChatLi
  */
 const groupChatListReducers = {
     NEW_GROUPCHATLIST: NewGroupChatListReducer,
-    NEW_MESSAGE: newMessageReducer
+    GROUPCHATLIST_NEW_MESSAGE: newMessageReducer
 }
 
 export default groupChatListReducers
