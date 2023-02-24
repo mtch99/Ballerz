@@ -57,25 +57,6 @@ t
 
 
 
-- [x] UserProfile feature
-
-    - [x] UserProfile UseCase
-
-    - [x] UserProfile Model
-        - [x] Refactor RootState to support a userProfileList state
-            - [x] Define userProfileList slice actions, for now just the newUserProfileList
-            - [x] Implement its reducer
-
-        - [x] Define and implement userProfileModel
-
-    - [x] UserProfile Controller
-
-    - [x] UserProfile View
-        - [x] init userProfileView
-
-
-
-
 
 ## Post-Testing Adjustments
 - [x] Fix header on badgelist Screen
