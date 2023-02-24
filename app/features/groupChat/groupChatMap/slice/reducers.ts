@@ -24,17 +24,19 @@ const newMessageReducer: IGroupChatStateMapReducer<INewGroupChatMessageActionPay
         return {...state}
     }
 
-    const previousConvo: IGroupChatState['conversation'] = previousState.conversation
+    const previousConvo: IGroupChatState['conversation'] = [...previousState.conversation]
     const newConvo: IGroupChatState['conversation'] = [...previousConvo, action.payload.message]
     const newGroupChatState: IGroupChatState = {...state[groupChatId], conversation: newConvo}
+ 
 
-
-    return {
+    const result = {
         ...state,
-        [groupChatId]: {
-            ...newGroupChatState
-        }
+        "ojikjiioj": newGroupChatState
     }
+
+    
+
+    return result
 }
 
 
