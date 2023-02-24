@@ -50,6 +50,7 @@ export default class GroupChatConversationView extends React.Component<IGroupCha
                             data={this.props.groupChatMap[this.groupChatId].conversation}
                             extraData={this.groupChat}
                             renderItem={({item}) => {
+                                console.log('id:   ' + item.id)
                                 return(
                                     <MessageItemView
                                         message={item}

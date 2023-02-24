@@ -50,9 +50,10 @@ t
         * [x] Add a newChatReducer to the groupChatMapState and the groupChatListState
             - [x] groupChatMapState
             - [x] groupChatListState
-        * [ ] ReImplement the groupChatModel to interact with the two states
+        * [x] ReImplement the groupChatModel to interact with the two states
             - [x] Add groupChatMap action on new message event
-            - [ ] Add groupChatMap action on new groupChatList event
+            - [x] Add groupChatMap action on new groupChatList event
+        * [ ] `Bug: ` The groupChatList delete elements on newGroupChatMessae
 
 
 

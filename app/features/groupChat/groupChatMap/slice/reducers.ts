@@ -31,7 +31,7 @@ const newMessageReducer: IGroupChatStateMapReducer<INewGroupChatMessageActionPay
 
     const result = {
         ...state,
-        "ojikjiioj": newGroupChatState
+        [groupChatId]: newGroupChatState
     }
 
     

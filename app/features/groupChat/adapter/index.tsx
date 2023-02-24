@@ -12,6 +12,8 @@ import { IGroupChat, IGroupChatList, IGroupChatMessage } from "../../../../use-c
 import { IGroupChatModelEventListener } from "../../../../use-cases/groupchat/interface";
 import { IFeedItemState } from "../../feed/slice/interface";
 import { NEW_GROUPCHATLIST } from "../groupChatList/slice";
+import produce from "immer"
+
 
 
 interface IGroupChatModelInput {
@@ -34,7 +36,6 @@ export function createGroupChatModel (modelInput: IGroupChatModelInput): IGroupC
             const groupChatMessageState = GroupChatModelAdapter.parseGroupChatMessage(input.message)
             const payload: INewGroupChatMessageActionPayload = {...input, message: groupChatMessageState}
             modelInput.dispatchFunc(GroupChatListSlice.NEW_MESSAGE(payload))
-            modelInput.dispatchFunc(GroupChatMapSlice.NEW_MESSAGE(payload))
         }
     }
 
