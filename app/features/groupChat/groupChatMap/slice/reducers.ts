@@ -20,7 +20,6 @@ const newMessageReducer: IGroupChatStateMapReducer<INewGroupChatMessageActionPay
     const previousState = state[groupChatId]
 
     if(!previousState){
-        console.warn("Tried to send message in an unexisting groupChat")
         return {...state}
     }
 

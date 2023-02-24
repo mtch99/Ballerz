@@ -57,7 +57,7 @@ t
 
 
 
-- [ ] UserProfile feature
+- [x] UserProfile feature
 
     - [x] UserProfile UseCase
 
@@ -70,7 +70,8 @@ t
 
     - [x] UserProfile Controller
 
-    - [ ] UserProfile View 
+    - [x] UserProfile View
+        - [x] init userProfileView
 
 
 

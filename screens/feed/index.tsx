@@ -43,7 +43,6 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
         this.feedController = this.context.feedController
         this.getFeed();
         this.feed = this.context.feedState
-        console.error(JSON.stringify(this.feed))
     }
 
     getFeed() {
@@ -104,22 +103,27 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
         // this.feedController.comment(commentInput)
     }
 
+
     handleCommentButtonPress(input: IFeedItemState): void {
         this.navigationController.goToCommentScreen(input)
     }
 
+
     handlePressMakeFriends(): void {
         this.navigationController.goToUserSearchScreen()
     }
+
     
     private displayNoFriendsHereModal(): void {
         // console.error("No friends here")
         this.showNoFriendsAlert()
     }
 
+
     private displayNoFriendsToInviteModal(): void {
         this.showNoFriendsAlert()
     }
+
 
     private showNoFriendsAlert(){
         Alert.alert(
@@ -132,6 +136,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
           { cancelable: false }
         );
     };
+    
 
     private showXthGameThisMobthAlert(){
         Alert.alert(

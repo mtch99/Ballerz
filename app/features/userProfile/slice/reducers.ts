@@ -13,13 +13,10 @@ type IUserProfileListReducer<PayloadType> = (state: IUserProfileListState, actio
 
 const newUserProfileListReducer: IUserProfileListReducer<INewUserProfileListActionPayload> = (state, action) => {
     const items = action.payload.items
-    console.warn("Reducer called with payload items: " + items)
     const newUserProfileList: IUserProfileListState = {items: [...items]}
     const newState = {
         ...newUserProfileList
     }
-
-    console.log("Reducer returned" + newState)
 
     return newState
 }
