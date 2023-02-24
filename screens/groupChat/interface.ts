@@ -1,4 +1,5 @@
 import { IGroupChatListState, IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface";
+import { GroupChatStackNavigationProp } from "../../navigation/groupChat/types";
 
 
 export default interface  IGroupChatListScreen{
@@ -10,6 +11,7 @@ export default interface  IGroupChatListScreen{
 
 export interface IGroupChatNavigationController {
     goToGroupChatConversationScreen(GroupChat: IGroupChatState): void
+    navigation: GroupChatStackNavigationProp<'GroupChatListScreen'>
 }
 
 

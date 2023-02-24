@@ -14,7 +14,7 @@ export const groupChatMapSlice = createSlice({
     }
 })
 
-export const {NEW_MESSAGE} = groupChatMapSlice.actions
+export const {NEW_GROUPCHATMAP, NEW_MESSAGE} = groupChatMapSlice.actions
 
 export const selectGroupChatMapState = (state: RootState) => state.groupChatMap
 

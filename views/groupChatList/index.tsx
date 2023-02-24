@@ -16,7 +16,7 @@ export class GroupChatListView extends React.Component<IGroupChatListViewProps>{
 
 
     onPressGroupChat(item: IGroupChatState){
-        // this.props.onPressGroupChat(item.id);
+        this.props.onPressGroupChat(item.id);
         
     }
 

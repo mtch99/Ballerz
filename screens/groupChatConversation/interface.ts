@@ -1,18 +1,20 @@
 import { IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface";
+import IGroupChatMapState from "../../app/features/groupChat/groupChatMap/slice/interface";
 
 
 export interface  IGroupChatConversationNavigationController{}
 
 export default interface IGroupChatConversationScreen {
     navigationController: IGroupChatConversationNavigationController;
-    groupChat: IGroupChatState
+    groupChatMap: IGroupChatMapState
     handleSendMessagePress(groupChatId: string, messageContent: string): void
 }
 
 
 export interface IGroupChatConversationViewProps {
     handleSendMessagePress: IGroupChatConversationScreen['handleSendMessagePress']
-    groupChat: IGroupChatState
+    groupChatMap: IGroupChatMapState 
+    groupChatId: IGroupChatState['id']
 }
 
 
