@@ -19,7 +19,7 @@ export function createUserProfileModel(modelInput: IUserProfileModelInput): IUse
     return {
         onNewUserProfileList(input: IUserProfile[]){
             const payload: INewUserProfileListActionPayload = UserProfileModelAdapter.parseUserProfileList(input)
-            return modelInput.dispatchFunc(NEW_USERPROFILELIST)
+            modelInput.dispatchFunc(NEW_USERPROFILELIST(payload))
         }
     }
 }
@@ -30,7 +30,7 @@ class UserProfileModelAdapter{
 
     static parseUserProfileList(userProfileList: IUserProfile[]): INewUserProfileListActionPayload{
         return {
-            items: userProfileList
+            items: [...userProfileList]
         }
     }
 }

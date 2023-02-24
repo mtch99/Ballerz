@@ -107,6 +107,10 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
     handleCommentButtonPress(input: IFeedItemState): void {
         this.navigationController.goToCommentScreen(input)
     }
+
+    handlePressMakeFriends(): void {
+        this.navigationController.goToUserSearchScreen()
+    }
     
     private displayNoFriendsHereModal(): void {
         // console.error("No friends here")
@@ -123,7 +127,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
           "Vous devez être amis avec un joueur ppour voir les patie auxquelles il va participer",
           [
               { text: 'Non, merci', onPress: () => console.log('Non, merci'), style: 'destructive' },
-              { text: 'Ajouter des amis', onPress: () => console.log('Ajouter des amis'), style: 'cancel' },
+              { text: 'Ajouter des amis', onPress: () =>  this.handlePressMakeFriends(), style: 'cancel' },
           ],
           { cancelable: false }
         );
@@ -139,6 +143,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
             { cancelable: false }
           );
     }
+
 
 
     render() {

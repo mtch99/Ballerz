@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { FeedStackParamList } from "./types";
-import { AttendantsListScreenWrapper, BadgeListScreenWrapper, CommentsScreenWrapper, FeedScreenWrapper } from "./wrappers";
+import { AttendantsListScreenWrapper, BadgeListScreenWrapper, CommentsScreenWrapper, FeedScreenWrapper, UserProfileSearchScreenWrapper } from "./wrappers";
 
 
 const Stack = createNativeStackNavigator<FeedStackParamList>();
@@ -52,6 +52,18 @@ export function FeedStackNavigator(): JSX.Element {
 					headerBackTitleVisible: false,
 				}}
 				component={AttendantsListScreenWrapper}
+			/>
+
+
+			<Stack.Screen
+				name="UserProfileSearch"
+				options={{
+					headerShown: true,
+					headerTitle: 'Joueurs',
+					headerBackTitleVisible: true,
+					headerBackTitle: 'annuler',
+				}}
+				component={UserProfileSearchScreenWrapper}
 			/>
 
 		</Stack.Navigator>

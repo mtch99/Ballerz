@@ -14,6 +14,7 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
 
     getAllUserProfiles(): IUserProfile[] {
         const result = initialUserProfiles
+        // console.warn("Fetching userProfiles")
         this.observer.onNewUserProfileList(result);
         return initialUserProfiles
     }
