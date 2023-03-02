@@ -64,7 +64,7 @@ export default function AppProvider (props: IProps) {
 
 
     const groupChatModel = createGroupChatModel(modelInput)
-    const groupChatListState: IGroupChatListState = selector(selectgroupChatModelState).groupChatList
+    const groupChatListState: IGroupChatListState = selector(selectgroupChatModelState)
     const groupChatMapState: IGroupChatMapState = selector(selectGroupChatMapState)
     const groupChatController = new GroupChatController(groupChatModel, groupChatListState, groupChatMapState)
 

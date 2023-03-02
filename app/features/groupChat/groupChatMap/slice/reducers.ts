@@ -40,22 +40,16 @@ const newMessageReducer: IGroupChatStateMapReducer<INewGroupChatMessageActionPay
 }
 
 
-const newGroupChatListReducer: IGroupChatStateMapReducer<INewGroupChatListActionPayload> = (state, action) => {
-    const newState: IGroupChatMapState = {}
-    
-    action.payload.groupChatList.forEach((groupChat) => {
-        newState[groupChat.id] = groupChat
-    })
-
+const newGroupChatMapReducer: IGroupChatStateMapReducer<INewGroupChatListActionPayload> = (state, action) => {
     return {
-        ...newState
+        ...action.payload
     }
 }
 
 
 const groupChatMapReducers = {
     NEW_MESSAGE: newMessageReducer,
-    NEW_GROUPCHATMAP: newGroupChatListReducer
+    NEW_GROUPCHATMAP: newGroupChatMapReducer
 }
 
 export default groupChatMapReducers

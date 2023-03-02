@@ -53,8 +53,6 @@ export default class GroupChatConversationScreen extends React.Component<IGroupC
     componentDidMount() {
         this.groupChatController = this.context.groupChatController
         this.groupChatMap = this.context.groupChatMapState
-        console.warn('groupChatMapState ' + JSON.stringify(this.context.groupChatMapState))
-        console.warn('on-mount props ' + JSON.stringify(this.props))
         this.setState((prevState) => {
             return {
                 ...prevState,
@@ -67,14 +65,7 @@ export default class GroupChatConversationScreen extends React.Component<IGroupC
 
 
     componentDidUpdate(prevProps: Readonly<IGroupChatConversationScreenProps>, prevState: Readonly<{}>, snapshot?: any): void {
-        console.warn(`GroupChat Convo screen updated props : \n \n From this: ${JSON.stringify(prevProps)}
-            \n \n To this: ${JSON.stringify(this.props)}`
-        )
-
-        // this.viewProps = {
-        //     ...this.viewProps,
-        //     groupChatId: 
-        // }
+        
     }
 
 

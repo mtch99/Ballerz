@@ -1,8 +1,8 @@
 import React from "react";
 import { FlatList, View, Text } from "react-native";
-import { IGroupChatListState, IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface";
 import { GroupChatItemView } from "./groupChatItem";
 import { IGroupChatListViewProps } from "../../screens/groupChat/interface";
+import { IGroupChatState } from "../../app/features/groupChat/types";
 
 
 
@@ -29,7 +29,7 @@ export class GroupChatListView extends React.Component<IGroupChatListViewProps>{
                 renderItem={({item}) => {
                     return(
                         <GroupChatItemView
-                            groupChat={item}
+                            groupChatListItem={item}
                             onPressGroupChat={() => {this.onPressGroupChat(item)}}
                         />
                     )

@@ -1,9 +1,9 @@
+import { IGroupChatListItemState } from "../../app/features/groupChat/types";
 import { IGroupChatListViewProps } from "./../../screens/groupChat/interface";
-import { IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface";
 
 
 export interface IGroupChatItemViewProps {
-    groupChat: IGroupChatState
+    groupChatListItem: IGroupChatListItemState
     onPressGroupChat: () => void
 }
 

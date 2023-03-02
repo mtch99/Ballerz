@@ -1,13 +1,12 @@
-import { IGroupChatRepo, IGroupChatModelState } from "./interface";
 import { ActionCreatorWithPayload, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../../../store'
 import groupChatListReducers  from "./reducers";
+import { IGroupChatListState } from '../../types';
 
 
 
-const initialState: IGroupChatModelState = {
-    groupChatList: {items: []},
-    groupChatRepo: {}
+const initialState: IGroupChatListState = {
+    items: []
 }
 
 
