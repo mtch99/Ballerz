@@ -3,11 +3,11 @@ import { GroupChatContext } from "../../controllers/groupChat/provider"
 import {View, Text} from 'react-native'
 import IGroupChatConversationScreen, { IGroupChatConversationViewProps } from "./interface"
 import React from "react"
-import { IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface"
 import GroupChatConversationView from "../../views/groupChatConversation"
 import IGroupChatMapState from "../../app/features/groupChat/groupChatMap/slice/interface"
 import { AppContext, IAppContext } from "../../controllers/provider"
 import { GroupChatStackNavigationProp, GroupChatStackScreenProps } from "../../navigation/groupChat/types"
+import { IGroupChatState } from "../../app/features/groupChat/types"
 
 
 
@@ -65,7 +65,7 @@ export default class GroupChatConversationScreen extends React.Component<IGroupC
 
 
     componentDidUpdate(prevProps: Readonly<IGroupChatConversationScreenProps>, prevState: Readonly<{}>, snapshot?: any): void {
-        
+
     }
 
 
