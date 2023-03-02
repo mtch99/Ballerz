@@ -24,14 +24,11 @@ export default class GroupChatConversationView extends React.Component<IGroupCha
 
 
     componentDidMount(): void {
-        console.warn(" GroupChatConversationView mounted with props: \n " + JSON.stringify(this.props))
+
     }
 
     componentDidUpdate(prevProps: Readonly<IGroupChatConversationViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
-        const length = this.props.groupChatMap[this.props.groupChatId].conversation.length
-        console.warn(" GroupChatConversationView updated with props: \n " + JSON.stringify(this.props.groupChatMap[this.props.groupChatId].conversation[length-1])
-            + " \n to....:" + JSON.stringify(this.props.groupChatMap[this.props.groupChatId].conversation)
-        )
+
     }
 
 
@@ -50,7 +47,6 @@ export default class GroupChatConversationView extends React.Component<IGroupCha
                             data={this.props.groupChatMap[this.groupChatId].conversation}
                             extraData={this.groupChat}
                             renderItem={({item}) => {
-                                console.log('id:   ' + item.id)
                                 return(
                                     <MessageItemView
                                         message={item}

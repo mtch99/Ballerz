@@ -6,8 +6,14 @@ export interface IGroupChatModelState{
     groupChatRepo: IGroupChatRepo
 }
 
-export interface IGroupChatListState {
-    items: IGroupChatState[]
+export interface IGroupChatListState{
+    items: IGroupChatListItemState[]
+}
+
+export interface IGroupChatListItemState{
+    id: IGroupChat['id']
+    name: IGroupChat['name']
+    lastMessage: IGroupChatMessageState | undefined
 }
 
 export interface IGroupChatRepo {

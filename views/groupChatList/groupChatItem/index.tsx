@@ -1,8 +1,10 @@
 import React from "react"
-import { IGroupChatMessageState, IGroupChatState } from "../../../app/features/groupChat/groupChatList/slice/interface"
 import { TouchableOpacity, View, Text } from "react-native"
 import {Image, StyleSheet} from "react-native";
 import { IGroupChatItemViewProps } from "../interface"
+import { IFeedItem } from "../../../use-cases/types";
+import { IFeedItemState } from "../../../app/features/feed/slice/interface";
+import { IGroupChatMessageState } from "../../../app/features/groupChat/types";
 
 
 
@@ -10,7 +12,7 @@ import { IGroupChatItemViewProps } from "../interface"
 
 export class GroupChatItemView extends React.Component<IGroupChatItemViewProps>{
 
-    groupChat = this.props.groupChat
+    groupChatListItem = this.props.groupChatListItem
     
     constructor(props: IGroupChatItemViewProps) {
         super(props)
@@ -22,7 +24,7 @@ export class GroupChatItemView extends React.Component<IGroupChatItemViewProps>{
     }
 
     render(): React.ReactNode {
-        const lastMessage = lastMessageView(this.groupChat.conversation[0].content)
+        const lastMessage = lastMessageView(this.groupChatListItem.lastMessage)
         return (
             <TouchableOpacity style = {styles.container} onPress={() => {this.onPressGroupChat()}}>
 		    	{/* <Image style = {stylesheet.style_Ellipse_8} source = {{uri:'https://reactnative.dev/img/tiny_logo.png'}}/> */}
@@ -31,7 +33,7 @@ export class GroupChatItemView extends React.Component<IGroupChatItemViewProps>{
 		    	<View style = {styles.infoContainer}>
                     <View style={styles.infoContainerHeader}>
                         <Text style = {styles.groupNameText}>
-                            {this.groupChat.name}
+                            {this.groupChatListItem.name}
                         </Text>
                         {/* <View style={styles2.unreadNumContainer}>
                             <Text style = {styles2.unreadNumText}>
@@ -42,10 +44,7 @@ export class GroupChatItemView extends React.Component<IGroupChatItemViewProps>{
 
 
                     <View style = {styles.lastMessageContainer}>
-                        <Text style = {styles.lastMessageAuthorText}>
-                            {this.groupChat.conversation[0].author.username}:
-                        </Text>
-                        {lastMessage}
+                        {lastMessageView(this.props.groupChatListItem.lastMessage)}
                     </View>
 		    	</View>
 		    </TouchableOpacity>
@@ -57,21 +56,43 @@ export class GroupChatItemView extends React.Component<IGroupChatItemViewProps>{
 }
 
 
-export function lastMessageView(content: IGroupChatMessageState['content']): React.ReactNode{
-    if(typeof content === 'string'){
-        return (
-            <Text style = {styles.lastMessageText}>
-                {content}
-            </Text>
-        )
-    } else {
-        return (
-            <Text style = {{...styles.lastMessageText, fontWeight: 'bold'}}>
-                Nouvelle invitation!! 
-            </Text>
-        )
-    }
-    return <></>
+export function lastMessageView(message?: IGroupChatMessageState): React.ReactNode{
+	let lastMessageText: string | IFeedItemState
+	let authorUsername: string | undefined = undefined
+	if(message){
+		lastMessageText = message.content
+		authorUsername = message.author.username
+	}
+	else{
+		lastMessageText = 'Lancez la conversation'
+	}
+    
+    if(authorUsername){
+		if(typeof lastMessageText === 'string'){
+			return (
+				<>
+					<Text style={styles.lastMessageAuthorText}>
+						{authorUsername}:{" "}
+					</Text>
+					<Text style={styles.lastMessageText}>
+							{lastMessageText}
+					</Text>
+				</>
+			)
+		} else {
+        	return (
+        	    <Text style = {{...styles.lastMessageText, fontWeight: 'bold'}}>
+        	        Nouvelle invitation!! 
+        	    </Text>
+        	)
+		}
+    } else if (typeof lastMessageText === 'string') {
+		return(
+			<Text style={styles.lastMessageText}>
+						{lastMessageText}
+			</Text>
+		)
+	}
 }
 
 

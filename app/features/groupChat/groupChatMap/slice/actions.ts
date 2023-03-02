@@ -1,4 +1,5 @@
 import { IGroupChatMessageState, IGroupChatState } from "../../types"
+import IGroupChatMapState from "./interface"
 
 
 export interface INewGroupChatMessageActionPayload {
@@ -7,6 +8,4 @@ export interface INewGroupChatMessageActionPayload {
 }
 
 
-export interface INewGroupChatListActionPayload {
-    groupChatList: IGroupChatState[]
-}
+export interface INewGroupChatListActionPayload extends IGroupChatMapState{}

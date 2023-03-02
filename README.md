@@ -56,8 +56,11 @@ t
         * [x] `Bug: ` The groupChatList delete elements on newGroupChatMessage
             * [x] This was caused by a cinflict in two reducer names in twi different slices
 
-    * [ ] Fix groupChatListView
-        - [ ] it should display the last message instead of the first one
+    * [x] Fix groupChatListView
+        - [x] it should display the last message instead of the first one
+        - [ ] it should update the last message display 
+            - [ ] Refactor groupChatListState to store the last message
+            - [ ] Refactor groupChatListView accordingly
 
 
 
