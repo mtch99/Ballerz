@@ -4,9 +4,10 @@ import BadgeListScreen from "../../screens/badgeList"
 import { IFeedScreenPropsWithoutNavigation, FeedScreen } from "../../screens/feed"
 import CommentScreen from "../../screens/feed/Comments"
 import { IFeedScreenNavigationController } from "../../screens/feed/interface"
-import AttendantsListScreen from "../../screens/userProfile/attendantsList"
-import { IUserProfileData } from "../../use-cases/feed/types"
+import AttendantsListScreen from "../../screens/userProfileSearch/attendantsList"
+import { IUserProfileData } from "../../use-cases/types"
 import { FeedStackScreenProps, FeedStackNavigationProp } from "./types"
+import UserProfileSearchScreen from "../../screens/userProfileSearch"
 
 
 /**
@@ -28,6 +29,10 @@ export function FeedScreenWrapper(props: IFeedScreenPropsWithoutNavigation): JSX
         goToCommentScreen(feedItem) {
             // console.error('attempted to go to comments scrren')
             navigation.navigate('CommentsScreen', {feedItem: feedItem, comments: feedItem.comments})
+        },
+
+        goToUserSearchScreen() {
+            navigation.navigate('UserProfileSearch', {})
         },
         
     }
@@ -82,6 +87,14 @@ export function CommentsScreenWrapper(props: FeedStackScreenProps<'CommentsScree
             navigationController={{}}
             feedItem={feedItem}
             comments={comments}
+        />
+    )
+}
+
+export function UserProfileSearchScreenWrapper(){
+
+    return(
+        <UserProfileSearchScreen
         />
     )
 }

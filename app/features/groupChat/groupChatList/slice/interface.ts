@@ -1,7 +1,7 @@
 import { IGroupChatMessage } from "../../../../../use-cases/groupchat/types";
-import { IUserProfileData } from "../../../../../use-cases/feed/types";
+import { IUserProfileData } from "../../../../../use-cases/types";
 import { IGroupChat } from "../../../../../use-cases/groupchat/types";
-import { IUserProfile } from "../../../../../use-cases/feed/types";
+import { IUserProfile } from "../../../../../use-cases/types";
 import { IFeedItemState } from "../../../feed/slice/interface";
 
 

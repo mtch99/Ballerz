@@ -34,7 +34,7 @@ export function GroupChatStackNavigator(): JSX.Element {
                     headerBackVisible: true,
                 }}
                 component={GroupChatConversationScreenWrapper}
-                initialParams={{}}
+                initialParams={{groupChatId: ''}}
             />
         </Stack.Navigator>
     )

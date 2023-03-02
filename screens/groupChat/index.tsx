@@ -5,6 +5,7 @@ import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import {GroupChatContext} from "../../controllers/groupChat/provider"
 import IGroupChatController, { IGroupChatContext } from "../../controllers/groupChat/interface";
 import { GroupChatListView } from "../../views/groupChatList";
+import { AppContext, IAppContext } from "../../controllers/provider";
 
 
 export interface IGroupChatListScreenPropsWithoutNavigation {
@@ -20,9 +21,9 @@ export default class GroupChatListScreen extends React.Component<IGroupChatListS
     navigationController: IGroupChatListScreen['navigationController'] = this.props.navigationController
 
 
-    static contextType = GroupChatContext
-    context: React.ContextType<typeof GroupChatContext> = {} as IGroupChatContext
-    private groupChatController: IGroupChatController = this.context.controller
+    static contextType = AppContext
+    context: React.ContextType<typeof AppContext> = {} as IAppContext
+    private groupChatController: IGroupChatController = this.context.groupChatController
 
 
     constructor(props: IGroupChatListScreenProps){
@@ -32,27 +33,26 @@ export default class GroupChatListScreen extends React.Component<IGroupChatListS
 
 
     componentDidMount() {
-        this.groupChatController = this.context.controller
-        this.groupChatController.getGroupChatList()
+        this.getGroupChatList()
     }
 
     getGroupChatList() {
-        this.groupChatController.getGroupChatList()
+        this.context.groupChatController.getGroupChatList()
     }
 
     handleGroupChatPress(id: IGroupChatState['id']): void {
-        const groupChat = this.context.groupChatMap[id]
+        const groupChat = this.context.groupChatMapState[id]
         if(groupChat){
             this.navigationController.goToGroupChatConversationScreen(groupChat)
         } else {
-            // console.error("Attempting to navigate to a groupChat absent from the groupChatModelRepo")
+            console.error("Attempting to navigate to a groupChat absent from the groupChatModelRepo")
         }
     }
 
     render(): React.ReactNode {
         return(
             <GroupChatListView
-                groupChatList={this.context.groupChatList}
+                groupChatList={this.context.groupChatListState}
                 onPressGroupChat={this.handleGroupChatPress}
             />
         )

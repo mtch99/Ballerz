@@ -1,5 +1,5 @@
-import { IBadge, IFeedItem } from "./../../../../use-cases/feed/types";
-import { IFeed, IPlace, IUserProfile } from "../../../../use-cases/feed/types";
+import { IBadge, IFeedItem } from "../../../../use-cases/types";
+import { IFeed, IPlace, IUserProfile } from "../../../../use-cases/types";
 
 
 export interface IFeedState {

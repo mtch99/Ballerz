@@ -16,42 +16,27 @@ There must be three different games on three different courts, two at the moment
 ## How? (technical)
 TODO: 
 - [x] Define the group chats use case
-    - [x] Define and implement group chat use case
-    - [x] Create group chats initial data
+
 - [x] Implement Group chats in model
-    - [x] Add group chats to the store
-    - [x] Implement IGroupChatModel
+
 - [x] Define and implement IGroupChatController
+
 - [x] Change Root Stack navigator to a tab navigator
-    - [x] Create Feed stack
-    - [x] Make it the first tab
+
 - [x] Produce group chat list screen
-    - [x] Define IGroupChatListScreen interface
-    - [x] Implement
+t
 - [x] Produce GroupChatStackNavigator
-    - [x] cf FeedStackNavigator
-    - [x] Add GroupChatListScreen
+
 
 - [x] Navigation to group chat Conversation screen
-    - [x] Define IGroupChatConversationScreen
-    - [x] Implement
-    - [x] Add GroupChatListScreen to GroupChatStack
+
 
 - [x] GroupChatListView v0.1
-    - [x] Define interface for GroupChatListView
-    TODO: 
-    - [x] Restyle GroupChatListScreen
-    - [x] Define interface for GroupChatItemView
 
 - [x] GroupChatConversationScreen
-    - [x] Define interface for GroupChatConversationScreen
 
 
 * [x] Refactor GroupChatConversationModel
-    - [x] Two giellds for the GroupChatModelState
-        - [x] One that contains a list of GroupChatListData, exempt of the conversations
-        - [x] Another one that contains a dictionary of id:GroupChatState 
-    - [x] Test that the groupChat stack behaves as expected
 
 
 - [ ] Complete sendMessage feature 
@@ -60,14 +45,20 @@ TODO:
         - [x] Refactor view interfaces 
         - [x] refactor view implementations
 
-    - [ ] Send a message in a convo and see it added in the convo screen
+    - [x] Send a message in a convo and see it added in the convo screen
         * [x] Refactor rootState to add groupChatStateMap slice
         * [x] Add a newChatReducer to the groupChatMapState and the groupChatListState
             - [x] groupChatMapState
             - [x] groupChatListState
-        * [ ] ReImplement the groupChatModel to interact with the two states
+        * [x] ReImplement the groupChatModel to interact with the two states
             - [x] Add groupChatMap action on new message event
-            - [ ] Add groupChatMap action on new groupChatList event
+            - [x] Add groupChatMap action on new groupChatList event
+        * [x] `Bug: ` The groupChatList delete elements on newGroupChatMessage
+            * [x] This was caused by a cinflict in two reducer names in twi different slices
+
+    * [ ] Fix groupChatListView
+        - [ ] it should display the last message instead of the first one
+
 
 
 

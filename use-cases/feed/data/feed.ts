@@ -1,6 +1,6 @@
-import { fivePlayerGameBadges } from "./badge";
-import { IFeedItem } from "../types"
-import initialUserProfiles from "./userProfile"
+import { fivePlayerGameBadges } from "../../data/badge";
+import { IFeedItem } from "../../types"
+import initialUserProfiles from "../../data/userProfile"
 
 /**
  * @param hour

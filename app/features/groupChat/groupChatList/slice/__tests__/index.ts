@@ -3,7 +3,7 @@ import { INewGroupChatMessageActionPayload } from "../actions"
 import { IGroupChatListState } from "../interface"
 import groupChatListReducers from "../reducers"
 
-const newMessageReducer = groupChatListReducers.NEW_MESSAGE
+const newMessageReducer = groupChatListReducers.GROUPCHATLIST_NEW_MESSAGE
 
 describe("NEW_MESSAGE reducer tests", () => {
 

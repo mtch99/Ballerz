@@ -1,10 +1,11 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import IGroupChatMapState from "./interface";
-import { INewGroupChatMessageActionPayload } from "./actions";
+import { INewGroupChatListActionPayload, INewGroupChatMessageActionPayload } from "./actions";
 import { IGroupChatState } from "../../types";
 
 export enum GroupChatMapAcctionType {
-    NEW_MESSAGE="NEW_MESSAGE"
+    NEW_MESSAGE="NEW_MESSAGE",
+    NEW_GROUPCHATMAP="NEW_GROUPCHATMAP"
 }
 
 
@@ -20,26 +21,41 @@ const newMessageReducer: IGroupChatStateMapReducer<INewGroupChatMessageActionPay
     const previousState = state[groupChatId]
 
     if(!previousState){
-        console.warn("Tried to send message in an unexisting groupChat")
         return {...state}
     }
 
-    const previousConvo: IGroupChatState['conversation'] = previousState.conversation
+    const previousConvo: IGroupChatState['conversation'] = [...previousState.conversation]
     const newConvo: IGroupChatState['conversation'] = [...previousConvo, action.payload.message]
     const newGroupChatState: IGroupChatState = {...state[groupChatId], conversation: newConvo}
+ 
 
+    const result = {
+        ...state,
+        [groupChatId]: newGroupChatState
+    }
+
+    
+
+    return result
+}
+
+
+const newGroupChatListReducer: IGroupChatStateMapReducer<INewGroupChatListActionPayload> = (state, action) => {
+    const newState: IGroupChatMapState = {}
+    
+    action.payload.groupChatList.forEach((groupChat) => {
+        newState[groupChat.id] = groupChat
+    })
 
     return {
-        ...state,
-        [groupChatId]: {
-            ...newGroupChatState
-        }
+        ...newState
     }
 }
 
 
 const groupChatMapReducers = {
-    NEW_MESSAGE: newMessageReducer
+    NEW_MESSAGE: newMessageReducer,
+    NEW_GROUPCHATMAP: newGroupChatListReducer
 }
 
 export default groupChatMapReducers

@@ -9,6 +9,7 @@ export default interface IFeedScreen {
     handlePlayButtonPress(feedItem: IFeedItemState): void
     postComment(input: IPostCommentInput): void
     handleCommentButtonPress(input: IFeedItemState): void
+    handlePressMakeFriends(): void
 }
 
 
@@ -16,6 +17,7 @@ export interface IFeedScreenNavigationController{
     goToBadgeListScreen(badgeList: IFeedItemState["badges"]): void
     goToAttendantsScreen(userProfileList: IUserProfileData[]): void
     goToCommentScreen(feedItem: IFeedItemState): void
+    goToUserSearchScreen(): void
 }
 
 
