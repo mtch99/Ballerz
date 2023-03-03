@@ -3,73 +3,23 @@ The app for finding basketball pickup games
 
 
 ## Branch Purpose
-    I Want to see the group chats I am part of
+    I want to look at a group chat conversation and see an invite
 
 ## Next 
 Test these scenarios:
     `TODO: define next scenarios` 
-    - I want to look at a group chat conversation and see an invite
+    - I want to see a place profile
         
 There must be three different games on three different courts, two at the moment, and one other on saturday
 
 
 ## How? (technical)
-TODO: 
-- [x] Define the group chats use case
-
-- [x] Implement Group chats in model
-
-- [x] Define and implement IGroupChatController
-
-- [x] Change Root Stack navigator to a tab navigator
-
-- [x] Produce group chat list screen
-t
-- [x] Produce GroupChatStackNavigator
-
-
-- [x] Navigation to group chat Conversation screen
-
-
-- [x] GroupChatListView v0.1
-
-- [x] GroupChatConversationScreen
-
-
-* [x] Refactor GroupChatConversationModel
-
-
-- [ ] Complete sendMessage feature 
-    - [x] Implement handleSendMessagePress in GroupChatConversationScreen
-        - [x] Implement sendGroupChatMessage in the groupChat useCase and Controller
-        - [x] Refactor view interfaces 
-        - [x] refactor view implementations
-
-    - [x] Send a message in a convo and see it added in the convo screen
-        * [x] Refactor rootState to add groupChatStateMap slice
-        * [x] Add a newChatReducer to the groupChatMapState and the groupChatListState
-            - [x] groupChatMapState
-            - [x] groupChatListState
-        * [x] ReImplement the groupChatModel to interact with the two states
-            - [x] Add groupChatMap action on new message event
-            - [x] Add groupChatMap action on new groupChatList event
-        * [x] `Bug: ` The groupChatList delete elements on newGroupChatMessage
-            * [x] This was caused by a cinflict in two reducer names in twi different slices
-
-    * [x] Fix groupChatListView
-        - [x] it should display the last message instead of the first one
-        - [ ] it should update the last message display 
-            - [ ] Refactor groupChatListState to store the last message
-            - [ ] Refactor groupChatListView accordingly
-
-
-
-
+- [ ] GroupChatGameInvitation component
+    - [ ] Define the props
+    - [ ] Implement view
 
 
 ## Post-Testing Adjustments
-- [x] Fix header on badgelist Screen
-- [x] Display all badges on the feed item
 TODO: Test that comment icon is explicit, now that there is a feed item with a comments section
 
 
