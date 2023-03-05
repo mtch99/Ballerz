@@ -13,10 +13,6 @@ There must be three different games on three different courts, two at the moment
 
 
 ## How? (technical)
-- [ ] UserProfile Feature
-    - [ ] UserProfile UseCase
-    - [ ] UserProfile Model
-    - [ ] UserProfileController
 - [ ] UserProfileList Screen
 - [ ] Invitation Link compoeneent
 - [ ] Native share media view
