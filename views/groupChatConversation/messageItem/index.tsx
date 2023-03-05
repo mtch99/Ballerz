@@ -14,38 +14,44 @@ export class MessageItemView extends React.Component<IMessageItemViewProps>{
     render() {
         if(typeof this.message.content == 'string'){
             return (
-                <View style={styles.container}>
-                    <View style={styles.messageContainer}>
+                <View style={styles.messageContainer}>
+                    <Text style={styles.authorUsernameText}>
+                        {this.message.author.username}
+                    </Text>
+                    <View style={styles.textMessageContainer}>
                         <Text style={styles.textMessage}>
                             {this.message.content}
-                        </Text>
-                        <Text style={styles.authorUsernameText}>
-                            {this.message.author.username}
                         </Text>
                     </View>
                 </View>
             )
         }
         else if (typeof this.message.content != 'string' ){
+
             return (
-                <GroupChatGameInvitationView
-                    feedItem={this.message.content} 
-                    handleBadgeClick={function (feedItem: IFeedItemState): void {
-                        console.log("Function not implemented.");
-                    } } 
-                    handleFriendsTherePress={function (feedItem: IFeedItemState): void {
-                        console.log("Function not implemented.");
-                    } } 
-                    handleInvitePress={function (feedItem: IFeedItemState): void {
-                        console.log("Function not implemented.");
-                    } } 
-                    handlePlayButtonPress={function (feedItem: IFeedItemState): void {
-                        console.log("Function not implemented.");
-                    } } 
-                    onPressCommentButton={function (): void {
-                        console.log("Function not implemented.");
-                    } }                    
-                />
+                    <View style={styles.messageContainer}>  
+                        <Text style={styles.authorUsernameText}>
+                            {this.message.author.username} vous invite a jouer
+                        </Text>
+                        <GroupChatGameInvitationView
+                            feedItem={this.message.content} 
+                            handleBadgeClick={function (feedItem: IFeedItemState): void {
+                                console.log("Function not implemented.");
+                            } } 
+                            handleFriendsTherePress={function (feedItem: IFeedItemState): void {
+                                console.log("Function not implemented.");
+                            } } 
+                            handleInvitePress={function (feedItem: IFeedItemState): void {
+                                console.log("Function not implemented.");
+                            } } 
+                            handlePlayButtonPress={function (feedItem: IFeedItemState): void {
+                                console.log("Function not implemented.");
+                            } } 
+                            onPressCommentButton={function (): void {
+                                console.log("Function not implemented.");
+                            } }                    
+                        />
+                    </View>
             )
         }
     }

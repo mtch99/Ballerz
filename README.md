@@ -14,13 +14,10 @@ There must be three different games on three different courts, two at the moment
 
 
 ## How? (technical)
-- [ ] GroupChatGameInvitation component
-    - [ ] Define the props
-    - [ ] Implement view
+- [x] GroupChatGameInvitation component
+    - [x] Define the props
+    - [x] Implement view
 
 
 ## Post-Testing Adjustments
 TODO: Test that comment icon is explicit, now that there is a feed item with a comments section
-
-
-
