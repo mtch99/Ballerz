@@ -8,6 +8,7 @@ import AttendantsListScreen from "../../screens/userProfileSearch/attendantsList
 import { IUserProfileData } from "../../use-cases/types"
 import { FeedStackScreenProps, FeedStackNavigationProp } from "./types"
 import UserProfileSearchScreen from "../../screens/userProfileSearch"
+import MakeFriendsScreen from "../../screens/userProfileSearch/makeFriends"
 
 
 /**
@@ -94,7 +95,7 @@ export function CommentsScreenWrapper(props: FeedStackScreenProps<'CommentsScree
 export function UserProfileSearchScreenWrapper(){
 
     return(
-        <UserProfileSearchScreen
+        <MakeFriendsScreen
         />
     )
 }
