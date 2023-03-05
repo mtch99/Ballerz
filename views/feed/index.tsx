@@ -3,7 +3,6 @@ import {FlatList, SafeAreaView } from "react-native";
 import { IFeedItemState, IFeedState } from "../../app/features/feed/slice/interface";
 import FeedItemView from "./feed-item/index";
 import IFeedScreen, { IPostCommentInput } from "../../screens/feed/interface";
-import { RedHatDisplay_300Light } from "@expo-google-fonts/dev";
 
 
 interface IProps {
@@ -12,7 +11,6 @@ interface IProps {
 	handleFriendsTherePress: IFeedScreen['handleFriendsTherePress']
 	handleInvitePress: IFeedScreen['handleInvitePress']
 	handlePlayButtonPress: IFeedScreen['handlePlayButtonPress']
-	// handlePostComment: IFeedScreen['postComment']
 	handleCommentButtonPress: (item: IFeedItemState) => void
 }
 

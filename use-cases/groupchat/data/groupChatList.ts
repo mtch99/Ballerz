@@ -30,18 +30,18 @@ const initialGroupChatList: IGroupChatList = {
             members: initialUserProfiles.slice(0,3),
             conversation: initialGroupChatMessageList
         },
-        {
-            id: "firstGroupChatId2",
-            name: "Peps__Ballerz🔥🔥🔥",
-            members: initialUserProfiles.slice(0,3),
-            conversation: initialGroupChatMessageList
-        },
-        {
-            id: "firstGroupChatId3",
-            name: "Peps__Ballerz🔥🔥🔥",
-            members: initialUserProfiles.slice(0,3),
-            conversation: initialGroupChatMessageList
-        },
+        // {
+        //     id: "firstGroupChatId2",
+        //     name: "Peps__Ballerz🔥🔥🔥",
+        //     members: initialUserProfiles.slice(0,3),
+        //     conversation: initialGroupChatMessageList
+        // },
+        // {
+        //     id: "firstGroupChatId3",
+        //     name: "Peps__Ballerz🔥🔥🔥",
+        //     members: initialUserProfiles.slice(0,3),
+        //     conversation: initialGroupChatMessageList
+        // },
     ]
 }
 
