@@ -1,12 +1,14 @@
-import React, { Component, ReactElement } from "react";
-import { StyleSheet, View, Text, FlatList } from "react-native";
-import { IFeedItemState} from "../../../app/features/feed/slice/interface";
-import BottomView from "./Bottom";
-import Header from "./Header";
+import React from "react";
+import {FlatList, SafeAreaView, View } from "react-native";
+import { IFeedItemState } from "../../../../app/features/feed/slice/interface";
+
+import IFeedScreen, { IPostCommentInput } from "../../../../screens/feed/interface";
+import { style } from "./styles";
 import { BodyView } from "./Body";
-import IFeedScreen, { IPostCommentInput } from "../../../screens/feed/interface";
-import { style } from "../../groupChatConversation/messageItem/GameInvitation/styles";
+import BottomView from "./Bottom";
 import CommentsView from "./Bottom/Comments";
+import Header from "./Header";
+
 
 interface IFeedItemViewProps{
 	feedItem: IFeedItemState
@@ -18,7 +20,9 @@ interface IFeedItemViewProps{
 }
 
 
-export default function FeedItemView(props: IFeedItemViewProps){
+
+
+export default function GroupChatGameInvitationView(props: IFeedItemViewProps){
 	const feedItem = props.feedItem
 	const handleBadgeClick = props.handleBadgeClick
 	const onBadgeClick = () => {
@@ -55,13 +59,6 @@ export default function FeedItemView(props: IFeedItemViewProps){
 				onBadgeClick={() => {onBadgeClick()}}
 				badgeList={feedItem.badges}
 			/>
-			<BottomView
-				onPressCommentButton={() => {onPressCommentButton()}}
-				onPressPlay={() => {onPressPlay()}}
-				friendsThere={feedItem.friendsThere}
-				onPressFriendsThere={() => {onPressFriendsThere()}}
-				onPressInvite={() => {onPressInvite()}}
-			/>
 			{
 				props.feedItem.comments.length>0?(
 					<CommentsView
@@ -70,8 +67,13 @@ export default function FeedItemView(props: IFeedItemViewProps){
 					/>
 				):(null)
 			}
+			<BottomView
+				onPressCommentButton={() => {onPressCommentButton()}}
+				onPressPlay={() => {onPressPlay()}}
+				friendsThere={feedItem.friendsThere}
+				onPressFriendsThere={() => {onPressFriendsThere()}}
+				onPressInvite={() => {onPressInvite()}}
+			/>
 		</View>
 	)
 }
-
-
