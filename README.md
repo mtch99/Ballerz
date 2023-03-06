@@ -14,6 +14,8 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 - [ ] UserProfileList Screen
+    - [ ] UserProfile Item
+    - [ ] Search Icon as right header
 - [x] Share action on invitation link press
 
 

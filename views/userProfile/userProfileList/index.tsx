@@ -21,7 +21,7 @@ export class UserProfileListView extends React.Component<IUserProfileListViewPro
     render(): React.ReactNode {
         return(
             <FlatList
-                style={{backgroundColor: '#121212'}}
+                // style={{backgroundColor: '#181C28'}}
                 data={this.props.userProfileList.items}
                 extraData={this.props.userProfileList}
                 renderItem={({item}) => {
