@@ -14,8 +14,7 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 - [ ] UserProfileList Screen
-- [ ] Invitation Link compoeneent
-- [ ] Native share media view
+- [x] Share action on invitation link press
 
 
 ## Post-Testing Adjustments
