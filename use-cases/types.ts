@@ -7,15 +7,19 @@ export interface IComment{
     author: IUserProfileData
     text: string;
 }
-export interface IFeedItem {
-    id: string;
+export interface IFeedItem extends IGame {
     place: IPlace
+}
+
+
+export interface IGame {
+    id: string;
+    friendsThere: IUserProfile[]
+    comments: IComment[]
+    badges: IBadge[]
     startingTime: Date
     endingTime: Date
     attendants: IUserProfile[]
-    badges: IBadge[]
-    friendsThere: IUserProfile[]
-    comments: IComment[]
 }
 
 
@@ -23,7 +27,9 @@ export interface IFeedItem {
 export interface IPlace {
     id: string;
     name: string
+    address: string
 }
+
 
 
 

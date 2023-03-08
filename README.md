@@ -13,11 +13,11 @@ There must be three different games on three different courts, two at the moment
 
 
 ## How? (technical)
-- [ ] Explore bottom tab
-
-- [ ] Place UseCase
+- [x] Place UseCase
 - [ ] Place Model
-- [ ] Add PlaceList and PlaceMap to rootState
+    - [ ] Add PlaceList and PlaceMap to rootState
+
+- [ ] Explore bottom tab
 
 - [ ] PlaceListScreen
     - [ ] ExploreStack

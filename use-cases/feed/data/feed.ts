@@ -6,7 +6,7 @@ import initialUserProfiles from "../../data/userProfile"
  * @param hour
  * @returns a date corresponding to the current day at the hour passed as parameter
  */
- function todayWithHour(hour: number): Date {
+export function todayWithHour(hour: number): Date {
 
     const date = new Date()
     date.setHours(hour)
@@ -20,7 +20,8 @@ const initialFeed: IFeedItem[] = [
         badges: fivePlayerGameBadges,
         place: {
             id: "ByfarId",
-            name: "ByFar centre sportif"
+            name: "ByFar centre sportif",
+            address: "355 boulevard des ballerz"
         },
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
@@ -39,7 +40,8 @@ const initialFeed: IFeedItem[] = [
         id: "sevenPlayerGameId23",
         place: {
             id: "PepsId",
-            name: "Peps de l'université Laval"
+            name: "Peps de l'université Laval",
+            address: "355 boulevard des ballerz"
         },
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
@@ -53,7 +55,8 @@ const initialFeed: IFeedItem[] = [
         id: "twoPlayersGameId",
         place: {
             id: "LimoilouId",
-            name: "La cité Limoilou"
+            name: "La cité Limoilou",
+            address: "355 boulevard des ballerz"
         },
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
