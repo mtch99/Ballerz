@@ -1,4 +1,4 @@
-import { FlatList } from "react-native";
+import { FlatList, KeyboardAvoidingView } from "react-native";
 import { IUserProfileListState, IUserProfileState } from "../../../app/features/userProfile/slice/interface";
 import React from "react";
 import { IUserProfileListViewProps } from "../../../screens/userProfileSearch/interface";
@@ -20,19 +20,21 @@ export class UserProfileListView extends React.Component<IUserProfileListViewPro
 
     render(): React.ReactNode {
         return(
-            <FlatList
-                // style={{backgroundColor: '#181C28'}}
-                data={this.props.userProfileList.items}
-                extraData={this.props.userProfileList}
-                renderItem={({item}) => {
-                    return(
-                        <UserProfileItemView
-                            userProfile={item}
-                            onPressUserProfileItem={() => {this.onPressUserProfile(item)}}
-                        />
-                    )
-                }}
-            />
+            <KeyboardAvoidingView>
+                <FlatList
+                    // style={{backgroundColor: '#181C28'}}
+                    data={this.props.userProfileList.items}
+                    extraData={this.props.userProfileList}
+                    renderItem={({item}) => {
+                        return(
+                            <UserProfileItemView
+                                userProfile={item}
+                                onPressUserProfileItem={() => {this.onPressUserProfile(item)}}
+                            />
+                        )
+                    }}
+                />
+            </KeyboardAvoidingView>
         )
     }
 }

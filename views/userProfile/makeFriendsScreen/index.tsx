@@ -3,10 +3,42 @@ import { Alert, Share, Text, TouchableOpacity, View } from "react-native";
 import { UserProfileListView } from "../userProfileList";
 import { IUserProfileListViewProps } from "../../../screens/userProfileSearch/interface";
 import styles from "./styles";
+import { IMakeFriendsViewProps } from "../../../screens/userProfileSearch/makeFriends";
+import { IUserProfileListState } from "../../../app/features/userProfile/slice/interface";
+import SearchBarView from "./SearchBar";
 
 
 
-export class MakeFriendsView extends React.Component<IUserProfileListViewProps>{
+interface IMakeFriendsViewState {
+    allUserProfiles: IUserProfileListState
+    filteredUserProfileList: IUserProfileListState
+    filterExpression: string | null
+}
+
+
+export class MakeFriendsView extends React.Component<IMakeFriendsViewProps>{
+
+
+    constructor(props: IMakeFriendsViewProps){
+        super(props);
+        this.filterList = this.filterList.bind(this)
+        this.onSearchInputChange = this.onSearchInputChange.bind(this)
+    }
+
+    state: IMakeFriendsViewState = {
+        allUserProfiles: this.props.userProfileList,
+        filteredUserProfileList: this.props.userProfileList,
+        filterExpression: null,
+    }
+
+    componentDidMount(): void {
+        this.setState((prevState) => ({
+            ...prevState,
+            allUserProfiles: this.props.userProfileList
+        }))
+    }
+
+
 
     async onPressInvitationLink(): Promise<void> {
         try {
@@ -27,11 +59,34 @@ export class MakeFriendsView extends React.Component<IUserProfileListViewProps>{
             Alert.alert(error.message);
           }
     }
-    
 
+
+
+    onSearchInputChange(filterExpression: string){
+        const filteredList = this.filterList(filterExpression)
+        this.setState((prevState) => ({
+            ...prevState,
+            filteredUserProfileList: filteredList
+        }))
+    }
+
+
+    private filterList(filterExpression: string): IUserProfileListState {
+        const result = this.state.allUserProfiles.items.filter(
+            (userProfile) => userProfile.username.toLocaleLowerCase().includes(filterExpression.toLocaleLowerCase())
+        )
+        return {items: result}
+    }
+
+    
     render(): React.ReactNode {
         return(
             <View>
+                {this.props.searchButtonState?(
+                    <SearchBarView
+                        onSearchInputChange={this.onSearchInputChange}
+                    />
+                ): null}
                 <View style={styles.inviteContactsContainer}>
                     <Text style={styles.inviteContactsText}>Invite tes amis sur ballerz grace à ce lien d'invitation: </Text>
                     <TouchableOpacity
@@ -46,6 +101,7 @@ export class MakeFriendsView extends React.Component<IUserProfileListViewProps>{
                 </View>
                 <UserProfileListView
                     {...this.props}
+                    userProfileList={this.state.filteredUserProfileList}
                 />
             </View>
         )
