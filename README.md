@@ -3,23 +3,26 @@ The app for finding basketball pickup games
 
 
 ## Branch Purpose
-    I want to invite friends to the app by text messages, messenger and other medias
+    I want to see a place profile
 ## Next 
 Test these scenarios:
     `TODO: define next scenarios` 
-    - I want to see a place profile
+    - I want to add my favorite playground
         
 There must be three different games on three different courts, two at the moment, and one other on saturday
 
 
 ## How? (technical)
-- [x] UserProfileList Screen
-    - [x] UserProfile Item
-    - [x] Search Icon as right header
-        - [x] NavigationContext
-        - [x] UserProfileSearchButtonState
-    - [X] Filter User Profiles    
-- [x] Share action on invitation link press
+- [ ] Explore bottom tab
+
+- [ ] Place UseCase
+- [ ] Place Model
+- [ ] Add PlaceList and PlaceMap to rootState
+
+- [ ] PlaceListScreen
+    - [ ] ExploreStack
+
+
 
 
 ## Post-Testing Adjustments

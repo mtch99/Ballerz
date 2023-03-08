@@ -1,7 +1,6 @@
 import React from "react";
 import { Alert, Share, Text, TouchableOpacity, View } from "react-native";
 import { UserProfileListView } from "../userProfileList";
-import { IUserProfileListViewProps } from "../../../screens/userProfileSearch/interface";
 import styles from "./styles";
 import { IMakeFriendsViewProps } from "../../../screens/userProfileSearch/makeFriends";
 import { IUserProfileListState } from "../../../app/features/userProfile/slice/interface";
