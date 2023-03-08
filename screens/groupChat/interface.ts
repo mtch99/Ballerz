@@ -1,4 +1,4 @@
-import { IGroupChatListState, IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface";
+import { IGroupChatListState, IGroupChatState } from "../../app/features/groupChat/types";
 import { GroupChatStackNavigationProp } from "../../navigation/groupChat/types";
 
 

@@ -1,3 +1,4 @@
+import { GMBadge, NewBieBadge } from "./badge";
 import { IUserProfile } from "../types"
 
 const initialUserProfiles: IUserProfile[] = [
@@ -5,7 +6,7 @@ const initialUserProfiles: IUserProfile[] = [
         id: "maximeId",
         username: "maxime",
         badges: {
-            items: []
+            items: [NewBieBadge, GMBadge]
         }
     },
     {

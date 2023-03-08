@@ -3,8 +3,7 @@ The app for finding basketball pickup games
 
 
 ## Branch Purpose
-    I want to look at a group chat conversation and see an invite
-
+    I want to invite friends to the app by text messages, messenger and other medias
 ## Next 
 Test these scenarios:
     `TODO: define next scenarios` 
@@ -14,9 +13,13 @@ There must be three different games on three different courts, two at the moment
 
 
 ## How? (technical)
-- [x] GroupChatGameInvitation component
-    - [x] Define the props
-    - [x] Implement view
+- [x] UserProfileList Screen
+    - [x] UserProfile Item
+    - [x] Search Icon as right header
+        - [x] NavigationContext
+        - [x] UserProfileSearchButtonState
+    - [X] Filter User Profiles    
+- [x] Share action on invitation link press
 
 
 ## Post-Testing Adjustments

@@ -34,13 +34,7 @@ export class GroupChatItemView extends React.Component<IGroupChatItemViewProps>{
                         <Text style = {styles.groupNameText}>
                             {this.groupChatListItem.name}
                         </Text>
-                        {/* <View style={styles2.unreadNumContainer}>
-                            <Text style = {styles2.unreadNumText}>
-                                2
-                            </Text>
-                        </View> */}
                     </View>
-
 
                     <View style = {styles.lastMessageContainer}>
                         {lastMessageView(this.props.groupChatListItem.lastMessage)}

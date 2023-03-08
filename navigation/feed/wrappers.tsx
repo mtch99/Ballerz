@@ -7,7 +7,10 @@ import { IFeedScreenNavigationController } from "../../screens/feed/interface"
 import AttendantsListScreen from "../../screens/userProfileSearch/attendantsList"
 import { IUserProfileData } from "../../use-cases/types"
 import { FeedStackScreenProps, FeedStackNavigationProp } from "./types"
-import UserProfileSearchScreen from "../../screens/userProfileSearch"
+import { FeedStackMakeFriendsScreen } from "../../screens/userProfileSearch/makeFriends"
+import React from "react"
+import { FeedStackNavigationContext, IFeedStackNavigationContext } from "./context"
+
 
 
 /**
@@ -27,10 +30,8 @@ export function FeedScreenWrapper(props: IFeedScreenPropsWithoutNavigation): JSX
             navigation.navigate('AttendantsListScreen', {userProfileList})
         },
         goToCommentScreen(feedItem) {
-            // console.error('attempted to go to comments scrren')
             navigation.navigate('CommentsScreen', {feedItem: feedItem, comments: feedItem.comments})
         },
-
         goToUserSearchScreen() {
             navigation.navigate('UserProfileSearch', {})
         },
@@ -93,8 +94,11 @@ export function CommentsScreenWrapper(props: FeedStackScreenProps<'CommentsScree
 
 export function UserProfileSearchScreenWrapper(){
 
+    const {userProfileSearchButtonState} = React.useContext<IFeedStackNavigationContext>(FeedStackNavigationContext)
+
     return(
-        <UserProfileSearchScreen
+        <FeedStackMakeFriendsScreen
+            searchButtonState={userProfileSearchButtonState}
         />
     )
 }

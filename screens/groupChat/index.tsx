@@ -1,11 +1,11 @@
 import React from "react";
 import IGroupChatListScreen, { IGroupChatNavigationController } from "./interface";
-import { IGroupChatListState, IGroupChatState } from "../../app/features/groupChat/groupChatList/slice/interface";
 import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import {GroupChatContext} from "../../controllers/groupChat/provider"
 import IGroupChatController, { IGroupChatContext } from "../../controllers/groupChat/interface";
 import { GroupChatListView } from "../../views/groupChatList";
 import { AppContext, IAppContext } from "../../controllers/provider";
+import { IGroupChatState } from "../../app/features/groupChat/types";
 
 
 export interface IGroupChatListScreenPropsWithoutNavigation {
