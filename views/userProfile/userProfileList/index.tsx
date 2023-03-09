@@ -20,9 +20,10 @@ export class UserProfileListView extends React.Component<IUserProfileListViewPro
 
     render(): React.ReactNode {
         return(
-            <KeyboardAvoidingView>
+            <KeyboardAvoidingView
+                style={{flexGrow:1}}
+            >
                 <FlatList
-                    // style={{backgroundColor: '#181C28'}}
                     data={this.props.userProfileList.items}
                     extraData={this.props.userProfileList}
                     renderItem={({item}) => {

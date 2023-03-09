@@ -6,9 +6,11 @@ import { FlatList, SafeAreaView, View, Text } from "react-native";
 import { UserProfileListView } from "../../views/userProfile/userProfileList";
 
 
-export interface IUserProfileSearchScreenProps{}
+export interface IUserProfileSearchScreenPropsWithoutNavigation{}
 
-export default class UserProfileSearchScreen extends React.Component implements IUserProfileSearchScreen {
+export interface IUserProfileSearchScreenProps extends IUserProfileSearchScreenPropsWithoutNavigation{}
+
+export default class UserProfileSearchScreen extends React.Component<IUserProfileSearchScreenProps> implements IUserProfileSearchScreen {
 
     userProfileList: IUserProfileListState = {items: []};
     static contextType = AppContext
