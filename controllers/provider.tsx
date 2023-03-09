@@ -19,6 +19,12 @@ import IFeedController from "./feed/interface";
 import IGroupChatController from "./groupChat/interface";
 import { IUserProfileController } from "./userProfile/interface";
 import { IUserProfileListState } from "../app/features/userProfile/slice/interface";
+import { IPlaceListState, IPlaceMapState } from "../app/features/place/types";
+import { IPlaceModel, createPlaceModel } from "../app/features/place/adapter";
+import { selectPlaceListState } from "../app/features/place/placeList/slice";
+import { selectPlaceMapState } from "../app/features/place/placeMap/slice";
+import PlaceController from "./place";
+import IPlaceController from "./place/interface";
 
 
 
@@ -31,6 +37,8 @@ export interface IAppContext extends IAppController{
     groupChatListState: IGroupChatListState
     groupChatMapState: IGroupChatMapState
     userProfileListState: IUserProfileListState
+    placeListState: IPlaceListState
+    placeMapState: IPlaceMapState
 }
 
 
@@ -38,10 +46,13 @@ export const AppContext = React.createContext<IAppContext>({
     feedController: {} as IFeedController,
     groupChatController: {} as IGroupChatController,
     userProfileController: {} as IUserProfileController,
+    placeController: {} as IPlaceController,
     feedState: {items: []},
     groupChatListState: {items: []},
     groupChatMapState: {},
-    userProfileListState: {items: []}
+    userProfileListState: {items: []},
+    placeListState: {items: []},
+    placeMapState: {}
 });
 
 
@@ -72,10 +83,17 @@ export default function AppProvider (props: IProps) {
     const userProfileListState = selector(selectUserProfileListState)
     const userProfileController = new UserProfileController(userProfileModel, userProfileListState)
 
+
+    const placeModel: IPlaceModel = createPlaceModel(modelInput)
+    const placeListState: IPlaceListState = selector(selectPlaceListState)
+    const placeMapState: IPlaceMapState = selector(selectPlaceMapState)
+    const placeController: IPlaceController = new PlaceController(placeModel)
+
     const controller: IAppController = {
         feedController,
         groupChatController,
         userProfileController,
+        placeController
     }
 
 
@@ -84,7 +102,9 @@ export default function AppProvider (props: IProps) {
         groupChatListState,
         groupChatMapState,
         userProfileListState,
-        feedState
+        feedState,
+        placeListState,
+        placeMapState
     }
     
 

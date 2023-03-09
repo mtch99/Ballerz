@@ -12,12 +12,15 @@ export default class PlaceUseCase implements IPlaceUseCase {
         this.observer = observer;
     }
     getAllPlaces(): IPlace[] {
-        return initialPlaces
+        const result = initialPlaces
+        this.observer.onNewPlaceList(result)
+        return result
     }
 
     getPlaceProfile(id: string): IPlaceProfile | null {
         for (let placeProfile of initialPlaceProfiles) {
             if(placeProfile.id === id) {
+                this.observer.onNewPlaceProfile(placeProfile)
                 return placeProfile;
             }
         }

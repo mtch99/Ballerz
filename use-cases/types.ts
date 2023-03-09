@@ -37,7 +37,7 @@ export interface IPlace {
 export interface IUserProfile {
     id: string
     username: string
-    badges: IBadgeList
+    badges: IBadge[]
 }
 
 

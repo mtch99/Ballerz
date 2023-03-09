@@ -17,10 +17,10 @@ There must be three different games on three different courts, two at the moment
 - [x] Place Model
     - [x] Add PlaceList and PlaceMap to rootState
 
-- [ ] Explore bottom tab
+- [x] Explore bottom tab
 
-- [ ] PlaceListScreen
-    - [ ] ExploreStack
+- [x] PlaceListScreen
+
 
 
 

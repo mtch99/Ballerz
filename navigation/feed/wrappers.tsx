@@ -1,11 +1,10 @@
 import { useNavigation } from "@react-navigation/native"
-import { IBadgeData } from "../../app/features/feed/slice/interface"
+import { IBadgeData, IUserProfileData } from "../../app/features/feed/slice/interface"
 import BadgeListScreen from "../../screens/badgeList"
 import { IFeedScreenPropsWithoutNavigation, FeedScreen } from "../../screens/feed"
 import CommentScreen from "../../screens/feed/Comments"
 import { IFeedScreenNavigationController } from "../../screens/feed/interface"
 import AttendantsListScreen from "../../screens/userProfileSearch/attendantsList"
-import { IUserProfileData } from "../../use-cases/types"
 import { FeedStackScreenProps, FeedStackNavigationProp } from "./types"
 import { FeedStackMakeFriendsScreen } from "../../screens/userProfileSearch/makeFriends"
 import React from "react"
@@ -18,7 +17,7 @@ import { FeedStackNavigationContext, IFeedStackNavigationContext } from "./conte
  * @param props FeedScreen props without navigation
  * @returns A FeedScreen
  */
-export function FeedScreenWrapper(props: IFeedScreenPropsWithoutNavigation): JSX.Element {
+export function FeedScreenWrapper(): JSX.Element {
 
     const navigation = useNavigation<FeedStackNavigationProp<'FeedScreen'>>()
 

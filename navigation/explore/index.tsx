@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ExploreStackParamList } from "./types";
-import { UserProfileSearchScreenWrapper } from "./wrappers";
+import { PlaceSearchScreenWrapper, UserProfileSearchScreenWrapper } from "./wrappers";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 
@@ -26,7 +26,7 @@ export function ExploreStackNavigator(): JSX.Element {
                 options={{
                     title: "Terrains",
                 }}
-				component={UserProfileSearchScreenWrapper}
+				component={PlaceSearchScreenWrapper}
             />
         </Stack.Navigator>
     )

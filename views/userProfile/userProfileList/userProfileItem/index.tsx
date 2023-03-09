@@ -14,7 +14,7 @@ export default class UserProfileItemView extends React.Component<IUserProfileIte
 
     render(){
 
-        if(this.props.userProfile.badges.items.length > 0){
+        if(this.props.userProfile.badges.length > 0){
             return(
                 <TouchableOpacity
                     style={styles.container}
@@ -29,7 +29,7 @@ export default class UserProfileItemView extends React.Component<IUserProfileIte
                             {this.username}
                         </Text>
                         <FlatList
-			    			data={this.props.userProfile.badges.items}
+			    			data={this.props.userProfile.badges}
 			    			renderItem={({item, index}) => {
 			    					return(
 			    						<Text>

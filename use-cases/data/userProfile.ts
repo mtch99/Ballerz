@@ -5,58 +5,42 @@ const initialUserProfiles: IUserProfile[] = [
     {
         id: "maximeId",
         username: "maxime",
-        badges: {
-            items: [NewBieBadge, GMBadge]
-        }
+        badges: [NewBieBadge, GMBadge]
     },
     {
         id: "frankId",
         username: "frank",
-        badges: {
-            items: []
-        }
+        badges: []
     },
     {
         id: "YannId",
         username: "yann",
-        badges: {
-            items: []
-        }
+        badges: []
     },
     {
         id: "scottId",
         username: "scott",
-        badges: {
-            items: []
-        }
+        badges: []
     }, 
     {
         id: "unknownId",
         username: "unknownUser",
-        badges: {
-            items: []
-        }
+        badges: []
     }, 
     {
         id: "unknownId2",
         username: "unknownUser",
-        badges: {
-            items: []
-        }
+        badges: []
     }, 
     {
         id: "unknownId3",
         username: "unknownUser",
-        badges: {
-            items: []
-        }
+        badges: []
     }, 
     {
         id: "unknownId4",
         username: "unknownUser",
-        badges: {
-            items: []
-        }
+        badges: []
     }, 
 ]
 

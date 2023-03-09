@@ -22,6 +22,7 @@ export interface IFeedItemState {
 export interface IUserProfileData extends Partial<IUserProfile>{
     id: IUserProfile['id'];
     username: IUserProfile['username'];
+    badges: IUserProfile['badges'];
 }
 
 export interface IPlaceData extends Partial<IPlace>{
