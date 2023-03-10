@@ -41,7 +41,10 @@ There must be three different games on three different courts, two at the moment
     - [x] Put back image view in UserProfileListItemView
     - [ ] UserProfileView
         - [x] init
-        - [ ] Header View
+        - [-] Header View
+            - [x] init
+            - [ ] add stats
+
         - [ ] Badges View
         - [ ] PicturesView
         - [ ] GamesView

@@ -3,6 +3,7 @@ import { View, Text } from "react-native"
 import { IUserProfileState } from "../../app/features/userProfile/types"
 import { IUserProfileViewProps } from "../../screens/userProfile"
 import { styles } from "./styles"
+import { HeaderView } from "./header"
 
 
 
@@ -26,18 +27,24 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
         console.warn(`UserProfileView newProps: ${JSON.stringify(this.props)})`)
     }
 
-    render(): React.ReactNode {
+    render(){
         return(
-            <View>
+            <View
+                style={styles.container}
+            >
                 {/* <View
                     style={styles.profilePictureContainer}
                 /> */}
-                <Text style={{color: 'white'}}>
+                <HeaderView
+                    username={this.props.username}
+                    profilePicUri={'../../assets/profilePic'}
+                />
+                {/* <Text style={{color: 'white'}}>
                     {this.props.username}
                 </Text>
                 <Text style={{color: 'white'}}>
                     {this.props.id}
-                </Text>
+                </Text> */}
             </View>
         )
     }
