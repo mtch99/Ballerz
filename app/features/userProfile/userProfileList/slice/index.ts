@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IUserProfileListState } from "./interface";
 import userProfileListReducers from "./reducers";
-import { RootState } from "../../../store";
+import { RootState } from "../../../../store";
 
 
 const initialState: IUserProfileListState = {

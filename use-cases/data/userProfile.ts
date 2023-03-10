@@ -1,7 +1,9 @@
+import { initialGames } from "./../feed/data/feed";
+import { IUserProfileData } from "./../types";
 import { GMBadge, NewBieBadge } from "./badge";
 import { IUserProfile } from "../types"
 
-const initialUserProfiles: IUserProfile[] = [
+const initialUserProfileData: IUserProfileData[] = [
     {
         id: "maximeId",
         username: "maxime",
@@ -44,4 +46,38 @@ const initialUserProfiles: IUserProfile[] = [
     }, 
 ]
 
-export default initialUserProfiles
+
+export const initialUserProfiles: IUserProfile[] = [
+    {
+        id: "maximeId",
+        username: "maxime",
+        badges: [NewBieBadge, GMBadge],
+        games: initialGames,
+        friends: []
+    },
+    {
+        id: "frankId",
+        username: "frank",
+        badges: [],
+        friends: initialUserProfileData,
+        games: []
+    },
+    {
+        id: "YannId",
+        username: "yann",
+        badges: [],
+        games: [],
+        friends: []
+    },
+    {
+        id: "scottId",
+        username: "scott",
+        badges: [],
+        games: [],
+        friends: [],
+    }, 
+]
+
+
+
+export default initialUserProfileData

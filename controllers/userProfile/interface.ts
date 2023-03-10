@@ -1,5 +1,5 @@
 import { IUserProfileUseCase } from "./../../use-cases/userProfile/interface";
-import { IUserProfileListState } from "../../app/features/userProfile/slice/interface";
+import { IUserProfileListState } from "../../app/features/userProfile/userProfileList/slice/interface";
 
 
 export interface IUserProfileController {

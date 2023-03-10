@@ -1,4 +1,4 @@
-import { IUserProfileListState, IUserProfileState } from "./../../app/features/userProfile/slice/interface";
+import { IUserProfileListState, IUserProfileDataState } from "../../app/features/userProfile/userProfileList/slice/interface";
 
 
 

@@ -1,5 +1,5 @@
-import { IGame, IPlace } from "../types";
+import { IGame, IPlaceData } from "../types";
 
-export interface IPlaceProfile extends IPlace{
+export interface IPlaceProfile extends IPlaceData{
     games: IGame[]
 }

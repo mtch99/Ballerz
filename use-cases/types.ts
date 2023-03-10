@@ -1,3 +1,5 @@
+
+
 export interface IFeed extends Array<IFeedItem>{}
 
 
@@ -8,23 +10,23 @@ export interface IComment{
     text: string;
 }
 export interface IFeedItem extends IGame {
-    place: IPlace
+    place: IPlaceData
 }
 
 
 export interface IGame {
     id: string;
-    friendsThere: IUserProfile[]
+    friendsThere: IUserProfileData[]
     comments: IComment[]
     badges: IBadge[]
     startingTime: Date
     endingTime: Date
-    attendants: IUserProfile[]
+    attendants: IUserProfileData[]
 }
 
 
 
-export interface IPlace {
+export interface IPlaceData {
     id: string;
     name: string
     address: string
@@ -34,14 +36,24 @@ export interface IPlace {
 
 
 
-export interface IUserProfile {
+export interface IUserProfile extends IUserProfileData {
+    games: IGame[]
+    friends: IUserProfileData[]
+}
+
+
+export interface IUserProfileData{
     id: string
     username: string
     badges: IBadge[]
 }
 
 
-
+export interface IPlaceData {
+    id: string;
+    name: string;
+    address: string
+}
 
 
 export interface IBadge {
@@ -57,8 +69,3 @@ export interface IBadgeList {
 
 
 
-export interface IUserProfileData extends Partial<IUserProfile> {
-    id: string;
-    username: string;
-    badges: IBadge[]
-}

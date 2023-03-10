@@ -30,9 +30,9 @@ There must be three different games on three different courts, two at the moment
         - [x] Container
         - [x] Image Background
 
-- [ ] UserProfile UseCase
-- [ ] UserProfileModel
-    - [ ] Add UserProfileMap to rootState
+- [x] UserProfile UseCase
+- [x] UserProfileModel
+    - [x] Add UserProfileMap to rootState
 
 - [ ] UserProfileListScreen
 

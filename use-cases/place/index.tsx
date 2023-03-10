@@ -1,6 +1,6 @@
 import initialPlaces, { initialPlaceProfiles } from "../data/places";
-import initialUserProfiles from "../data/userProfile";
-import { IPlace } from "../types";
+import initialUserProfileData from "../data/userProfile";
+import { IPlaceData } from "../types";
 import IPlaceUseCase, { IPlaceModelEventListener } from "./interface";
 import { IPlaceProfile } from "./types";
 
@@ -11,7 +11,7 @@ export default class PlaceUseCase implements IPlaceUseCase {
     constructor(observer: IPlaceModelEventListener){
         this.observer = observer;
     }
-    getAllPlaces(): IPlace[] {
+    getAllPlaces(): IPlaceData[] {
         const result = initialPlaces
         this.observer.onNewPlaceList(result)
         return result

@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks";
 import { IPlaceModelEventListener } from "../../../../use-cases/place/interface";
-import { IPlace, IFeedItem, IGame } from "../../../../use-cases/types";
+import { IPlaceData, IFeedItem, IGame } from "../../../../use-cases/types";
 import { AppDispatch } from "../../../store";
 import { IFeedItemState } from "../../feed/slice/interface";
 import { NEW_PLACELIST, PlaceListSlice } from "../placeList/slice";
@@ -23,7 +23,7 @@ export interface IPlaceModel extends IPlaceModelEventListener{}
 export function createPlaceModel (modelInput: IPlaceModelInput): IPlaceModel {
     const model: IPlaceModel = {
 
-        onNewPlaceList(input:  IPlace[]) {
+        onNewPlaceList(input:  IPlaceData[]) {
             const  payload: INewPlaceListActionPayload = {items: input}
             modelInput.dispatchFunc(NEW_PLACELIST(payload))
         },

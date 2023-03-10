@@ -1,10 +1,10 @@
 import { IPlaceProfile } from "./../place/types";
-import { IPlace } from "../types";
+import { IPlaceData } from "../types";
 import { todayWithHour } from "../feed/data/feed";
 import { fivePlayerGameBadges } from "./badge";
-import initialUserProfiles from "./userProfile";
+import initialUserProfileData from "./userProfile";
 
-const initialPlaces: IPlace[] = [
+const initialPlaces: IPlaceData[] = [
     {
         id: "ByfarId",
         name: "ByFar centre sportif",
@@ -34,7 +34,7 @@ export const initialPlaceProfiles: IPlaceProfile[] = [
                     id: "twoPlayersGameId",
                     startingTime: todayWithHour(17),
                     endingTime: todayWithHour(21),
-                    attendants: initialUserProfiles.slice(0, 2),
+                    attendants: initialUserProfileData.slice(0, 2),
                     badges: fivePlayerGameBadges,
                     friendsThere: [],
                     comments: [],
@@ -50,7 +50,7 @@ export const initialPlaceProfiles: IPlaceProfile[] = [
                 id: "twoPlayersGameId",
                 startingTime: todayWithHour(17),
                 endingTime: todayWithHour(21),
-                attendants: initialUserProfiles.slice(0, 2),
+                attendants: initialUserProfileData.slice(0, 2),
                 badges: fivePlayerGameBadges,
                 friendsThere: [],
                 comments: [],
@@ -66,7 +66,7 @@ export const initialPlaceProfiles: IPlaceProfile[] = [
                 id: "twoPlayersGameId",
                 startingTime: todayWithHour(17),
                 endingTime: todayWithHour(21),
-                attendants: initialUserProfiles.slice(0, 2),
+                attendants: initialUserProfileData.slice(0, 2),
                 badges: fivePlayerGameBadges,
                 friendsThere: [],
                 comments: [],

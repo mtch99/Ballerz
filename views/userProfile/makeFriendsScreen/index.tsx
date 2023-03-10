@@ -3,7 +3,7 @@ import { Alert, Share, Text, TouchableOpacity, View } from "react-native";
 import { UserProfileListView } from "../userProfileList";
 import styles from "./styles";
 import { IMakeFriendsViewProps } from "../../../screens/userProfileSearch/makeFriends";
-import { IUserProfileListState } from "../../../app/features/userProfile/slice/interface";
+import { IUserProfileListState } from "../../../app/features/userProfile/userProfileList/slice/interface";
 import SearchBarView from "./SearchBar";
 
 

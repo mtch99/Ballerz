@@ -1,5 +1,5 @@
-import initialUserProfiles from "../data/userProfile";
-import { IUserProfile } from "../types";
+import initialUserProfileData, { initialUserProfiles } from "../data/userProfile";
+import { IUserProfile, IUserProfileData } from "../types";
 import { IUserProfileModelEventListener, IUserProfileUseCase } from "./interface";
 
 
@@ -12,10 +12,23 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
     }
 
 
-    getAllUserProfiles(): IUserProfile[] {
-        const result = initialUserProfiles
+    getAllUserProfilData(): IUserProfileData[] {
+        const result = initialUserProfileData
         // console.warn("Fetching userProfiles")
         this.observer.onNewUserProfileList(result);
-        return initialUserProfiles
+        return initialUserProfileData
     }
+
+    getUserProfile(id: string): IUserProfile | null {
+        for (let userProfile of initialUserProfiles) {
+            if(userProfile.id === id) {
+                console.warn("Found id: " + id)
+                this.observer.onNewUserProfile(userProfile)
+                return userProfile;
+            }
+        }
+        return null;
+    }
+
+
 }

@@ -1,11 +1,14 @@
+import { IUserProfileData } from "./../types";
 import { IUserProfile } from "../types";
 
 export interface IUserProfileUseCase {
     observer: IUserProfileModelEventListener
-    getAllUserProfiles(): IUserProfile[]
+    getAllUserProfilData(): IUserProfileData[]
+    getUserProfile(id: IUserProfileData['id']): IUserProfile | null
 }
 
 
 export interface IUserProfileModelEventListener {
-    onNewUserProfileList(input: IUserProfile[]): void
+    onNewUserProfileList(input: IUserProfileData[]): void
+    onNewUserProfile(input: IUserProfile): void
 }

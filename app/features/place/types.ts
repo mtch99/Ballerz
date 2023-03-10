@@ -1,4 +1,4 @@
-import { IGame, IPlace } from "../../../use-cases/types";
+import { IGame, IPlaceData } from "../../../use-cases/types";
 
 export interface IPlaceModelState{
     PlaceList: IPlaceListState;
@@ -10,16 +10,16 @@ export interface IPlaceListState{
 }
 
 export interface IPlaceListItemState{
-    id: IPlace['id']
-    name: IPlace['name']
-    address: IPlace['address']
+    id: IPlaceData['id']
+    name: IPlaceData['name']
+    address: IPlaceData['address']
 }
 
 export interface IPlaceMapState {
     [key: string]: IPlaceProfileState
 }
 
-export interface IPlaceProfileState extends IPlace{
+export interface IPlaceProfileState extends IPlaceData{
     games: IGameState[]
 }
 
