@@ -36,7 +36,7 @@ export const createFeedModel = (input: IFeedModelInput): IFeedModel => {
 }
 
 
-class FeedModelAdapter {
+export class FeedModelAdapter {
     static parseNewFeedEventPayload(payload: IFeed): INewFeedActionPayload {
         const feed: IFeedItemState[] = []
         payload.forEach((feedItem) => {

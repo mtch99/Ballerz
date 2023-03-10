@@ -17,10 +17,13 @@ const newPlaceProfileReducer: IPlaceMapStateReducer<INewPlaceProfileActionPayloa
     
     const placeId = action.payload.id
 
-    return {
+    
+    const newState = {
         ...state,
-        placeId: action.payload
+        [placeId]: action.payload
     }
+
+    return newState
 }
 
 

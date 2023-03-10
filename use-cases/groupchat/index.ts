@@ -25,7 +25,7 @@ export default class GroupChatUseCase implements IGroupChatUseCase{
                 author: {
                     id: 'moiId',
                     username: "moi",
-                    badges: {items: []}
+                    badges: []
                 },
                 content: input.messageContent
             }

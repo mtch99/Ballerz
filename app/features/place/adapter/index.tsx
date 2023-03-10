@@ -1,16 +1,15 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks";
 import { IPlaceModelEventListener } from "../../../../use-cases/place/interface";
-import { IPlace, IFeedItem } from "../../../../use-cases/types";
+import { IPlace, IFeedItem, IGame } from "../../../../use-cases/types";
 import { AppDispatch } from "../../../store";
 import { IFeedItemState } from "../../feed/slice/interface";
 import { NEW_PLACELIST, PlaceListSlice } from "../placeList/slice";
 import { NEW_PLACEPROFILE, PlaceMapSlice } from "../placeMap/slice";
-import { IPlaceListState, IPlaceMapState, IPlaceListItemState } from "../types";
+import { IPlaceListState, IPlaceMapState, IPlaceListItemState, IGameState } from "../types";
 import { IPlaceProfile } from "../../../../use-cases/place/types";
 import { INewPlaceProfileActionPayload } from "../placeMap/slice/actions";
 import { INewPlaceListActionPayload } from "../placeList/slice/actions";
-
 
 
 interface IPlaceModelInput {
@@ -30,7 +29,7 @@ export function createPlaceModel (modelInput: IPlaceModelInput): IPlaceModel {
         },
 
         onNewPlaceProfile: (input: IPlaceProfile) => {
-            const payload: INewPlaceProfileActionPayload = input
+            const payload: INewPlaceProfileActionPayload = PlaceModelAdapter.parsePlaceProfilePayload(input)
             modelInput.dispatchFunc(NEW_PLACEPROFILE(payload))
         }
     }
@@ -39,4 +38,32 @@ export function createPlaceModel (modelInput: IPlaceModelInput): IPlaceModel {
 }
 
 
+
+
+class PlaceModelAdapter {
+    static parsePlaceProfilePayload(input: IPlaceProfile): INewPlaceProfileActionPayload {
+        return {
+            ...input,
+            games: this.parseGameList(input.games)
+        }
+    } 
+
+
+    private static parseGame(input: IGame): IGameState{
+        return {
+            ...input,
+            startingTime: input.startingTime.toLocaleDateString(),
+            endingTime: input.endingTime.toLocaleDateString()
+        }
+    }
+
+    private static parseGameList(input: IPlaceProfile['games']): IGameState[]{
+        const gameStateList: IGameState[] = []
+        for(let game of input){
+            gameStateList.push(this.parseGame(game))
+        }
+
+        return gameStateList
+    }
+}
 

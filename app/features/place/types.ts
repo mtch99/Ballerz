@@ -1,6 +1,4 @@
-import { IPlaceProfile } from "./../../../use-cases/place/types";
-import { IPlace } from "../../../use-cases/types";
-import { IFeedItemState, IUserProfileData } from "../feed/slice/interface";
+import { IGame, IPlace } from "../../../use-cases/types";
 
 export interface IPlaceModelState{
     PlaceList: IPlaceListState;
@@ -22,5 +20,15 @@ export interface IPlaceMapState {
 }
 
 export interface IPlaceProfileState extends IPlace{
-    games: IFeedItemState
+    games: IGameState[]
+}
+
+export interface IGameState {
+    id: IGame['id'];
+    friendsThere: IGame['friendsThere']
+    comments: IGame['comments']
+    badges: IGame['badges']
+    startingTime: string
+    endingTime: string
+    attendants: IGame['attendants']
 }

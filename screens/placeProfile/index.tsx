@@ -2,7 +2,7 @@ import React from "react";
 import IPlaceProfileScreen, { IPlaceProfileScreenNavigationController } from "./interface";
 import { View, Text } from "react-native";
 import { AppContext, IAppContext } from "../../controllers/provider";
-import { IPlaceProfileState } from "../../app/features/place/types";
+import { IPlaceMapState, IPlaceProfileState } from "../../app/features/place/types";
 
 
 export interface IPlaceProfileScreenPropsWithoutNavigation {
@@ -52,15 +52,37 @@ export class PlaceProfileScreen extends React.Component<IPlaceProfileScreenProps
         }))
     }
 
+    viewProps = {...this.state}
+
 
     render(): React.ReactNode {
         return(
-            <View>
-                <Text style={{color: 'white'}}>
-                    {this.state.name}
-                </Text>
-            </View>
+            <PlaceProfileView
+                {...this.state}
+            />
         )
     }
 
 } 
+
+export interface IPlaceProfileViewProps extends IPlaceProfileState {
+    
+}
+
+
+export class PlaceProfileView extends React.Component<IPlaceProfileViewProps>{
+
+
+    componentDidUpdate(prevProps: Readonly<IPlaceProfileViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
+        console.warn(`PlaceProfileView newProps: ${JSON.stringify(this.props)})`)
+    }
+    render(): React.ReactNode {
+        return(
+            <View>
+                <Text style={{color: 'white'}}>
+                    {this.props.name}
+                </Text>
+            </View>
+        )
+    }
+}
