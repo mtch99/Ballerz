@@ -21,4 +21,6 @@ export interface IPlaceMapState {
     [key: string]: IPlaceProfileState
 }
 
-export interface IPlaceProfileState extends IPlaceProfile {}
+export interface IPlaceProfileState extends IPlace{
+    games: IFeedItemState
+}

@@ -60,4 +60,5 @@ export interface IBadgeList {
 export interface IUserProfileData extends Partial<IUserProfile> {
     id: string;
     username: string;
+    badges: IBadge[]
 }

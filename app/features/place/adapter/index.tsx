@@ -37,3 +37,6 @@ export function createPlaceModel (modelInput: IPlaceModelInput): IPlaceModel {
 
     return model
 }
+
+
+

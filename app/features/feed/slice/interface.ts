@@ -1,4 +1,4 @@
-import { IBadge, IFeedItem } from "../../../../use-cases/types";
+import { IBadge, IFeedItem, IUserProfileData } from "../../../../use-cases/types";
 import { IFeed, IPlace, IUserProfile } from "../../../../use-cases/types";
 
 
@@ -19,11 +19,6 @@ export interface IFeedItemState {
 }
 
 
-export interface IUserProfileData extends Partial<IUserProfile>{
-    id: IUserProfile['id'];
-    username: IUserProfile['username'];
-    badges: IUserProfile['badges'];
-}
 
 export interface IPlaceData extends Partial<IPlace>{
     id: IPlace['id'];
