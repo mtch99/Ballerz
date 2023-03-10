@@ -1,9 +1,8 @@
-import { useNavigation } from "@react-navigation/native";
-import { IPlaceProfileScreenNavigationController } from "../../screens/placeProfile/interface";
-import { PlaceProfileScreen } from "../../screens/placeProfile";
-import { BaseStackScreenProps, BaseStackNavigationProp } from "../base/types";
-
-
+import { useNavigation } from "@react-navigation/native"
+import { IPlaceProfileScreenNavigationController } from "../../screens/placeProfile/interface"
+import { BaseStackNavigationProp, BaseStackScreenProps } from "./types"
+import { PlaceProfileScreen } from "../../screens/placeProfile"
+import { TabRouter } from "react-navigation"
 
 export function PlaceProfileScreenWrapper(props: BaseStackScreenProps<'PlaceProfileScreen'>){
 
@@ -13,6 +12,12 @@ export function PlaceProfileScreenWrapper(props: BaseStackScreenProps<'PlaceProf
         goToAttendantsListScreen() {
             navigation.goBack()
         },
+    }
+
+    if(!props.route.params){
+        return(
+            <></>
+        )
     }
 
     return(

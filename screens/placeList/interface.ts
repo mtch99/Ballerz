@@ -1,4 +1,4 @@
-import { IPlaceListState } from "./../../app/features/place/types";
+import { IPlaceListState } from "../../app/features/place/types";
 
 
 export interface IPlaceSearchScreen {

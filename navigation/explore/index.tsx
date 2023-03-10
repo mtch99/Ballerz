@@ -1,32 +1,32 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ExploreStackParamList } from "./types";
-import { PlaceSearchScreenWrapper, UserProfileSearchScreenWrapper } from "./wrappers";
+import {PlaceProfileScreenWrapper} from "./wrappers";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { BaseStackNavigator } from "../base";
+import { SearchStackNavigator } from "./search";
 
 
-const Stack = createMaterialTopTabNavigator<ExploreStackParamList>();
+const Stack = createNativeStackNavigator<ExploreStackParamList>();
 
 export function ExploreStackNavigator(): JSX.Element {
-    const initialRouteName: keyof ExploreStackParamList = "UserProfileSearchSreen"
+    const initialRouteName: keyof ExploreStackParamList = "SearchStack"
 
     return(
         <Stack.Navigator
             initialRouteName={initialRouteName}
         >
             <Stack.Screen
-                name="UserProfileSearchSreen"
+                name="SearchStack"
                 options={{
+                    headerShown: false,
                     title: "Personnes",
                 }}
-				component={UserProfileSearchScreenWrapper}
+				component={SearchStackNavigator}
             />
 
             <Stack.Screen
-                name="PlaceSearchScreen"
-                options={{
-                    title: "Terrains",
-                }}
-				component={PlaceSearchScreenWrapper}
+                name='PlaceProfileScreen'
+                component={PlaceProfileScreenWrapper}
             />
         </Stack.Navigator>
     )

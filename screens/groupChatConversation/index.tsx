@@ -1,12 +1,9 @@
 import IGroupChatController, { IGroupChatContext } from "../../controllers/groupChat/interface"
-import { GroupChatContext } from "../../controllers/groupChat/provider"
-import {View, Text} from 'react-native'
 import IGroupChatConversationScreen, { IGroupChatConversationViewProps } from "./interface"
 import React from "react"
 import GroupChatConversationView from "../../views/groupChatConversation"
 import IGroupChatMapState from "../../app/features/groupChat/groupChatMap/slice/interface"
 import { AppContext, IAppContext } from "../../controllers/provider"
-import { GroupChatStackNavigationProp, GroupChatStackScreenProps } from "../../navigation/groupChat/types"
 import { IGroupChatState } from "../../app/features/groupChat/types"
 
 
@@ -17,7 +14,6 @@ export interface IGroupChatConversationScreenPropsWithoutNavigation {
 
 export interface IGroupChatConversationScreenProps extends IGroupChatConversationScreenPropsWithoutNavigation {
     navigationController: IGroupChatConversationScreen['navigationController']
-    // navigation: GroupChatStackScreenProps<'GroupChatConversationScreen'>
 }
 
 

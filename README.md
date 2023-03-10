@@ -21,10 +21,9 @@ There must be three different games on three different courts, two at the moment
 
 - [x] PlaceListScreen
 
-- [ ] PlaceProfileScreen
-    - [ ] Define Interface
-    - [ ] Init view
-    - [ ] Add to ExploreStackNavigator
+- [x] Explore Stack... contains placeProfileScreen
+- [x] PlaceProfileScreen
+    * [ ] Fix Non serializable values in place profile state
 
 
 

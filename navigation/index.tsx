@@ -58,7 +58,6 @@ export function RootStackNavigator(): JSX.Element {
 				name='FeedStack'
 				options={{
 					headerShown: false,
-					// headerTitle: 'Ballerz',
 					tabBarLabel: 'Games',
 					tabBarIcon: undefined
 				}}
@@ -70,7 +69,7 @@ export function RootStackNavigator(): JSX.Element {
 				options={{
 					headerShown: false,
 					tabBarLabel: 'Groupes',
-					tabBarIcon: undefined
+					tabBarIcon: undefined,
 				}}
 				component={GroupChatStackWrapper}
 			/>

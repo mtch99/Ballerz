@@ -1,4 +1,8 @@
+import { FeedStackParamList } from "./feed/types";
 import { BottomTabNavigationProp, BottomTabScreenProps } from '@react-navigation/bottom-tabs'
+import { NavigatorScreenParams } from '@react-navigation/native';
+import { GroupChatStackParamList } from "./groupChat/types";
+import { ExploreStackParamList } from "./explore/types";
 
 /**
  * Learn more about using TypeScript with React Navigation:
@@ -14,9 +18,9 @@ declare global {
 }
 
 export type RootTabParamList = {
-	ExploreStack: {}
-	FeedStack: {}
-    GroupChatStack: {}
+	ExploreStack: NavigatorScreenParams<ExploreStackParamList>
+	FeedStack: NavigatorScreenParams<FeedStackParamList>
+	GroupChatStack: NavigatorScreenParams<GroupChatStackParamList>
 };
 
 

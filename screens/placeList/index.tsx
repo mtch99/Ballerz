@@ -21,8 +21,12 @@ export interface IPlaceListScreenProps extends IPlaceListScreenPropsWithoutNavig
 
 export default class PlaceListScreen extends React.Component<IPlaceListScreenProps>{
 
+
+    navigationController: IPlaceSearchScreenNavigationController = this.props.navigationController
     constructor(props: IPlaceListScreenProps) {
         super(props);
+        console.error(JSON.stringify(props));
+        this.onPressPlace = this.onPressPlace.bind(this);
     }
 
     static contextType = AppContext
@@ -31,22 +35,23 @@ export default class PlaceListScreen extends React.Component<IPlaceListScreenPro
 
     componentDidMount(): void {
         this.context.placeController.getAllPlaces()
-        console.error("component did mount")
+        // console.error("component did mount")
     }
 
 
     onPressPlace(id: string){
-        throw new Error("Method not implemented")
+        this.navigationController.goToPlaceProfile(id)
+        console.error("TODO: implement navigation to place profile on press place item")
     }
 
 
     render(): React.ReactNode {
         return(
             <SafeAreaView>
-                    <PlaceListView
-                        placeList={this.context.placeListState}
-                        onPressPlaceItem={this.onPressPlace}
-                    />
+                <PlaceListView
+                    placeList={this.context.placeListState}
+                    onPressPlaceItem={this.onPressPlace}
+                />
             </SafeAreaView>
         )
     }
