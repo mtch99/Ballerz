@@ -25,7 +25,10 @@ There must be three different games on three different courts, two at the moment
 - [x] PlaceProfileScreen
     * [x] Fix Non serializable values in place profile state
 
-- [ ] PlaceProfileView
+- [x] PlaceProfileView
+    - [x] Place Profile Picture View
+        - [x] Container
+        - [x] Image Background
 
 
 

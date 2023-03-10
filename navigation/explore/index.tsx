@@ -27,6 +27,9 @@ export function ExploreStackNavigator(): JSX.Element {
             <Stack.Screen
                 name='PlaceProfileScreen'
                 component={PlaceProfileScreenWrapper}
+                options={{
+                    title: 'Explore'
+                }}
             />
         </Stack.Navigator>
     )
