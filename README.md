@@ -37,13 +37,14 @@ There must be three different games on three different courts, two at the moment
 
 - [x] Add UserProfileScreen to Explore Stack
 - [ ] UserProfileScreen
-    - [ ] Fix require cycle error
+    - [x] Fix require cycle error
+    - [x] Put back image view in UserProfileListItemView
     - [ ] UserProfileView
         - [x] init
 
 
 
-{/* <Image style = {styles.groupPhoto} source = {require("../../../../assets/profilePic.jpg")}/> */}
+
 
 
 

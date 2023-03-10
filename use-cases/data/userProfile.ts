@@ -1,6 +1,5 @@
-import { initialGames } from "./../feed/data/feed";
-import { IUserProfileData } from "./../types";
-import { GMBadge, NewBieBadge } from "./badge";
+import { IGame, IUserProfileData } from "./../types";
+import { GMBadge, NewBieBadge, fivePlayerGameBadges } from "./badge";
 import { IUserProfile } from "../types"
 
 const initialUserProfileData: IUserProfileData[] = [
@@ -47,6 +46,57 @@ const initialUserProfileData: IUserProfileData[] = [
 ]
 
 
+export const initialGames: IGame[] = [
+    {
+        id: "sevenPlayerGameId",
+        badges: fivePlayerGameBadges,
+        startingTime: todayWithHour(17),
+        endingTime: todayWithHour(21),
+        attendants: initialUserProfileData,
+        friendsThere: initialUserProfileData.slice(0, 2),
+        comments: [
+            {
+                id:"firstTestCommentId",
+                author: initialUserProfileData[0],
+                text: "5v5 tout-terrain ce soir 🔥"
+            }
+        ],
+    },
+
+    {
+        id: "sevenPlayerGameId23",
+        startingTime: todayWithHour(17),
+        endingTime: todayWithHour(21),
+        attendants: initialUserProfileData,
+        badges: [],
+        friendsThere: [],
+        comments: [],
+    },
+
+    {
+        id: "twoPlayersGameId",
+        startingTime: todayWithHour(17),
+        endingTime: todayWithHour(21),
+        attendants: initialUserProfileData.slice(0, 2),
+        badges: fivePlayerGameBadges,
+        friendsThere: [],
+        comments: [],
+    },
+
+    // {
+    //     id: "noPlayersGameId",
+    //     place: {
+    //         id: "VictoriaId",
+    //         name: "Parc Victoria"
+    //     },
+    //     startingTime: todayWithHour(17),
+    //     endingTime: todayWithHour(21),
+    //     attendants: [],
+    //     badges: [],
+    //     friendsThere: []
+    // },
+]
+
 export const initialUserProfiles: IUserProfile[] = [
     {
         id: "maximeId",
@@ -77,6 +127,17 @@ export const initialUserProfiles: IUserProfile[] = [
         friends: [],
     }, 
 ]
+
+export function todayWithHour(hour: number): Date {
+
+    const date = new Date()
+    date.setHours(hour)
+    
+    return date
+}
+
+
+
 
 
 

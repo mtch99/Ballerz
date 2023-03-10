@@ -21,6 +21,7 @@ export default class UserProfileItemView extends React.Component<IUserProfileIte
                     onPress={() => {this.props.onPressUserProfileItem(this.props.userProfile.id)}}
                 >
                     <View style={styles.groupPhotoContainer}>
+                        <Image style = {styles.groupPhoto} source = {require("../../../assets/profilePic.jpg")}/>
                     </View> 
                     <View>
                         <Text
@@ -51,7 +52,7 @@ export default class UserProfileItemView extends React.Component<IUserProfileIte
             style={styles.container}
             >
                 <View style={styles.groupPhotoContainer}>
-                    {/* <Image style = {styles.groupPhoto} source = {require("../../../../assets/profilePic.jpg")}/> */}
+                    <Image style = {styles.groupPhoto} source = {require("../../../assets/profilePic.jpg")}/>
                 </View> 
                 <View>
                     <Text
