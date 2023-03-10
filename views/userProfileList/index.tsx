@@ -1,7 +1,7 @@
 import { FlatList, KeyboardAvoidingView } from "react-native";
-import { IUserProfileListState, IUserProfileDataState } from "../../../app/features/userProfile/userProfileList/slice/interface";
+import { IUserProfileListState, IUserProfileDataState } from "../../app/features/userProfile/userProfileList/slice/interface";
 import React from "react";
-import { IUserProfileListViewProps } from "../../../screens/userProfileSearch/interface";
+import { IUserProfileListViewProps } from "../../screens/userProfileSearch/interface";
 import UserProfileItemView from "./userProfileItem";
 
 
@@ -14,9 +14,7 @@ export class UserProfileListView extends React.Component<IUserProfileListViewPro
     }
 
 
-    onPressUserProfile(item: IUserProfileDataState){
-        this.props.onPressUserProfile(item.id);
-    }
+
 
     render(): React.ReactNode {
         return(
@@ -30,7 +28,7 @@ export class UserProfileListView extends React.Component<IUserProfileListViewPro
                         return(
                             <UserProfileItemView
                                 userProfile={item}
-                                onPressUserProfileItem={() => {this.onPressUserProfile(item)}}
+                                onPressUserProfileItem={() => {this.props.onPressUserProfile(item.id)}}
                             />
                         )
                     }}

@@ -44,6 +44,7 @@ There must be three different games on three different courts, two at the moment
 
 
 
+{/* <Image style = {styles.groupPhoto} source = {require("../../../../assets/profilePic.jpg")}/> */}
 
 
 

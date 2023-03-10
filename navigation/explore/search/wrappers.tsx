@@ -5,11 +5,21 @@ import UserProfileSearchScreen from "../../../screens/userProfileSearch";
 import { ExploreStackNavigationProp, ExploreStackScreenProps } from "../types";
 import { IPlaceProfileScreenNavigationController } from "../../../screens/placeProfile/interface";
 import { PlaceProfileScreen } from "../../../screens/placeProfile";
-import { SearchStackScreenProps } from "./types";
+import { SearchStackNavigationProp, SearchStackScreenProps } from "./types";
+import { IUserProfileListScreenNavigationController } from "../../../screens/userProfile/interface";
 
 
 export function UserProfileSearchScreenWrapper(){
-    return <UserProfileSearchScreen/>
+
+    const navigation = useNavigation<ExploreStackNavigationProp<'SearchStack'>>()
+    const navigationController: IUserProfileListScreenNavigationController = {
+        goToUserProfile(id) {
+            navigation.push('UserProfileScreen', {userProfileId: id})
+        },
+    }
+    return <UserProfileSearchScreen
+        {...{navigationController}}
+    />
 }
 
 

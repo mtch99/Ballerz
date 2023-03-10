@@ -3,12 +3,15 @@ import { IUserProfileListState, IUserProfileDataState } from "../../app/features
 import { IUserProfileSearchScreen } from "./interface";
 import { AppContext, IAppContext } from "../../controllers/provider";
 import { FlatList, SafeAreaView, View, Text } from "react-native";
-import { UserProfileListView } from "../../views/userProfile/userProfileList";
+import { UserProfileListView } from "../../views/userProfileList";
+import { IUserProfileListScreenNavigationController } from "../userProfile/interface";
 
 
 export interface IUserProfileSearchScreenPropsWithoutNavigation{}
 
-export interface IUserProfileSearchScreenProps extends IUserProfileSearchScreenPropsWithoutNavigation{}
+export interface IUserProfileSearchScreenProps extends IUserProfileSearchScreenPropsWithoutNavigation{
+    navigationController: IUserProfileListScreenNavigationController
+}
 
 export default class UserProfileSearchScreen extends React.Component<IUserProfileSearchScreenProps> implements IUserProfileSearchScreen {
 
@@ -18,10 +21,12 @@ export default class UserProfileSearchScreen extends React.Component<IUserProfil
 
     constructor(props: IUserProfileSearchScreenProps){
         super(props);
+        this.onPressUserProfile = this.onPressUserProfile.bind(this)
     }
 
+
     onPressUserProfile(id: string): void {
-        throw new Error("Method not implemented.");
+        this.props.navigationController.goToUserProfile(id)
     }
 
 

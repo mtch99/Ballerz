@@ -67,3 +67,23 @@ class PlaceModelAdapter {
     }
 }
 
+
+export function parseGame(game: IGame): IGameState{
+    return {
+        ...game,
+        startingTime: game.startingTime.toLocaleDateString(),
+        endingTime: game.endingTime.toLocaleDateString()
+    }
+}
+
+export function parseGameList(gameList: IGame[]): IGameState[]{
+    const result: IGameState[] = []
+
+    if(gameList.length > 0){
+        for(let game of gameList){
+            result.push(parseGame(game))
+        }
+    }
+
+    return result
+}

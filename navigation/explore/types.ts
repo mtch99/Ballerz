@@ -1,3 +1,4 @@
+import { IUserProfileScreenPropsWithoutNavigation } from "./../../screens/userProfile/index";
 import { NavigatorScreenParams } from "@react-navigation/native";
 import { IPlaceProfileScreenPropsWithoutNavigation } from "./../../screens/placeProfile/index";
 import { IUserProfileSearchScreenProps, IUserProfileSearchScreenPropsWithoutNavigation } from "./../../screens/userProfileSearch/index";
@@ -15,6 +16,7 @@ declare global {
 export type ExploreStackParamList = {
     SearchStack: NavigatorScreenParams<SearchStackParamList>
     PlaceProfileScreen: IPlaceProfileScreenPropsWithoutNavigation
+    UserProfileScreen: IUserProfileScreenPropsWithoutNavigation
 };
 
 

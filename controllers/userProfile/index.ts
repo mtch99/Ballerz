@@ -1,4 +1,4 @@
-import { IUserProfileModel } from "../../app/features/userProfile/userProfileList/adapter";
+import { IUserProfileModel } from "../../app/features/userProfile/adapter";
 import { IUserProfileListState } from "../../app/features/userProfile/userProfileList/slice/interface";
 import UserProfileUseCase from "../../use-cases/userProfile";
 import { IUserProfileUseCase } from "../../use-cases/userProfile/interface";
@@ -17,5 +17,9 @@ export default class UserProfileController implements IUserProfileController{
 
     getAllUserProfiles(): void{
         this.userProfileUseCase.getAllUserProfilData()
+    }
+
+    getUserProfile(id: string): void {
+        this.userProfileUseCase.getUserProfile(id)
     }
 }

@@ -1,7 +1,10 @@
 import React from "react";
 import { View, Text, SafeAreaView, FlatList } from "react-native";
-import {IUserProfileData } from "../../../app/features/feed/slice/interface";
-import { UserProfileListView } from "../../../views/userProfile/userProfileList";
+import { UserProfileListView } from "../../../views/userProfileList";
+import { IUserProfileData } from "../../../use-cases/types";
+import { IUserProfileListScreenNavigationController } from "../../userProfile/interface";
+
+
 
 
 export interface IUserProfileListScreenPropsWithoutNavigation {
@@ -10,7 +13,7 @@ export interface IUserProfileListScreenPropsWithoutNavigation {
 
 
 export interface IUserProfileListScreenProps extends IUserProfileListScreenPropsWithoutNavigation{
-    
+    navigationController: IUserProfileListScreenNavigationController
 }
 
 
@@ -21,7 +24,7 @@ export default class UserProfileListScreen extends React.Component<IUserProfileL
     }
 
     onPressUserProfile(id: string){
-        throw new Error("Method not implemented")
+        this.props.navigationController.goToUserProfile(id)
     }
 
 

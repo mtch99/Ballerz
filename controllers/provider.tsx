@@ -5,7 +5,7 @@ import { createFeedModel } from "../app/features/feed/adapter";
 import { FeedController } from "./feed";
 import { createGroupChatModel } from "../app/features/groupChat/adapter";
 import GroupChatController from "./groupChat";
-import { createUserProfileModel } from "../app/features/userProfile/userProfileList/adapter";
+import { createUserProfileModel } from "../app/features/userProfile/adapter";
 import UserProfileController from "./userProfile";
 import { IFeedState } from "../app/features/feed/slice/interface";
 import { selectFeed } from "../app/features/feed/slice";
@@ -25,6 +25,8 @@ import { selectPlaceListState } from "../app/features/place/placeList/slice";
 import { selectPlaceMapState } from "../app/features/place/placeMap/slice";
 import PlaceController from "./place";
 import IPlaceController from "./place/interface";
+import { IUserProfileMapState } from "../app/features/userProfile/types";
+import { selectUserProfileMapState } from "../app/features/userProfile/userProfileMap/slice";
 
 
 
@@ -37,6 +39,7 @@ export interface IAppContext extends IAppController{
     groupChatListState: IGroupChatListState
     groupChatMapState: IGroupChatMapState
     userProfileListState: IUserProfileListState
+    userProfileMapState: IUserProfileMapState
     placeListState: IPlaceListState
     placeMapState: IPlaceMapState
 }
@@ -52,7 +55,8 @@ export const AppContext = React.createContext<IAppContext>({
     groupChatMapState: {},
     userProfileListState: {items: []},
     placeListState: {items: []},
-    placeMapState: {}
+    placeMapState: {},
+    userProfileMapState: {}
 });
 
 
@@ -81,6 +85,7 @@ export default function AppProvider (props: IProps) {
 
     const userProfileModel = createUserProfileModel(modelInput)
     const userProfileListState = selector(selectUserProfileListState)
+    const userProfileMapState = selector(selectUserProfileMapState)
     const userProfileController = new UserProfileController(userProfileModel, userProfileListState)
 
 
@@ -104,7 +109,8 @@ export default function AppProvider (props: IProps) {
         userProfileListState,
         feedState,
         placeListState,
-        placeMapState
+        placeMapState,
+        userProfileMapState
     }
     
 
