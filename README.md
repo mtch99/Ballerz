@@ -34,13 +34,12 @@ There must be three different games on three different courts, two at the moment
 - [x] UserProfileModel
     - [x] Add UserProfileMap to rootState
 
-- [ ] UserProfileListScreen
 
-- [ ] Add UserProfileScreen to Explore Stack
+- [x] Add UserProfileScreen to Explore Stack
 - [ ] UserProfileScreen
-    
-
-- [ ] UserProfileView
+    - [ ] Fix require cycle error
+    - [ ] UserProfileView
+        - [x] init
 
 
 
