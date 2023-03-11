@@ -1,11 +1,12 @@
 import React from "react"
-import { View, Text } from "react-native"
+import { View, Text, ScrollView } from "react-native"
 import { IUserProfileState } from "../../app/features/userProfile/types"
 import { IUserProfileViewProps } from "../../screens/userProfile"
 import { styles } from "./styles"
 import { HeaderView } from "./header"
 import { BadgeListView } from "./badges"
 import PictresView from "./pictures"
+import GamesListView from "./games"
 
 
 
@@ -31,7 +32,7 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
 
     render(){
         return(
-            <View
+            <ScrollView
                 style={styles.container}
             >
                 {/* <View
@@ -47,13 +48,16 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
                 <PictresView
                     pictureUriList={['../../assets/profilePic', '../../assets/dunkPic']}
                 />
+                <GamesListView
+                    gameList={this.props.games}
+                />
                 {/* <Text style={{color: 'white'}}>
                     {this.props.username}
                 </Text>
                 <Text style={{color: 'white'}}>
                     {this.props.id}
                 </Text> */}
-            </View>
+            </ScrollView>
         )
     }
 }

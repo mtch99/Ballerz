@@ -22,6 +22,7 @@ export interface IGame {
     startingTime: Date
     endingTime: Date
     attendants: IUserProfileData[]
+    place: IPlaceData
 }
 
 

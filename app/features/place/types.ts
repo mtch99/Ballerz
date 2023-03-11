@@ -31,4 +31,5 @@ export interface IGameState {
     startingTime: string
     endingTime: string
     attendants: IGame['attendants']
+    place: IPlaceData
 }

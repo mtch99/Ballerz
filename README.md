@@ -47,9 +47,9 @@ There must be three different games on three different courts, two at the moment
 
         - [x] Badges View
         - [x] PicturesView
-        - [ ] GamesView
-        * [ ] inject profilepic uri
+        - [x] GamesView
         * [ ] fix screens headers
+        * [ ] inject profilepic uri
 
 
 

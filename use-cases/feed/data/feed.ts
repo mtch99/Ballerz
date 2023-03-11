@@ -30,6 +30,11 @@ export const initialGames: IGame[] = [
                 text: "5v5 tout-terrain ce soir 🔥"
             }
         ],
+        place: {
+            id: "LimoilouId",
+            name: "La cité Limoilou",
+            address: "355 boulevard des ballerz"
+        },
     },
 
     {
@@ -40,6 +45,11 @@ export const initialGames: IGame[] = [
         badges: [],
         friendsThere: [],
         comments: [],
+        place: {
+            id: "LimoilouId",
+            name: "La cité Limoilou",
+            address: "355 boulevard des ballerz"
+        },
     },
 
     {
@@ -50,6 +60,11 @@ export const initialGames: IGame[] = [
         badges: fivePlayerGameBadges,
         friendsThere: [],
         comments: [],
+        place: {
+            id: "LimoilouId",
+            name: "La cité Limoilou",
+            address: "355 boulevard des ballerz"
+        },
     },
 
     // {
