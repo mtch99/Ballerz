@@ -45,9 +45,11 @@ There must be three different games on three different courts, two at the moment
             - [x] init
             - [ ] add stats
 
-        - [ ] Badges View
-        - [ ] PicturesView
+        - [x] Badges View
+        - [x] PicturesView
         - [ ] GamesView
+        * [ ] inject profilepic uri
+        * [ ] fix screens headers
 
 
 

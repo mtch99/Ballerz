@@ -4,6 +4,8 @@ import { IUserProfileState } from "../../app/features/userProfile/types"
 import { IUserProfileViewProps } from "../../screens/userProfile"
 import { styles } from "./styles"
 import { HeaderView } from "./header"
+import { BadgeListView } from "./badges"
+import PictresView from "./pictures"
 
 
 
@@ -38,6 +40,12 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
                 <HeaderView
                     username={this.props.username}
                     profilePicUri={'../../assets/profilePic'}
+                />
+                <BadgeListView
+                    badgeList={this.props.badges}
+                />
+                <PictresView
+                    pictureUriList={['../../assets/profilePic', '../../assets/dunkPic']}
                 />
                 {/* <Text style={{color: 'white'}}>
                     {this.props.username}
