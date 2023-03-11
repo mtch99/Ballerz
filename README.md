@@ -36,7 +36,7 @@ There must be three different games on three different courts, two at the moment
 
 
 - [x] Add UserProfileScreen to Explore Stack
-- [ ] UserProfileScreen
+- [x] UserProfileScreen
     - [x] Fix require cycle error
     - [x] Put back image view in UserProfileListItemView
     - [ ] UserProfileView
@@ -44,12 +44,12 @@ There must be three different games on three different courts, two at the moment
         - [-] Header View
             - [x] init
             - [ ] add stats
-
         - [x] Badges View
         - [x] PicturesView
         - [x] GamesView
-        * [ ] fix screens headers
-        * [ ] inject profilepic uri
+
+* [ ] fix screens headers
+* [ ] inject profilepic uri
 
 
 
