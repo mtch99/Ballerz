@@ -22,7 +22,7 @@ export default class GamesListView extends React.Component<IGamesViewProps> {
         return(
             <View style={{flexWrap:'wrap'}}>
                 <Text style={styles.gamesText}>Partcipations</Text>
-                    {this.gameList.map(game => {
+                    {/* {this.gameList.map(game => {
                         return (<FeedItemView 
                             feedItem={game} 
                             handleBadgeClick={function (feedItem: IFeedItemState): void {
@@ -41,8 +41,8 @@ export default class GamesListView extends React.Component<IGamesViewProps> {
                                 throw new Error("Function not implemented.");
                             } }                            
                         />)
-                    })}
-                    {/* <FlatList
+                    })} */}
+                    <FlatList
                         style={{flexGrow: 1}}
                         data={this.gameList}
                         extraData={this.gameList}
@@ -69,7 +69,7 @@ export default class GamesListView extends React.Component<IGamesViewProps> {
                             )
                         }}
 
-                    /> */}
+                    />
             </View>
         )
     }

@@ -19,7 +19,6 @@ export function ExploreStackNavigator(): JSX.Element {
                 name="SearchStack"
                 options={{
                     headerShown: false,
-                    title: "Personnes",
                 }}
 				component={SearchStackNavigator}
             />
@@ -28,6 +27,7 @@ export function ExploreStackNavigator(): JSX.Element {
                 name='PlaceProfileScreen'
                 component={PlaceProfileScreenWrapper}
                 options={{
+                    // headerShown: false,
                     title: 'Explore'
                 }}
             />
@@ -35,6 +35,7 @@ export function ExploreStackNavigator(): JSX.Element {
                 name="UserProfileScreen"
                 component={UserProfileScreenWrapper}
                 options={{
+                    // headerShown: false,
                     title: 'Explore'
                 }}
             />

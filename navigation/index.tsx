@@ -7,6 +7,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DarkTheme} from '@react-navigation/native';
 import { ColorSchemeName } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 import { RootTabParamList } from './types';
@@ -17,11 +18,13 @@ import { ExploreStackWrapper, FeedStackWrapper, GroupChatStackWrapper } from './
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
-    <NavigationContainer
-      // linking={LinkingConfiguration}
-      theme={DarkTheme}>
-      <RootStackNavigator />
-    </NavigationContainer>
+	<SafeAreaProvider>
+    	<NavigationContainer
+    	  // linking={LinkingConfiguration}
+    	  theme={DarkTheme}>
+    	  <RootStackNavigator />
+    	</NavigationContainer>
+	</SafeAreaProvider>
   );
 }
 
@@ -46,8 +49,8 @@ export function RootStackNavigator(): JSX.Element {
 			<BottomTab.Screen
 				name='ExploreStack'
 				options={{
-					headerShown: true,
-					tabBarLabel: 'Explore',
+					headerShown: false,
+					// tabBarLabel: 'Explore',
 					tabBarIcon: undefined,
 					headerTitle: 'Explore'
 				}}

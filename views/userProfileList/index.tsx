@@ -10,7 +10,6 @@ export class UserProfileListView extends React.Component<IUserProfileListViewPro
 
     constructor(props: IUserProfileListViewProps) {
         super(props)
-        // this.onPressGroupChat.bind(this)
     }
 
 

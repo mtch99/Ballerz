@@ -35,9 +35,6 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
             <ScrollView
                 style={styles.container}
             >
-                {/* <View
-                    style={styles.profilePictureContainer}
-                /> */}
                 <HeaderView
                     username={this.props.username}
                     profilePicUri={'../../assets/profilePic'}
@@ -51,12 +48,6 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
                 <GamesListView
                     gameList={this.props.games}
                 />
-                {/* <Text style={{color: 'white'}}>
-                    {this.props.username}
-                </Text>
-                <Text style={{color: 'white'}}>
-                    {this.props.id}
-                </Text> */}
             </ScrollView>
         )
     }

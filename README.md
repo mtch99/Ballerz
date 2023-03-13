@@ -48,10 +48,10 @@ There must be three different games on three different courts, two at the moment
         - [x] PicturesView
         - [x] GamesView
 
-* [ ] fix screens headers
+* [x] fix screens headers
 * [ ] inject profilepic uri
-
-
+* [ ] Fix userProfileScreen virtualized list in scrollView Error
+    * [ ] Refactor Searchcreen using react native tab view
 
 
 

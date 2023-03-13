@@ -141,6 +141,34 @@ export const initialUserProfiles: IUserProfile[] = [
         games: [],
         friends: [],
     }, 
+    {
+        id: "unknownId",
+        username: "unknownUser",
+        badges: [],
+        games: [],
+        friends: [],
+    }, 
+    {
+        id: "unknownId2",
+        username: "unknownUser",
+        badges: [],
+        games: [],
+        friends: [],
+    }, 
+    {
+        id: "unknownId3",
+        username: "unknownUser",
+        badges: [],
+        games: [],
+        friends: [],
+    }, 
+    {
+        id: "unknownId4",
+        username: "unknownUser",
+        badges: [],
+        games: [],
+        friends: [],
+    }, 
 ]
 
 export function todayWithHour(hour: number): Date {

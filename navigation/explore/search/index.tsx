@@ -1,33 +1,38 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import { SafeAreaView } from "react-native";
 import { SearchStackParamList } from "./types";
 import {PlaceSearchScreenWrapper, UserProfileSearchScreenWrapper } from "./wrappers";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 
-const Stack = createMaterialTopTabNavigator<SearchStackParamList>();
+
+const TopTab = createMaterialTopTabNavigator<SearchStackParamList>();
 
 export function SearchStackNavigator(): JSX.Element {
     const initialRouteName: keyof SearchStackParamList = "UserProfileSearchSreen"
 
     return(
-        <Stack.Navigator
-            initialRouteName={initialRouteName}
-        >
-            <Stack.Screen
-                name="UserProfileSearchSreen"
-                options={{
-                    title: "Personnes",
-                }}
-				component={UserProfileSearchScreenWrapper}
-            />
+        <SafeAreaProvider>
+            <TopTab.Navigator
+                initialRouteName={initialRouteName}
+            >
+                <TopTab.Screen
+                    name="UserProfileSearchSreen"
+                    options={{
+                        title: "Personnes",
+                    }}
+                    component={UserProfileSearchScreenWrapper}
+                />
 
-            <Stack.Screen
-                name="PlaceSearchScreen"
-                options={{
-                    title: "Terrains",
-                }}
-				component={PlaceSearchScreenWrapper}
-            />
-        </Stack.Navigator>
+                <TopTab.Screen
+                    name="PlaceSearchScreen"
+                    options={{
+                        title: "Terrains",
+                    }}
+                    component={PlaceSearchScreenWrapper}
+                />
+            </TopTab.Navigator>
+        </SafeAreaProvider>
     )
 }
