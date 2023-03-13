@@ -3,52 +3,33 @@ The app for finding basketball pickup games
 
 
 ## Branch Purpose
-    I want to see a place profile
+    I want to create a game
 ## Next 
 Test these scenarios:
     `TODO: define next scenarios` 
+    - Places and users search
     - I want to add my favorite playground
         
 There must be three different games on three different courts, two at the moment, and one other on saturday
 
 
 ## How? (technical)
-- [x] Place UseCase
-- [x] Place Model
-    - [x] Add PlaceList and PlaceMap to rootState
 
-- [x] Explore bottom tab
+- [ ] FeedUseCase
+    - [ ] createGame method on usecase and controller
+    - [ ] newGameEventAction on Feed slice
 
-- [x] PlaceListScreen
-
-- [x] Explore Stack... contains placeProfileScreen
-- [x] PlaceProfileScreen
-    * [x] Fix Non serializable values in place profile state
-
-- [x] PlaceProfileView
-    - [x] Place Profile Picture View
-        - [x] Container
-        - [x] Image Background
-
-- [x] UserProfile UseCase
-- [x] UserProfileModel
-    - [x] Add UserProfileMap to rootState
+- [ ] CreateGameStack
+    - [ ] CreateGameScreen
+    - [ ] CreateGameView
 
 
-- [x] Add UserProfileScreen to Explore Stack
-- [x] UserProfileScreen
-    - [x] Fix require cycle error
-    - [x] Put back image view in UserProfileListItemView
-    - [ ] UserProfileView
-        - [x] init
-        - [-] Header View
-            - [x] init
+
+
+
+TODO: Unfinished work on scenario10
+- [ ] UserProfileScreen
             - [ ] add stats
-        - [x] Badges View
-        - [x] PicturesView
-        - [x] GamesView
-
-* [x] fix screens headers
 * [ ] inject profilepic uri
 * [ ] Fix userProfileScreen virtualized list in scrollView Error
     * [ ] Refactor Searchcreen using react native tab view
