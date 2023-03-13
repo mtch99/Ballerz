@@ -1,8 +1,8 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks";
-import { IFeed, IFeedItem } from "../../../../use-cases/types";
+import { IFeed, IFeedItem, IUserProfile, IUserProfileData } from "../../../../use-cases/types";
 import { CHECK_IN, COMMENT, NEW_FEED, selectFeed } from "../slice";
-import { IFeedItemState, IFeedState } from "../slice/interface";
+import { IFeedItemState, IFeedState} from "../slice/interface";
 import { useSelector } from "react-redux";
 import { AppDispatch } from "../../../store";
 import { ICheckInActionPayload, ICommentActionPayload, INewFeedActionPayload } from "../slice/actions";
@@ -36,7 +36,7 @@ export const createFeedModel = (input: IFeedModelInput): IFeedModel => {
 }
 
 
-class FeedModelAdapter {
+export class FeedModelAdapter {
     static parseNewFeedEventPayload(payload: IFeed): INewFeedActionPayload {
         const feed: IFeedItemState[] = []
         payload.forEach((feedItem) => {
@@ -62,6 +62,12 @@ class FeedModelAdapter {
             itemId: payload.feedItemId,
             author: payload.comment.author,
             text: payload.comment.text
+        }
+    }
+
+    static parseUserProfileData(userProfile: IUserProfile): IUserProfileData {
+        return {
+            ...userProfile
         }
     }
 }

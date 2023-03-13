@@ -7,21 +7,24 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DarkTheme} from '@react-navigation/native';
 import { ColorSchemeName } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 import { RootTabParamList } from './types';
-import { FeedStackWrapper, GroupChatStackWrapper } from './wrappers';
+import { ExploreStackWrapper, FeedStackWrapper, GroupChatStackWrapper } from './wrappers';
 
 // import LinkingConfiguration from './LinkingConfiguration';
 
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
-    <NavigationContainer
-      // linking={LinkingConfiguration}
-      theme={DarkTheme}>
-      <RootStackNavigator />
-    </NavigationContainer>
+	<SafeAreaProvider>
+    	<NavigationContainer
+    	  // linking={LinkingConfiguration}
+    	  theme={DarkTheme}>
+    	  <RootStackNavigator />
+    	</NavigationContainer>
+	</SafeAreaProvider>
   );
 }
 
@@ -30,7 +33,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
  * A root stack navigator is often used for displaying modals on top of all other content.
  * https://reactnavigation.org/docs/modal
  */
-const Stack = createBottomTabNavigator<RootTabParamList>();
+const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 //TODO: Tab bar icon 
 
@@ -39,31 +42,40 @@ export function RootStackNavigator(): JSX.Element {
 	const _initialRouteName: keyof RootTabParamList = 'FeedStack'
 	
 	  return (
-		<Stack.Navigator
+		<BottomTab.Navigator
 		  initialRouteName={_initialRouteName}
 		>
-			<Stack.Screen
+
+			<BottomTab.Screen
+				name='ExploreStack'
+				options={{
+					headerShown: false,
+					// tabBarLabel: 'Explore',
+					tabBarIcon: undefined,
+					headerTitle: 'Explore'
+				}}
+				component={ExploreStackWrapper}
+			/>
+
+			<BottomTab.Screen
 				name='FeedStack'
 				options={{
 					headerShown: false,
-					// headerTitle: 'Ballerz',
 					tabBarLabel: 'Games',
 					tabBarIcon: undefined
 				}}
 				component={FeedStackWrapper}
 			/>
 
-			<Stack.Screen
+			<BottomTab.Screen
 				name='GroupChatStack'
 				options={{
 					headerShown: false,
 					tabBarLabel: 'Groupes',
-					tabBarIcon: undefined
+					tabBarIcon: undefined,
 				}}
 				component={GroupChatStackWrapper}
 			/>
-		</Stack.Navigator>
+		</BottomTab.Navigator>
 	  )
 }
-  
-

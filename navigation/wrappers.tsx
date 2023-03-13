@@ -1,7 +1,7 @@
 import React from "react";
 import {FeedStackNavigator} from "./feed"
 import { GroupChatStackNavigator } from "./groupChat";
-import GroupChatProvider from "../controllers/groupChat/provider";
+import { ExploreStackNavigator } from "./explore";
 
 
 export function FeedStackWrapper(){
@@ -12,10 +12,12 @@ export function FeedStackWrapper(){
 
 export function GroupChatStackWrapper(){
     return(
-        <GroupChatProvider
-            navigation={{}}
-        >
-            <GroupChatStackNavigator/>
-        </GroupChatProvider>
+        <GroupChatStackNavigator/>
     )
 }
+
+
+export function ExploreStackWrapper(){
+    return(<ExploreStackNavigator/>)
+}
+

@@ -1,7 +1,7 @@
-import { IUserProfileState } from "../../app/features/userProfile/slice/interface";
+import { IUserProfileDataState } from "./../../app/features/userProfile/userProfileList/slice/interface";
 
 
 export interface IUserProfileItemViewProps {
-    onPressUserProfileItem(): void;
-    userProfile: IUserProfileState
+    onPressUserProfileItem(id: IUserProfileDataState['id']): void;
+    userProfile: IUserProfileDataState
 }

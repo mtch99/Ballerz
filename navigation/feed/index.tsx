@@ -16,9 +16,11 @@ export function FeedStackNavigator(): JSX.Element {
 	const _initialRouteName: keyof FeedStackParamList = 'FeedScreen'
 	const [userProfileSearchButtonState, setUserProfileSearchButtonState] = React.useState(false)
 
+	
 	const _contextValue: IFeedStackNavigationContext = {
 		userProfileSearchButtonState
 	}
+
 
 	const onPressUserProfileSearchButton = () => {
 		if(userProfileSearchButtonState){
@@ -29,7 +31,7 @@ export function FeedStackNavigator(): JSX.Element {
 	}
 
 	
-	  return (
+	return (
 		<FeedStackNavigationContext.Provider
 			value={_contextValue}
 		>
@@ -97,5 +99,5 @@ export function FeedStackNavigator(): JSX.Element {
 
 			</Stack.Navigator>
 		</FeedStackNavigationContext.Provider>
-	  )
+	)
 }

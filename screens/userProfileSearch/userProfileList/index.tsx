@@ -1,6 +1,10 @@
 import React from "react";
 import { View, Text, SafeAreaView, FlatList } from "react-native";
-import {IUserProfileData } from "../../../app/features/feed/slice/interface";
+import { UserProfileListView } from "../../../views/userProfileList";
+import { IUserProfileData } from "../../../use-cases/types";
+import { IUserProfileListScreenNavigationController } from "../../userProfile/interface";
+
+
 
 
 export interface IUserProfileListScreenPropsWithoutNavigation {
@@ -9,7 +13,7 @@ export interface IUserProfileListScreenPropsWithoutNavigation {
 
 
 export interface IUserProfileListScreenProps extends IUserProfileListScreenPropsWithoutNavigation{
-    
+    navigationController: IUserProfileListScreenNavigationController
 }
 
 
@@ -19,24 +23,18 @@ export default class UserProfileListScreen extends React.Component<IUserProfileL
         super(props);
     }
 
+    onPressUserProfile(id: string){
+        this.props.navigationController.goToUserProfile(id)
+    }
+
 
     render(): React.ReactNode {
         return(
             <SafeAreaView>
                 {this.props.userProfileList.length > 0?(
-                    <FlatList
-                        data={this.props.userProfileList}
-                        renderItem={({item, index}) =>{
-                            return(
-                                <View style={{borderBottomColor:"#657786", borderBottomWidth:3, marginTop: 4}}>
-                                    <Text
-                                        style={{color:"#F5F8FA", fontSize:26}}
-                                    >
-                                        {item.username}
-                                    </Text>
-                                </View>
-                            )
-                        }}
+                    <UserProfileListView
+                        userProfileList={{items: this.props.userProfileList}}
+                        onPressUserProfile={this.onPressUserProfile}
                     />
 
                 ):(

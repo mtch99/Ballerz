@@ -1,12 +1,13 @@
+import { IGame } from "./../../types";
 import { fivePlayerGameBadges } from "../../data/badge";
 import { IFeedItem } from "../../types"
-import initialUserProfiles from "../../data/userProfile"
+import initialUserProfileData from "../../data/userProfile"
 
 /**
  * @param hour
  * @returns a date corresponding to the current day at the hour passed as parameter
  */
- function todayWithHour(hour: number): Date {
+export function todayWithHour(hour: number): Date {
 
     const date = new Date()
     date.setHours(hour)
@@ -14,22 +15,89 @@ import initialUserProfiles from "../../data/userProfile"
     return date
 }
 
+export const initialGames: IGame[] = [
+    {
+        id: "sevenPlayerGameId",
+        badges: fivePlayerGameBadges,
+        startingTime: todayWithHour(17),
+        endingTime: todayWithHour(21),
+        attendants: initialUserProfileData,
+        friendsThere: initialUserProfileData.slice(0, 2),
+        comments: [
+            {
+                id:"firstTestCommentId",
+                author: initialUserProfileData[0],
+                text: "5v5 tout-terrain ce soir 🔥"
+            }
+        ],
+        place: {
+            id: "LimoilouId",
+            name: "La cité Limoilou",
+            address: "355 boulevard des ballerz"
+        },
+    },
+
+    {
+        id: "sevenPlayerGameId23",
+        startingTime: todayWithHour(17),
+        endingTime: todayWithHour(21),
+        attendants: initialUserProfileData,
+        badges: [],
+        friendsThere: [],
+        comments: [],
+        place: {
+            id: "LimoilouId",
+            name: "La cité Limoilou",
+            address: "355 boulevard des ballerz"
+        },
+    },
+
+    {
+        id: "twoPlayersGameId",
+        startingTime: todayWithHour(17),
+        endingTime: todayWithHour(21),
+        attendants: initialUserProfileData.slice(0, 2),
+        badges: fivePlayerGameBadges,
+        friendsThere: [],
+        comments: [],
+        place: {
+            id: "LimoilouId",
+            name: "La cité Limoilou",
+            address: "355 boulevard des ballerz"
+        },
+    },
+
+    // {
+    //     id: "noPlayersGameId",
+    //     place: {
+    //         id: "VictoriaId",
+    //         name: "Parc Victoria"
+    //     },
+    //     startingTime: todayWithHour(17),
+    //     endingTime: todayWithHour(21),
+    //     attendants: [],
+    //     badges: [],
+    //     friendsThere: []
+    // },
+]
+
 const initialFeed: IFeedItem[] = [
     {
         id: "sevenPlayerGameId",
         badges: fivePlayerGameBadges,
         place: {
             id: "ByfarId",
-            name: "ByFar centre sportif"
+            name: "ByFar centre sportif",
+            address: "355 boulevard des ballerz"
         },
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
-        attendants: initialUserProfiles,
-        friendsThere: initialUserProfiles.slice(0, 2),
+        attendants: initialUserProfileData,
+        friendsThere: initialUserProfileData.slice(0, 2),
         comments: [
             {
                 id:"firstTestCommentId",
-                author: initialUserProfiles[0],
+                author: initialUserProfileData[0],
                 text: "5v5 tout-terrain ce soir 🔥"
             }
         ],
@@ -39,11 +107,12 @@ const initialFeed: IFeedItem[] = [
         id: "sevenPlayerGameId23",
         place: {
             id: "PepsId",
-            name: "Peps de l'université Laval"
+            name: "Peps de l'université Laval",
+            address: "355 boulevard des ballerz"
         },
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
-        attendants: initialUserProfiles,
+        attendants: initialUserProfileData,
         badges: [],
         friendsThere: [],
         comments: [],
@@ -53,11 +122,12 @@ const initialFeed: IFeedItem[] = [
         id: "twoPlayersGameId",
         place: {
             id: "LimoilouId",
-            name: "La cité Limoilou"
+            name: "La cité Limoilou",
+            address: "355 boulevard des ballerz"
         },
         startingTime: todayWithHour(17),
         endingTime: todayWithHour(21),
-        attendants: initialUserProfiles.slice(0, 2),
+        attendants: initialUserProfileData.slice(0, 2),
         badges: fivePlayerGameBadges,
         friendsThere: [],
         comments: [],
