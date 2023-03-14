@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { CreateGameStackNavigationProp, CreateGameStackParamList } from "./types";
-import {SelectPlaceScreenWrapper } from "./wrappers";
+import {SelectPlaceScreenWrapper, SelectTimeSlotScreenWrapper } from "./wrappers";
 import { HeaderBackButton } from '@react-navigation/elements';
 ;
 import React from "react";
@@ -40,6 +40,14 @@ export function CreateGameStackNavigator(): JSX.Element {
 				}}
 				component={SelectPlaceScreenWrapper}
 			/>	
+
+			<Stack.Screen
+				name="SelectTimeSlot"
+				options={{
+					headerTitle: "Choisissez votre horaire"
+				}}
+				component={SelectTimeSlotScreenWrapper}
+			/>
 		</Stack.Navigator>
 	)
 }

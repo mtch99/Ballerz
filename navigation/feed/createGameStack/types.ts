@@ -1,3 +1,4 @@
+import { ISelectTimeSlotScreenPropsWithoutNavigation } from "./../../../screens/createGame/selectTimeSlot/index";
 import { IPlaceListScreenProps, IPlaceListScreenPropsWithoutNavigation } from "./../../../screens/placeList/index";
 
 /**
@@ -20,6 +21,7 @@ declare global {
 
 export type CreateGameStackParamList = {
 	SelectPlace: IPlaceListScreenPropsWithoutNavigation
+	SelectTimeSlot: ISelectTimeSlotScreenPropsWithoutNavigation
 };
 
 
