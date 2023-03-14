@@ -16,8 +16,9 @@ There must be three different games on three different courts, two at the moment
 ## How? (technical)
 
 - [ ] FeedUseCase
-    - [ ] createGame method on usecase and controller
-    - [ ] newGameEventAction on Feed slice
+    - [x] createGame method on usecase and controller
+    - [x] newGameEventAction on Feed slice
+    - [ ] Test
 
 - [ ] CreateGameStack
     - [ ] CreateGameScreen

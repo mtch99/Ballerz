@@ -4,5 +4,6 @@ export default interface IFeedController {
     getFeed: IFeedUseCase['getFeed']
     checkIn(payload: ICheckinEventPayload): Promise<boolean>
     feed: IFeedState
+    createGame(input: IFeedUseCase['createGame']['arguments']): void
 }
 

@@ -16,6 +16,10 @@ export class FeedController implements IFeedController {
         this.feedUseCase = new FeedUseCase(feedModel)
         this.feed = feedState
     }
+    
+    createGame(input: IFeedUseCase['createGame']['arguments']): void {
+        this.feedUseCase.createGame(input)
+    }
 
 
     async getFeed(): Promise<IFeedItem[]>{
