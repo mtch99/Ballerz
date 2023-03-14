@@ -34,6 +34,7 @@ export const createFeedModel = (input: IFeedModelInput): IFeedModel => {
         },
         newGameEventHandler(payload) {
             const addItemActionPayload: IAddItemActionPayload = FeedModelAdapter.parseFeedItem(payload)
+            console.error(`Add item Action trigered with payload: ${JSON.stringify(addItemActionPayload)}`)
             input.dispatchFunc(ADD_ITEM(addItemActionPayload))
         },
     }

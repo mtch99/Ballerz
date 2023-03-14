@@ -15,15 +15,15 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 
-- [ ] FeedUseCase
+- [x] FeedUseCase
     - [x] createGame method on usecase and controller
     - [x] newGameEventAction on Feed slice
-    - [ ] Test
-        - [ ] Left Header button in feedScreen
-            - [ ] The createGameMethod is imported from the feed controller of the app context
-            - [ ] SetDate to now by default
-            - [ ] Validate feature by viewing the feed update with a new element
-            - [ ] The new element must come on top of the list
+    - [x] Test
+        - [x] Left Header button in feedScreen
+            - [x] The createGameMethod is imported from the feed controller of the app context
+            - [x] SetDate to now by default
+            - [x] Validate feature by viewing the feed update with a new element
+            - [x] The new element must come on top of the list
 
 
 

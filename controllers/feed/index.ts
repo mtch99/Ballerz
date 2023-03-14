@@ -1,4 +1,4 @@
-import { ICheckinEventPayload, ICommentInput } from "./../../use-cases/feed/interface";
+import { ICheckinEventPayload, ICommentInput, ICreateGameInput, ICreateGameOutput } from "./../../use-cases/feed/interface";
 import { IFeed, IFeedItem, IUserProfileData } from "../../use-cases/types";
 import { FeedUseCase } from "../../use-cases/feed"
 import IFeedModel, { IFeedEventObserver, IFeedUseCase } from "../../use-cases/feed/interface";
@@ -17,8 +17,9 @@ export class FeedController implements IFeedController {
         this.feed = feedState
     }
     
-    createGame(input: IFeedUseCase['createGame']['arguments']): void {
-        this.feedUseCase.createGame(input)
+    async createGame(input: ICreateGameInput): Promise<ICreateGameOutput>{
+        const result = await this.feedUseCase.createGame(input)
+        return result
     }
 
 

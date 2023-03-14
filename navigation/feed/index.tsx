@@ -5,6 +5,7 @@ import { Button, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/AntDesign';
 import React from "react";
 import { FeedStackNavigationContext, IFeedStackNavigationContext } from "./context";
+import LeftHeader from "./components/LeftHeader";
 
 
 
@@ -42,8 +43,9 @@ export function FeedStackNavigator(): JSX.Element {
 				<Stack.Screen
 					name='FeedScreen'
 					options={{
-					headerShown: true,
-					headerTitle: 'Ballerz'
+						headerShown: true,
+						headerTitle: 'Ballerz',
+						headerLeft: () => (<LeftHeader></LeftHeader>)
 					}}
 					component={FeedScreenWrapper}
 				/>	
