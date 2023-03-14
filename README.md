@@ -33,14 +33,13 @@ There must be three different games on three different courts, two at the moment
             - [x] Abstract onPressPlaceItemMethod
         * [x] Implement concrete children SearchPlaceScreen and SelectPlaceScreen
     - [ ] SelectTimeSlotScreen
+        - [ ] Define and implement interface ISelectTimeSlotScreen
+        - [ ] define ISelectTimeSlotViewProps
+        - [ ] Implement SelectTimeSlotView
      
 
 
-
-
-
-
-TODO: Unfinished work on scenario10
+TODO: scenario10
 - [ ] UserProfileScreen
             - [ ] add stats
 * [ ] inject profilepic uri
