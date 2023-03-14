@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import React from "react";
 import { FeedStackNavigationContext, IFeedStackNavigationContext } from "./context";
 import LeftHeader from "./components/LeftHeader";
+import { CreateGameStackNavigator } from "./createGameStack";
 
 
 
@@ -37,7 +38,7 @@ export function FeedStackNavigator(): JSX.Element {
 			value={_contextValue}
 		>
 			<Stack.Navigator
-			initialRouteName={_initialRouteName}
+				initialRouteName={_initialRouteName}
 			>
 	
 				<Stack.Screen
@@ -97,6 +98,14 @@ export function FeedStackNavigator(): JSX.Element {
 						)
 					}}
 					component={UserProfileSearchScreenWrapper}
+				/>
+
+				<Stack.Screen
+					name="CreateGameStack"
+					options={{
+						headerShown: false
+					}}
+					component={CreateGameStackNavigator}
 				/>
 
 			</Stack.Navigator>

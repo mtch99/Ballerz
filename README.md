@@ -32,6 +32,7 @@ There must be three different games on three different courts, two at the moment
         * [x] Change Place List Screen to a generic abstract class
             - [x] Abstract onPressPlaceItemMethod
         * [x] Implement concrete children SearchPlaceScreen and SelectPlaceScreen
+    - [ ] SelectTimeSlotScreen
      
 
 

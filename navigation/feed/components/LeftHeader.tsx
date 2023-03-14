@@ -1,8 +1,10 @@
-import React, { Context } from "react";
+import React, { Context, useContext, useEffect } from "react";
 import IFeedController from "../../../controllers/feed/interface";
 import { ICreateGameInput } from "../../../use-cases/feed/interface";
 import { Text, TouchableOpacity } from "react-native";
 import { AppContext, IAppContext } from "../../../controllers/provider";
+import { FeedStackNavigationProp, FeedStackScreenProps } from "../types";
+import { useNavigation } from "@react-navigation/native";
 
 
 export interface IGameCreator {
@@ -12,33 +14,29 @@ export interface IGameCreator {
 
 
 
-export default class LeftHeader extends React.Component implements IGameCreator {
+export default function LeftHeader(){
 
 
-    static contextType: Context<IAppContext> = AppContext
-    context: IAppContext = {} as IAppContext
-    feedController: IFeedController = {} as IFeedController
+    const navigation = useNavigation() as FeedStackNavigationProp<'FeedScreen'>
+    const context = useContext(AppContext)
+    const feedController: IFeedController = context.feedController
 
 
-    componentDidMount(): void {
-        this.feedController = this.context.feedController
+    const createGame = (): void => {
+        // const input: ICreateGameInput = {
+        //     placeId: "",
+        //     userProfileId: "",
+        //     startingTime: new Date(),
+        //     endingTime: new Date()
+        // }
+        // this.feedController.createGame(input)
+        navigation.navigate('CreateGameStack', {})
     }
 
-    createGame(): void {
-        const input: ICreateGameInput = {
-            placeId: "",
-            userProfileId: "",
-            startingTime: new Date(),
-            endingTime: new Date()
-        }
-        this.feedController.createGame(input)
-    }
-
-    render(): React.ReactNode {
         return (
             <TouchableOpacity
                 onPress={() => {
-                    this.createGame()
+                    createGame()
                 }}
             >
                 <Text
@@ -51,6 +49,5 @@ export default class LeftHeader extends React.Component implements IGameCreator 
                 </Text>
             </TouchableOpacity>
         )
-    }
     
 }
