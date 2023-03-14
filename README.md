@@ -28,8 +28,10 @@ There must be three different games on three different courts, two at the moment
 
 
 - [ ] CreateGameStack
-    - [ ] CreateGameScreen
-    - [ ] CreateGameView
+    - [x] CreateGameScreen
+        * [x] Change Place List Screen to a generic abstract class
+            - [x] Abstract onPressPlaeItemMethod
+        * [x] Implement concrete children SearchPlaceScreen and SelectPlaceScreen 
 
 
 

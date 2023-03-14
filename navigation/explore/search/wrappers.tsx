@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import PlaceListScreen from "../../../screens/placeList";
+import PlaceSearchScreen from "../../../screens/placeList";
 import { IPlaceSearchScreenNavigationController } from "../../../screens/placeList/interface";
 import UserProfileSearchScreen from "../../../screens/userProfileSearch";
 import { ExploreStackNavigationProp, ExploreStackScreenProps } from "../types";
@@ -34,7 +34,7 @@ export function PlaceSearchScreenWrapper(){
         },
     }
 
-    return <PlaceListScreen navigationController={navigationController}/>
+    return <PlaceSearchScreen navigationController={navigationController}/>
 }
 
 

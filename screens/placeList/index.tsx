@@ -2,10 +2,10 @@
 
 import React from "react";
 import { View, Text, SafeAreaView, FlatList } from "react-native";
-import { IPlaceData } from "../../app/features/feed/slice/interface";
 import { IPlaceSearchScreenNavigationController } from "./interface";
 import { AppContext, IAppContext } from "../../controllers/provider";
 import PlaceListView from "../../views/place/placeList";
+import { IPlaceListItemState } from "../../app/features/place/types";
 
 
 
@@ -14,16 +14,16 @@ export interface IPlaceListScreenPropsWithoutNavigation {
 }
 
 
-export interface IPlaceListScreenProps extends IPlaceListScreenPropsWithoutNavigation{
-    navigationController: IPlaceSearchScreenNavigationController
+export interface IPlaceListScreenProps<T> extends IPlaceListScreenPropsWithoutNavigation{
+    navigationController: T
 }
 
 
-export default class PlaceListScreen extends React.Component<IPlaceListScreenProps>{
+export abstract class AbstractPlaceListScreen<T> extends React.Component<IPlaceListScreenProps<T>>{
 
 
-    navigationController: IPlaceSearchScreenNavigationController = this.props.navigationController
-    constructor(props: IPlaceListScreenProps) {
+    navigationController: T = this.props.navigationController
+    constructor(props: IPlaceListScreenProps<T>) {
         super(props);
         console.error(JSON.stringify(props));
         this.onPressPlace = this.onPressPlace.bind(this);
@@ -39,10 +39,7 @@ export default class PlaceListScreen extends React.Component<IPlaceListScreenPro
     }
 
 
-    onPressPlace(id: string){
-        this.navigationController.goToPlaceProfile(id)
-        console.error("TODO: implement navigation to place profile on press place item")
-    }
+    abstract onPressPlace(placeData: IPlaceListItemState): void
 
 
     render(): React.ReactNode {
@@ -56,3 +53,17 @@ export default class PlaceListScreen extends React.Component<IPlaceListScreenPro
         )
     }
 }
+
+
+
+
+export default class PlaceSearchScreen extends AbstractPlaceListScreen<IPlaceSearchScreenNavigationController>{
+    navigationController: IPlaceSearchScreenNavigationController = this.props.navigationController
+    onPressPlace(placeData: IPlaceListItemState){
+        this.navigationController.goToPlaceProfile(placeData.id)
+    }
+}
+
+
+
+
