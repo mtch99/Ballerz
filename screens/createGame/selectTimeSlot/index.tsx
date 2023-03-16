@@ -3,7 +3,8 @@ import { IPlaceData } from "../../../use-cases/types";
 import { ISelectTimeSlotScreen } from "../interface";
 import { ICreateGameInput, ICreateGameOutput } from "../../../use-cases/feed/interface";
 import { AppContext, IAppContext } from "../../../controllers/provider";
-import { View, Text, TouchableOpacity } from "react-native";
+import { SelectTimeSlotView } from "../../../views/selectTimeSlot";
+
 
 
 export interface ISelectTimeSlotScreenPropsWithoutNavigation{
@@ -16,7 +17,9 @@ export interface ISelectTimeSlotScreenProps extends ISelectTimeSlotScreenPropsWi
     navigationController: ISelectTimeSlotScreenNavigationController
 }
 
-export interface ISelectTimeSlotScreenNavigationController extends IGameCreatedEventListener {}
+export interface ISelectTimeSlotScreenNavigationController extends IGameCreatedEventListener {
+	goBack(): void
+}
 export interface IGameCreatedEventListener{
     onGameCreated(): void
 }
@@ -28,6 +31,11 @@ export interface ISelectTimeSlotScreenState{
     endingTime: Date
 }
 
+export interface ITime {
+	hour: number
+	minute: number
+}
+
 
 export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlotScreenProps, ISelectTimeSlotScreenState> implements ISelectTimeSlotScreen{
     
@@ -37,8 +45,15 @@ export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlo
 
     constructor(props: ISelectTimeSlotScreenProps){
         super(props)
-        this.createGame = this.createGame.bind(this)
+		this.__bindMethods()
     }
+
+	private __bindMethods(){
+		this.createGame = this.createGame.bind(this)
+		this.modifyEndingTime = this.modifyEndingTime.bind(this)
+		this.modifyStartingTime = this.modifyStartingTime.bind(this)
+		this.onPressModifyPlace = this.onPressModifyPlace.bind(this)
+	}
 
     state: ISelectTimeSlotScreenState = {
         chosenPlaceId: this.props.chosenPlace.id,
@@ -57,6 +72,32 @@ export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlo
         return this.context.feedController.createGame(input)
     }
 
+	onPressModifyPlace(): void {
+		this.props.navigationController.goBack()
+	}
+
+	modifyStartingTime(startingTime: Date): void {
+		this.setState((prevState) => (
+			{
+				...prevState,
+				startingTime
+			}
+		))
+	}
+
+	modifyEndingTime(endingTime: Date): void {
+		this.setState((prevState) => (
+			{
+				...prevState,
+				endingTime
+			}
+		))
+	}
+
+	// modifyStartingTime(new)
+
+
+
 
     render(): React.ReactNode {
         return(
@@ -65,6 +106,9 @@ export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlo
                 endingTime={this.state.endingTime}
                 placeName={this.state.chosenPlaceName}
                 onPressPlay={this.createGame}
+				onPressModifyPlace={this.onPressModifyPlace}
+				modifyEndingTime={this.modifyEndingTime}
+				modifyStartingTime={this.modifyStartingTime}
             />
         )
     }
@@ -77,26 +121,8 @@ export interface ISelectTimeSlotViewProps{
     startingTime: Date
     endingTime: Date
     placeName: string
-}
-
-
-export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps>{
-
-
-
-    render(): React.ReactNode {
-        return(
-            <View>
-                <Text style={{color: 'white'}}>{this.props.placeName}</Text>
-                <Text style={{color: 'white'}}>{this.props.startingTime.toLocaleString()}</Text>
-                <Text style={{color: 'white'}}>{this.props.endingTime.toLocaleString()}</Text>
-                <TouchableOpacity
-                    onPress={() => {this.props.onPressPlay()}}
-                >
-                    <Text style={{color: 'white', alignSelf: 'center'}}>Jouer</Text>
-                </TouchableOpacity>
-            </View>
-        )
-    }
+	onPressModifyPlace: () => void
+	modifyEndingTime: SelectTimeSlotScreen['modifyEndingTime']
+	modifyStartingTime: SelectTimeSlotScreen['modifyStartingTime']
 }
 

@@ -37,7 +37,20 @@ There must be three different games on three different courts, two at the moment
         - [x] define ISelectTimeSlotViewProps
         - [ ] Implement SelectTimeSlotView
             - [x] Display props
-            - [ ] Copy styles from last beta realease
+            - [x] IState
+            - [x] EditPlaceView
+            - [x] other EditView Props
+                - [x] EditDateViewProps
+                - [x] EditStartingTimeViewProps
+                - [x] EditEndingTimeViewProps
+
+            - [ ] Views
+                - [ ] EditDateView
+                - [ ] EditTimeView
+                - [ ] Confirm Button
+            
+                
+            - [ ] CreateGameButton
      
 
 

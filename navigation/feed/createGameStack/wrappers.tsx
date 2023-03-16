@@ -35,6 +35,9 @@ export function SelectTimeSlotScreenWrapper(props: CreateGameStackScreenProps<'S
     const navigationController: ISelectTimeSlotScreenNavigationController = {
         onGameCreated: function (): void {
             throw new Error("Function not implemented.")
+        },
+        goBack(): void {
+            navigation.goBack()
         }
     }
 
