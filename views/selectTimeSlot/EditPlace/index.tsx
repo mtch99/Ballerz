@@ -1,7 +1,7 @@
 import React from "react";
 import { IEditPlaceViewProps } from "../interface";
 import { StyleSheet, View, Text } from "react-native";
-import ModifyButton from "./modifyButton";
+import ModifyButton from "../modifyButton";
 
 
 export default class EditPlaceView extends React.Component<IEditPlaceViewProps>{
@@ -46,9 +46,9 @@ const styles = StyleSheet.create({
     
     subTitle: {
         fontWeight: "300",
-        fontStyle: "italic",
         fontSize: 20,
         alignSelf: "flex-start",
+        color: "#FFFFFF"
     },
     
     
@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
 
     placeNameText: {
         fontWeight: "bold",
-        maxWidth: "75%"
+        maxWidth: "75%",
+        color: "#969698"
     }
 })

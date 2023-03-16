@@ -7,6 +7,7 @@ import { ISelectTimeSlotViewProps, ITime } from "../../screens/createGame/select
 import { StatusBar } from "expo-status-bar";
 import EditPlaceView from "./EditPlace";
 import { ISelectTimeSlotViewState, IDateTimePickerState, EditState, TimeEditActionType } from "./interface";
+import EditTimeView, { EditDateView, EditEndingTimeView, EditStartingTimeView } from "./EditTime";
 
 
 
@@ -47,11 +48,30 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 		currentEditState: null
 	}
 
+	constructor(props: ISelectTimeSlotViewProps){
+		super(props)
+		this.__bindMethods()
+	}
+
+	private __bindMethods(){
+		this.onCancelTimeEdit = this.onCancelTimeEdit.bind(this)
+		this.onConfirmDateEdit = this.onConfirmDateEdit.bind(this)
+		this.onConfirmEndingTimeEdit = this.onConfirmEndingTimeEdit.bind(this)
+		this.onPressModifyEndingTimeButton = this.onPressModifyEndingTimeButton.bind(this)
+		this.onEndingTimeEdit = this.onEndingTimeEdit?.bind(this)
+		this.onDateEdit = this.onDateEdit?.bind(this)
+		this.onStartingTimeEdit = this.onStartingTimeEdit?.bind(this)
+		this.onPressDateTimePickerConfirm = this.onPressDateTimePickerConfirm.bind(this)
+		this.onConfirmStartingTimeEdit = this.onConfirmStartingTimeEdit.bind(this)
+		this.onPressModifyStartingTimeButton = this.onPressModifyStartingTimeButton.bind(this)
+		this.onPressModifyDateButton = this.onPressModifyDateButton.bind(this)
+	}
+
 
 	onPressModifyDateButton(){
 		const dateTimePickerState: IDateTimePickerState = {
 			isVisible: true,
-			mode: "time",
+			mode: "date",
 		}
 		const currentEditState: EditState = 'DATE'
 		this.setState((prevState) => (
@@ -233,9 +253,10 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 	 * @param date 
 	 */
 	onPressDateTimePickerConfirm: ReactNativeModalDateTimePickerProps['onConfirm'] = (date: Date) => {
+		
 		switch(this.state.currentEditState){
 			case null: 
-				console.warn("Current Edidt state is null. Expected type TimeEditAction instead")
+				console.warn("Current Edit state is null. Expected type TimeEditAction instead")
 				break
 
 			case 'DATE':
@@ -251,6 +272,31 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 				break;
 		}
 		return
+	}
+	
+	dateTimePickerOnChangeHandler: ReactNativeModalDateTimePickerProps['onChange'] = (date: Date) => {
+		switch(this.state.currentEditState){
+			case null: 
+				console.warn("Current Edit state is null. Expected type TimeEditAction instead")
+				break
+
+			case 'DATE':
+				this.onDateEdit?this.onDateEdit(date):(null)
+				break;
+
+			case 'ENDING_TIME':
+				this.onEndingTimeEdit?this.onEndingTimeEdit(date):(null)
+				break;
+
+			case 'STARTING_TIME':
+				this.onStartingTimeEdit?this.onStartingTimeEdit(date):(null)
+				break;
+		}
+	}
+
+	onPressDateTimePickerCancel: ReactNativeModalDateTimePickerProps['onCancel'] = (date) => {
+		this.endEditing()
+		this.hideDateTimePicker()
 	}
 
 	
@@ -289,16 +335,37 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 
             <SafeAreaView style={styles.container}>
                 <DateTimePickerModal
-                  	{...this.state.dateTimePickerState}
-					onConfirm={() => {}}
-					onCancel={() => {}}
-					onChange={(date) => {}}
+					onConfirm={(date) => {this.onPressDateTimePickerConfirm(date)}}
+					onCancel={(date) => {this.onPressDateTimePickerCancel(date)}}
+					onChange={(date) => {
+						this.dateTimePickerOnChangeHandler?
+							this.dateTimePickerOnChangeHandler(date):(null)
+					}}
+					{...this.state.dateTimePickerState}
                 />
 
                 <EditPlaceView
 					placeName={this.props.placeName}
 					onPressModify={this.props.onPressModifyPlace}
                 />
+
+				<EditDateView
+					onPressModify={this.onPressModifyDateButton}
+					{...this.state.editDateViewState}
+				/>
+
+				<EditStartingTimeView
+					onPressModify={this.onPressModifyStartingTimeButton}
+					{...this.state.editStartingTimeViewState}
+				/>
+
+				<EditEndingTimeView
+					onPressModify={this.onPressModifyEndingTimeButton}
+					{...this.state.editEndingTimeViewState}
+				/>
+
+
+
 
                 {/* <View style={styles.subContainer}>
         <Text style={styles.subTitle}>

@@ -45,8 +45,8 @@ There must be three different games on three different courts, two at the moment
                 - [x] EditEndingTimeViewProps
 
             - [ ] Views
-                - [ ] EditDateView
-                - [ ] EditTimeView
+                - [x] EditDateView
+                - [x] EditTimeView
                 - [ ] Confirm Button
             
                 

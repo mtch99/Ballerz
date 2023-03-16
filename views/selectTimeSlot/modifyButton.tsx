@@ -9,7 +9,7 @@ export default function ModifyButton(props: {onPress: () => void}) {
 	return(
         <TouchableOpacity 
           style={styles.modifyButton}
-          onPress={props.onPress}
+          onPress={() => {props.onPress()}}
         >
           <Text style={styles.modifyText}>
             modifier
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
       },
     
       modifyText: {
-        color: "blue"
+        color: "#E78B2F"
       },
 })
 

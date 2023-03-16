@@ -31,8 +31,7 @@ export interface IDateTimePickerState {
 }
 
 export interface IEditTimeViewProps extends IEditTimeViewState{
-	onConfirmEditing: (type: TimeEditActionType) => void
-	onTimeChange: (type: TimeEditActionType) => void
+	onPressModify(): void
 }
 
 export interface IEditTimeViewState {
@@ -41,8 +40,7 @@ export interface IEditTimeViewState {
 
 
 export interface IEditDateViewProps extends IEditDateViewState{
-	onConfirmEditing: (type: TimeEditActionType) => void
-	onDateChange: (type: TimeEditActionType) => void
+    onPressModify(): void
 }
 export interface IEditDateViewState{
 	date: Date
