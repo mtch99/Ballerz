@@ -47,6 +47,11 @@ export default class ExploreTabScreen extends React.Component<IExploreTabScreenP
         )
     })
 
+    constructor(props: IExploreTabScreenProps){
+        super(props)
+        this.setIndex = this.setIndex.bind(this)
+    }
+
     setIndex(index: number) {
         this.setState((prevState) => (
             {

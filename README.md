@@ -15,9 +15,9 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 
-- [ ] Refactor Searchcreen using react native tab view
+- [x] Refactor Searchcreen using react native tab view
     - [x] Create ExploreTabScreen
-    - [ ] Replace the esearcheStack by the ExploreTabScreen in ExploreStack
+    - [x] Replace the esearcheStack by the ExploreTabScreen in ExploreStack
 
 
 
