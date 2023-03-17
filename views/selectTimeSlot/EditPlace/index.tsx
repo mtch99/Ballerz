@@ -31,7 +31,6 @@ export default class EditPlaceView extends React.Component<IEditPlaceViewProps>{
 }
 
 
-export interface IModifyButtonProps{onPress: () => void}
 
 
 const styles = StyleSheet.create({

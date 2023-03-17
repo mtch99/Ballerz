@@ -33,6 +33,7 @@ There must be three different games on three different courts, two at the moment
             - [x] Abstract onPressPlaceItemMethod
         * [x] Implement concrete children SearchPlaceScreen and SelectPlaceScreen
     - [ ] SelectTimeSlotScreen
+        TODO: Error management in selectTimeSlotScreen
         - [x] Define and implement interface ISelectTimeSlotScreen
         - [x] define ISelectTimeSlotViewProps
         - [ ] Implement SelectTimeSlotView
@@ -46,11 +47,13 @@ There must be three different games on three different courts, two at the moment
 
             - [ ] Views
                 - [x] EditDateView
-                - [x] EditTimeView
-                - [ ] Confirm Button
-            
+                    - [x] Display date in a friendly string format
+                        - [x] define interface IDateString
+                - [x] EditTimeView            
                 
             - [ ] CreateGameButton
+                - [ ] Test that the use case function is triggerred
+                - [ ] Test that the model function is triggered
      
 
 

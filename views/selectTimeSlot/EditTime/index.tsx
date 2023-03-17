@@ -36,8 +36,60 @@ export default abstract class EditTimeView extends React.Component<IEditTimeView
     }
 }
 
+
+export enum WeekDayEnumFR {
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi",
+    "Samedi",
+    "Dimanche"
+} 
+export type WeekDayFR = keyof typeof WeekDayEnumFR
+
+export enum MonthEnumFr {
+    "Janvier",
+    "Février",
+    "Mars",
+    "Avril",
+    "Mai", 
+    "Juin",
+    "Juillet",
+    "Août",
+    "Septembre",
+    "Octobre",
+    "Novembre",
+    "Decembre"
+}
+export type MonthFR = keyof typeof MonthEnumFr
+interface IDate {
+    weekDay: string
+    monthDay: string
+    month: string 
+    year: string
+}
 export class EditDateView extends React.Component<IEditDateViewProps> {
+
+    private parseDate(date: Date): IDate {
+        const month = MonthEnumFr[date.getMonth()];
+        const weekDay = WeekDayEnumFR[date.getDay()]
+        const year = `${date.getFullYear()}`
+        const monthDay = `${date.getDate()}`
+
+        const result: IDate = {
+            weekDay,
+            monthDay,
+            month,
+            year
+        }
+
+        return result
+    }
+
+
     render(){
+        const date: IDate = this.parseDate(this.props.date)
         return(
             <View style={styles.subContainer}>
                 <Text style={styles.subTitle}>
@@ -48,7 +100,7 @@ export class EditDateView extends React.Component<IEditDateViewProps> {
                     <Text
                         style={styles.dateText}
                     >
-                        {this.props.date.toLocaleString()}
+                        {date.weekDay} {date.monthDay} {date.month} {date.year}
                     </Text>
 
                     <ModifyButton
