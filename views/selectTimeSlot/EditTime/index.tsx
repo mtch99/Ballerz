@@ -11,8 +11,8 @@ export default abstract class EditTimeView extends React.Component<IEditTimeView
 
 
     componentDidUpdate(prevProps: Readonly<IEditTimeViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
-        console.log(`EditTimeView did update: \n \n prevProps: ${JSON.stringify(prevProps)}
-            \n \n newProps: ${JSON.stringify(this.props)}`)
+        // console.log(`EditTimeView did update: \n \n prevProps: ${JSON.stringify(prevProps)}
+        //     \n \n newProps: ${JSON.stringify(this.props)}`)
     }
     
     render(){

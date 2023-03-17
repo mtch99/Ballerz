@@ -20,7 +20,6 @@ export default class PlaceUseCase implements IPlaceUseCase {
     getPlaceProfile(id: string): IPlaceProfile | null {
         for (let placeProfile of initialPlaceProfiles) {
             if(placeProfile.id === id) {
-                console.warn("Found id: " + id)
                 this.observer.onNewPlaceProfile(placeProfile)
                 return placeProfile;
             }

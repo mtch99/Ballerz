@@ -36,7 +36,6 @@ export function UserProfileScreenWrapper(props: ExploreStackScreenProps<'UserPro
 
     const navigationController: IUserProfileListScreenNavigationController = {
         goToUserProfile(id: IUserProfileDataState['id']){
-            console.error("sjsjjsjssj")
             navigation.navigation.push('UserProfileScreen', {userProfileId: id})
         }
     }

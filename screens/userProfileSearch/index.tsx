@@ -26,7 +26,6 @@ export default class UserProfileSearchScreen extends React.Component<IUserProfil
 
 
     onPressUserProfile(id: string): void {
-        console.error("User profile")
         this.props.navigationController.goToUserProfile(id)
     }
 
