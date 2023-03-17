@@ -1,8 +1,9 @@
 import uuid from "react-native-uuid";
 import initialFeed from "./data/feed";
 import initialUserProfileData from "../data/userProfile";
-import { ICheckinEventPayload, ICommentEventPayload, ICommentInput, IFeedEventObserver, IFeedUseCase } from "./interface";
+import { ICheckinEventPayload, ICommentEventPayload, ICommentInput, ICreateGameInput, ICreateGameOutput, IFeedEventObserver, IFeedUseCase } from "./interface";
 import { IComment, IFeed, IFeedItem, IUserProfile, IUserProfileData } from "../types";
+import { initialPlaceProfiles } from "../data/places";
 
 
 export class FeedUseCase implements IFeedUseCase {
@@ -14,6 +15,28 @@ export class FeedUseCase implements IFeedUseCase {
 
     constructor(observer: IFeedEventObserver){
         this.observer = observer;
+    }
+    
+    async createGame(input: ICreateGameInput): Promise<ICreateGameOutput> {
+
+        const result: ICreateGameOutput ={
+            error: false,
+            feedItem: {
+                ...input,
+                place: {
+                    id: input.placeId,
+                    name: `Fake ${initialPlaceProfiles[0].name}`,
+                    address: `Fake ${initialPlaceProfiles[0].address}`
+                },
+                id: uuid.v4().toString(),
+                friendsThere: [],
+                comments: [],
+                badges: [],
+                attendants: []
+            }
+        }
+        this.observer.newGameEventHandler(result.feedItem)
+        return result
     }
 
     async getFeed(): Promise<IFeed> {
@@ -41,4 +64,6 @@ export class FeedUseCase implements IFeedUseCase {
 
         return true
     }
+
+    
 }

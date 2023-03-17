@@ -1,5 +1,4 @@
 import React, { ContextType } from "react";
-import { FeedContext, IFeedContext } from "../../controllers/feed/provider";
 import FeedView from "../../views/feed";
 import { IFeedItemState, IFeedState} from "../../app/features/feed/slice/interface";
 import IFeedScreen, { IFeedScreenNavigationController, IPostCommentInput } from "./interface";
@@ -66,7 +65,8 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
             id: feedItem.id,
             userProfile: {
                 id: "moiId",
-                username: "moi"
+                username: "moi",
+                badges: []
             }
         }).then(res => {
             if(res == true){
@@ -96,7 +96,8 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
             feedItemId: input.feedItem.id,
             author: {
                 id: "moiId",
-                username: "moi"
+                username: "moi",
+                badges: []
             },
             text: input.commentText
         }

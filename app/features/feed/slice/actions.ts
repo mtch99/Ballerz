@@ -1,6 +1,6 @@
-import { IFeedItemState, IFeedState, IUserProfileData } from "./interface";
+import { IFeedItemState, IFeedState,} from "./interface";
 import { PayloadAction, createAction } from "@reduxjs/toolkit";
-import { IFeedItem, IUserProfile } from "../../../../use-cases/types";
+import { IFeedItem, IUserProfile, IUserProfileData } from "../../../../use-cases/types";
 
 
 enum FeedActionType {

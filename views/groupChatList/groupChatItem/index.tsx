@@ -9,7 +9,6 @@ import { IGroupChatMessageState } from "../../../app/features/groupChat/types";
 
 
 
-
 export class GroupChatItemView extends React.Component<IGroupChatItemViewProps>{
 
     groupChatListItem = this.props.groupChatListItem
@@ -28,7 +27,6 @@ export class GroupChatItemView extends React.Component<IGroupChatItemViewProps>{
         return (
             <TouchableOpacity style = {styles.container} onPress={() => {this.onPressGroupChat()}}>
                 <Image style = {styles.groupPhoto} source = {require("../../../assets/profilePic.jpg")}/>
-
 		    	<View style = {styles.infoContainer}>
                     <View style={styles.infoContainerHeader}>
                         <Text style = {styles.groupNameText}>
@@ -42,9 +40,6 @@ export class GroupChatItemView extends React.Component<IGroupChatItemViewProps>{
 		    	</View>
 		    </TouchableOpacity>
         )
-
-        // return tempView({onPressGroupChat: this.onPressGroupChat})
-
     }
 }
 
@@ -103,7 +98,6 @@ const styles = StyleSheet.create({
 		width: 50,
 		height: 50,
 		borderRadius: 1000,
-		backgroundColor: "rgba(0,0,0,0)",
 	},
 
     infoContainer: {

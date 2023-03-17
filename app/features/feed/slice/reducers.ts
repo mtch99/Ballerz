@@ -40,7 +40,7 @@ type FeedReducer<PayloadType> = (state: IFeedState, action: PayloadAction<Payloa
 const addItemReducer: FeedReducer<IAddItemActionPayload> = (state, action) => {
 	return {
 		...state,
-		items: [...state.items, action.payload],
+		items: [action.payload, ...state.items,],
 	};
 }
 

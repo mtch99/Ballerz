@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, TouchableOpacity, View, Image, StyleSheet, FlatList } from "react-native";
 import { IPlaceItemViewProps } from "../interface";
+import { IPlaceListItemState } from "../../../../app/features/place/types";
 
 
 
@@ -8,8 +9,8 @@ export default class PlaceItemView extends React.Component<IPlaceItemViewProps>{
 
     placeData = this.props.placeData
     name = this.placeData.name
-    onPressPlace(id: string){
-        this.props.onPressPlaceItem(id)
+    onPressPlace(item: IPlaceListItemState){
+        this.props.onPressPlaceItem(item)
     }
 
 
@@ -18,7 +19,7 @@ export default class PlaceItemView extends React.Component<IPlaceItemViewProps>{
             return(
                 <TouchableOpacity
                     style={styles.container}
-                    onPress={() => {this.props.onPressPlaceItem(this.placeData.id)}}
+                    onPress={() => {this.props.onPressPlaceItem(this.placeData)}}
                 >
                     <View>
                         <Text

@@ -1,4 +1,4 @@
-import { IPlaceListState } from "../../app/features/place/types";
+import { IPlaceListItemState, IPlaceListState } from "../../app/features/place/types";
 
 
 export interface IPlaceSearchScreen {
@@ -11,5 +11,5 @@ export interface IPlaceSearchScreenNavigationController {
 
 export interface IPlaceListViewProps {
     placeList: IPlaceListState
-    onPressPlaceItem: (id: string) => void
+    onPressPlaceItem: (placeData: IPlaceListItemState) => void
 }

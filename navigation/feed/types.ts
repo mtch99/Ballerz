@@ -1,4 +1,4 @@
-import { IUserProfileSearchScreenProps } from "./../../screens/userProfileSearch/index";
+import { IUserProfileSearchScreenProps, IUserProfileSearchScreenPropsWithoutNavigation } from "./../../screens/userProfileSearch/index";
 
 /**
  * Learn more about using TypeScript with React Navigation:
@@ -27,7 +27,8 @@ export type FeedStackParamList = {
 	BadgeListScreen: IBadgeListScreenPropsWithoutNavigation;
 	AttendantsListScreen: IUserProfileListScreenPropsWithoutNavigation;
 	CommentsScreen: ICommentScreenPropsWithoutNavigation;
-	UserProfileSearch: IUserProfileSearchScreenProps
+	UserProfileSearch: IUserProfileSearchScreenPropsWithoutNavigation
+	CreateGameStack: {}
 };
 
 

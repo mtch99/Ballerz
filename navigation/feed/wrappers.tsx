@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native"
-import { IBadgeData, IUserProfileData } from "../../app/features/feed/slice/interface"
+import { IBadgeData, } from "../../app/features/feed/slice/interface"
 import BadgeListScreen from "../../screens/badgeList"
 import { IFeedScreenPropsWithoutNavigation, FeedScreen } from "../../screens/feed"
 import CommentScreen from "../../screens/feed/Comments"
@@ -9,6 +9,9 @@ import { FeedStackScreenProps, FeedStackNavigationProp } from "./types"
 import { FeedStackMakeFriendsScreen } from "../../screens/userProfileSearch/makeFriends"
 import React from "react"
 import { FeedStackNavigationContext, IFeedStackNavigationContext } from "./context"
+import { IUserProfileSearchScreenProps } from "../../screens/userProfileSearch"
+import { IUserProfileData } from "../../use-cases/types"
+import { IUserProfileListScreenNavigationController } from "../../screens/userProfileSearch/userProfileList/interface"
 
 
 
@@ -68,10 +71,17 @@ export function FeedScreenWrapper(): JSX.Element {
 
 export function AttendantsListScreenWrapper(props: FeedStackScreenProps<'AttendantsListScreen'>){
 
+    const navigation = useNavigation<FeedStackNavigationProp<'AttendantsListScreen'>>
+
+    //TODO: Implement
+    const navigationController: IUserProfileListScreenNavigationController = {
+        goToUserProfile: function (id: string): void {
+            throw new Error("Function not implemented.")
+        }
+    }
     return(
         <AttendantsListScreen
-            userProfileList={props.route.params.userProfileList}
-        />
+            userProfileList={props.route.params.userProfileList} navigationController={navigationController}        />
     )
 }
 
