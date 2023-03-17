@@ -45,13 +45,16 @@ There must be three different games on three different courts, two at the moment
                 - [x] EditStartingTimeViewProps
                 - [x] EditEndingTimeViewProps
 
-            - [ ] Views
+            - [x] Views
                 - [x] EditDateView
                     - [x] Display date in a friendly string format
                         - [x] define interface IDateString
                 - [x] EditTimeView            
                 
             - [ ] CreateGameButton
+                - [ ] Create game Button View
+                    -  [ ] IProps
+                    
                 - [ ] Test that the use case function is triggerred
                 - [ ] Test that the model function is triggered
      
