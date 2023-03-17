@@ -49,14 +49,16 @@ There must be three different games on three different courts, two at the moment
                 - [x] EditDateView
                     - [x] Display date in a friendly string format
                         - [x] define interface IDateString
-                - [x] EditTimeView            
+                - [x] EditTimeView     
+                - [x] Test       
                 
             - [ ] CreateGameButton
-                - [ ] Create game Button View
-                    -  [ ] IProps
-                    
-                - [ ] Test that the use case function is triggerred
-                - [ ] Test that the model function is triggered
+                - [x] Create game Button View
+                    -  [x] IProps
+
+                - [x] Test that the use case function is triggerred
+                - [x] Test that the model function is triggered
+                - [ ] Test that the new game appears on the feed screen
      
 
 

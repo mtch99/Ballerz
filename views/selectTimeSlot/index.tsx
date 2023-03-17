@@ -8,6 +8,7 @@ import { StatusBar } from "expo-status-bar";
 import EditPlaceView from "./EditPlace";
 import { ISelectTimeSlotViewState, IDateTimePickerState, EditState, TimeEditActionType } from "./interface";
 import EditTimeView, { EditDateView, EditEndingTimeView, EditStartingTimeView } from "./EditTime";
+import { ConfirmButton } from "./CreateGameButton";
 
 
 
@@ -164,6 +165,7 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 	}
 
 
+
 	/**
 	 * Update TimeViewState
 	 * 
@@ -171,34 +173,54 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 	 * @param date 
 	 */
 	private onConfirmTimeEdit(type: TimeEditActionType, date: Date): void{
-		const time: ITime = {
+		const timeEdit: ITime = {
 			hour: date.getHours(),
 			minute: date.getMinutes()
 		}
+
+		let newStartingTime: Date;
+		let newEndingTime: Date;
 		switch(type){
 			case 'STARTING_TIME': 
+				// Update EditTimeView
 				this.setState((prevState) => (
 					{
 						...prevState,
 						editStartingTimeViewState: {
-							time
+							time: timeEdit
 						},
 					}
 				))
+
+				// Update SelectTimeSlotScreen StartingTime 
+				newStartingTime = this.state.editDateViewState.date
+				newStartingTime.setHours(date.getHours())
+				newStartingTime.setMinutes(date.getMinutes())
+				this.props.modifyStartingTime(newStartingTime)
 				break;
+
 			
 			case 'ENDING_TIME':
+				// Update EditEntingTimeView
 				this.setState((prevState) => (
 					{
 						...prevState,
 						editEndingTimeViewState: {
-							time
+							time: timeEdit
 						},
 					}
 				))
+
+
+				// Update SelectTimeSlotScreen EndingTime 
+				newEndingTime = this.state.editDateViewState.date
+				newEndingTime.setHours(date.getHours())
+				newEndingTime.setMinutes(date.getMinutes())
+				this.props.modifyEndingTime(newEndingTime)
 				break;
 			
 			case 'DATE':
+				// Update EditDateView
 				this.setState((prevState) => (
 					{
 						...prevState,
@@ -207,6 +229,19 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 						},
 					}
 				))
+
+
+				// Update SelectTimeSlotScreen startingTime
+				newStartingTime = date
+				newStartingTime.setHours(this.state.editStartingTimeViewState.time.hour)
+				newStartingTime.setMinutes(this.state.editStartingTimeViewState.time.minute)
+				this.props.modifyStartingTime(newStartingTime)
+
+				// Update SelectTimeSlotScreen EndingTime
+				newEndingTime = date
+				newEndingTime.setHours(this.state.editEndingTimeViewState.time.hour)
+				newEndingTime.setMinutes(this.state.editEndingTimeViewState.time.minute)
+				this.props.modifyEndingTime(newEndingTime)
 				break;
 		}
 
@@ -218,26 +253,14 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 
 	onConfirmStartingTimeEdit: ReactNativeModalDateTimePickerProps['onConfirm'] = (date: Date) => {
 		this.onConfirmTimeEdit('STARTING_TIME', date)
-		const startingDateTime = this.createDateTime(this.state.editDateViewState.date, this.state.editStartingTimeViewState.time)
-		this.props.modifyStartingTime(startingDateTime)
 	}
 
 	onConfirmEndingTimeEdit: ReactNativeModalDateTimePickerProps['onConfirm'] = (date: Date) => {
 		this.onConfirmTimeEdit('ENDING_TIME', date)
-		const endingDateTime = this.createDateTime(this.state.editDateViewState.date, this.state.editEndingTimeViewState.time)
-
-		// Update the parent screen
-		this.props.modifyEndingTime(endingDateTime)
 	}
 
 	onConfirmDateEdit: ReactNativeModalDateTimePickerProps['onConfirm'] = (date: Date) => {
 		this.onConfirmTimeEdit('DATE', date)
-		const endingDateTime = this.createDateTime(this.state.editDateViewState.date, this.state.editEndingTimeViewState.time)
-		const startingTime = this.createDateTime(this.state.editDateViewState.date, this.state.editStartingTimeViewState.time)
-		
-		// Update the parent screen
-		this.props.modifyEndingTime(endingDateTime)
-		this.props.modifyStartingTime(startingTime)
 	}
 
 	onCancelTimeEdit: ReactNativeModalDateTimePickerProps['onCancel'] = (date: Date) => {
@@ -364,92 +387,9 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 					{...this.state.editEndingTimeViewState}
 				/>
 
-
-
-
-                {/* <View style={styles.subContainer}>
-        <Text style={styles.subTitle}>
-          Jour
-        </Text>
-
-        <View style={styles.dateContainer}>
-            <FullDate
-              style={styles.modifyText}
-              weekDay={myDate.weekDay}
-              monthDay={myDate.monthDay}
-              month={myDate.month}
-              year={myDate.year}
-            />
-            <TouchableOpacity 
-              style={styles.modifyButton}
-              onPress={handleModifyDateButtonPress}
-            >
-              <Text style={styles.modifyText}>
-                modifier
-              </Text>
-            </TouchableOpacity>
-        </View>
-                </View>
-
-                <View style={styles.subContainer}>
-        <Text style={styles.subTitle}>
-          Heure de début
-        </Text>
-
-        <View style={styles.dateContainer}>
-
-            <Time
-              hour = {myArrivingTime.hour}
-              minute = {myArrivingTime.minute}
-            />
-            
-            <ModifyButton
-              onPress = {handleModifyArrivingTimeButtonPress}
-            />
-        </View>
-                </View>
-
-                <View style={styles.subContainer}>
-        <Text style={styles.subTitle}>
-          Heure de fin 
-        </Text>
-
-        <View style={styles.dateContainer}>
-            <Time
-              hour = {myDepartureTime.hour}
-              minute = {myDepartureTime.minute}
-            />
-            <ModifyButton
-              onPress = {handleModifyDepartureTimeButtonPress}
-            />
-        </View>
-                </View>
-
-                <View style={styles.confirmButtonContainer}>
-        <ConfirmButton
-          onPress = {handleConfirmButtonPress}
-        />
-                </View>
-
-                <AwesomeAlert
-                    show={showAlert}
-            showProgress={false}
-            title={`Présence Confirmée`}
-            message={alertMessage}
-            // closeOnTouchOutside={true}
-            closeOnHardwareBackPress={false}
-            // showCancelButton={true}
-            showCancelButton={false}
-            showConfirmButton={true}
-            cancelText="No, cancel"
-            confirmText="OK"
-            confirmButtonColor="blue"
-            onCancelPressed={handleAlertConfirmButtonPress}
-            closeOnTouchOutside={false}
-            onConfirmPressed={() => {
-              hideAlert();
-                    }}
-                /> */}
+				<ConfirmButton
+					onPress={() => {this.props.onPressPlay()}}
+				/>
 
             <StatusBar style="auto" />
          </SafeAreaView>

@@ -73,7 +73,7 @@ export class EditDateView extends React.Component<IEditDateViewProps> {
 
     private parseDate(date: Date): IDate {
         const month = MonthEnumFr[date.getMonth()];
-        const weekDay = WeekDayEnumFR[date.getDay()]
+        const weekDay = WeekDayEnumFR[date.getDay()-1]
         const year = `${date.getFullYear()}`
         const monthDay = `${date.getDate()}`
 

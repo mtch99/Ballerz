@@ -35,6 +35,7 @@ export class FeedUseCase implements IFeedUseCase {
                 attendants: []
             }
         }
+        console.warn('Feed use case CreateGame function')
         this.observer.newGameEventHandler(result.feedItem)
         return result
     }

@@ -51,3 +51,7 @@ export interface IEditPlaceViewProps{
     placeName: string
 }
 
+export interface IConfirmButtonProps{
+	onPress: () => void
+}
+
