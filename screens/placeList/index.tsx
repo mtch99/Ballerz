@@ -65,5 +65,3 @@ export default class PlaceSearchScreen extends AbstractPlaceListScreen<IPlaceSea
 }
 
 
-
-
