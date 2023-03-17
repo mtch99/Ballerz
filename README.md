@@ -16,50 +16,9 @@ There must be three different games on three different courts, two at the moment
 ## How? (technical)
 
 - [x] FeedUseCase
-    - [x] createGame method on usecase and controller
-    - [x] newGameEventAction on Feed slice
-    - [x] Test
-        - [x] Left Header button in feedScreen
-            - [x] The createGameMethod is imported from the feed controller of the app context
-            - [x] SetDate to now by default
-            - [x] Validate feature by viewing the feed update with a new element
-            - [x] The new element must come on top of the list
-
-
-
 - [x] CreateGameStack
-    - [x] SelectGameScreen
-        * [x] Change Place List Screen to a generic abstract class
-            - [x] Abstract onPressPlaceItemMethod
-        * [x] Implement concrete children SearchPlaceScreen and SelectPlaceScreen
-    - [ ] SelectTimeSlotScreen
-        TODO: Error management in selectTimeSlotScreen
-        - [x] Define and implement interface ISelectTimeSlotScreen
-        - [x] define ISelectTimeSlotViewProps
-        - [ ] Implement SelectTimeSlotView
-            - [x] Display props
-            - [x] IState
-            - [x] EditPlaceView
-            - [x] other EditView Props
-                - [x] EditDateViewProps
-                - [x] EditStartingTimeViewProps
-                - [x] EditEndingTimeViewProps
 
-            - [x] Views
-                - [x] EditDateView
-                    - [x] Display date in a friendly string format
-                        - [x] define interface IDateString
-                - [x] EditTimeView     
-                - [x] Test       
-                
-            - [x] CreateGameButton
-                - [x] Create game Button View
-                    -  [x] IProps
-                - [x] Test that the use case function is triggerred
-                - [x] Test that the model function is triggered
-                - [x] Test that the new game appears on the feed screen
-                    - [x] When the game is created, navigate to the feed screen to make sure it is added on top of the list
-     
+* [ ] Refactor Searchcreen using react native tab view
 
 
 TODO: scenario10
@@ -67,7 +26,6 @@ TODO: scenario10
             - [ ] add stats
 * [ ] inject profilepic uri
 * [ ] Fix userProfileScreen virtualized list in scrollView Error
-    * [ ] Refactor Searchcreen using react native tab view
 
 
 
