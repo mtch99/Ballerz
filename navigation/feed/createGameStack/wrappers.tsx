@@ -1,7 +1,9 @@
+import { useNavigation } from "@react-navigation/native"
 import { ISelectPlaceScreenNavigationController, SelectPlaceScreen } from "../../../screens/createGame/selectPlace"
 import SelectTimeSlotScreen, { ISelectTimeSlotScreenNavigationController, ISelectTimeSlotScreenProps } from "../../../screens/createGame/selectTimeSlot"
 import { IPlaceData } from "../../../use-cases/types"
-import { CreateGameStackScreenProps } from "./types"
+import { RootTabNavigationProp } from "../../types"
+import { CreateGameStackScreenProps, SelectTimeSlotScreenNavigationProps } from "./types"
 
 
 
@@ -29,12 +31,12 @@ export function SelectPlaceScreenWrapper(props: CreateGameStackScreenProps<'Sele
 
 export function SelectTimeSlotScreenWrapper(props: CreateGameStackScreenProps<'SelectTimeSlot'>){
 
-    const navigation = props.navigation
+    const navigation = useNavigation<SelectTimeSlotScreenNavigationProps>()
     const route = props.route
 
     const navigationController: ISelectTimeSlotScreenNavigationController = {
         onGameCreated: function (): void {
-            throw new Error("Function not implemented.")
+            navigation.navigate('FeedScreen', {})
         },
         goBack(): void {
             navigation.goBack()

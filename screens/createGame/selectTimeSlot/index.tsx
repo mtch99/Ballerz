@@ -69,8 +69,14 @@ export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlo
             startingTime: this.state.startingTime,
             endingTime: this.state.endingTime
         }
-        console.warn(`Create Game input: ${JSON.stringify(input)}`)
-        return this.context.feedController.createGame(input)
+        const response = await this.context.feedController.createGame(input)
+        if(!response.error){
+            this.props.navigationController.onGameCreated()
+        }
+        else{
+            console.warn("SelectTimeSlotScreen: Error in use controller create game output")
+        }
+        return response
     }
 
 	onPressModifyPlace(): void {
@@ -78,7 +84,6 @@ export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlo
 	}
 
 	modifyStartingTime(startingTime: Date): void {
-        console.error("Modifying startingTime: " + startingTime.toUTCString())
 		this.setState((prevState) => (
 			{
 				...prevState,
@@ -88,7 +93,6 @@ export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlo
 	}
 
 	modifyEndingTime(endingTime: Date): void {
-        console.error("Modifying endingTime: " + endingTime.toUTCString())
 		this.setState((prevState) => (
 			{
 				...prevState,

@@ -27,7 +27,7 @@ There must be three different games on three different courts, two at the moment
 
 
 
-- [ ] CreateGameStack
+- [x] CreateGameStack
     - [x] SelectGameScreen
         * [x] Change Place List Screen to a generic abstract class
             - [x] Abstract onPressPlaceItemMethod
@@ -52,13 +52,13 @@ There must be three different games on three different courts, two at the moment
                 - [x] EditTimeView     
                 - [x] Test       
                 
-            - [ ] CreateGameButton
+            - [x] CreateGameButton
                 - [x] Create game Button View
                     -  [x] IProps
-
                 - [x] Test that the use case function is triggerred
                 - [x] Test that the model function is triggered
-                - [ ] Test that the new game appears on the feed screen
+                - [x] Test that the new game appears on the feed screen
+                    - [x] When the game is created, navigate to the feed screen to make sure it is added on top of the list
      
 
 

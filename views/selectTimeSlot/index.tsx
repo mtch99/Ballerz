@@ -268,8 +268,6 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 		this.endEditing()
 	}
 
-	
-
 
 	/**
 	 * set currenEditState to null before return
