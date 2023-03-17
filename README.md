@@ -1,9 +1,9 @@
 # Ballerz
-The app for finding basketball pickup games
+The app for basketball pickup games
 
 
 ## Branch Purpose
-    I want to create a game
+    fix Explore Stack
 ## Next 
 Test these scenarios:
     `TODO: define next scenarios` 
@@ -15,10 +15,13 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 
-- [x] FeedUseCase
-- [x] CreateGameStack
-
 * [ ] Refactor Searchcreen using react native tab view
+
+
+
+
+
+
 
 
 TODO: scenario10
