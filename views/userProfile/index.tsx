@@ -23,11 +23,11 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
 
 
     componentDidMount(): void {
-        console.warn(`Mounting props: ${JSON.stringify(this.props)}`)
+        // console.warn(`Mounting props: ${JSON.stringify(this.props)}`)
     }
 
     componentDidUpdate(prevProps: Readonly<IUserProfileViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
-        console.warn(`UserProfileView newProps: ${JSON.stringify(this.props)})`)
+        // console.warn(`UserProfileView newProps: ${JSON.stringify(this.props)})`)
     }
 
     render(){

@@ -25,7 +25,6 @@ export abstract class AbstractPlaceListScreen<T> extends React.Component<IPlaceL
     navigationController: T = this.props.navigationController
     constructor(props: IPlaceListScreenProps<T>) {
         super(props);
-        console.error(JSON.stringify(props));
         this.onPressPlace = this.onPressPlace.bind(this);
     }
 
@@ -63,7 +62,5 @@ export default class PlaceSearchScreen extends AbstractPlaceListScreen<IPlaceSea
         this.navigationController.goToPlaceProfile(placeData.id)
     }
 }
-
-
 
 

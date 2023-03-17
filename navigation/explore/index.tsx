@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ExploreStackParamList } from "./types";
-import {PlaceProfileScreenWrapper, UserProfileScreenWrapper} from "./wrappers";
+import {ExploreTabScreenWrapper, PlaceProfileScreenWrapper, UserProfileScreenWrapper} from "./wrappers";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { BaseStackNavigator } from "../base";
 import { SearchStackNavigator } from "./search";
@@ -18,9 +18,11 @@ export function ExploreStackNavigator(): JSX.Element {
             <Stack.Screen
                 name="SearchStack"
                 options={{
-                    headerShown: false,
+                    headerShown: true,
+                    headerTitle: "Explore"
                 }}
-				component={SearchStackNavigator}
+				// component={SearchStackNavigator}
+                component={ExploreTabScreenWrapper}
             />
 
             <Stack.Screen

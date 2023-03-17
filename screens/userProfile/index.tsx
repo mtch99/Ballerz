@@ -60,7 +60,6 @@ export class UserProfileScreen extends React.Component<IUserProfileScreenProps, 
                 ...prevState,
                 ...UserProfile
         }})
-        console.warn(`${JSON.stringify(this.state)}`)
     }
 
     viewProps = {...this.state}

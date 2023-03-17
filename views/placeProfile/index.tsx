@@ -18,11 +18,11 @@ export class PlaceProfileView extends React.Component<IPlaceProfileViewProps>{
 
 
     componentDidMount(): void {
-        console.warn(`Mounting props: ${JSON.stringify(this.props)}`)
+        // console.warn(`Mounting props: ${JSON.stringify(this.props)}`)
     }
 
     componentDidUpdate(prevProps: Readonly<IPlaceProfileViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
-        console.warn(`PlaceProfileView newProps: ${JSON.stringify(this.props)})`)
+        // console.warn(`PlaceProfileView newProps: ${JSON.stringify(this.props)})`)
     }
 
     render(): React.ReactNode {
