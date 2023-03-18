@@ -12,7 +12,7 @@ export interface AdditionalUserData {
 
 export interface ISignupResult {
     error: false | ISignupRejection
-    newUserData?: UserData
+    newUserData?: UserBasicData
 }
 
 
@@ -21,7 +21,7 @@ export enum RepoSignupErrorReason {
     SERVER_ERROR="SERVER_ERROR"
 }
 
-export type UserData = {
+export type UserBasicData = {
     email: string,
     additionalUserData?: AdditionalUserData
 }

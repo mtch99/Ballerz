@@ -14,7 +14,7 @@ There must be three different games on three different courts, two at the moment
 
 
 ## How? (technical)
-- [ ] Add AuthUseCase and Auth Model
+- [x] Add AuthUseCase and Auth Model
 - [ ] Define and Implement Signup and Signin Screen
 - [ ] Implement RootStack
 

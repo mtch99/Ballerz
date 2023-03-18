@@ -10,7 +10,7 @@ Amplify.configure(awsmobile);
 export class AuthRepository implements IAuthRepository {
 
     private _currentUser: CognitoUser | null = null;
-    private _currentUserData: struct.UserData | null = null;
+    private _currentUserData: struct.UserBasicData | null = null;
     
 
     
@@ -80,7 +80,7 @@ export class AuthRepository implements IAuthRepository {
     }
 
 
-    async getCurrentUser(): Promise<struct.UserData | null>{
+    async getCurrentUser(): Promise<struct.UserBasicData | null>{
         return this._currentUserData;
     }
 

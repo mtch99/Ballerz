@@ -1,12 +1,12 @@
 import { mock, mockClear } from 'jest-mock-extended';
 import AuthUCI from '../index';
-import IAuthUCI, { IAuthRepository, IAuthEventDispatcher } from '../interface'
+import IAuthUCI, { IAuthRepository, IAuthModel } from '../interface'
 import * as struct from '../types/signup'
 
 
 
 const AuthRepoMock = mock<IAuthRepository>();
-const AuthListenerMock = mock<IAuthEventDispatcher>();
+const AuthListenerMock = mock<IAuthModel>();
 
 
 /**
@@ -55,7 +55,7 @@ describe('AuthUseCaseInteractor signup method ', () => {
                     authUCI.setListener(AuthListenerMock)
                     test('Then NewRegisteredUser Event has been dispatched', async() => {
                         await authUCI.signup(given)
-                        expect(AuthListenerMock.dispatchNewRegisteredUserEvent).toHaveBeenCalledTimes(1)
+                        expect(AuthListenerMock.onNewRegisteredUserEvent).toHaveBeenCalledTimes(1)
                     })
                 })
 
@@ -65,7 +65,7 @@ describe('AuthUseCaseInteractor signup method ', () => {
                     test('Then NewRegisteredUser Event has not been dispatched', async() => {
                         mockClear(AuthListenerMock)
                         await authUCI.signup(given)
-                        expect(AuthListenerMock.dispatchNewRegisteredUserEvent).toHaveBeenCalledTimes(0)
+                        expect(AuthListenerMock.onNewRegisteredUserEvent).toHaveBeenCalledTimes(0)
                     })
                 })
 

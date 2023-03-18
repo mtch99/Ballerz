@@ -14,13 +14,13 @@ export default interface IAuthUCI {
     signup(input: types.ISignupInput): Promise<types.ISignupResult>
     login(signInInput: types.ILoginInput): Promise<types.ILoginResult>
     getLastLoginCreds(): Promise<types.ILoginInput | null>
-    setListener(listener: IAuthEventDispatcher): void
+    setListener(listener: IAuthModel): void
 }
 
 
-export interface IAuthEventDispatcher {
-    dispatchNewRegisteredUserEvent(newUserData: types.ILoginInput): void; 
-    dispatchNewLoggedInUserEvent(userData: types.UserData): void
+export interface IAuthModel {
+    onNewRegisteredUserEvent(newUserData: types.ILoginInput): void; 
+    onhNewLoggedInUserEvent(userData: types.UserBasicData): void
 }
 
 
@@ -28,6 +28,6 @@ export interface IAuthRepository{
     signup(signupCredsInterface: types.ISignupInput): Promise<types.ISignupResult>
     getLastLoginCreds(): Promise<types.ILoginInput | null>
     login(loginCreds: types.ILoginInput): Promise<types.ILoginResult>
-    getCurrentUser(): Promise<types.UserData | null>
+    getCurrentUser(): Promise<types.UserBasicData | null>
     __storeLoginCreds(creds: types.ILoginInput): void
 }

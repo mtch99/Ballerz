@@ -1,6 +1,6 @@
 import { TouchableHighlightBase } from "react-native"
 import {AuthRepository} from "../../repositories/Auth"
-import IAuthUCI, {IAuthEventDispatcher, IAuthRepository} from "./interface"
+import IAuthUCI, {IAuthModel, IAuthRepository} from "./interface"
 import * as types from './types'
 
 
@@ -14,7 +14,7 @@ export default class AuthUCI implements IAuthUCI {
 
     
     private _repo: IAuthRepository;
-    private _listener: IAuthEventDispatcher | undefined = undefined
+    private _listener: IAuthModel | undefined = undefined
 
     constructor(repo: IAuthRepository){
         this._repo = repo
@@ -59,7 +59,7 @@ export default class AuthUCI implements IAuthUCI {
     }
 
 
-    setListener(listener: IAuthEventDispatcher): void {
+    setListener(listener: IAuthModel): void {
         this._listener = listener 
     }
 
@@ -73,14 +73,14 @@ export default class AuthUCI implements IAuthUCI {
                 email: signupInput.email,
                 password: signupInput.password
             };
-            this._listener.dispatchNewRegisteredUserEvent(payload);
+            this._listener.onNewRegisteredUserEvent(payload);
         }
     }
 
 
-    private __emitNewLoggedInUserEvent(userData: types.UserData): void{
+    private __emitNewLoggedInUserEvent(userData: types.UserBasicData): void{
         if(this._listener){
-            this._listener.dispatchNewLoggedInUserEvent(userData);
+            this._listener.onhNewLoggedInUserEvent(userData);
         }
     }
 
