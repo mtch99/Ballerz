@@ -3,7 +3,7 @@ The app for basketball pickup games
 
 
 ## Branch Purpose
-    fix Explore Stack
+    Auth
 ## Next 
 Test these scenarios:
     `TODO: define next scenarios` 
@@ -14,15 +14,9 @@ There must be three different games on three different courts, two at the moment
 
 
 ## How? (technical)
-
-- [x] Refactor Searchcreen using react native tab view
-    - [x] Create ExploreTabScreen
-    - [x] Replace the esearcheStack by the ExploreTabScreen in ExploreStack
-
-
-
-
-
+- [ ] Add AuthUseCase and Auth Model
+- [ ] Define and Implement Signup and Signin Screen
+- [ ] Implement RootStack
 
 
 
