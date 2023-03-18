@@ -3,7 +3,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import FriendsThereView from "./FriendsThere";
 import { ActionsContainer } from "./Actions/actionsContainer";
-import { IUserProfileData } from "../../../../../use-cases/types";
+import { IUserProfileData } from "../../../../../domain/use-cases/types";
 
 
 interface IBottomViewProps{

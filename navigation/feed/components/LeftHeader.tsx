@@ -1,6 +1,6 @@
 import React, { Context, useContext, useEffect } from "react";
 import IFeedController from "../../../controllers/feed/interface";
-import { ICreateGameInput } from "../../../use-cases/feed/interface";
+import { ICreateGameInput } from "../../../domain/use-cases/feed/interface";
 import { Text, TouchableOpacity } from "react-native";
 import { AppContext, IAppContext } from "../../../controllers/provider";
 import { FeedStackNavigationProp, FeedStackScreenProps } from "../types";

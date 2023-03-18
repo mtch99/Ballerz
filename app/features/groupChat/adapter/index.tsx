@@ -1,14 +1,14 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks";
-import { IFeed, IFeedItem } from "../../../../use-cases/types";
+import { IFeed, IFeedItem } from "../../../../domain/use-cases/types";
 import * as GroupChatListSlice from "../groupChatList/slice";
 import * as GroupChatMapSlice from "../groupChatMap/slice"
 import { useSelector } from "react-redux";
 import { AppDispatch } from "../../../store";
 import { INewGroupChatListActionPayload, INewGroupChatMessageActionPayload } from "../groupChatList/slice/actions";
 import { INewGroupChatListActionPayload as INewGroupChatMapMessageActionPayload } from "../groupChatMap/slice/actions";
-import { IGroupChat, IGroupChatList, IGroupChatMessage } from "../../../../use-cases/groupchat/types";
-import { IGroupChatModelEventListener } from "../../../../use-cases/groupchat/interface";
+import { IGroupChat, IGroupChatList, IGroupChatMessage } from "../../../../domain/use-cases/groupchat/types";
+import { IGroupChatModelEventListener } from "../../../../domain/use-cases/groupchat/interface";
 import { IFeedItemState } from "../../feed/slice/interface";
 import { NEW_GROUPCHATLIST } from "../groupChatList/slice";
 import { IGroupChatListItemState, IGroupChatListState, IGroupChatMessageState, IGroupChatState } from "../types";

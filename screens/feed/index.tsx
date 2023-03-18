@@ -4,7 +4,7 @@ import { IFeedItemState, IFeedState} from "../../app/features/feed/slice/interfa
 import IFeedScreen, { IFeedScreenNavigationController, IPostCommentInput } from "./interface";
 import { Modal, View, Text, SafeAreaView, Alert } from "react-native";
 import IFeedController from "../../controllers/feed/interface";
-import { ICommentInput } from "../../use-cases/feed/interface";
+import { ICommentInput } from "../../domain/use-cases/feed/interface";
 import { AppContext, IAppContext } from "../../controllers/provider";
 
 

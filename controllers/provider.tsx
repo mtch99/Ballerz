@@ -9,7 +9,7 @@ import { createUserProfileModel } from "../app/features/userProfile/adapter";
 import UserProfileController from "./userProfile";
 import { IFeedState } from "../app/features/feed/slice/interface";
 import { selectFeed } from "../app/features/feed/slice";
-import IFeedModel from "../use-cases/feed/interface";
+import IFeedModel from "../domain/use-cases/feed/interface";
 import { IGroupChatListState } from "../app/features/groupChat/types";
 import { selectgroupChatModelState } from "../app/features/groupChat/groupChatList/slice";
 import { selectUserProfileListState } from "../app/features/userProfile/userProfileList/slice";

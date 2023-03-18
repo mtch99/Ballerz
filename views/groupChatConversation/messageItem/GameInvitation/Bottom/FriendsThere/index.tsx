@@ -1,7 +1,7 @@
 import styles from "./styles"
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { IUserProfileData } from "../../../../../../use-cases/types";
+import { IUserProfileData } from "../../../../../../domain/use-cases/types";
 
 
 interface IFriendsThereViewProps {

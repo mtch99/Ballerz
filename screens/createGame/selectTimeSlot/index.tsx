@@ -1,7 +1,7 @@
 import React from "react";
-import { IPlaceData } from "../../../use-cases/types";
+import { IPlaceData } from "../../../domain/use-cases/types";
 import { ISelectTimeSlotScreen } from "../interface";
-import { ICreateGameInput, ICreateGameOutput } from "../../../use-cases/feed/interface";
+import { ICreateGameInput, ICreateGameOutput } from "../../../domain/use-cases/feed/interface";
 import { AppContext, IAppContext } from "../../../controllers/provider";
 import { SelectTimeSlotView } from "../../../views/selectTimeSlot";
 

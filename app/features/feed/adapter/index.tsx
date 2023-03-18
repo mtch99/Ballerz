@@ -1,13 +1,13 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks";
-import { IFeed, IFeedItem, IUserProfile, IUserProfileData } from "../../../../use-cases/types";
+import { IFeed, IFeedItem, IUserProfile, IUserProfileData } from "../../../../domain/use-cases/types";
 import { ADD_ITEM, CHECK_IN, COMMENT, NEW_FEED, selectFeed } from "../slice";
 import { IFeedItemState, IFeedState} from "../slice/interface";
 import { useSelector } from "react-redux";
 import { AppDispatch } from "../../../store";
 import { IAddItemActionPayload, ICheckInActionPayload, ICommentActionPayload, INewFeedActionPayload } from "../slice/actions";
 import { feedReducers } from "../slice/reducers";
-import IFeedModel, { ICheckinEventPayload, ICommentEventPayload } from "../../../../use-cases/feed/interface";
+import IFeedModel, { ICheckinEventPayload, ICommentEventPayload } from "../../../../domain/use-cases/feed/interface";
 
 
 

@@ -1,6 +1,6 @@
 import React from "react";
-import { IUserProfileData, IGame, IUserProfile } from "../../../../../use-cases/types";
-import { IUserProfileModelEventListener } from "../../../../../use-cases/userProfile/interface";
+import { IUserProfileData, IGame, IUserProfile } from "../../../../../domain/use-cases/types";
+import { IUserProfileModelEventListener } from "../../../../../domain/use-cases/userProfile/interface";
 import { useAppSelector } from "../../../../hooks";
 import { AppDispatch } from "../../../../store";
 import { IGameState } from "../../../place/types";

@@ -1,5 +1,5 @@
 
-import { IUserProfileData } from "../../../use-cases/types";
+import { IUserProfileData } from "../../../domain/use-cases/types";
 import { IGameState } from "../place/types";
 
 export interface IUserProfileState extends IUserProfileData {

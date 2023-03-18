@@ -1,7 +1,7 @@
 import { IUserProfileModel } from "../../app/features/userProfile/adapter";
 import { IUserProfileListState } from "../../app/features/userProfile/userProfileList/slice/interface";
-import UserProfileUseCase from "../../use-cases/userProfile";
-import { IUserProfileUseCase } from "../../use-cases/userProfile/interface";
+import UserProfileUseCase from "../../domain/use-cases/userProfile";
+import { IUserProfileUseCase } from "../../domain/use-cases/userProfile/interface";
 import { IUserProfileController } from "./interface";
 
 

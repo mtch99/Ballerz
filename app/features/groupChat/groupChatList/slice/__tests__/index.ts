@@ -1,4 +1,4 @@
-import initialGroupChatList from "../../../../../../use-cases/groupchat/data/groupChatList"
+import initialGroupChatList from "../../../../../../domain/use-cases/groupchat/data/groupChatList"
 import { INewGroupChatMessageActionPayload } from "../actions"
 import { IGroupChatListState } from "../interface"
 import groupChatListReducers from "../reducers"

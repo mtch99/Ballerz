@@ -1,4 +1,4 @@
-import { IGame, IPlaceData } from "../../../use-cases/types";
+import { IGame, IPlaceData } from "../../../domain/use-cases/types";
 
 export interface IPlaceModelState{
     PlaceList: IPlaceListState;

@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native"
 import { ISelectPlaceScreenNavigationController, SelectPlaceScreen } from "../../../screens/createGame/selectPlace"
 import SelectTimeSlotScreen, { ISelectTimeSlotScreenNavigationController, ISelectTimeSlotScreenProps } from "../../../screens/createGame/selectTimeSlot"
-import { IPlaceData } from "../../../use-cases/types"
+import { IPlaceData } from "../../../domain/use-cases/types"
 import { RootTabNavigationProp } from "../../types"
 import { CreateGameStackScreenProps, SelectTimeSlotScreenNavigationProps } from "./types"
 

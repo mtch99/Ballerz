@@ -1,9 +1,9 @@
 import React from "react";
 import { IFeedItemState } from "../../../app/features/feed/slice/interface";
 import ICommentsScreen, { ICommentsScreenNavigator } from "./interface";
-import { IComment } from "../../../use-cases/types";
+import { IComment } from "../../../domain/use-cases/types";
 import ICommentsController from "../../../controllers/feed/Comments/interface";
-import { ICommentInput } from "../../../use-cases/feed/interface";
+import { ICommentInput } from "../../../domain/use-cases/feed/interface";
 import { FeedContext, IFeedContext } from "../../../controllers/feed/provider";
 import { Text } from "react-native";
 

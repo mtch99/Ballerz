@@ -1,9 +1,9 @@
 import { IGroupChatModel } from "../../app/features/groupChat/adapter";
 import IGroupChatMapState from "../../app/features/groupChat/groupChatMap/slice/interface";
 import { IGroupChatListState } from "../../app/features/groupChat/types";
-import GroupChatUseCase from "../../use-cases/groupchat";
-import IGroupChatUseCase from "../../use-cases/groupchat/interface";
-import { ISendGroupChatMessageInput } from "../../use-cases/groupchat/types";
+import GroupChatUseCase from "../../domain/use-cases/groupchat";
+import IGroupChatUseCase from "../../domain/use-cases/groupchat/interface";
+import { ISendGroupChatMessageInput } from "../../domain/use-cases/groupchat/types";
 import IGroupChatController from "./interface";
 
 

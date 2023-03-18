@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, SafeAreaView, FlatList } from "react-native";
 import { UserProfileListView } from "../../../views/userProfileList";
-import { IUserProfileData } from "../../../use-cases/types";
+import { IUserProfileData } from "../../../domain/use-cases/types";
 import { IUserProfileListScreenNavigationController } from "../../userProfile/interface";
 
 

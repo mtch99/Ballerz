@@ -1,6 +1,6 @@
 import IGroupChatMapState from "../../app/features/groupChat/groupChatMap/slice/interface";
 import { IGroupChatListState } from "../../app/features/groupChat/types";
-import IGroupChatUseCase from "../../use-cases/groupchat/interface";
+import IGroupChatUseCase from "../../domain/use-cases/groupchat/interface";
 
 
 export default interface IGroupChatController {

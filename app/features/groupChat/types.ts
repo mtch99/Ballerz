@@ -1,4 +1,4 @@
-import { IGroupChat } from "../../../use-cases/groupchat/types";
+import { IGroupChat } from "../../../domain/use-cases/groupchat/types";
 import { IFeedItemState, IUserProfileData } from "../feed/slice/interface";
 
 export interface IGroupChatModelState{

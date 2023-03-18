@@ -1,7 +1,7 @@
-import { ICheckinEventPayload, ICommentInput, ICreateGameInput, ICreateGameOutput } from "./../../use-cases/feed/interface";
-import { IFeed, IFeedItem, IUserProfileData } from "../../use-cases/types";
-import { FeedUseCase } from "../../use-cases/feed"
-import IFeedModel, { IFeedEventObserver, IFeedUseCase } from "../../use-cases/feed/interface";
+import { ICheckinEventPayload, ICommentInput, ICreateGameInput, ICreateGameOutput } from "../../domain/use-cases/feed/interface";
+import { IFeed, IFeedItem, IUserProfileData } from "../../domain/use-cases/types";
+import { FeedUseCase } from "../../domain/use-cases/feed"
+import IFeedModel, { IFeedEventObserver, IFeedUseCase } from "../../domain/use-cases/feed/interface";
 import IFeedController from "./interface";
 import { IFeedState } from "../../app/features/feed/slice/interface";
 

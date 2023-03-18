@@ -1,13 +1,13 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks";
-import { IPlaceModelEventListener } from "../../../../use-cases/place/interface";
-import { IPlaceData, IFeedItem, IGame } from "../../../../use-cases/types";
+import { IPlaceModelEventListener } from "../../../../domain/use-cases/place/interface";
+import { IPlaceData, IFeedItem, IGame } from "../../../../domain/use-cases/types";
 import { AppDispatch } from "../../../store";
 import { IFeedItemState } from "../../feed/slice/interface";
 import { NEW_PLACELIST, PlaceListSlice } from "../placeList/slice";
 import { NEW_PLACEPROFILE, PlaceMapSlice } from "../placeMap/slice";
 import { IPlaceListState, IPlaceMapState, IPlaceListItemState, IGameState } from "../types";
-import { IPlaceProfile } from "../../../../use-cases/place/types";
+import { IPlaceProfile } from "../../../../domain/use-cases/place/types";
 import { INewPlaceProfileActionPayload } from "../placeMap/slice/actions";
 import { INewPlaceListActionPayload } from "../placeList/slice/actions";
 

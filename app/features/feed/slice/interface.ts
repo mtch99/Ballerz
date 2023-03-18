@@ -1,5 +1,5 @@
-import { IBadge, IFeedItem, IPlaceData, IUserProfileData } from "../../../../use-cases/types";
-import { IFeed, IUserProfile } from "../../../../use-cases/types";
+import { IBadge, IFeedItem, IPlaceData, IUserProfileData } from "../../../../domain/use-cases/types";
+import { IFeed, IUserProfile } from "../../../../domain/use-cases/types";
 
 
 export interface IFeedState {

@@ -1,6 +1,6 @@
 import { IPlaceModel } from "../../app/features/place/adapter";
-import PlaceUseCase from "../../use-cases/place";
-import IPlaceUseCase from "../../use-cases/place/interface";
+import PlaceUseCase from "../../domain/use-cases/place";
+import IPlaceUseCase from "../../domain/use-cases/place/interface";
 import IPlaceController from "./interface";
 
 export default class PlaceController implements IPlaceController{
