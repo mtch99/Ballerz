@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, Text, TextInput, TextInputProps, TouchableOpacity, View } from "react-native";
+import { SafeAreaView, Text, TextInput, TextInputProps, TouchableOpacity, View, KeyboardAvoidingView } from "react-native";
 import styles from "./styles";
 import SigninButton from "./signinButton";
 // import { ILastSignupInput } from "../../../../src/App/features/Auth/authSlice";
@@ -52,15 +52,15 @@ export default class SigninScreenView extends React.Component<Props>{
                 <SigninButton
                     onPress={this.props.onPressSignin}
                 />
-                {
-                    this.props.error?(
-                        <Text
-                            style={styles.errorTex}
-                        >
-                            {this.props.error}
-                        </Text>
-                    ):(<></>)
-                }
+                    {
+                        this.props.error?(
+                            <Text
+                                style={styles.errorTex}
+                            >
+                                {this.props.error}
+                            </Text>
+                        ):(<></>)
+                    }
             </SafeAreaView>
         )
     }
@@ -94,7 +94,6 @@ export class EmailInput extends React.Component<TextInputProps> {
 
 export class PasswordInput extends React.Component<TextInputProps> {
 
-    placeholder = "mot de passe"
     
     constructor(props: TextInputProps) {
         super(props)
@@ -104,14 +103,16 @@ export class PasswordInput extends React.Component<TextInputProps> {
         
         const props: TextInputProps = {
             ...this.props,
-            placeholder: this.placeholder
+            placeholder: this.props.placeholder?(this.props.placeholder):("Mot de passe")
         }
         return(
-            <TextInput 
-                {
-                    ...props
-                }
-            />
+            // <KeyboardAvoidingView>
+                <TextInput 
+                    {
+                        ...props
+                    }
+                />
+            // </KeyboardAvoidingView>
         )
     }
 }

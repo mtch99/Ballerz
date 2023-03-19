@@ -2,6 +2,7 @@ import { RootStackNavigationProp } from "./../types";
 import { CompositeNavigationProp, CompositeScreenProps } from "@react-navigation/native";
 import { ISigninScreenPropsWithoutNavigation } from "./../../screens/auth/signIn/interface";
 import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
+import { ISignupScreenPropsWithoutNavigation } from "../../screens/auth/signUp/interface";
 
 declare global {
     namespace ReactNavigation {
@@ -12,6 +13,7 @@ declare global {
 
 export type AuthStackParamList = {
     SigninSreen: ISigninScreenPropsWithoutNavigation
+    SignupScreen: ISignupScreenPropsWithoutNavigation
 };
 
 

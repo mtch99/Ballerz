@@ -193,7 +193,7 @@ class EmailStrategy {
         } else {
             result = {
                 reason: types.EmailValidationRejectionReason.badFormat,
-                description: "Invalid email format"
+                description: "Cet email n'existe pas"
             }
         }
 

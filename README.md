@@ -27,9 +27,9 @@ There must be three different games on three different courts, two at the moment
             - [x] Navigate to the AppStack on sucess
         
     - [ ] Signup Screen
-        - [ ] ISignupScreen interface
-        - [ ] implement SignupScreen
-        - [ ] SignupScreen View with Email and password inputs
+        - [x] ISignupScreen interface
+        - [x] implement SignupScreen
+        - [x] SignupScreen View with Email and password inputs
 
 
 

@@ -2,7 +2,7 @@ import * as struct from "../../domain/use-cases/Auth/types";
 import {CognitoUser} from 'amazon-cognito-identity-js'
 
 
-export default class Adapter {
+export default class SignupAdapter {
 
     // Parse a cignito signup error into a Signup Error
     static parseCognitoSignupError(description: {
@@ -34,9 +34,9 @@ export default class Adapter {
 
 
 
-export class SignupAdapter {
+export class SigninAdapter {
 
-    static parseCognitoSignupError(error: ICognitoSignupError): struct.ILoginRejection{
+    static parseCognitoSigninError(error: ICognitoSignupError): struct.ILoginRejection{
         let result: struct.ILoginRejection;
         switch(error.name){
             case CognitoSignupErrorName['UserNotFoundException']:
@@ -53,7 +53,15 @@ export class SignupAdapter {
                 }
                 break;
             
+                case CognitoSignupErrorName['UsernameExistsException']:
+                    result = {
+                        reason: struct.LoginErrorReason.WRONG_PASSWORD,
+                        description: "Cet a email appartient déjà à un utilisateur",
+                    }
+                    break;
 
+
+            
             default: 
                 result = {
                     reason: struct.LoginErrorReason.UNREGISTERED_EMAIL,
@@ -68,12 +76,11 @@ export class SignupAdapter {
 
 export interface ICognitoSignupError {
     name: string
-
-
 }
 
 
 export enum CognitoSignupErrorName {
     UserNotFoundException="UserNotFoundException",
-    WRONG_EMAIL_OR_PASSWORD="WRONG_EMAIL_OR_PASSWORD"
+    WRONG_EMAIL_OR_PASSWORD="WRONG_EMAIL_OR_PASSWORD",
+    UsernameExistsException="UsernameExistsException"
 }

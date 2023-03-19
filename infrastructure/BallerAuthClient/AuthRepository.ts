@@ -2,7 +2,7 @@ import * as struct from "../../domain/use-cases/Auth/types";
 import { Amplify, Auth } from 'aws-amplify';
 import {CognitoUser} from 'amazon-cognito-identity-js'
 import awsmobile from './aws-exports';
-import Adapter, { SignupAdapter } from './adapter'
+import SignupAdapter, { SigninAdapter } from './adapter'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { IAuthRepository } from "../../domain/use-cases/Auth/interface";
 Amplify.configure(awsmobile);
@@ -49,7 +49,7 @@ export class AuthRepository implements IAuthRepository {
             return result.user
         })
         .catch(message => {
-            const error:struct.ISignupRejection = Adapter.parseCognitoSignupError(message);
+            const error:struct.ISignupRejection = SignupAdapter.parseCognitoSignupError(message);
             result.error = error;
             return null;
         });
@@ -59,7 +59,7 @@ export class AuthRepository implements IAuthRepository {
         }
 
         if(this._currentUser){
-            result.newUserData = Adapter.parseCognitoUser(this._currentUser)
+            result.newUserData = SignupAdapter.parseCognitoUser(this._currentUser)
             this.__storeLoginCreds(creds);
         }
 
@@ -101,7 +101,7 @@ export class AuthRepository implements IAuthRepository {
         })
         .catch((error) => {
             // console.error(JSON.stringify(error));
-            result.error = SignupAdapter.parseCognitoSignupError(error)
+            result.error = SigninAdapter.parseCognitoSigninError(error)
             // result.error = {
             //     reason: struct.LoginErrorReason.WRONG_PASSWORD,
             //     description: error,
@@ -109,7 +109,7 @@ export class AuthRepository implements IAuthRepository {
         })
 
         if(this._currentUser){
-            result.user = Adapter.parseCognitoUser(this._currentUser)
+            result.user = SignupAdapter.parseCognitoUser(this._currentUser)
         }
 
 
@@ -124,7 +124,7 @@ export class AuthRepository implements IAuthRepository {
 
     private __setCurrentUser(user: CognitoUser){
         this._currentUser = user;
-        this._currentUserData = Adapter.parseCognitoUser(this._currentUser)
+        this._currentUserData = SignupAdapter.parseCognitoUser(this._currentUser)
     }
 
 
