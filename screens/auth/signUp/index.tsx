@@ -4,9 +4,10 @@ import { AppContext, IAppContext } from "../../../controllers/provider";
 import IAuthController from "../../../controllers/auth/interface";
 import { ISignupInput, ISignupResult } from "../../../domain/use-cases/Auth/types";
 import { EmailInput, PasswordInput } from "../../../views/auth/signIn";
-import { View, StyleSheet, Text, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback } from "react-native";
+import { View, StyleSheet, Text, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback, Modal } from "react-native";
 import { globalStyles } from "../../../views/styles";
 import SigninButton from "../../../views/auth/signIn/signinButton";
+import ConfirmSignupModal from "./confirmSignupModal";
 
 
 export default class SignupScreen extends React.Component<ISignupScreenProps, ISignupScreenState> implements ISignupScreen{
@@ -16,7 +17,8 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
     state: ISignupScreenState = {
         emailInput: "",
         passwordInput: "",
-        confirmPasswordInput: ""
+        confirmPasswordInput: "",
+        confirmSignupModalVisible: true
     }
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
@@ -56,8 +58,16 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
             }))
             console.warn(`Signup Error: ${JSON.stringify(response.error)}`)
         } else {
-            console.warn(`Signup Success: \n ${JSON.stringify(response.newUserData)} \n ----> Alert Confirmation code entry`)
+            this.displayModal()
+            // console.warn(`Signup Success: \n ${JSON.stringify(response.newUserData)} \n ----> Alert Confirmation code entry`)
         }
+    }
+
+    private displayModal(): void {
+        this.setState((prevState) => ({
+            ...prevState,
+            confirmSignupModalVisible: true
+        }))
     }
 
 
@@ -85,6 +95,7 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
 
     render(): React.ReactNode {
         return(
+            
             <TouchableWithoutFeedback
                 onPress={() => {Keyboard.dismiss()}}
             >
@@ -92,6 +103,9 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
                     style={styles.container}
                     behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 >
+                    <ConfirmSignupModal
+                        visible={this.state.confirmSignupModalVisible}
+                    />
                     <EmailInput
                         style={styles.inputsContainer}
                         onChangeText={(text) => {this.onEmailInputChange(text)}}
@@ -170,4 +184,9 @@ export const styles = StyleSheet.create({
     placeHolderText: {
         color: "grey",
     },
+
+    modalContainer: {
+        alignSelf: "flex-end",
+        height: "65%",
+    }
 })

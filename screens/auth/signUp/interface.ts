@@ -8,6 +8,7 @@ export interface ISignupScreenState {
     emailInput: string
     passwordInput: string
     confirmPasswordInput: string
+    confirmSignupModalVisible: boolean
     error?: string
 }
 
@@ -21,3 +22,8 @@ export interface ISignupScreenNavigationController {
     onSignupSucess(): Promise<void>;
 }
 
+
+
+export interface IConfirmSignupModalViewProps {
+    visible: boolean
+}

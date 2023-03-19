@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, Text, TextInput, TextInputProps, TouchableOpacity, View, KeyboardAvoidingView } from "react-native";
+import { SafeAreaView, Text, TextInput, TextInputProps, TouchableOpacity, View, KeyboardAvoidingView, Modal } from "react-native";
 import styles from "./styles";
 import SigninButton from "./signinButton";
 // import { ILastSignupInput } from "../../../../src/App/features/Auth/authSlice";
