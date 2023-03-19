@@ -1,5 +1,5 @@
 import React from "react";
-import { ILoginInput, ILoginResult } from "../../../domain/use-cases/Auth/types";
+import { ILoginInput, ILoginRejection, ILoginResult } from "../../../domain/use-cases/Auth/types";
 import { ISigninScreen, ISigninScreenProps, ISigninScreenState } from "./interface";
 import { AppContext, IAppContext } from "../../../controllers/provider";
 import IAuthController from "../../../controllers/auth/interface";
@@ -13,8 +13,21 @@ export default class SigninScreen extends React.Component<ISigninScreenProps, IS
     authController: IAuthController = {} as IAuthController;
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
+
+    constructor(props: ISigninScreenProps) {
+        super(props)
+        this.onEmailInputChange = this.onEmailInputChange.bind(this)
+        this.onPasswordInputChange = this.onPasswordInputChange.bind(this)
+        this.signIn = this.signIn.bind(this)
+        this.handleSigninResponse = this.handleSigninResponse.bind(this)
+    }
     
 
+    state: ISigninScreenState = {
+        emailInput: "stephcurry30@gmail.com",
+        passworInput: "stephcurrY30@mailcom",
+        error: undefined
+    }
 
 
     componentDidMount(): void {
@@ -27,9 +40,9 @@ export default class SigninScreen extends React.Component<ISigninScreenProps, IS
             password: this.state.passworInput
         }
         this.authController.login(loginInput).then((response) => {
-            this.handleSigninResponse
+            this.handleSigninResponse(response)
         })
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
 
     onEmailInputChange(emailInput: string){
@@ -47,8 +60,12 @@ export default class SigninScreen extends React.Component<ISigninScreenProps, IS
     }
 
     private handleSigninResponse(response: ILoginResult): void {
-        if(response.error){
-            console.error(`Signin error: ${JSON.stringify(response.error)}`)
+        if(response.error != false){
+            const error: ILoginRejection = response.error
+            this.setState((prevState) => ({
+                ...prevState,
+                error: error.description
+            }))
         }
         else{
             const signinInput = {
@@ -69,6 +86,7 @@ export default class SigninScreen extends React.Component<ISigninScreenProps, IS
                 placeholders={{
                     emailInput: "stephcurry30@ballerz.com"
                 }}
+                onPressSignin={this.signIn}
             />
         )
     }

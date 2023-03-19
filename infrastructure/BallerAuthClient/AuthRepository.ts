@@ -2,10 +2,11 @@ import * as struct from "../../domain/use-cases/Auth/types";
 import { Amplify, Auth } from 'aws-amplify';
 import {CognitoUser} from 'amazon-cognito-identity-js'
 import awsmobile from './aws-exports';
-import Adapter from './adapter'
+import Adapter, { SignupAdapter } from './adapter'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { IAuthRepository } from "../../domain/use-cases/Auth/interface";
 Amplify.configure(awsmobile);
+import {isDevice} from 'expo-device';
 
 export class AuthRepository implements IAuthRepository {
 
@@ -81,15 +82,30 @@ export class AuthRepository implements IAuthRepository {
             error: false,
         }
 
-        await Auth.signIn(creds.email, creds.password)
+        let email: string
+        let password: string
+
+        if(!isDevice){
+            email = "foo@bar.com"
+            password="validpassword1"
+            // password="UknowitsaDummyPassword123"
+        }
+        else{
+            email = creds.email
+            password = creds.password
+        }
+        
+        await Auth.signIn(email, password)
         .then((result: CognitoUser) => {
             this.__setCurrentUser(result)
         })
-        .catch(description => {
-            result.error = {
-                reason: struct.LoginErrorReason.wrongEmailOrPassword,
-                description,
-            }
+        .catch((error) => {
+            // console.error(JSON.stringify(error));
+            result.error = SignupAdapter.parseCognitoSignupError(error)
+            // result.error = {
+            //     reason: struct.LoginErrorReason.WRONG_PASSWORD,
+            //     description: error,
+            // }
         })
 
         if(this._currentUser){
@@ -130,57 +146,5 @@ export class AuthRepository implements IAuthRepository {
     }
 
 
-
-    // async confirmSignup(confirmSignupParams: ConfirmSignupInputInterface): Promise<ConfirmSignupResponseInterface> {
-    //     const result:ConfirmSignupResponseInterface ={
-    //         error: null,
-    //         success: false,
-    //     }
-
-    //     const confirmationCode = confirmSignupParams.confirmationCode
-    //     const username = confirmSignupParams.email
-
-    //     const confirmSignup = await Auth.confirmSignUp(username, confirmationCode).catch(err => {
-    //         result.error = this.parseCognitoConfirmSignupError(err);
-    //         return null
-    //     })
-
-    //     if(confirmSignup){result.success = true}
-
-    //     return result;
-    // }
-    
-    
-
-    // async login(loginCreds: LoginInputInterface): Promise<LoginResponseInterface> {
-    //     const result: LoginResponseInterface = {
-    //         error: null,
-    //     }
-
-    //     const email = loginCreds.email
-    //     const password = loginCreds.password
-
-    //     await Auth.signIn(email, password).catch(err => {
-    //         result.error = this.parseCognitoSignInError(err)
-    //     })
-
-    //     return result
-    // }
-
-
-    // async forgotPassword(email: string): Promise<ForgotPasswordResponseInterface> {
-
-    //     const result:ForgotPasswordResponseInterface = {
-    //         error: null,
-    //         message: "Un lien de revérification vous a été envoyé"
-    //     }
-
-    //     await Auth.forgotPassword(email).catch(err => {
-    //         result.error = this.parseCognitoForgotPasswordErrro(err)
-    //         result.message = result.error.message
-    //     })
-
-    //     return result
-    // }
     
 }

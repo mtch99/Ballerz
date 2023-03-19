@@ -10,23 +10,29 @@ const styles = StyleSheet.create({
         backgroundColor: globalStyles.global.screenBackGroundColor
     },
 
-
     inputsContainer: {
+        // flex: 1,
         marginHorizontal: 35,
         marginTop: 20,
+        width: '80%',
+        height: 40
     },
 
 
     emailInputContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        flex: 1,
-        color: 'white',
+        width: '100%',
         paddingLeft: 15,
         paddingRight: 15,
         borderWidth: 1,
         borderRadius: 30,
-        borderColor: '#dadae8',
+        borderColor: "green",
+        color: "white",
+    },
+
+    errorTex: {
+        color: "white",
     },
 
 })

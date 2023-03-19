@@ -1,6 +1,7 @@
 import React from "react";
 import { SafeAreaView, Text, TextInput, TextInputProps, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
+import SigninButton from "./signinButton";
 // import { ILastSignupInput } from "../../../../src/App/features/Auth/authSlice";
 
 
@@ -13,6 +14,8 @@ export interface Props {
     placeholders: {
         emailInput?: string 
     }
+    onPressSignin(): void
+
 }
 
 
@@ -31,16 +34,30 @@ export default class SigninScreenView extends React.Component<Props>{
             <SafeAreaView style={
                 styles.container
             }>  
-                <EmailInput 
-                    onChangeText={this.props.onEmailInputChange}
-                    placeholder={this.props.placeholders.emailInput}
-                    style={styles.emailInputContainer}
+                <View style={styles.inputsContainer}>
+                    <EmailInput 
+                        onChangeText={this.props.onEmailInputChange}
+                        placeholder={this.props.placeholders.emailInput}
+                        style={styles.emailInputContainer}
+                        placeholderTextColor={"grey"}
+                    />
+                </View>
+                <View style={styles.inputsContainer}>
+                    <PasswordInput 
+                        onChangeText={this.props.onPasswordInputChange}
+                        style={styles.emailInputContainer}
+                        placeholderTextColor={"grey"}
+                    />
+                </View>
+                <SigninButton
+                    onPress={this.props.onPressSignin}
                 />
-                <PasswordInput onChangeText={this.props.onPasswordInputChange}/>
                 {
                     this.props.error?(
-                        <Text>
-                            {JSON.stringify(this.props.error)}
+                        <Text
+                            style={styles.errorTex}
+                        >
+                            {this.props.error}
                         </Text>
                     ):(<></>)
                 }

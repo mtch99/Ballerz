@@ -10,6 +10,7 @@ export default class Adapter {
         name: string
     }): struct.ISignupRejection {
         let errorReason: struct.RepoSignupErrorReason
+        
         if(description.code == 'UsernameExistsException'){
             errorReason = struct.RepoSignupErrorReason.EMAIL_ALREADY_EXISTS
         }else{
@@ -29,27 +30,50 @@ export default class Adapter {
         }
     }
 
+}
 
-    // static parseCognitoConfirmSignupError(message: string): ConfirmSignupErrorInterface{
-    //     return {
-    //         message,
-    //         reason: ConfirmSignupErrorReason.wrongCode
-    //     }
-    // }
 
-    // static parseCognitoSignInError(message: string): struct.LoginError{
-        
-    //     return {
-    //         message,
-    //         reason: LoginErrorReason.wrongPassword
-    //     }
-    // }
 
-    // static parseCognitoForgotPasswordErrro(message: string): struct.ForgotPasswordError{
-        
-    //     return {
-    //         message,
-    //         reason: ForgotPasswordRejectionReason.unregisteredEmail
-    //     }
-    // }
+export class SignupAdapter {
+
+    static parseCognitoSignupError(error: ICognitoSignupError): struct.ILoginRejection{
+        let result: struct.ILoginRejection;
+        switch(error.name){
+            case CognitoSignupErrorName['UserNotFoundException']:
+                result = {
+                    reason: struct.LoginErrorReason.UNREGISTERED_EMAIL,
+                    description: "Cet email n'appartient à aucun untilisateur"
+                }
+                break;
+
+            case CognitoSignupErrorName['WRONG_EMAIL_OR_PASSWORD']:
+                result = {
+                    reason: struct.LoginErrorReason.WRONG_PASSWORD,
+                    description: "Mot de passe incorrect"
+                }
+                break;
+            
+
+            default: 
+                result = {
+                    reason: struct.LoginErrorReason.UNREGISTERED_EMAIL,
+                    description: "Cet email n'appartient à aucun untilisateur"
+                }
+        }
+
+        return result
+    }
+}
+
+
+export interface ICognitoSignupError {
+    name: string
+
+
+}
+
+
+export enum CognitoSignupErrorName {
+    UserNotFoundException="UserNotFoundException",
+    WRONG_EMAIL_OR_PASSWORD="WRONG_EMAIL_OR_PASSWORD"
 }

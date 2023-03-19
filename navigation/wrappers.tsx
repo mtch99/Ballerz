@@ -1,23 +1,21 @@
 import React from "react";
 import {FeedStackNavigator} from "./feed"
-import { GroupChatStackNavigator } from "./groupChat";
 import { ExploreStackNavigator } from "./explore";
+import { AuthStackNavigator } from "./auth";
+import { AppStackNavigator } from "./app";
 
 
-export function FeedStackWrapper(){
+export function AuthStackWrapper(){
     return(
-        <FeedStackNavigator/>
+        <AuthStackNavigator/>
     )
 }
 
-export function GroupChatStackWrapper(){
+export function AppStackWrapper(){
     return(
-        <GroupChatStackNavigator/>
+        <AppStackNavigator/>
     )
 }
 
 
-export function ExploreStackWrapper(){
-    return(<ExploreStackNavigator/>)
-}
 

@@ -20,10 +20,10 @@ There must be three different games on three different courts, two at the moment
         - [x] IAuthRepo
 - [x] Define and implement AuthController
 - [ ] Define and Implement Signup and Signin Screen
-    - [ ] Signin Screen
-        - [ ] Signin View init
-        - [ ] Test by Signing in with foobar
-            - [ ] Navigate to the AppStack on sucess
+    - [x] Signin Screen
+        - [x] Signin View init
+        - [x] Test by Signing in with foobar
+            - [x] Navigate to the AppStack on sucess
 - [ ] Implement RootStack
 
 

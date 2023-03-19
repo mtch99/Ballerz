@@ -19,6 +19,6 @@ export type ILoginRejection = {
 
 
 export enum LoginErrorReason {
-    unregisteredEmail="UNREGISTERED_EMAIL",
-    wrongEmailOrPassword="WRONG_EMAIL_OR_PASSWORD"
+    UNREGISTERED_EMAIL="UNREGISTERED_EMAIL",
+    WRONG_PASSWORD="WRONG_PASSWORD"
 }

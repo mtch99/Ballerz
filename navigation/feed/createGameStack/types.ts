@@ -1,6 +1,5 @@
-import { RootTabNavigationProp } from "./../../types";
 import { ISelectTimeSlotScreenPropsWithoutNavigation } from "./../../../screens/createGame/selectTimeSlot/index";
-import { IPlaceListScreenProps, IPlaceListScreenPropsWithoutNavigation } from "./../../../screens/placeList/index";
+import { IPlaceListScreenPropsWithoutNavigation } from "./../../../screens/placeList/index";
 
 /**
  * Learn more about using TypeScript with React Navigation:
