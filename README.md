@@ -22,9 +22,15 @@ There must be three different games on three different courts, two at the moment
 - [ ] Define and Implement Signup and Signin Screen
     - [x] Signin Screen
         - [x] Signin View init
+        - [x] Implement RootStack
         - [x] Test by Signing in with foobar
             - [x] Navigate to the AppStack on sucess
-- [ ] Implement RootStack
+        
+    - [ ] Signup Screen
+        - [ ] ISignupScreen interface
+        - [ ] implement SignupScreen
+        - [ ] SignupScreen View with Email and password inputs
+
 
 
 

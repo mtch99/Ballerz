@@ -19,6 +19,7 @@ export function SignInScreenWrapper(props: AuthStackScreenProps<'SigninSreen'>){
     const navigationController: ISigninScreenNavigationController = {
         onSigninSuccess: function (signinInput: ILoginInput): void {
             // props.navigation.navigate("", {})
+            // @ts-ignore
             props.navigation.navigate("AppStack", {})
             throw new Error("Function not implemented. Parametrs: \n   " + JSON.stringify(signinInput))
         }
