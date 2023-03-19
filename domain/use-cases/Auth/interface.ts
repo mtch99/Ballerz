@@ -12,6 +12,7 @@ export interface IUserData {
 
 export default interface IAuthUCI {
     signup(input: types.ISignupInput): Promise<types.ISignupResult>
+    confirmSignup(input: types.IConfirmSignupInput): Promise<types.IConfirmSignupResult>
     login(signInInput: types.ILoginInput): Promise<types.ILoginResult>
     getLastLoginCreds(): Promise<types.ILoginInput | null>
     setListener(listener: IAuthModel): void
@@ -25,6 +26,7 @@ export interface IAuthModel {
 
 
 export interface IAuthRepository{
+    confirmSignup(input: types.IConfirmSignupInput): Promise<types.IConfirmSignupResult>
     signup(signupCredsInterface: types.ISignupInput): Promise<types.ISignupResult>
     getLastLoginCreds(): Promise<types.ILoginInput | null>
     login(loginCreds: types.ILoginInput): Promise<types.ILoginResult>

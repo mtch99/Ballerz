@@ -1,6 +1,6 @@
 import { mock, mockClear } from 'jest-mock-extended';
-import * as struct from '../../../domain/use-cases/Auth/types'
-import {AuthRepository} from '../AuthRepository'
+import * as struct  from '../../../domain/use-cases/Auth/types'
+import { AuthRepository } from '../AuthRepository';
 /**
  * Given valid creds
  * When signup called 

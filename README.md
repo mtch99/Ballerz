@@ -15,10 +15,10 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 - [x] Add AuthUseCase and Auth Model
-    * [ ] ConfirmSignup
-        - [ ] IAuthUCI
-        - [ ] IAuthRepo
-- [ ] Define and implement AuthController
+    * [x] ConfirmSignup
+        - [x] IAuthUCI
+        - [x] IAuthRepo
+- [x] Define and implement AuthController
 - [ ] Define and Implement Signup and Signin Screen
 - [ ] Implement RootStack
 

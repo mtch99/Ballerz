@@ -9,6 +9,27 @@ Amplify.configure(awsmobile);
 
 export class AuthRepository implements IAuthRepository {
 
+    async confirmSignup(input: struct.IConfirmSignupInput): Promise<struct.IConfirmSignupResult> {
+        const error: struct.IConfirmSignupResult['error'] = await Auth.confirmSignUp(input.email, input.code, {forceAliasCreation:true})
+        .then(() => {
+            return false as false
+        })
+        .catch(
+            (err) => {
+                const result: struct.IConfirmSignupResult['error'] = {
+                        reason: struct.ConfirmSignupErrorReason.WRONG_CODE,
+                        code: 404
+                }
+                return result
+            }
+        )
+
+        return {
+            error
+        }
+
+    }
+
     private _currentUser: CognitoUser | null = null;
     private _currentUserData: struct.UserBasicData | null = null;
     

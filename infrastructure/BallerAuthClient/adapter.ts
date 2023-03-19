@@ -1,4 +1,4 @@
-import * as struct from "../../domain/UseCases/Auth/types";
+import * as struct from "../../domain/use-cases/Auth/types";
 import {CognitoUser} from 'amazon-cognito-identity-js'
 
 
@@ -23,7 +23,7 @@ export default class Adapter {
         return error;
     }
 
-    static parseCognitoUser(user: CognitoUser): struct.UserData{
+    static parseCognitoUser(user: CognitoUser): struct.UserBasicData{
         return {
             email: user.getUsername()
         }

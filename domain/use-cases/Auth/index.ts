@@ -21,6 +21,11 @@ export default class AuthUCI implements IAuthUCI {
     }
 
 
+    async confirmSignup(input: types.IConfirmSignupInput): Promise<types.IConfirmSignupResult> {
+        return this._repo.confirmSignup(input)
+    }
+
+
     async signup(input: types.ISignupInput): Promise<types.ISignupResult>{
         const {email, password, confirmPassword} = input
 
@@ -200,4 +205,4 @@ class EmailStrategy {
 // TODO: Create Factory for AuthUCI
 
 
-export const interactor = new AuthUCI(new AuthRepository())
+export const authUCI = new AuthUCI(new AuthRepository())
