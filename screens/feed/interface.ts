@@ -1,4 +1,5 @@
-import { IBadgeData, IFeedItemState, IUserProfileData } from "./../../app/features/feed/slice/interface";
+import { IUserProfileData } from "../../domain/use-cases/types";
+import { IBadgeData, IFeedItemState} from "./../../app/features/feed/slice/interface";
 export default interface IFeedScreen {
     navigationController: IFeedScreenNavigationController
     getFeed(): void

@@ -14,12 +14,8 @@ export default class AuthController implements IAuthController {
     }
 
 
-    async login(email: string, password: string): Promise<ILoginResult> {
-        const loginInput: ILoginInput = {
-            email,
-            password
-        }
-        return this.authUci.login(loginInput)
+    async login(input: ILoginInput): Promise<ILoginResult> {
+        return this.authUci.login(input)
     }
     signup(input: ISignupInput): Promise<ISignupResult> {
         return this.authUci.signup(input)
