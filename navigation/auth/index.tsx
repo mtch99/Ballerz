@@ -1,7 +1,7 @@
 import { AuthStackParamList } from "./types";
 // import { PlaceProfileScreenWrapper } from "./wrappers";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { SignInScreenWrapper, SignupScreenWrapper } from "./wrappers";
+import { ConfirmSignupScreenWrapper, SignInScreenWrapper, SignupScreenWrapper } from "./wrappers";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 
@@ -28,6 +28,15 @@ export function AuthStackNavigator(): JSX.Element {
                     title: "Connexion",
                 }}
 				component={SignInScreenWrapper}
+            />
+
+            <Stack.Screen
+                name="ConfirmSignupScreen"
+                options={{
+                    title: "Inscription",
+                    headerBackTitleVisible: false
+                }}
+				component={ConfirmSignupScreenWrapper}
             />
 
         </Stack.Navigator>

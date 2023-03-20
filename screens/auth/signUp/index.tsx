@@ -18,7 +18,7 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
         emailInput: "",
         passwordInput: "",
         confirmPasswordInput: "",
-        confirmSignupModalVisible: true
+        confirmSignupModalVisible: false
     }
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
@@ -29,6 +29,7 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
         this.onPressSignup = this.onPressSignup.bind(this)
         this.onConfirmPasswordInputChange = this.onConfirmPasswordInputChange.bind(this)
         this.onPasswordInputChange = this.onPasswordInputChange.bind(this)
+        this.onPressConfirmationCodeReceived = this.onPressConfirmationCodeReceived.bind(this)
     }
     componentDidMount(): void {
         this.authController = this.context.authController
@@ -46,6 +47,11 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
             this.handleSignupResponse(response)
         })
         // throw new Error("Method not implemented.");
+    }
+
+    onPressConfirmationCodeReceived(): void {
+        this.hideModal()
+        this.props.navigationController.goToConfirmSignup(this.state.emailInput)
     }
 
 
@@ -67,6 +73,13 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
         this.setState((prevState) => ({
             ...prevState,
             confirmSignupModalVisible: true
+        }))
+    }
+
+    private hideModal(): void {
+        this.setState((prevState) =>({
+            ...prevState,
+            confirmSignupModalVisible: false,
         }))
     }
 
@@ -104,6 +117,7 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
                     behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 >
                     <ConfirmSignupModal
+                        onPressCofirmationCodeReceived={this.onPressConfirmationCodeReceived}
                         email={this.state.emailInput}
                         visible={this.state.confirmSignupModalVisible}
                     />

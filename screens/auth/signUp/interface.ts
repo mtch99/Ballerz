@@ -16,10 +16,10 @@ export interface ISignupScreenPropsWithoutNavigation {
 
 }
 export interface ISignupScreenProps extends ISignupScreenPropsWithoutNavigation{
-    // navigationController: ISignupScreenNavigationController
+    navigationController: ISignupScreenNavigationController
 }
 export interface ISignupScreenNavigationController {
-    onSignupSucess(): Promise<void>;
+    goToConfirmSignup(email: string): void;
 }
 
 
@@ -27,4 +27,5 @@ export interface ISignupScreenNavigationController {
 export interface IConfirmSignupModalViewProps {
     visible: boolean
     email: string
+    onPressCofirmationCodeReceived(): void;
 }

@@ -44,7 +44,7 @@ export default class ConfirmSignupModal extends React.Component<IConfirmSignupMo
                         style={styles.codeFoundButtonContainer}
                     >
                         <TouchableOpacity
-                            onPress={() => {console.error("Method not implemented")}}
+                            onPress={() => {this.props.onPressCofirmationCodeReceived()}}
                             style={styles.codeFoundButton}
                         >
                             <Text

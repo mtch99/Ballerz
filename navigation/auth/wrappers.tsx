@@ -1,4 +1,4 @@
-import {useNavigation} from "@react-navigation/native"
+import {NavigatorScreenParams, useNavigation} from "@react-navigation/native"
 import {AuthStackScreenProps} from "./types"
 import React from "react"
 import { ISigninScreenNavigationController } from "../../screens/auth/signIn/interface"
@@ -8,15 +8,18 @@ import { RootTabParamList } from "../app/types"
 import { RootStackNavigationProp } from "../types"
 import { ISignupScreenNavigationController } from "../../screens/auth/signUp/interface"
 import SignupScreen from "../../screens/auth/signUp"
+import ConfirmSignupScreen, { IConfirmSignupScreenNavigationController } from "../../screens/auth/confirmSignup"
 
 export function SignInScreenWrapper(props: AuthStackScreenProps<'SigninSreen'>){
 
     const navigation = useNavigation<RootStackNavigationProp<'AuthStack'>>()
     const navigationController: ISigninScreenNavigationController = {
         onSigninSuccess: function (signinInput: ILoginInput): void {
-            // @ts-ignore
-            props.navigation.navigate("AppStack", {})
-            throw new Error("Function not implemented. Parametrs: \n   " + JSON.stringify(signinInput))
+            //@ts-ignore
+            const params: NavigatorScreenParams<RootTabParamList> = {
+                screen: 'FeedStack',
+            }
+            navigation.navigate("AppStack", params)
         }
     }
 
@@ -34,21 +37,34 @@ export function SignupScreenWrapper(props: AuthStackScreenProps<'SignupScreen'>)
 
     const navigation = useNavigation<RootStackNavigationProp<'AuthStack'>>()
 
-    // const screenParams: NavigatorScreenParams<RootTabParamList> = {
-    //     screen: "FeedStack",
-
-    // }
-    
-    // const navigationController: ISignupScreenNavigationController = {
-    //     onSignupSucess: function (): Promise<void> {
-    //         throw new Error("Function not implemented.")
-    //     }
-    // }
-
+    const navigationController: ISignupScreenNavigationController = {
+        goToConfirmSignup: function (email: string): void {
+            props.navigation.navigate("ConfirmSignupScreen", {email})
+        }
+    }
 
     return(
         <SignupScreen
-            // {...{navigationController}}
+            {...{navigationController}}
+        />
+    )
+}
+
+
+export function ConfirmSignupScreenWrapper(props: AuthStackScreenProps<'ConfirmSignupScreen'>){
+
+    const navigation = useNavigation<RootStackNavigationProp<'AuthStack'>>()
+
+    const navigationController: IConfirmSignupScreenNavigationController = {
+        goToAppStack: function (): void {
+            throw new Error("Function not implemented.")
+        }
+    }
+
+    return(
+        <ConfirmSignupScreen
+            email={props.route.params.email}
+            {...{navigationController}}
         />
     )
 }
