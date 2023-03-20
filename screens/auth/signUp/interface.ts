@@ -26,4 +26,5 @@ export interface ISignupScreenNavigationController {
 
 export interface IConfirmSignupModalViewProps {
     visible: boolean
+    email: string
 }

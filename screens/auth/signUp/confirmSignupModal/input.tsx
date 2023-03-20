@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet, KeyboardAvoidingView } from "react-native";
 
 
 
@@ -7,7 +7,7 @@ export class ConfirmSignupInput extends React.Component {
     
     render(): React.ReactNode {
         return(
-            <View
+            <KeyboardAvoidingView
                 style={styles.container}
             >
                 <View
@@ -44,7 +44,7 @@ export class ConfirmSignupInput extends React.Component {
                         maxLength={1}
                     />
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }

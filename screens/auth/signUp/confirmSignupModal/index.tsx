@@ -2,7 +2,9 @@ import React from "react";
 import { Modal, View, Text, StyleSheet, SafeAreaView } from "react-native";
 import { IConfirmSignupModalViewProps } from "../interface";
 import { ConfirmSignupInput } from "./input";
-
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { globalStyles } from "../../../../views/styles";
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 
 export default class ConfirmSignupModal extends React.Component<IConfirmSignupModalViewProps> {
@@ -24,7 +26,7 @@ export default class ConfirmSignupModal extends React.Component<IConfirmSignupMo
                         <Text
                             style={styles.title}
                         >
-                            Code de confirmation
+                            Confirmez votre inscription
                         </Text>
                     </View>
                     <View
@@ -33,16 +35,36 @@ export default class ConfirmSignupModal extends React.Component<IConfirmSignupMo
                         <Text
                             style={styles.bodyText}
                         >
-                            thftdthdfjyfyf jyvjycjychcjghvc
-                            hgcyjfyjfjyfgjygfukfgkufgukgukgukgugkhgvbhjvjg
-                            jgvjhgvjkghjgvbjkhgbkhgkj,hkugjjuhgkuguikgfiuykfgvyujgv
+                            Un code de confirmation a été envoyé à l'adresse suivante: 
+                            {this.props.email}. 
+                            Verifiez aussi votre boîte de courriers indésirables.
                         </Text>
                     </View>
-                    <ConfirmSignupInput/>
+                    <View
+                        style={styles.codeFoundButtonContainer}
+                    >
+                        <TouchableOpacity
+                            onPress={() => {console.error("Method not implemented")}}
+                            style={styles.codeFoundButton}
+                        >
+                            <Text
+                                style={styles.codeFoundButtonText}
+                            >
+                                J'ai reçu le code
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                 </SafeAreaView>
             </Modal>
         )
     }
+
+    // render() {
+    //     return(
+    //         <AwesomeAlert
+    //         />
+    //     )
+    // }
 }
 
 
@@ -51,6 +73,7 @@ export default class ConfirmSignupModal extends React.Component<IConfirmSignupMo
 const styles = StyleSheet.create({
     container: {
         alignSelf: "flex-end",
+        // justifyContent: "space-around"
         // height: "65%",
     },
     
@@ -70,7 +93,8 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
         marginTop: "100%",
-        flexGrow: 1
+        flexGrow: 1,
+        // justifyContent: "space-around"
     },
 
     
@@ -81,16 +105,37 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 30,
         fontWeight: "500",
-        marginTop: 20
+    },
+
+
+
+    codeFoundButtonContainer: {
+        flexGrow: 1,
+        // alignItems: "center",
+        justifyContent: "flex-end",
+        paddingBottom: 40,
+    },
+
+    codeFoundButton: {
+        // width: "60%",
+        backgroundColor: globalStyles.global.logoColor,
+        borderRadius: 10,
+        padding: 20
+    },
+
+    codeFoundButtonText: {
+        color: 'white',
+        fontWeight: '700'
     },
 
     bodyContainer: {
-        marginHorizontal: 50,
-        marginTop: 5
+        marginTop: 5,
+        marginHorizontal: 10
     },
     
     bodyText: {
-        flexWrap:"wrap",
-        color: "black"
+        // flexWrap:"wrap",
+        color: "black",
+        fontSize: 18
     }
 })

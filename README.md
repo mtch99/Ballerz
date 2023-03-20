@@ -30,7 +30,8 @@ There must be three different games on three different courts, two at the moment
         - [x] ISignupScreen interface
         - [x] implement SignupScreen
         - [x] SignupScreen View with Email and password inputs
-            - [ ] ConfirmSignupModal
+            - [x] ConfirmSignupModal
+            - [ ] ConfirmSignupScreen
 
 
 

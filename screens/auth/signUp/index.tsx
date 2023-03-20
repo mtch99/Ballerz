@@ -104,6 +104,7 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
                     behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 >
                     <ConfirmSignupModal
+                        email={this.state.emailInput}
                         visible={this.state.confirmSignupModalVisible}
                     />
                     <EmailInput
