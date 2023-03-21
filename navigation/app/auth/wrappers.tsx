@@ -1,14 +1,13 @@
 import {NavigatorScreenParams, useNavigation} from "@react-navigation/native"
 import {AuthStackScreenProps} from "./types"
 import React from "react"
-import { ISigninScreenNavigationController } from "../../screens/auth/signIn/interface"
-import { ILoginInput } from "../../domain/use-cases/Auth/types"
-import SigninScreen from "../../screens/auth/signIn"
-import { RootTabParamList } from "../app/types"
-import { RootStackNavigationProp } from "../types"
-import { ISignupScreenNavigationController } from "../../screens/auth/signUp/interface"
-import SignupScreen from "../../screens/auth/signUp"
-import ConfirmSignupScreen, { IConfirmSignupScreenNavigationController } from "../../screens/auth/confirmSignup"
+import { ILoginInput } from "../../../domain/use-cases/Auth/types"
+import ConfirmSignupScreen, { IConfirmSignupScreenNavigationController } from "../../../screens/auth/confirmSignup"
+import SigninScreen from "../../../screens/auth/signIn"
+import { ISigninScreenNavigationController } from "../../../screens/auth/signIn/interface"
+import SignupScreen from "../../../screens/auth/signUp"
+import { ISignupScreenNavigationController } from "../../../screens/auth/signUp/interface"
+import { RootStackNavigationProp } from "../../types"
 
 export function SignInScreenWrapper(props: AuthStackScreenProps<'SigninSreen'>){
 
@@ -16,7 +15,7 @@ export function SignInScreenWrapper(props: AuthStackScreenProps<'SigninSreen'>){
     const navigationController: ISigninScreenNavigationController = {
         onSigninSuccess: function (signinInput: ILoginInput): void {
             //@ts-ignore
-            const params: NavigatorScreenParams<RootTabParamList> = {
+            const params: NavigatorScreenParams<AppTabParamList> = {
                 screen: 'FeedStack',
             }
             navigation.navigate("AppStack", params)

@@ -5,7 +5,7 @@ import { IDefineUsernameInput, IDefineUsernameResult } from '../../../domain/use
 import { DefineUsernameView } from '../../../views/auth/defineUsername';
 
 
-export default class DefineViewScreen extends React.Component<IDefineUsernameScreenProps, IDefineUsernameScreenState> {
+export default class DefineUsernameScreen extends React.Component<IDefineUsernameScreenProps, IDefineUsernameScreenState> {
 
     state: IDefineUsernameScreenState = {
         usernameInput: "",

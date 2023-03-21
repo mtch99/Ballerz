@@ -1,36 +1,31 @@
-
+import { NavigatorScreenParams } from '@react-navigation/native';
+import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { CreateProfileStackParamList } from '../createProfile/types';
+import { AppTabParamList } from './appTab/types';
 
 /**
  * Learn more about using TypeScript with React Navigation:
  * https://reactnavigation.org/docs/typescript/
  */
 
-import { BottomTabScreenProps, BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import { NavigatorScreenParams } from "@react-navigation/native";
-import { ExploreStackParamList } from "../explore/types";
-import { FeedStackParamList } from "../feed/types";
-import { GroupChatStackParamList } from "../groupChat/types";
-
 
  
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootTabParamList {}
+    interface AppParamList extends AppStackParamList {}
   }
 }
 
-export type RootTabParamList = {
-	ExploreStack: NavigatorScreenParams<ExploreStackParamList>
-	FeedStack: NavigatorScreenParams<FeedStackParamList>
-	GroupChatStack: NavigatorScreenParams<GroupChatStackParamList>
+export type AppStackParamList = {
+	CreateProfile: NavigatorScreenParams<CreateProfileStackParamList>
+  	AppTab:  NavigatorScreenParams<AppTabParamList>
 };
 
 
-export type RootTabScreenProps<Screen extends keyof RootTabParamList> = BottomTabScreenProps<
-	RootTabParamList,
+export type AppStackScreenProps<Screen extends keyof AppStackParamList> = StackScreenProps<
+	AppStackParamList,
 	Screen
 >;
 
-export type RootTabNavigationProp<Screen extends keyof RootTabParamList> = BottomTabNavigationProp<RootTabParamList, Screen>
-
-
+export type AppStackNavigationProp<Screen extends keyof AppStackParamList> = NativeStackNavigationProp<AppStackParamList, Screen>

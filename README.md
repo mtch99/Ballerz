@@ -37,8 +37,9 @@ There must be three different games on three different courts, two at the moment
     * [x] UserProfile and auth usecases update to support cache auth creds storage and defineUsername
 
     - [ ] Create Profile
-        - [ ] CreateProfileStack
-            - [ ] Define Username screen
+        - [x] CreateProfileStack
+            - [x] init Define Username screen
+        - [ ] UserProfileRepo
 
 
 

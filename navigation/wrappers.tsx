@@ -1,8 +1,9 @@
 import React from "react";
 import {FeedStackNavigator} from "./feed"
 import { ExploreStackNavigator } from "./explore";
-import { AuthStackNavigator } from "./auth";
-import { AppStackNavigator } from "./app";
+import { AppTab } from "./app/appTab";
+import { AuthStackNavigator } from "./app/auth";
+import { AppStack } from "./app";
 
 
 export function AuthStackWrapper(){
@@ -13,7 +14,7 @@ export function AuthStackWrapper(){
 
 export function AppStackWrapper(){
     return(
-        <AppStackNavigator/>
+        <AppStack/>
     )
 }
 

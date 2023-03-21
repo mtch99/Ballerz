@@ -1,81 +1,47 @@
-/**
- * If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
- * https://reactnavigation.org/docs/getting-started
- *
- */
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DarkTheme} from '@react-navigation/native';
-import { ColorSchemeName } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AppStackParamList } from "./types";
+// import { PlaceProfileScreenWrapper } from "./wrappers";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { AppContext } from "../../controllers/provider";
+import React from "react";
+import { CreateProfileScreenWrapper, AppTabWrapper } from "./wrappers";
 
 
-import { RootTabParamList } from './types';
-import { ExploreStackWrapper, FeedStackWrapper, GroupChatStackWrapper } from './wrappers';
 
-// import LinkingConfiguration from './LinkingConfiguration';
+const Stack = createNativeStackNavigator<AppStackParamList>();
 
+export function AppStack(): JSX.Element {
+    const {authState} = React.useContext(AppContext)
+    let initialRouteName: keyof AppStackParamList = 'AppTab'
 
-// export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
-//   return (
-// 	<SafeAreaProvider>
-//     	<NavigationContainer
-//     	  // linking={LinkingConfiguration}
-//     	  theme={DarkTheme}>
-//     	  <AppStackNavigator />
-//     	</NavigationContainer>
-// 	</SafeAreaProvider>
-//   );
-// }
+    if(!authState.user?.profile){
+        initialRouteName = 'CreateProfile'
+    }
 
+    else {
 
-/**
- * A root stack navigator is often used for displaying modals on top of all other content.
- * https://reactnavigation.org/docs/modal
- */
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+    }
 
-//TODO: Tab bar icon 
+    return(
+        <Stack.Navigator
+            initialRouteName={initialRouteName}
+        >
+            <Stack.Screen
+                name="CreateProfile"
+                options={{
+                    headerShown: false
+                }}
+                component={CreateProfileScreenWrapper}
+            />
 
-export function AppStackNavigator(): JSX.Element {
+            <Stack.Screen
+                name="AppTab"
+                options={{
+                    headerShown: false,
+                }}
+				component={AppTabWrapper}
+            />
 
-	const _initialRouteName: keyof RootTabParamList = 'FeedStack'
-	
-	  return (
-		<BottomTab.Navigator
-		  initialRouteName={_initialRouteName}
-		>
-
-			<BottomTab.Screen
-				name='ExploreStack'
-				options={{
-					headerShown: false,
-					// tabBarLabel: 'Explore',
-					tabBarIcon: undefined,
-					headerTitle: 'Explore'
-				}}
-				component={ExploreStackWrapper}
-			/>
-
-			<BottomTab.Screen
-				name='FeedStack'
-				options={{
-					headerShown: false,
-					tabBarLabel: 'Games',
-					tabBarIcon: undefined
-				}}
-				component={FeedStackWrapper}
-			/>
-
-			<BottomTab.Screen
-				name='GroupChatStack'
-				options={{
-					headerShown: false,
-					tabBarLabel: 'Groupes',
-					tabBarIcon: undefined,
-				}}
-				component={GroupChatStackWrapper}
-			/>
-		</BottomTab.Navigator>
-	  )
+        </Stack.Navigator>
+    )
 }

@@ -1,9 +1,11 @@
-import { RootStackNavigationProp } from "./../types";
-import { CompositeNavigationProp, CompositeScreenProps } from "@react-navigation/native";
-import { ISigninScreenPropsWithoutNavigation } from "./../../screens/auth/signIn/interface";
+
+import { CompositeNavigationProp } from "@react-navigation/native";
 import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
-import { ISignupScreenPropsWithoutNavigation } from "../../screens/auth/signUp/interface";
-import { IConfirmSignupScreenPropsWithoutNavigation } from "../../screens/auth/confirmSignup";
+import { IConfirmSignupScreenPropsWithoutNavigation } from "../../../screens/auth/confirmSignup";
+import { ISigninScreenPropsWithoutNavigation } from "../../../screens/auth/signIn/interface";
+import { ISignupScreenPropsWithoutNavigation } from "../../../screens/auth/signUp/interface";
+import { RootStackNavigationProp } from "../../types";
+
 
 declare global {
     namespace ReactNavigation {

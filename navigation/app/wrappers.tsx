@@ -1,24 +1,17 @@
-import React from "react";
-import { ExploreStackNavigator } from "../explore";
-import { FeedStackNavigator } from "../feed";
-import { GroupChatStackNavigator } from "../groupChat";
+import { AppStackScreenProps } from "./types"
+import { CreateProfileStack } from "../createProfile"
+import { AppTab } from "./appTab"
 
 
-
-export function FeedStackWrapper(){
+export function CreateProfileScreenWrapper(props: AppStackScreenProps<'CreateProfile'>){
     return(
-        <FeedStackNavigator/>
-    )
-}
-
-export function GroupChatStackWrapper(){
-    return(
-        <GroupChatStackNavigator/>
+        <CreateProfileStack/>
     )
 }
 
 
-export function ExploreStackWrapper(){
-    return(<ExploreStackNavigator/>)
-}
 
+
+export function AppTabWrapper(){
+    return <AppTab/>
+}
