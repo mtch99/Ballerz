@@ -39,7 +39,11 @@ export function SignupScreenWrapper(props: AuthStackScreenProps<'SignupScreen'>)
 
     const navigationController: ISignupScreenNavigationController = {
         goToConfirmSignup: function (email: string): void {
-            props.navigation.navigate("ConfirmSignupScreen", {email})
+            props.navigation.navigate("ConfirmSignupScreen", { email })
+        },
+        goToApp: function (): void {
+            //@ts-ignore
+            navigation.navigate("AppStack")
         }
     }
 

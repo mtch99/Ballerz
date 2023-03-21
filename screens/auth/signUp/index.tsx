@@ -64,7 +64,8 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
             }))
             console.warn(`Signup Error: ${JSON.stringify(response.error)}`)
         } else {
-            this.displayModal()
+            // this.displayModal()
+            this.props.navigationController.goToApp()
             // console.warn(`Signup Success: \n ${JSON.stringify(response.newUserData)} \n ----> Alert Confirmation code entry`)
         }
     }
@@ -126,17 +127,26 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
                         onChangeText={(text) => {this.onEmailInputChange(text)}}
                         placeholder="Email"
                         placeholderTextColor={styles.placeHolderText.color}
+                        autoCorrect={false}
+                        autoComplete="email"
+                        autoCapitalize="none"
                     />
                     <PasswordInput
                         style={styles.inputsContainer}
                         onChangeText={(text) => {this.onPasswordInputChange(text)}}
                         placeholderTextColor={styles.placeHolderText.color}
+                        secureTextEntry={true}
+                        autoComplete="password-new"
+                        autoCapitalize="none"
                     />
                     <PasswordInput
                         style={styles.inputsContainer}
                         placeholder="Confirmez le mot de passe"
                         onChangeText={(text) => {this.onConfirmPasswordInputChange(text)}}
                         placeholderTextColor={styles.placeHolderText.color}
+                        secureTextEntry= {true}
+                        autoComplete="password-new"
+                        autoCapitalize="none"
                     />
 
 

@@ -1,5 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../../store'
+import { IUserProfile } from '../../../../domain/use-cases/types'
+import { IUserProfileState } from '../../userProfile/types'
+import { ILoginInput } from '../../../../domain/use-cases/Auth/types'
 
 // Define a type for the slice state
 export interface IUserStateProfileData {
@@ -9,7 +12,7 @@ export interface IUserStateProfileData {
 
 export type UserState = {
   email: string,
-  profileData?: IUserStateProfileData
+  profile?: IUserProfileState
 } | undefined
 
 export interface ILastSignupInput {
@@ -19,12 +22,20 @@ export interface ILastSignupInput {
 export type  AuthState = {
   user: UserState
   lastSignupInput: ILastSignupInput
+  lastSigninInput: {
+	email: string,
+	password: string
+  }
 }
 
 // Define the initial state using that type
 const initialState: AuthState = {
 	user: undefined,
-	lastSignupInput: {email: ""}
+	lastSignupInput: {email: ""},
+	lastSigninInput: {
+		email: '',
+		password: ''
+	}
 };
 
 
@@ -36,18 +47,44 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state: AuthState, action: PayloadAction<UserState>) => {
-        state.user = action.payload
+		return {
+			...state,
+			user: action.payload
+		}
     },
-    setLastSignupInput: (state: AuthState, action: PayloadAction<{email: string}>) => {
-		state.lastSignupInput = action.payload
-    }
+
+    setLastSignupInput: (state: AuthState, action: PayloadAction<{email: string, password: string}>) => {
+		return {
+			...state,
+			lastSignupInput: action.payload
+		}
+    },
+
+	setLoginInput: (state: AuthState, action: PayloadAction<ILoginInput>) => {
+		return {
+			...state,
+			lastSigninInput: action.payload
+		}
+    },
+
+	setUserProfile: (state: AuthState, action: PayloadAction<{profile: IUserProfileState}>) => {
+		return {
+			...state,
+			user: {
+				...state.user,
+				email: state.lastSigninInput.email,
+				profile: action.payload.profile
+			}
+		}
+	}
+
   }
 })
 
 
 
 
-export const { setUser, setLastSignupInput } = authSlice.actions
+export const { setUser, setLastSignupInput, setLoginInput } = authSlice.actions
 
 
 // Other code such as selectors can use the imported `RootState` type

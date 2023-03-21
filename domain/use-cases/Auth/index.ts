@@ -1,6 +1,6 @@
 import { TouchableHighlightBase } from "react-native"
 import {AuthRepository} from "../../repositories/Auth"
-import IAuthUCI, {IAuthModel, IAuthRepository} from "./interface"
+import IAuthUCI, {IAuthModel, IAuthRepository, IDefineUsernameInput, IDefineUsernameResult} from "./interface"
 import * as types from './types'
 
 
@@ -12,21 +12,31 @@ import * as types from './types'
  */
 export default class AuthUCI implements IAuthUCI {
 
+    private repo: IAuthRepository = new AuthRepository();
     
-    private _repo: IAuthRepository;
-    private _listener: IAuthModel | undefined = undefined
-
-    constructor(repo: IAuthRepository){
-        this._repo = repo
+    private observer: IAuthModel
+    
+    constructor(observer: IAuthModel){
+        this.observer = observer;
     }
+    
 
+    defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult> {
+        throw new Error("Method not implemented.");
+    }
+    
 
+    setListener(listener: IAuthModel): void {
+        throw new Error("Method not implemented.");
+    }
+    
     async confirmSignup(input: types.IConfirmSignupInput): Promise<types.IConfirmSignupResult> {
-        return this._repo.confirmSignup(input)
+        return this.repo.confirmSignup(input);
     }
 
 
     async signup(input: types.ISignupInput): Promise<types.ISignupResult>{
+        this.observer.onNewSignupAttempt(input)
         const {email, password, confirmPassword} = input
 
         let result: types.ISignupResult  = {
@@ -40,10 +50,12 @@ export default class AuthUCI implements IAuthUCI {
             return result;
         }
 
-        result = await this._repo.signup(input);
+        result = await this.repo.signup(input);
         
-        if(result.error === false){
+
+        if(!result.error){
             this.__emitNewRegisteredUserEvent(input)
+            this.__emitNewLoggedInUserEvent({email: input.email})
         }
 
         return result;
@@ -56,7 +68,8 @@ export default class AuthUCI implements IAuthUCI {
      * @returns 
      */
     async login(input: types.ILoginInput): Promise<types.ILoginResult>{
-        const result = await this._repo.login(input);
+        this.observer.onNewLoginAttempt(input)
+        const result = await this.repo.login(input);
         if(result.user){
             this.__emitNewLoggedInUserEvent(result.user)
         }
@@ -64,33 +77,22 @@ export default class AuthUCI implements IAuthUCI {
     }
 
 
-    setListener(listener: IAuthModel): void {
-        this._listener = listener 
-    }
-
-
-
-
-
     private __emitNewRegisteredUserEvent(signupInput: types.ISignupInput): void{  
-        if(this._listener != undefined){
             const payload: types.ILoginInput = {
                 email: signupInput.email,
                 password: signupInput.password
-            };
-            this._listener.onNewRegisteredUserEvent(payload);
-        }
+            }
+            this.observer.onNewRegisteredUserEvent(payload);
     }
 
 
     private __emitNewLoggedInUserEvent(userData: types.UserBasicData): void{
-        if(this._listener){
-            this._listener.onhNewLoggedInUserEvent(userData);
-        }
+        this.observer.onhNewLoggedInUserEvent(userData);
     }
+    
 
     getLastLoginCreds(): Promise<types.ILoginInput | null>{        
-        return this._repo.getLastLoginCreds()
+        return this.repo.getLastLoginCreds()
     }
 
 
@@ -130,7 +132,7 @@ export default class AuthUCI implements IAuthUCI {
         if(password != confirmPassword){
             result = {
                 reason: types.ConfirmPasswordRejectionReason.mismatchedPasswords,
-                description: "mismatched passwords"
+                description: "Les deux mots de passe sont différents"
             }
         }
 
@@ -162,10 +164,10 @@ export default class AuthUCI implements IAuthUCI {
 
 
 
-
-
-
 // ----------------------- Validation Startegies
+
+
+
 class PasswordStrategy {
 
     static validate(password: string): true | types.PasswordValidationRejection {
@@ -173,7 +175,7 @@ class PasswordStrategy {
         if(password.length < 8){
             result = {
                 reason: types.PasswordFormatValidationRejectionReason.passwordLengthLowerThanEight,
-                description: "Password must be at least 8 charachters long"
+                description: `Le mot de passe doit cotenir au moins 8 charactères`
             }
             return result
         }
@@ -205,4 +207,4 @@ class EmailStrategy {
 // TODO: Create Factory for AuthUCI
 
 
-export const authUCI = new AuthUCI(new AuthRepository())
+// export const authUCI = new AuthUCI(new AuthRepository())

@@ -1,6 +1,6 @@
 import React from "react";
 import { IUserProfileData, IGame, IUserProfile } from "../../../../../domain/use-cases/types";
-import { IUserProfileModelEventListener } from "../../../../../domain/use-cases/userProfile/interface";
+import { IUserProfileModel } from "../../../../../domain/use-cases/userProfile/interface";
 import { useAppSelector } from "../../../../hooks";
 import { AppDispatch } from "../../../../store";
 import { IGameState } from "../../../place/types";
@@ -15,7 +15,7 @@ interface IUserProfileModelInput {
     selectorFunc: typeof useAppSelector
 }
 
-export interface IUserProfileModel extends IUserProfileModelEventListener{}
+export interface IUserProfileModel extends IUserProfileModel{}
 
 
 export function createUserProfileModel (modelInput: IUserProfileModelInput): IUserProfileModel {

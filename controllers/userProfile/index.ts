@@ -1,7 +1,8 @@
 import { IUserProfileModel } from "../../app/features/userProfile/adapter";
 import { IUserProfileListState } from "../../app/features/userProfile/userProfileList/slice/interface";
+import { IDefineUsernameResult } from "../../domain/use-cases/Auth/interface";
 import UserProfileUseCase from "../../domain/use-cases/userProfile";
-import { IUserProfileUseCase } from "../../domain/use-cases/userProfile/interface";
+import { IDefineUsernameInput, IUserProfileUseCase } from "../../domain/use-cases/userProfile/interface";
 import { IUserProfileController } from "./interface";
 
 
@@ -16,10 +17,14 @@ export default class UserProfileController implements IUserProfileController{
     }
 
     getAllUserProfiles(): void{
-        this.userProfileUseCase.getAllUserProfilData()
+        this.userProfileUseCase.getAllUserProfileData()
     }
 
     getUserProfile(id: string): void {
         this.userProfileUseCase.getUserProfile(id)
+    }
+
+    defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult> {
+        return this.userProfileUseCase.defineUsername(input)
     }
 }

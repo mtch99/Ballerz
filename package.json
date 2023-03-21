@@ -26,6 +26,7 @@
     "aws-amplify": "^5.0.20",
     "expo": "~47.0.12",
     "expo-device": "~5.0.0",
+    "expo-image": "^1.0.0",
     "expo-status-bar": "~1.4.2",
     "jest-expo": "^48.0.2",
     "jest-mock-extended": "^3.0.3",

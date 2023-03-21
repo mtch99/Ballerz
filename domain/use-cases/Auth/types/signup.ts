@@ -1,3 +1,5 @@
+import { IUserProfile } from "../../types"
+
 export type ISignupInput = {
     email: string,
     password: string,
@@ -23,6 +25,7 @@ export enum RepoSignupErrorReason {
 
 export type UserBasicData = {
     email: string,
+    profile?: IUserProfile
     additionalUserData?: AdditionalUserData
 }
 

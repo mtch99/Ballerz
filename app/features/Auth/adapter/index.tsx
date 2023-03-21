@@ -1,8 +1,11 @@
 import { IAuthModel } from "../../../../domain/use-cases/Auth/interface"
-import { ILoginInput, UserBasicData } from "../../../../domain/use-cases/Auth/types"
+import { ILoginInput, ISignupInput, UserBasicData } from "../../../../domain/use-cases/Auth/types"
+import { IUserProfile } from "../../../../domain/use-cases/types"
 import { useAppSelector } from "../../../hooks"
 import { AppDispatch } from "../../../store"
-import { UserState, setLastSignupInput, setUser } from "../slice"
+import { UserProfileModelAdapter } from "../../userProfile/adapter"
+import { IUserProfileState } from "../../userProfile/types"
+import { UserState, setLastSignupInput, setLoginInput, setUser } from "../slice"
 
 interface IAuthModelInput {
     dispatchFunc: AppDispatch
@@ -11,18 +14,33 @@ interface IAuthModelInput {
 
 
 export const createAuthModel = (input: IAuthModelInput): IAuthModel => {
-    return {
-        onNewRegisteredUserEvent(newUserData: ILoginInput) {
-            const payload = {email: newUserData.email}
+    const authModel: IAuthModel = {
+        onNewRegisteredUserEvent(payload: ILoginInput) {
             input.dispatchFunc(setLastSignupInput(payload))
         },
 
+        onNewSignupAttempt: function (payload: ISignupInput): void {
+            input.dispatchFunc(setLastSignupInput(payload))
+        },
+        onNewLoginAttempt: function (payload: ILoginInput): void {
+            input.dispatchFunc(setLoginInput(payload))
+        },
         onhNewLoggedInUserEvent(userData: UserBasicData): void {
+            let profile: undefined | IUserProfileState = undefined
+            if(userData.profile){
+                profile = UserProfileModelAdapter.parseUserProfile(userData.profile)
+            }
             const payload: UserState = {
                 email: userData.email,
-                profileData: undefined
+                profile
             }
+            
             input.dispatchFunc(setUser(payload))
         }
     }
+    return authModel
 }
+
+
+
+

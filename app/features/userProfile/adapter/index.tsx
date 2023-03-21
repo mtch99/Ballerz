@@ -1,5 +1,5 @@
 import { IGame, IUserProfile, IUserProfileData } from "../../../../domain/use-cases/types"
-import { IUserProfileModelEventListener } from "../../../../domain/use-cases/userProfile/interface"
+import { IUserProfileModel } from "../../../../domain/use-cases/userProfile/interface"
 import { useAppSelector } from "../../../hooks"
 import { AppDispatch } from "../../../store"
 import { parseGame, parseGameList } from "../../place/adapter"
@@ -17,7 +17,6 @@ interface IUserProfileModelInput{
 }
 
 
-export interface IUserProfileModel extends IUserProfileModelEventListener{}
 
 
 export function createUserProfileModel(modelInput: IUserProfileModelInput): IUserProfileModel {
@@ -30,12 +29,20 @@ export function createUserProfileModel(modelInput: IUserProfileModelInput): IUse
             const payload: INewUserProfileProfileActionPayload = UserProfileModelAdapter.parseUserProfile(input);
             modelInput.dispatchFunc(NEW_USERPROFILE(payload));
         },
+
+        setMyProfile(input) {
+            throw new Error("Method not implemented in createUserProfileModel")
+        },
+
+        onDefineUsername(input) {
+            throw new Error("Method not implemented in createUserProfileModel")
+        },
     }
 }
 
 
 
-class UserProfileModelAdapter{
+export class UserProfileModelAdapter{
 
     static parseUserProfileList(userProfileList: IUserProfileData[]): INewUserProfileListActionPayload{
         return {

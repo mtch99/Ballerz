@@ -31,7 +31,14 @@ There must be three different games on three different courts, two at the moment
         - [x] implement SignupScreen
         - [x] SignupScreen View with Email and password inputs
             - [x] ConfirmSignupModal
-            - [ ] ConfirmSignupScreen
+            - [x] ConfirmSignupScreen
+        - [ ] Navigate to AppStack on signup success
+
+    * [x] UserProfile and auth usecases update to support cache auth creds storage and defineUsername
+
+    - [ ] Create Profile
+        - [ ] CreateProfileStack
+            - [ ] Define Username screen
 
 
 

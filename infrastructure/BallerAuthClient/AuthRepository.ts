@@ -42,10 +42,15 @@ export class AuthRepository implements IAuthRepository {
         };
 
         const {email, password} = creds;
-        const user:CognitoUser | null = await Auth.signUp({
-            username: email,
-            password: password
-        }).then((result) => {
+        const user:CognitoUser | null = await Auth.signUp(
+            {
+                username: email,
+                password: password,
+                autoSignIn: {
+                    enabled: true
+                }
+            },
+        ).then((result) => {
             return result.user
         })
         .catch(message => {
@@ -140,9 +145,23 @@ export class AuthRepository implements IAuthRepository {
 
     }
 
+    async getLastSignupCreds(): Promise<struct.ISignupInput | null> {
+        const creds = await AsyncStorage.getItem("lastSignupCreds");
+        if(creds){
+            return JSON.parse(creds) as struct.ISignupInput
+        }
+        else{
+            return null
+        }
+    }
+
 
     __storeLoginCreds(creds: struct.ILoginInput): void {
         AsyncStorage.setItem("lastLoginCreds", JSON.stringify(creds))
+    }
+
+    __storeSignupCreds(creds: struct.ISignupInput): void {
+        AsyncStorage.setItem("lastSignupCreds", JSON.stringify(creds))
     }
 
 

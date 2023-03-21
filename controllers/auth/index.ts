@@ -1,16 +1,16 @@
-import { authUCI } from "./../../domain/use-cases/Auth/index";
+import AuthUCI from "../../domain/use-cases/Auth";
 import { ISignupInput, ISignupResult, IConfirmSignupInput, IConfirmSignupResult, ILoginInput, ILoginResult } from "../../domain/use-cases/Auth/types";
 import IAuthController from "./interface";
-import { IAuthModel } from "../../domain/use-cases/Auth/interface";
+import IAuthUCI, { IAuthModel, IDefineUsernameInput, IDefineUsernameResult } from "../../domain/use-cases/Auth/interface";
 
 
 
 export default class AuthController implements IAuthController {
 
-    private authUci = authUCI
+    private authUci: IAuthUCI 
 
     constructor(authModel: IAuthModel){
-        this.authUci.setListener(authModel)
+        this.authUci = new AuthUCI(authModel)
     }
 
 
@@ -23,6 +23,10 @@ export default class AuthController implements IAuthController {
     
     confirmSignup(input: IConfirmSignupInput): Promise<IConfirmSignupResult> {
         return this.authUci.confirmSignup(input)
+    }
+
+    defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult> {
+        return this.authUci.defineUsername(input)
     }
     
 }
