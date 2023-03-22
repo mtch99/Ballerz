@@ -41,7 +41,7 @@ export type GetUserProfileQuery = {
       id: string,
       email: string,
       username: string,
-      friends?:  {
+      friends:  {
         __typename: "ModelFriendshipConnection",
         items: Array<Friendship | null>
         nextToken?: string | null,

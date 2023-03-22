@@ -18,8 +18,8 @@ export interface IUserProfileModel {
 
 
 export interface IUserProfileRepository {
-    getAllUserProfileData(): IUserProfileData[]
-    getUserProfile(id: IUserProfileData['id']): IUserProfile | null
+    getAllUserProfileData(): Promise<IUserProfileData[]>
+    getUserProfile(id: IUserProfileData['id']): Promise<IUserProfile | null>
     defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult>
 }
 

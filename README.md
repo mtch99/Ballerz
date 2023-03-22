@@ -40,7 +40,8 @@ There must be three different games on three different courts, two at the moment
         - [x] CreateProfileStack
             - [x] init Define Username screen
         - [ ] UserProfileRepo
-            - [ ] APIUserProfileClient
+            - [x] APIUserProfileClient
+            - [ ] implement IUserProfileRepo
 
 
 
