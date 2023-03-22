@@ -73,11 +73,11 @@ export type Post = {
   __typename: "Post",
   id: string,
   title: string,
-  blogID: string,
   blog?: Blog | null,
   comments?: ModelCommentConnection | null,
   createdAt: string,
   updatedAt: string,
+  blogPostsId?: string | null,
 };
 
 export type ModelCommentConnection = {
@@ -89,11 +89,11 @@ export type ModelCommentConnection = {
 export type Comment = {
   __typename: "Comment",
   id: string,
-  postID: string,
   post?: Post | null,
   content: string,
   createdAt: string,
   updatedAt: string,
+  postCommentsId?: string | null,
 };
 
 export type UpdateBlogInput = {
@@ -108,15 +108,15 @@ export type DeleteBlogInput = {
 export type CreatePostInput = {
   id?: string | null,
   title: string,
-  blogID: string,
+  blogPostsId?: string | null,
 };
 
 export type ModelPostConditionInput = {
   title?: ModelStringInput | null,
-  blogID?: ModelIDInput | null,
   and?: Array< ModelPostConditionInput | null > | null,
   or?: Array< ModelPostConditionInput | null > | null,
   not?: ModelPostConditionInput | null,
+  blogPostsId?: ModelIDInput | null,
 };
 
 export type ModelIDInput = {
@@ -138,7 +138,7 @@ export type ModelIDInput = {
 export type UpdatePostInput = {
   id: string,
   title?: string | null,
-  blogID?: string | null,
+  blogPostsId?: string | null,
 };
 
 export type DeletePostInput = {
@@ -147,406 +147,422 @@ export type DeletePostInput = {
 
 export type CreateCommentInput = {
   id?: string | null,
-  postID: string,
   content: string,
+  postCommentsId?: string | null,
 };
 
 export type ModelCommentConditionInput = {
-  postID?: ModelIDInput | null,
   content?: ModelStringInput | null,
   and?: Array< ModelCommentConditionInput | null > | null,
   or?: Array< ModelCommentConditionInput | null > | null,
   not?: ModelCommentConditionInput | null,
+  postCommentsId?: ModelIDInput | null,
 };
 
 export type UpdateCommentInput = {
   id: string,
-  postID?: string | null,
   content?: string | null,
+  postCommentsId?: string | null,
 };
 
 export type DeleteCommentInput = {
   id: string,
 };
 
-export type CreateUserDocInput = {
+export type CreateUserInput = {
   id?: string | null,
-  profileID?: string | null,
   email: string,
-  deviceToken?: string | null,
   phoneNumber?: string | null,
+  profileID?: string | null,
 };
 
-export type ModelUserDocConditionInput = {
-  profileID?: ModelIDInput | null,
+export type ModelUserConditionInput = {
   email?: ModelStringInput | null,
-  deviceToken?: ModelStringInput | null,
   phoneNumber?: ModelStringInput | null,
-  and?: Array< ModelUserDocConditionInput | null > | null,
-  or?: Array< ModelUserDocConditionInput | null > | null,
-  not?: ModelUserDocConditionInput | null,
+  profileID?: ModelIDInput | null,
+  and?: Array< ModelUserConditionInput | null > | null,
+  or?: Array< ModelUserConditionInput | null > | null,
+  not?: ModelUserConditionInput | null,
 };
 
-export type UserDoc = {
-  __typename: "UserDoc",
+export type User = {
+  __typename: "User",
   id: string,
-  profileID?: string | null,
   email: string,
-  deviceToken?: string | null,
   phoneNumber?: string | null,
+  profileID?: string | null,
+  profile?: UserProfile | null,
   createdAt: string,
   updatedAt: string,
-  uProfile?: Uprofile | null,
 };
 
-export type Uprofile = {
-  __typename: "Uprofile",
+export type UserProfile = {
+  __typename: "UserProfile",
   id: string,
+  email: string,
   username: string,
-  name?: string | null,
-  userDocID: string,
-  currentPlaceID?: string | null,
-  expoPushToken?: string | null,
+  user?: User | null,
+  friends?: ModelFriendshipConnection | null,
+  presenceList?: ModelPresenceConnection | null,
+  groupChatUserProfileConnectionList?: ModelGroupChatUserProfileConnectionConnection | null,
+  createdGroupChatList?: ModelGroupChatConnection | null,
   createdAt: string,
   updatedAt: string,
-  userDoc?: UserDoc | null,
-  attendings?: ModelUserPlaceConnectionConnection | null,
-  placeTimeSlots?: ModelPlaceTimeSlotUserPlaceConnectionConnection | null,
-  currentPlace?: Place | null,
-  friends?: ModelFriendConnectionConnection | null,
-  sentNotifications?: ModelNotificationConnection | null,
-  notifications?: ModelNotificationConnection | null,
+  userProfileUserId?: string | null,
 };
 
-export type ModelUserPlaceConnectionConnection = {
-  __typename: "ModelUserPlaceConnectionConnection",
-  items:  Array<UserPlaceConnection | null >,
+export type ModelFriendshipConnection = {
+  __typename: "ModelFriendshipConnection",
+  items:  Array<Friendship | null >,
   nextToken?: string | null,
 };
 
-export type UserPlaceConnection = {
-  __typename: "UserPlaceConnection",
+export type Friendship = {
+  __typename: "Friendship",
   id: string,
-  profileID: string,
-  placeID: string,
-  arrivingTime?: string | null,
-  departureTime?: string | null,
-  placeTimeSoltUserPlaceConnection?: Place | null,
+  userProfileID: string,
+  friendProfileID: string,
+  friendProfile?: UserProfile | null,
   createdAt: string,
   updatedAt: string,
-  uProfile?: Uprofile | null,
+};
+
+export type ModelPresenceConnection = {
+  __typename: "ModelPresenceConnection",
+  items:  Array<Presence | null >,
+  nextToken?: string | null,
+};
+
+export type Presence = {
+  __typename: "Presence",
+  id: string,
+  placeID: string,
+  userProfileID: string,
   place?: Place | null,
+  userProfile?: UserProfile | null,
+  startingDateTime: string,
+  endingDateTime: string,
+  startingTime?: string | null,
+  endingTime: string,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export type Place = {
   __typename: "Place",
   id: string,
   name: string,
-  address: string,
-  coords: Coords,
+  presenceList?: ModelPresenceConnection | null,
   createdAt: string,
   updatedAt: string,
-  currentPlayers?: ModelUprofileConnection | null,
-  timeSlots?: ModelPlaceTimeSlotConnection | null,
 };
 
-export type Coords = {
-  __typename: "Coords",
-  lon: number,
-  lat: number,
-};
-
-export type ModelUprofileConnection = {
-  __typename: "ModelUprofileConnection",
-  items:  Array<Uprofile | null >,
+export type ModelGroupChatUserProfileConnectionConnection = {
+  __typename: "ModelGroupChatUserProfileConnectionConnection",
+  items:  Array<GroupChatUserProfileConnection | null >,
   nextToken?: string | null,
 };
 
-export type ModelPlaceTimeSlotConnection = {
-  __typename: "ModelPlaceTimeSlotConnection",
-  items:  Array<PlaceTimeSlot | null >,
-  nextToken?: string | null,
-};
-
-export type PlaceTimeSlot = {
-  __typename: "PlaceTimeSlot",
+export type GroupChatUserProfileConnection = {
+  __typename: "GroupChatUserProfileConnection",
   id: string,
-  numAttendings?: number | null,
-  myDate?: MyDate | null,
-  dateTime?: string | null,
-  placeID: string,
-  startingHour: string,
-  endingHour: string,
+  groupChatID: string,
+  userProfileID: string,
+  userProfile?: UserProfile | null,
+  groupChat?: GroupChat | null,
   createdAt: string,
   updatedAt: string,
-  attendings?: ModelPlaceTimeSlotUserPlaceConnectionConnection | null,
-  place?: Place | null,
 };
 
-export type MyDate = {
-  __typename: "MyDate",
-  weekDay: string,
-  monthDay: string,
-  month: string,
-  year: string,
+export type GroupChat = {
+  __typename: "GroupChat",
+  id: string,
+  name: string,
+  firstInvitedProfileIDList?: string | null,
+  groupChatUserProfileConnectionList?: ModelGroupChatUserProfileConnectionConnection | null,
+  creatorProfileID: string,
+  creatorProfile?: UserProfile | null,
+  messageList?: ModelGroupChatMessageConnection | null,
+  createdAt: string,
+  updatedAt: string,
 };
 
-export type ModelPlaceTimeSlotUserPlaceConnectionConnection = {
-  __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
-  items:  Array<PlaceTimeSlotUserPlaceConnection | null >,
+export type ModelGroupChatMessageConnection = {
+  __typename: "ModelGroupChatMessageConnection",
+  items:  Array<GroupChatMessage | null >,
   nextToken?: string | null,
 };
 
-export type PlaceTimeSlotUserPlaceConnection = {
-  __typename: "PlaceTimeSlotUserPlaceConnection",
+export type GroupChatMessage = {
+  __typename: "GroupChatMessage",
   id: string,
-  attendingID: string,
+  type: GroupChatMessageType,
+  groupChatID: string,
+  senderProfileID: string,
+  groupChat?: GroupChat | null,
+  senderProfile?: UserProfile | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export enum GroupChatMessageType {
+  text = "text",
+}
+
+
+export type ModelGroupChatConnection = {
+  __typename: "ModelGroupChatConnection",
+  items:  Array<GroupChat | null >,
+  nextToken?: string | null,
+};
+
+export type UpdateUserInput = {
+  id: string,
+  email?: string | null,
+  phoneNumber?: string | null,
   profileID?: string | null,
-  placeTimeSlotID: string,
-  createdAt?: string | null,
-  updatedAt: string,
-  uProfile?: Uprofile | null,
-  attending?: UserPlaceConnection | null,
-  timeSlot?: PlaceTimeSlot | null,
 };
 
-export type ModelFriendConnectionConnection = {
-  __typename: "ModelFriendConnectionConnection",
-  items:  Array<FriendConnection | null >,
-  nextToken?: string | null,
-};
-
-export type FriendConnection = {
-  __typename: "FriendConnection",
+export type DeleteUserInput = {
   id: string,
+};
+
+export type CreateUserProfileInput = {
+  id?: string | null,
+  email: string,
+  username: string,
+  userProfileUserId?: string | null,
+};
+
+export type ModelUserProfileConditionInput = {
+  email?: ModelStringInput | null,
+  username?: ModelStringInput | null,
+  and?: Array< ModelUserProfileConditionInput | null > | null,
+  or?: Array< ModelUserProfileConditionInput | null > | null,
+  not?: ModelUserProfileConditionInput | null,
+  userProfileUserId?: ModelIDInput | null,
+};
+
+export type UpdateUserProfileInput = {
+  id: string,
+  email?: string | null,
+  username?: string | null,
+  userProfileUserId?: string | null,
+};
+
+export type DeleteUserProfileInput = {
+  id: string,
+};
+
+export type CreateFriendshipInput = {
+  id?: string | null,
   userProfileID: string,
   friendProfileID: string,
-  createdAt: string,
-  updatedAt: string,
-  friendProfile?: Uprofile | null,
 };
 
-export type ModelNotificationConnection = {
-  __typename: "ModelNotificationConnection",
-  items:  Array<Notification | null >,
-  nextToken?: string | null,
+export type ModelFriendshipConditionInput = {
+  userProfileID?: ModelIDInput | null,
+  friendProfileID?: ModelIDInput | null,
+  and?: Array< ModelFriendshipConditionInput | null > | null,
+  or?: Array< ModelFriendshipConditionInput | null > | null,
+  not?: ModelFriendshipConditionInput | null,
+};
+
+export type UpdateFriendshipInput = {
+  id: string,
+  userProfileID?: string | null,
+  friendProfileID?: string | null,
+};
+
+export type DeleteFriendshipInput = {
+  id: string,
+};
+
+export type CreateFriendshipRequestInput = {
+  id?: string | null,
+  status: FriendshipRequestStatus,
+  senderProfileID: string,
+  receiverProfileID: string,
+};
+
+export enum FriendshipRequestStatus {
+  pending = "pending",
+  accepted = "accepted",
+  rejected = "rejected",
+}
+
+
+export type ModelFriendshipRequestConditionInput = {
+  status?: ModelFriendshipRequestStatusInput | null,
+  senderProfileID?: ModelIDInput | null,
+  receiverProfileID?: ModelIDInput | null,
+  and?: Array< ModelFriendshipRequestConditionInput | null > | null,
+  or?: Array< ModelFriendshipRequestConditionInput | null > | null,
+  not?: ModelFriendshipRequestConditionInput | null,
+};
+
+export type ModelFriendshipRequestStatusInput = {
+  eq?: FriendshipRequestStatus | null,
+  ne?: FriendshipRequestStatus | null,
+};
+
+export type FriendshipRequest = {
+  __typename: "FriendshipRequest",
+  id: string,
+  status: FriendshipRequestStatus,
+  senderProfileID: string,
+  senderProfile?: UserProfile | null,
+  receiverProfileID: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateFriendshipRequestInput = {
+  id: string,
+  status?: FriendshipRequestStatus | null,
+  senderProfileID?: string | null,
+  receiverProfileID?: string | null,
+};
+
+export type DeleteFriendshipRequestInput = {
+  id: string,
+};
+
+export type CreateNotificationInput = {
+  id?: string | null,
+  type: NotificationType,
+  receiverProfileID: string,
+  friendshipRequestID?: string | null,
+  presenceID?: string | null,
+  senderProfileID?: string | null,
+  groupChatInvitationID?: string | null,
+  groupChatID?: string | null,
+};
+
+export enum NotificationType {
+  friendshipRequest = "friendshipRequest",
+  newFriend = "newFriend",
+  friendPlaying = "friendPlaying",
+  joinGroupChat = "joinGroupChat",
+  newGroupChatMember = "newGroupChatMember",
+}
+
+
+export type ModelNotificationConditionInput = {
+  type?: ModelNotificationTypeInput | null,
+  receiverProfileID?: ModelIDInput | null,
+  friendshipRequestID?: ModelIDInput | null,
+  presenceID?: ModelIDInput | null,
+  senderProfileID?: ModelIDInput | null,
+  groupChatInvitationID?: ModelIDInput | null,
+  groupChatID?: ModelIDInput | null,
+  and?: Array< ModelNotificationConditionInput | null > | null,
+  or?: Array< ModelNotificationConditionInput | null > | null,
+  not?: ModelNotificationConditionInput | null,
+};
+
+export type ModelNotificationTypeInput = {
+  eq?: NotificationType | null,
+  ne?: NotificationType | null,
 };
 
 export type Notification = {
   __typename: "Notification",
   id: string,
-  placeID?: string | null,
-  placeName?: string | null,
-  arrivingTime?: string | null,
-  departureTime?: string | null,
-  senderProfileID: string,
-  message: string,
+  type: NotificationType,
   receiverProfileID: string,
-  photo?: string | null,
-  createdAt?: string | null,
-  type: NotifType,
-  status: Status,
-  placeTimeSlotID?: string | null,
+  friendshipRequestID?: string | null,
+  presenceID?: string | null,
+  senderProfileID?: string | null,
+  groupChatInvitationID?: string | null,
+  groupChatID?: string | null,
+  presence?: Presence | null,
+  senderProfile?: UserProfile | null,
+  groupChatInvitation?: GroupChatInvitation | null,
+  groupChat?: GroupChat | null,
+  createdAt: string,
   updatedAt: string,
-  userProfile?: Uprofile | null,
-  senderProfile?: Uprofile | null,
-  placeTimeSlot?: PlaceTimeSlot | null,
 };
 
-export enum NotifType {
-  newFriend = "newFriend",
-  friendRequest = "friendRequest",
-  eventInvitation = "eventInvitation",
-  friendPlaying = "friendPlaying",
-  hotCourt = "hotCourt",
-  casualInvitation = "casualInvitation",
-  friendJoining = "friendJoining",
-  playersJoining = "playersJoining",
-}
+export type GroupChatInvitation = {
+  __typename: "GroupChatInvitation",
+  id: string,
+  senderProfileID: string,
+  receiverProfileID: string,
+  groupChatID: string,
+  senderProfile?: UserProfile | null,
+  receiverProfile?: UserProfile | null,
+  groupChat?: GroupChat | null,
+  status: GroupChatInvitationStatus,
+  createdAt: string,
+  updatedAt: string,
+};
 
-
-export enum Status {
-  noStatus = "noStatus",
+export enum GroupChatInvitationStatus {
   pending = "pending",
   accepted = "accepted",
-  refused = "refused",
+  rejected = "rejected",
 }
 
 
-export type UpdateUserDocInput = {
+export type UpdateNotificationInput = {
   id: string,
-  profileID?: string | null,
-  email?: string | null,
-  deviceToken?: string | null,
-  phoneNumber?: string | null,
+  type?: NotificationType | null,
+  receiverProfileID?: string | null,
+  friendshipRequestID?: string | null,
+  presenceID?: string | null,
+  senderProfileID?: string | null,
+  groupChatInvitationID?: string | null,
+  groupChatID?: string | null,
 };
 
-export type DeleteUserDocInput = {
+export type DeleteNotificationInput = {
   id: string,
 };
 
-export type CreateUprofileInput = {
+export type CreatePresenceInput = {
   id?: string | null,
-  username: string,
-  name?: string | null,
-  userDocID: string,
-  currentPlaceID?: string | null,
-  expoPushToken?: string | null,
-};
-
-export type ModelUprofileConditionInput = {
-  username?: ModelStringInput | null,
-  name?: ModelStringInput | null,
-  userDocID?: ModelIDInput | null,
-  currentPlaceID?: ModelIDInput | null,
-  expoPushToken?: ModelStringInput | null,
-  and?: Array< ModelUprofileConditionInput | null > | null,
-  or?: Array< ModelUprofileConditionInput | null > | null,
-  not?: ModelUprofileConditionInput | null,
-};
-
-export type UpdateUprofileInput = {
-  id: string,
-  username?: string | null,
-  name?: string | null,
-  userDocID?: string | null,
-  currentPlaceID?: string | null,
-  expoPushToken?: string | null,
-};
-
-export type DeleteUprofileInput = {
-  id: string,
-};
-
-export type CreateUserPlaceConnectionInput = {
-  id?: string | null,
-  profileID: string,
   placeID: string,
-  arrivingTime?: string | null,
-  departureTime?: string | null,
+  userProfileID: string,
+  startingDateTime: string,
+  endingDateTime: string,
+  startingTime?: string | null,
+  endingTime: string,
 };
 
-export type ModelUserPlaceConnectionConditionInput = {
-  profileID?: ModelIDInput | null,
+export type ModelPresenceConditionInput = {
   placeID?: ModelIDInput | null,
-  arrivingTime?: ModelStringInput | null,
-  departureTime?: ModelStringInput | null,
-  and?: Array< ModelUserPlaceConnectionConditionInput | null > | null,
-  or?: Array< ModelUserPlaceConnectionConditionInput | null > | null,
-  not?: ModelUserPlaceConnectionConditionInput | null,
+  userProfileID?: ModelIDInput | null,
+  startingDateTime?: ModelStringInput | null,
+  endingDateTime?: ModelStringInput | null,
+  startingTime?: ModelStringInput | null,
+  endingTime?: ModelStringInput | null,
+  and?: Array< ModelPresenceConditionInput | null > | null,
+  or?: Array< ModelPresenceConditionInput | null > | null,
+  not?: ModelPresenceConditionInput | null,
 };
 
-export type UpdateUserPlaceConnectionInput = {
+export type UpdatePresenceInput = {
   id: string,
-  profileID?: string | null,
   placeID?: string | null,
-  arrivingTime?: string | null,
-  departureTime?: string | null,
+  userProfileID?: string | null,
+  startingDateTime?: string | null,
+  endingDateTime?: string | null,
+  startingTime?: string | null,
+  endingTime?: string | null,
 };
 
-export type DeleteUserPlaceConnectionInput = {
-  id: string,
-};
-
-export type CreatePlaceTimeSlotInput = {
-  id?: string | null,
-  numAttendings?: number | null,
-  myDate?: MyDateInput | null,
-  dateTime?: string | null,
-  placeID: string,
-  startingHour: string,
-  endingHour: string,
-};
-
-export type MyDateInput = {
-  weekDay: string,
-  monthDay: string,
-  month: string,
-  year: string,
-};
-
-export type ModelPlaceTimeSlotConditionInput = {
-  numAttendings?: ModelIntInput | null,
-  dateTime?: ModelStringInput | null,
-  placeID?: ModelIDInput | null,
-  startingHour?: ModelStringInput | null,
-  endingHour?: ModelStringInput | null,
-  and?: Array< ModelPlaceTimeSlotConditionInput | null > | null,
-  or?: Array< ModelPlaceTimeSlotConditionInput | null > | null,
-  not?: ModelPlaceTimeSlotConditionInput | null,
-};
-
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
-export type UpdatePlaceTimeSlotInput = {
-  id: string,
-  numAttendings?: number | null,
-  myDate?: MyDateInput | null,
-  dateTime?: string | null,
-  placeID?: string | null,
-  startingHour?: string | null,
-  endingHour?: string | null,
-};
-
-export type DeletePlaceTimeSlotInput = {
-  id: string,
-};
-
-export type CreatePlaceTimeSlotUserPlaceConnectionInput = {
-  id?: string | null,
-  attendingID: string,
-  profileID?: string | null,
-  placeTimeSlotID: string,
-  createdAt?: string | null,
-};
-
-export type ModelPlaceTimeSlotUserPlaceConnectionConditionInput = {
-  attendingID?: ModelIDInput | null,
-  profileID?: ModelIDInput | null,
-  placeTimeSlotID?: ModelIDInput | null,
-  createdAt?: ModelStringInput | null,
-  and?: Array< ModelPlaceTimeSlotUserPlaceConnectionConditionInput | null > | null,
-  or?: Array< ModelPlaceTimeSlotUserPlaceConnectionConditionInput | null > | null,
-  not?: ModelPlaceTimeSlotUserPlaceConnectionConditionInput | null,
-};
-
-export type UpdatePlaceTimeSlotUserPlaceConnectionInput = {
-  id: string,
-  attendingID?: string | null,
-  profileID?: string | null,
-  placeTimeSlotID?: string | null,
-  createdAt?: string | null,
-};
-
-export type DeletePlaceTimeSlotUserPlaceConnectionInput = {
+export type DeletePresenceInput = {
   id: string,
 };
 
 export type CreatePlaceInput = {
   id?: string | null,
   name: string,
-  address: string,
-  coords: CoordsInput,
-};
-
-export type CoordsInput = {
-  lon: number,
-  lat: number,
 };
 
 export type ModelPlaceConditionInput = {
   name?: ModelStringInput | null,
-  address?: ModelStringInput | null,
   and?: Array< ModelPlaceConditionInput | null > | null,
   or?: Array< ModelPlaceConditionInput | null > | null,
   not?: ModelPlaceConditionInput | null,
@@ -555,169 +571,139 @@ export type ModelPlaceConditionInput = {
 export type UpdatePlaceInput = {
   id: string,
   name?: string | null,
-  address?: string | null,
-  coords?: CoordsInput | null,
 };
 
 export type DeletePlaceInput = {
   id: string,
 };
 
-export type CreateFriendConnectionInput = {
+export type CreateGroupChatInput = {
   id?: string | null,
-  userProfileID: string,
-  friendProfileID: string,
-};
-
-export type ModelFriendConnectionConditionInput = {
-  userProfileID?: ModelIDInput | null,
-  friendProfileID?: ModelIDInput | null,
-  and?: Array< ModelFriendConnectionConditionInput | null > | null,
-  or?: Array< ModelFriendConnectionConditionInput | null > | null,
-  not?: ModelFriendConnectionConditionInput | null,
-};
-
-export type UpdateFriendConnectionInput = {
-  id: string,
-  userProfileID?: string | null,
-  friendProfileID?: string | null,
-};
-
-export type DeleteFriendConnectionInput = {
-  id: string,
-};
-
-export type CreateNotificationInput = {
-  id?: string | null,
-  placeID?: string | null,
-  placeName?: string | null,
-  arrivingTime?: string | null,
-  departureTime?: string | null,
-  senderProfileID: string,
-  message: string,
-  receiverProfileID: string,
-  photo?: string | null,
+  name: string,
+  firstInvitedProfileIDList?: string | null,
+  creatorProfileID: string,
   createdAt?: string | null,
-  type: NotifType,
-  status: Status,
-  placeTimeSlotID?: string | null,
+  updatedAt?: string | null,
 };
 
-export type ModelNotificationConditionInput = {
-  placeID?: ModelIDInput | null,
-  placeName?: ModelStringInput | null,
-  arrivingTime?: ModelStringInput | null,
-  departureTime?: ModelStringInput | null,
-  senderProfileID?: ModelIDInput | null,
-  message?: ModelStringInput | null,
-  receiverProfileID?: ModelIDInput | null,
-  photo?: ModelStringInput | null,
+export type ModelGroupChatConditionInput = {
+  name?: ModelStringInput | null,
+  firstInvitedProfileIDList?: ModelStringInput | null,
+  creatorProfileID?: ModelIDInput | null,
   createdAt?: ModelStringInput | null,
-  type?: ModelNotifTypeInput | null,
-  status?: ModelStatusInput | null,
-  placeTimeSlotID?: ModelIDInput | null,
-  and?: Array< ModelNotificationConditionInput | null > | null,
-  or?: Array< ModelNotificationConditionInput | null > | null,
-  not?: ModelNotificationConditionInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelGroupChatConditionInput | null > | null,
+  or?: Array< ModelGroupChatConditionInput | null > | null,
+  not?: ModelGroupChatConditionInput | null,
 };
 
-export type ModelNotifTypeInput = {
-  eq?: NotifType | null,
-  ne?: NotifType | null,
-};
-
-export type ModelStatusInput = {
-  eq?: Status | null,
-  ne?: Status | null,
-};
-
-export type UpdateNotificationInput = {
+export type UpdateGroupChatInput = {
   id: string,
-  placeID?: string | null,
-  placeName?: string | null,
-  arrivingTime?: string | null,
-  departureTime?: string | null,
-  senderProfileID?: string | null,
-  message?: string | null,
-  receiverProfileID?: string | null,
-  photo?: string | null,
+  name?: string | null,
+  firstInvitedProfileIDList?: string | null,
+  creatorProfileID?: string | null,
   createdAt?: string | null,
-  type?: NotifType | null,
-  status?: Status | null,
-  placeTimeSlotID?: string | null,
+  updatedAt?: string | null,
 };
 
-export type DeleteNotificationInput = {
+export type DeleteGroupChatInput = {
   id: string,
 };
 
-export type CreatePushNotificationsBatchInput = {
+export type CreateGroupChatUserProfileConnectionInput = {
   id?: string | null,
-  payloadsList?: string | null,
+  groupChatID: string,
+  userProfileID: string,
 };
 
-export type ModelPushNotificationsBatchConditionInput = {
-  payloadsList?: ModelStringInput | null,
-  and?: Array< ModelPushNotificationsBatchConditionInput | null > | null,
-  or?: Array< ModelPushNotificationsBatchConditionInput | null > | null,
-  not?: ModelPushNotificationsBatchConditionInput | null,
+export type ModelGroupChatUserProfileConnectionConditionInput = {
+  groupChatID?: ModelIDInput | null,
+  userProfileID?: ModelIDInput | null,
+  and?: Array< ModelGroupChatUserProfileConnectionConditionInput | null > | null,
+  or?: Array< ModelGroupChatUserProfileConnectionConditionInput | null > | null,
+  not?: ModelGroupChatUserProfileConnectionConditionInput | null,
 };
 
-export type PushNotificationsBatch = {
-  __typename: "PushNotificationsBatch",
+export type UpdateGroupChatUserProfileConnectionInput = {
   id: string,
-  payloadsList?: string | null,
-  createdAt: string,
-  updatedAt: string,
+  groupChatID?: string | null,
+  userProfileID?: string | null,
 };
 
-export type UpdatePushNotificationsBatchInput = {
-  id: string,
-  payloadsList?: string | null,
-};
-
-export type DeletePushNotificationsBatchInput = {
+export type DeleteGroupChatUserProfileConnectionInput = {
   id: string,
 };
 
-export type CreatePushNotificationsInput = {
+export type CreateGroupChatInvitationInput = {
   id?: string | null,
-  body: string,
-  userTokens: string,
-  data: string,
-  type?: NotifType | null,
+  senderProfileID: string,
+  receiverProfileID: string,
+  groupChatID: string,
+  status: GroupChatInvitationStatus,
 };
 
-export type ModelPushNotificationsConditionInput = {
-  body?: ModelStringInput | null,
-  userTokens?: ModelStringInput | null,
-  data?: ModelStringInput | null,
-  type?: ModelNotifTypeInput | null,
-  and?: Array< ModelPushNotificationsConditionInput | null > | null,
-  or?: Array< ModelPushNotificationsConditionInput | null > | null,
-  not?: ModelPushNotificationsConditionInput | null,
+export type ModelGroupChatInvitationConditionInput = {
+  senderProfileID?: ModelIDInput | null,
+  receiverProfileID?: ModelIDInput | null,
+  groupChatID?: ModelIDInput | null,
+  status?: ModelGroupChatInvitationStatusInput | null,
+  and?: Array< ModelGroupChatInvitationConditionInput | null > | null,
+  or?: Array< ModelGroupChatInvitationConditionInput | null > | null,
+  not?: ModelGroupChatInvitationConditionInput | null,
 };
 
-export type PushNotifications = {
-  __typename: "PushNotifications",
-  id?: string | null,
-  body: string,
-  userTokens: string,
-  data: string,
-  type?: NotifType | null,
-  createdAt: string,
-  updatedAt: string,
+export type ModelGroupChatInvitationStatusInput = {
+  eq?: GroupChatInvitationStatus | null,
+  ne?: GroupChatInvitationStatus | null,
 };
 
-export type UpdatePushNotificationsInput = {
+export type UpdateGroupChatInvitationInput = {
   id: string,
-  body?: string | null,
-  userTokens?: string | null,
-  data?: string | null,
-  type?: NotifType | null,
+  senderProfileID?: string | null,
+  receiverProfileID?: string | null,
+  groupChatID?: string | null,
+  status?: GroupChatInvitationStatus | null,
 };
 
-export type DeletePushNotificationsInput = {
+export type DeleteGroupChatInvitationInput = {
+  id: string,
+};
+
+export type CreateGroupChatMessageInput = {
+  id?: string | null,
+  type: GroupChatMessageType,
+  groupChatID: string,
+  senderProfileID: string,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+};
+
+export type ModelGroupChatMessageConditionInput = {
+  type?: ModelGroupChatMessageTypeInput | null,
+  groupChatID?: ModelIDInput | null,
+  senderProfileID?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelGroupChatMessageConditionInput | null > | null,
+  or?: Array< ModelGroupChatMessageConditionInput | null > | null,
+  not?: ModelGroupChatMessageConditionInput | null,
+};
+
+export type ModelGroupChatMessageTypeInput = {
+  eq?: GroupChatMessageType | null,
+  ne?: GroupChatMessageType | null,
+};
+
+export type UpdateGroupChatMessageInput = {
+  id: string,
+  type?: GroupChatMessageType | null,
+  groupChatID?: string | null,
+  senderProfileID?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+};
+
+export type DeleteGroupChatMessageInput = {
   id: string,
 };
 
@@ -738,88 +724,130 @@ export type ModelBlogConnection = {
 export type ModelPostFilterInput = {
   id?: ModelIDInput | null,
   title?: ModelStringInput | null,
-  blogID?: ModelIDInput | null,
   and?: Array< ModelPostFilterInput | null > | null,
   or?: Array< ModelPostFilterInput | null > | null,
   not?: ModelPostFilterInput | null,
+  blogPostsId?: ModelIDInput | null,
 };
 
 export type ModelCommentFilterInput = {
   id?: ModelIDInput | null,
-  postID?: ModelIDInput | null,
   content?: ModelStringInput | null,
   and?: Array< ModelCommentFilterInput | null > | null,
   or?: Array< ModelCommentFilterInput | null > | null,
   not?: ModelCommentFilterInput | null,
+  postCommentsId?: ModelIDInput | null,
 };
 
-export type ModelUserDocFilterInput = {
+export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
-  profileID?: ModelIDInput | null,
   email?: ModelStringInput | null,
-  deviceToken?: ModelStringInput | null,
   phoneNumber?: ModelStringInput | null,
-  and?: Array< ModelUserDocFilterInput | null > | null,
-  or?: Array< ModelUserDocFilterInput | null > | null,
-  not?: ModelUserDocFilterInput | null,
+  profileID?: ModelIDInput | null,
+  and?: Array< ModelUserFilterInput | null > | null,
+  or?: Array< ModelUserFilterInput | null > | null,
+  not?: ModelUserFilterInput | null,
 };
 
-export type ModelUserDocConnection = {
-  __typename: "ModelUserDocConnection",
-  items:  Array<UserDoc | null >,
+export type ModelUserConnection = {
+  __typename: "ModelUserConnection",
+  items:  Array<User | null >,
   nextToken?: string | null,
 };
 
-export type ModelUprofileFilterInput = {
+export type ModelUserProfileFilterInput = {
   id?: ModelIDInput | null,
+  email?: ModelStringInput | null,
   username?: ModelStringInput | null,
-  name?: ModelStringInput | null,
-  userDocID?: ModelIDInput | null,
-  currentPlaceID?: ModelIDInput | null,
-  expoPushToken?: ModelStringInput | null,
-  and?: Array< ModelUprofileFilterInput | null > | null,
-  or?: Array< ModelUprofileFilterInput | null > | null,
-  not?: ModelUprofileFilterInput | null,
+  and?: Array< ModelUserProfileFilterInput | null > | null,
+  or?: Array< ModelUserProfileFilterInput | null > | null,
+  not?: ModelUserProfileFilterInput | null,
+  userProfileUserId?: ModelIDInput | null,
 };
 
-export type ModelUserPlaceConnectionFilterInput = {
+export type ModelUserProfileConnection = {
+  __typename: "ModelUserProfileConnection",
+  items:  Array<UserProfile | null >,
+  nextToken?: string | null,
+};
+
+export type ModelFriendshipFilterInput = {
   id?: ModelIDInput | null,
-  profileID?: ModelIDInput | null,
+  userProfileID?: ModelIDInput | null,
+  friendProfileID?: ModelIDInput | null,
+  and?: Array< ModelFriendshipFilterInput | null > | null,
+  or?: Array< ModelFriendshipFilterInput | null > | null,
+  not?: ModelFriendshipFilterInput | null,
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
+export type ModelFriendshipRequestFilterInput = {
+  id?: ModelIDInput | null,
+  status?: ModelFriendshipRequestStatusInput | null,
+  senderProfileID?: ModelIDInput | null,
+  receiverProfileID?: ModelIDInput | null,
+  and?: Array< ModelFriendshipRequestFilterInput | null > | null,
+  or?: Array< ModelFriendshipRequestFilterInput | null > | null,
+  not?: ModelFriendshipRequestFilterInput | null,
+};
+
+export type ModelFriendshipRequestConnection = {
+  __typename: "ModelFriendshipRequestConnection",
+  items:  Array<FriendshipRequest | null >,
+  nextToken?: string | null,
+};
+
+export type ModelNotificationFilterInput = {
+  id?: ModelIDInput | null,
+  type?: ModelNotificationTypeInput | null,
+  receiverProfileID?: ModelIDInput | null,
+  friendshipRequestID?: ModelIDInput | null,
+  presenceID?: ModelIDInput | null,
+  senderProfileID?: ModelIDInput | null,
+  groupChatInvitationID?: ModelIDInput | null,
+  groupChatID?: ModelIDInput | null,
+  and?: Array< ModelNotificationFilterInput | null > | null,
+  or?: Array< ModelNotificationFilterInput | null > | null,
+  not?: ModelNotificationFilterInput | null,
+};
+
+export type ModelNotificationConnection = {
+  __typename: "ModelNotificationConnection",
+  items:  Array<Notification | null >,
+  nextToken?: string | null,
+};
+
+export type ModelPresenceFilterInput = {
+  id?: ModelIDInput | null,
   placeID?: ModelIDInput | null,
-  arrivingTime?: ModelStringInput | null,
-  departureTime?: ModelStringInput | null,
-  and?: Array< ModelUserPlaceConnectionFilterInput | null > | null,
-  or?: Array< ModelUserPlaceConnectionFilterInput | null > | null,
-  not?: ModelUserPlaceConnectionFilterInput | null,
+  userProfileID?: ModelIDInput | null,
+  startingDateTime?: ModelStringInput | null,
+  endingDateTime?: ModelStringInput | null,
+  startingTime?: ModelStringInput | null,
+  endingTime?: ModelStringInput | null,
+  and?: Array< ModelPresenceFilterInput | null > | null,
+  or?: Array< ModelPresenceFilterInput | null > | null,
+  not?: ModelPresenceFilterInput | null,
 };
 
-export type ModelPlaceTimeSlotFilterInput = {
-  id?: ModelIDInput | null,
-  numAttendings?: ModelIntInput | null,
-  dateTime?: ModelStringInput | null,
-  placeID?: ModelIDInput | null,
-  startingHour?: ModelStringInput | null,
-  endingHour?: ModelStringInput | null,
-  and?: Array< ModelPlaceTimeSlotFilterInput | null > | null,
-  or?: Array< ModelPlaceTimeSlotFilterInput | null > | null,
-  not?: ModelPlaceTimeSlotFilterInput | null,
-};
-
-export type ModelPlaceTimeSlotUserPlaceConnectionFilterInput = {
-  id?: ModelIDInput | null,
-  attendingID?: ModelIDInput | null,
-  profileID?: ModelIDInput | null,
-  placeTimeSlotID?: ModelIDInput | null,
-  createdAt?: ModelStringInput | null,
-  and?: Array< ModelPlaceTimeSlotUserPlaceConnectionFilterInput | null > | null,
-  or?: Array< ModelPlaceTimeSlotUserPlaceConnectionFilterInput | null > | null,
-  not?: ModelPlaceTimeSlotUserPlaceConnectionFilterInput | null,
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
 };
 
 export type ModelPlaceFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
-  address?: ModelStringInput | null,
   and?: Array< ModelPlaceFilterInput | null > | null,
   or?: Array< ModelPlaceFilterInput | null > | null,
   not?: ModelPlaceFilterInput | null,
@@ -831,71 +859,54 @@ export type ModelPlaceConnection = {
   nextToken?: string | null,
 };
 
-export type ModelFriendConnectionFilterInput = {
+export type ModelGroupChatFilterInput = {
   id?: ModelIDInput | null,
-  userProfileID?: ModelIDInput | null,
-  friendProfileID?: ModelIDInput | null,
-  and?: Array< ModelFriendConnectionFilterInput | null > | null,
-  or?: Array< ModelFriendConnectionFilterInput | null > | null,
-  not?: ModelFriendConnectionFilterInput | null,
-};
-
-export type ModelNotificationFilterInput = {
-  id?: ModelIDInput | null,
-  placeID?: ModelIDInput | null,
-  placeName?: ModelStringInput | null,
-  arrivingTime?: ModelStringInput | null,
-  departureTime?: ModelStringInput | null,
-  senderProfileID?: ModelIDInput | null,
-  message?: ModelStringInput | null,
-  receiverProfileID?: ModelIDInput | null,
-  photo?: ModelStringInput | null,
+  name?: ModelStringInput | null,
+  firstInvitedProfileIDList?: ModelStringInput | null,
+  creatorProfileID?: ModelIDInput | null,
   createdAt?: ModelStringInput | null,
-  type?: ModelNotifTypeInput | null,
-  status?: ModelStatusInput | null,
-  placeTimeSlotID?: ModelIDInput | null,
-  and?: Array< ModelNotificationFilterInput | null > | null,
-  or?: Array< ModelNotificationFilterInput | null > | null,
-  not?: ModelNotificationFilterInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelGroupChatFilterInput | null > | null,
+  or?: Array< ModelGroupChatFilterInput | null > | null,
+  not?: ModelGroupChatFilterInput | null,
 };
 
-export type ModelPushNotificationsBatchFilterInput = {
+export type ModelGroupChatUserProfileConnectionFilterInput = {
   id?: ModelIDInput | null,
-  payloadsList?: ModelStringInput | null,
-  and?: Array< ModelPushNotificationsBatchFilterInput | null > | null,
-  or?: Array< ModelPushNotificationsBatchFilterInput | null > | null,
-  not?: ModelPushNotificationsBatchFilterInput | null,
+  groupChatID?: ModelIDInput | null,
+  userProfileID?: ModelIDInput | null,
+  and?: Array< ModelGroupChatUserProfileConnectionFilterInput | null > | null,
+  or?: Array< ModelGroupChatUserProfileConnectionFilterInput | null > | null,
+  not?: ModelGroupChatUserProfileConnectionFilterInput | null,
 };
 
-export type ModelPushNotificationsBatchConnection = {
-  __typename: "ModelPushNotificationsBatchConnection",
-  items:  Array<PushNotificationsBatch | null >,
+export type ModelGroupChatInvitationFilterInput = {
+  id?: ModelIDInput | null,
+  senderProfileID?: ModelIDInput | null,
+  receiverProfileID?: ModelIDInput | null,
+  groupChatID?: ModelIDInput | null,
+  status?: ModelGroupChatInvitationStatusInput | null,
+  and?: Array< ModelGroupChatInvitationFilterInput | null > | null,
+  or?: Array< ModelGroupChatInvitationFilterInput | null > | null,
+  not?: ModelGroupChatInvitationFilterInput | null,
+};
+
+export type ModelGroupChatInvitationConnection = {
+  __typename: "ModelGroupChatInvitationConnection",
+  items:  Array<GroupChatInvitation | null >,
   nextToken?: string | null,
 };
 
-export type ModelPushNotificationsFilterInput = {
+export type ModelGroupChatMessageFilterInput = {
   id?: ModelIDInput | null,
-  body?: ModelStringInput | null,
-  userTokens?: ModelStringInput | null,
-  data?: ModelStringInput | null,
-  type?: ModelNotifTypeInput | null,
-  and?: Array< ModelPushNotificationsFilterInput | null > | null,
-  or?: Array< ModelPushNotificationsFilterInput | null > | null,
-  not?: ModelPushNotificationsFilterInput | null,
-};
-
-export type ModelPushNotificationsConnection = {
-  __typename: "ModelPushNotificationsConnection",
-  items:  Array<PushNotifications | null >,
-  nextToken?: string | null,
-};
-
-export type DeleteAttendanceMutationVariables = {
-  id: string,
-};
-
-export type DeleteAttendanceMutation = {
-  deleteAttendance?: boolean | null,
+  type?: ModelGroupChatMessageTypeInput | null,
+  groupChatID?: ModelIDInput | null,
+  senderProfileID?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelGroupChatMessageFilterInput | null > | null,
+  or?: Array< ModelGroupChatMessageFilterInput | null > | null,
+  not?: ModelGroupChatMessageFilterInput | null,
 };
 
 export type CreateBlogMutationVariables = {
@@ -965,7 +976,6 @@ export type CreatePostMutation = {
     __typename: "Post",
     id: string,
     title: string,
-    blogID: string,
     blog?:  {
       __typename: "Blog",
       id: string,
@@ -979,6 +989,7 @@ export type CreatePostMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    blogPostsId?: string | null,
   } | null,
 };
 
@@ -992,7 +1003,6 @@ export type UpdatePostMutation = {
     __typename: "Post",
     id: string,
     title: string,
-    blogID: string,
     blog?:  {
       __typename: "Blog",
       id: string,
@@ -1006,6 +1016,7 @@ export type UpdatePostMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    blogPostsId?: string | null,
   } | null,
 };
 
@@ -1019,7 +1030,6 @@ export type DeletePostMutation = {
     __typename: "Post",
     id: string,
     title: string,
-    blogID: string,
     blog?:  {
       __typename: "Blog",
       id: string,
@@ -1033,6 +1043,7 @@ export type DeletePostMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    blogPostsId?: string | null,
   } | null,
 };
 
@@ -1045,18 +1056,18 @@ export type CreateCommentMutation = {
   createComment?:  {
     __typename: "Comment",
     id: string,
-    postID: string,
     post?:  {
       __typename: "Post",
       id: string,
       title: string,
-      blogID: string,
       createdAt: string,
       updatedAt: string,
+      blogPostsId?: string | null,
     } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
+    postCommentsId?: string | null,
   } | null,
 };
 
@@ -1069,18 +1080,18 @@ export type UpdateCommentMutation = {
   updateComment?:  {
     __typename: "Comment",
     id: string,
-    postID: string,
     post?:  {
       __typename: "Post",
       id: string,
       title: string,
-      blogID: string,
       createdAt: string,
       updatedAt: string,
+      blogPostsId?: string | null,
     } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
+    postCommentsId?: string | null,
   } | null,
 };
 
@@ -1093,672 +1104,666 @@ export type DeleteCommentMutation = {
   deleteComment?:  {
     __typename: "Comment",
     id: string,
-    postID: string,
     post?:  {
       __typename: "Post",
       id: string,
       title: string,
-      blogID: string,
       createdAt: string,
       updatedAt: string,
+      blogPostsId?: string | null,
     } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
+    postCommentsId?: string | null,
   } | null,
 };
 
-export type CreateUserDocMutationVariables = {
-  input: CreateUserDocInput,
-  condition?: ModelUserDocConditionInput | null,
+export type CreateUserMutationVariables = {
+  input: CreateUserInput,
+  condition?: ModelUserConditionInput | null,
 };
 
-export type CreateUserDocMutation = {
-  createUserDoc?:  {
-    __typename: "UserDoc",
+export type CreateUserMutation = {
+  createUser?:  {
+    __typename: "User",
     id: string,
-    profileID?: string | null,
     email: string,
-    deviceToken?: string | null,
     phoneNumber?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type UpdateUserDocMutationVariables = {
-  input: UpdateUserDocInput,
-  condition?: ModelUserDocConditionInput | null,
-};
-
-export type UpdateUserDocMutation = {
-  updateUserDoc?:  {
-    __typename: "UserDoc",
-    id: string,
     profileID?: string | null,
-    email: string,
-    deviceToken?: string | null,
-    phoneNumber?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
+    profile?:  {
+      __typename: "UserProfile",
       id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type DeleteUserDocMutationVariables = {
-  input: DeleteUserDocInput,
-  condition?: ModelUserDocConditionInput | null,
-};
-
-export type DeleteUserDocMutation = {
-  deleteUserDoc?:  {
-    __typename: "UserDoc",
-    id: string,
-    profileID?: string | null,
-    email: string,
-    deviceToken?: string | null,
-    phoneNumber?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type CreateUprofileMutationVariables = {
-  input: CreateUprofileInput,
-  condition?: ModelUprofileConditionInput | null,
-};
-
-export type CreateUprofileMutation = {
-  createUprofile?:  {
-    __typename: "Uprofile",
-    id: string,
-    username: string,
-    name?: string | null,
-    userDocID: string,
-    currentPlaceID?: string | null,
-    expoPushToken?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    userDoc?:  {
-      __typename: "UserDoc",
-      id: string,
-      profileID?: string | null,
       email: string,
-      deviceToken?: string | null,
-      phoneNumber?: string | null,
+      username: string,
       createdAt: string,
       updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-    attendings?:  {
-      __typename: "ModelUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    placeTimeSlots?:  {
-      __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    currentPlace?:  {
-      __typename: "Place",
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateUserMutationVariables = {
+  input: UpdateUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type UpdateUserMutation = {
+  updateUser?:  {
+    __typename: "User",
+    id: string,
+    email: string,
+    phoneNumber?: string | null,
+    profileID?: string | null,
+    profile?:  {
+      __typename: "UserProfile",
       id: string,
-      name: string,
-      address: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteUserMutationVariables = {
+  input: DeleteUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type DeleteUserMutation = {
+  deleteUser?:  {
+    __typename: "User",
+    id: string,
+    email: string,
+    phoneNumber?: string | null,
+    profileID?: string | null,
+    profile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateUserProfileMutationVariables = {
+  input: CreateUserProfileInput,
+  condition?: ModelUserProfileConditionInput | null,
+};
+
+export type CreateUserProfileMutation = {
+  createUserProfile?:  {
+    __typename: "UserProfile",
+    id: string,
+    email: string,
+    username: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      email: string,
+      phoneNumber?: string | null,
+      profileID?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     friends?:  {
-      __typename: "ModelFriendConnectionConnection",
+      __typename: "ModelFriendshipConnection",
       nextToken?: string | null,
     } | null,
-    sentNotifications?:  {
-      __typename: "ModelNotificationConnection",
+    presenceList?:  {
+      __typename: "ModelPresenceConnection",
       nextToken?: string | null,
     } | null,
-    notifications?:  {
-      __typename: "ModelNotificationConnection",
+    groupChatUserProfileConnectionList?:  {
+      __typename: "ModelGroupChatUserProfileConnectionConnection",
       nextToken?: string | null,
     } | null,
+    createdGroupChatList?:  {
+      __typename: "ModelGroupChatConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userProfileUserId?: string | null,
   } | null,
 };
 
-export type UpdateUprofileMutationVariables = {
-  input: UpdateUprofileInput,
-  condition?: ModelUprofileConditionInput | null,
+export type UpdateUserProfileMutationVariables = {
+  input: UpdateUserProfileInput,
+  condition?: ModelUserProfileConditionInput | null,
 };
 
-export type UpdateUprofileMutation = {
-  updateUprofile?:  {
-    __typename: "Uprofile",
+export type UpdateUserProfileMutation = {
+  updateUserProfile?:  {
+    __typename: "UserProfile",
     id: string,
+    email: string,
     username: string,
-    name?: string | null,
-    userDocID: string,
-    currentPlaceID?: string | null,
-    expoPushToken?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    userDoc?:  {
-      __typename: "UserDoc",
+    user?:  {
+      __typename: "User",
       id: string,
-      profileID?: string | null,
       email: string,
-      deviceToken?: string | null,
       phoneNumber?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    attendings?:  {
-      __typename: "ModelUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    placeTimeSlots?:  {
-      __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    currentPlace?:  {
-      __typename: "Place",
-      id: string,
-      name: string,
-      address: string,
+      profileID?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     friends?:  {
-      __typename: "ModelFriendConnectionConnection",
+      __typename: "ModelFriendshipConnection",
       nextToken?: string | null,
     } | null,
-    sentNotifications?:  {
-      __typename: "ModelNotificationConnection",
+    presenceList?:  {
+      __typename: "ModelPresenceConnection",
       nextToken?: string | null,
     } | null,
-    notifications?:  {
-      __typename: "ModelNotificationConnection",
+    groupChatUserProfileConnectionList?:  {
+      __typename: "ModelGroupChatUserProfileConnectionConnection",
       nextToken?: string | null,
     } | null,
+    createdGroupChatList?:  {
+      __typename: "ModelGroupChatConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userProfileUserId?: string | null,
   } | null,
 };
 
-export type DeleteUprofileMutationVariables = {
-  input: DeleteUprofileInput,
-  condition?: ModelUprofileConditionInput | null,
+export type DeleteUserProfileMutationVariables = {
+  input: DeleteUserProfileInput,
+  condition?: ModelUserProfileConditionInput | null,
 };
 
-export type DeleteUprofileMutation = {
-  deleteUprofile?:  {
-    __typename: "Uprofile",
+export type DeleteUserProfileMutation = {
+  deleteUserProfile?:  {
+    __typename: "UserProfile",
     id: string,
+    email: string,
     username: string,
-    name?: string | null,
-    userDocID: string,
-    currentPlaceID?: string | null,
-    expoPushToken?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    userDoc?:  {
-      __typename: "UserDoc",
+    user?:  {
+      __typename: "User",
       id: string,
-      profileID?: string | null,
       email: string,
-      deviceToken?: string | null,
       phoneNumber?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    attendings?:  {
-      __typename: "ModelUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    placeTimeSlots?:  {
-      __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    currentPlace?:  {
-      __typename: "Place",
-      id: string,
-      name: string,
-      address: string,
+      profileID?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     friends?:  {
-      __typename: "ModelFriendConnectionConnection",
+      __typename: "ModelFriendshipConnection",
       nextToken?: string | null,
     } | null,
-    sentNotifications?:  {
-      __typename: "ModelNotificationConnection",
+    presenceList?:  {
+      __typename: "ModelPresenceConnection",
       nextToken?: string | null,
     } | null,
-    notifications?:  {
-      __typename: "ModelNotificationConnection",
+    groupChatUserProfileConnectionList?:  {
+      __typename: "ModelGroupChatUserProfileConnectionConnection",
       nextToken?: string | null,
     } | null,
+    createdGroupChatList?:  {
+      __typename: "ModelGroupChatConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userProfileUserId?: string | null,
   } | null,
 };
 
-export type CreateUserPlaceConnectionMutationVariables = {
-  input: CreateUserPlaceConnectionInput,
-  condition?: ModelUserPlaceConnectionConditionInput | null,
+export type CreateFriendshipMutationVariables = {
+  input: CreateFriendshipInput,
+  condition?: ModelFriendshipConditionInput | null,
 };
 
-export type CreateUserPlaceConnectionMutation = {
-  createUserPlaceConnection?:  {
-    __typename: "UserPlaceConnection",
+export type CreateFriendshipMutation = {
+  createFriendship?:  {
+    __typename: "Friendship",
     id: string,
-    profileID: string,
-    placeID: string,
-    arrivingTime?: string | null,
-    departureTime?: string | null,
-    placeTimeSoltUserPlaceConnection?:  {
-      __typename: "Place",
+    userProfileID: string,
+    friendProfileID: string,
+    friendProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateFriendshipMutationVariables = {
+  input: UpdateFriendshipInput,
+  condition?: ModelFriendshipConditionInput | null,
+};
+
+export type UpdateFriendshipMutation = {
+  updateFriendship?:  {
+    __typename: "Friendship",
+    id: string,
+    userProfileID: string,
+    friendProfileID: string,
+    friendProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteFriendshipMutationVariables = {
+  input: DeleteFriendshipInput,
+  condition?: ModelFriendshipConditionInput | null,
+};
+
+export type DeleteFriendshipMutation = {
+  deleteFriendship?:  {
+    __typename: "Friendship",
+    id: string,
+    userProfileID: string,
+    friendProfileID: string,
+    friendProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateFriendshipRequestMutationVariables = {
+  input: CreateFriendshipRequestInput,
+  condition?: ModelFriendshipRequestConditionInput | null,
+};
+
+export type CreateFriendshipRequestMutation = {
+  createFriendshipRequest?:  {
+    __typename: "FriendshipRequest",
+    id: string,
+    status: FriendshipRequestStatus,
+    senderProfileID: string,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    receiverProfileID: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateFriendshipRequestMutationVariables = {
+  input: UpdateFriendshipRequestInput,
+  condition?: ModelFriendshipRequestConditionInput | null,
+};
+
+export type UpdateFriendshipRequestMutation = {
+  updateFriendshipRequest?:  {
+    __typename: "FriendshipRequest",
+    id: string,
+    status: FriendshipRequestStatus,
+    senderProfileID: string,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    receiverProfileID: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteFriendshipRequestMutationVariables = {
+  input: DeleteFriendshipRequestInput,
+  condition?: ModelFriendshipRequestConditionInput | null,
+};
+
+export type DeleteFriendshipRequestMutation = {
+  deleteFriendshipRequest?:  {
+    __typename: "FriendshipRequest",
+    id: string,
+    status: FriendshipRequestStatus,
+    senderProfileID: string,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    receiverProfileID: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateNotificationMutationVariables = {
+  input: CreateNotificationInput,
+  condition?: ModelNotificationConditionInput | null,
+};
+
+export type CreateNotificationMutation = {
+  createNotification?:  {
+    __typename: "Notification",
+    id: string,
+    type: NotificationType,
+    receiverProfileID: string,
+    friendshipRequestID?: string | null,
+    presenceID?: string | null,
+    senderProfileID?: string | null,
+    groupChatInvitationID?: string | null,
+    groupChatID?: string | null,
+    presence?:  {
+      __typename: "Presence",
+      id: string,
+      placeID: string,
+      userProfileID: string,
+      startingDateTime: string,
+      endingDateTime: string,
+      startingTime?: string | null,
+      endingTime: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChatInvitation?:  {
+      __typename: "GroupChatInvitation",
+      id: string,
+      senderProfileID: string,
+      receiverProfileID: string,
+      groupChatID: string,
+      status: GroupChatInvitationStatus,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
       id: string,
       name: string,
-      address: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
     createdAt: string,
     updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    place?:  {
-      __typename: "Place",
-      id: string,
-      name: string,
-      address: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
-export type UpdateUserPlaceConnectionMutationVariables = {
-  input: UpdateUserPlaceConnectionInput,
-  condition?: ModelUserPlaceConnectionConditionInput | null,
+export type UpdateNotificationMutationVariables = {
+  input: UpdateNotificationInput,
+  condition?: ModelNotificationConditionInput | null,
 };
 
-export type UpdateUserPlaceConnectionMutation = {
-  updateUserPlaceConnection?:  {
-    __typename: "UserPlaceConnection",
+export type UpdateNotificationMutation = {
+  updateNotification?:  {
+    __typename: "Notification",
     id: string,
-    profileID: string,
-    placeID: string,
-    arrivingTime?: string | null,
-    departureTime?: string | null,
-    placeTimeSoltUserPlaceConnection?:  {
-      __typename: "Place",
+    type: NotificationType,
+    receiverProfileID: string,
+    friendshipRequestID?: string | null,
+    presenceID?: string | null,
+    senderProfileID?: string | null,
+    groupChatInvitationID?: string | null,
+    groupChatID?: string | null,
+    presence?:  {
+      __typename: "Presence",
+      id: string,
+      placeID: string,
+      userProfileID: string,
+      startingDateTime: string,
+      endingDateTime: string,
+      startingTime?: string | null,
+      endingTime: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChatInvitation?:  {
+      __typename: "GroupChatInvitation",
+      id: string,
+      senderProfileID: string,
+      receiverProfileID: string,
+      groupChatID: string,
+      status: GroupChatInvitationStatus,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
       id: string,
       name: string,
-      address: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
     createdAt: string,
     updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    place?:  {
-      __typename: "Place",
-      id: string,
-      name: string,
-      address: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
-export type DeleteUserPlaceConnectionMutationVariables = {
-  input: DeleteUserPlaceConnectionInput,
-  condition?: ModelUserPlaceConnectionConditionInput | null,
+export type DeleteNotificationMutationVariables = {
+  input: DeleteNotificationInput,
+  condition?: ModelNotificationConditionInput | null,
 };
 
-export type DeleteUserPlaceConnectionMutation = {
-  deleteUserPlaceConnection?:  {
-    __typename: "UserPlaceConnection",
+export type DeleteNotificationMutation = {
+  deleteNotification?:  {
+    __typename: "Notification",
     id: string,
-    profileID: string,
-    placeID: string,
-    arrivingTime?: string | null,
-    departureTime?: string | null,
-    placeTimeSoltUserPlaceConnection?:  {
-      __typename: "Place",
+    type: NotificationType,
+    receiverProfileID: string,
+    friendshipRequestID?: string | null,
+    presenceID?: string | null,
+    senderProfileID?: string | null,
+    groupChatInvitationID?: string | null,
+    groupChatID?: string | null,
+    presence?:  {
+      __typename: "Presence",
+      id: string,
+      placeID: string,
+      userProfileID: string,
+      startingDateTime: string,
+      endingDateTime: string,
+      startingTime?: string | null,
+      endingTime: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChatInvitation?:  {
+      __typename: "GroupChatInvitation",
+      id: string,
+      senderProfileID: string,
+      receiverProfileID: string,
+      groupChatID: string,
+      status: GroupChatInvitationStatus,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
       id: string,
       name: string,
-      address: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
     createdAt: string,
     updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+  } | null,
+};
+
+export type CreatePresenceMutationVariables = {
+  input: CreatePresenceInput,
+  condition?: ModelPresenceConditionInput | null,
+};
+
+export type CreatePresenceMutation = {
+  createPresence?:  {
+    __typename: "Presence",
+    id: string,
+    placeID: string,
+    userProfileID: string,
     place?:  {
       __typename: "Place",
       id: string,
       name: string,
-      address: string,
       createdAt: string,
       updatedAt: string,
     } | null,
-  } | null,
-};
-
-export type CreatePlaceTimeSlotMutationVariables = {
-  input: CreatePlaceTimeSlotInput,
-  condition?: ModelPlaceTimeSlotConditionInput | null,
-};
-
-export type CreatePlaceTimeSlotMutation = {
-  createPlaceTimeSlot?:  {
-    __typename: "PlaceTimeSlot",
-    id: string,
-    numAttendings?: number | null,
-    myDate?:  {
-      __typename: "MyDate",
-      weekDay: string,
-      monthDay: string,
-      month: string,
-      year: string,
+    userProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-    dateTime?: string | null,
-    placeID: string,
-    startingHour: string,
-    endingHour: string,
+    startingDateTime: string,
+    endingDateTime: string,
+    startingTime?: string | null,
+    endingTime: string,
     createdAt: string,
     updatedAt: string,
-    attendings?:  {
-      __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
+  } | null,
+};
+
+export type UpdatePresenceMutationVariables = {
+  input: UpdatePresenceInput,
+  condition?: ModelPresenceConditionInput | null,
+};
+
+export type UpdatePresenceMutation = {
+  updatePresence?:  {
+    __typename: "Presence",
+    id: string,
+    placeID: string,
+    userProfileID: string,
     place?:  {
       __typename: "Place",
       id: string,
       name: string,
-      address: string,
       createdAt: string,
       updatedAt: string,
     } | null,
-  } | null,
-};
-
-export type UpdatePlaceTimeSlotMutationVariables = {
-  input: UpdatePlaceTimeSlotInput,
-  condition?: ModelPlaceTimeSlotConditionInput | null,
-};
-
-export type UpdatePlaceTimeSlotMutation = {
-  updatePlaceTimeSlot?:  {
-    __typename: "PlaceTimeSlot",
-    id: string,
-    numAttendings?: number | null,
-    myDate?:  {
-      __typename: "MyDate",
-      weekDay: string,
-      monthDay: string,
-      month: string,
-      year: string,
+    userProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-    dateTime?: string | null,
-    placeID: string,
-    startingHour: string,
-    endingHour: string,
+    startingDateTime: string,
+    endingDateTime: string,
+    startingTime?: string | null,
+    endingTime: string,
     createdAt: string,
     updatedAt: string,
-    attendings?:  {
-      __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
+  } | null,
+};
+
+export type DeletePresenceMutationVariables = {
+  input: DeletePresenceInput,
+  condition?: ModelPresenceConditionInput | null,
+};
+
+export type DeletePresenceMutation = {
+  deletePresence?:  {
+    __typename: "Presence",
+    id: string,
+    placeID: string,
+    userProfileID: string,
     place?:  {
       __typename: "Place",
       id: string,
       name: string,
-      address: string,
       createdAt: string,
       updatedAt: string,
     } | null,
-  } | null,
-};
-
-export type DeletePlaceTimeSlotMutationVariables = {
-  input: DeletePlaceTimeSlotInput,
-  condition?: ModelPlaceTimeSlotConditionInput | null,
-};
-
-export type DeletePlaceTimeSlotMutation = {
-  deletePlaceTimeSlot?:  {
-    __typename: "PlaceTimeSlot",
-    id: string,
-    numAttendings?: number | null,
-    myDate?:  {
-      __typename: "MyDate",
-      weekDay: string,
-      monthDay: string,
-      month: string,
-      year: string,
+    userProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-    dateTime?: string | null,
-    placeID: string,
-    startingHour: string,
-    endingHour: string,
+    startingDateTime: string,
+    endingDateTime: string,
+    startingTime?: string | null,
+    endingTime: string,
     createdAt: string,
     updatedAt: string,
-    attendings?:  {
-      __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    place?:  {
-      __typename: "Place",
-      id: string,
-      name: string,
-      address: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type CreatePlaceTimeSlotUserPlaceConnectionMutationVariables = {
-  input: CreatePlaceTimeSlotUserPlaceConnectionInput,
-  condition?: ModelPlaceTimeSlotUserPlaceConnectionConditionInput | null,
-};
-
-export type CreatePlaceTimeSlotUserPlaceConnectionMutation = {
-  createPlaceTimeSlotUserPlaceConnection?:  {
-    __typename: "PlaceTimeSlotUserPlaceConnection",
-    id: string,
-    attendingID: string,
-    profileID?: string | null,
-    placeTimeSlotID: string,
-    createdAt?: string | null,
-    updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    attending?:  {
-      __typename: "UserPlaceConnection",
-      id: string,
-      profileID: string,
-      placeID: string,
-      arrivingTime?: string | null,
-      departureTime?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    timeSlot?:  {
-      __typename: "PlaceTimeSlot",
-      id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
-      placeID: string,
-      startingHour: string,
-      endingHour: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type UpdatePlaceTimeSlotUserPlaceConnectionMutationVariables = {
-  input: UpdatePlaceTimeSlotUserPlaceConnectionInput,
-  condition?: ModelPlaceTimeSlotUserPlaceConnectionConditionInput | null,
-};
-
-export type UpdatePlaceTimeSlotUserPlaceConnectionMutation = {
-  updatePlaceTimeSlotUserPlaceConnection?:  {
-    __typename: "PlaceTimeSlotUserPlaceConnection",
-    id: string,
-    attendingID: string,
-    profileID?: string | null,
-    placeTimeSlotID: string,
-    createdAt?: string | null,
-    updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    attending?:  {
-      __typename: "UserPlaceConnection",
-      id: string,
-      profileID: string,
-      placeID: string,
-      arrivingTime?: string | null,
-      departureTime?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    timeSlot?:  {
-      __typename: "PlaceTimeSlot",
-      id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
-      placeID: string,
-      startingHour: string,
-      endingHour: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type DeletePlaceTimeSlotUserPlaceConnectionMutationVariables = {
-  input: DeletePlaceTimeSlotUserPlaceConnectionInput,
-  condition?: ModelPlaceTimeSlotUserPlaceConnectionConditionInput | null,
-};
-
-export type DeletePlaceTimeSlotUserPlaceConnectionMutation = {
-  deletePlaceTimeSlotUserPlaceConnection?:  {
-    __typename: "PlaceTimeSlotUserPlaceConnection",
-    id: string,
-    attendingID: string,
-    profileID?: string | null,
-    placeTimeSlotID: string,
-    createdAt?: string | null,
-    updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    attending?:  {
-      __typename: "UserPlaceConnection",
-      id: string,
-      profileID: string,
-      placeID: string,
-      arrivingTime?: string | null,
-      departureTime?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    timeSlot?:  {
-      __typename: "PlaceTimeSlot",
-      id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
-      placeID: string,
-      startingHour: string,
-      endingHour: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
@@ -1772,22 +1777,12 @@ export type CreatePlaceMutation = {
     __typename: "Place",
     id: string,
     name: string,
-    address: string,
-    coords:  {
-      __typename: "Coords",
-      lon: number,
-      lat: number,
-    },
+    presenceList?:  {
+      __typename: "ModelPresenceConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    currentPlayers?:  {
-      __typename: "ModelUprofileConnection",
-      nextToken?: string | null,
-    } | null,
-    timeSlots?:  {
-      __typename: "ModelPlaceTimeSlotConnection",
-      nextToken?: string | null,
-    } | null,
   } | null,
 };
 
@@ -1801,22 +1796,12 @@ export type UpdatePlaceMutation = {
     __typename: "Place",
     id: string,
     name: string,
-    address: string,
-    coords:  {
-      __typename: "Coords",
-      lon: number,
-      lat: number,
-    },
+    presenceList?:  {
+      __typename: "ModelPresenceConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    currentPlayers?:  {
-      __typename: "ModelUprofileConnection",
-      nextToken?: string | null,
-    } | null,
-    timeSlots?:  {
-      __typename: "ModelPlaceTimeSlotConnection",
-      nextToken?: string | null,
-    } | null,
   } | null,
 };
 
@@ -1830,425 +1815,454 @@ export type DeletePlaceMutation = {
     __typename: "Place",
     id: string,
     name: string,
-    address: string,
-    coords:  {
-      __typename: "Coords",
-      lon: number,
-      lat: number,
-    },
-    createdAt: string,
-    updatedAt: string,
-    currentPlayers?:  {
-      __typename: "ModelUprofileConnection",
+    presenceList?:  {
+      __typename: "ModelPresenceConnection",
       nextToken?: string | null,
     } | null,
-    timeSlots?:  {
-      __typename: "ModelPlaceTimeSlotConnection",
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateGroupChatMutationVariables = {
+  input: CreateGroupChatInput,
+  condition?: ModelGroupChatConditionInput | null,
+};
+
+export type CreateGroupChatMutation = {
+  createGroupChat?:  {
+    __typename: "GroupChat",
+    id: string,
+    name: string,
+    firstInvitedProfileIDList?: string | null,
+    groupChatUserProfileConnectionList?:  {
+      __typename: "ModelGroupChatUserProfileConnectionConnection",
       nextToken?: string | null,
     } | null,
-  } | null,
-};
-
-export type CreateFriendConnectionMutationVariables = {
-  input: CreateFriendConnectionInput,
-  condition?: ModelFriendConnectionConditionInput | null,
-};
-
-export type CreateFriendConnectionMutation = {
-  createFriendConnection?:  {
-    __typename: "FriendConnection",
-    id: string,
-    userProfileID: string,
-    friendProfileID: string,
-    createdAt: string,
-    updatedAt: string,
-    friendProfile?:  {
-      __typename: "Uprofile",
+    creatorProfileID: string,
+    creatorProfile?:  {
+      __typename: "UserProfile",
       id: string,
+      email: string,
       username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
       createdAt: string,
       updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-  } | null,
-};
-
-export type UpdateFriendConnectionMutationVariables = {
-  input: UpdateFriendConnectionInput,
-  condition?: ModelFriendConnectionConditionInput | null,
-};
-
-export type UpdateFriendConnectionMutation = {
-  updateFriendConnection?:  {
-    __typename: "FriendConnection",
-    id: string,
-    userProfileID: string,
-    friendProfileID: string,
+    messageList?:  {
+      __typename: "ModelGroupChatMessageConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    friendProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
-export type DeleteFriendConnectionMutationVariables = {
-  input: DeleteFriendConnectionInput,
-  condition?: ModelFriendConnectionConditionInput | null,
+export type UpdateGroupChatMutationVariables = {
+  input: UpdateGroupChatInput,
+  condition?: ModelGroupChatConditionInput | null,
 };
 
-export type DeleteFriendConnectionMutation = {
-  deleteFriendConnection?:  {
-    __typename: "FriendConnection",
+export type UpdateGroupChatMutation = {
+  updateGroupChat?:  {
+    __typename: "GroupChat",
     id: string,
-    userProfileID: string,
-    friendProfileID: string,
+    name: string,
+    firstInvitedProfileIDList?: string | null,
+    groupChatUserProfileConnectionList?:  {
+      __typename: "ModelGroupChatUserProfileConnectionConnection",
+      nextToken?: string | null,
+    } | null,
+    creatorProfileID: string,
+    creatorProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    messageList?:  {
+      __typename: "ModelGroupChatMessageConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    friendProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
-export type CreateNotificationMutationVariables = {
-  input: CreateNotificationInput,
-  condition?: ModelNotificationConditionInput | null,
+export type DeleteGroupChatMutationVariables = {
+  input: DeleteGroupChatInput,
+  condition?: ModelGroupChatConditionInput | null,
 };
 
-export type CreateNotificationMutation = {
-  createNotification?:  {
-    __typename: "Notification",
+export type DeleteGroupChatMutation = {
+  deleteGroupChat?:  {
+    __typename: "GroupChat",
     id: string,
-    placeID?: string | null,
-    placeName?: string | null,
-    arrivingTime?: string | null,
-    departureTime?: string | null,
-    senderProfileID: string,
-    message: string,
-    receiverProfileID: string,
-    photo?: string | null,
-    createdAt?: string | null,
-    type: NotifType,
-    status: Status,
-    placeTimeSlotID?: string | null,
+    name: string,
+    firstInvitedProfileIDList?: string | null,
+    groupChatUserProfileConnectionList?:  {
+      __typename: "ModelGroupChatUserProfileConnectionConnection",
+      nextToken?: string | null,
+    } | null,
+    creatorProfileID: string,
+    creatorProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    messageList?:  {
+      __typename: "ModelGroupChatMessageConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type CreateGroupChatUserProfileConnectionMutationVariables = {
+  input: CreateGroupChatUserProfileConnectionInput,
+  condition?: ModelGroupChatUserProfileConnectionConditionInput | null,
+};
+
+export type CreateGroupChatUserProfileConnectionMutation = {
+  createGroupChatUserProfileConnection?:  {
+    __typename: "GroupChatUserProfileConnection",
+    id: string,
+    groupChatID: string,
+    userProfileID: string,
     userProfile?:  {
-      __typename: "Uprofile",
+      __typename: "UserProfile",
       id: string,
+      email: string,
       username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateGroupChatUserProfileConnectionMutationVariables = {
+  input: UpdateGroupChatUserProfileConnectionInput,
+  condition?: ModelGroupChatUserProfileConnectionConditionInput | null,
+};
+
+export type UpdateGroupChatUserProfileConnectionMutation = {
+  updateGroupChatUserProfileConnection?:  {
+    __typename: "GroupChatUserProfileConnection",
+    id: string,
+    groupChatID: string,
+    userProfileID: string,
+    userProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteGroupChatUserProfileConnectionMutationVariables = {
+  input: DeleteGroupChatUserProfileConnectionInput,
+  condition?: ModelGroupChatUserProfileConnectionConditionInput | null,
+};
+
+export type DeleteGroupChatUserProfileConnectionMutation = {
+  deleteGroupChatUserProfileConnection?:  {
+    __typename: "GroupChatUserProfileConnection",
+    id: string,
+    groupChatID: string,
+    userProfileID: string,
+    userProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateGroupChatInvitationMutationVariables = {
+  input: CreateGroupChatInvitationInput,
+  condition?: ModelGroupChatInvitationConditionInput | null,
+};
+
+export type CreateGroupChatInvitationMutation = {
+  createGroupChatInvitation?:  {
+    __typename: "GroupChatInvitation",
+    id: string,
+    senderProfileID: string,
+    receiverProfileID: string,
+    groupChatID: string,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    receiverProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    status: GroupChatInvitationStatus,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateGroupChatInvitationMutationVariables = {
+  input: UpdateGroupChatInvitationInput,
+  condition?: ModelGroupChatInvitationConditionInput | null,
+};
+
+export type UpdateGroupChatInvitationMutation = {
+  updateGroupChatInvitation?:  {
+    __typename: "GroupChatInvitation",
+    id: string,
+    senderProfileID: string,
+    receiverProfileID: string,
+    groupChatID: string,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    receiverProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    status: GroupChatInvitationStatus,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteGroupChatInvitationMutationVariables = {
+  input: DeleteGroupChatInvitationInput,
+  condition?: ModelGroupChatInvitationConditionInput | null,
+};
+
+export type DeleteGroupChatInvitationMutation = {
+  deleteGroupChatInvitation?:  {
+    __typename: "GroupChatInvitation",
+    id: string,
+    senderProfileID: string,
+    receiverProfileID: string,
+    groupChatID: string,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    receiverProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    status: GroupChatInvitationStatus,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateGroupChatMessageMutationVariables = {
+  input: CreateGroupChatMessageInput,
+  condition?: ModelGroupChatMessageConditionInput | null,
+};
+
+export type CreateGroupChatMessageMutation = {
+  createGroupChatMessage?:  {
+    __typename: "GroupChatMessage",
+    id: string,
+    type: GroupChatMessageType,
+    groupChatID: string,
+    senderProfileID: string,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
     senderProfile?:  {
-      __typename: "Uprofile",
+      __typename: "UserProfile",
       id: string,
+      email: string,
       username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
       createdAt: string,
       updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-    placeTimeSlot?:  {
-      __typename: "PlaceTimeSlot",
-      id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
-      placeID: string,
-      startingHour: string,
-      endingHour: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
-export type UpdateNotificationMutationVariables = {
-  input: UpdateNotificationInput,
-  condition?: ModelNotificationConditionInput | null,
+export type UpdateGroupChatMessageMutationVariables = {
+  input: UpdateGroupChatMessageInput,
+  condition?: ModelGroupChatMessageConditionInput | null,
 };
 
-export type UpdateNotificationMutation = {
-  updateNotification?:  {
-    __typename: "Notification",
+export type UpdateGroupChatMessageMutation = {
+  updateGroupChatMessage?:  {
+    __typename: "GroupChatMessage",
     id: string,
-    placeID?: string | null,
-    placeName?: string | null,
-    arrivingTime?: string | null,
-    departureTime?: string | null,
+    type: GroupChatMessageType,
+    groupChatID: string,
     senderProfileID: string,
-    message: string,
-    receiverProfileID: string,
-    photo?: string | null,
-    createdAt?: string | null,
-    type: NotifType,
-    status: Status,
-    placeTimeSlotID?: string | null,
-    updatedAt: string,
-    userProfile?:  {
-      __typename: "Uprofile",
+    groupChat?:  {
+      __typename: "GroupChat",
       id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
     senderProfile?:  {
-      __typename: "Uprofile",
+      __typename: "UserProfile",
       id: string,
+      email: string,
       username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
       createdAt: string,
       updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-    placeTimeSlot?:  {
-      __typename: "PlaceTimeSlot",
-      id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
-      placeID: string,
-      startingHour: string,
-      endingHour: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
-export type DeleteNotificationMutationVariables = {
-  input: DeleteNotificationInput,
-  condition?: ModelNotificationConditionInput | null,
+export type DeleteGroupChatMessageMutationVariables = {
+  input: DeleteGroupChatMessageInput,
+  condition?: ModelGroupChatMessageConditionInput | null,
 };
 
-export type DeleteNotificationMutation = {
-  deleteNotification?:  {
-    __typename: "Notification",
+export type DeleteGroupChatMessageMutation = {
+  deleteGroupChatMessage?:  {
+    __typename: "GroupChatMessage",
     id: string,
-    placeID?: string | null,
-    placeName?: string | null,
-    arrivingTime?: string | null,
-    departureTime?: string | null,
+    type: GroupChatMessageType,
+    groupChatID: string,
     senderProfileID: string,
-    message: string,
-    receiverProfileID: string,
-    photo?: string | null,
-    createdAt?: string | null,
-    type: NotifType,
-    status: Status,
-    placeTimeSlotID?: string | null,
-    updatedAt: string,
-    userProfile?:  {
-      __typename: "Uprofile",
+    groupChat?:  {
+      __typename: "GroupChat",
       id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
     senderProfile?:  {
-      __typename: "Uprofile",
+      __typename: "UserProfile",
       id: string,
+      email: string,
       username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
       createdAt: string,
       updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-    placeTimeSlot?:  {
-      __typename: "PlaceTimeSlot",
-      id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
-      placeID: string,
-      startingHour: string,
-      endingHour: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type CreatePushNotificationsBatchMutationVariables = {
-  input: CreatePushNotificationsBatchInput,
-  condition?: ModelPushNotificationsBatchConditionInput | null,
-};
-
-export type CreatePushNotificationsBatchMutation = {
-  createPushNotificationsBatch?:  {
-    __typename: "PushNotificationsBatch",
-    id: string,
-    payloadsList?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdatePushNotificationsBatchMutationVariables = {
-  input: UpdatePushNotificationsBatchInput,
-  condition?: ModelPushNotificationsBatchConditionInput | null,
-};
-
-export type UpdatePushNotificationsBatchMutation = {
-  updatePushNotificationsBatch?:  {
-    __typename: "PushNotificationsBatch",
-    id: string,
-    payloadsList?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeletePushNotificationsBatchMutationVariables = {
-  input: DeletePushNotificationsBatchInput,
-  condition?: ModelPushNotificationsBatchConditionInput | null,
-};
-
-export type DeletePushNotificationsBatchMutation = {
-  deletePushNotificationsBatch?:  {
-    __typename: "PushNotificationsBatch",
-    id: string,
-    payloadsList?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type CreateAttendanceMutationVariables = {
-  arrivingTime: string,
-  departureTime?: string | null,
-  placeID: string,
-  profileID: string,
-};
-
-export type CreateAttendanceMutation = {
-  createAttendance?:  {
-    __typename: "PlaceTimeSlotUserPlaceConnection",
-    id: string,
-    attendingID: string,
-    profileID?: string | null,
-    placeTimeSlotID: string,
-    createdAt?: string | null,
-    updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    attending?:  {
-      __typename: "UserPlaceConnection",
-      id: string,
-      profileID: string,
-      placeID: string,
-      arrivingTime?: string | null,
-      departureTime?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    timeSlot?:  {
-      __typename: "PlaceTimeSlot",
-      id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
-      placeID: string,
-      startingHour: string,
-      endingHour: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type CreatePushNotificationsMutationVariables = {
-  input: CreatePushNotificationsInput,
-  condition?: ModelPushNotificationsConditionInput | null,
-};
-
-export type CreatePushNotificationsMutation = {
-  createPushNotifications?:  {
-    __typename: "PushNotifications",
-    id?: string | null,
-    body: string,
-    userTokens: string,
-    data: string,
-    type?: NotifType | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdatePushNotificationsMutationVariables = {
-  input: UpdatePushNotificationsInput,
-  condition?: ModelPushNotificationsConditionInput | null,
-};
-
-export type UpdatePushNotificationsMutation = {
-  updatePushNotifications?:  {
-    __typename: "PushNotifications",
-    id?: string | null,
-    body: string,
-    userTokens: string,
-    data: string,
-    type?: NotifType | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeletePushNotificationsMutationVariables = {
-  input: DeletePushNotificationsInput,
-  condition?: ModelPushNotificationsConditionInput | null,
-};
-
-export type DeletePushNotificationsMutation = {
-  deletePushNotifications?:  {
-    __typename: "PushNotifications",
-    id?: string | null,
-    body: string,
-    userTokens: string,
-    data: string,
-    type?: NotifType | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2301,7 +2315,6 @@ export type GetPostQuery = {
     __typename: "Post",
     id: string,
     title: string,
-    blogID: string,
     blog?:  {
       __typename: "Blog",
       id: string,
@@ -2315,6 +2328,7 @@ export type GetPostQuery = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    blogPostsId?: string | null,
   } | null,
 };
 
@@ -2331,9 +2345,9 @@ export type ListPostsQuery = {
       __typename: "Post",
       id: string,
       title: string,
-      blogID: string,
       createdAt: string,
       updatedAt: string,
+      blogPostsId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -2347,18 +2361,18 @@ export type GetCommentQuery = {
   getComment?:  {
     __typename: "Comment",
     id: string,
-    postID: string,
     post?:  {
       __typename: "Post",
       id: string,
       title: string,
-      blogID: string,
       createdAt: string,
       updatedAt: string,
+      blogPostsId?: string | null,
     } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
+    postCommentsId?: string | null,
   } | null,
 };
 
@@ -2374,59 +2388,55 @@ export type ListCommentsQuery = {
     items:  Array< {
       __typename: "Comment",
       id: string,
-      postID: string,
       content: string,
       createdAt: string,
       updatedAt: string,
+      postCommentsId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
 };
 
-export type GetUserDocQueryVariables = {
+export type GetUserQueryVariables = {
   id: string,
 };
 
-export type GetUserDocQuery = {
-  getUserDoc?:  {
-    __typename: "UserDoc",
+export type GetUserQuery = {
+  getUser?:  {
+    __typename: "User",
     id: string,
-    profileID?: string | null,
     email: string,
-    deviceToken?: string | null,
     phoneNumber?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
+    profileID?: string | null,
+    profile?:  {
+      __typename: "UserProfile",
       id: string,
+      email: string,
       username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
       createdAt: string,
       updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
-export type ListUserDocsQueryVariables = {
-  filter?: ModelUserDocFilterInput | null,
+export type ListUsersQueryVariables = {
+  filter?: ModelUserFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListUserDocsQuery = {
-  listUserDocs?:  {
-    __typename: "ModelUserDocConnection",
+export type ListUsersQuery = {
+  listUsers?:  {
+    __typename: "ModelUserConnection",
     items:  Array< {
-      __typename: "UserDoc",
+      __typename: "User",
       id: string,
-      profileID?: string | null,
       email: string,
-      deviceToken?: string | null,
       phoneNumber?: string | null,
+      profileID?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -2434,79 +2444,107 @@ export type ListUserDocsQuery = {
   } | null,
 };
 
-export type GetUprofileQueryVariables = {
+export type GetUserProfileQueryVariables = {
   id: string,
 };
 
-export type GetUprofileQuery = {
-  getUprofile?:  {
-    __typename: "Uprofile",
+export type GetUserProfileQuery = {
+  getUserProfile?:  {
+    __typename: "UserProfile",
     id: string,
+    email: string,
     username: string,
-    name?: string | null,
-    userDocID: string,
-    currentPlaceID?: string | null,
-    expoPushToken?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    userDoc?:  {
-      __typename: "UserDoc",
+    user?:  {
+      __typename: "User",
       id: string,
-      profileID?: string | null,
       email: string,
-      deviceToken?: string | null,
       phoneNumber?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    attendings?:  {
-      __typename: "ModelUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    placeTimeSlots?:  {
-      __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    currentPlace?:  {
-      __typename: "Place",
-      id: string,
-      name: string,
-      address: string,
+      profileID?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     friends?:  {
-      __typename: "ModelFriendConnectionConnection",
+      __typename: "ModelFriendshipConnection",
       nextToken?: string | null,
     } | null,
-    sentNotifications?:  {
-      __typename: "ModelNotificationConnection",
+    presenceList?:  {
+      __typename: "ModelPresenceConnection",
       nextToken?: string | null,
     } | null,
-    notifications?:  {
-      __typename: "ModelNotificationConnection",
+    groupChatUserProfileConnectionList?:  {
+      __typename: "ModelGroupChatUserProfileConnectionConnection",
       nextToken?: string | null,
     } | null,
+    createdGroupChatList?:  {
+      __typename: "ModelGroupChatConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userProfileUserId?: string | null,
   } | null,
 };
 
-export type ListUprofilesQueryVariables = {
-  filter?: ModelUprofileFilterInput | null,
+export type ListUserProfilesQueryVariables = {
+  filter?: ModelUserProfileFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListUprofilesQuery = {
-  listUprofiles?:  {
-    __typename: "ModelUprofileConnection",
+export type ListUserProfilesQuery = {
+  listUserProfiles?:  {
+    __typename: "ModelUserProfileConnection",
     items:  Array< {
-      __typename: "Uprofile",
+      __typename: "UserProfile",
       id: string,
+      email: string,
       username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetFriendshipQueryVariables = {
+  id: string,
+};
+
+export type GetFriendshipQuery = {
+  getFriendship?:  {
+    __typename: "Friendship",
+    id: string,
+    userProfileID: string,
+    friendProfileID: string,
+    friendProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListFriendshipsQueryVariables = {
+  filter?: ModelFriendshipFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListFriendshipsQuery = {
+  listFriendships?:  {
+    __typename: "ModelFriendshipConnection",
+    items:  Array< {
+      __typename: "Friendship",
+      id: string,
+      userProfileID: string,
+      friendProfileID: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -2514,66 +2552,155 @@ export type ListUprofilesQuery = {
   } | null,
 };
 
-export type GetUserPlaceConnectionQueryVariables = {
+export type FriendshipsByUserProfileIDQueryVariables = {
+  userProfileID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelFriendshipFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type FriendshipsByUserProfileIDQuery = {
+  friendshipsByUserProfileID?:  {
+    __typename: "ModelFriendshipConnection",
+    items:  Array< {
+      __typename: "Friendship",
+      id: string,
+      userProfileID: string,
+      friendProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetFriendshipRequestQueryVariables = {
   id: string,
 };
 
-export type GetUserPlaceConnectionQuery = {
-  getUserPlaceConnection?:  {
-    __typename: "UserPlaceConnection",
+export type GetFriendshipRequestQuery = {
+  getFriendshipRequest?:  {
+    __typename: "FriendshipRequest",
     id: string,
-    profileID: string,
-    placeID: string,
-    arrivingTime?: string | null,
-    departureTime?: string | null,
-    placeTimeSoltUserPlaceConnection?:  {
-      __typename: "Place",
+    status: FriendshipRequestStatus,
+    senderProfileID: string,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    receiverProfileID: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListFriendshipRequestsQueryVariables = {
+  filter?: ModelFriendshipRequestFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListFriendshipRequestsQuery = {
+  listFriendshipRequests?:  {
+    __typename: "ModelFriendshipRequestConnection",
+    items:  Array< {
+      __typename: "FriendshipRequest",
+      id: string,
+      status: FriendshipRequestStatus,
+      senderProfileID: string,
+      receiverProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetNotificationQueryVariables = {
+  id: string,
+};
+
+export type GetNotificationQuery = {
+  getNotification?:  {
+    __typename: "Notification",
+    id: string,
+    type: NotificationType,
+    receiverProfileID: string,
+    friendshipRequestID?: string | null,
+    presenceID?: string | null,
+    senderProfileID?: string | null,
+    groupChatInvitationID?: string | null,
+    groupChatID?: string | null,
+    presence?:  {
+      __typename: "Presence",
+      id: string,
+      placeID: string,
+      userProfileID: string,
+      startingDateTime: string,
+      endingDateTime: string,
+      startingTime?: string | null,
+      endingTime: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChatInvitation?:  {
+      __typename: "GroupChatInvitation",
+      id: string,
+      senderProfileID: string,
+      receiverProfileID: string,
+      groupChatID: string,
+      status: GroupChatInvitationStatus,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
       id: string,
       name: string,
-      address: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
     createdAt: string,
     updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    place?:  {
-      __typename: "Place",
-      id: string,
-      name: string,
-      address: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
-export type ListUserPlaceConnectionsQueryVariables = {
-  filter?: ModelUserPlaceConnectionFilterInput | null,
+export type ListNotificationsQueryVariables = {
+  filter?: ModelNotificationFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListUserPlaceConnectionsQuery = {
-  listUserPlaceConnections?:  {
-    __typename: "ModelUserPlaceConnectionConnection",
+export type ListNotificationsQuery = {
+  listNotifications?:  {
+    __typename: "ModelNotificationConnection",
     items:  Array< {
-      __typename: "UserPlaceConnection",
+      __typename: "Notification",
       id: string,
-      profileID: string,
-      placeID: string,
-      arrivingTime?: string | null,
-      departureTime?: string | null,
+      type: NotificationType,
+      receiverProfileID: string,
+      friendshipRequestID?: string | null,
+      presenceID?: string | null,
+      senderProfileID?: string | null,
+      groupChatInvitationID?: string | null,
+      groupChatID?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -2581,60 +2708,59 @@ export type ListUserPlaceConnectionsQuery = {
   } | null,
 };
 
-export type GetPlaceTimeSlotQueryVariables = {
+export type GetPresenceQueryVariables = {
   id: string,
 };
 
-export type GetPlaceTimeSlotQuery = {
-  getPlaceTimeSlot?:  {
-    __typename: "PlaceTimeSlot",
+export type GetPresenceQuery = {
+  getPresence?:  {
+    __typename: "Presence",
     id: string,
-    numAttendings?: number | null,
-    myDate?:  {
-      __typename: "MyDate",
-      weekDay: string,
-      monthDay: string,
-      month: string,
-      year: string,
-    } | null,
-    dateTime?: string | null,
     placeID: string,
-    startingHour: string,
-    endingHour: string,
+    userProfileID: string,
+    place?:  {
+      __typename: "Place",
+      id: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    userProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    startingDateTime: string,
+    endingDateTime: string,
+    startingTime?: string | null,
+    endingTime: string,
     createdAt: string,
     updatedAt: string,
-    attendings?:  {
-      __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    place?:  {
-      __typename: "Place",
-      id: string,
-      name: string,
-      address: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
-export type ListPlaceTimeSlotsQueryVariables = {
-  filter?: ModelPlaceTimeSlotFilterInput | null,
+export type ListPresencesQueryVariables = {
+  filter?: ModelPresenceFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListPlaceTimeSlotsQuery = {
-  listPlaceTimeSlots?:  {
-    __typename: "ModelPlaceTimeSlotConnection",
+export type ListPresencesQuery = {
+  listPresences?:  {
+    __typename: "ModelPresenceConnection",
     items:  Array< {
-      __typename: "PlaceTimeSlot",
+      __typename: "Presence",
       id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
       placeID: string,
-      startingHour: string,
-      endingHour: string,
+      userProfileID: string,
+      startingDateTime: string,
+      endingDateTime: string,
+      startingTime?: string | null,
+      endingTime: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -2642,70 +2768,55 @@ export type ListPlaceTimeSlotsQuery = {
   } | null,
 };
 
-export type GetPlaceTimeSlotUserPlaceConnectionQueryVariables = {
-  id: string,
-};
-
-export type GetPlaceTimeSlotUserPlaceConnectionQuery = {
-  getPlaceTimeSlotUserPlaceConnection?:  {
-    __typename: "PlaceTimeSlotUserPlaceConnection",
-    id: string,
-    attendingID: string,
-    profileID?: string | null,
-    placeTimeSlotID: string,
-    createdAt?: string | null,
-    updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    attending?:  {
-      __typename: "UserPlaceConnection",
-      id: string,
-      profileID: string,
-      placeID: string,
-      arrivingTime?: string | null,
-      departureTime?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    timeSlot?:  {
-      __typename: "PlaceTimeSlot",
-      id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
-      placeID: string,
-      startingHour: string,
-      endingHour: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type ListPlaceTimeSlotUserPlaceConnectionsQueryVariables = {
-  filter?: ModelPlaceTimeSlotUserPlaceConnectionFilterInput | null,
+export type PresencesByPlaceIDAndStartingTimeQueryVariables = {
+  placeID: string,
+  startingTime?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPresenceFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListPlaceTimeSlotUserPlaceConnectionsQuery = {
-  listPlaceTimeSlotUserPlaceConnections?:  {
-    __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
+export type PresencesByPlaceIDAndStartingTimeQuery = {
+  presencesByPlaceIDAndStartingTime?:  {
+    __typename: "ModelPresenceConnection",
     items:  Array< {
-      __typename: "PlaceTimeSlotUserPlaceConnection",
+      __typename: "Presence",
       id: string,
-      attendingID: string,
-      profileID?: string | null,
-      placeTimeSlotID: string,
-      createdAt?: string | null,
+      placeID: string,
+      userProfileID: string,
+      startingDateTime: string,
+      endingDateTime: string,
+      startingTime?: string | null,
+      endingTime: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type PresencesByUserProfileIDQueryVariables = {
+  userProfileID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPresenceFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type PresencesByUserProfileIDQuery = {
+  presencesByUserProfileID?:  {
+    __typename: "ModelPresenceConnection",
+    items:  Array< {
+      __typename: "Presence",
+      id: string,
+      placeID: string,
+      userProfileID: string,
+      startingDateTime: string,
+      endingDateTime: string,
+      startingTime?: string | null,
+      endingTime: string,
+      createdAt: string,
       updatedAt: string,
     } | null >,
     nextToken?: string | null,
@@ -2721,22 +2832,12 @@ export type GetPlaceQuery = {
     __typename: "Place",
     id: string,
     name: string,
-    address: string,
-    coords:  {
-      __typename: "Coords",
-      lon: number,
-      lat: number,
-    },
+    presenceList?:  {
+      __typename: "ModelPresenceConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    currentPlayers?:  {
-      __typename: "ModelUprofileConnection",
-      nextToken?: string | null,
-    } | null,
-    timeSlots?:  {
-      __typename: "ModelPlaceTimeSlotConnection",
-      nextToken?: string | null,
-    } | null,
   } | null,
 };
 
@@ -2753,7 +2854,6 @@ export type ListPlacesQuery = {
       __typename: "Place",
       id: string,
       name: string,
-      address: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -2761,368 +2861,331 @@ export type ListPlacesQuery = {
   } | null,
 };
 
-export type GetFriendConnectionQueryVariables = {
+export type GetGroupChatQueryVariables = {
   id: string,
 };
 
-export type GetFriendConnectionQuery = {
-  getFriendConnection?:  {
-    __typename: "FriendConnection",
+export type GetGroupChatQuery = {
+  getGroupChat?:  {
+    __typename: "GroupChat",
     id: string,
-    userProfileID: string,
-    friendProfileID: string,
-    createdAt: string,
-    updatedAt: string,
-    friendProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
+    name: string,
+    firstInvitedProfileIDList?: string | null,
+    groupChatUserProfileConnectionList?:  {
+      __typename: "ModelGroupChatUserProfileConnectionConnection",
+      nextToken?: string | null,
     } | null,
-  } | null,
-};
-
-export type ListFriendConnectionsQueryVariables = {
-  filter?: ModelFriendConnectionFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListFriendConnectionsQuery = {
-  listFriendConnections?:  {
-    __typename: "ModelFriendConnectionConnection",
-    items:  Array< {
-      __typename: "FriendConnection",
+    creatorProfileID: string,
+    creatorProfile?:  {
+      __typename: "UserProfile",
       id: string,
-      userProfileID: string,
-      friendProfileID: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetNotificationQueryVariables = {
-  id: string,
-};
-
-export type GetNotificationQuery = {
-  getNotification?:  {
-    __typename: "Notification",
-    id: string,
-    placeID?: string | null,
-    placeName?: string | null,
-    arrivingTime?: string | null,
-    departureTime?: string | null,
-    senderProfileID: string,
-    message: string,
-    receiverProfileID: string,
-    photo?: string | null,
-    createdAt?: string | null,
-    type: NotifType,
-    status: Status,
-    placeTimeSlotID?: string | null,
-    updatedAt: string,
-    userProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    senderProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    placeTimeSlot?:  {
-      __typename: "PlaceTimeSlot",
-      id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
-      placeID: string,
-      startingHour: string,
-      endingHour: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type ListNotificationsQueryVariables = {
-  filter?: ModelNotificationFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListNotificationsQuery = {
-  listNotifications?:  {
-    __typename: "ModelNotificationConnection",
-    items:  Array< {
-      __typename: "Notification",
-      id: string,
-      placeID?: string | null,
-      placeName?: string | null,
-      arrivingTime?: string | null,
-      departureTime?: string | null,
-      senderProfileID: string,
-      message: string,
-      receiverProfileID: string,
-      photo?: string | null,
-      createdAt?: string | null,
-      type: NotifType,
-      status: Status,
-      placeTimeSlotID?: string | null,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetPushNotificationsBatchQueryVariables = {
-  id: string,
-};
-
-export type GetPushNotificationsBatchQuery = {
-  getPushNotificationsBatch?:  {
-    __typename: "PushNotificationsBatch",
-    id: string,
-    payloadsList?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListPushNotificationsBatchesQueryVariables = {
-  filter?: ModelPushNotificationsBatchFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListPushNotificationsBatchesQuery = {
-  listPushNotificationsBatches?:  {
-    __typename: "ModelPushNotificationsBatchConnection",
-    items:  Array< {
-      __typename: "PushNotificationsBatch",
-      id: string,
-      payloadsList?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetPushNotificationsQueryVariables = {
-  id: string,
-};
-
-export type GetPushNotificationsQuery = {
-  getPushNotifications?:  {
-    __typename: "PushNotifications",
-    id?: string | null,
-    body: string,
-    userTokens: string,
-    data: string,
-    type?: NotifType | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListPushNotificationsQueryVariables = {
-  filter?: ModelPushNotificationsFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListPushNotificationsQuery = {
-  listPushNotifications?:  {
-    __typename: "ModelPushNotificationsConnection",
-    items:  Array< {
-      __typename: "PushNotifications",
-      id?: string | null,
-      body: string,
-      userTokens: string,
-      data: string,
-      type?: NotifType | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type OnNewMyAttendanceSubscriptionVariables = {
-  profileID: string,
-};
-
-export type OnNewMyAttendanceSubscription = {
-  onNewMyAttendance?:  {
-    __typename: "UserPlaceConnection",
-    id: string,
-    profileID: string,
-    placeID: string,
-    arrivingTime?: string | null,
-    departureTime?: string | null,
-    placeTimeSoltUserPlaceConnection?:  {
-      __typename: "Place",
-      id: string,
-      name: string,
-      address: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    place?:  {
-      __typename: "Place",
-      id: string,
-      name: string,
-      address: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type OnUpdateMyProfileSubscriptionVariables = {
-  id: string,
-};
-
-export type OnUpdateMyProfileSubscription = {
-  onUpdateMyProfile?:  {
-    __typename: "Uprofile",
-    id: string,
-    username: string,
-    name?: string | null,
-    userDocID: string,
-    currentPlaceID?: string | null,
-    expoPushToken?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    userDoc?:  {
-      __typename: "UserDoc",
-      id: string,
-      profileID?: string | null,
       email: string,
-      deviceToken?: string | null,
-      phoneNumber?: string | null,
+      username: string,
       createdAt: string,
       updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-    attendings?:  {
-      __typename: "ModelUserPlaceConnectionConnection",
+    messageList?:  {
+      __typename: "ModelGroupChatMessageConnection",
       nextToken?: string | null,
     } | null,
-    placeTimeSlots?:  {
-      __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    currentPlace?:  {
-      __typename: "Place",
-      id: string,
-      name: string,
-      address: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    friends?:  {
-      __typename: "ModelFriendConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    sentNotifications?:  {
-      __typename: "ModelNotificationConnection",
-      nextToken?: string | null,
-    } | null,
-    notifications?:  {
-      __typename: "ModelNotificationConnection",
-      nextToken?: string | null,
-    } | null,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
-export type OnNewMyNotificationSubscriptionVariables = {
-  receiverProfileID: string,
+export type ListGroupChatsQueryVariables = {
+  filter?: ModelGroupChatFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type OnNewMyNotificationSubscription = {
-  onNewMyNotification?:  {
-    __typename: "Notification",
-    id: string,
-    placeID?: string | null,
-    placeName?: string | null,
-    arrivingTime?: string | null,
-    departureTime?: string | null,
-    senderProfileID: string,
-    message: string,
-    receiverProfileID: string,
-    photo?: string | null,
-    createdAt?: string | null,
-    type: NotifType,
-    status: Status,
-    placeTimeSlotID?: string | null,
-    updatedAt: string,
-    userProfile?:  {
-      __typename: "Uprofile",
+export type ListGroupChatsQuery = {
+  listGroupChats?:  {
+    __typename: "ModelGroupChatConnection",
+    items:  Array< {
+      __typename: "GroupChat",
       id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GroupChatsByCreatorProfileIDAndCreatedAtQueryVariables = {
+  creatorProfileID: string,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelGroupChatFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type GroupChatsByCreatorProfileIDAndCreatedAtQuery = {
+  groupChatsByCreatorProfileIDAndCreatedAt?:  {
+    __typename: "ModelGroupChatConnection",
+    items:  Array< {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetGroupChatUserProfileConnectionQueryVariables = {
+  id: string,
+};
+
+export type GetGroupChatUserProfileConnectionQuery = {
+  getGroupChatUserProfileConnection?:  {
+    __typename: "GroupChatUserProfileConnection",
+    id: string,
+    groupChatID: string,
+    userProfileID: string,
+    userProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
       username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListGroupChatUserProfileConnectionsQueryVariables = {
+  filter?: ModelGroupChatUserProfileConnectionFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListGroupChatUserProfileConnectionsQuery = {
+  listGroupChatUserProfileConnections?:  {
+    __typename: "ModelGroupChatUserProfileConnectionConnection",
+    items:  Array< {
+      __typename: "GroupChatUserProfileConnection",
+      id: string,
+      groupChatID: string,
+      userProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GroupChatUserProfileConnectionsByGroupChatIDQueryVariables = {
+  groupChatID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelGroupChatUserProfileConnectionFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type GroupChatUserProfileConnectionsByGroupChatIDQuery = {
+  groupChatUserProfileConnectionsByGroupChatID?:  {
+    __typename: "ModelGroupChatUserProfileConnectionConnection",
+    items:  Array< {
+      __typename: "GroupChatUserProfileConnection",
+      id: string,
+      groupChatID: string,
+      userProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GroupChatUserProfileConnectionsByUserProfileIDQueryVariables = {
+  userProfileID: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelGroupChatUserProfileConnectionFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type GroupChatUserProfileConnectionsByUserProfileIDQuery = {
+  groupChatUserProfileConnectionsByUserProfileID?:  {
+    __typename: "ModelGroupChatUserProfileConnectionConnection",
+    items:  Array< {
+      __typename: "GroupChatUserProfileConnection",
+      id: string,
+      groupChatID: string,
+      userProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetGroupChatInvitationQueryVariables = {
+  id: string,
+};
+
+export type GetGroupChatInvitationQuery = {
+  getGroupChatInvitation?:  {
+    __typename: "GroupChatInvitation",
+    id: string,
+    senderProfileID: string,
+    receiverProfileID: string,
+    groupChatID: string,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    receiverProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    status: GroupChatInvitationStatus,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListGroupChatInvitationsQueryVariables = {
+  filter?: ModelGroupChatInvitationFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListGroupChatInvitationsQuery = {
+  listGroupChatInvitations?:  {
+    __typename: "ModelGroupChatInvitationConnection",
+    items:  Array< {
+      __typename: "GroupChatInvitation",
+      id: string,
+      senderProfileID: string,
+      receiverProfileID: string,
+      groupChatID: string,
+      status: GroupChatInvitationStatus,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetGroupChatMessageQueryVariables = {
+  id: string,
+};
+
+export type GetGroupChatMessageQuery = {
+  getGroupChatMessage?:  {
+    __typename: "GroupChatMessage",
+    id: string,
+    type: GroupChatMessageType,
+    groupChatID: string,
+    senderProfileID: string,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
     senderProfile?:  {
-      __typename: "Uprofile",
+      __typename: "UserProfile",
       id: string,
+      email: string,
       username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
       createdAt: string,
       updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-    placeTimeSlot?:  {
-      __typename: "PlaceTimeSlot",
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListGroupChatMessagesQueryVariables = {
+  filter?: ModelGroupChatMessageFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListGroupChatMessagesQuery = {
+  listGroupChatMessages?:  {
+    __typename: "ModelGroupChatMessageConnection",
+    items:  Array< {
+      __typename: "GroupChatMessage",
       id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
-      placeID: string,
-      startingHour: string,
-      endingHour: string,
+      type: GroupChatMessageType,
+      groupChatID: string,
+      senderProfileID: string,
       createdAt: string,
       updatedAt: string,
-    } | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GroupChatMessagesByGroupChatIDAndCreatedAtQueryVariables = {
+  groupChatID: string,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelGroupChatMessageFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type GroupChatMessagesByGroupChatIDAndCreatedAtQuery = {
+  groupChatMessagesByGroupChatIDAndCreatedAt?:  {
+    __typename: "ModelGroupChatMessageConnection",
+    items:  Array< {
+      __typename: "GroupChatMessage",
+      id: string,
+      type: GroupChatMessageType,
+      groupChatID: string,
+      senderProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -3173,7 +3236,6 @@ export type OnCreatePostSubscription = {
     __typename: "Post",
     id: string,
     title: string,
-    blogID: string,
     blog?:  {
       __typename: "Blog",
       id: string,
@@ -3187,6 +3249,7 @@ export type OnCreatePostSubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    blogPostsId?: string | null,
   } | null,
 };
 
@@ -3195,7 +3258,6 @@ export type OnUpdatePostSubscription = {
     __typename: "Post",
     id: string,
     title: string,
-    blogID: string,
     blog?:  {
       __typename: "Blog",
       id: string,
@@ -3209,6 +3271,7 @@ export type OnUpdatePostSubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    blogPostsId?: string | null,
   } | null,
 };
 
@@ -3217,7 +3280,6 @@ export type OnDeletePostSubscription = {
     __typename: "Post",
     id: string,
     title: string,
-    blogID: string,
     blog?:  {
       __typename: "Blog",
       id: string,
@@ -3231,6 +3293,7 @@ export type OnDeletePostSubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    blogPostsId?: string | null,
   } | null,
 };
 
@@ -3238,18 +3301,18 @@ export type OnCreateCommentSubscription = {
   onCreateComment?:  {
     __typename: "Comment",
     id: string,
-    postID: string,
     post?:  {
       __typename: "Post",
       id: string,
       title: string,
-      blogID: string,
       createdAt: string,
       updatedAt: string,
+      blogPostsId?: string | null,
     } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
+    postCommentsId?: string | null,
   } | null,
 };
 
@@ -3257,18 +3320,18 @@ export type OnUpdateCommentSubscription = {
   onUpdateComment?:  {
     __typename: "Comment",
     id: string,
-    postID: string,
     post?:  {
       __typename: "Post",
       id: string,
       title: string,
-      blogID: string,
       createdAt: string,
       updatedAt: string,
+      blogPostsId?: string | null,
     } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
+    postCommentsId?: string | null,
   } | null,
 };
 
@@ -3276,597 +3339,576 @@ export type OnDeleteCommentSubscription = {
   onDeleteComment?:  {
     __typename: "Comment",
     id: string,
-    postID: string,
     post?:  {
       __typename: "Post",
       id: string,
       title: string,
-      blogID: string,
       createdAt: string,
       updatedAt: string,
+      blogPostsId?: string | null,
     } | null,
     content: string,
     createdAt: string,
     updatedAt: string,
+    postCommentsId?: string | null,
   } | null,
 };
 
-export type OnCreateUserDocSubscription = {
-  onCreateUserDoc?:  {
-    __typename: "UserDoc",
+export type OnCreateUserSubscription = {
+  onCreateUser?:  {
+    __typename: "User",
     id: string,
-    profileID?: string | null,
     email: string,
-    deviceToken?: string | null,
     phoneNumber?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type OnUpdateUserDocSubscription = {
-  onUpdateUserDoc?:  {
-    __typename: "UserDoc",
-    id: string,
     profileID?: string | null,
-    email: string,
-    deviceToken?: string | null,
-    phoneNumber?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
+    profile?:  {
+      __typename: "UserProfile",
       id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type OnDeleteUserDocSubscription = {
-  onDeleteUserDoc?:  {
-    __typename: "UserDoc",
-    id: string,
-    profileID?: string | null,
-    email: string,
-    deviceToken?: string | null,
-    phoneNumber?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type OnCreateUprofileSubscription = {
-  onCreateUprofile?:  {
-    __typename: "Uprofile",
-    id: string,
-    username: string,
-    name?: string | null,
-    userDocID: string,
-    currentPlaceID?: string | null,
-    expoPushToken?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    userDoc?:  {
-      __typename: "UserDoc",
-      id: string,
-      profileID?: string | null,
       email: string,
-      deviceToken?: string | null,
-      phoneNumber?: string | null,
+      username: string,
       createdAt: string,
       updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-    attendings?:  {
-      __typename: "ModelUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    placeTimeSlots?:  {
-      __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    currentPlace?:  {
-      __typename: "Place",
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateUserSubscription = {
+  onUpdateUser?:  {
+    __typename: "User",
+    id: string,
+    email: string,
+    phoneNumber?: string | null,
+    profileID?: string | null,
+    profile?:  {
+      __typename: "UserProfile",
       id: string,
-      name: string,
-      address: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteUserSubscription = {
+  onDeleteUser?:  {
+    __typename: "User",
+    id: string,
+    email: string,
+    phoneNumber?: string | null,
+    profileID?: string | null,
+    profile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateUserProfileSubscription = {
+  onCreateUserProfile?:  {
+    __typename: "UserProfile",
+    id: string,
+    email: string,
+    username: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      email: string,
+      phoneNumber?: string | null,
+      profileID?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     friends?:  {
-      __typename: "ModelFriendConnectionConnection",
+      __typename: "ModelFriendshipConnection",
       nextToken?: string | null,
     } | null,
-    sentNotifications?:  {
-      __typename: "ModelNotificationConnection",
+    presenceList?:  {
+      __typename: "ModelPresenceConnection",
       nextToken?: string | null,
     } | null,
-    notifications?:  {
-      __typename: "ModelNotificationConnection",
+    groupChatUserProfileConnectionList?:  {
+      __typename: "ModelGroupChatUserProfileConnectionConnection",
       nextToken?: string | null,
     } | null,
+    createdGroupChatList?:  {
+      __typename: "ModelGroupChatConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userProfileUserId?: string | null,
   } | null,
 };
 
-export type OnUpdateUprofileSubscription = {
-  onUpdateUprofile?:  {
-    __typename: "Uprofile",
+export type OnUpdateUserProfileSubscription = {
+  onUpdateUserProfile?:  {
+    __typename: "UserProfile",
     id: string,
+    email: string,
     username: string,
-    name?: string | null,
-    userDocID: string,
-    currentPlaceID?: string | null,
-    expoPushToken?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    userDoc?:  {
-      __typename: "UserDoc",
+    user?:  {
+      __typename: "User",
       id: string,
-      profileID?: string | null,
       email: string,
-      deviceToken?: string | null,
       phoneNumber?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    attendings?:  {
-      __typename: "ModelUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    placeTimeSlots?:  {
-      __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    currentPlace?:  {
-      __typename: "Place",
-      id: string,
-      name: string,
-      address: string,
+      profileID?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     friends?:  {
-      __typename: "ModelFriendConnectionConnection",
+      __typename: "ModelFriendshipConnection",
       nextToken?: string | null,
     } | null,
-    sentNotifications?:  {
-      __typename: "ModelNotificationConnection",
+    presenceList?:  {
+      __typename: "ModelPresenceConnection",
       nextToken?: string | null,
     } | null,
-    notifications?:  {
-      __typename: "ModelNotificationConnection",
+    groupChatUserProfileConnectionList?:  {
+      __typename: "ModelGroupChatUserProfileConnectionConnection",
       nextToken?: string | null,
     } | null,
+    createdGroupChatList?:  {
+      __typename: "ModelGroupChatConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userProfileUserId?: string | null,
   } | null,
 };
 
-export type OnDeleteUprofileSubscription = {
-  onDeleteUprofile?:  {
-    __typename: "Uprofile",
+export type OnDeleteUserProfileSubscription = {
+  onDeleteUserProfile?:  {
+    __typename: "UserProfile",
     id: string,
+    email: string,
     username: string,
-    name?: string | null,
-    userDocID: string,
-    currentPlaceID?: string | null,
-    expoPushToken?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    userDoc?:  {
-      __typename: "UserDoc",
+    user?:  {
+      __typename: "User",
       id: string,
-      profileID?: string | null,
       email: string,
-      deviceToken?: string | null,
       phoneNumber?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    attendings?:  {
-      __typename: "ModelUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    placeTimeSlots?:  {
-      __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    currentPlace?:  {
-      __typename: "Place",
-      id: string,
-      name: string,
-      address: string,
+      profileID?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null,
     friends?:  {
-      __typename: "ModelFriendConnectionConnection",
+      __typename: "ModelFriendshipConnection",
       nextToken?: string | null,
     } | null,
-    sentNotifications?:  {
-      __typename: "ModelNotificationConnection",
+    presenceList?:  {
+      __typename: "ModelPresenceConnection",
       nextToken?: string | null,
     } | null,
-    notifications?:  {
-      __typename: "ModelNotificationConnection",
+    groupChatUserProfileConnectionList?:  {
+      __typename: "ModelGroupChatUserProfileConnectionConnection",
       nextToken?: string | null,
     } | null,
+    createdGroupChatList?:  {
+      __typename: "ModelGroupChatConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    userProfileUserId?: string | null,
   } | null,
 };
 
-export type OnCreateUserPlaceConnectionSubscription = {
-  onCreateUserPlaceConnection?:  {
-    __typename: "UserPlaceConnection",
+export type OnCreateFriendshipSubscription = {
+  onCreateFriendship?:  {
+    __typename: "Friendship",
     id: string,
-    profileID: string,
-    placeID: string,
-    arrivingTime?: string | null,
-    departureTime?: string | null,
-    placeTimeSoltUserPlaceConnection?:  {
-      __typename: "Place",
+    userProfileID: string,
+    friendProfileID: string,
+    friendProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateFriendshipSubscription = {
+  onUpdateFriendship?:  {
+    __typename: "Friendship",
+    id: string,
+    userProfileID: string,
+    friendProfileID: string,
+    friendProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteFriendshipSubscription = {
+  onDeleteFriendship?:  {
+    __typename: "Friendship",
+    id: string,
+    userProfileID: string,
+    friendProfileID: string,
+    friendProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateFriendshipRequestSubscription = {
+  onCreateFriendshipRequest?:  {
+    __typename: "FriendshipRequest",
+    id: string,
+    status: FriendshipRequestStatus,
+    senderProfileID: string,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    receiverProfileID: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateFriendshipRequestSubscription = {
+  onUpdateFriendshipRequest?:  {
+    __typename: "FriendshipRequest",
+    id: string,
+    status: FriendshipRequestStatus,
+    senderProfileID: string,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    receiverProfileID: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteFriendshipRequestSubscription = {
+  onDeleteFriendshipRequest?:  {
+    __typename: "FriendshipRequest",
+    id: string,
+    status: FriendshipRequestStatus,
+    senderProfileID: string,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    receiverProfileID: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateNotificationSubscription = {
+  onCreateNotification?:  {
+    __typename: "Notification",
+    id: string,
+    type: NotificationType,
+    receiverProfileID: string,
+    friendshipRequestID?: string | null,
+    presenceID?: string | null,
+    senderProfileID?: string | null,
+    groupChatInvitationID?: string | null,
+    groupChatID?: string | null,
+    presence?:  {
+      __typename: "Presence",
+      id: string,
+      placeID: string,
+      userProfileID: string,
+      startingDateTime: string,
+      endingDateTime: string,
+      startingTime?: string | null,
+      endingTime: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChatInvitation?:  {
+      __typename: "GroupChatInvitation",
+      id: string,
+      senderProfileID: string,
+      receiverProfileID: string,
+      groupChatID: string,
+      status: GroupChatInvitationStatus,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
       id: string,
       name: string,
-      address: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
     createdAt: string,
     updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    place?:  {
-      __typename: "Place",
-      id: string,
-      name: string,
-      address: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
-export type OnUpdateUserPlaceConnectionSubscription = {
-  onUpdateUserPlaceConnection?:  {
-    __typename: "UserPlaceConnection",
+export type OnUpdateNotificationSubscription = {
+  onUpdateNotification?:  {
+    __typename: "Notification",
     id: string,
-    profileID: string,
-    placeID: string,
-    arrivingTime?: string | null,
-    departureTime?: string | null,
-    placeTimeSoltUserPlaceConnection?:  {
-      __typename: "Place",
+    type: NotificationType,
+    receiverProfileID: string,
+    friendshipRequestID?: string | null,
+    presenceID?: string | null,
+    senderProfileID?: string | null,
+    groupChatInvitationID?: string | null,
+    groupChatID?: string | null,
+    presence?:  {
+      __typename: "Presence",
+      id: string,
+      placeID: string,
+      userProfileID: string,
+      startingDateTime: string,
+      endingDateTime: string,
+      startingTime?: string | null,
+      endingTime: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChatInvitation?:  {
+      __typename: "GroupChatInvitation",
+      id: string,
+      senderProfileID: string,
+      receiverProfileID: string,
+      groupChatID: string,
+      status: GroupChatInvitationStatus,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
       id: string,
       name: string,
-      address: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
     createdAt: string,
     updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    place?:  {
-      __typename: "Place",
-      id: string,
-      name: string,
-      address: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
-export type OnDeleteUserPlaceConnectionSubscription = {
-  onDeleteUserPlaceConnection?:  {
-    __typename: "UserPlaceConnection",
+export type OnDeleteNotificationSubscription = {
+  onDeleteNotification?:  {
+    __typename: "Notification",
     id: string,
-    profileID: string,
-    placeID: string,
-    arrivingTime?: string | null,
-    departureTime?: string | null,
-    placeTimeSoltUserPlaceConnection?:  {
-      __typename: "Place",
+    type: NotificationType,
+    receiverProfileID: string,
+    friendshipRequestID?: string | null,
+    presenceID?: string | null,
+    senderProfileID?: string | null,
+    groupChatInvitationID?: string | null,
+    groupChatID?: string | null,
+    presence?:  {
+      __typename: "Presence",
+      id: string,
+      placeID: string,
+      userProfileID: string,
+      startingDateTime: string,
+      endingDateTime: string,
+      startingTime?: string | null,
+      endingTime: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChatInvitation?:  {
+      __typename: "GroupChatInvitation",
+      id: string,
+      senderProfileID: string,
+      receiverProfileID: string,
+      groupChatID: string,
+      status: GroupChatInvitationStatus,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
       id: string,
       name: string,
-      address: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
     createdAt: string,
     updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+  } | null,
+};
+
+export type OnCreatePresenceSubscription = {
+  onCreatePresence?:  {
+    __typename: "Presence",
+    id: string,
+    placeID: string,
+    userProfileID: string,
     place?:  {
       __typename: "Place",
       id: string,
       name: string,
-      address: string,
       createdAt: string,
       updatedAt: string,
     } | null,
-  } | null,
-};
-
-export type OnCreatePlaceTimeSlotSubscription = {
-  onCreatePlaceTimeSlot?:  {
-    __typename: "PlaceTimeSlot",
-    id: string,
-    numAttendings?: number | null,
-    myDate?:  {
-      __typename: "MyDate",
-      weekDay: string,
-      monthDay: string,
-      month: string,
-      year: string,
+    userProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-    dateTime?: string | null,
-    placeID: string,
-    startingHour: string,
-    endingHour: string,
+    startingDateTime: string,
+    endingDateTime: string,
+    startingTime?: string | null,
+    endingTime: string,
     createdAt: string,
     updatedAt: string,
-    attendings?:  {
-      __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
+  } | null,
+};
+
+export type OnUpdatePresenceSubscription = {
+  onUpdatePresence?:  {
+    __typename: "Presence",
+    id: string,
+    placeID: string,
+    userProfileID: string,
     place?:  {
       __typename: "Place",
       id: string,
       name: string,
-      address: string,
       createdAt: string,
       updatedAt: string,
     } | null,
-  } | null,
-};
-
-export type OnUpdatePlaceTimeSlotSubscription = {
-  onUpdatePlaceTimeSlot?:  {
-    __typename: "PlaceTimeSlot",
-    id: string,
-    numAttendings?: number | null,
-    myDate?:  {
-      __typename: "MyDate",
-      weekDay: string,
-      monthDay: string,
-      month: string,
-      year: string,
+    userProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-    dateTime?: string | null,
-    placeID: string,
-    startingHour: string,
-    endingHour: string,
+    startingDateTime: string,
+    endingDateTime: string,
+    startingTime?: string | null,
+    endingTime: string,
     createdAt: string,
     updatedAt: string,
-    attendings?:  {
-      __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
+  } | null,
+};
+
+export type OnDeletePresenceSubscription = {
+  onDeletePresence?:  {
+    __typename: "Presence",
+    id: string,
+    placeID: string,
+    userProfileID: string,
     place?:  {
       __typename: "Place",
       id: string,
       name: string,
-      address: string,
       createdAt: string,
       updatedAt: string,
     } | null,
-  } | null,
-};
-
-export type OnDeletePlaceTimeSlotSubscription = {
-  onDeletePlaceTimeSlot?:  {
-    __typename: "PlaceTimeSlot",
-    id: string,
-    numAttendings?: number | null,
-    myDate?:  {
-      __typename: "MyDate",
-      weekDay: string,
-      monthDay: string,
-      month: string,
-      year: string,
+    userProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-    dateTime?: string | null,
-    placeID: string,
-    startingHour: string,
-    endingHour: string,
+    startingDateTime: string,
+    endingDateTime: string,
+    startingTime?: string | null,
+    endingTime: string,
     createdAt: string,
     updatedAt: string,
-    attendings?:  {
-      __typename: "ModelPlaceTimeSlotUserPlaceConnectionConnection",
-      nextToken?: string | null,
-    } | null,
-    place?:  {
-      __typename: "Place",
-      id: string,
-      name: string,
-      address: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type OnCreatePlaceTimeSlotUserPlaceConnectionSubscription = {
-  onCreatePlaceTimeSlotUserPlaceConnection?:  {
-    __typename: "PlaceTimeSlotUserPlaceConnection",
-    id: string,
-    attendingID: string,
-    profileID?: string | null,
-    placeTimeSlotID: string,
-    createdAt?: string | null,
-    updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    attending?:  {
-      __typename: "UserPlaceConnection",
-      id: string,
-      profileID: string,
-      placeID: string,
-      arrivingTime?: string | null,
-      departureTime?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    timeSlot?:  {
-      __typename: "PlaceTimeSlot",
-      id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
-      placeID: string,
-      startingHour: string,
-      endingHour: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type OnUpdatePlaceTimeSlotUserPlaceConnectionSubscription = {
-  onUpdatePlaceTimeSlotUserPlaceConnection?:  {
-    __typename: "PlaceTimeSlotUserPlaceConnection",
-    id: string,
-    attendingID: string,
-    profileID?: string | null,
-    placeTimeSlotID: string,
-    createdAt?: string | null,
-    updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    attending?:  {
-      __typename: "UserPlaceConnection",
-      id: string,
-      profileID: string,
-      placeID: string,
-      arrivingTime?: string | null,
-      departureTime?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    timeSlot?:  {
-      __typename: "PlaceTimeSlot",
-      id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
-      placeID: string,
-      startingHour: string,
-      endingHour: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type OnDeletePlaceTimeSlotUserPlaceConnectionSubscription = {
-  onDeletePlaceTimeSlotUserPlaceConnection?:  {
-    __typename: "PlaceTimeSlotUserPlaceConnection",
-    id: string,
-    attendingID: string,
-    profileID?: string | null,
-    placeTimeSlotID: string,
-    createdAt?: string | null,
-    updatedAt: string,
-    uProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    attending?:  {
-      __typename: "UserPlaceConnection",
-      id: string,
-      profileID: string,
-      placeID: string,
-      arrivingTime?: string | null,
-      departureTime?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    timeSlot?:  {
-      __typename: "PlaceTimeSlot",
-      id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
-      placeID: string,
-      startingHour: string,
-      endingHour: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
@@ -3875,22 +3917,12 @@ export type OnCreatePlaceSubscription = {
     __typename: "Place",
     id: string,
     name: string,
-    address: string,
-    coords:  {
-      __typename: "Coords",
-      lon: number,
-      lat: number,
-    },
+    presenceList?:  {
+      __typename: "ModelPresenceConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    currentPlayers?:  {
-      __typename: "ModelUprofileConnection",
-      nextToken?: string | null,
-    } | null,
-    timeSlots?:  {
-      __typename: "ModelPlaceTimeSlotConnection",
-      nextToken?: string | null,
-    } | null,
   } | null,
 };
 
@@ -3899,22 +3931,12 @@ export type OnUpdatePlaceSubscription = {
     __typename: "Place",
     id: string,
     name: string,
-    address: string,
-    coords:  {
-      __typename: "Coords",
-      lon: number,
-      lat: number,
-    },
+    presenceList?:  {
+      __typename: "ModelPresenceConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    currentPlayers?:  {
-      __typename: "ModelUprofileConnection",
-      nextToken?: string | null,
-    } | null,
-    timeSlots?:  {
-      __typename: "ModelPlaceTimeSlotConnection",
-      nextToken?: string | null,
-    } | null,
   } | null,
 };
 
@@ -3923,314 +3945,454 @@ export type OnDeletePlaceSubscription = {
     __typename: "Place",
     id: string,
     name: string,
-    address: string,
-    coords:  {
-      __typename: "Coords",
-      lon: number,
-      lat: number,
-    },
-    createdAt: string,
-    updatedAt: string,
-    currentPlayers?:  {
-      __typename: "ModelUprofileConnection",
+    presenceList?:  {
+      __typename: "ModelPresenceConnection",
       nextToken?: string | null,
     } | null,
-    timeSlots?:  {
-      __typename: "ModelPlaceTimeSlotConnection",
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateGroupChatSubscription = {
+  onCreateGroupChat?:  {
+    __typename: "GroupChat",
+    id: string,
+    name: string,
+    firstInvitedProfileIDList?: string | null,
+    groupChatUserProfileConnectionList?:  {
+      __typename: "ModelGroupChatUserProfileConnectionConnection",
       nextToken?: string | null,
     } | null,
-  } | null,
-};
-
-export type OnCreateFriendConnectionSubscription = {
-  onCreateFriendConnection?:  {
-    __typename: "FriendConnection",
-    id: string,
-    userProfileID: string,
-    friendProfileID: string,
-    createdAt: string,
-    updatedAt: string,
-    friendProfile?:  {
-      __typename: "Uprofile",
+    creatorProfileID: string,
+    creatorProfile?:  {
+      __typename: "UserProfile",
       id: string,
+      email: string,
       username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
       createdAt: string,
       updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-  } | null,
-};
-
-export type OnUpdateFriendConnectionSubscription = {
-  onUpdateFriendConnection?:  {
-    __typename: "FriendConnection",
-    id: string,
-    userProfileID: string,
-    friendProfileID: string,
+    messageList?:  {
+      __typename: "ModelGroupChatMessageConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    friendProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
-export type OnDeleteFriendConnectionSubscription = {
-  onDeleteFriendConnection?:  {
-    __typename: "FriendConnection",
+export type OnUpdateGroupChatSubscription = {
+  onUpdateGroupChat?:  {
+    __typename: "GroupChat",
     id: string,
-    userProfileID: string,
-    friendProfileID: string,
+    name: string,
+    firstInvitedProfileIDList?: string | null,
+    groupChatUserProfileConnectionList?:  {
+      __typename: "ModelGroupChatUserProfileConnectionConnection",
+      nextToken?: string | null,
+    } | null,
+    creatorProfileID: string,
+    creatorProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    messageList?:  {
+      __typename: "ModelGroupChatMessageConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    friendProfile?:  {
-      __typename: "Uprofile",
-      id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
-export type OnCreateNotificationSubscription = {
-  onCreateNotification?:  {
-    __typename: "Notification",
+export type OnDeleteGroupChatSubscription = {
+  onDeleteGroupChat?:  {
+    __typename: "GroupChat",
     id: string,
-    placeID?: string | null,
-    placeName?: string | null,
-    arrivingTime?: string | null,
-    departureTime?: string | null,
-    senderProfileID: string,
-    message: string,
-    receiverProfileID: string,
-    photo?: string | null,
-    createdAt?: string | null,
-    type: NotifType,
-    status: Status,
-    placeTimeSlotID?: string | null,
+    name: string,
+    firstInvitedProfileIDList?: string | null,
+    groupChatUserProfileConnectionList?:  {
+      __typename: "ModelGroupChatUserProfileConnectionConnection",
+      nextToken?: string | null,
+    } | null,
+    creatorProfileID: string,
+    creatorProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    messageList?:  {
+      __typename: "ModelGroupChatMessageConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type OnCreateGroupChatUserProfileConnectionSubscription = {
+  onCreateGroupChatUserProfileConnection?:  {
+    __typename: "GroupChatUserProfileConnection",
+    id: string,
+    groupChatID: string,
+    userProfileID: string,
     userProfile?:  {
-      __typename: "Uprofile",
+      __typename: "UserProfile",
       id: string,
+      email: string,
       username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateGroupChatUserProfileConnectionSubscription = {
+  onUpdateGroupChatUserProfileConnection?:  {
+    __typename: "GroupChatUserProfileConnection",
+    id: string,
+    groupChatID: string,
+    userProfileID: string,
+    userProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteGroupChatUserProfileConnectionSubscription = {
+  onDeleteGroupChatUserProfileConnection?:  {
+    __typename: "GroupChatUserProfileConnection",
+    id: string,
+    groupChatID: string,
+    userProfileID: string,
+    userProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateGroupChatInvitationSubscription = {
+  onCreateGroupChatInvitation?:  {
+    __typename: "GroupChatInvitation",
+    id: string,
+    senderProfileID: string,
+    receiverProfileID: string,
+    groupChatID: string,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    receiverProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    status: GroupChatInvitationStatus,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateGroupChatInvitationSubscription = {
+  onUpdateGroupChatInvitation?:  {
+    __typename: "GroupChatInvitation",
+    id: string,
+    senderProfileID: string,
+    receiverProfileID: string,
+    groupChatID: string,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    receiverProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    status: GroupChatInvitationStatus,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteGroupChatInvitationSubscription = {
+  onDeleteGroupChatInvitation?:  {
+    __typename: "GroupChatInvitation",
+    id: string,
+    senderProfileID: string,
+    receiverProfileID: string,
+    groupChatID: string,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    receiverProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    status: GroupChatInvitationStatus,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateGroupChatMessageSubscription = {
+  onCreateGroupChatMessage?:  {
+    __typename: "GroupChatMessage",
+    id: string,
+    type: GroupChatMessageType,
+    groupChatID: string,
+    senderProfileID: string,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
     senderProfile?:  {
-      __typename: "Uprofile",
+      __typename: "UserProfile",
       id: string,
+      email: string,
       username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
       createdAt: string,
       updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-    placeTimeSlot?:  {
-      __typename: "PlaceTimeSlot",
-      id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
-      placeID: string,
-      startingHour: string,
-      endingHour: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
-export type OnUpdateNotificationSubscription = {
-  onUpdateNotification?:  {
-    __typename: "Notification",
+export type OnUpdateGroupChatMessageSubscription = {
+  onUpdateGroupChatMessage?:  {
+    __typename: "GroupChatMessage",
     id: string,
-    placeID?: string | null,
-    placeName?: string | null,
-    arrivingTime?: string | null,
-    departureTime?: string | null,
+    type: GroupChatMessageType,
+    groupChatID: string,
     senderProfileID: string,
-    message: string,
-    receiverProfileID: string,
-    photo?: string | null,
-    createdAt?: string | null,
-    type: NotifType,
-    status: Status,
-    placeTimeSlotID?: string | null,
-    updatedAt: string,
-    userProfile?:  {
-      __typename: "Uprofile",
+    groupChat?:  {
+      __typename: "GroupChat",
       id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
     senderProfile?:  {
-      __typename: "Uprofile",
+      __typename: "UserProfile",
       id: string,
+      email: string,
       username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
       createdAt: string,
       updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-    placeTimeSlot?:  {
-      __typename: "PlaceTimeSlot",
-      id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
-      placeID: string,
-      startingHour: string,
-      endingHour: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
-export type OnDeleteNotificationSubscription = {
-  onDeleteNotification?:  {
-    __typename: "Notification",
+export type OnDeleteGroupChatMessageSubscription = {
+  onDeleteGroupChatMessage?:  {
+    __typename: "GroupChatMessage",
     id: string,
-    placeID?: string | null,
-    placeName?: string | null,
-    arrivingTime?: string | null,
-    departureTime?: string | null,
+    type: GroupChatMessageType,
+    groupChatID: string,
     senderProfileID: string,
-    message: string,
-    receiverProfileID: string,
-    photo?: string | null,
-    createdAt?: string | null,
-    type: NotifType,
-    status: Status,
-    placeTimeSlotID?: string | null,
-    updatedAt: string,
-    userProfile?:  {
-      __typename: "Uprofile",
+    groupChat?:  {
+      __typename: "GroupChat",
       id: string,
-      username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
     senderProfile?:  {
-      __typename: "Uprofile",
+      __typename: "UserProfile",
       id: string,
+      email: string,
       username: string,
-      name?: string | null,
-      userDocID: string,
-      currentPlaceID?: string | null,
-      expoPushToken?: string | null,
       createdAt: string,
       updatedAt: string,
+      userProfileUserId?: string | null,
     } | null,
-    placeTimeSlot?:  {
-      __typename: "PlaceTimeSlot",
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateNotificationByReceiverSubscriptionVariables = {
+  receiverProfileID: string,
+};
+
+export type OnCreateNotificationByReceiverSubscription = {
+  onCreateNotificationByReceiver?:  {
+    __typename: "Notification",
+    id: string,
+    type: NotificationType,
+    receiverProfileID: string,
+    friendshipRequestID?: string | null,
+    presenceID?: string | null,
+    senderProfileID?: string | null,
+    groupChatInvitationID?: string | null,
+    groupChatID?: string | null,
+    presence?:  {
+      __typename: "Presence",
       id: string,
-      numAttendings?: number | null,
-      dateTime?: string | null,
       placeID: string,
-      startingHour: string,
-      endingHour: string,
+      userProfileID: string,
+      startingDateTime: string,
+      endingDateTime: string,
+      startingTime?: string | null,
+      endingTime: string,
       createdAt: string,
       updatedAt: string,
     } | null,
-  } | null,
-};
-
-export type OnCreatePushNotificationsBatchSubscription = {
-  onCreatePushNotificationsBatch?:  {
-    __typename: "PushNotificationsBatch",
-    id: string,
-    payloadsList?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdatePushNotificationsBatchSubscription = {
-  onUpdatePushNotificationsBatch?:  {
-    __typename: "PushNotificationsBatch",
-    id: string,
-    payloadsList?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeletePushNotificationsBatchSubscription = {
-  onDeletePushNotificationsBatch?:  {
-    __typename: "PushNotificationsBatch",
-    id: string,
-    payloadsList?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreatePushNotificationsSubscription = {
-  onCreatePushNotifications?:  {
-    __typename: "PushNotifications",
-    id?: string | null,
-    body: string,
-    userTokens: string,
-    data: string,
-    type?: NotifType | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdatePushNotificationsSubscription = {
-  onUpdatePushNotifications?:  {
-    __typename: "PushNotifications",
-    id?: string | null,
-    body: string,
-    userTokens: string,
-    data: string,
-    type?: NotifType | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeletePushNotificationsSubscription = {
-  onDeletePushNotifications?:  {
-    __typename: "PushNotifications",
-    id?: string | null,
-    body: string,
-    userTokens: string,
-    data: string,
-    type?: NotifType | null,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    groupChatInvitation?:  {
+      __typename: "GroupChatInvitation",
+      id: string,
+      senderProfileID: string,
+      receiverProfileID: string,
+      groupChatID: string,
+      status: GroupChatInvitationStatus,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    groupChat?:  {
+      __typename: "GroupChat",
+      id: string,
+      name: string,
+      firstInvitedProfileIDList?: string | null,
+      creatorProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
