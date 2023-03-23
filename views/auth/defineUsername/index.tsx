@@ -25,6 +25,7 @@ export class DefineUsernameView extends React.Component<IDefineUsernameViewProps
                     placeholder="570016"
                     placeholderTextColor={"#969696"}
                     style={styles.confirmationCodeInputContainer}
+                    onChangeText={(input) => {this.props.onUsernameInputChange(input)}}
                 />
 
 

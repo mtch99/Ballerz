@@ -1,4 +1,4 @@
-import { IPlaceModel } from "../../app/features/place/adapter";
+import { IPlaceModel } from "../../app/features/place/model";
 import PlaceUseCase from "../../domain/use-cases/place";
 import IPlaceUseCase from "../../domain/use-cases/place/interface";
 import IPlaceController from "./interface";

@@ -2,17 +2,17 @@ import { IUserProfileData } from "../types";
 import { IUserProfile } from "../types";
 
 export interface IUserProfileUseCase {
-    observer: IUserProfileModel
+    observer: IUserProfileModelEventListener
     getAllUserProfileData(): Promise<IUserProfileData[]>
     getUserProfile(id: IUserProfileData['id']): Promise<IUserProfile | null>
     defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult>
 }
 
 
-export interface IUserProfileModel {
+export interface IUserProfileModelEventListener {
     onNewUserProfileList(input: IUserProfileData[]): void
     onNewUserProfile(input: IUserProfile): void
-    onDefineUsername(input: IUserProfile): void
+    onUsernameDefinedEvent(userProfileData: IUserProfileData): void
     setMyProfile(input: IUserProfile): void
 }
 

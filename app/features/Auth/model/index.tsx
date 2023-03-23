@@ -3,8 +3,8 @@ import { ILoginInput, ISignupInput, UserBasicData } from "../../../../domain/use
 import { IGame, IUserProfile, IUserProfileData } from "../../../../domain/use-cases/types"
 import { useAppSelector } from "../../../hooks"
 import { AppDispatch } from "../../../store"
+import { UserProfileModelAdapter } from "../../adapters"
 import { IGameState, IUserProfileState } from "../../types"
-import { UserProfileModelAdapter } from "../../userProfile/adapter"
 import { UserState, setLastSignupInput, setLoginInput, setUser, setUserProfile } from "../slice"
 
 interface IAuthModelInput {
@@ -47,7 +47,7 @@ export const createAuthModel = (input: IAuthModelInput): IAuthModel => {
 
 
 
-class AuthModelAdapter {
+export class AuthModelAdapter {
 
     static parseUserProfile(userProfile: IUserProfile): IUserProfileState {
         const {id, username, badges} = userProfile

@@ -64,7 +64,7 @@ import { IFeedState } from "../../app/features/feed/slice/interface"
 import IFeedController from "./interface"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { NEW_FEED, selectFeed } from "../../app/features/feed/slice"
-import { createFeedModel } from "../../app/features/feed/adapter"
+import { createFeedModel } from "../../app/features/feed/model"
 import { FeedController } from "."
 
 

@@ -36,7 +36,7 @@ There must be three different games on three different courts, two at the moment
 
     * [x] UserProfile and auth usecases update to support cache auth creds storage and defineUsername
 
-    - [ ] Create Profile
+    - [x] Create Profile
         - [x] CreateProfileStack
             - [x] init Define Username screen
         - [x] UserProfileRepo
@@ -44,10 +44,14 @@ There must be three different games on three different courts, two at the moment
             - [x] implement IUserProfileRepo
         
         * [x] Setup staging env mock API credentials
-        - [ ] Test
-            - [ ] Define username returns the created user profile
-            - [ ] UserProfile state is updated
-            - [ ] Navigation to Feed
+        * [x] Go back to managed workflow
+        - [x] Test
+            - [x] Define username returns the created user profile
+            - [x] UserProfile state is updated
+            - [x] Navigation to Feed
+
+    - [ ] Find your friends
+        TODO: List the following steps
 
 
 

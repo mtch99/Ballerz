@@ -1,4 +1,4 @@
-import { IGroupChatModel } from "../../app/features/groupChat/adapter";
+import { IGroupChatModel } from "../../app/features/groupChat/model";
 import IGroupChatMapState from "../../app/features/groupChat/groupChatMap/slice/interface";
 import { IGroupChatListState } from "../../app/features/groupChat/types";
 import GroupChatUseCase from "../../domain/use-cases/groupchat";

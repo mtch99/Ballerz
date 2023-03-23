@@ -2,24 +2,34 @@ import { AuthRepository } from "../../repositories/Auth";
 import UserProfileRepository from "../../repositories/UserProfile";
 import initialUserProfileData, { initialUserProfiles } from "../data/userProfile";
 import { IUserProfile, IUserProfileData } from "../types";
-import { IDefineUsernameInput, IDefineUsernameResult, IUserProfileModel, IUserProfileRepository, IUserProfileUseCase } from "./interface";
+import { IDefineUsernameInput, IDefineUsernameResult, IUserProfileModelEventListener, IUserProfileRepository, IUserProfileUseCase } from "./interface";
 
 
 export default class UserProfileUseCase implements IUserProfileUseCase{
 
-    observer: IUserProfileModel;
+    observer: IUserProfileModelEventListener;
 
     repo: IUserProfileRepository = new UserProfileRepository()
 
-    constructor(observer: IUserProfileModel){
+    constructor(observer: IUserProfileModelEventListener){
         this.observer = observer;
     }
 
 
     async defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult> {
         const result = await this.repo.defineUsername(input)
-        if(!result.error && result.userProfile){
-            this.observer.onDefineUsername(result.userProfile)
+        if(result.error){
+            // TODO: Define and implment error types in output port and response handler
+            console.error("Error on defineUsername request")
+        }
+        if(result.userProfile){
+            const userProfileData: IUserProfileData = {
+                ...result.userProfile,
+                badges: []
+            }
+            if(!result.error && result.userProfile){
+                this.observer.onUsernameDefinedEvent(userProfileData)
+            }
         }
         return result
     }

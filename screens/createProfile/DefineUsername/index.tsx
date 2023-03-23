@@ -30,7 +30,7 @@ export default class DefineUsernameScreen extends React.Component<IDefineUsernam
                 username: this.state.usernameInput
             }
 
-            const response = await this.context.authController.defineUsername(input)
+            const response = await this.context.userProfileController.defineUsername(input)
             this.handleDefineUsernameResponse(response)
         }
 

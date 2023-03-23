@@ -22,7 +22,7 @@ export default class UserProfileClient implements IUserProfileClient {
             {
                 query: queries.getUserProfile,
                 variables: input,
-                authMode: "API_KEY"
+                // authMode: "API_KEY"
             }
         )
 

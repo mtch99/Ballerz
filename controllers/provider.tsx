@@ -1,11 +1,11 @@
 import React from "react";
 import { IAppController } from "./interface";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { createFeedModel } from "../app/features/feed/adapter";
+import { createFeedModel } from "../app/features/feed/model";
 import { FeedController } from "./feed";
-import { createGroupChatModel } from "../app/features/groupChat/adapter";
+import { createGroupChatModel } from "../app/features/groupChat/model";
 import GroupChatController from "./groupChat";
-import { createUserProfileModel } from "../app/features/userProfile/adapter";
+import { createUserProfileModel } from "../app/features/userProfile/model";
 import UserProfileController from "./userProfile";
 import { IFeedState } from "../app/features/feed/slice/interface";
 import { selectFeed } from "../app/features/feed/slice";
@@ -20,14 +20,14 @@ import IGroupChatController from "./groupChat/interface";
 import { IUserProfileController } from "./userProfile/interface";
 import { IUserProfileListState } from "../app/features/userProfile/userProfileList/slice/interface";
 import { IPlaceListState, IPlaceMapState } from "../app/features/place/types";
-import { IPlaceModel, createPlaceModel } from "../app/features/place/adapter";
+import { IPlaceModel, createPlaceModel } from "../app/features/place/model";
 import { selectPlaceListState } from "../app/features/place/placeList/slice";
 import { selectPlaceMapState } from "../app/features/place/placeMap/slice";
 import PlaceController from "./place";
 import IPlaceController from "./place/interface";
 import { IUserProfileMapState } from "../app/features/userProfile/types";
 import { selectUserProfileMapState } from "../app/features/userProfile/userProfileMap/slice";
-import { createAuthModel } from "../app/features/Auth/adapter";
+import { createAuthModel } from "../app/features/Auth/model";
 import { IAuthModel } from "../domain/use-cases/Auth/interface";
 import AuthController from "./auth";
 import IAuthController from "./auth/interface";
@@ -65,6 +65,10 @@ export const AppContext = React.createContext<IAppContext>({
         user: undefined,
         lastSignupInput: {
             email: ""
+        },
+        lastSigninInput: {
+            email: "",
+            password: ""
         }
     }
 });
