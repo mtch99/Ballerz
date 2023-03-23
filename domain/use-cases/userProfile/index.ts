@@ -1,3 +1,5 @@
+import { AuthRepository } from "../../repositories/Auth";
+import UserProfileRepository from "../../repositories/UserProfile";
 import initialUserProfileData, { initialUserProfiles } from "../data/userProfile";
 import { IUserProfile, IUserProfileData } from "../types";
 import { IDefineUsernameInput, IDefineUsernameResult, IUserProfileModel, IUserProfileRepository, IUserProfileUseCase } from "./interface";
@@ -7,17 +9,7 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
 
     observer: IUserProfileModel;
 
-    repo: IUserProfileRepository = {
-        getAllUserProfileData: function (): IUserProfileData[] {
-            throw new Error("Function not implemented.");
-        },
-        getUserProfile: function (id: string): IUserProfile | null {
-            throw new Error("Function not implemented.");
-        },
-        defineUsername: function (input: IDefineUsernameInput): Promise<IDefineUsernameResult> {
-            throw new Error("Function not implemented.");
-        }
-    } 
+    repo: IUserProfileRepository = new UserProfileRepository()
 
     constructor(observer: IUserProfileModel){
         this.observer = observer;
@@ -33,22 +25,19 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
     }
 
 
-    getAllUserProfileData(): IUserProfileData[] {
-        const result = initialUserProfileData
+    async getAllUserProfileData(): Promise<IUserProfileData[]> {
+        const result = await this.repo.getAllUserProfileData()
         // console.warn("Fetching userProfiles")
         this.observer.onNewUserProfileList(result);
-        return initialUserProfileData
+        return result
     }
 
-    getUserProfile(id: string): IUserProfile | null {
-        for (let userProfile of initialUserProfiles) {
-            if(userProfile.id === id) {
-                console.warn("Found id: " + id)
-                this.observer.onNewUserProfile(userProfile)
-                return userProfile;
-            }
+    async getUserProfile(id: string): Promise<IUserProfile | null> {
+        const response = await this.repo.getUserProfile(id)
+        if(response){
+            this.observer.onNewUserProfile(response)
         }
-        return null;
+        return response
     }
 
 

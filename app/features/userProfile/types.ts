@@ -1,10 +1,8 @@
 
 import { IUserProfileData } from "../../../domain/use-cases/types";
-import { IGameState } from "../place/types";
+import { IGameState, IUserProfileState } from "../types";
 
-export interface IUserProfileState extends IUserProfileData {
-    games: IGameState[]
-}
+
 
 
 export interface IUserProfileMapState {

@@ -39,9 +39,15 @@ There must be three different games on three different courts, two at the moment
     - [ ] Create Profile
         - [x] CreateProfileStack
             - [x] init Define Username screen
-        - [ ] UserProfileRepo
+        - [x] UserProfileRepo
             - [x] APIUserProfileClient
-            - [ ] implement IUserProfileRepo
+            - [x] implement IUserProfileRepo
+        
+        * [x] Setup staging env mock API credentials
+        - [ ] Test
+            - [ ] Define username returns the created user profile
+            - [ ] UserProfile state is updated
+            - [ ] Navigation to Feed
 
 
 

@@ -3,8 +3,8 @@ import { IUserProfile } from "../types";
 
 export interface IUserProfileUseCase {
     observer: IUserProfileModel
-    getAllUserProfileData(): IUserProfileData[]
-    getUserProfile(id: IUserProfileData['id']): IUserProfile | null
+    getAllUserProfileData(): Promise<IUserProfileData[]>
+    getUserProfile(id: IUserProfileData['id']): Promise<IUserProfile | null>
     defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult>
 }
 

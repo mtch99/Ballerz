@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../../store'
-import { IUserProfile } from '../../../../domain/use-cases/types'
-import { IUserProfileState } from '../../userProfile/types'
 import { ILoginInput } from '../../../../domain/use-cases/Auth/types'
+import { IUserProfileState } from '../../types'
 
 // Define a type for the slice state
 export interface IUserStateProfileData {
@@ -84,7 +83,7 @@ export const authSlice = createSlice({
 
 
 
-export const { setUser, setLastSignupInput, setLoginInput } = authSlice.actions
+export const { setUser, setLastSignupInput, setLoginInput, setUserProfile } = authSlice.actions
 
 
 // Other code such as selectors can use the imported `RootState` type

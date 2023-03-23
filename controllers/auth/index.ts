@@ -25,8 +25,13 @@ export default class AuthController implements IAuthController {
         return this.authUci.confirmSignup(input)
     }
 
-    defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult> {
-        return this.authUci.defineUsername(input)
+    async defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult> {
+        const result = await this.authUci.defineUsername(input)
+        console.log(`
+            -- Auth controller -- \n
+            defineUsername result: ${JSON.stringify(result)}`
+        )
+        return result
     }
     
 }

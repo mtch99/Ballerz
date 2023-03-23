@@ -35,7 +35,8 @@ export interface IAuthModel {
     onNewRegisteredUserEvent(newUserData: types.ILoginInput): void; 
     onNewSignupAttempt(input: types.ISignupInput): void;
     onNewLoginAttempt(input: types.ILoginInput): void;
-    onhNewLoggedInUserEvent(userData: types.UserBasicData): void
+    onhNewUserLoggedInEvent(userData: types.UserBasicData): void
+    onUsernameDefinedEvent(userProfile: IUserProfile): void
 }
 
 

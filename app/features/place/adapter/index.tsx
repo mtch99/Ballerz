@@ -6,10 +6,11 @@ import { AppDispatch } from "../../../store";
 import { IFeedItemState } from "../../feed/slice/interface";
 import { NEW_PLACELIST, PlaceListSlice } from "../placeList/slice";
 import { NEW_PLACEPROFILE, PlaceMapSlice } from "../placeMap/slice";
-import { IPlaceListState, IPlaceMapState, IPlaceListItemState, IGameState } from "../types";
+import { IPlaceListState, IPlaceMapState, IPlaceListItemState} from "../types";
 import { IPlaceProfile } from "../../../../domain/use-cases/place/types";
 import { INewPlaceProfileActionPayload } from "../placeMap/slice/actions";
 import { INewPlaceListActionPayload } from "../placeList/slice/actions";
+import { IGameState } from "../../types";
 
 
 interface IPlaceModelInput {

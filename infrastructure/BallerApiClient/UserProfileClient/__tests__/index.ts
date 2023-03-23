@@ -1,4 +1,4 @@
-import { awsmobileMock } from "../../aws-exports";
+import { awsmobileAPIMock } from "../../aws-exports";
 import { GetUserProfileQueryVariables, ListUserProfilesQueryVariables } from "../../API";
 import UserProfileClient from ".."
 import { Amplify } from "aws-amplify";
@@ -8,7 +8,7 @@ import { CreateUserProfileMutationVariables } from "../mutations";
 describe("UserProfileClient test suite", () => {
 
     const client = new UserProfileClient()
-    Amplify.configure(awsmobileMock)
+    Amplify.configure(awsmobileAPIMock)
     describe("getUserProfile function tests", () => {
 
         describe("given unexisting userProfileID", () => {

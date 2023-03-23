@@ -3,7 +3,7 @@ export interface IDefineUsernameScreenProps {
     navigationController: IDefineUsernameScreenNavigationController
 }
 export interface IDefineUsernameScreenNavigationController {
-    goToUserProfileScreen(): void
+    goToMyProfileScreen(): void
 }
 
 export interface IDefineUsernameScreenState {

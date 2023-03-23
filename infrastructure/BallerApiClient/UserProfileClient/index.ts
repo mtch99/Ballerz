@@ -2,7 +2,7 @@ import { GetUserQuery, GetUserQueryVariables,ListUserProfilesQueryVariables } fr
 // import {GraphQLResult} from "@aws-amplify/api-graphql"
 import {API, Amplify} from "aws-amplify"
 import {GraphQLQuery, GraphQLResult} from "@aws-amplify/api"
-import { awsmobile } from "../aws-exports";
+import { awsmobile, awsmobileAPIMock } from "../aws-exports";
 import * as mutations from "./mutations"
 import * as queries from "./queries"
 
@@ -11,9 +11,11 @@ import { IUserProfileClient } from "./interface";
 import { CreateUserProfileMutation, CreateUserProfileMutationVariables } from "./mutations";
 
 
-Amplify.configure(awsmobile)
 export default class UserProfileClient implements IUserProfileClient {
     
+    constructor(config: any = awsmobile){
+        Amplify.configure(config)
+    }
     
     async getUserProfile(input: GetUserProfileQueryVariables): Promise<queries.GetUserProfileQuery | undefined> {
         const response = await API.graphql<GraphQLQuery<queries.GetUserProfileQuery>>(
@@ -97,5 +99,12 @@ export default class UserProfileClient implements IUserProfileClient {
                 throw new Error(JSON.stringify(response.errors))
             }
         }
+    }
+}
+
+
+export class UserProfileClientMock extends UserProfileClient {
+    constructor(){
+        super(awsmobileAPIMock)
     }
 }

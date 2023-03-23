@@ -30,7 +30,6 @@ export default class DefineUsernameScreen extends React.Component<IDefineUsernam
                 username: this.state.usernameInput
             }
 
-            // TODO: Handle response
             const response = await this.context.authController.defineUsername(input)
             this.handleDefineUsernameResponse(response)
         }
@@ -39,7 +38,7 @@ export default class DefineUsernameScreen extends React.Component<IDefineUsernam
 
     private handleDefineUsernameResponse(response: IDefineUsernameResult): void {
         if(!response.error && response.userProfile){
-            this.props.navigationController.goToUserProfileScreen()
+            this.props.navigationController.goToMyProfileScreen()
         }
     }
 

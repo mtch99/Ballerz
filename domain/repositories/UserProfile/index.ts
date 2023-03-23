@@ -1,4 +1,4 @@
-import UserProfileClient from "../../../infrastructure/BallerApiClient/UserProfileClient";
+import UserProfileClient, { UserProfileClientMock } from "../../../infrastructure/BallerApiClient/UserProfileClient";
 import { IUserProfileData, IUserProfile } from "../../use-cases/types";
 import { IDefineUsernameInput, IDefineUsernameResult, IUserProfileRepository } from "../../use-cases/userProfile/interface";
 import * as queries from "../../../infrastructure/BallerApiClient/UserProfileClient/queries"
@@ -9,9 +9,11 @@ import { GetUserProfileQueryVariables, ListUserProfilesQueryVariables } from "..
 
 export default class UserProfileRepository implements IUserProfileRepository {
 
-    client: UserProfileClient = new UserProfileClient()
+    client: UserProfileClient
     constructor(){
-
+        // new UserProfileClient()
+        console.log("UserProfileRepository using a userProfileClient mock")
+        this.client = new UserProfileClientMock()
     }
 
     async getAllUserProfileData(): Promise<IUserProfileData[]> {
@@ -60,7 +62,17 @@ export default class UserProfileRepository implements IUserProfileRepository {
         return IUserProfileDataAdapter.parseCreateUserProfileResponse(response)
     }
 
+
 }
+
+
+
+
+
+
+
+
+
 
 
 /**

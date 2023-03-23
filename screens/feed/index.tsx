@@ -42,6 +42,9 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
         this.feedController = this.context.feedController
         this.getFeed();
         this.feed = this.context.feedState
+        console.error(`Feed Screen just mounted \n
+            authState.user: ${this.context.authState.user}`
+        )
     }
 
     getFeed() {

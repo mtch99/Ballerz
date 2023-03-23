@@ -87,7 +87,7 @@ export default class AuthUCI implements IAuthUCI {
 
 
     private __emitNewLoggedInUserEvent(userData: types.UserBasicData): void{
-        this.observer.onhNewLoggedInUserEvent(userData);
+        this.observer.onhNewUserLoggedInEvent(userData);
     }
     
 
