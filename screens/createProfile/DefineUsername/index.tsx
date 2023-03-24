@@ -38,7 +38,7 @@ export default class DefineUsernameScreen extends React.Component<IDefineUsernam
 
     private handleDefineUsernameResponse(response: IDefineUsernameResult): void {
         if(!response.error && response.userProfile){
-            this.props.navigationController.goToMyProfileScreen()
+            this.props.navigationController.goToFindYourFriendsScreen()
         }
     }
 

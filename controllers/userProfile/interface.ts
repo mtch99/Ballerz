@@ -7,7 +7,7 @@ import { IUserProfileData } from "../../domain/use-cases/types";
 
 
 export interface IUserProfileController {
-    getAllUserProfiles(): void
+    getAllUserProfiles(): Promise<void>
     userProfileList: IUserProfileListState
     getUserProfile(id: IUserProfileState['id']): void
     getMyProfile(email: string): void

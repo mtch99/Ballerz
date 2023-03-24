@@ -10,17 +10,18 @@ import { useNavigation } from "@react-navigation/native";
 import { RootStackNavigationProp } from "../types";
 import { AuthStackNavigationProp } from "../app/auth/types";
 import { AppStackNavigationProp } from "../app/types";
+import FindYourFriendsScreen from "../../screens/createProfile/findYourFriends";
+import { IFindYourFriendsScreenNavigationController } from "../../screens/createProfile/findYourFriends/interface";
 
 
 
 export function DefineUsernameScreenWrapper(){
 
-    const navigation = useNavigation<AppStackNavigationProp<'CreateProfile'>>()
+    const navigation = useNavigation<CreateProfileStackNavigationProp<'DefineUsername'>>()
     const navigationController: IDefineUsernameScreenNavigationController = {
-        goToMyProfileScreen: function (): void {
-            console.warn(`navigation to MyProfileScreen not implemented. 
-                Navigating to feed stack instead`);
-            navigation.navigate('AppTab', {screen: 'FeedStack', params: {screen: 'FeedScreen', params: {}}})
+        goToFindYourFriendsScreen: function (): void {
+            //@ts-ignore
+            navigation.navigate('FindYourFriends', {})
             
         }
     }
@@ -30,3 +31,21 @@ export function DefineUsernameScreenWrapper(){
     />
 }
 
+
+
+export function FindYourFriendsScreenWrapper(){
+    const navigation = useNavigation<AppStackNavigationProp<'CreateProfile'>>()
+    const navigationController: IFindYourFriendsScreenNavigationController = {
+        goToMyProfileScreen: function (): void {
+            console.warn(`navigation to MyProfileScreen not implemented. 
+                Navigating to feed stack instead`);
+            navigation.navigate('AppTab', {screen: 'FeedStack', params: {screen: 'FeedScreen', params: {}}})
+            
+        }
+    }
+
+    return <FindYourFriendsScreen
+        {...{navigationController}}
+    />
+
+}

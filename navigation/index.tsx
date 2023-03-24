@@ -43,27 +43,79 @@ export function RootStackNavigator(): JSX.Element {
 
 	const {authState} = React.useContext(AppContext)
 	const _initialRouteName: keyof RootStackParamList = 'AuthStack'
-	
-	
-	  return (
-		<RootStack.Navigator
-		  initialRouteName={authState.user?'AppStack':_initialRouteName}
-		>
+	const [isSignedIn, setIsSignedIn] = React.useState(false)
 
-			<RootStack.Screen
-				name='AuthStack'
-				options={{
-					headerShown: false,
-				}}
-				component={AuthStackWrapper}
-			/>
-			<RootStack.Screen
-				name='AppStack'
-				options={{
-					headerShown: false,
-				}}
-				component={AppStackWrapper}
-			/>
-		</RootStack.Navigator>
-	  )
+	React.useEffect(() => {
+		if(authState.user){
+			console.log(JSON.stringify(authState.user))
+			setIsSignedIn(true)
+		}
+	}, [authState])
+	
+	
+	//   return (
+
+		// <RootStack.Navigator
+		//   initialRouteName={authState.user?'AppStack':_initialRouteName}
+		// >
+
+		// 	<RootStack.Screen
+		// 		name='AuthStack'
+		// 		options={{
+		// 			headerShown: false,
+		// 		}}
+		// 		component={AuthStackWrapper}
+		// 	/>
+		// 	<RootStack.Screen
+		// 		name='AppStack'
+		// 		options={{
+		// 			headerShown: false,
+		// 		}}
+		// 		component={AppStackWrapper}
+		// 	/>
+		// </RootStack.Navigator>
+	//   )
+	return (
+
+			<RootStack.Navigator
+			  initialRouteName={'AppStack'}
+			>
+				{isSignedIn?(
+					<>
+						<RootStack.Screen
+							name='AppStack'
+							options={{
+								headerShown: false,
+							}}
+							component={AppStackWrapper}
+						/>
+						<RootStack.Screen
+							name='AuthStack'
+							options={{
+								headerShown: false,
+							}}
+							component={AuthStackWrapper}
+						/>
+					</>
+				):(
+					<>
+						<RootStack.Screen
+						name='AuthStack'
+						options={{
+							headerShown: false,
+						}}
+						component={AuthStackWrapper}
+						/>
+						<RootStack.Screen
+							name='AppStack'
+							options={{
+								headerShown: false,
+							}}
+							component={AppStackWrapper}
+						/>
+						
+					</>
+				)}
+			</RootStack.Navigator>
+		)
 }

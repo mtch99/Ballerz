@@ -5,7 +5,7 @@ import {GraphQLQuery, GraphQLResult} from "@aws-amplify/api"
 import { awsmobile, awsmobileAPIMock } from "../aws-exports";
 import * as mutations from "./mutations"
 import * as queries from "./queries"
-
+import {GraphQLOptions} from "@aws-amplify/api-graphql"
 import { GetUserProfileQueryVariables} from "../API";
 import { IUserProfileClient } from "./interface";
 import { CreateUserProfileMutation, CreateUserProfileMutationVariables } from "./mutations";
@@ -14,52 +14,56 @@ import { ListUserProfileQuery } from "./queries";
 
 export default class UserProfileClient implements IUserProfileClient {
     
-    constructor(config: any = awsmobile){
+    apiKeyAuthentication: boolean = false;
+    constructor(config: any = awsmobile, authMode?: "API_KEY") {
+        if(authMode){
+            this.apiKeyAuthentication = true;
+        }
         Amplify.configure(config)
+    }
+
+
+    private genRequestPayload(query: string, variables: any): GraphQLOptions{
+        let options: GraphQLOptions = {
+            query,
+            variables
+        }
+        if(this.apiKeyAuthentication){
+            options = {
+                ...options,
+                authMode: "API_KEY"
+            }
+        }
+        return options
     }
     
     async getUserProfile(input: GetUserProfileQueryVariables): Promise<queries.GetUserProfileQuery | undefined> {
-        const response = await API.graphql<GraphQLQuery<queries.GetUserProfileQuery>>(
-            {
-                query: queries.getUserProfile,
-                variables: input,
-            }
-        )
+        const payload = this.genRequestPayload(queries.getUserProfile, input)
+        const response = await API.graphql<GraphQLQuery<queries.GetUserProfileQuery>>(payload)
 
         return this.handleResponse(response)
     }
 
     async listUserProfileData(input: ListUserProfilesQueryVariables): Promise<queries.ListUserProfileDataQuery | undefined> {
-        const response = await API.graphql<GraphQLQuery<queries.ListUserProfileDataQuery>>(
-            {
-                query: queries.listUserProfileData,
-                variables: input,
-            }
-        )
+        const payload = this.genRequestPayload(queries.listUserProfileData, input)
+        const response = await API.graphql<GraphQLQuery<queries.ListUserProfileDataQuery>>(payload)
 
         return this.handleResponse<queries.ListUserProfileDataQuery>(response)
 
     }
 
     async listUserProfiles(input: ListUserProfilesQueryVariables): Promise<queries.ListUserProfileQuery | undefined> {
-        const response = await API.graphql<GraphQLQuery<queries.ListUserProfileQuery>>(
-            {
-                query: queries.listUserProfiles,
-                variables: input,
-            }
-        )
+        const payload = this.genRequestPayload(queries.listUserProfiles, input)
+        const response = await API.graphql<GraphQLQuery<queries.ListUserProfileQuery>>(payload)
 
         return this.handleResponse<queries.ListUserProfileQuery>(response)
     }
 
 
     async createUserProfile(input: CreateUserProfileMutationVariables): Promise<CreateUserProfileMutation | undefined> {
-        const response = await API.graphql<GraphQLQuery<mutations.CreateUserProfileMutation>>(
-            {
-                query: mutations.createUserProfile,
-                variables: input,
-            }
-        )
+        const payload = this.genRequestPayload(mutations.createUserProfile, input)
+
+        const response = await API.graphql<GraphQLQuery<mutations.CreateUserProfileMutation>>(payload)
 
         return this.handleResponse<mutations.CreateUserProfileMutation>(response)
 
@@ -67,28 +71,21 @@ export default class UserProfileClient implements IUserProfileClient {
 
 
     async requestFriendship(input: mutations.CreateFriendshipRequestMutationVariables): Promise<mutations.CreateFriendshipRequestMutation | undefined>{
-        const response = await API.graphql<GraphQLQuery<mutations.CreateFriendshipRequestMutation>>(
-            {
-                query: mutations.createFriendshipRequest,
-                variables: input,
-            }
-        )
+        const payload = this.genRequestPayload(mutations.createFriendshipRequest, input)
+        const response = await API.graphql<GraphQLQuery<mutations.CreateFriendshipRequestMutation>>(payload)
 
         return this.handleResponse<mutations.CreateFriendshipRequestMutation>(response)
     }
 
 
     async acceptFriendship(input: mutations.UpdateFriendshipRequestMutationVariables): Promise<mutations.UpdateFriendshipRequestMutation | undefined> {
-        const response = await API.graphql<GraphQLQuery<mutations.UpdateFriendshipRequestMutation>>(
-            {
-                query: mutations.updateFriendshipRequest,
-                variables: input,
-            }
-        )
+        const payload = this.genRequestPayload(mutations.updateFriendshipRequest, input)
+        const response = await API.graphql<GraphQLQuery<mutations.UpdateFriendshipRequestMutation>>(payload)
 
         return this.handleResponse<mutations.UpdateFriendshipRequestMutation>(response)
 
     }
+
 
     private handleResponse<T>(response: GraphQLResult<T>): T | undefined{
         this.handleResponseError(response)
@@ -97,6 +94,7 @@ export default class UserProfileClient implements IUserProfileClient {
         }
         return response.data
     }
+
 
     private handleResponseError(response: any): void {
         if(response.errors){
@@ -112,6 +110,6 @@ export default class UserProfileClient implements IUserProfileClient {
 
 export class UserProfileClientMock extends UserProfileClient {
     constructor(){
-        super(awsmobileAPIMock)
+        super(awsmobileAPIMock, "API_KEY")
     }
 }

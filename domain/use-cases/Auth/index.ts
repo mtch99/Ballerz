@@ -20,13 +20,12 @@ export default class AuthUCI implements IAuthUCI {
     constructor(observer: IAuthModel){
         this.observer = observer;
     }
-    defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult> {
-        throw new Error("Method not implemented.");
-    }
+
 
 
     async signinLastUser(): Promise<types.ILoginResult | false> {
         const lastLoginCreds = await this.repo.getLastLoginCreds()
+        console.warn("last login credentials: " + JSON.stringify(lastLoginCreds))
         if(lastLoginCreds){
             return await this.login(lastLoginCreds)
         } else {

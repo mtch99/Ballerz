@@ -55,9 +55,14 @@ There must be three different games on three different courts, two at the moment
             - [x] Init and define IFindYourFriendsScreen
                 - [x] SelectableUserPfoileListView
             * [x] Auto Signin user with past credentials
+                * [ ] Enable email confirmation to allow users to signin 
                 - [x] Load data before hiding the splashScreen
                 - [ ] Go appTab if the userprofile exitst
+                    - [x] Implement
+                    - [ ] Test
             - [ ] Add find your friends screen to create profile stack
+                - [ ] Test:
+                    - Log the input and output of the controller sendFriendshipRequests function
             - [ ] Refactor the IDefineUsernameScreenNavigation COntroller to go to the IFindYourFriendsScreen after Username is defined^
 
         - [ ] Test

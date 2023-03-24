@@ -53,12 +53,20 @@ export class SigninAdapter {
                 }
                 break;
             
-                case CognitoSignupErrorName['UsernameExistsException']:
-                    result = {
-                        reason: struct.LoginErrorReason.WRONG_PASSWORD,
-                        description: "Cet a email appartient déjà à un utilisateur",
-                    }
-                    break;
+            case CognitoSignupErrorName['UsernameExistsException']:
+                result = {
+                    reason: struct.LoginErrorReason.WRONG_PASSWORD,
+                    description: "Cet a email appartient déjà à un utilisateur",
+                }
+                break;
+
+            case CognitoSignupErrorName['UserNotConfirmedException']:
+                result = {
+                    reason: struct.LoginErrorReason.USER_NOT_CONFIRMED,
+                    description: "Vous n'avez pas encore confirmé votre email"
+                }
+                break;
+
 
 
             
@@ -67,6 +75,7 @@ export class SigninAdapter {
                     reason: struct.LoginErrorReason.UNREGISTERED_EMAIL,
                     description: "Cet email n'appartient à aucun untilisateur"
                 }
+                break;
         }
 
         return result
@@ -82,5 +91,6 @@ export interface ICognitoSignupError {
 export enum CognitoSignupErrorName {
     UserNotFoundException="UserNotFoundException",
     WRONG_EMAIL_OR_PASSWORD="WRONG_EMAIL_OR_PASSWORD",
-    UsernameExistsException="UsernameExistsException"
+    UsernameExistsException="UsernameExistsException",
+    UserNotConfirmedException="UserNotConfirmedException"
 }

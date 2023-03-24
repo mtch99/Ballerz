@@ -12,6 +12,7 @@ export default class AuthController implements IAuthController {
     constructor(authModel: IAuthModel){
         this.authUci = new AuthUCI(authModel)
     }
+    
     signinLastUser(): Promise<false | ILoginResult> {
         return this.authUci.signinLastUser();
     }

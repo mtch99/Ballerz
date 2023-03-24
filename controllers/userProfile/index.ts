@@ -1,3 +1,5 @@
+import { IUserProfileState } from "./../../app/features/types";
+import { IUserProfile } from "./../../domain/use-cases/types";
 import { IRequestFriendShipInput, IRequestFriendShipResult } from "./../../domain/use-cases/userProfile/interface";
 import { IUserProfileListState } from "../../app/features/userProfile/userProfileList/slice/interface";
 import { IDefineUsernameResult } from "../../domain/use-cases/Auth/interface";
@@ -15,6 +17,7 @@ export default class UserProfileController implements IUserProfileController{
     constructor(model: IUserProfileModelEventListener, userProfileList: IUserProfileListState){
         this.userProfileUseCase = new UserProfileUseCase(model)
         this.userProfileList = userProfileList
+        console.log("Creating user profile controller")
     }
     async getMyProfile(email: string): Promise<boolean> {
         const response = await this.userProfileUseCase.getMyUserProfile(email)
@@ -38,12 +41,17 @@ export default class UserProfileController implements IUserProfileController{
         await Promise.all(promises)
     }
 
-    getAllUserProfiles(): void{
-        this.userProfileUseCase.getAllUserProfileData()
+    async getAllUserProfiles(): Promise<void>{
+        await this.userProfileUseCase.getAllUserProfileData()
     }
 
-    getUserProfile(id: string): void {
-        this.userProfileUseCase.getUserProfile(id)
+    async getUserProfile(id: string): Promise<boolean> {
+        let result = true
+        const response = await this.userProfileUseCase.getUserProfile(id)
+        if(!response) {
+            result = false
+        }
+        return result
     }
 
     defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult> {

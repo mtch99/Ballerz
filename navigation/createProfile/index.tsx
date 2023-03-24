@@ -6,7 +6,7 @@
 import React from 'react';
 import { CreateProfileStackParamList } from './types';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { DefineUsernameScreenWrapper } from './wrappers';
+import { DefineUsernameScreenWrapper, FindYourFriendsScreenWrapper } from './wrappers';
  
  // import LinkingConfiguration from './LinkingConfiguration';
  
@@ -33,19 +33,27 @@ import { DefineUsernameScreenWrapper } from './wrappers';
 
  export function CreateProfileStack(): JSX.Element {
  
-     const _initialRouteName: keyof CreateProfileStackParamList = 'DefineUsername'
-     
-       return (
-         <Stack.Navigator
-           initialRouteName={_initialRouteName}
-         >
-             <Stack.Screen
-                 name='DefineUsername'
-                 options={{
-                     headerShown: false,
-                 }}
-                 component={DefineUsernameScreenWrapper}
-             />
-         </Stack.Navigator>
-       )
- }
+    	const _initialRouteName: keyof CreateProfileStackParamList = 'DefineUsername'
+	
+    	  	return (
+    	   		<Stack.Navigator
+    	   		  initialRouteName={_initialRouteName}
+    	   		>
+    	   		   <Stack.Screen
+    	   		       name='DefineUsername'
+    	   		       options={{
+    	   		           headerShown: false,
+    	   		       }}
+    	   		       component={DefineUsernameScreenWrapper}
+    	   		   />
+    	   		   <Stack.Screen
+    	   		       name='FindYourFriends'
+    	   		       options={{
+    	   		           headerShown: false,
+    	   		       }}
+    	   		       component={FindYourFriendsScreenWrapper}
+    	   		   />
+    	   		</Stack.Navigator>
+
+    	  )
+}	  

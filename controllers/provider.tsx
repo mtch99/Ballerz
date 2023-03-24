@@ -88,6 +88,8 @@ export default function AppProvider (props: IProps) {
         dispatchFunc: dispatch
     }
 
+    const [isDataPrepared, setIsDataPrepared] = React.useState(false)
+
     const authModel: IAuthModel = createAuthModel(modelInput)
     const authState: AuthState = selector(selectAuth)
     const authController: IAuthController = new AuthController(authModel)
@@ -143,8 +145,10 @@ export default function AppProvider (props: IProps) {
     }
     
     React.useEffect(() => {
-        prepareData();
-    })
+        if(!isDataPrepared){
+            prepareData().then(() => {setIsDataPrepared(true)});
+        }
+    }, [])
 
 
     return (

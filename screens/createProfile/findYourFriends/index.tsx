@@ -4,6 +4,7 @@ import { AppContext, IAppContext } from '../../../controllers/provider';
 import { ISendFriendshipRequestsInput } from '../../../controllers/userProfile/interface';
 import { IUserProfileData } from '../../../domain/use-cases/types';
 import SelectableUserProfileListView from '../../../views/userProfileList/selectable';
+import { ISelectableUserProfileData } from '../../interface';
 
 
 export default class FindYourFriendsScreen extends React.Component<IFindYourFriendsScreenProps, IFindYourFriendsScreenState> {
@@ -20,9 +21,10 @@ export default class FindYourFriendsScreen extends React.Component<IFindYourFrie
     }
 
 
-    private __initUserList(){
+    private __initUserList(): ISelectableUserProfileData[]{
         const userList: IFindYourFriendsScreenState['userList'] = []
-        this.props.userProfileDataList.forEach((userProfileData) => {
+        const userProfileDataList = this.context.userProfileListState.items
+        userProfileDataList.forEach((userProfileData) => {
             userList.push({...userProfileData, selected: false})
         })
 
@@ -30,6 +32,22 @@ export default class FindYourFriendsScreen extends React.Component<IFindYourFrie
             ...prevState,
             userList
         }))  
+
+        console.error(JSON.stringify(userList))
+
+        return userList
+    }
+
+    componentDidMount(): void {
+        if(this.context.userProfileListState.items.length == 0){
+            this.context.userProfileController.getAllUserProfiles().then(() => 
+                {
+                    this.__initUserList()
+                }
+            )
+        } else {
+            this.__initUserList()
+        }
     }
 
     onSelectItem(item: IUserProfileData): void {

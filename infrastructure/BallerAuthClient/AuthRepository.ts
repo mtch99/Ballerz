@@ -62,11 +62,11 @@ export class AuthRepository implements IAuthRepository {
 
         if(user){
             this.__setCurrentUser(user);
+            this.__storeLoginCreds(creds);
         }
 
         if(this._currentUser){
             result.newUserData = SignupAdapter.parseCognitoUser(this._currentUser)
-            this.__storeLoginCreds(creds);
         }
 
         return result;
@@ -84,7 +84,7 @@ export class AuthRepository implements IAuthRepository {
     async login(creds: struct.ILoginInput): Promise<struct.ILoginResult> {
         this.__storeLoginCreds(creds)
 
-        const result: struct.ILoginResult = {
+        let result: struct.ILoginResult = {
             error: false,
         }
 
@@ -92,8 +92,10 @@ export class AuthRepository implements IAuthRepository {
         let password: string
 
         if(!isDevice){
-            email = "foo@bar.com"
-            password="validpassword1"
+            // email = "foo@bar.com"
+            // password="validpassword1"
+            email = creds.email
+            password = creds.password
             // password="UknowitsaDummyPassword123"
         }
         else{
@@ -108,10 +110,14 @@ export class AuthRepository implements IAuthRepository {
         .catch((error) => {
             // console.error(JSON.stringify(error));
             result.error = SigninAdapter.parseCognitoSigninError(error)
-            // result.error = {
-            //     reason: struct.LoginErrorReason.WRONG_PASSWORD,
-            //     description: error,
-            // }
+            if(result.error.reason == struct.LoginErrorReason['USER_NOT_CONFIRMED']){
+                result = {
+                    error: false,
+                    user: {
+                        email
+                    }
+                }
+            }
         })
 
         if(this._currentUser){

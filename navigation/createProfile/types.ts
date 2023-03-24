@@ -11,6 +11,7 @@ import { IDefineUsernameScreenProps } from "../../screens/createProfile/DefineUs
  import { ExploreStackParamList } from "../explore/types";
  import { FeedStackParamList } from "../feed/types";
  import { GroupChatStackParamList } from "../groupChat/types";
+import { IFindYourFriendsScreenProps } from "../../screens/createProfile/findYourFriends/interface";
  
  
   
@@ -22,6 +23,7 @@ import { IDefineUsernameScreenProps } from "../../screens/createProfile/DefineUs
  
  export type CreateProfileStackParamList = {
     DefineUsername: IDefineUsernameScreenProps
+    FindYourFriends: IFindYourFriendsScreenProps
  };
  
  

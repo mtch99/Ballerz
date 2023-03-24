@@ -2,7 +2,7 @@ import { IUserProfileData } from "../../../domain/use-cases/types"
 import { ISelectableUserProfileData, ISelectableUserProfileViewProps } from "../../interface"
 
 export interface IFindYourFriendsScreenPropsWithoutNavigation {
-    userProfileDataList: IUserProfileData[]
+    // userProfileDataList: IUserProfileData[]
 }
 export interface IFindYourFriendsScreenProps extends IFindYourFriendsScreenPropsWithoutNavigation {
     navigationController: IFindYourFriendsScreenNavigationController

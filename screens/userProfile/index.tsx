@@ -3,7 +3,7 @@ import IUserProfileScreen, { IUserProfileListScreenNavigationController } from "
 import { View, Text } from "react-native";
 import { AppContext, IAppContext } from "../../controllers/provider";
 import { UserProfileView } from "../../views/userProfile";
-import { IUserProfileState } from "../../app/features/userProfile/types";
+import { IUserProfileState } from "../../app/features/types";
 // import { UserProfileView } from "../../views/UserProfile";
 
 

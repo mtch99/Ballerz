@@ -35,7 +35,7 @@ export const createAuthModel = (input: IAuthModelInput): IAuthModel => {
                 email: userData.email,
                 profile
             }
-            
+
             input.dispatchFunc(setUser(payload))
         },
 
