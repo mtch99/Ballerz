@@ -33,7 +33,7 @@ describe("UserProfileClient test suite", () => {
             }
             describe("when listUserProfiles is called", () => {
                 test("It should not return undefined", async() => {
-                    const result = await client.listUserProfiles(input)
+                    const result = await client.listUserProfileData(input)
                     expect(result).not.toBeUndefined()
                     if(result){
                         expect(result.listUserProfiles).not.toBeNull()

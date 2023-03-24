@@ -25,6 +25,7 @@ export const createAuthModel = (input: IAuthModelInput): IAuthModel => {
         onNewLoginAttempt: function (payload: ILoginInput): void {
             input.dispatchFunc(setLoginInput(payload))
         },
+        
         onhNewUserLoggedInEvent(userData: UserBasicData): void {
             let profile: undefined | IUserProfileState = undefined
             if(userData.profile){
@@ -37,6 +38,7 @@ export const createAuthModel = (input: IAuthModelInput): IAuthModel => {
             
             input.dispatchFunc(setUser(payload))
         },
+
         onUsernameDefinedEvent(userProfile: IUserProfile): void {
             const actionPayload: IUserProfileState = AuthModelAdapter.parseUserProfile(userProfile)
             input.dispatchFunc(setUserProfile({profile: actionPayload}))

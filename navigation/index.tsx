@@ -13,6 +13,7 @@ import { RootStackParamList } from './types';
 import { AppStackWrapper, AuthStackWrapper} from './wrappers';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AppContext } from '../controllers/provider';
 
 // import LinkingConfiguration from './LinkingConfiguration';
 
@@ -40,11 +41,13 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 export function RootStackNavigator(): JSX.Element {
 
+	const {authState} = React.useContext(AppContext)
 	const _initialRouteName: keyof RootStackParamList = 'AuthStack'
+	
 	
 	  return (
 		<RootStack.Navigator
-		  initialRouteName={_initialRouteName}
+		  initialRouteName={authState.user?'AppStack':_initialRouteName}
 		>
 
 			<RootStack.Screen

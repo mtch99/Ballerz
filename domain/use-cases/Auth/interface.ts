@@ -15,8 +15,7 @@ export default interface IAuthUCI {
     confirmSignup(input: types.IConfirmSignupInput): Promise<types.IConfirmSignupResult>
     login(signInInput: types.ILoginInput): Promise<types.ILoginResult>
     getLastLoginCreds(): Promise<types.ILoginInput | null>
-    setListener(listener: IAuthModel): void
-    defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult>
+    signinLastUser(): Promise<types.ILoginResult | false>
 }
 
 

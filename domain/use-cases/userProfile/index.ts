@@ -2,7 +2,7 @@ import { AuthRepository } from "../../repositories/Auth";
 import UserProfileRepository from "../../repositories/UserProfile";
 import initialUserProfileData, { initialUserProfiles } from "../data/userProfile";
 import { IUserProfile, IUserProfileData } from "../types";
-import { IDefineUsernameInput, IDefineUsernameResult, IUserProfileModelEventListener, IUserProfileRepository, IUserProfileUseCase } from "./interface";
+import { IDefineUsernameInput, IDefineUsernameResult, IRequestFriendShipInput, IRequestFriendShipResult, IUserProfileModelEventListener, IUserProfileRepository, IUserProfileUseCase } from "./interface";
 
 
 export default class UserProfileUseCase implements IUserProfileUseCase{
@@ -15,7 +15,15 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
         this.observer = observer;
     }
 
-
+    async getMyUserProfile(email: string): Promise<IUserProfile | null> {
+        const result = await this.repo.getUserProfileByEmail(email)
+        if(result){
+            this.observer.setMyProfile(result)
+        }
+        return result
+    }
+    
+    
     async defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult> {
         const result = await this.repo.defineUsername(input)
         if(result.error){
@@ -33,15 +41,15 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
         }
         return result
     }
-
-
+    
+    
     async getAllUserProfileData(): Promise<IUserProfileData[]> {
         const result = await this.repo.getAllUserProfileData()
-        // console.warn("Fetching userProfiles")
         this.observer.onNewUserProfileList(result);
         return result
     }
 
+    
     async getUserProfile(id: string): Promise<IUserProfile | null> {
         const response = await this.repo.getUserProfile(id)
         if(response){
@@ -50,5 +58,10 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
         return response
     }
 
-
+    
+    async requestFriendShip(input: IRequestFriendShipInput): Promise<IRequestFriendShipResult> {
+        const response = await this.repo.requestFriendship(input)
+        return response
+    }
+    
 }

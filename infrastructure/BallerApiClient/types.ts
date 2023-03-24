@@ -47,12 +47,33 @@ export type UserProfileData = {
     username: string
 }
 
+export type UserProfile = {
+    __typename: "UserProfile",
+    id: string,
+    username: string,
+    friends: ModelFriendshipConnection,
+    createdAt: string,
+    updatedAt: string
+    // groupChatUserProfileConnectionList: GroupChatUserProfileConnectionConnection | null,
+    //   createdGroupChatList?:  {
+    //     __typename: "ModelGroupChatConnection",
+    //     items: Array<GroupChatData | null>
+    //     nextToken?: string | null,
+    //   } | null,
+}
+
 
 export type Friendship = {
     __typename: "Friendship",
     id: string
     friendProfile: UserProfileData
 }
+
+export type ModelFriendshipConnection = {
+    __typename: "ModelFriendshipConnection",
+    items:  Array<Friendship | null >,
+    nextToken?: string | null,
+};
 
 
 export type GroupChatUserProfileConnection = {

@@ -37,6 +37,7 @@ export class AuthRepository implements IAuthRepository {
 
     
     async signup(creds: struct.ISignupInput): Promise<struct.ISignupResult> {
+        this.__storeSignupCreds(creds)
         const result:struct.ISignupResult = {
             error: false,
         };

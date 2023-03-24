@@ -32,6 +32,7 @@ import { IAuthModel } from "../domain/use-cases/Auth/interface";
 import AuthController from "./auth";
 import IAuthController from "./auth/interface";
 import { AuthState, selectAuth } from "../app/features/Auth/slice";
+import * as SplashScreen from 'expo-splash-screen'
 
 
 
@@ -132,7 +133,18 @@ export default function AppProvider (props: IProps) {
         placeMapState,
         userProfileMapState,
     }
+
+    const prepareData = async() => {
+        const isUserSignedIn = await authController.signinLastUser()
+        if(isUserSignedIn && authState.user){
+            await userProfileController.getMyProfile(authState.user.email)
+        }
+        await SplashScreen.hideAsync()
+    }
     
+    React.useEffect(() => {
+        prepareData();
+    })
 
 
     return (

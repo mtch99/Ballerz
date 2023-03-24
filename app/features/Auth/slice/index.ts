@@ -67,14 +67,19 @@ export const authSlice = createSlice({
     },
 
 	setUserProfile: (state: AuthState, action: PayloadAction<{profile: IUserProfileState}>) => {
-		return {
-			...state,
-			user: {
-				...state.user,
-				email: state.lastSigninInput.email,
-				profile: action.payload.profile
+		
+		if(state.user){
+			return {
+				...state,
+				user: {
+					...state.user,
+					profile: action.payload.profile
+				}
 			}
+		} else {
+			throw new Error("User state is undefined")
 		}
+		
 	}
 
   }

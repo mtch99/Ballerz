@@ -1,3 +1,4 @@
+import { ModelFriendshipConnection, UserProfile } from "../types";
 import { Presence, Friendship, GroupChatDataWithMembers, GroupChatUserProfileConnectionConnection, GroupChatData, UserProfileData } from "../types";
 
 export const getUserProfile = /* GraphQL */ `
@@ -15,20 +16,20 @@ export const getUserProfile = /* GraphQL */ `
               }
           }
         }
-        groupChatUserProfileConnectionList {
-          items {
-            groupChatID
-            userProfileID
-            userProfile {
-                id
-                username
-            }
-            groupChat {
-                id
-                name
-            }
-          }
-        }
+        # groupChatUserProfileConnectionList {
+        #   items {
+        #     groupChatID
+        #     userProfileID
+        #     userProfile {
+        #         id
+        #         username
+        #     }
+        #     groupChat {
+        #         id
+        #         name
+        #     }
+        #   }
+        # }
         createdAt
         updatedAt
     }
@@ -36,35 +37,42 @@ export const getUserProfile = /* GraphQL */ `
 `;
 
 export type GetUserProfileQuery = {
-    getUserProfile:  {
-      __typename: "UserProfile",
-      id: string,
-      email: string,
-      username: string,
-      friends:  {
-        __typename: "ModelFriendshipConnection",
-        items: Array<Friendship | null>
-        nextToken?: string | null,
-      } 
-      groupChatUserProfileConnectionList: GroupChatUserProfileConnectionConnection | null,
-    //   createdGroupChatList?:  {
-    //     __typename: "ModelGroupChatConnection",
-    //     items: Array<GroupChatData | null>
-    //     nextToken?: string | null,
-    //   } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null
+  getUserProfile:  UserProfile | null
 };
 
 
-export type ListUserProfilesQuery = {
+export type ListUserProfileDataQuery = {
   listUserProfiles:  {
     __typename: "ModelUserProfileConnection",
     items:  Array< UserProfileData | null >,
-    nextToken?: string | null,
+    nextToken: string | null,
   } | null,
 };
+
+export type ListUserProfileQuery = {
+  listUserProfiles:  {
+    __typename: "ModelUserProfileConnection",
+    items:  Array< UserProfileData | null >,
+    nextToken: string | null,
+  } | null,
+}
+
+export const listUserProfileData = /* GraphQL */ `
+  query ListUserProfiles(
+    $filter: ModelUserProfileFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserProfiles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        username
+      }
+      nextToken
+    }
+  }
+`;
+
 
 export const listUserProfiles = /* GraphQL */ `
   query ListUserProfiles(
@@ -75,7 +83,33 @@ export const listUserProfiles = /* GraphQL */ `
     listUserProfiles(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        email
         username
+        friends {
+          items {
+              id
+              friendProfile {
+                  id
+                  username
+              }
+          }
+        }
+        # groupChatUserProfileConnectionList {
+        #   items {
+        #     groupChatID
+        #     userProfileID
+        #     userProfile {
+        #         id
+        #         username
+        #     }
+        #     groupChat {
+        #         id
+        #         name
+        #     }
+        #   }
+        # }
+        createdAt
+        updatedAt
       }
       nextToken
     }

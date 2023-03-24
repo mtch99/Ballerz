@@ -27,15 +27,16 @@ export function createUserProfileModel(modelInput: IUserProfileModelInput): IUse
             const payload: INewUserProfileListActionPayload = UserProfileModelAdapter.parseUserProfileList(input)
             modelInput.dispatchFunc(NEW_USERPROFILELIST(payload))
         },
+
         onNewUserProfile(input: IUserProfile) {
             const payload: INewUserProfileProfileActionPayload = UserProfileModelAdapter.parseUserProfile(input);
             modelInput.dispatchFunc(NEW_USERPROFILE(payload));
         },
 
         setMyProfile(input) {
-            throw new Error("setMyProfile Method not implemented in createUserProfileModel")
-            // const actionPayload: IUserProfileState = AuthModelAdapter.parseUserProfile(userProfile)
-            // modelInput.dispatchFunc(setUserProfile({profile: actionPayload}))
+            // throw new Error("setMyProfile Method not implemented in createUserProfileModel")
+            const actionPayload: IUserProfileState = AuthModelAdapter.parseUserProfile(input)
+            modelInput.dispatchFunc(setUserProfile({profile: actionPayload}))
         },
 
         onUsernameDefinedEvent(userProfile: IUserProfile): void {

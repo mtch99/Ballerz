@@ -12,6 +12,9 @@ export default class AuthController implements IAuthController {
     constructor(authModel: IAuthModel){
         this.authUci = new AuthUCI(authModel)
     }
+    signinLastUser(): Promise<false | ILoginResult> {
+        return this.authUci.signinLastUser();
+    }
 
 
     async login(input: ILoginInput): Promise<ILoginResult> {
@@ -23,15 +26,6 @@ export default class AuthController implements IAuthController {
     
     confirmSignup(input: IConfirmSignupInput): Promise<IConfirmSignupResult> {
         return this.authUci.confirmSignup(input)
-    }
-
-    async defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult> {
-        const result = await this.authUci.defineUsername(input)
-        console.log(`
-            -- Auth controller -- \n
-            defineUsername result: ${JSON.stringify(result)}`
-        )
-        return result
     }
     
 }

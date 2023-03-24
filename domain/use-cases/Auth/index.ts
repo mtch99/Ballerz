@@ -2,6 +2,7 @@ import { TouchableHighlightBase } from "react-native"
 import {AuthRepository} from "../../repositories/Auth"
 import IAuthUCI, {IAuthModel, IAuthRepository, IDefineUsernameInput, IDefineUsernameResult} from "./interface"
 import * as types from './types'
+import { ThemeProvider } from "@react-navigation/native";
 
 
 
@@ -19,16 +20,20 @@ export default class AuthUCI implements IAuthUCI {
     constructor(observer: IAuthModel){
         this.observer = observer;
     }
-    
-
     defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult> {
         throw new Error("Method not implemented.");
     }
-    
 
-    setListener(listener: IAuthModel): void {
-        throw new Error("Method not implemented.");
+
+    async signinLastUser(): Promise<types.ILoginResult | false> {
+        const lastLoginCreds = await this.repo.getLastLoginCreds()
+        if(lastLoginCreds){
+            return await this.login(lastLoginCreds)
+        } else {
+            return false
+        }
     }
+    
     
     async confirmSignup(input: types.IConfirmSignupInput): Promise<types.IConfirmSignupResult> {
         return this.repo.confirmSignup(input);

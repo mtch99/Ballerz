@@ -9,6 +9,7 @@ import * as queries from "./queries"
 import { GetUserProfileQueryVariables} from "../API";
 import { IUserProfileClient } from "./interface";
 import { CreateUserProfileMutation, CreateUserProfileMutationVariables } from "./mutations";
+import { ListUserProfileQuery } from "./queries";
 
 
 export default class UserProfileClient implements IUserProfileClient {
@@ -22,24 +23,33 @@ export default class UserProfileClient implements IUserProfileClient {
             {
                 query: queries.getUserProfile,
                 variables: input,
-                // authMode: "API_KEY"
             }
         )
 
         return this.handleResponse(response)
     }
 
-    async listUserProfiles(input: ListUserProfilesQueryVariables): Promise<queries.ListUserProfilesQuery | undefined> {
-        const response = await API.graphql<GraphQLQuery<queries.ListUserProfilesQuery>>(
+    async listUserProfileData(input: ListUserProfilesQueryVariables): Promise<queries.ListUserProfileDataQuery | undefined> {
+        const response = await API.graphql<GraphQLQuery<queries.ListUserProfileDataQuery>>(
             {
-                query: queries.listUserProfiles,
+                query: queries.listUserProfileData,
                 variables: input,
-                authMode: "API_KEY"
             }
         )
 
-        return this.handleResponse<queries.ListUserProfilesQuery>(response)
+        return this.handleResponse<queries.ListUserProfileDataQuery>(response)
 
+    }
+
+    async listUserProfiles(input: ListUserProfilesQueryVariables): Promise<queries.ListUserProfileQuery | undefined> {
+        const response = await API.graphql<GraphQLQuery<queries.ListUserProfileQuery>>(
+            {
+                query: queries.listUserProfiles,
+                variables: input,
+            }
+        )
+
+        return this.handleResponse<queries.ListUserProfileQuery>(response)
     }
 
 
@@ -48,7 +58,6 @@ export default class UserProfileClient implements IUserProfileClient {
             {
                 query: mutations.createUserProfile,
                 variables: input,
-                authMode: "API_KEY"
             }
         )
 
@@ -62,7 +71,6 @@ export default class UserProfileClient implements IUserProfileClient {
             {
                 query: mutations.createFriendshipRequest,
                 variables: input,
-                authMode: "API_KEY"
             }
         )
 
@@ -75,7 +83,6 @@ export default class UserProfileClient implements IUserProfileClient {
             {
                 query: mutations.updateFriendshipRequest,
                 variables: input,
-                authMode: "API_KEY"
             }
         )
 
