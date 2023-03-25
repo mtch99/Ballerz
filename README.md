@@ -57,7 +57,7 @@ There must be three different games on three different courts, two at the moment
             * [x] Auto Signin user with past credentials
                 * [ ] Enable email confirmation to allow users to signin 
                 - [x] Load data before hiding the splashScreen
-                - [ ] Go appTab if the userprofile exitst
+                - [x] Go appTab if the userprofile exitst
                     - [x] Implement
                     - [x] Test
             - [ ] Add find your friends screen to create profile stack
