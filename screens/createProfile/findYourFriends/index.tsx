@@ -19,6 +19,8 @@ export default class FindYourFriendsScreen extends React.Component<IFindYourFrie
 
     constructor(props: IFindYourFriendsScreenProps){
         super(props)
+        this.onAddButtonPress = this.onAddButtonPress.bind(this)
+        this.onPressContinue = this.onPressContinue.bind(this)
     }
 
 
@@ -50,7 +52,7 @@ export default class FindYourFriendsScreen extends React.Component<IFindYourFrie
         }
     }
 
-    onSelectItem(item: IUserProfileData): void {
+    onAddButtonPress(item: IUserProfileData): void {
         const userList: IFindYourFriendsScreenState['userList']  = [] 
         this.state.userList.forEach((selectableUserProfileData) => {
             if(selectableUserProfileData.id == item.id){
@@ -71,6 +73,7 @@ export default class FindYourFriendsScreen extends React.Component<IFindYourFrie
         }))
     }
 
+    
     onPressContinue(): void {
         let myProfileID: string | undefined = undefined
         if(this.context.authState.user){
@@ -95,15 +98,10 @@ export default class FindYourFriendsScreen extends React.Component<IFindYourFrie
         }
     }
 
-
-
-
-
-
     render(): React.ReactNode {
         return (
             <FindYourFriendsView
-                onSelectItem={this.onSelectItem}
+                onAddButtonPress={this.onAddButtonPress}
                 usersList={this.state.userList}
                 shareableLink='asdfg'
             />

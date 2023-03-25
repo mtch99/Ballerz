@@ -3,6 +3,7 @@ import { ISelectableUserProfileItemViewProps, IUserProfileItemViewProps } from "
 import { FlatList, TouchableOpacity, View, Text, StyleSheet, Image } from "react-native"
 import { CheckBox } from "react-native-btr"
 import { ISelectableUserProfileViewProps } from "../../../screens/interface"
+import AddUserButton from "../../components/Buttons/addUser"
 
 
 
@@ -19,7 +20,7 @@ export class SelectableUserProfileListView extends React.Component<ISelectableUs
                         <UserProfileItemView
                             userProfile={item}
                             selected={item.selected}
-                            onPressCheckBox={(id) => {this.props.onSelectItem(item)}}
+                            onPressCheckBox={(id) => {this.props.onAddButtonPress(item)}}
                             onPressUserProfileItem={() => {}}
                         />
                     )
@@ -44,7 +45,7 @@ class UserProfileItemView extends React.Component<ISelectableUserProfileItemView
 
     render(){
 
-        if(this.props.userProfile.badges.length > 0){
+        // if(this.props.userProfile.badges.length > 0){
             return(
                 <View
                     style={styles.container}
@@ -73,49 +74,22 @@ class UserProfileItemView extends React.Component<ISelectableUserProfileItemView
                     </View>
 
                     <View
-                        style={{alignSelf: "flex-end"}}
-                    >
-                        <CheckBox
+                        style={{alignItems: "flex-end", flexGrow: 1}}
+                    > 
+                        {/* <CheckBox
                             checked={this.props.selected}
                             color="orange"
                             onPress={() => {this.props.onPressCheckBox(this.props.userProfile.id)}}
+                        /> */}
+                        <AddUserButton
+                            selected={this.props.selected}
+                            onPress={() => {this.props.onPressCheckBox(this.props.userProfile.id)}}
                         />
-                    </View>
+                    </View> 
 
                 </View>
             )
         }
-        
-        
-        return(
-            <TouchableOpacity
-                style={styles.container}
-                onPress={() => {this.props.onPressUserProfileItem(this.props.userProfile.id)}}
-            >
-                <View style={styles.groupPhotoContainer}>
-                    <Image style = {styles.groupPhoto} source = {require("../../../assets/profilePic.jpg")}/>
-                </View> 
-                <View>
-                    <Text
-                        style={{color:"#F5F8FA", fontSize:16, fontWeight: "500"}}
-                        >
-                        {this.username}
-                    </Text>
-                    <Text style={styles.gameNumText}>4 parties</Text>
-                </View>
-                <View
-                        style={{alignSelf: "flex-end"}}
-                    >
-                        <CheckBox
-                            checked={this.props.selected}
-                            color="orange"
-                            onPress={() => {this.props.onPressCheckBox(this.props.userProfile.id)}}
-                        />
-                </View>
-            </TouchableOpacity>
-        )
-    }
-    
 }
 
 
@@ -128,8 +102,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: 'transparent',
-        marginHorizontal: 10,
-        width: "81%"
+        marginHorizontal: "8%",
+        width: "83%",
+        // justifyContent: 'space-around',
     },
     
     groupPhotoContainer: {

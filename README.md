@@ -60,6 +60,11 @@ There must be three different games on three different courts, two at the moment
                 - [x] Go appTab if the userprofile exitst
                     - [x] Implement
                     - [x] Test
+            - [ ] FindYourFriendsView 
+                - [x] Selectable UserProfileList View
+                - [ ] Header
+                    - [ ] Right Button to continue
+
             - [ ] Add find your friends screen to create profile stack
                 - [ ] Test:
                     - [ ] Log the input and output of the controller sendFriendshipRequests function

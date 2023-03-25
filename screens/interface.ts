@@ -7,5 +7,5 @@ export interface ISelectableUserProfileData extends IUserProfileData {
 
 export interface ISelectableUserProfileViewProps {
     usersList: ISelectableUserProfileData[]
-    onSelectItem(item: ISelectableUserProfileData): void
+    onAddButtonPress(item: ISelectableUserProfileData): void
 }

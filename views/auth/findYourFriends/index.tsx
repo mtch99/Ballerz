@@ -11,7 +11,7 @@ export default class FindYourFriendsView extends React.Component<IFindYourFriend
         return(
             <SafeAreaView>
                 <SelectableUserProfileListView
-                    onSelectItem={this.props.onSelectItem}
+                    onAddButtonPress={this.props.onAddButtonPress}
                     usersList={this.props.usersList}
                 />
             </SafeAreaView>
