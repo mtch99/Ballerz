@@ -8,6 +8,8 @@ export default interface IAuthController {
     signinLastUser(): Promise<types.ILoginResult| false>
 }
 
+
+
 export interface IILoginResult extends types.ILoginResult{}
 
 

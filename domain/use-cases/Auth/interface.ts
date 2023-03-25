@@ -30,7 +30,7 @@ export interface IDefineUsernameResult {
 }
 
 
-export interface IAuthModel {
+export interface IAuthUCIEventListener {
     onNewRegisteredUserEvent(newUserData: types.ILoginInput): void; 
     onNewSignupAttempt(input: types.ISignupInput): void;
     onNewLoginAttempt(input: types.ILoginInput): void;

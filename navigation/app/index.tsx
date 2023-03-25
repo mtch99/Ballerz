@@ -3,8 +3,9 @@ import { AppStackParamList } from "./types";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AppContext } from "../../controllers/provider";
-import React from "react";
+import React, { useEffect } from "react";
 import { CreateProfileScreenWrapper, AppTabWrapper } from "./wrappers";
+
 
 
 
@@ -12,20 +13,28 @@ const Stack = createNativeStackNavigator<AppStackParamList>();
 
 export function AppStack(): JSX.Element {
     const {authState} = React.useContext(AppContext)
-    let initialRouteName: keyof AppStackParamList = 'AppTab'
-
-    if(!authState.user?.profile){
-        initialRouteName = 'CreateProfile'
-    }
-
-    else {
-
-    }
-
+    
     return(
-        <Stack.Navigator
-            initialRouteName={initialRouteName}
-        >
+        authState.profile?(
+            <Stack.Navigator
+            >
+                <Stack.Screen
+                    name="AppTab"
+                    options={{
+                        headerShown: false,
+                    }}
+                    component={AppTabWrapper}
+                />
+                <Stack.Screen
+                    name="CreateProfile"
+                    options={{
+                        headerShown: false
+                    }}
+                    component={CreateProfileScreenWrapper}
+                />
+            </Stack.Navigator>
+        ):
+        (<Stack.Navigator>
             <Stack.Screen
                 name="CreateProfile"
                 options={{
@@ -33,15 +42,13 @@ export function AppStack(): JSX.Element {
                 }}
                 component={CreateProfileScreenWrapper}
             />
-
             <Stack.Screen
                 name="AppTab"
                 options={{
                     headerShown: false,
                 }}
-				component={AppTabWrapper}
+                component={AppTabWrapper}
             />
-
-        </Stack.Navigator>
+        </Stack.Navigator>)
     )
 }

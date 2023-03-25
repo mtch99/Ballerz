@@ -1,12 +1,12 @@
 import { mock, mockClear } from 'jest-mock-extended';
 import AuthUCI from '../index';
-import IAuthUCI, { IAuthRepository, IAuthModel } from '../interface'
+import IAuthUCI, { IAuthRepository, IAuthUCIEventListener } from '../interface'
 import * as struct from '../types/signup'
 
 
 
 const AuthRepoMock = mock<IAuthRepository>();
-const AuthListenerMock = mock<IAuthModel>();
+const AuthListenerMock = mock<IAuthUCIEventListener>();
 
 
 /**

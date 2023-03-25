@@ -18,7 +18,6 @@ export default function App() {
       />
         <Provider store={store}>
           <AppProvider
-            navigation={{}}
           >
             <Navigation
               colorScheme={"dark"} 

@@ -11,5 +11,12 @@ export interface IAppController {
     feedController: IFeedController,
     groupChatController: IGroupChatController
     userProfileController: IUserProfileController,
-    placeController: IPlaceController
+    placeController: IPlaceController,
+    prepareData: () => void
+    appControllerEventListener: IAppControllerEventListener
+}
+
+
+export interface IAppControllerEventListener {
+    onDataPreparedEvent: () => void
 }

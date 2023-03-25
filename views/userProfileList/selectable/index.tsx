@@ -7,7 +7,7 @@ import { ISelectableUserProfileViewProps } from "../../../screens/interface"
 
 
 
-export default class SelectableUserProfileListView extends React.Component<ISelectableUserProfileViewProps> {
+export class SelectableUserProfileListView extends React.Component<ISelectableUserProfileViewProps> {
 
 
     render(): React.ReactNode {
@@ -102,6 +102,15 @@ class UserProfileItemView extends React.Component<ISelectableUserProfileItemView
                         {this.username}
                     </Text>
                     <Text style={styles.gameNumText}>4 parties</Text>
+                </View>
+                <View
+                        style={{alignSelf: "flex-end"}}
+                    >
+                        <CheckBox
+                            checked={this.props.selected}
+                            color="orange"
+                            onPress={() => {this.props.onPressCheckBox(this.props.userProfile.id)}}
+                        />
                 </View>
             </TouchableOpacity>
         )

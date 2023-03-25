@@ -42,7 +42,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
         this.feedController = this.context.feedController
         this.getFeed();
         this.feed = this.context.feedState
-        console.error(`Feed Screen just mounted \n
+        console.log(`Feed Screen just mounted \n
             authState: ${JSON.stringify(this.context.authState)}`
         )
     }
@@ -134,7 +134,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
           'Fais toi des amis',
           "Vous devez être amis avec un joueur ppour voir les patie auxquelles il va participer",
           [
-              { text: 'Non, merci', onPress: () => console.log('Non, merci'), style: 'destructive' },
+              { text: 'Non, merci', onPress: () => {}, style: 'destructive' },
               { text: 'Ajouter des amis', onPress: () =>  this.handlePressMakeFriends(), style: 'cancel' },
           ],
           { cancelable: false }
@@ -147,7 +147,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
             'Nice!!!',
             "C'est votre 4ième participation ce mois. Vous êtes à une participation de gagner un badge 🔜🙌🏽",
             [
-                { text: 'Cool', onPress: () => console.log('Ajouter des amis'), style: 'cancel' },
+                { text: 'Cool', onPress: () => {}, style: 'cancel' },
             ],
             { cancelable: false }
           );

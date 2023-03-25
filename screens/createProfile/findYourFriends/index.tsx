@@ -3,8 +3,9 @@ import { IFindYourFriendsScreenProps, IFindYourFriendsScreenState} from './inter
 import { AppContext, IAppContext } from '../../../controllers/provider';
 import { ISendFriendshipRequestsInput } from '../../../controllers/userProfile/interface';
 import { IUserProfileData } from '../../../domain/use-cases/types';
-import SelectableUserProfileListView from '../../../views/userProfileList/selectable';
+import {SelectableUserProfileListView} from '../../../views/userProfileList/selectable';
 import { ISelectableUserProfileData } from '../../interface';
+import FindYourFriendsView from '../../../views/auth/findYourFriends';
 
 
 export default class FindYourFriendsScreen extends React.Component<IFindYourFriendsScreenProps, IFindYourFriendsScreenState> {
@@ -33,7 +34,6 @@ export default class FindYourFriendsScreen extends React.Component<IFindYourFrie
             userList
         }))  
 
-        console.error(JSON.stringify(userList))
 
         return userList
     }
@@ -102,9 +102,10 @@ export default class FindYourFriendsScreen extends React.Component<IFindYourFrie
 
     render(): React.ReactNode {
         return (
-            <SelectableUserProfileListView
+            <FindYourFriendsView
                 onSelectItem={this.onSelectItem}
                 usersList={this.state.userList}
+                shareableLink='asdfg'
             />
         )
     }

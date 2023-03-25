@@ -25,6 +25,8 @@ export type  AuthState = {
 	email: string,
 	password: string
   }
+  profile?: IUserProfileState
+  isDataPrepared: boolean
 }
 
 // Define the initial state using that type
@@ -34,7 +36,8 @@ const initialState: AuthState = {
 	lastSigninInput: {
 		email: '',
 		password: ''
-	}
+	},
+	isDataPrepared: false,
 };
 
 
@@ -46,6 +49,10 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state: AuthState, action: PayloadAction<UserState>) => {
+		const result = {
+			...state,
+			user: action.payload
+		}
 		return {
 			...state,
 			user: action.payload
@@ -71,15 +78,19 @@ export const authSlice = createSlice({
 		if(state.user){
 			return {
 				...state,
-				user: {
-					...state.user,
-					profile: action.payload.profile
-				}
+				profile: action.payload.profile
 			}
 		} else {
 			throw new Error("User state is undefined")
 		}
 		
+	},
+
+	preparedData: (state: AuthState, action: PayloadAction<undefined>) => {
+		return {
+			...state,
+			isDataPrepared: true
+		}
 	}
 
   }
@@ -88,7 +99,7 @@ export const authSlice = createSlice({
 
 
 
-export const { setUser, setLastSignupInput, setLoginInput, setUserProfile } = authSlice.actions
+export const { setUser, setLastSignupInput, setLoginInput, setUserProfile, preparedData } = authSlice.actions
 
 
 // Other code such as selectors can use the imported `RootState` type

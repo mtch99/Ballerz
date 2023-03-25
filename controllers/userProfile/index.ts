@@ -19,7 +19,10 @@ export default class UserProfileController implements IUserProfileController{
         this.userProfileList = userProfileList
         console.log("Creating user profile controller")
     }
-    async getMyProfile(email: string): Promise<boolean> {
+    async getMyProfile(email: string | undefined): Promise<boolean> {
+        if(!email){
+            return false
+        }
         const response = await this.userProfileUseCase.getMyUserProfile(email)
         if(!response){
             return false
@@ -54,7 +57,9 @@ export default class UserProfileController implements IUserProfileController{
         return result
     }
 
-    defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult> {
-        return this.userProfileUseCase.defineUsername(input)
+    async defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult> {
+        const result = await this.userProfileUseCase.defineUsername(input)
+        console.log(`Response of define username function: ${JSON.stringify(result)}`)
+        return result
     }
 }

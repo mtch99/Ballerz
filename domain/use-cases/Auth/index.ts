@@ -1,6 +1,6 @@
 import { TouchableHighlightBase } from "react-native"
 import {AuthRepository} from "../../repositories/Auth"
-import IAuthUCI, {IAuthModel, IAuthRepository, IDefineUsernameInput, IDefineUsernameResult} from "./interface"
+import IAuthUCI, {IAuthUCIEventListener, IAuthRepository, IDefineUsernameInput, IDefineUsernameResult} from "./interface"
 import * as types from './types'
 import { ThemeProvider } from "@react-navigation/native";
 
@@ -15,9 +15,9 @@ export default class AuthUCI implements IAuthUCI {
 
     private repo: IAuthRepository = new AuthRepository();
     
-    private observer: IAuthModel
+    private observer: IAuthUCIEventListener
     
-    constructor(observer: IAuthModel){
+    constructor(observer: IAuthUCIEventListener){
         this.observer = observer;
     }
 
@@ -25,9 +25,10 @@ export default class AuthUCI implements IAuthUCI {
 
     async signinLastUser(): Promise<types.ILoginResult | false> {
         const lastLoginCreds = await this.repo.getLastLoginCreds()
-        console.warn("last login credentials: " + JSON.stringify(lastLoginCreds))
+        console.log("last login credentials: " + JSON.stringify(lastLoginCreds))
         if(lastLoginCreds){
-            return await this.login(lastLoginCreds)
+            const res = await this.login(lastLoginCreds)
+            return res
         } else {
             return false
         }

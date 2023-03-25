@@ -1,7 +1,7 @@
 import AuthUCI from "../../domain/use-cases/Auth";
 import { ISignupInput, ISignupResult, IConfirmSignupInput, IConfirmSignupResult, ILoginInput, ILoginResult } from "../../domain/use-cases/Auth/types";
 import IAuthController from "./interface";
-import IAuthUCI, { IAuthModel, IDefineUsernameInput, IDefineUsernameResult } from "../../domain/use-cases/Auth/interface";
+import IAuthUCI, { IAuthUCIEventListener, IDefineUsernameInput, IDefineUsernameResult } from "../../domain/use-cases/Auth/interface";
 
 
 
@@ -9,12 +9,13 @@ export default class AuthController implements IAuthController {
 
     private authUci: IAuthUCI 
 
-    constructor(authModel: IAuthModel){
+    constructor(authModel: IAuthUCIEventListener){
         this.authUci = new AuthUCI(authModel)
     }
     
-    signinLastUser(): Promise<false | ILoginResult> {
-        return this.authUci.signinLastUser();
+    async signinLastUser(): Promise<false | ILoginResult> {
+        const result = await this.authUci.signinLastUser();
+        return result
     }
 
 

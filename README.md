@@ -59,10 +59,10 @@ There must be three different games on three different courts, two at the moment
                 - [x] Load data before hiding the splashScreen
                 - [ ] Go appTab if the userprofile exitst
                     - [x] Implement
-                    - [ ] Test
+                    - [x] Test
             - [ ] Add find your friends screen to create profile stack
                 - [ ] Test:
-                    - Log the input and output of the controller sendFriendshipRequests function
+                    - [ ] Log the input and output of the controller sendFriendshipRequests function
             - [ ] Refactor the IDefineUsernameScreenNavigation COntroller to go to the IFindYourFriendsScreen after Username is defined^
 
         - [ ] Test

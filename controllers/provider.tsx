@@ -1,5 +1,5 @@
 import React from "react";
-import { IAppController } from "./interface";
+import { IAppController, IAppControllerEventListener } from "./interface";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { createFeedModel } from "../app/features/feed/model";
 import { FeedController } from "./feed";
@@ -27,8 +27,8 @@ import PlaceController from "./place";
 import IPlaceController from "./place/interface";
 import { IUserProfileMapState } from "../app/features/userProfile/types";
 import { selectUserProfileMapState } from "../app/features/userProfile/userProfileMap/slice";
-import { createAuthModel } from "../app/features/Auth/model";
-import { IAuthModel } from "../domain/use-cases/Auth/interface";
+import { IAuthModel, createAuthModel } from "../app/features/Auth/model";
+import { IAuthUCIEventListener } from "../domain/use-cases/Auth/interface";
 import AuthController from "./auth";
 import IAuthController from "./auth/interface";
 import { AuthState, selectAuth } from "../app/features/Auth/slice";
@@ -70,17 +70,20 @@ export const AppContext = React.createContext<IAppContext>({
         lastSigninInput: {
             email: "",
             password: ""
-        }
-    }
+        },
+        isDataPrepared: false
+    },
+    appControllerEventListener: {} as IAppControllerEventListener,
+    prepareData: () => {}
 });
 
 
 interface IProps {
-    navigation: any
-    children: JSX.Element
+    navigation?: any
+    children?: JSX.Element
 }
 
-export default function AppProvider (props: IProps) {
+export function AppProvider (props: IProps) {
     const selector = useAppSelector;
     const dispatch = useAppDispatch();
     const modelInput = {
@@ -115,14 +118,29 @@ export default function AppProvider (props: IProps) {
     const placeMapState: IPlaceMapState = selector(selectPlaceMapState)
     const placeController: IPlaceController = new PlaceController(placeModel)
 
+    
+    
+    
+    const prepareData = async() => {
+        const isUserSignedIn = await authController.signinLastUser()
+        if(isUserSignedIn){
+            await userProfileController.getMyProfile(isUserSignedIn.user?.email)
+        }
+        authModel.onDataPreparedEvent()
+        await SplashScreen.hideAsync().then(result => {
+            if(result){console.log(`Splashscreen hidden`)}
+        })
+    }
+    
     const controller: IAppController = {
         feedController,
         groupChatController,
         userProfileController,
         placeController,
-        authController
+        authController,
+        prepareData,
+        appControllerEventListener: authModel
     }
-
 
     const _contextValue: IAppContext = {
         ...controller,
@@ -136,19 +154,11 @@ export default function AppProvider (props: IProps) {
         userProfileMapState,
     }
 
-    const prepareData = async() => {
-        const isUserSignedIn = await authController.signinLastUser()
-        if(isUserSignedIn && authState.user){
-            await userProfileController.getMyProfile(authState.user.email)
-        }
-        await SplashScreen.hideAsync()
-    }
-    
-    React.useEffect(() => {
-        if(!isDataPrepared){
-            prepareData().then(() => {setIsDataPrepared(true)});
-        }
-    }, [])
+    // React.useEffect(() => {
+    //     if(!isDataPrepared){
+    //         prepareData().then(() => {setIsDataPrepared(true)});
+    //     }
+    // }, [])
 
 
     return (
@@ -160,5 +170,10 @@ export default function AppProvider (props: IProps) {
     )
 
 }
+
+
+export const MemoizedAppProvider = React.memo(AppProvider)
+
+export default MemoizedAppProvider;
 
 
