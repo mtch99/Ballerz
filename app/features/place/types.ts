@@ -1,4 +1,5 @@
-import { IGame, IPlaceData } from "../../../use-cases/types";
+import { IGame, IPlaceData } from "../../../domain/use-cases/types";
+import { IGameState } from "../types";
 
 export interface IPlaceModelState{
     PlaceList: IPlaceListState;
@@ -23,13 +24,3 @@ export interface IPlaceProfileState extends IPlaceData{
     games: IGameState[]
 }
 
-export interface IGameState {
-    id: IGame['id'];
-    friendsThere: IGame['friendsThere']
-    comments: IGame['comments']
-    badges: IGame['badges']
-    startingTime: string
-    endingTime: string
-    attendants: IGame['attendants']
-    place: IPlaceData
-}

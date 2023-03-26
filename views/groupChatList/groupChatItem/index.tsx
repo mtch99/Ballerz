@@ -2,7 +2,7 @@ import React from "react"
 import { TouchableOpacity, View, Text } from "react-native"
 import {Image, StyleSheet} from "react-native";
 import { IGroupChatItemViewProps } from "../interface"
-import { IFeedItem } from "../../../use-cases/types";
+import { IFeedItem } from "../../../domain/use-cases/types";
 import { IFeedItemState } from "../../../app/features/feed/slice/interface";
 import { IGroupChatMessageState } from "../../../app/features/groupChat/types";
 
@@ -26,7 +26,7 @@ export class GroupChatItemView extends React.Component<IGroupChatItemViewProps>{
         const lastMessage = lastMessageView(this.groupChatListItem.lastMessage)
         return (
             <TouchableOpacity style = {styles.container} onPress={() => {this.onPressGroupChat()}}>
-                <Image style = {styles.groupPhoto} source = {require("../../../assets/profilePic.jpg")}/>
+                <Image style = {styles.groupPhoto} source = {require("../../../assets/groupPhoto.png")}/>
 		    	<View style = {styles.infoContainer}>
                     <View style={styles.infoContainerHeader}>
                         <Text style = {styles.groupNameText}>

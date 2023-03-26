@@ -1,0 +1,16 @@
+{
+  "newauthdev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ballerapp-newauthdev-200807-authRole",
+      "UnauthRoleArn": "arn:aws:iam::675018912417:role/amplify-ballerapp-newauthdev-200807-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::675018912417:role/amplify-ballerapp-newauthdev-200807-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-ballerapp-newauthdev-200807-deployment",
+      "UnauthRoleName": "amplify-ballerapp-newauthdev-200807-unauthRole",
+      "StackName": "amplify-ballerapp-newauthdev-200807",
+      "StackId": "arn:aws:cloudformation:us-east-2:675018912417:stack/amplify-ballerapp-newauthdev-200807/c53b9d80-571d-11ed-8cd7-06ac4b73858e",
+      "AmplifyAppId": "d33awn81aldfh4",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-ballerapp-newauthdev-200807-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    }
+  }
+}

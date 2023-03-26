@@ -10,7 +10,7 @@ import { FeedStackMakeFriendsScreen } from "../../screens/userProfileSearch/make
 import React from "react"
 import { FeedStackNavigationContext, IFeedStackNavigationContext } from "./context"
 import { IUserProfileSearchScreenProps } from "../../screens/userProfileSearch"
-import { IUserProfileData } from "../../use-cases/types"
+import { IUserProfileData } from "../../domain/use-cases/types"
 import { IUserProfileListScreenNavigationController } from "../../screens/userProfileSearch/userProfileList/interface"
 
 

@@ -1,5 +1,5 @@
 import { IFeedItemState } from "../../../app/features/feed/slice/interface"
-import { ICommentInput } from "../../../use-cases/feed/interface";
+import { ICommentInput } from "../../../domain/use-cases/feed/interface";
 
 
 export default interface  ICommentsScreen{

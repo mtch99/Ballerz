@@ -1,6 +1,6 @@
 import React from "react";
-import { IUserProfileData, IGame, IUserProfile } from "../../../../../use-cases/types";
-import { IUserProfileModelEventListener } from "../../../../../use-cases/userProfile/interface";
+import { IUserProfileData, IGame, IUserProfile } from "../../../../../domain/use-cases/types";
+import { IUserProfileModelEventListener } from "../../../../../domain/use-cases/userProfile/interface";
 import { useAppSelector } from "../../../../hooks";
 import { AppDispatch } from "../../../../store";
 import { IGameState } from "../../../place/types";
@@ -18,8 +18,8 @@ interface IUserProfileModelInput {
 export interface IUserProfileModel extends IUserProfileModelEventListener{}
 
 
-export function createUserProfileModel (modelInput: IUserProfileModelInput): IUserProfileModel {
-    const model: IUserProfileModel = {
+export function createUserProfileModel (modelInput: IUserProfileModelInput): IUserProfileModelEventListener {
+    const model: IUserProfileModelEventListener = {
 
         onNewUserProfileList(input:  IUserProfileData[]) {
             const  payload: INewUserProfileListActionPayload = {items: input}

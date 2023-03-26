@@ -31,12 +31,16 @@ export class MakeFriendsView extends React.Component<IMakeFriendsViewProps>{
     }
 
     componentDidMount(): void {
+        console.warn(`Component did mount: \n ${JSON.stringify(this.props.userProfileList)}`)
         this.setState((prevState) => ({
             ...prevState,
             allUserProfiles: this.props.userProfileList
         }))
     }
 
+    componentDidUpdate(prevProps: Readonly<IMakeFriendsViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
+        console.warn(JSON.stringify(this.props.userProfileList))
+    }
 
 
     async onPressInvitationLink(): Promise<void> {

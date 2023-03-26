@@ -4,8 +4,9 @@ import { IFeedItemState, IFeedState} from "../../app/features/feed/slice/interfa
 import IFeedScreen, { IFeedScreenNavigationController, IPostCommentInput } from "./interface";
 import { Modal, View, Text, SafeAreaView, Alert } from "react-native";
 import IFeedController from "../../controllers/feed/interface";
-import { ICommentInput } from "../../use-cases/feed/interface";
+import { ICommentInput } from "../../domain/use-cases/feed/interface";
 import { AppContext, IAppContext } from "../../controllers/provider";
+import { globalStyles } from "../../views/styles";
 
 
 export interface IFeedScreenPropsWithoutNavigation {
@@ -42,6 +43,9 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
         this.feedController = this.context.feedController
         this.getFeed();
         this.feed = this.context.feedState
+        console.log(`Feed Screen just mounted \n
+            authState: ${JSON.stringify(this.context.authState)}`
+        )
     }
 
     getFeed() {
@@ -131,7 +135,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
           'Fais toi des amis',
           "Vous devez être amis avec un joueur ppour voir les patie auxquelles il va participer",
           [
-              { text: 'Non, merci', onPress: () => console.log('Non, merci'), style: 'destructive' },
+              { text: 'Non, merci', onPress: () => {}, style: 'destructive' },
               { text: 'Ajouter des amis', onPress: () =>  this.handlePressMakeFriends(), style: 'cancel' },
           ],
           { cancelable: false }
@@ -142,9 +146,9 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
     private showXthGameThisMobthAlert(){
         Alert.alert(
             'Nice!!!',
-            "C'est votre 4ième participation ce mois. Vous êtes à une participation de gagner un badge 🔜🙌🏽",
+            "C'est votre 4ième participation ce mois. Vous êtes à une participation de gagner un nouveau badge 🔜🙌🏽",
             [
-                { text: 'Cool', onPress: () => console.log('Ajouter des amis'), style: 'cancel' },
+                { text: 'Cool', onPress: () => {}, style: 'cancel' },
             ],
             { cancelable: false }
           );
@@ -155,7 +159,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
     render() {
         return (
             <SafeAreaView
-                style={{backgroundColor:"#14171A", flexGrow:1}}
+                style={{backgroundColor: globalStyles.global.screenBackGroundColor, flexGrow:1}}
             >
                 <FeedView
                     feedState={this.context.feedState}

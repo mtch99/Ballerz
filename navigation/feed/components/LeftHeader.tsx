@@ -1,10 +1,11 @@
 import React, { Context, useContext, useEffect } from "react";
 import IFeedController from "../../../controllers/feed/interface";
-import { ICreateGameInput } from "../../../use-cases/feed/interface";
+import { ICreateGameInput } from "../../../domain/use-cases/feed/interface";
 import { Text, TouchableOpacity } from "react-native";
 import { AppContext, IAppContext } from "../../../controllers/provider";
 import { FeedStackNavigationProp, FeedStackScreenProps } from "../types";
 import { useNavigation } from "@react-navigation/native";
+import { globalStyles } from "../../../views/styles";
 
 
 export interface IGameCreator {
@@ -41,8 +42,8 @@ export default function LeftHeader(){
             >
                 <Text
                     style={{
-                        fontSize: 24,
-                        color: "E78B2F"
+                        fontSize: 18,
+                        color: globalStyles.global.logoColor
                     }}
                 >
                     Jouer

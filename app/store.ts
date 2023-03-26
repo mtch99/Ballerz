@@ -1,3 +1,4 @@
+import authSliceReducer from "./features/Auth/slice";
 import { configureStore } from '@reduxjs/toolkit'
 import feedSliceReducer from "./features/feed/slice"
 import groupChatSliceReducer from './features/groupChat/groupChatList/slice'
@@ -11,13 +12,14 @@ import userProfileMapSliceReducer from './features/userProfile/userProfileMap/sl
 
 export const store = configureStore({
 	reducer: {	
+		auth: authSliceReducer,
 		feed: feedSliceReducer,	
 		groupChat: groupChatSliceReducer,	
 		groupChatMap: groupChatMapSliceReducer,	
 		userProfile: userProfileSliceReducer,
 		userProfileMap: userProfileMapSliceReducer,
 		placeMap: placeMapSliceReducer,
-		placeList: placeListSliceReducer	
+		placeList: placeListSliceReducer
 	}
 })
 

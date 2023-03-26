@@ -1,4 +1,4 @@
-import { IUserProfile } from "../../../../../use-cases/types";
+import { IUserProfile } from "../../../../../domain/use-cases/types";
 import { IUserProfileListState } from "./interface";
 
 

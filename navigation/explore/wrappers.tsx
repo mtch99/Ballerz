@@ -2,12 +2,12 @@ import { useNavigation } from "@react-navigation/native";
 import { IPlaceProfileScreenNavigationController } from "../../screens/placeProfile/interface";
 import { PlaceProfileScreen } from "../../screens/placeProfile";
 import { BaseStackScreenProps, BaseStackNavigationProp } from "../base/types";
-import { IUserProfileListScreenNavigationController } from "../../screens/userProfile/interface";
-import { IUserProfileDataState } from "../../app/features/userProfile/userProfileList/slice/interface";
+import { IUserProfileListScreenNavigationController, IUserProfileScreenNavigationController } from "../../screens/userProfile/interface";
 import { UserProfileScreen } from "../../screens/userProfile";
 import { ExploreStackNavigationProp, ExploreStackScreenProps } from "./types";
 import ExploreTabScreen from "../../screens/ExploreTabScreen";
 import { IPlaceSearchScreenNavigationController } from "../../screens/placeList/interface";
+import { IUserProfileDataState } from "../../app/features/types";
 
 
 
@@ -34,9 +34,18 @@ export function UserProfileScreenWrapper(props: ExploreStackScreenProps<'UserPro
 
     const navigation = useNavigation<ExploreStackScreenProps<'SearchStack'>>()
 
-    const navigationController: IUserProfileListScreenNavigationController = {
-        goToUserProfile(id: IUserProfileDataState['id']){
-            navigation.navigation.push('UserProfileScreen', {userProfileId: id})
+    const navigationController: IUserProfileScreenNavigationController = {
+        goToUserProfile(id: IUserProfileDataState['id']) {
+            navigation.navigation.push('UserProfileScreen', { userProfileId: id });
+        },
+        goToPlaceProfile: function (id: string): void {
+            throw new Error("Function not implemented.");
+        },
+        goToCommentsScreen: function (gameId: string): void {
+            throw new Error("Function not implemented.");
+        },
+        goToAttendantsListScreen: function (gameId: string): void {
+            throw new Error("Function not implemented.");
         }
     }
 

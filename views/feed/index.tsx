@@ -3,6 +3,7 @@ import {FlatList, SafeAreaView } from "react-native";
 import { IFeedItemState, IFeedState } from "../../app/features/feed/slice/interface";
 import FeedItemView from "./feed-item/index";
 import IFeedScreen, { IPostCommentInput } from "../../screens/feed/interface";
+import { globalStyles } from "../styles";
 
 
 interface IProps {
@@ -54,6 +55,7 @@ class FeedView extends React.Component<IProps> {
 		return(
 				<FlatList
 					data={this.props.feedState.items}
+					style={{backgroundColor: globalStyles.global.screenBackGroundColor}}
 					renderItem={({item, index}) => {
 						return(
 							<FeedItemView
@@ -67,7 +69,6 @@ class FeedView extends React.Component<IProps> {
 						)
 					}}
 					extraData={this.props.feedState.items}
-					style={{backgroundColor: "#121212", flexGrow:1}}
 				/>
 		)
     }

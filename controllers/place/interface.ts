@@ -1,4 +1,4 @@
-import { IPlaceProfile } from "../../use-cases/place/types"
+import { IPlaceProfile } from "../../domain/use-cases/place/types"
 
 
 export default interface IPlaceController {

@@ -60,7 +60,6 @@ export class PlaceProfileScreen extends React.Component<IPlaceProfileScreenProps
                 ...prevState,
                 ...placeProfile
         }})
-        console.warn(`${JSON.stringify(this.state)}`)
     }
 
     viewProps = {...this.state}

@@ -1,5 +1,5 @@
 import React from "react";
-import { IUserProfileListState, IUserProfileDataState } from "../../app/features/userProfile/userProfileList/slice/interface";
+import { IUserProfileListState} from "../../app/features/userProfile/userProfileList/slice/interface";
 import { IUserProfileSearchScreen } from "./interface";
 import { AppContext, IAppContext } from "../../controllers/provider";
 import { FlatList, SafeAreaView, View, Text } from "react-native";

@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, SafeAreaView, FlatList } from "react-native";
 import { IBadgeData } from "../../app/features/feed/slice/interface";
 import { BadgeListView } from "../../views/badgeList";
+import BallerzSafeAreaView from "../../views/safeArea";
 
 
 export interface IBadgeListScreenPropsWithoutNavigation {
@@ -24,7 +25,8 @@ export default class BadgeListScreen extends React.Component<IBadgeListScreenPro
 
     render(): React.ReactNode {
         return(
-            <SafeAreaView>
+            <BallerzSafeAreaView
+            >
                 {this.props.badgeList.length > 0?(
                     <BadgeListView
                         badgeList={this.props.badgeList}
@@ -32,7 +34,7 @@ export default class BadgeListScreen extends React.Component<IBadgeListScreenPro
                 ):(
                     <></>
                 )}
-            </SafeAreaView>
+            </BallerzSafeAreaView>
         )
     }
 }

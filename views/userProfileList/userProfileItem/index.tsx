@@ -4,18 +4,11 @@ import { Text, TouchableOpacity, View, Image, StyleSheet, FlatList } from "react
 
 
 
-export default class UserProfileItemView extends React.Component<IUserProfileItemViewProps>{
+export default class ClickableUserProfileItemView extends React.Component<IUserProfileItemViewProps>{
 
     username = this.props.userProfile.username
-    // onPressUserProfile(){
-    //     this.props.onPressUserProfileItem(this.)
-    // }
-
-
     render(){
-
-        if(this.props.userProfile.badges.length > 0){
-            return(
+        return(
                 <TouchableOpacity
                     style={styles.container}
                     onPress={() => {this.props.onPressUserProfileItem(this.props.userProfile.id)}}
@@ -34,37 +27,17 @@ export default class UserProfileItemView extends React.Component<IUserProfileIte
 			    			renderItem={({item, index}) => {
                                 return(
                                     <Text>
-			    							{item.symbol}
-			    						</Text>
-			    					)
+			    						{item.symbol}
+			    					</Text>
+			    				)
                                 }}
                                 style={{flexDirection: "row"}}
                                 />
                         <Text style={styles.gameNumText}>4 parties </Text>
                     </View>
                 </TouchableOpacity>
-            )
-        }
-        
-        
-        return(
-            <TouchableOpacity
-                style={styles.container}
-                onPress={() => {this.props.onPressUserProfileItem(this.props.userProfile.id)}}
-            >
-                <View style={styles.groupPhotoContainer}>
-                    <Image style = {styles.groupPhoto} source = {require("../../../assets/profilePic.jpg")}/>
-                </View> 
-                <View>
-                    <Text
-                        style={{color:"#F5F8FA", fontSize:16, fontWeight: "500"}}
-                        >
-                        {this.username}
-                    </Text>
-                    <Text style={styles.gameNumText}>4 parties</Text>
-                </View>
-            </TouchableOpacity>
         )
+
     }
     
 }
@@ -75,21 +48,25 @@ const styles = StyleSheet.create({
     container: {
         borderBottomColor:"#657786",
         borderBottomWidth:0.2,
-        marginTop: 4,
+        marginTop: 15,
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        marginHorizontal: "8%",
+        width: "83%",
     },
     
     groupPhotoContainer: {
-        padding: 10
+        paddingRight: 10
     },
+
     
     groupPhoto: {
         width: 50,
 		height: 50,
 		borderRadius: 1000,
 		backgroundColor: "rgba(0,0,0,0)",
+        marginBottom: 10
 	},
     
     gameNumText: {
