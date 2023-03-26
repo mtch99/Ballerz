@@ -2,6 +2,7 @@ import React from "react";
 import { IPlaceListViewProps } from "../../../screens/placeList/interface";
 import { FlatList, KeyboardAvoidingView } from "react-native";
 import PlaceItemView from "./placeItem";
+import { globalStyles } from "../../styles";
 
 
 export default class PlaceListView extends React.Component<IPlaceListViewProps>{
@@ -10,9 +11,10 @@ export default class PlaceListView extends React.Component<IPlaceListViewProps>{
     render(): React.ReactNode {
         return(
             <KeyboardAvoidingView
-                style={{flexGrow:1}}
+                style={{backgroundColor: globalStyles.global.screenBackGroundColor}}
             >
                 <FlatList
+                    style={{backgroundColor: globalStyles.global.screenBackGroundColor}}
                     data={this.props.placeList.items}
                     extraData={this.props.placeList}
                     renderItem={({item}) => {

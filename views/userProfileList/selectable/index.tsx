@@ -25,6 +25,7 @@ export class SelectableUserProfileListView extends React.Component<ISelectableUs
                         />
                     )
                 }}
+                extraData={this.props.usersList}
             />
         )
     }

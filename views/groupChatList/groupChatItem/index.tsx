@@ -26,7 +26,7 @@ export class GroupChatItemView extends React.Component<IGroupChatItemViewProps>{
         const lastMessage = lastMessageView(this.groupChatListItem.lastMessage)
         return (
             <TouchableOpacity style = {styles.container} onPress={() => {this.onPressGroupChat()}}>
-                <Image style = {styles.groupPhoto} source = {require("../../../assets/profilePic.jpg")}/>
+                <Image style = {styles.groupPhoto} source = {require("../../../assets/groupPhoto.png")}/>
 		    	<View style = {styles.infoContainer}>
                     <View style={styles.infoContainerHeader}>
                         <Text style = {styles.groupNameText}>

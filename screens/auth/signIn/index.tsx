@@ -42,7 +42,6 @@ export default class SigninScreen extends React.Component<ISigninScreenProps, IS
         this.authController.login(loginInput).then((response) => {
             this.handleSigninResponse(response)
         })
-        // throw new Error("Method not implemented.");
     }
 
     onEmailInputChange(emailInput: string){
@@ -75,8 +74,8 @@ export default class SigninScreen extends React.Component<ISigninScreenProps, IS
             this.props.navigationController.onSigninSuccess(signinInput)
         }
     }
-
-
+    
+    
     render(): React.ReactNode {
         return(
             <SigninScreenView 
@@ -90,5 +89,5 @@ export default class SigninScreen extends React.Component<ISigninScreenProps, IS
             />
         )
     }
-
+    
 }

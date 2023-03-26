@@ -1,12 +1,12 @@
 import React from "react"
 import { View, Text, ScrollView } from "react-native"
-import { IUserProfileState } from "../../app/features/userProfile/types"
 import { IUserProfileViewProps } from "../../screens/userProfile"
 import { styles } from "./styles"
 import { HeaderView } from "./header"
 import { BadgeListView } from "./badges"
 import PictresView from "./pictures"
 import GamesListView from "./games"
+import { IUserProfileState } from "../../app/features/types"
 
 
 
@@ -26,9 +26,9 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
         // console.warn(`Mounting props: ${JSON.stringify(this.props)}`)
     }
 
-    componentDidUpdate(prevProps: Readonly<IUserProfileViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
-        // console.warn(`UserProfileView newProps: ${JSON.stringify(this.props)})`)
-    }
+    // componentDidUpdate(prevProps: Readonly<IUserProfileViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
+        // console.warn(`UserProfileView newProps: ${JSON.stringify(this.props.games)})`)
+    // }
 
     render(){
         return(

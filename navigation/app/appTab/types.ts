@@ -1,3 +1,4 @@
+import { IUserProfileScreenPropsWithoutNavigation } from "./../../../screens/userProfile/index";
 
 
 /**
@@ -23,6 +24,7 @@ export type AppTabParamList = {
 	ExploreStack: NavigatorScreenParams<ExploreStackParamList>
 	FeedStack: NavigatorScreenParams<FeedStackParamList>
 	GroupChatStack: NavigatorScreenParams<GroupChatStackParamList>
+	MyProfileScreen: IUserProfileScreenPropsWithoutNavigation
 };
 
 

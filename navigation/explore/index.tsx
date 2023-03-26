@@ -1,10 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ExploreStackParamList } from "./types";
 import {ExploreTabScreenWrapper, PlaceProfileScreenWrapper, UserProfileScreenWrapper} from "./wrappers";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { BaseStackNavigator } from "../base";
-import { SearchStackNavigator } from "./search";
-
 
 const Stack = createNativeStackNavigator<ExploreStackParamList>();
 

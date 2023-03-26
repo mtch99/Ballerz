@@ -4,14 +4,14 @@ import { Text, TouchableOpacity, View, Image, StyleSheet, FlatList } from "react
 
 
 
-export default class UserProfileItemView extends React.Component<IUserProfileItemViewProps>{
+export default class ClickableUserProfileItemView extends React.Component<IUserProfileItemViewProps>{
 
     username = this.props.userProfile.username
-
     render(){
         return(
-                <View
+                <TouchableOpacity
                     style={styles.container}
+                    onPress={() => {this.props.onPressUserProfileItem(this.props.userProfile.id)}}
                 >
                     <View style={styles.groupPhotoContainer}>
                         <Image style = {styles.groupPhoto} source = {require("../../../assets/profilePic.jpg")}/>
@@ -35,7 +35,7 @@ export default class UserProfileItemView extends React.Component<IUserProfileIte
                                 />
                         <Text style={styles.gameNumText}>4 parties </Text>
                     </View>
-                </View>
+                </TouchableOpacity>
         )
 
     }

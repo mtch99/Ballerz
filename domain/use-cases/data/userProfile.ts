@@ -43,6 +43,21 @@ const initialUserProfileData: IUserProfileData[] = [
         username: "unknownUser",
         badges: []
     }, 
+    {
+        id: "unknownId5",
+        username: "unknownUser",
+        badges: []
+    }, 
+    {
+        id: "unknownId6",
+        username: "unknownUser",
+        badges: []
+    }, 
+    {
+        id: "unknownId7",
+        username: "unknownUser",
+        badges: []
+    }, 
 ]
 
 

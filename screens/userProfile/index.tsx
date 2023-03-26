@@ -1,5 +1,5 @@
 import React from "react";
-import IUserProfileScreen, { IUserProfileListScreenNavigationController } from "./interface";
+import IUserProfileScreen, { IUserProfileListScreenNavigationController, IUserProfileScreenNavigationController } from "./interface";
 import { View, Text } from "react-native";
 import { AppContext, IAppContext } from "../../controllers/provider";
 import { UserProfileView } from "../../views/userProfile";
@@ -13,7 +13,7 @@ export interface IUserProfileScreenPropsWithoutNavigation {
 
 
 export interface IUserProfileScreenProps extends IUserProfileScreenPropsWithoutNavigation{
-    navigationController: IUserProfileListScreenNavigationController
+    navigationController: IUserProfileScreenNavigationController
 }
 
 export interface IUserProfileScreenState extends IUserProfileState {
@@ -23,7 +23,7 @@ export interface IUserProfileScreenState extends IUserProfileState {
 
 export class UserProfileScreen extends React.Component<IUserProfileScreenProps, IUserProfileScreenState> implements IUserProfileScreen {
     
-    navigationController: IUserProfileListScreenNavigationController;
+    navigationController: IUserProfileScreenNavigationController;
 
     userProfile: IUserProfileState = {
         games: [],
@@ -62,11 +62,12 @@ export class UserProfileScreen extends React.Component<IUserProfileScreenProps, 
         }})
     }
 
-    viewProps = {...this.state}
+   
 
 
     render(): React.ReactNode {
         if(this.context.userProfileMapState[this.props.userProfileId]){
+            console.warn("User profile")
             return( 
                 <UserProfileView
                     {...this.context.userProfileMapState[this.props.userProfileId]}
@@ -81,6 +82,28 @@ export class UserProfileScreen extends React.Component<IUserProfileScreenProps, 
     }
 
 } 
+
+export class MyProfileScreen extends React.Component {
+    static contextType = AppContext
+    context: React.ContextType<typeof AppContext> = {} as IAppContext
+
+    // componentDidMount(): void {
+    //     this.context.userProfileController.
+    // }
+
+
+
+    render(): React.ReactNode {
+        if(this.context.authState.profile){
+            const userProfileId = this.context.authState.profile.id
+            return(
+                <UserProfileView
+                    {...this.context.authState.profile}
+                />
+            )
+        }
+    }
+}
 
 export interface IUserProfileViewProps extends IUserProfileState{
 

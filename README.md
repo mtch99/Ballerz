@@ -19,20 +19,19 @@ There must be three different games on three different courts, two at the moment
         - [x] IAuthUCI
         - [x] IAuthRepo
 - [x] Define and implement AuthController
-- [ ] Define and Implement Signup and Signin Screen
+- [x] Define and Implement Signup and Signin Screen
     - [x] Signin Screen
         - [x] Signin View init
         - [x] Implement RootStack
         - [x] Test by Signing in with foobar
             - [x] Navigate to the AppStack on sucess
         
-    - [ ] Signup Screen
+    - [x] Signup Screen
         - [x] ISignupScreen interface
         - [x] implement SignupScreen
         - [x] SignupScreen View with Email and password inputs
             - [x] ConfirmSignupModal
             - [x] ConfirmSignupScreen
-        - [ ] Navigate to AppStack on signup success
 
     * [x] UserProfile and auth usecases update to support cache auth creds storage and defineUsername
 
@@ -68,7 +67,17 @@ There must be three different games on three different courts, two at the moment
             - [x] Add find your friends screen to create profile stack
                 - [x] Test:
                     - [x] Log the input and output of the controller sendFriendshipRequests function
-            - [x] Refactor the IDefineUsernameScreenNavigation COntroller to go to the IFindYourFriendsScreen after Username is defined^
+            - [x] Refactor the IDefineUsernameScreenNavigation COntroller to go to the IFindYourFriendsScreen after Username is defined
+
+- [x] MyProfileScreen
+* [x] Fix: GroupChatPicture does not display
+
+Next:
+- [ ] Invite your friends after finf Your friends
+- [ ] Add place
+- [ ] Add Profile Picture
+
+
 
 
 

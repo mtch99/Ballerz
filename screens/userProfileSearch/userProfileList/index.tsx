@@ -3,6 +3,7 @@ import { View, Text, SafeAreaView, FlatList } from "react-native";
 import { UserProfileListView } from "../../../views/userProfileList";
 import { IUserProfileData } from "../../../domain/use-cases/types";
 import { IUserProfileListScreenNavigationController } from "../../userProfile/interface";
+import { globalStyles } from "../../../views/styles";
 
 
 
@@ -30,7 +31,9 @@ export default class UserProfileListScreen extends React.Component<IUserProfileL
 
     render(): React.ReactNode {
         return(
-            <SafeAreaView>
+            <SafeAreaView
+                style={{backgroundColor: globalStyles.global.screenBackGroundColor , flexGrow: 1}}
+            >
                 {this.props.userProfileList.length > 0?(
                     <UserProfileListView
                         userProfileList={{items: this.props.userProfileList}}

@@ -7,6 +7,7 @@ import React from "react";
 import { FeedStackNavigationContext, IFeedStackNavigationContext } from "./context";
 import LeftHeader from "./components/LeftHeader";
 import { CreateGameStackNavigator } from "./createGameStack";
+import { globalStyles } from "../../views/styles";
 
 
 
@@ -46,6 +47,7 @@ export function FeedStackNavigator(): JSX.Element {
 					options={{
 						headerShown: true,
 						headerTitle: 'Ballerz',
+						headerStyle: { backgroundColor: globalStyles.global.screenBackGroundColor},
 						headerLeft: () => (<LeftHeader></LeftHeader>)
 					}}
 					component={FeedScreenWrapper}
@@ -56,6 +58,8 @@ export function FeedStackNavigator(): JSX.Element {
 						headerShown: true,
 						headerTitle: 'Badges',
 						headerBackTitleVisible: false,
+						headerStyle: { backgroundColor: globalStyles.global.screenBackGroundColor},
+
 					}}
 					component={BadgeListScreenWrapper}
 					initialParams={{badgeList: []}}
@@ -67,6 +71,8 @@ export function FeedStackNavigator(): JSX.Element {
 						headerShown: true,
 						headerTitle: 'Commentaires',
 						headerBackTitleVisible: false,
+						headerStyle: { backgroundColor: globalStyles.global.screenBackGroundColor},
+
 					}}
 					component={CommentsScreenWrapper}
 				/>
@@ -77,6 +83,7 @@ export function FeedStackNavigator(): JSX.Element {
 						headerShown: true,
 						headerTitle: 'Amis présents',
 						headerBackTitleVisible: false,
+						headerStyle: { backgroundColor: globalStyles.global.screenBackGroundColor},
 					}}
 					component={AttendantsListScreenWrapper}
 				/>
