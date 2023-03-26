@@ -6,6 +6,7 @@ import FeedProvider from './controllers/feed/provider';
 import Navigation from './navigation';
 import React from 'react';
 import AppProvider from './controllers/provider';
+import { globalStyles } from './views/styles';
 
 
 
@@ -15,6 +16,7 @@ export default function App() {
     <>
       <StatusBar 
         barStyle={'light-content'}
+        backgroundColor={globalStyles.global.screenBackGroundColor}
       />
         <Provider store={store}>
           <AppProvider

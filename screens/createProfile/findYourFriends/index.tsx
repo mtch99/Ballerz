@@ -76,26 +76,27 @@ export default class FindYourFriendsScreen extends React.Component<IFindYourFrie
     
     onPressContinue(): void {
         let myProfileID: string | undefined = undefined
-        if(this.context.authState.user){
-            if(this.context.authState.user.profile){
-                myProfileID = this.context.authState.user.profile.id
-                const receiverProfiles: ISendFriendshipRequestsInput['receiverProfiles'] = []
-                this.state.userList.forEach(item => {
-                    if(item.selected){
-                        receiverProfiles.push({id: item.id, username: item.username, badges: item.badges})
-                    }
-                })
-                const input: ISendFriendshipRequestsInput = {
-                    myProfileID,
-                    receiverProfiles
+
+        if(this.context.authState.profile){
+            myProfileID = this.context.authState.profile.id
+            const receiverProfiles: ISendFriendshipRequestsInput['receiverProfiles'] = []
+            this.state.userList.forEach(item => {
+                if(item.selected){
+                    receiverProfiles.push({id: item.id, username: item.username, badges: item.badges})
                 }
-                this.context.userProfileController.sendFriendShipRequests(input)
+            })
+            const input: ISendFriendshipRequestsInput = {
+                myProfileID,
+                receiverProfiles
             }
+            this.context.userProfileController.sendFriendShipRequests(input)
         }
 
         if(!myProfileID){
             console.error("No user Profile found, in findYourFriendsScreen")
         }
+
+        this.props.navigationController.goToMyProfileScreen()
     }
 
     render(): React.ReactNode {
@@ -104,6 +105,7 @@ export default class FindYourFriendsScreen extends React.Component<IFindYourFrie
                 onAddButtonPress={this.onAddButtonPress}
                 usersList={this.state.userList}
                 shareableLink='asdfg'
+                onPressContinue={this.onPressContinue}
             />
         )
     }

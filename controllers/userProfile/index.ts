@@ -41,7 +41,8 @@ export default class UserProfileController implements IUserProfileController{
             promises.push(this.userProfileUseCase.requestFriendShip(input))
         })
 
-        await Promise.all(promises)
+        const result = await Promise.all(promises)
+        console.warn(`Result of senndFriendshipRequests function: ${JSON.stringify(result)}`) 
     }
 
     async getAllUserProfiles(): Promise<void>{

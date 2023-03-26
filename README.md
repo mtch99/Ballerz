@@ -50,8 +50,8 @@ There must be three different games on three different courts, two at the moment
             - [x] UserProfile state is updated
             - [x] Navigation to Feed
 
-    - [ ] Find your friends
-        - [ ] Find your friends screen
+    - [x] Find your friends
+        - [x] Find your friends screen
             - [x] Init and define IFindYourFriendsScreen
                 - [x] SelectableUserPfoileListView
             * [x] Auto Signin user with past credentials
@@ -62,15 +62,13 @@ There must be three different games on three different courts, two at the moment
                     - [x] Test
             - [ ] FindYourFriendsView 
                 - [x] Selectable UserProfileList View
-                - [ ] Header
-                    - [ ] Right Button to continue
+                - [x] Header
+                    - [x] Right Button to continue
 
-            - [ ] Add find your friends screen to create profile stack
-                - [ ] Test:
-                    - [ ] Log the input and output of the controller sendFriendshipRequests function
-            - [ ] Refactor the IDefineUsernameScreenNavigation COntroller to go to the IFindYourFriendsScreen after Username is defined^
-
-        - [ ] Test
+            - [x] Add find your friends screen to create profile stack
+                - [x] Test:
+                    - [x] Log the input and output of the controller sendFriendshipRequests function
+            - [x] Refactor the IDefineUsernameScreenNavigation COntroller to go to the IFindYourFriendsScreen after Username is defined^
 
 
 
@@ -81,6 +79,11 @@ TODO: scenario10
             - [ ] add stats
 * [ ] inject profilepic uri
 * [ ] Fix userProfileScreen virtualized list in scrollView Error
+
+TODO: auth
+* [ ] Enable email confirmation to allow users to signin 
+- [ ] FeedBack in auth flow, after defining username, befor find your friends screen
+
 
 
 

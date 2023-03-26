@@ -98,13 +98,12 @@ const styles = StyleSheet.create({
     container: {
         borderBottomColor:"#657786",
         borderBottomWidth:0.2,
-        marginTop: 4,
+        marginTop: 15,
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: 'transparent',
         marginHorizontal: "8%",
         width: "83%",
-        // justifyContent: 'space-around',
     },
     
     groupPhotoContainer: {
@@ -117,6 +116,7 @@ const styles = StyleSheet.create({
 		height: 50,
 		borderRadius: 1000,
 		backgroundColor: "rgba(0,0,0,0)",
+        marginBottom: 10
 	},
     
     gameNumText: {

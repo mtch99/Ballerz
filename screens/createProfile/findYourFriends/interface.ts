@@ -19,6 +19,7 @@ export interface IFindYourFriendsScreenState {
 
 export interface IFindYourFriendsViewProps extends ISelectableUserProfileViewProps {
     shareableLink: string
+    onPressContinue: () => void
 }
 
 
