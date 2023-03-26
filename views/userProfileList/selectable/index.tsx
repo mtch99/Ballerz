@@ -76,11 +76,6 @@ class UserProfileItemView extends React.Component<ISelectableUserProfileItemView
                     <View
                         style={{alignItems: "flex-end", flexGrow: 1}}
                     > 
-                        {/* <CheckBox
-                            checked={this.props.selected}
-                            color="orange"
-                            onPress={() => {this.props.onPressCheckBox(this.props.userProfile.id)}}
-                        /> */}
                         <AddUserButton
                             selected={this.props.selected}
                             onPress={() => {this.props.onPressCheckBox(this.props.userProfile.id)}}

@@ -3,11 +3,11 @@ import { IPlaceProfileScreenNavigationController } from "../../screens/placeProf
 import { PlaceProfileScreen } from "../../screens/placeProfile";
 import { BaseStackScreenProps, BaseStackNavigationProp } from "../base/types";
 import { IUserProfileListScreenNavigationController } from "../../screens/userProfile/interface";
-import { IUserProfileDataState } from "../../app/features/userProfile/userProfileList/slice/interface";
 import { UserProfileScreen } from "../../screens/userProfile";
 import { ExploreStackNavigationProp, ExploreStackScreenProps } from "./types";
 import ExploreTabScreen from "../../screens/ExploreTabScreen";
 import { IPlaceSearchScreenNavigationController } from "../../screens/placeList/interface";
+import { IUserProfileDataState } from "../../app/features/types";
 
 
 

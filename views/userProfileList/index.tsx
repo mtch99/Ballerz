@@ -1,5 +1,5 @@
 import { FlatList, KeyboardAvoidingView } from "react-native";
-import { IUserProfileListState, IUserProfileDataState } from "../../app/features/userProfile/userProfileList/slice/interface";
+import { IUserProfileListState } from "../../app/features/userProfile/userProfileList/slice/interface";
 import React from "react";
 import { IUserProfileListViewProps } from "../../screens/userProfileSearch/interface";
 import UserProfileItemView from "./userProfileItem";

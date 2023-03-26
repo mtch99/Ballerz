@@ -42,7 +42,7 @@ export default class ExploreTabScreen extends React.Component<IExploreTabScreenP
         ),
         second: () => (
             <UserProfileSearchScreen
-            navigationController={this.props.userProfileSearchScreenNavigationController}
+                navigationController={this.props.userProfileSearchScreenNavigationController}
             />
         )
     })
