@@ -5,6 +5,8 @@ import styles from "./styles";
 import { IMakeFriendsViewProps } from "../../screens/userProfileSearch/makeFriends";
 import { IUserProfileListState } from "../../app/features/userProfile/userProfileList/slice/interface";
 import SearchBarView from "./SearchBar";
+import InviteYourFriendsFeedBackView from "../teachingFeedBack/inviteYourFriends";
+import BallerzSafeAreaView from "../safeArea";
 
 
 
@@ -84,29 +86,22 @@ export class MakeFriendsView extends React.Component<IMakeFriendsViewProps>{
     
     render(): React.ReactNode {
         return(
-            <View>
+            <BallerzSafeAreaView>
+                <>
                 {this.props.searchButtonState?(
                     <SearchBarView
                         onSearchInputChange={this.onSearchInputChange}
                     />
                 ): null}
-                <View style={styles.inviteContactsContainer}>
-                    <Text style={styles.inviteContactsText}>Invite tes amis sur ballerz grace à ce lien d'invitation: </Text>
-                    <TouchableOpacity
-                        onPress={() => {this.onPressInvitationLink()}}
-                    >
-                        <Text 
-                            style={styles.inviteLinkText}
-                        > 
-                            MKMKNMOKINIONHJIOJ
-                        </Text>
-                    </TouchableOpacity>
-                </View>
+                <InviteYourFriendsFeedBackView
+                    onPressInvitationLink={this.onPressInvitationLink}
+                />
                 <UserProfileListView
                     {...this.props}
                     userProfileList={this.state.filteredUserProfileList}
                 />
-            </View>
+                </>
+            </BallerzSafeAreaView>
         )
     }
 }

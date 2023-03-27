@@ -7,6 +7,7 @@ import IFeedController from "../../controllers/feed/interface";
 import { ICommentInput } from "../../domain/use-cases/feed/interface";
 import { AppContext, IAppContext } from "../../controllers/provider";
 import { globalStyles } from "../../views/styles";
+import FindYourFriendsBottomSheetView from "../../views/makeFriends/findYourFriendsBottomSheet";
 
 
 export interface IFeedScreenPropsWithoutNavigation {

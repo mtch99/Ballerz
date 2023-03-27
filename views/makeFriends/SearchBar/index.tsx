@@ -2,6 +2,7 @@ import React from "react"
 import Icon from 'react-native-vector-icons/AntDesign';
 import { StyleSheet, TextInput, View } from "react-native"
 import SearchBar from 'react-native-material-design-searchbar';
+import { globalStyles } from "../../styles";
 
 
 export interface ISearchBarViewProps{
@@ -36,6 +37,7 @@ export default class SearchBarView extends React.Component<ISearchBarViewProps>{
                 onSearchChange={(text) => {this.props.onSearchInputChange(text)}}
                 padding={5}
                 height={42}
+                // iconColor={globalStyles.global.logoColor}
             />
         )
     }

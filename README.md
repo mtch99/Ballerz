@@ -3,7 +3,7 @@ The app for basketball pickup games
 
 
 ## Branch Purpose
-    Auth
+    I want to invite my find my friends ib the app or invite them after creating my profile
 ## Next 
 Test these scenarios:
     `TODO: define next scenarios` 
@@ -14,66 +14,16 @@ There must be three different games on three different courts, two at the moment
 
 
 ## How? (technical)
-- [x] Add AuthUseCase and Auth Model
-    * [x] ConfirmSignup
-        - [x] IAuthUCI
-        - [x] IAuthRepo
-- [x] Define and implement AuthController
-- [x] Define and Implement Signup and Signin Screen
-    - [x] Signin Screen
-        - [x] Signin View init
-        - [x] Implement RootStack
-        - [x] Test by Signing in with foobar
-            - [x] Navigate to the AppStack on sucess
-        
-    - [x] Signup Screen
-        - [x] ISignupScreen interface
-        - [x] implement SignupScreen
-        - [x] SignupScreen View with Email and password inputs
-            - [x] ConfirmSignupModal
-            - [x] ConfirmSignupScreen
 
-    * [x] UserProfile and auth usecases update to support cache auth creds storage and defineUsername
+- [ ] Invite your friends after find Your friends
+    - [x] Styles Find your friends bottom sheet
+        - [x] Display bottom sheet in home page
+    - [x] Invite Your friends Feedback vue
 
-    - [x] Create Profile
-        - [x] CreateProfileStack
-            - [x] init Define Username screen
-        - [x] UserProfileRepo
-            - [x] APIUserProfileClient
-            - [x] implement IUserProfileRepo
-        
-        * [x] Setup staging env mock API credentials
-        * [x] Go back to managed workflow
-        - [x] Test
-            - [x] Define username returns the created user profile
-            - [x] UserProfile state is updated
-            - [x] Navigation to Feed
 
-    - [x] Find your friends
-        - [x] Find your friends screen
-            - [x] Init and define IFindYourFriendsScreen
-                - [x] SelectableUserPfoileListView
-            * [x] Auto Signin user with past credentials
-                * [ ] Enable email confirmation to allow users to signin 
-                - [x] Load data before hiding the splashScreen
-                - [x] Go appTab if the userprofile exitst
-                    - [x] Implement
-                    - [x] Test
-            - [ ] FindYourFriendsView 
-                - [x] Selectable UserProfileList View
-                - [x] Header
-                    - [x] Right Button to continue
 
-            - [x] Add find your friends screen to create profile stack
-                - [x] Test:
-                    - [x] Log the input and output of the controller sendFriendshipRequests function
-            - [x] Refactor the IDefineUsernameScreenNavigation COntroller to go to the IFindYourFriendsScreen after Username is defined
 
-- [x] MyProfileScreen
-* [x] Fix: GroupChatPicture does not display
 
-Next:
-- [ ] Invite your friends after finf Your friends
 - [ ] Add place
 - [ ] Add Profile Picture
 
@@ -88,6 +38,7 @@ TODO: scenario10
             - [ ] add stats
 * [ ] inject profilepic uri
 * [ ] Fix userProfileScreen virtualized list in scrollView Error
+
 
 TODO: auth
 * [ ] Enable email confirmation to allow users to signin 

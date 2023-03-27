@@ -107,6 +107,8 @@ export function FeedStackNavigator(): JSX.Element {
 					component={UserProfileSearchScreenWrapper}
 				/>
 
+		
+
 				<Stack.Screen
 					name="CreateGameStack"
 					options={{
