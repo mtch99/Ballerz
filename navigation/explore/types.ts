@@ -1,7 +1,7 @@
 import { IUserProfileScreenPropsWithoutNavigation } from "./../../screens/userProfile/index";
 import { NavigatorScreenParams } from "@react-navigation/native";
 import { IPlaceProfileScreenPropsWithoutNavigation } from "./../../screens/placeProfile/index";
-import { IUserProfileSearchScreenProps, IUserProfileSearchScreenPropsWithoutNavigation } from "./../../screens/userProfileSearch/index";
+import { IUserProfileSearchScreenProps, IUserProfileSearchScreenPropsWithoutNavigation } from "../../screens/userProfileList/index";
 import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
 import { BaseStackParamList } from "../base/types";
 import { SearchStackParamList } from "./search/types";

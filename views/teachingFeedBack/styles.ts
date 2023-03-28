@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
         backgroundColor:"#292D39",
         padding: 10,
         margin: 10,
-        borderRadius: 10
+        borderRadius: 10,
+        flexGrow: 1
     },
     text: {
         color:"#E5E6E8"

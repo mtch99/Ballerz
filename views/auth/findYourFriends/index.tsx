@@ -1,13 +1,17 @@
 import React from "react";
-import { IFindYourFriendsViewProps } from "../../../screens/createProfile/findYourFriends/interface";
-import { SafeAreaView } from "react-native-safe-area-context";
-import {SelectableUserProfileListView} from "../../userProfileList/selectable";
+import { IFindYourFriendsViewProps } from "../../../screens/userProfileList/findYourFriends/interface";
+import {SelectableUserProfileListView, UserProfileItemView} from "../../userProfileList/selectable";
 import HeaderView from "../../header";
 import CheckButton from "../../header/buttons/checkButton"
 import { globalStyles } from "../../styles";
-import { Alert, Share, StyleSheet } from "react-native";
+import { Alert, Share, StyleSheet, SafeAreaView } from "react-native";
 import FindYourFriendsBottomSheetView from "../../makeFriends/findYourFriendsBottomSheet";
 import InviteYourFriendsFeedBackView from "../../teachingFeedBack/inviteYourFriends";
+import SearchBarView from "../../makeFriends/SearchBar";
+import { BallerzFlatList } from "../../../components/Flatlist";
+import { IUserProfileData } from "../../../domain/use-cases/types";
+import { ISelectableUserProfileData } from "../../../screens/interface";
+import { FlatList } from "react-native-gesture-handler";
 
 
 export default class FindYourFriendsView extends React.Component<IFindYourFriendsViewProps>{
@@ -16,6 +20,7 @@ export default class FindYourFriendsView extends React.Component<IFindYourFriend
         super(props);
         this.onPressInvitationLink = this.onPressInvitationLink.bind(this);
     }
+
     
     async onPressInvitationLink(): Promise<void> {
         try {
@@ -47,6 +52,9 @@ export default class FindYourFriendsView extends React.Component<IFindYourFriend
                     leftButtonProps={{onPress: () => {}}}
                     rightButtonProps={{onPress: this.props.onPressContinue}}
                 />
+                <SearchBarView
+                  onSearchInputChange={() => {}}
+                />
                 <InviteYourFriendsFeedBackView
                     onPressInvitationLink={this.onPressInvitationLink}
                 />
@@ -54,7 +62,8 @@ export default class FindYourFriendsView extends React.Component<IFindYourFriend
                     onAddButtonPress={this.props.onAddButtonPress}
                     usersList={this.props.usersList}
                 />
-                <FindYourFriendsBottomSheetView/>
+				
+                {/* <FindYourFriendsBottomSheetView/> */}
             </SafeAreaView>
         )
     }

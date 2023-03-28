@@ -5,7 +5,8 @@ export interface ISelectableUserProfileData extends IUserProfileData {
 }
 
 
-export interface ISelectableUserProfileViewProps {
+
+export interface IUserProfileListViewProps {
     usersList: ISelectableUserProfileData[]
     onAddButtonPress(item: ISelectableUserProfileData): void
 }

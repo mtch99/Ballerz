@@ -1,10 +1,11 @@
 import React from "react";
 import { IUserProfileListState} from "../../app/features/userProfile/userProfileList/slice/interface";
-import { IUserProfileSearchScreen } from "./interface";
 import { AppContext, IAppContext } from "../../controllers/provider";
 import { FlatList, SafeAreaView, View, Text } from "react-native";
 import { UserProfileListView } from "../../views/userProfileList";
 import { IUserProfileListScreenNavigationController } from "../userProfile/interface";
+import { IUserProfileDataState } from "../../app/features/types";
+import { IUserProfileData } from "../../domain/use-cases/types";
 
 
 export interface IUserProfileSearchScreenPropsWithoutNavigation{}
@@ -13,7 +14,7 @@ export interface IUserProfileSearchScreenProps extends IUserProfileSearchScreenP
     navigationController: IUserProfileListScreenNavigationController
 }
 
-export default class UserProfileSearchScreen extends React.Component<IUserProfileSearchScreenProps> implements IUserProfileSearchScreen {
+export default class UserProfileSearchScreen extends React.Component<IUserProfileSearchScreenProps>  {
 
     userProfileList: IUserProfileListState = {items: []};
     static contextType = AppContext
@@ -44,3 +45,10 @@ export default class UserProfileSearchScreen extends React.Component<IUserProfil
         )
     }
 }
+
+
+
+
+// export class NewMakeFriendsScreen extends 
+
+

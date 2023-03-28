@@ -2,7 +2,7 @@ import React from "react";
 import { Alert, Share, Text, TouchableOpacity, View } from "react-native";
 import { UserProfileListView } from "../userProfileList";
 import styles from "./styles";
-import { IMakeFriendsViewProps } from "../../screens/userProfileSearch/makeFriends";
+import { IMakeFriendsViewProps } from "../../screens/userProfileList/makeFriends";
 import { IUserProfileListState } from "../../app/features/userProfile/userProfileList/slice/interface";
 import SearchBarView from "./SearchBar";
 import InviteYourFriendsFeedBackView from "../teachingFeedBack/inviteYourFriends";

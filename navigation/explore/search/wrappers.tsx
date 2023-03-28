@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import PlaceSearchScreen from "../../../screens/placeList";
 import { IPlaceSearchScreenNavigationController } from "../../../screens/placeList/interface";
-import UserProfileSearchScreen from "../../../screens/userProfileSearch";
+import UserProfileSearchScreen from "../../../screens/userProfileList";
 import { ExploreStackNavigationProp, ExploreStackScreenProps } from "../types";
 import { IPlaceProfileScreenNavigationController } from "../../../screens/placeProfile/interface";
 import { PlaceProfileScreen } from "../../../screens/placeProfile";

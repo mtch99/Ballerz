@@ -1,6 +1,6 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
 import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
-import { IUserProfileSearchScreenPropsWithoutNavigation } from "../../../screens/userProfileSearch";
+import { IUserProfileSearchScreenPropsWithoutNavigation } from "../../../screens/userProfileList";
 
 declare global {
     namespace ReactNavigation {

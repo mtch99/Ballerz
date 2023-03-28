@@ -15,10 +15,19 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 
-- [ ] Invite your friends after find Your friends
+- [x] Invite your friends after find Your friends
     - [x] Styles Find your friends bottom sheet
         - [x] Display bottom sheet in home page
     - [x] Invite Your friends Feedback vue
+
+* [x] Fix MakeFriendsScreenNot displaying list of users on first render
+    - [x] Refactor UserProfileListScreen
+        - [x] The view will contain the searchBar
+* [x] Fix FindYourFriendsScreen not srolling
+
+- [ ] Refactor MakeriendsView to enable FriendsShip Request
+    - [ ] Copy paste the FindYourFriendsView
+    - [ ] Refactor SearchBar title
 
 
 

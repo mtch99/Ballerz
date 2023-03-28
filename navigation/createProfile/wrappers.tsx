@@ -10,8 +10,8 @@ import { useNavigation } from "@react-navigation/native";
 import { RootStackNavigationProp } from "../types";
 import { AuthStackNavigationProp } from "../app/auth/types";
 import { AppStackNavigationProp } from "../app/types";
-import FindYourFriendsScreen from "../../screens/createProfile/findYourFriends";
-import { IFindYourFriendsScreenNavigationController } from "../../screens/createProfile/findYourFriends/interface";
+import FindYourFriendsScreen from "../../screens/userProfileList/findYourFriends";
+import { IFindYourFriendsScreenNavigationController } from "../../screens/userProfileList/findYourFriends/interface";
 
 
 

@@ -4,14 +4,16 @@ import BadgeListScreen from "../../screens/badgeList"
 import { IFeedScreenPropsWithoutNavigation, FeedScreen } from "../../screens/feed"
 import CommentScreen from "../../screens/feed/Comments"
 import { IFeedScreenNavigationController } from "../../screens/feed/interface"
-import AttendantsListScreen from "../../screens/userProfileSearch/attendantsList"
+import AttendantsListScreen from "../../screens/userProfileList/attendantsList"
 import { FeedStackScreenProps, FeedStackNavigationProp } from "./types"
-import { FeedStackMakeFriendsScreen } from "../../screens/userProfileSearch/makeFriends"
+import { FeedStackMakeFriendsScreen } from "../../screens/userProfileList/makeFriends"
 import React from "react"
 import { FeedStackNavigationContext, IFeedStackNavigationContext } from "./context"
-import { IUserProfileSearchScreenProps } from "../../screens/userProfileSearch"
+import { IUserProfileSearchScreenProps } from "../../screens/userProfileList"
 import { IUserProfileData } from "../../domain/use-cases/types"
-import { IUserProfileListScreenNavigationController } from "../../screens/userProfileSearch/userProfileList/interface"
+import { IUserProfileListScreenNavigationController } from "../../screens/userProfileList/interface"
+import NewFindYourFriendsScreen from "../../screens/userProfileList/findYourFriends"
+import FindYourFriendsView from "../../views/auth/findYourFriends"
 
 
 
@@ -47,6 +49,8 @@ export function FeedScreenWrapper(): JSX.Element {
                 navigationController
             }}
         />
+        // <NewFindYourFriendsScreen/>
+
     )
 
 }
