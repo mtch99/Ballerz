@@ -59,7 +59,7 @@ export default class FindYourFriendsView extends React.Component<IFindYourFriend
                     onPressInvitationLink={this.onPressInvitationLink}
                 />
                 <SelectableUserProfileListView
-                    onAddButtonPress={this.props.onAddButtonPress}
+                    onPressUserProfile={this.props.onPressUserProfile}
                     usersList={this.props.usersList}
                 />
 				

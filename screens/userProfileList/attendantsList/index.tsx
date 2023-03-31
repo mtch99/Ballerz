@@ -1,25 +1,27 @@
-import { ReactNode } from "react";
-import UserProfileListScreen from "../userProfileList";
-import { SafeAreaView as View } from "react-native-safe-area-context";
-import { Text } from "react-native";
+import {IUserProfileListScreenProps, IUserProfileListScreenPropsWithoutNavigation } from "..";
+import { IUserProfileData } from "../../../domain/use-cases/types";
+
+import UserProfileSearchScreen from '../userProfileSearch';
 
 
-export default class AttendantsListScreen extends UserProfileListScreen {
+export interface IAttendantsListScreenPropsWithoutNavigation extends IUserProfileListScreenPropsWithoutNavigation{
+    attendantsList: IUserProfileData[]
+}
+export interface IAttendantsListScreenProps extends IUserProfileListScreenProps,  IAttendantsListScreenPropsWithoutNavigation{}
 
-    render(): ReactNode {
-        if(this.props.userProfileList.length>0){
-            return super.render()
+export default class AttendantsListScreen 
+    extends UserProfileSearchScreen<IAttendantsListScreenProps>{
+
+        componentDidMount(): void { 
+            this.__initState()
         }
-        return(
-            <View
-                style={{
-                    borderBottomColor:""
-                }}
-            >
-                <Text style={{color:"#F5F8FA", marginTop: "10"}}>
-                    Vous n'avez pas d'amis ici. Ajouter des gens
-                </Text>
-            </View>
-        )
-    }
+
+        __initState() {
+            this.setState((prevState) => ({
+                ...prevState,
+                userProfileList: this.props.attendantsList,
+                filteredUserProfileList: this.props.attendantsList,
+                filterInput: ''
+            }))
+        }
 }

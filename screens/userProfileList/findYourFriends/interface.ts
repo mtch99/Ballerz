@@ -1,7 +1,7 @@
 
 import { IUserProfileData } from "../../../domain/use-cases/types"
 import { ISelectableUserProfileData, IUserProfileListViewProps } from "../../interface"
-import { ISelectableUserProfileListScreenState } from "../interface"
+import { ISelectableUserProfileListScreenState, ISelectableUserProfileListViewProps } from "../interface"
 
 export interface IFindYourFriendsScreenPropsWithoutNavigation {
     // userProfileDataList: IUserProfileData[]
@@ -10,7 +10,7 @@ export interface IFindYourFriendsScreenProps extends IFindYourFriendsScreenProps
     navigationController: IFindYourFriendsScreenNavigationController
 }
 export interface IFindYourFriendsScreenNavigationController {
-    goToMyProfileScreen(): void
+    onFriendshipRequestsSent(): void
 }
 
 export interface IFindYourFriendsScreenState extends ISelectableUserProfileListScreenState {
@@ -19,10 +19,10 @@ export interface IFindYourFriendsScreenState extends ISelectableUserProfileListS
 
 
 
-export interface IFindYourFriendsViewProps extends IUserProfileListViewProps {
+export interface IFindYourFriendsViewProps extends ISelectableUserProfileListViewProps {
     shareableLink: string
-    onPressContinue: () => void
-    onFilterInputChange(input: string): void
+    onPressContinue(): void
+    onFilterInputChange(filterExpression: string): void
 }
 
 

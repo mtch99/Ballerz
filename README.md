@@ -29,6 +29,9 @@ There must be three different games on three different courts, two at the moment
 
 - [ ] Enable seacrh function in FindYourFriendsScreen
     - [x] Fix Find your friends Screen
+    - [ ] Refactor screens/UserProfileList package
+
+
 - [ ] Refactor MakefriendsView to enable FriendsShip Request
     - [ ] Copy paste the FindYourFriendsView
     - [ ] Refactor SearchBar title

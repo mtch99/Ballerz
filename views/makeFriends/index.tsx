@@ -1,6 +1,6 @@
 import React from "react";
 import { Alert, Share, Text, TouchableOpacity, View } from "react-native";
-import { UserProfileListView } from "../userProfileList";
+import { UserProfileSearchView } from "../userProfileList";
 import styles from "./styles";
 import { IMakeFriendsViewProps } from "../../screens/userProfileList/makeFriends";
 import { IUserProfileListState } from "../../app/features/userProfile/userProfileList/slice/interface";
@@ -96,7 +96,7 @@ export class MakeFriendsView extends React.Component<IMakeFriendsViewProps>{
                 <InviteYourFriendsFeedBackView
                     onPressInvitationLink={this.onPressInvitationLink}
                 />
-                <UserProfileListView
+                <UserProfileSearchView
                     {...this.props}
                     userProfileList={this.state.filteredUserProfileList}
                 />

@@ -1,10 +1,9 @@
 import React from "react";
 import { TabView, SceneMap } from 'react-native-tab-view'
-import UserProfileListScreen from "../userProfileList/userProfileList";
 import PlaceSearchScreen, { AbstractPlaceListScreen } from "../placeList";
-import UserProfileSearchScreen from "../userProfileList";
 import { IPlaceSearchScreenNavigationController } from "../placeList/interface";
 import { IUserProfileListScreenNavigationController } from "../userProfile/interface";
+import UserProfileSearchScreen from "../userProfileList/userProfileSearch";
 
 
 export interface IExploreTabScreenProps {

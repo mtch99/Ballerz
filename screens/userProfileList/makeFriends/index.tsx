@@ -1,9 +1,8 @@
 import React, { ReactNode } from "react";
-import UserProfileSearchScreen from "..";
 import { MakeFriendsView } from "../../../views/makeFriends";
 import { AppContext, IAppContext } from "../../../controllers/provider";
-import { IUserProfileListViewProps } from "../interface";
 import { FeedStackNavigationContext } from "../../../navigation/feed/context";
+import { IUserProfileListViewProps } from "../../interface";
 
 
 export interface IMakeFriendsViewProps extends IUserProfileListViewProps{
