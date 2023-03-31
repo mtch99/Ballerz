@@ -3,7 +3,7 @@ import { ISelectableUserProfileItemViewProps, IUserProfileItemViewProps } from "
 import {Dimensions, FlatList, TouchableOpacity, View, Text, StyleSheet, Image, NativeSyntheticEvent, NativeScrollEvent } from "react-native"
 import { CheckBox } from "react-native-btr"
 import { ISelectableUserProfileData, IUserProfileListViewProps } from "../../../screens/interface"
-import AddUserButton from "../../components/Buttons/addUser"
+import AddUserButton from "../../../components/Flatlist/Buttons/addUser"
 import { AppContext, IAppContext } from "../../../controllers/provider"
 import { BallerzFlatList } from "../../../components/Flatlist"
 import { IUserProfileData } from "../../../domain/use-cases/types"
@@ -12,11 +12,9 @@ import { IUserProfileData } from "../../../domain/use-cases/types"
 
 export class SelectableUserProfileListView extends React.Component<IUserProfileListViewProps> {
 
-    static contextType = AppContext
-    context: React.ContextType<typeof AppContext> = {} as IAppContext
 
     componentDidUpdate(prevProps: Readonly<IUserProfileListViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
-        console.warn(`SelectableUserProfileListView did update: ${JSON.stringify(this.context.userProfileListState['items'])}`)
+        console.warn(`SelectableUserProfileListView did update: ${JSON.stringify(this.props.usersList)}`)
     }
 
 
@@ -30,7 +28,7 @@ export class SelectableUserProfileListView extends React.Component<IUserProfileL
                         <UserProfileItemView
                             userProfile={item}
                             selected={item.selected}
-                            onPressCheckBox={(id) => {this.props.onAddButtonPress(item)}}
+                            onPressCheckBox={() => {this.props.onAddButtonPress(item)}}
                             onPressUserProfileItem={() => {}}
                         />
                     )

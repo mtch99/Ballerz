@@ -135,26 +135,55 @@ export default class NewFindYourFriendsScreen  extends AUserProfileListScreen<IF
         this.onPressContinue = this.onPressContinue.bind(this)
     }
 
-    onPressUserProfile(selectedItem: IUserProfileDataState): void {
-        const userProfileList: ISelectableUserProfileData[]  = [] 
+    onPressUserProfile(pressedItem: ISelectableUserProfileData): void {
+        const newUserProfileList = this.__selectItem(pressedItem)
+        const mockUpdatedUserProfileState = this.__mockUpdateUserProfileListState(this.state, newUserProfileList)
+        const newState = this.__mockUpdateFilteredUserProfileListState(mockUpdatedUserProfileState, this.state.filterInput)
+        this.setState((prevState) => ({
+            ...prevState,
+            userProfileList: newState.userProfileList,
+            filteredUserProfileList: newState.filteredUserProfileList,
+            filterInput: newState.filterInput
+        }))
+    }
+
+    private __mockUpdateUserProfileListState(currentState: ISelectableUserProfileListScreenState, newUserProfileList: ISelectableUserProfileData[]): ISelectableUserProfileListScreenState {
+        const result: ISelectableUserProfileListScreenState = {
+            ...currentState,
+            userProfileList: [...newUserProfileList]
+        }
+        console.log(`Result: ${JSON.stringify(result.userProfileList[0])}`)
+        return result
+
+    }
+
+    private __mockUpdateFilteredUserProfileListState(currentState: ISelectableUserProfileListScreenState, filterInput: string | null): ISelectableUserProfileListScreenState {
+        const filteredUserProfileList: ISelectableUserProfileData[] = this.__applyFilter(filterInput?filterInput:'', currentState.userProfileList)
+        console.log(`New filteredUserProfileList: ${JSON.stringify(filteredUserProfileList[0])}`)
+        return {
+            ...currentState,
+            filterInput,
+            filteredUserProfileList
+        }
+    }
+
+    __selectItem(pressedItem: ISelectableUserProfileData): ISelectableUserProfileData[] {
+        const newUserProfileList: ISelectableUserProfileData[]  = [] 
         this.state.userProfileList.forEach((item) => {
-            if(item.id == selectedItem.id){
-                userProfileList.push({
-                    ...item,
-                    selected: !item.selected
-                })
+            if(item.id == pressedItem.id){
+                console.log(`Item to select: ${JSON.stringify(pressedItem)}`)
+                const newItem = {...item, selected:!pressedItem.selected}
+                newUserProfileList.push(newItem)
             } 
             else {
-                userProfileList.push({
+                newUserProfileList.push({
                     ...item,
+                    selected: item.selected
                 })
             }
         })
-        const newState: ISelectableUserProfileListScreenState = {
-            ...this.state,
-            userProfileList
-        }
-        this.setState(newState)
+        console.log(`result of selectItem: ${JSON.stringify(newUserProfileList[0])}`)
+        return newUserProfileList
     }
 
     componentDidMount(): void {
@@ -201,6 +230,7 @@ export default class NewFindYourFriendsScreen  extends AUserProfileListScreen<IF
         this.props.navigationController.goToMyProfileScreen()
     }
 
+
     render() {
         return (
             <FindYourFriendsView
@@ -208,7 +238,7 @@ export default class NewFindYourFriendsScreen  extends AUserProfileListScreen<IF
                 shareableLink={""} 
                 onPressContinue={this.onPressContinue} 
                 onFilterInputChange={this.onFilterInputChange} 
-                usersList={this.state.userProfileList}                
+                usersList={this.state.filteredUserProfileList}                
             />
         )
     }

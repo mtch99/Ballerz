@@ -53,7 +53,7 @@ export default class FindYourFriendsView extends React.Component<IFindYourFriend
                     rightButtonProps={{onPress: this.props.onPressContinue}}
                 />
                 <SearchBarView
-                  onSearchInputChange={() => {}}
+                  onSearchInputChange={this.props.onFilterInputChange}
                 />
                 <InviteYourFriendsFeedBackView
                     onPressInvitationLink={this.onPressInvitationLink}

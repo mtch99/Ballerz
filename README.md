@@ -25,7 +25,11 @@ There must be three different games on three different courts, two at the moment
         - [x] The view will contain the searchBar
 * [x] Fix FindYourFriendsScreen not srolling
 
-- [ ] Refactor MakeriendsView to enable FriendsShip Request
+* [ ] TODO: Save userProfile in the local storage upon creation
+
+- [ ] Enable seacrh function in FindYourFriendsScreen
+    - [x] Fix Find your friends Screen
+- [ ] Refactor MakefriendsView to enable FriendsShip Request
     - [ ] Copy paste the FindYourFriendsView
     - [ ] Refactor SearchBar title
 - [ ] Fix searchbar in find your friends screen 
@@ -60,6 +64,9 @@ TODO: scenario10
 TODO: auth
 * [ ] Enable email confirmation to allow users to signin 
 - [ ] FeedBack in auth flow, after defining username, befor find your friends screen
+
+
+TODO: Prevent users from sharing a username
 
 
 

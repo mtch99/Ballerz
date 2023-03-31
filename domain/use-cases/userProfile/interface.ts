@@ -25,6 +25,12 @@ export interface IUserProfileRepository {
     defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult>
     requestFriendship(input: IRequestFriendShipInput): Promise<IRequestFriendShipResult>
     getUserProfileByEmail(email: string): Promise<IUserProfile | null>
+    cacheMyUserProfileData(myUserProfileData: IMyUserProfileData): Promise<void>
+    getMyUserProfileData(): Promise<IMyUserProfileData | null>
+}
+
+export interface IMyUserProfileData extends IUserProfileData {
+    email: string
 }
 
 export interface IRequestFriendShipInput {
@@ -46,3 +52,4 @@ export interface IDefineUsernameResult {
     error: boolean
     userProfile?: IUserProfile
 }
+

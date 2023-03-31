@@ -10,8 +10,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         flexGrow: 1
     },
-    text: {
-        color:"#E5E6E8"
+    cant_find_ur_friends_text: {
+        color:"#E5E6E8",
+        fontSize: 15,
+        justifyContent: "center"
     },
 })
 

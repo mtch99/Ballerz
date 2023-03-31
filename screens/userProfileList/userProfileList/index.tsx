@@ -97,12 +97,22 @@ export abstract class AUserProfileListScreen<P, S extends IUserProfileListScreen
         }
     }
 
-    __applyFilter(input: string): IUserProfileListState['items'] {
-        const result = this.state.userProfileList.filter(
-            (userProfile) => userProfile.username.toLocaleLowerCase().includes(input.toLocaleLowerCase())
+    __applyFilter(filterInput: string, userProfileList?: S['userProfileList']): S['userProfileList'] {
+        
+        if(filterInput == ''){
+            return userProfileList || this.state.userProfileList
+        }
+
+        let listTofilter: S['userProfileList'] = userProfileList || this.state.userProfileList
+        const result = listTofilter.filter(
+            (userProfile) => userProfile.username.toLocaleLowerCase().includes(filterInput.toLocaleLowerCase())
         )
+
+        
         return result
     }
+
+
 
     abstract onPressUserProfile(userProfileData: IUserProfileDataState): void
 
