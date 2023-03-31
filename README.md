@@ -28,13 +28,21 @@ There must be three different games on three different courts, two at the moment
 - [ ] Refactor MakeriendsView to enable FriendsShip Request
     - [ ] Copy paste the FindYourFriendsView
     - [ ] Refactor SearchBar title
+- [ ] Fix searchbar in find your friends screen 
 
 
 
 
 
-- [ ] Add place
+- [ ] Add friend
+<!-- - [ ] Add place -->
+- [ ] Invitations
+- [ ] Notifications
+- [ ] Comments
+
+
 - [ ] Add Profile Picture
+
 
 
 
