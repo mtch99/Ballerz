@@ -8,7 +8,7 @@ import { AUserProfileListScreen } from '..';
 
 
 
-export default class FindYourFriendsScreen  extends AUserProfileListScreen<IFindYourFriendsScreenProps, ISelectableUserProfileListScreenState> {
+export default class FindYourFriendsScreen<P extends IFindYourFriendsScreenProps = IFindYourFriendsScreenProps>  extends AUserProfileListScreen<P, ISelectableUserProfileListScreenState> {
 
 
     state: ISelectableUserProfileListScreenState = {
@@ -17,7 +17,7 @@ export default class FindYourFriendsScreen  extends AUserProfileListScreen<IFind
         filterInput: '',
     }
 
-    constructor(props: IFindYourFriendsScreenProps){
+    constructor(props: P){
         super(props)
         this.onFilterInputChange = this.onFilterInputChange.bind(this)
         this.clearFilterInput = this.clearFilterInput.bind(this)

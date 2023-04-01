@@ -14,7 +14,6 @@ import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-naviga
 import { IBadgeListScreenPropsWithoutNavigation } from '../../screens/badgeList';
 import { IFeedScreenPropsWithoutNavigation } from '../../screens/feed';
 import { ICommentScreenPropsWithoutNavigation } from '../../screens/feed/Comments';
-import { IAttendantsListScreenProps } from "../../screens/userProfileList/attendantsList";
 
 
  

@@ -116,7 +116,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
 
 
     handlePressMakeFriends(): void {
-        this.navigationController.goToUserSearchScreen()
+        this.navigationController.goToMakeFriendsScreen()
     }
 
     

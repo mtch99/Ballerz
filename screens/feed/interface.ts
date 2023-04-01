@@ -18,7 +18,7 @@ export interface IFeedScreenNavigationController{
     goToBadgeListScreen(badgeList: IFeedItemState["badges"]): void
     goToAttendantsScreen(userProfileList: IUserProfileData[]): void
     goToCommentScreen(feedItem: IFeedItemState): void
-    goToUserSearchScreen(): void
+    goToMakeFriendsScreen(): void
 }
 
 

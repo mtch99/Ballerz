@@ -5,7 +5,7 @@ import { globalStyles } from "../styles";
 import { IUserProfileListViewProps } from "../../screens/interface";
 import { IUserProfileData } from "../../domain/use-cases/types";
 import { BallerzFlatList } from "../../components/Flatlist";
-import SearchBarView from "../makeFriends/SearchBar";
+import SearchBarView from "../../components/SearchBar";
 import { SafeAreaView } from "react-navigation";
 
 

@@ -2,7 +2,7 @@ import React from "react"
 import Icon from 'react-native-vector-icons/AntDesign';
 import { StyleSheet, TextInput, View } from "react-native"
 import SearchBar from 'react-native-material-design-searchbar';
-import { globalStyles } from "../../styles";
+import { globalStyles } from "../../views/styles";
 
 
 export interface ISearchBarViewProps{

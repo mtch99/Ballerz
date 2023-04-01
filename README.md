@@ -34,6 +34,10 @@ There must be three different games on three different courts, two at the moment
 * [x] Fix flatlist scrolling bug on FindYourFriends View ... scroll stops before the end of the list
     - [x] Wrap the safeArea children with a view of flex 1
 
+- [ ] Run scenario and test evrything works fine
+    - [x] Fix MakeFriendsViewHeader
+
+
 
 
 

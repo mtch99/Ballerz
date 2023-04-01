@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { FeedStackParamList } from "./types";
-import { AttendantsListScreenWrapper, BadgeListScreenWrapper, CommentsScreenWrapper, FeedScreenWrapper, UserProfileSearchScreenWrapper } from "./wrappers";
+import { AttendantsListScreenWrapper, BadgeListScreenWrapper, CommentsScreenWrapper, FeedScreenWrapper, MakeFriendsScreenWrapper, UserProfileSearchScreenWrapper } from "./wrappers";
 import { Button, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/AntDesign';
 import React from "react";
@@ -105,6 +105,15 @@ export function FeedStackNavigator(): JSX.Element {
 						)
 					}}
 					component={UserProfileSearchScreenWrapper}
+				/>
+
+				<Stack.Screen
+					name="MakeFriends"
+					options={{
+						headerShown: false,
+						gestureEnabled: false,
+					}}
+					component={MakeFriendsScreenWrapper}
 				/>
 
 		

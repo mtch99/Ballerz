@@ -6,7 +6,7 @@ import CommentScreen from "../../screens/feed/Comments"
 import { IFeedScreenNavigationController } from "../../screens/feed/interface"
 import AttendantsListScreen from "../../screens/userProfileList/attendantsList"
 import { FeedStackScreenProps, FeedStackNavigationProp } from "./types"
-import { FeedStackMakeFriendsScreen } from "../../screens/userProfileList/makeFriends"
+import { IMakeFriendsScreenNavigationController, MakeFriendsScreen } from "../../screens/userProfileList/makeFriends"
 import React from "react"
 import { FeedStackNavigationContext, IFeedStackNavigationContext } from "./context"
 
@@ -32,14 +32,13 @@ export function FeedScreenWrapper(): JSX.Element {
             navigation.navigate('BadgeListScreen', {badgeList})
         },
         goToAttendantsScreen: (attendantsList: IUserProfileData[]) => {
-            
             navigation.navigate('AttendantsListScreen', {attendantsList})
         },
         goToCommentScreen(feedItem) {
             navigation.navigate('CommentsScreen', {feedItem: feedItem, comments: feedItem.comments})
         },
-        goToUserSearchScreen() {
-            navigation.navigate('UserProfileSearch', {})
+        goToMakeFriendsScreen() {
+            navigation.navigate('MakeFriends', {})
         },
         
     }
@@ -131,13 +130,16 @@ export function MakeFriendsScreenWrapper(){
 
     const {userProfileSearchButtonState} = React.useContext<IFeedStackNavigationContext>(FeedStackNavigationContext)
     const navigation = useNavigation<FeedStackNavigationProp<'UserProfileSearch'>>()
-    const navigationController: IFindYourFriendsScreenNavigationController = {
+    const navigationController: IMakeFriendsScreenNavigationController = {
         onFriendshipRequestsSent(): void {
+            navigation.goBack()
+        },
+        goBack(): void {
             navigation.goBack()
         }
     }
     return(
-        <FindYourFriendsScreen
+        <MakeFriendsScreen
             navigationController={navigationController}
         />
     )

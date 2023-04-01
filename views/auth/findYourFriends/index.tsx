@@ -1,18 +1,18 @@
 import React from "react";
 import { IFindYourFriendsViewProps } from "../../../screens/userProfileList/findYourFriends/interface";
 import {SelectableUserProfileListView, UserProfileItemView} from "../../userProfileList/selectable";
-import HeaderView from "../../header";
-import CheckButton from "../../header/buttons/checkButton"
+import HeaderView from "../../../components/header";
+import HeaderCheckButton from "../../../components/header/buttons/checkButton"
 import { globalStyles } from "../../styles";
 import { Alert, Share, StyleSheet, View } from "react-native";
-import InviteYourFriendsFeedBackView from "../../teachingFeedBack/inviteYourFriends";
-import SearchBarView from "../../makeFriends/SearchBar";
+import InviteYourFriendsFeedBackView from "../../FeedBack/inviteYourFriends";
+import SearchBarView from "../../../components/SearchBar";
 import BallerzSafeAreaView from "../../safeArea";
 
 
-export default class FindYourFriendsView extends React.Component<IFindYourFriendsViewProps>{
+export default class FindYourFriendsView<P extends IFindYourFriendsViewProps = IFindYourFriendsViewProps> extends React.Component<P>{
 
-    constructor(props: IFindYourFriendsViewProps) {
+    constructor(props: P) {
         super(props);
         this.onPressInvitationLink = this.onPressInvitationLink.bind(this);
     }
@@ -22,6 +22,8 @@ export default class FindYourFriendsView extends React.Component<IFindYourFriend
         try {
             const result = await Share.share({
               message:'https://testflight.apple.com/join/6GBFVtwg',
+			  title: "https://testflight.apple.com/join/6GBFVtwg",
+			  url: "https://testflight.apple.com/join/6GBFVtwg"
             });
             if (result.action === Share.sharedAction) {
               if (result.activityType) {
@@ -44,7 +46,7 @@ export default class FindYourFriendsView extends React.Component<IFindYourFriend
                 <View style={{flex:1}}>
                 <HeaderView
                     title="Trouve tes amis"
-                    rightButton={CheckButton}
+                    rightButton={HeaderCheckButton}
                     leftButtonProps={{onPress: () => {}}}
                     rightButtonProps={{onPress: this.props.onPressContinue}}
                 />
