@@ -34,17 +34,15 @@ There must be three different games on three different courts, two at the moment
 * [x] Fix flatlist scrolling bug on FindYourFriends View ... scroll stops before the end of the list
     - [x] Wrap the safeArea children with a view of flex 1
 
-- [ ] Run scenario and test evrything works fine
+- [x] Run scenario and test evrything works fine
     - [x] Fix MakeFriendsViewHeader
     - [x] disable error log on navigation to place profile screen
-
-
-
-
-
+    * [x] disable error logs for uimplemented functions
 
 
 - [ ] Add friend
+
+
 <!-- - [ ] Add place -->
 - [ ] Invitations
 - [ ] Notifications
@@ -56,7 +54,8 @@ There must be three different games on three different courts, two at the moment
 
 
 
-
+TODO: Fixes
+- [ ] remove trailing space from define username input and search inputs 
 
 
 

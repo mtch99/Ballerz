@@ -20,26 +20,6 @@ export default class GamesListView extends React.Component<IGamesViewProps> {
         return(
             <View style={{flexWrap:'wrap'}}>
                 <Text style={styles.gamesText}>Partcipations</Text>
-                    {/* {this.gameList.map(game => {
-                        return (<FeedItemView 
-                            feedItem={game} 
-                            handleBadgeClick={function (feedItem: IFeedItemState): void {
-                                throw new Error("Function not implemented.");
-                            } } 
-                            handleFriendsTherePress={function (feedItem: IFeedItemState): void {
-                                throw new Error("Function not implemented.");
-                            } } 
-                            handleInvitePress={function (feedItem: IFeedItemState): void {
-                                throw new Error("Function not implemented.");
-                            } } 
-                            handlePlayButtonPress={function (feedItem: IFeedItemState): void {
-                                throw new Error("Function not implemented.");
-                            } } 
-                            onPressCommentButton={function (): void {
-                                throw new Error("Function not implemented.");
-                            } }                            
-                        />)
-                    })} */}
                     <FlatList
                         style={{flexGrow: 1}}
                         data={this.props.gameList}
@@ -49,19 +29,19 @@ export default class GamesListView extends React.Component<IGamesViewProps> {
                                 <FeedItemView 
                                     feedItem={item} 
                                     handleBadgeClick={function (feedItem: IFeedItemState): void {
-                                        throw new Error("Function not implemented.");
+                                        console.log("Function not implemented.");
                                     } } 
                                     handleFriendsTherePress={function (feedItem: IFeedItemState): void {
-                                        throw new Error("Function not implemented.");
+                                        console.log("Function not implemented.");
                                     } } 
                                     handleInvitePress={function (feedItem: IFeedItemState): void {
-                                        throw new Error("Function not implemented.");
+                                        console.log("Function not implemented.");
                                     } } 
                                     handlePlayButtonPress={function (feedItem: IFeedItemState): void {
-                                        throw new Error("Function not implemented.");
+                                        console.log("Function not implemented.");
                                     } } 
                                     onPressCommentButton={function (): void {
-                                        throw new Error("Function not implemented.");
+                                        console.log("Function not implemented.");
                                     } }                            
                                 />
                             )
