@@ -5,6 +5,7 @@ import { ConfirmSignupInput } from "./input";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { globalStyles } from "../../../../views/styles";
 import AwesomeAlert from 'react-native-awesome-alerts';
+import BallerzSafeAreaView from "../../../../views/safeArea";
 
 
 export default class ConfirmSignupModal extends React.Component<IConfirmSignupModalViewProps> {
@@ -17,9 +18,9 @@ export default class ConfirmSignupModal extends React.Component<IConfirmSignupMo
                 transparent={true}
                 animationType="slide"
             >
-                <SafeAreaView
-                    style={styles.modalView}
+                <BallerzSafeAreaView
                 >
+                    <>
                     <View
                         style={styles.titleContainer}
                     >
@@ -54,17 +55,11 @@ export default class ConfirmSignupModal extends React.Component<IConfirmSignupMo
                             </Text>
                         </TouchableOpacity>
                     </View>
-                </SafeAreaView>
+                    </>
+                </BallerzSafeAreaView>
             </Modal>
         )
     }
-
-    // render() {
-    //     return(
-    //         <AwesomeAlert
-    //         />
-    //     )
-    // }
 }
 
 

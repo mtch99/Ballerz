@@ -1,10 +1,9 @@
 import React from "react";
 import { TabView, SceneMap } from 'react-native-tab-view'
-import UserProfileListScreen from "../userProfileSearch/userProfileList";
 import PlaceSearchScreen, { AbstractPlaceListScreen } from "../placeList";
-import UserProfileSearchScreen from "../userProfileSearch";
 import { IPlaceSearchScreenNavigationController } from "../placeList/interface";
 import { IUserProfileListScreenNavigationController } from "../userProfile/interface";
+import UserProfileSearchScreen from "../userProfileList/userProfileSearch";
 
 
 export interface IExploreTabScreenProps {
@@ -37,7 +36,7 @@ export default class ExploreTabScreen extends React.Component<IExploreTabScreenP
     renderScene = SceneMap({
         first: () => (
             <PlaceSearchScreen
-            navigationController={this.props.placeSearcScreenNavigationController}
+                navigationController={this.props.placeSearcScreenNavigationController}
             />
         ),
         second: () => (

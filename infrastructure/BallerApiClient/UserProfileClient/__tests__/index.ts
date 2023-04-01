@@ -1,3 +1,4 @@
+import { UserProfileClientMock } from "./../index";
 import { awsmobileAPIMock } from "../../aws-exports";
 import { GetUserProfileQueryVariables, ListUserProfilesQueryVariables } from "../../API";
 import UserProfileClient from ".."
@@ -7,7 +8,7 @@ import { CreateUserProfileMutationVariables } from "../mutations";
 
 describe("UserProfileClient test suite", () => {
 
-    const client = new UserProfileClient()
+    const client = new UserProfileClientMock()
     Amplify.configure(awsmobileAPIMock)
     describe("getUserProfile function tests", () => {
 

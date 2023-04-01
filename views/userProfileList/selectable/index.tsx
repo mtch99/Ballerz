@@ -1,42 +1,46 @@
 import React from "react"
 import { ISelectableUserProfileItemViewProps, IUserProfileItemViewProps } from "../interface"
-import { FlatList, TouchableOpacity, View, Text, StyleSheet, Image } from "react-native"
+import {Dimensions, FlatList, TouchableOpacity, View, Text, StyleSheet, Image, NativeSyntheticEvent, NativeScrollEvent } from "react-native"
 import { CheckBox } from "react-native-btr"
-import { ISelectableUserProfileViewProps } from "../../../screens/interface"
-import AddUserButton from "../../components/Buttons/addUser"
+import { ISelectableUserProfileData, IUserProfileListViewProps } from "../../../screens/interface"
+import AddUserButton from "../../../components/Buttons/addUser"
+import { AppContext, IAppContext } from "../../../controllers/provider"
+import { BallerzFlatList } from "../../../components/Flatlist"
+import { IUserProfileData } from "../../../domain/use-cases/types"
+import { ISelectableUserProfileListViewProps } from "../../../screens/userProfileList/interface"
 
 
 
+export class SelectableUserProfileListView extends React.Component<ISelectableUserProfileListViewProps> {
 
-export class SelectableUserProfileListView extends React.Component<ISelectableUserProfileViewProps> {
+
+    componentDidUpdate(prevProps: Readonly<ISelectableUserProfileListViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
+        console.warn(`SelectableUserProfileListView did update: ${JSON.stringify(this.props.usersList)}`)
+    }
 
 
     render(): React.ReactNode {
         return(
-            <FlatList
+            <BallerzFlatList<ISelectableUserProfileData>
                 data={this.props.usersList}
+                extraData={this.props.usersList}
                 renderItem={({item}) =>  {
                     return(
                         <UserProfileItemView
                             userProfile={item}
                             selected={item.selected}
-                            onPressCheckBox={(id) => {this.props.onAddButtonPress(item)}}
+                            onPressCheckBox={() => {this.props.onPressUserProfile(item)}}
                             onPressUserProfileItem={() => {}}
                         />
                     )
                 }}
-                extraData={this.props.usersList}
             />
         )
     }
 }
 
 
-
-
-
-
-class UserProfileItemView extends React.Component<ISelectableUserProfileItemViewProps>{
+export class UserProfileItemView extends React.Component<ISelectableUserProfileItemViewProps>{
 
     username = this.props.userProfile.username
     // onPressUserProfile(){

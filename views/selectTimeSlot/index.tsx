@@ -9,6 +9,7 @@ import EditPlaceView from "./EditPlace";
 import { ISelectTimeSlotViewState, IDateTimePickerState, EditState, TimeEditActionType } from "./interface";
 import EditTimeView, { EditDateView, EditEndingTimeView, EditStartingTimeView } from "./EditTime";
 import { ConfirmButton } from "./CreateGameButton";
+import BallerzSafeAreaView from "../safeArea";
 
 
 
@@ -354,7 +355,8 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
     render(): React.ReactNode {
         return(
 
-            <SafeAreaView style={styles.container}>
+            <BallerzSafeAreaView>
+				<>
                 <DateTimePickerModal
 					onConfirm={(date) => {this.onPressDateTimePickerConfirm(date)}}
 					onCancel={(date) => {this.onPressDateTimePickerCancel(date)}}
@@ -388,9 +390,8 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 				<ConfirmButton
 					onPress={() => {this.props.onPressPlay()}}
 				/>
-
-            <StatusBar style="auto" />
-         </SafeAreaView>
+				</>
+         </BallerzSafeAreaView>
         )
     }
 }

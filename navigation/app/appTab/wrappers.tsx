@@ -35,16 +35,16 @@ export function UserProfileScreenWrapper(){
 
     const navigationController: IUserProfileScreenNavigationController = {
         goToUserProfile: function (id: string): void {
-            throw new Error("Function not implemented.");
+            console.log("Function not implemented.");
         },
         goToPlaceProfile: function (id: string): void {
-            throw new Error("Function not implemented.");
+            console.log("Function not implemented.");
         },
         goToCommentsScreen: function (gameId: string): void {
-            throw new Error("Function not implemented.");
+            console.log("Function not implemented.");
         },
         goToAttendantsListScreen: function (gameId: string): void {
-            throw new Error("Function not implemented.");
+            console.log("Function not implemented.");
         }
     }
 

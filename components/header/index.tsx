@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { globalStyles } from '../styles';
+import { globalStyles } from '../../views/styles';
 
 export interface IHeaderViewProps {
     title: string, 

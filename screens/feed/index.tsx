@@ -7,6 +7,7 @@ import IFeedController from "../../controllers/feed/interface";
 import { ICommentInput } from "../../domain/use-cases/feed/interface";
 import { AppContext, IAppContext } from "../../controllers/provider";
 import { globalStyles } from "../../views/styles";
+import FindYourFriendsBottomSheetView from "../../views/makeFriends/findYourFriendsBottomSheet";
 
 
 export interface IFeedScreenPropsWithoutNavigation {
@@ -115,7 +116,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
 
 
     handlePressMakeFriends(): void {
-        this.navigationController.goToUserSearchScreen()
+        this.navigationController.goToMakeFriendsScreen()
     }
 
     
@@ -158,9 +159,6 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
 
     render() {
         return (
-            <SafeAreaView
-                style={{backgroundColor: globalStyles.global.screenBackGroundColor, flexGrow:1}}
-            >
                 <FeedView
                     feedState={this.context.feedState}
                     handleBadgeClick={(item) => {this.handleBadgeClick(item)}}
@@ -169,14 +167,6 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
                     handlePlayButtonPress={(item) => {this.handlePlayButtonPress(item)}}
                     handleCommentButtonPress={(input: IFeedItemState) => {this.handleCommentButtonPress(input)}}
                 />
-                {/* <Modal
-                    visible={this.state.modalVisible}
-                >
-                    <Text>
-                        NoFreidns here
-                    </Text>
-                </Modal> */}
-            </SafeAreaView>
         )
     }
 }

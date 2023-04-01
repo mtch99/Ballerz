@@ -1,32 +1,67 @@
 import React from "react";
-import { IFindYourFriendsViewProps } from "../../../screens/createProfile/findYourFriends/interface";
-import { SafeAreaView } from "react-native-safe-area-context";
-import {SelectableUserProfileListView} from "../../userProfileList/selectable";
-import HeaderView from "../../header";
-import CheckButton from "../../header/buttons/checkButton"
+import { IFindYourFriendsViewProps } from "../../../screens/userProfileList/findYourFriends/interface";
+import {SelectableUserProfileListView, UserProfileItemView} from "../../userProfileList/selectable";
+import HeaderView from "../../../components/header";
+import HeaderCheckButton from "../../../components/header/buttons/checkButton"
 import { globalStyles } from "../../styles";
-import { StyleSheet } from "react-native";
+import { Alert, Share, StyleSheet, View } from "react-native";
+import InviteYourFriendsFeedBackView from "../../FeedBack/inviteYourFriends";
+import SearchBarView from "../../../components/SearchBar";
+import BallerzSafeAreaView from "../../safeArea";
 
 
-export default class FindYourFriendsView extends React.Component<IFindYourFriendsViewProps>{
+export default class FindYourFriendsView<P extends IFindYourFriendsViewProps = IFindYourFriendsViewProps> extends React.Component<P>{
+
+    constructor(props: P) {
+        super(props);
+        this.onPressInvitationLink = this.onPressInvitationLink.bind(this);
+    }
+
     
+    async onPressInvitationLink(): Promise<void> {
+        try {
+            const result = await Share.share({
+              message:'https://testflight.apple.com/join/6GBFVtwg',
+			  title: "https://testflight.apple.com/join/6GBFVtwg",
+			  url: "https://testflight.apple.com/join/6GBFVtwg"
+            });
+            if (result.action === Share.sharedAction) {
+              if (result.activityType) {
+                // shared with activity type of result.activityType
+              } else {
+                // shared
+              }
+            } else if (result.action === Share.dismissedAction) {
+              // dismissed
+            }
+          } catch (error: any) {
+            Alert.alert(error.message);
+          }
+    }
 
     render(): React.ReactNode {
         return(
-            <SafeAreaView
-             style={styles.container}
+            <BallerzSafeAreaView
             >
+                <View style={{flex:1}}>
                 <HeaderView
                     title="Trouve tes amis"
-                    rightButton={CheckButton}
+                    rightButton={HeaderCheckButton}
                     leftButtonProps={{onPress: () => {}}}
                     rightButtonProps={{onPress: this.props.onPressContinue}}
                 />
+                <SearchBarView
+                  onSearchInputChange={this.props.onFilterInputChange}
+                />
+                <InviteYourFriendsFeedBackView
+                    onPressInvitationLink={this.onPressInvitationLink}
+                />
                 <SelectableUserProfileListView
-                    onAddButtonPress={this.props.onAddButtonPress}
+                    onPressUserProfile={this.props.onPressUserProfile}
                     usersList={this.props.usersList}
                 />
-            </SafeAreaView>
+                </View>
+            </BallerzSafeAreaView>
         )
     }
 }

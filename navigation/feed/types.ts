@@ -1,4 +1,6 @@
-import { IUserProfileSearchScreenProps, IUserProfileSearchScreenPropsWithoutNavigation } from "./../../screens/userProfileSearch/index";
+import { IAttendantsListScreenPropsWithoutNavigation } from "./../../screens/userProfileList/attendantsList/index";
+import { IFindYourFriendsScreenPropsWithoutNavigation } from "./../../screens/userProfileList/findYourFriends/interface";
+import { IUserProfileListScreenPropsWithoutNavigation, IUserProfileSearchScreenProps, IUserProfileSearchScreenPropsWithoutNavigation } from "../../screens/userProfileList/index";
 
 /**
  * Learn more about using TypeScript with React Navigation:
@@ -9,7 +11,6 @@ import React from 'react';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
-import { IUserProfileListScreenPropsWithoutNavigation } from "../../screens/userProfileSearch/userProfileList";
 import { IBadgeListScreenPropsWithoutNavigation } from '../../screens/badgeList';
 import { IFeedScreenPropsWithoutNavigation } from '../../screens/feed';
 import { ICommentScreenPropsWithoutNavigation } from '../../screens/feed/Comments';
@@ -25,9 +26,10 @@ declare global {
 export type FeedStackParamList = {
 	FeedScreen: IFeedScreenPropsWithoutNavigation;
 	BadgeListScreen: IBadgeListScreenPropsWithoutNavigation;
-	AttendantsListScreen: IUserProfileListScreenPropsWithoutNavigation;
+	AttendantsListScreen: IAttendantsListScreenPropsWithoutNavigation;
 	CommentsScreen: ICommentScreenPropsWithoutNavigation;
 	UserProfileSearch: IUserProfileSearchScreenPropsWithoutNavigation
+	MakeFriends: IFindYourFriendsScreenPropsWithoutNavigation
 	CreateGameStack: {}
 };
 
