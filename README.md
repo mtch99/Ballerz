@@ -27,15 +27,11 @@ There must be three different games on three different courts, two at the moment
 
 * [ ] TODO: Save userProfile in the local storage upon creation
 
-- [ ] Enable seacrh function in FindYourFriendsScreen
-    - [x] Fix Find your friends Screen
-    - [ ] Refactor screens/UserProfileList package
+- [x] Enable seacrh function in FindYourFriendsScreen
 
+- [x] Refactor MakefriendsView to enable FriendsShip Request
 
-- [ ] Refactor MakefriendsView to enable FriendsShip Request
-    - [ ] Copy paste the FindYourFriendsView
-    - [ ] Refactor SearchBar title
-- [ ] Fix searchbar in find your friends screen 
+* [ ] Fix flatlist scrolling bug on MakeFriendsScreen
 
 
 

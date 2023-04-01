@@ -17,8 +17,6 @@ export interface IFindYourFriendsScreenState extends ISelectableUserProfileListS
     userList: ISelectableUserProfileData[]
 }
 
-
-
 export interface IFindYourFriendsViewProps extends ISelectableUserProfileListViewProps {
     shareableLink: string
     onPressContinue(): void

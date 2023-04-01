@@ -12,6 +12,7 @@ import { BallerzFlatList } from "../../../components/Flatlist";
 import { IUserProfileData } from "../../../domain/use-cases/types";
 import { ISelectableUserProfileData } from "../../../screens/interface";
 import { FlatList } from "react-native-gesture-handler";
+import BallerzSafeAreaView from "../../safeArea";
 
 
 export default class FindYourFriendsView extends React.Component<IFindYourFriendsViewProps>{
@@ -43,9 +44,9 @@ export default class FindYourFriendsView extends React.Component<IFindYourFriend
 
     render(): React.ReactNode {
         return(
-            <SafeAreaView
-             style={styles.container}
+            <BallerzSafeAreaView
             >
+                <>
                 <HeaderView
                     title="Trouve tes amis"
                     rightButton={CheckButton}
@@ -62,9 +63,8 @@ export default class FindYourFriendsView extends React.Component<IFindYourFriend
                     onPressUserProfile={this.props.onPressUserProfile}
                     usersList={this.props.usersList}
                 />
-				
-                {/* <FindYourFriendsBottomSheetView/> */}
-            </SafeAreaView>
+                </>
+            </BallerzSafeAreaView>
         )
     }
 }

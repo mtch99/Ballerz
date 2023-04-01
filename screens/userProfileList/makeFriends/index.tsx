@@ -1,43 +1,22 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { MakeFriendsView } from "../../../views/makeFriends";
 import { AppContext, IAppContext } from "../../../controllers/provider";
-import { FeedStackNavigationContext } from "../../../navigation/feed/context";
-import { IUserProfileListViewProps } from "../../interface";
-
-
-export interface IMakeFriendsViewProps extends IUserProfileListViewProps{
-    searchButtonState: boolean
-}
-
-export interface IMakeFriendsScreenProps {
-    searchButtonState: boolean
-}
+import FindYourFriendsScreen from "../findYourFriends";
 
 
 
-export class FeedStackMakeFriendsScreen extends React.Component<IMakeFriendsScreenProps> {
-
-
+export class FeedStackMakeFriendsScreen extends FindYourFriendsScreen {
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
-
-
-    onPressUserProfile(id: string): void {
-        throw new Error("Method not implemented.");
-    }
-
-
-    componentDidMount(): void {
-        this.context.userProfileController.getAllUserProfiles()
-    }
-
 
     render(): JSX.Element {
         return(
             <MakeFriendsView
-                userProfileList={this.context.userProfileListState}
+                usersList={this.state.filteredUserProfileList}
+                onFilterInputChange={this.onFilterInputChange}
+                onPressContinue={this.onPressContinue}
+                shareableLink=""
                 onPressUserProfile={this.onPressUserProfile}
-                searchButtonState={this.props.searchButtonState}
             />
         )
     }

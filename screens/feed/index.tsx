@@ -159,9 +159,6 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
 
     render() {
         return (
-            <SafeAreaView
-                style={{backgroundColor: globalStyles.global.screenBackGroundColor, flexGrow:1}}
-            >
                 <FeedView
                     feedState={this.context.feedState}
                     handleBadgeClick={(item) => {this.handleBadgeClick(item)}}
@@ -170,14 +167,6 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
                     handlePlayButtonPress={(item) => {this.handlePlayButtonPress(item)}}
                     handleCommentButtonPress={(input: IFeedItemState) => {this.handleCommentButtonPress(input)}}
                 />
-                {/* <Modal
-                    visible={this.state.modalVisible}
-                >
-                    <Text>
-                        NoFreidns here
-                    </Text>
-                </Modal> */}
-            </SafeAreaView>
         )
     }
 }

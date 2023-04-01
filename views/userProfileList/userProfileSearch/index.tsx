@@ -5,6 +5,7 @@ import { UserProfileListView } from ".."
 import SearchBarView from "../../makeFriends/SearchBar"
 import { globalStyles } from "../../styles"
 import { IUserProfileSearchViewProps } from "../../../screens/userProfileList/userProfileSearch/interface"
+import BallerzSafeAreaView from "../../safeArea"
 
 
 
@@ -16,15 +17,17 @@ export class UserProfileSearchView extends React.Component<IUserProfileSearchVie
 
     render(): React.ReactNode {
         return(  
-            <SafeAreaView style={styles.container}>
+            <BallerzSafeAreaView>
+                <>
                 <SearchBarView
                     onSearchInputChange={this.props.onFilterInputChange}
-                />
+                    />
                 <UserProfileListView
                     usersList={this.props.usersList}
                     onPressUserProfile={this.props.onPressUserProfile}
-                />
-            </SafeAreaView>
+                    />
+                </>
+            </BallerzSafeAreaView>
         )
     }
 

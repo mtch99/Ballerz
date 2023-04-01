@@ -4,6 +4,7 @@ import { IFeedItemState, IFeedState } from "../../app/features/feed/slice/interf
 import FeedItemView from "./feed-item/index";
 import IFeedScreen, { IPostCommentInput } from "../../screens/feed/interface";
 import { globalStyles } from "../styles";
+import BallerzSafeAreaView from "../safeArea";
 
 
 interface IProps {
@@ -53,6 +54,7 @@ class FeedView extends React.Component<IProps> {
   
     render(): React.ReactNode {
 		return(
+			<BallerzSafeAreaView>
 				<FlatList
 					data={this.props.feedState.items}
 					style={{backgroundColor: globalStyles.global.screenBackGroundColor}}
@@ -70,6 +72,7 @@ class FeedView extends React.Component<IProps> {
 					}}
 					extraData={this.props.feedState.items}
 				/>
+			</BallerzSafeAreaView>
 		)
     }
 }
