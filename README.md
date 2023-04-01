@@ -3,11 +3,10 @@ The app for basketball pickup games
 
 
 ## Branch Purpose
-    I want to invite my find my friends ib the app or invite them after creating my profile
+    I want to be able to make friends and accept friendship requests
 ## Next 
 Test these scenarios:
     `TODO: define next scenarios` 
-    - Places and users search
     - I want to add my favorite playground
         
 There must be three different games on three different courts, two at the moment, and one other on saturday
@@ -15,33 +14,32 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 
-- [x] Invite your friends after find Your friends
-    - [x] Styles Find your friends bottom sheet
-        - [x] Display bottom sheet in home page
-    - [x] Invite Your friends Feedback vue
+- [ ] Notifications use case
+    - [ ] Define and implement Notifications usecase
+        - [ ] Define Notification type
+        - [ ] Define useCase interface
+        - [ ] Define repository interface
+        - [ ] Define model interface
 
-* [x] Fix MakeFriendsScreenNot displaying list of users on first render
-    - [x] Refactor UserProfileListScreen
-        - [x] The view will contain the searchBar
-* [x] Fix FindYourFriendsScreen not srolling
-
-* [ ] TODO: Save userProfile in the local storage upon creation
-
-- [x] Enable seacrh function in FindYourFriendsScreen
-
-- [x] Refactor MakefriendsView to enable FriendsShip Request
-
-* [x] Fix flatlist scrolling bug on FindYourFriends View ... scroll stops before the end of the list
-    - [x] Wrap the safeArea children with a view of flex 1
-
-- [x] Run scenario and test evrything works fine
-    - [x] Fix MakeFriendsViewHeader
-    - [x] disable error log on navigation to place profile screen
-    * [x] disable error logs for uimplemented functions
-
+    - [ ] Define and implement Notifications slice
+    - [ ] Implement Notifications model
+    - [ ] Define and implement Notifications controller
+    - [ ] Define and implement Notifications screen
+        - [ ] Define and implement Notifications View
+    - [ ] Add notification screen to FeedStack
 
 - [ ] Add friend
+    - [ ] UserProfileScreen and MyUserProfileScreen
+        - [ ] UserProfileScreen ... manage data loading, no network, ...
+            - [ ] UserProfileView 
+        - [ ] MyUserProfileScreen
+            - [ ] MyUserProfileView
 
+    - [ ] Make sure that everything works properly
+        - [ ] implement missing methods
+
+
+ 
 
 <!-- - [ ] Add place -->
 - [ ] Invitations
@@ -57,6 +55,7 @@ There must be three different games on three different courts, two at the moment
 TODO: Fixes
 - [ ] remove trailing space from define username input and search inputs 
 
+* [ ] TODO: Save userProfile in the local storage upon creation
 
 
 TODO: scenario10
