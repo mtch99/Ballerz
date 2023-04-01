@@ -1,7 +1,7 @@
 import { FriendshipRequestStatus } from "./../../../infrastructure/BallerApiClient/API";
 import UserProfileClient, { UserProfileClientMock } from "../../../infrastructure/BallerApiClient/UserProfileClient";
 import { IUserProfileData, IUserProfile } from "../../use-cases/types";
-import { IDefineUsernameInput, IDefineUsernameResult, IRequestFriendShipInput, IRequestFriendShipResult, IUserProfileRepository } from "../../use-cases/userProfile/interface";
+import { IDefineUsernameInput, IDefineUsernameResult, IMyUserProfileData, IRequestFriendShipInput, IRequestFriendShipResult, IUserProfileRepository } from "../../use-cases/userProfile/interface";
 import * as queries from "../../../infrastructure/BallerApiClient/UserProfileClient/queries"
 import * as mutations from "../../../infrastructure/BallerApiClient/UserProfileClient/mutations"
 import { GetUserProfileQueryVariables, ListUserProfilesQueryVariables } from "../../../infrastructure/BallerApiClient/API";
@@ -15,6 +15,12 @@ export default class UserProfileRepository implements IUserProfileRepository {
         // new UserProfileClient()
         console.log("UserProfileRepository using a userProfileClient mock")
         this.client = new UserProfileClientMock()
+    }
+    cacheMyUserProfileData(myUserProfileData: IMyUserProfileData): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
+    getMyUserProfileData(): Promise<IMyUserProfileData | null> {
+        throw new Error("Method not implemented.");
     }
     
 

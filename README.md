@@ -23,7 +23,7 @@ There must be three different games on three different courts, two at the moment
 
         - [ ] Implement the previous
             - [ ] Implement Notifications repository
-                - [ ] Define and Implement Notifications client
+                - [x] Define and Implement Notifications client
                 - [ ] Test manually ... do not write tests
 
            

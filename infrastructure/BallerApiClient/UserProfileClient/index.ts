@@ -10,45 +10,24 @@ import { GetUserProfileQueryVariables} from "../API";
 import { IUserProfileClient } from "./interface";
 import { CreateUserProfileMutation, CreateUserProfileMutationVariables } from "./mutations";
 import { ListUserProfileQuery } from "./queries";
+import BallerzApiClient from "../client";
 
 
-export default class UserProfileClient implements IUserProfileClient {
-    
-    apiKeyAuthentication: boolean = false;
-    constructor(config: any = awsmobile, authMode?: "API_KEY") {
-        if(authMode){
-            this.apiKeyAuthentication = true;
-        }
-        Amplify.configure(config)
-    }
+export default class UserProfileClient extends BallerzApiClient implements IUserProfileClient {
 
-
-    private genRequestPayload(query: string, variables: any): GraphQLOptions{
-        let options: GraphQLOptions = {
-            query,
-            variables
-        }
-        if(this.apiKeyAuthentication){
-            options = {
-                ...options,
-                authMode: "API_KEY"
-            }
-        }
-        return options
-    }
     
     async getUserProfile(input: GetUserProfileQueryVariables): Promise<queries.GetUserProfileQuery | undefined> {
         const payload = this.genRequestPayload(queries.getUserProfile, input)
         const response = await API.graphql<GraphQLQuery<queries.GetUserProfileQuery>>(payload)
 
-        return this.handleResponse(response)
+        return this._handleResponse(response)
     }
 
     async listUserProfileData(input: ListUserProfilesQueryVariables): Promise<queries.ListUserProfileDataQuery | undefined> {
         const payload = this.genRequestPayload(queries.listUserProfileData, input)
         const response = await API.graphql<GraphQLQuery<queries.ListUserProfileDataQuery>>(payload)
 
-        return this.handleResponse<queries.ListUserProfileDataQuery>(response)
+        return this._handleResponse<queries.ListUserProfileDataQuery>(response)
 
     }
 
@@ -56,7 +35,7 @@ export default class UserProfileClient implements IUserProfileClient {
         const payload = this.genRequestPayload(queries.listUserProfiles, input)
         const response = await API.graphql<GraphQLQuery<queries.ListUserProfileQuery>>(payload)
 
-        return this.handleResponse<queries.ListUserProfileQuery>(response)
+        return this._handleResponse<queries.ListUserProfileQuery>(response)
     }
 
 
@@ -65,7 +44,7 @@ export default class UserProfileClient implements IUserProfileClient {
 
         const response = await API.graphql<GraphQLQuery<mutations.CreateUserProfileMutation>>(payload)
 
-        return this.handleResponse<mutations.CreateUserProfileMutation>(response)
+        return this._handleResponse<mutations.CreateUserProfileMutation>(response)
 
     }
 
@@ -74,7 +53,7 @@ export default class UserProfileClient implements IUserProfileClient {
         const payload = this.genRequestPayload(mutations.createFriendshipRequest, input)
         const response = await API.graphql<GraphQLQuery<mutations.CreateFriendshipRequestMutation>>(payload)
 
-        return this.handleResponse<mutations.CreateFriendshipRequestMutation>(response)
+        return this._handleResponse<mutations.CreateFriendshipRequestMutation>(response)
     }
 
 
@@ -82,28 +61,8 @@ export default class UserProfileClient implements IUserProfileClient {
         const payload = this.genRequestPayload(mutations.updateFriendshipRequest, input)
         const response = await API.graphql<GraphQLQuery<mutations.UpdateFriendshipRequestMutation>>(payload)
 
-        return this.handleResponse<mutations.UpdateFriendshipRequestMutation>(response)
+        return this._handleResponse<mutations.UpdateFriendshipRequestMutation>(response)
 
-    }
-
-
-    private handleResponse<T>(response: GraphQLResult<T>): T | undefined{
-        this.handleResponseError(response)
-        if(response.data){
-            return response.data
-        }
-        return response.data
-    }
-
-
-    private handleResponseError(response: any): void {
-        if(response.errors){
-            if(response.data){
-                throw new Error(`errors: ${JSON.stringify(response.errors)} \n data: ${JSON.stringify(response.data)}`)
-            } else {
-                throw new Error(JSON.stringify(response.errors))
-            }
-        }
     }
 }
 

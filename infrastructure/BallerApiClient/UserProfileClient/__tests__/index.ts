@@ -9,7 +9,6 @@ import { CreateUserProfileMutationVariables } from "../mutations";
 describe("UserProfileClient test suite", () => {
 
     const client = new UserProfileClientMock()
-    Amplify.configure(awsmobileAPIMock)
     describe("getUserProfile function tests", () => {
 
         describe("given unexisting userProfileID", () => {

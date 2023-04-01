@@ -1,8 +1,8 @@
 import { Notification } from "../types";
 
 export interface INotificationsUseCase{
-    getMyNotifications(myProfileID: string): Promise<IGetMyNotificationsResult>
-    onNewNotification(notification: Notification): Promise<void>
+    getMyReceivedNotifications(myProfileID: string): Promise<IGetMyNotificationsResult>
+    onNewNotificatioReceived(notification: Notification): Promise<void>
 }
 
 
