@@ -31,7 +31,9 @@ There must be three different games on three different courts, two at the moment
 
 - [x] Refactor MakefriendsView to enable FriendsShip Request
 
-* [ ] Fix flatlist scrolling bug on MakeFriendsScreen
+* [x] Fix flatlist scrolling bug on FindYourFriends View ... scroll stops before the end of the list
+    - [x] Wrap the safeArea children with a view of flex 1
+
 
 
 

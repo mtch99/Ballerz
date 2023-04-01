@@ -4,14 +4,9 @@ import {SelectableUserProfileListView, UserProfileItemView} from "../../userProf
 import HeaderView from "../../header";
 import CheckButton from "../../header/buttons/checkButton"
 import { globalStyles } from "../../styles";
-import { Alert, Share, StyleSheet, SafeAreaView } from "react-native";
-import FindYourFriendsBottomSheetView from "../../makeFriends/findYourFriendsBottomSheet";
+import { Alert, Share, StyleSheet, View } from "react-native";
 import InviteYourFriendsFeedBackView from "../../teachingFeedBack/inviteYourFriends";
 import SearchBarView from "../../makeFriends/SearchBar";
-import { BallerzFlatList } from "../../../components/Flatlist";
-import { IUserProfileData } from "../../../domain/use-cases/types";
-import { ISelectableUserProfileData } from "../../../screens/interface";
-import { FlatList } from "react-native-gesture-handler";
 import BallerzSafeAreaView from "../../safeArea";
 
 
@@ -46,7 +41,7 @@ export default class FindYourFriendsView extends React.Component<IFindYourFriend
         return(
             <BallerzSafeAreaView
             >
-                <>
+                <View style={{flex:1}}>
                 <HeaderView
                     title="Trouve tes amis"
                     rightButton={CheckButton}
@@ -63,7 +58,7 @@ export default class FindYourFriendsView extends React.Component<IFindYourFriend
                     onPressUserProfile={this.props.onPressUserProfile}
                     usersList={this.props.usersList}
                 />
-                </>
+                </View>
             </BallerzSafeAreaView>
         )
     }
