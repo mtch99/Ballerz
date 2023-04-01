@@ -66,7 +66,6 @@ export function ExploreTabScreenWrapper(props: ExploreStackScreenProps<'SearchSt
     const placeSearcScreenNavigationController: IPlaceSearchScreenNavigationController = {
         goToPlaceProfile: function (id: string): void {
             navigation.navigate("PlaceProfileScreen", {placeId: id})
-            throw new Error("Function not implemented.");
         }
     }
 

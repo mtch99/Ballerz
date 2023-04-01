@@ -36,7 +36,7 @@ export default class ExploreTabScreen extends React.Component<IExploreTabScreenP
     renderScene = SceneMap({
         first: () => (
             <PlaceSearchScreen
-            navigationController={this.props.placeSearcScreenNavigationController}
+                navigationController={this.props.placeSearcScreenNavigationController}
             />
         ),
         second: () => (

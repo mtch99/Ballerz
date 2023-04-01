@@ -36,6 +36,7 @@ There must be three different games on three different courts, two at the moment
 
 - [ ] Run scenario and test evrything works fine
     - [x] Fix MakeFriendsViewHeader
+    - [x] disable error log on navigation to place profile screen
 
 
 
