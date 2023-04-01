@@ -16,7 +16,7 @@ There must be three different games on three different courts, two at the moment
 
 - [ ] Notifications use case
     - [ ] Define and implement Notifications usecase
-        - [ ] Define Notification type
+        - [x] Define Notification type
         - [ ] Define useCase interface
         - [ ] Define repository interface
         - [ ] Define model interface

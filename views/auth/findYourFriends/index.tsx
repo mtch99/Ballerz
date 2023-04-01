@@ -1,12 +1,12 @@
 import React from "react";
 import { IFindYourFriendsViewProps } from "../../../screens/userProfileList/findYourFriends/interface";
 import {SelectableUserProfileListView, UserProfileItemView} from "../../userProfileList/selectable";
-import HeaderView from "../../../components/header";
-import HeaderCheckButton from "../../../components/header/buttons/checkButton"
+import HeaderView from "../../header";
+import HeaderCheckButton from "../../header/buttons/checkButton"
 import { globalStyles } from "../../styles";
 import { Alert, Share, StyleSheet, View } from "react-native";
 import InviteYourFriendsFeedBackView from "../../FeedBack/inviteYourFriends";
-import SearchBarView from "../../../components/SearchBar";
+import SearchBarView from "../../makeFriends/SearchBar";
 import BallerzSafeAreaView from "../../safeArea";
 
 

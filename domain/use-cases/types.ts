@@ -1,3 +1,5 @@
+import { Friendship } from "./../../infrastructure/BallerApiClient/types";
+import { FriendshipRequest } from "./../../infrastructure/BallerApiClient/API";
 
 
 export interface IFeed extends Array<IFeedItem>{}
@@ -67,6 +69,52 @@ export interface IBadge {
 export interface IBadgeList {
     items: IBadge[]
 }
+
+export enum NotificationType{
+    friendshipRequest="friendshipRequest",
+    newFriend="newFriend",
+    friendPlaying="friendPlaying",
+    joinGroupChat="joinGroupChat",
+    newGroupChatMember="newGroupChatMember"
+}
+
+export type Notification = IFriendShipRequestNotification
+
+
+export interface IFriendshipRequest{
+    id: string
+    senderProfileID: string
+    senderProfile: IUserProfileData
+    receiverProfileID: string
+    receiverProfile: IUserProfileData
+    status: keyof typeof FriendshipRequestStatus
+}
+
+export interface IFriendShipRequestNotification{
+    type: NotificationType.friendshipRequest
+    receiverProfileID: string;
+    friendshipRequestID: string;
+    presenceID: string;
+    senderProfileID: string;
+    senderProfile: IUserProfileData;
+    receiverProfile: IUserProfileData;
+    friendshipRequest: IFriendshipRequest
+    createdAt: string;
+    updatedAt: string;
+}
+
+export enum FriendshipRequestStatus {
+    pending="pending",
+    accepted="accepted",
+    rejected="rejected"
+}
+
+
+
+
+
+
+
 
 
 
