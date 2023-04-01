@@ -9,13 +9,19 @@ const AuthRepoMock = mock<IAuthRepository>();
 const AuthListenerMock = mock<IAuthUCIEventListener>();
 
 
+
 /**
  * TODO: Refactor to make tests pass
  */
 describe('AuthUseCaseInteractor signup method ', () => {
 
 
-    let authUCI: AuthUCI = new AuthUCI(AuthRepoMock);
+    let authUCI: AuthUCI = new AuthUCI(AuthListenerMock, AuthRepoMock);
+    beforeEach(() => {
+        authUCI = new AuthUCI(AuthListenerMock, AuthRepoMock);
+        mockClear(AuthListenerMock)
+        mockClear(AuthRepoMock)
+    })
     describe('Given valid Credentials', () => {
         const given: struct.ISignupInput = {
             email: 'foo@bar.com',
@@ -50,9 +56,6 @@ describe('AuthUseCaseInteractor signup method ', () => {
 
 
                 describe('given a Listener', () => {
-                    const authUCI = new AuthUCI(AuthRepoMock);
-                    mockClear(AuthListenerMock)
-                    authUCI.setListener(AuthListenerMock)
                     test('Then NewRegisteredUser Event has been dispatched', async() => {
                         await authUCI.signup(given)
                         expect(AuthListenerMock.onNewRegisteredUserEvent).toHaveBeenCalledTimes(1)
@@ -61,9 +64,7 @@ describe('AuthUseCaseInteractor signup method ', () => {
 
 
                 describe('given no Listener', () => {
-                    authUCI = new AuthUCI(AuthRepoMock);
                     test('Then NewRegisteredUser Event has not been dispatched', async() => {
-                        mockClear(AuthListenerMock)
                         await authUCI.signup(given)
                         expect(AuthListenerMock.onNewRegisteredUserEvent).toHaveBeenCalledTimes(0)
                     })
@@ -77,7 +78,7 @@ describe('AuthUseCaseInteractor signup method ', () => {
 
     describe('Given invalid email address and valid mismatched passwords', () => {
         
-        const authUseCaseInteractor = new AuthUCI(AuthRepoMock);
+        const authUseCaseInteractor = new AuthUCI(AuthListenerMock,AuthRepoMock);
         const given: struct.ISignupInput = {
             email: 'foobar.com',
             password: 'validpassword',
@@ -111,7 +112,7 @@ describe('AuthUseCaseInteractor signup method ', () => {
 
     describe('Given invalid email address and valid passwords', () => {
         
-        const authUseCaseInteractor = new AuthUCI(AuthRepoMock);
+        const authUseCaseInteractor = new AuthUCI(AuthListenerMock,AuthRepoMock);
         const given: struct.ISignupInput = {
             email: 'foobar.com',
             password: 'validpassword1',
@@ -144,7 +145,7 @@ describe('AuthUseCaseInteractor signup method ', () => {
 
     describe('Given valid email address and mismatched passwords', () => {
         
-        const authUseCaseInteractor = new AuthUCI(AuthRepoMock);
+        const authUseCaseInteractor = new AuthUCI(AuthListenerMock,AuthRepoMock);
         const given: struct.ISignupInput = {
             email: 'foo@bar.com',
             password: 'validpassword1',
@@ -178,7 +179,7 @@ describe('AuthUseCaseInteractor signup method ', () => {
 
     describe('Given valid email address and 7 characters password', () => {
         
-        const authUseCaseInteractor = new AuthUCI(AuthRepoMock);
+        const authUseCaseInteractor = new AuthUCI(AuthListenerMock,AuthRepoMock);
         const given: struct.ISignupInput = {
             email: 'foo@bar.com',
             password: '1234567',

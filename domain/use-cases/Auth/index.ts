@@ -13,11 +13,12 @@ import { ThemeProvider } from "@react-navigation/native";
  */
 export default class AuthUCI implements IAuthUCI {
 
-    private repo: IAuthRepository = new AuthRepository();
+    private repo: IAuthRepository
     
     private observer: IAuthUCIEventListener
     
-    constructor(observer: IAuthUCIEventListener){
+    constructor(observer: IAuthUCIEventListener, authRepo?: IAuthRepository){
+        this.repo = authRepo || new AuthRepository(); 
         this.observer = observer;
     }
 
@@ -210,6 +211,7 @@ class EmailStrategy {
 
 
 // TODO: Create Factory for AuthUCI
+
 
 
 // export const authUCI = new AuthUCI(new AuthRepository())
