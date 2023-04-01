@@ -1,7 +1,7 @@
-import AuthUCI from "../../domain/use-cases/Auth";
-import { ISignupInput, ISignupResult, IConfirmSignupInput, IConfirmSignupResult, ILoginInput, ILoginResult } from "../../domain/use-cases/Auth/types";
+import AuthUCI from "../../domain/use-cases/auth";
+import { ISignupInput, ISignupResult, IConfirmSignupInput, IConfirmSignupResult, ILoginInput, ILoginResult } from "../../domain/use-cases/auth/types";
 import IAuthController from "./interface";
-import IAuthUCI, { IAuthUCIEventListener, IDefineUsernameInput, IDefineUsernameResult } from "../../domain/use-cases/Auth/interface";
+import IAuthUCI, { IAuthUCIEventListener, IDefineUsernameInput, IDefineUsernameResult } from "../../domain/use-cases/auth/interface";
 
 
 

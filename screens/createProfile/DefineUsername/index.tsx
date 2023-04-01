@@ -1,7 +1,7 @@
 import React from 'react';
 import { IDefineUsernameScreenProps, IDefineUsernameScreenState} from './interface';
 import { AppContext, IAppContext } from '../../../controllers/provider';
-import { IDefineUsernameInput, IDefineUsernameResult } from '../../../domain/use-cases/Auth/interface';
+import { IDefineUsernameInput, IDefineUsernameResult } from '../../../domain/use-cases/auth/interface';
 import { DefineUsernameView } from '../../../views/auth/defineUsername';
 
 

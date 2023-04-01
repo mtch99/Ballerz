@@ -1,5 +1,5 @@
 import React from "react";
-import { ILoginInput, ILoginRejection, ILoginResult } from "../../../domain/use-cases/Auth/types";
+import { ILoginInput, ILoginRejection, ILoginResult } from "../../../domain/use-cases/auth/types";
 import { ISigninScreen, ISigninScreenProps, ISigninScreenState } from "./interface";
 import { AppContext, IAppContext } from "../../../controllers/provider";
 import IAuthController from "../../../controllers/auth/interface";

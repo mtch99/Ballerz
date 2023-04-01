@@ -28,7 +28,7 @@ import IPlaceController from "./place/interface";
 import { IUserProfileMapState } from "../app/features/userProfile/types";
 import { selectUserProfileMapState } from "../app/features/userProfile/userProfileMap/slice";
 import { IAuthModel, createAuthModel } from "../app/features/Auth/model";
-import { IAuthUCIEventListener } from "../domain/use-cases/Auth/interface";
+import { IAuthUCIEventListener } from "../domain/use-cases/auth/interface";
 import AuthController from "./auth";
 import IAuthController from "./auth/interface";
 import { AuthState, selectAuth } from "../app/features/Auth/slice";

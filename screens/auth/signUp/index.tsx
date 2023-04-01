@@ -2,7 +2,7 @@ import React from "react";
 import ISignupScreen, { ISignupScreenProps, ISignupScreenState } from "./interface";
 import { AppContext, IAppContext } from "../../../controllers/provider";
 import IAuthController from "../../../controllers/auth/interface";
-import { ISignupInput, ISignupResult } from "../../../domain/use-cases/Auth/types";
+import { ISignupInput, ISignupResult } from "../../../domain/use-cases/auth/types";
 import { EmailInput, PasswordInput } from "../../../views/auth/signIn";
 import { View, StyleSheet, Text, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback, Modal } from "react-native";
 import { globalStyles } from "../../../views/styles";

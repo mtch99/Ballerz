@@ -17,9 +17,16 @@ There must be three different games on three different courts, two at the moment
 - [ ] Notifications use case
     - [ ] Define and implement Notifications usecase
         - [x] Define Notification type
-        - [ ] Define useCase interface
-        - [ ] Define repository interface
-        - [ ] Define model interface
+        - [x] Define useCase interface
+        - [x] Define repository interface
+        - [x] Define model interface
+
+        - [ ] Implement the previous
+            - [ ] Implement Notifications repository
+                - [ ] Define and Implement Notifications client
+                - [ ] Test manually ... do not write tests
+
+           
 
     - [ ] Define and implement Notifications slice
     - [ ] Implement Notifications model

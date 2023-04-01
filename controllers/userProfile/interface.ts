@@ -1,4 +1,4 @@
-import { IDefineUsernameResult } from "./../../domain/use-cases/Auth/interface";
+import { IDefineUsernameResult } from "../../domain/use-cases/auth/interface";
 import { IDefineUsernameInput } from "./../../domain/use-cases/userProfile/interface";
 import { IUserProfileUseCase } from "../../domain/use-cases/userProfile/interface";
 import { IUserProfileListState } from "../../app/features/userProfile/userProfileList/slice/interface";

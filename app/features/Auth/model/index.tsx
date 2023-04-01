@@ -1,6 +1,6 @@
 import { IAppControllerEventListener } from "../../../../controllers/interface"
-import { IAuthUCIEventListener } from "../../../../domain/use-cases/Auth/interface"
-import { ILoginInput, ISignupInput, UserBasicData } from "../../../../domain/use-cases/Auth/types"
+import { IAuthUCIEventListener } from "../../../../domain/use-cases/auth/interface"
+import { ILoginInput, ISignupInput, UserBasicData } from "../../../../domain/use-cases/auth/types"
 import { IGame, IUserProfile, IUserProfileData } from "../../../../domain/use-cases/types"
 import { useAppSelector } from "../../../hooks"
 import { AppDispatch } from "../../../store"

@@ -1,10 +1,10 @@
-import * as struct from "../../domain/use-cases/Auth/types";
+import * as struct from "../../domain/use-cases/auth/types";
 import { Amplify, Auth } from 'aws-amplify';
 import {AuthenticationDetails, ChallengeName, ClientMetadata, CognitoRefreshToken, CognitoUser, CognitoUserAttribute, CognitoUserSession, GetSessionOptions, IAuthenticationCallback, ICognitoUserAttributeData, IMfaSettings, MFAOption, NodeCallback, UpdateAttributesNodeCallback, UserData} from 'amazon-cognito-identity-js'
 import awsmobile from './aws-exports';
 import SignupAdapter, { SigninAdapter } from './adapter'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { IAuthRepository } from "../../domain/use-cases/Auth/interface";
+import { IAuthRepository } from "../../domain/use-cases/auth/interface";
 Amplify.configure(awsmobile);
 import {isDevice} from 'expo-device';
 

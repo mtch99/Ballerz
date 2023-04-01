@@ -1,7 +1,7 @@
 import {NavigatorScreenParams, useNavigation} from "@react-navigation/native"
 import {AuthStackScreenProps} from "./types"
 import React from "react"
-import { ILoginInput } from "../../../domain/use-cases/Auth/types"
+import { ILoginInput } from "../../../domain/use-cases/auth/types"
 import ConfirmSignupScreen, { IConfirmSignupScreenNavigationController } from "../../../screens/auth/confirmSignup"
 import SigninScreen from "../../../screens/auth/signIn"
 import { ISigninScreenNavigationController } from "../../../screens/auth/signIn/interface"

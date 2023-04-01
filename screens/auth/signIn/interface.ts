@@ -1,4 +1,4 @@
-import { ILoginInput } from "../../../domain/use-cases/Auth/types";
+import { ILoginInput } from "../../../domain/use-cases/auth/types";
 
 
 export interface ISigninScreenPropsWithoutNavigation {

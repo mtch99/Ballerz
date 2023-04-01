@@ -1,5 +1,5 @@
-import { IDefineUsernameInput, IDefineUsernameResult } from "./../../domain/use-cases/Auth/interface";
-import * as types from "../../domain/use-cases/Auth/types"
+import { IDefineUsernameInput, IDefineUsernameResult } from "../../domain/use-cases/auth/interface";
+import * as types from "../../domain/use-cases/auth/types"
 
 export default interface IAuthController {
     login(input: types.ILoginInput): Promise<types.ILoginResult>

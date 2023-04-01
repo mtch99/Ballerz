@@ -2,7 +2,7 @@ import { IUserProfileState } from "./../../app/features/types";
 import { IUserProfile } from "./../../domain/use-cases/types";
 import { IRequestFriendShipInput, IRequestFriendShipResult } from "./../../domain/use-cases/userProfile/interface";
 import { IUserProfileListState } from "../../app/features/userProfile/userProfileList/slice/interface";
-import { IDefineUsernameResult } from "../../domain/use-cases/Auth/interface";
+import { IDefineUsernameResult } from "../../domain/use-cases/auth/interface";
 import { IUserProfileData } from "../../domain/use-cases/types";
 import UserProfileUseCase from "../../domain/use-cases/userProfile";
 import { IDefineUsernameInput, IUserProfileModelEventListener, IUserProfileUseCase } from "../../domain/use-cases/userProfile/interface";

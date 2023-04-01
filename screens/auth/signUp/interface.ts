@@ -1,4 +1,4 @@
-import {ISignupResult} from '../../../domain/use-cases/Auth/types'
+import {ISignupResult} from '../../../domain/use-cases/auth/types'
 
 export default interface ISignupScreen {
     onPressSignup(): void;

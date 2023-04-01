@@ -1,4 +1,4 @@
-import * as struct from "../../domain/use-cases/Auth/types";
+import * as struct from "../../domain/use-cases/auth/types";
 import {CognitoUser} from 'amazon-cognito-identity-js'
 
 

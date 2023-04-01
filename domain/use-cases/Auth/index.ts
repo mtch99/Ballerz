@@ -1,8 +1,8 @@
 import { TouchableHighlightBase } from "react-native"
 import {AuthRepository} from "../../repositories/Auth"
 import IAuthUCI, {IAuthUCIEventListener, IAuthRepository, IDefineUsernameInput, IDefineUsernameResult} from "./interface"
-import * as types from './types'
 import { ThemeProvider } from "@react-navigation/native";
+import * as types from "./types"
 
 
 
