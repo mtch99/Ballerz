@@ -93,11 +93,9 @@ export interface IFriendshipRequest{
 export interface IFriendShipRequestNotification{
     type: NotificationType.friendshipRequest
     receiverProfileID: string;
-    friendshipRequestID: string;
-    presenceID: string;
     senderProfileID: string;
     senderProfile: IUserProfileData;
-    receiverProfile: IUserProfileData;
+    friendshipRequestID: string;
     friendshipRequest: IFriendshipRequest
     createdAt: string;
     updatedAt: string;

@@ -1,5 +1,6 @@
-import { ModelIDInput } from "./../API";
+import { ModelIDInput, FriendshipRequestStatus } from "./../API";
 import { NotificationType } from "../API";
+import { UserProfileData } from "../types";
 
 
 
@@ -19,33 +20,29 @@ export type ListNotificationsQuery = {
         __typename: "Notification",
         id: string,
         type: NotificationType,
-        receiverProfileID: string,
-        receiverProfile: IUserProfileData | null
         friendshipRequestID: string | null,
         friendshipRequest: {
             __typename: "FriendshipRequest",
             id: string,
             senderProfileID: string,
             receiverProfileID: string
-            receiverProfile: IUserProfileData | null
-            senderProfile: IUserProfileData | null
+            receiverProfile: UserProfileData | null
+            senderProfile: UserProfileData | null
+            status: FriendshipRequestStatus
 
         } | null,
-        senderProfileID: string | null,
-        senderProfile: IUserProfileData | null
+        receiverProfileID: string 
+        senderProfileID: string,
+        senderProfile: UserProfileData | null
         createdAt: string,
         updatedAt: string,
-      } | null >,
+      } >,
       nextToken: string | null,
     } | null,
 };
 
 
-export interface IUserProfileData {
-    __typename: "UserProfile",
-    id: string;
-    name: string
-}
+
 
 
 export const listNotifications_gql = /* GraphQL */ `
@@ -59,19 +56,27 @@ export const listNotifications_gql = /* GraphQL */ `
         id
         type
         receiverProfileID
-        receiverProfile
         friendshipRequestID
         friendshipRequest{
             __typename
             id
             senderProfileID
             receiverProfileID
-            receiverProfile
-            senderProfile
-
-        } | null,
+            receiverProfile{
+                id
+                username
+            }
+            senderProfile{
+                id
+                username
+            }
+            status
+        },
         senderProfileID
-        senderProfile
+        senderProfile{
+            id
+            username
+        }
         createdAt
         updatedAt
       }
