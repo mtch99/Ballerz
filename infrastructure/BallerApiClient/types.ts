@@ -1,3 +1,16 @@
+import { FriendshipRequestStatus } from "./API"
+
+export type FriendShipRequestData = {
+    __typename: "FriendshipRequest",
+    id: string,
+    senderProfileID: string,
+    receiverProfileID: string
+    receiverProfile: UserProfileData | null
+    senderProfile: UserProfileData | null
+    status: FriendshipRequestStatus
+}
+
+
 export type Presence = {
     __typename: "Presence",
     id: string,

@@ -24,18 +24,6 @@ describe('Notifications client tests', () => {
             })
         })
     })
-
-
-    describe('subscribeToNotifications function tests', () => {
-        jest.setTimeout(60*5*1000)
-        test('should return an array of notifications', async () => {
-            await client.subscribeToNotifications({receiverProfileID: '123'}).then(result => {console.log("ajajaj")})
-            setTimeout(() => {
-                
-            }, (60*5*1000))
-
-        })
-    })
 })
 
 

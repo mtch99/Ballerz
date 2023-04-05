@@ -385,6 +385,8 @@ export type CreateNotificationInput = {
   friendshipRequestID?: string | null,
   presenceID?: string | null,
   senderProfileID?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
 };
 
 export enum NotificationType {
@@ -402,6 +404,8 @@ export type ModelNotificationConditionInput = {
   friendshipRequestID?: ModelIDInput | null,
   presenceID?: ModelIDInput | null,
   senderProfileID?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelNotificationConditionInput | null > | null,
   or?: Array< ModelNotificationConditionInput | null > | null,
   not?: ModelNotificationConditionInput | null,
@@ -434,6 +438,8 @@ export type UpdateNotificationInput = {
   friendshipRequestID?: string | null,
   presenceID?: string | null,
   senderProfileID?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
 };
 
 export type DeleteNotificationInput = {
@@ -687,6 +693,8 @@ export type ModelNotificationFilterInput = {
   friendshipRequestID?: ModelIDInput | null,
   presenceID?: ModelIDInput | null,
   senderProfileID?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelNotificationFilterInput | null > | null,
   or?: Array< ModelNotificationFilterInput | null > | null,
   not?: ModelNotificationFilterInput | null,
@@ -696,6 +704,16 @@ export type ModelNotificationConnection = {
   __typename: "ModelNotificationConnection",
   items:  Array<Notification | null >,
   nextToken?: string | null,
+};
+
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
 };
 
 export type ModelJoinMeInvitationFilterInput = {
@@ -714,6 +732,123 @@ export type ModelJoinMeInvitationConnection = {
   __typename: "ModelJoinMeInvitationConnection",
   items:  Array<JoinMeInvitation | null >,
   nextToken?: string | null,
+};
+
+export type ModelSubscriptionUserFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  email?: ModelSubscriptionStringInput | null,
+  phoneNumber?: ModelSubscriptionStringInput | null,
+  profileID?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionUserFilterInput | null > | null,
+  or?: Array< ModelSubscriptionUserFilterInput | null > | null,
+};
+
+export type ModelSubscriptionIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionUserProfileFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  email?: ModelSubscriptionStringInput | null,
+  username?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionUserProfileFilterInput | null > | null,
+  or?: Array< ModelSubscriptionUserProfileFilterInput | null > | null,
+};
+
+export type ModelSubscriptionFriendshipFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  userProfileID?: ModelSubscriptionIDInput | null,
+  friendProfileID?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionFriendshipFilterInput | null > | null,
+  or?: Array< ModelSubscriptionFriendshipFilterInput | null > | null,
+};
+
+export type ModelSubscriptionFriendshipRequestFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  status?: ModelSubscriptionStringInput | null,
+  senderProfileID?: ModelSubscriptionIDInput | null,
+  receiverProfileID?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionFriendshipRequestFilterInput | null > | null,
+  or?: Array< ModelSubscriptionFriendshipRequestFilterInput | null > | null,
+};
+
+export type ModelSubscriptionPlaceFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  address?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionPlaceFilterInput | null > | null,
+  or?: Array< ModelSubscriptionPlaceFilterInput | null > | null,
+};
+
+export type ModelSubscriptionGameFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  placeID?: ModelSubscriptionIDInput | null,
+  startingDateTime?: ModelSubscriptionStringInput | null,
+  endingDateTime?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionGameFilterInput | null > | null,
+  or?: Array< ModelSubscriptionGameFilterInput | null > | null,
+};
+
+export type ModelSubscriptionPresenceFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  type?: ModelSubscriptionStringInput | null,
+  placeID?: ModelSubscriptionIDInput | null,
+  userProfileID?: ModelSubscriptionIDInput | null,
+  gameID?: ModelSubscriptionIDInput | null,
+  startingDateTime?: ModelSubscriptionStringInput | null,
+  endingDateTime?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionPresenceFilterInput | null > | null,
+  or?: Array< ModelSubscriptionPresenceFilterInput | null > | null,
+};
+
+export type ModelSubscriptionNotificationFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  type?: ModelSubscriptionStringInput | null,
+  receiverProfileID?: ModelSubscriptionIDInput | null,
+  friendshipRequestID?: ModelSubscriptionIDInput | null,
+  presenceID?: ModelSubscriptionIDInput | null,
+  senderProfileID?: ModelSubscriptionIDInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionNotificationFilterInput | null > | null,
+  or?: Array< ModelSubscriptionNotificationFilterInput | null > | null,
+};
+
+export type ModelSubscriptionJoinMeInvitationFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  type?: ModelSubscriptionStringInput | null,
+  status?: ModelSubscriptionStringInput | null,
+  receiverProfileID?: ModelSubscriptionIDInput | null,
+  senderProfileID?: ModelSubscriptionIDInput | null,
+  gameID?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionJoinMeInvitationFilterInput | null > | null,
+  or?: Array< ModelSubscriptionJoinMeInvitationFilterInput | null > | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -2229,6 +2364,33 @@ export type ListNotificationsQuery = {
   } | null,
 };
 
+export type NotificationsBySenderProfileIDAndCreatedAtQueryVariables = {
+  senderProfileID: string,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelNotificationFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type NotificationsBySenderProfileIDAndCreatedAtQuery = {
+  notificationsBySenderProfileIDAndCreatedAt?:  {
+    __typename: "ModelNotificationConnection",
+    items:  Array< {
+      __typename: "Notification",
+      id: string,
+      type: NotificationType,
+      receiverProfileID: string,
+      friendshipRequestID?: string | null,
+      presenceID?: string | null,
+      senderProfileID?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetJoinMeInvitationQueryVariables = {
   id: string,
 };
@@ -2298,6 +2460,55 @@ export type ListJoinMeInvitationsQuery = {
   } | null,
 };
 
+export type OnCreateNotificationByReceiverSubscriptionVariables = {
+  receiverProfileID: string,
+};
+
+export type OnCreateNotificationByReceiverSubscription = {
+  onCreateNotificationByReceiver?:  {
+    __typename: "Notification",
+    id: string,
+    type: NotificationType,
+    receiverProfileID: string,
+    friendshipRequestID?: string | null,
+    friendshipRequest?:  {
+      __typename: "FriendshipRequest",
+      id: string,
+      status: FriendshipRequestStatus,
+      senderProfileID: string,
+      receiverProfileID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    presenceID?: string | null,
+    senderProfileID?: string | null,
+    senderProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    receiverProfile?:  {
+      __typename: "UserProfile",
+      id: string,
+      email: string,
+      username: string,
+      createdAt: string,
+      updatedAt: string,
+      userProfileUserId?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateUserSubscriptionVariables = {
+  filter?: ModelSubscriptionUserFilterInput | null,
+};
+
 export type OnCreateUserSubscription = {
   onCreateUser?:  {
     __typename: "User",
@@ -2317,6 +2528,10 @@ export type OnCreateUserSubscription = {
     createdAt: string,
     updatedAt: string,
   } | null,
+};
+
+export type OnUpdateUserSubscriptionVariables = {
+  filter?: ModelSubscriptionUserFilterInput | null,
 };
 
 export type OnUpdateUserSubscription = {
@@ -2340,6 +2555,10 @@ export type OnUpdateUserSubscription = {
   } | null,
 };
 
+export type OnDeleteUserSubscriptionVariables = {
+  filter?: ModelSubscriptionUserFilterInput | null,
+};
+
 export type OnDeleteUserSubscription = {
   onDeleteUser?:  {
     __typename: "User",
@@ -2359,6 +2578,10 @@ export type OnDeleteUserSubscription = {
     createdAt: string,
     updatedAt: string,
   } | null,
+};
+
+export type OnCreateUserProfileSubscriptionVariables = {
+  filter?: ModelSubscriptionUserProfileFilterInput | null,
 };
 
 export type OnCreateUserProfileSubscription = {
@@ -2390,6 +2613,10 @@ export type OnCreateUserProfileSubscription = {
   } | null,
 };
 
+export type OnUpdateUserProfileSubscriptionVariables = {
+  filter?: ModelSubscriptionUserProfileFilterInput | null,
+};
+
 export type OnUpdateUserProfileSubscription = {
   onUpdateUserProfile?:  {
     __typename: "UserProfile",
@@ -2417,6 +2644,10 @@ export type OnUpdateUserProfileSubscription = {
     updatedAt: string,
     userProfileUserId?: string | null,
   } | null,
+};
+
+export type OnDeleteUserProfileSubscriptionVariables = {
+  filter?: ModelSubscriptionUserProfileFilterInput | null,
 };
 
 export type OnDeleteUserProfileSubscription = {
@@ -2448,6 +2679,10 @@ export type OnDeleteUserProfileSubscription = {
   } | null,
 };
 
+export type OnCreateFriendshipSubscriptionVariables = {
+  filter?: ModelSubscriptionFriendshipFilterInput | null,
+};
+
 export type OnCreateFriendshipSubscription = {
   onCreateFriendship?:  {
     __typename: "Friendship",
@@ -2466,6 +2701,10 @@ export type OnCreateFriendshipSubscription = {
     createdAt: string,
     updatedAt: string,
   } | null,
+};
+
+export type OnUpdateFriendshipSubscriptionVariables = {
+  filter?: ModelSubscriptionFriendshipFilterInput | null,
 };
 
 export type OnUpdateFriendshipSubscription = {
@@ -2488,6 +2727,10 @@ export type OnUpdateFriendshipSubscription = {
   } | null,
 };
 
+export type OnDeleteFriendshipSubscriptionVariables = {
+  filter?: ModelSubscriptionFriendshipFilterInput | null,
+};
+
 export type OnDeleteFriendshipSubscription = {
   onDeleteFriendship?:  {
     __typename: "Friendship",
@@ -2506,6 +2749,10 @@ export type OnDeleteFriendshipSubscription = {
     createdAt: string,
     updatedAt: string,
   } | null,
+};
+
+export type OnCreateFriendshipRequestSubscriptionVariables = {
+  filter?: ModelSubscriptionFriendshipRequestFilterInput | null,
 };
 
 export type OnCreateFriendshipRequestSubscription = {
@@ -2538,6 +2785,10 @@ export type OnCreateFriendshipRequestSubscription = {
   } | null,
 };
 
+export type OnUpdateFriendshipRequestSubscriptionVariables = {
+  filter?: ModelSubscriptionFriendshipRequestFilterInput | null,
+};
+
 export type OnUpdateFriendshipRequestSubscription = {
   onUpdateFriendshipRequest?:  {
     __typename: "FriendshipRequest",
@@ -2566,6 +2817,10 @@ export type OnUpdateFriendshipRequestSubscription = {
     createdAt: string,
     updatedAt: string,
   } | null,
+};
+
+export type OnDeleteFriendshipRequestSubscriptionVariables = {
+  filter?: ModelSubscriptionFriendshipRequestFilterInput | null,
 };
 
 export type OnDeleteFriendshipRequestSubscription = {
@@ -2598,6 +2853,10 @@ export type OnDeleteFriendshipRequestSubscription = {
   } | null,
 };
 
+export type OnCreatePlaceSubscriptionVariables = {
+  filter?: ModelSubscriptionPlaceFilterInput | null,
+};
+
 export type OnCreatePlaceSubscription = {
   onCreatePlace?:  {
     __typename: "Place",
@@ -2611,6 +2870,10 @@ export type OnCreatePlaceSubscription = {
     createdAt: string,
     updatedAt: string,
   } | null,
+};
+
+export type OnUpdatePlaceSubscriptionVariables = {
+  filter?: ModelSubscriptionPlaceFilterInput | null,
 };
 
 export type OnUpdatePlaceSubscription = {
@@ -2628,6 +2891,10 @@ export type OnUpdatePlaceSubscription = {
   } | null,
 };
 
+export type OnDeletePlaceSubscriptionVariables = {
+  filter?: ModelSubscriptionPlaceFilterInput | null,
+};
+
 export type OnDeletePlaceSubscription = {
   onDeletePlace?:  {
     __typename: "Place",
@@ -2641,6 +2908,10 @@ export type OnDeletePlaceSubscription = {
     createdAt: string,
     updatedAt: string,
   } | null,
+};
+
+export type OnCreateGameSubscriptionVariables = {
+  filter?: ModelSubscriptionGameFilterInput | null,
 };
 
 export type OnCreateGameSubscription = {
@@ -2667,6 +2938,10 @@ export type OnCreateGameSubscription = {
   } | null,
 };
 
+export type OnUpdateGameSubscriptionVariables = {
+  filter?: ModelSubscriptionGameFilterInput | null,
+};
+
 export type OnUpdateGameSubscription = {
   onUpdateGame?:  {
     __typename: "Game",
@@ -2691,6 +2966,10 @@ export type OnUpdateGameSubscription = {
   } | null,
 };
 
+export type OnDeleteGameSubscriptionVariables = {
+  filter?: ModelSubscriptionGameFilterInput | null,
+};
+
 export type OnDeleteGameSubscription = {
   onDeleteGame?:  {
     __typename: "Game",
@@ -2713,6 +2992,10 @@ export type OnDeleteGameSubscription = {
     createdAt: string,
     updatedAt: string,
   } | null,
+};
+
+export type OnCreatePresenceSubscriptionVariables = {
+  filter?: ModelSubscriptionPresenceFilterInput | null,
 };
 
 export type OnCreatePresenceSubscription = {
@@ -2756,6 +3039,10 @@ export type OnCreatePresenceSubscription = {
   } | null,
 };
 
+export type OnUpdatePresenceSubscriptionVariables = {
+  filter?: ModelSubscriptionPresenceFilterInput | null,
+};
+
 export type OnUpdatePresenceSubscription = {
   onUpdatePresence?:  {
     __typename: "Presence",
@@ -2795,6 +3082,10 @@ export type OnUpdatePresenceSubscription = {
     createdAt: string,
     updatedAt: string,
   } | null,
+};
+
+export type OnDeletePresenceSubscriptionVariables = {
+  filter?: ModelSubscriptionPresenceFilterInput | null,
 };
 
 export type OnDeletePresenceSubscription = {
@@ -2838,6 +3129,10 @@ export type OnDeletePresenceSubscription = {
   } | null,
 };
 
+export type OnCreateNotificationSubscriptionVariables = {
+  filter?: ModelSubscriptionNotificationFilterInput | null,
+};
+
 export type OnCreateNotificationSubscription = {
   onCreateNotification?:  {
     __typename: "Notification",
@@ -2877,6 +3172,10 @@ export type OnCreateNotificationSubscription = {
     createdAt: string,
     updatedAt: string,
   } | null,
+};
+
+export type OnUpdateNotificationSubscriptionVariables = {
+  filter?: ModelSubscriptionNotificationFilterInput | null,
 };
 
 export type OnUpdateNotificationSubscription = {
@@ -2920,6 +3219,10 @@ export type OnUpdateNotificationSubscription = {
   } | null,
 };
 
+export type OnDeleteNotificationSubscriptionVariables = {
+  filter?: ModelSubscriptionNotificationFilterInput | null,
+};
+
 export type OnDeleteNotificationSubscription = {
   onDeleteNotification?:  {
     __typename: "Notification",
@@ -2959,6 +3262,10 @@ export type OnDeleteNotificationSubscription = {
     createdAt: string,
     updatedAt: string,
   } | null,
+};
+
+export type OnCreateJoinMeInvitationSubscriptionVariables = {
+  filter?: ModelSubscriptionJoinMeInvitationFilterInput | null,
 };
 
 export type OnCreateJoinMeInvitationSubscription = {
@@ -3002,6 +3309,10 @@ export type OnCreateJoinMeInvitationSubscription = {
   } | null,
 };
 
+export type OnUpdateJoinMeInvitationSubscriptionVariables = {
+  filter?: ModelSubscriptionJoinMeInvitationFilterInput | null,
+};
+
 export type OnUpdateJoinMeInvitationSubscription = {
   onUpdateJoinMeInvitation?:  {
     __typename: "JoinMeInvitation",
@@ -3043,6 +3354,10 @@ export type OnUpdateJoinMeInvitationSubscription = {
   } | null,
 };
 
+export type OnDeleteJoinMeInvitationSubscriptionVariables = {
+  filter?: ModelSubscriptionJoinMeInvitationFilterInput | null,
+};
+
 export type OnDeleteJoinMeInvitationSubscription = {
   onDeleteJoinMeInvitation?:  {
     __typename: "JoinMeInvitation",
@@ -3078,51 +3393,6 @@ export type OnDeleteJoinMeInvitationSubscription = {
       endingDateTime: string,
       createdAt: string,
       updatedAt: string,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreateNotificationByReceiverSubscriptionVariables = {
-  receiverProfileID: string,
-};
-
-export type OnCreateNotificationByReceiverSubscription = {
-  onCreateNotificationByReceiver?:  {
-    __typename: "Notification",
-    id: string,
-    type: NotificationType,
-    receiverProfileID: string,
-    friendshipRequestID?: string | null,
-    friendshipRequest?:  {
-      __typename: "FriendshipRequest",
-      id: string,
-      status: FriendshipRequestStatus,
-      senderProfileID: string,
-      receiverProfileID: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    presenceID?: string | null,
-    senderProfileID?: string | null,
-    senderProfile?:  {
-      __typename: "UserProfile",
-      id: string,
-      email: string,
-      username: string,
-      createdAt: string,
-      updatedAt: string,
-      userProfileUserId?: string | null,
-    } | null,
-    receiverProfile?:  {
-      __typename: "UserProfile",
-      id: string,
-      email: string,
-      username: string,
-      createdAt: string,
-      updatedAt: string,
-      userProfileUserId?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,

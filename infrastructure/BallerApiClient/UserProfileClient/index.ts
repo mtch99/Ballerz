@@ -2,7 +2,6 @@ import { GetUserQuery, GetUserQueryVariables,ListUserProfilesQueryVariables } fr
 // import {GraphQLResult} from "@aws-amplify/api-graphql"
 import {API, Amplify} from "aws-amplify"
 import {GraphQLQuery, GraphQLResult} from "@aws-amplify/api"
-import { awsmobile, awsmobileAPIMock } from "../aws-exports";
 import * as mutations from "./mutations"
 import * as queries from "./queries"
 import {GraphQLOptions} from "@aws-amplify/api-graphql"
@@ -11,6 +10,7 @@ import { IUserProfileClient } from "./interface";
 import { CreateUserProfileMutation, CreateUserProfileMutationVariables } from "./mutations";
 import { ListUserProfileQuery } from "./queries";
 import BallerzApiClient from "../client";
+import { awsmobileAPIMock } from "../aws-exports";
 
 
 export default class UserProfileClient extends BallerzApiClient implements IUserProfileClient {

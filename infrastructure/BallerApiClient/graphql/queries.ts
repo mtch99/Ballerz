@@ -2,146 +2,38 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getBlog = /* GraphQL */ `
-  query GetBlog($id: ID!) {
-    getBlog(id: $id) {
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
       id
-      name
-      posts {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listBlogs = /* GraphQL */ `
-  query ListBlogs(
-    $filter: ModelBlogFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listBlogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getPost = /* GraphQL */ `
-  query GetPost($id: ID!) {
-    getPost(id: $id) {
-      id
-      title
-      blogID
-      blog {
-        id
-        name
-        createdAt
-        updatedAt
-      }
-      comments {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listPosts = /* GraphQL */ `
-  query ListPosts(
-    $filter: ModelPostFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        title
-        blogID
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getComment = /* GraphQL */ `
-  query GetComment($id: ID!) {
-    getComment(id: $id) {
-      id
-      postID
-      post {
-        id
-        title
-        blogID
-        createdAt
-        updatedAt
-      }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listComments = /* GraphQL */ `
-  query ListComments(
-    $filter: ModelCommentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        postID
-        content
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getUserDoc = /* GraphQL */ `
-  query GetUserDoc($id: ID!) {
-    getUserDoc(id: $id) {
-      id
-      profileID
       email
-      deviceToken
       phoneNumber
-      createdAt
-      updatedAt
-      uProfile {
+      profileID
+      profile {
         id
+        email
         username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
         createdAt
         updatedAt
+        userProfileUserId
       }
+      createdAt
+      updatedAt
     }
   }
 `;
-export const listUserDocs = /* GraphQL */ `
-  query ListUserDocs(
-    $filter: ModelUserDocFilterInput
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listUserDocs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        profileID
         email
-        deviceToken
         phoneNumber
+        profileID
         createdAt
         updatedAt
       }
@@ -149,65 +41,81 @@ export const listUserDocs = /* GraphQL */ `
     }
   }
 `;
-export const getUprofile = /* GraphQL */ `
-  query GetUprofile($id: ID!) {
-    getUprofile(id: $id) {
+export const getUserProfile = /* GraphQL */ `
+  query GetUserProfile($id: ID!) {
+    getUserProfile(id: $id) {
       id
+      email
       username
-      name
-      userDocID
-      currentPlaceID
-      expoPushToken
-      createdAt
-      updatedAt
-      userDoc {
+      user {
         id
-        profileID
         email
-        deviceToken
         phoneNumber
-        createdAt
-        updatedAt
-      }
-      attendings {
-        nextToken
-      }
-      placeTimeSlots {
-        nextToken
-      }
-      currentPlace {
-        id
-        name
-        address
+        profileID
         createdAt
         updatedAt
       }
       friends {
         nextToken
       }
-      sentNotifications {
+      presenceList {
         nextToken
       }
-      notifications {
-        nextToken
-      }
+      createdAt
+      updatedAt
+      userProfileUserId
     }
   }
 `;
-export const listUprofiles = /* GraphQL */ `
-  query ListUprofiles(
-    $filter: ModelUprofileFilterInput
+export const listUserProfiles = /* GraphQL */ `
+  query ListUserProfiles(
+    $filter: ModelUserProfileFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listUprofiles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listUserProfiles(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        email
         username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      nextToken
+    }
+  }
+`;
+export const getFriendship = /* GraphQL */ `
+  query GetFriendship($id: ID!) {
+    getFriendship(id: $id) {
+      id
+      userProfileID
+      friendProfileID
+      friendProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listFriendships = /* GraphQL */ `
+  query ListFriendships(
+    $filter: ModelFriendshipFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFriendships(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userProfileID
+        friendProfileID
         createdAt
         updatedAt
       }
@@ -215,60 +123,25 @@ export const listUprofiles = /* GraphQL */ `
     }
   }
 `;
-export const getUserPlaceConnection = /* GraphQL */ `
-  query GetUserPlaceConnection($id: ID!) {
-    getUserPlaceConnection(id: $id) {
-      id
-      profileID
-      placeID
-      arrivingTime
-      departureTime
-      placeTimeSoltUserPlaceConnection {
-        id
-        name
-        address
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-      uProfile {
-        id
-        username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
-        createdAt
-        updatedAt
-      }
-      place {
-        id
-        name
-        address
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const listUserPlaceConnections = /* GraphQL */ `
-  query ListUserPlaceConnections(
-    $filter: ModelUserPlaceConnectionFilterInput
+export const friendshipsByUserProfileID = /* GraphQL */ `
+  query FriendshipsByUserProfileID(
+    $userProfileID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelFriendshipFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listUserPlaceConnections(
+    friendshipsByUserProfileID(
+      userProfileID: $userProfileID
+      sortDirection: $sortDirection
       filter: $filter
       limit: $limit
       nextToken: $nextToken
     ) {
       items {
         id
-        profileID
-        placeID
-        arrivingTime
-        departureTime
+        userProfileID
+        friendProfileID
         createdAt
         updatedAt
       }
@@ -276,114 +149,50 @@ export const listUserPlaceConnections = /* GraphQL */ `
     }
   }
 `;
-export const getPlaceTimeSlot = /* GraphQL */ `
-  query GetPlaceTimeSlot($id: ID!) {
-    getPlaceTimeSlot(id: $id) {
+export const getFriendshipRequest = /* GraphQL */ `
+  query GetFriendshipRequest($id: ID!) {
+    getFriendshipRequest(id: $id) {
       id
-      numAttendings
-      myDate {
-        weekDay
-        monthDay
-        month
-        year
-      }
-      dateTime
-      placeID
-      startingHour
-      endingHour
-      createdAt
-      updatedAt
-      attendings {
-        nextToken
-      }
-      place {
+      status
+      senderProfileID
+      receiverProfileID
+      senderProfile {
         id
-        name
-        address
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const listPlaceTimeSlots = /* GraphQL */ `
-  query ListPlaceTimeSlots(
-    $filter: ModelPlaceTimeSlotFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPlaceTimeSlots(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        numAttendings
-        dateTime
-        placeID
-        startingHour
-        endingHour
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getPlaceTimeSlotUserPlaceConnection = /* GraphQL */ `
-  query GetPlaceTimeSlotUserPlaceConnection($id: ID!) {
-    getPlaceTimeSlotUserPlaceConnection(id: $id) {
-      id
-      attendingID
-      profileID
-      placeTimeSlotID
-      createdAt
-      updatedAt
-      uProfile {
-        id
+        email
         username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
         createdAt
         updatedAt
+        userProfileUserId
       }
-      attending {
+      receiverProfile {
         id
-        profileID
-        placeID
-        arrivingTime
-        departureTime
+        email
+        username
         createdAt
         updatedAt
+        userProfileUserId
       }
-      timeSlot {
-        id
-        numAttendings
-        dateTime
-        placeID
-        startingHour
-        endingHour
-        createdAt
-        updatedAt
-      }
+      createdAt
+      updatedAt
     }
   }
 `;
-export const listPlaceTimeSlotUserPlaceConnections = /* GraphQL */ `
-  query ListPlaceTimeSlotUserPlaceConnections(
-    $filter: ModelPlaceTimeSlotUserPlaceConnectionFilterInput
+export const listFriendshipRequests = /* GraphQL */ `
+  query ListFriendshipRequests(
+    $filter: ModelFriendshipRequestFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listPlaceTimeSlotUserPlaceConnections(
+    listFriendshipRequests(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
     ) {
       items {
         id
-        attendingID
-        profileID
-        placeTimeSlotID
+        status
+        senderProfileID
+        receiverProfileID
         createdAt
         updatedAt
       }
@@ -397,18 +206,11 @@ export const getPlace = /* GraphQL */ `
       id
       name
       address
-      coords {
-        lon
-        lat
+      gameList {
+        nextToken
       }
       createdAt
       updatedAt
-      currentPlayers {
-        nextToken
-      }
-      timeSlots {
-        nextToken
-      }
     }
   }
 `;
@@ -430,42 +232,225 @@ export const listPlaces = /* GraphQL */ `
     }
   }
 `;
-export const getFriendConnection = /* GraphQL */ `
-  query GetFriendConnection($id: ID!) {
-    getFriendConnection(id: $id) {
+export const getGame = /* GraphQL */ `
+  query GetGame($id: ID!) {
+    getGame(id: $id) {
       id
-      userProfileID
-      friendProfileID
-      createdAt
-      updatedAt
-      friendProfile {
+      presenceList {
+        nextToken
+      }
+      placeID
+      startingDateTime
+      endingDateTime
+      place {
         id
-        username
         name
-        userDocID
-        currentPlaceID
-        expoPushToken
+        address
         createdAt
         updatedAt
       }
+      createdAt
+      updatedAt
     }
   }
 `;
-export const listFriendConnections = /* GraphQL */ `
-  query ListFriendConnections(
-    $filter: ModelFriendConnectionFilterInput
+export const listGames = /* GraphQL */ `
+  query ListGames(
+    $filter: ModelGameFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listFriendConnections(
+    listGames(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        placeID
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const gamesByPlaceIDAndStartingDateTimeAndEndingDateTime = /* GraphQL */ `
+  query GamesByPlaceIDAndStartingDateTimeAndEndingDateTime(
+    $placeID: ID!
+    $startingDateTimeEndingDateTime: ModelGameByPlaceCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelGameFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    gamesByPlaceIDAndStartingDateTimeAndEndingDateTime(
+      placeID: $placeID
+      startingDateTimeEndingDateTime: $startingDateTimeEndingDateTime
+      sortDirection: $sortDirection
       filter: $filter
       limit: $limit
       nextToken: $nextToken
     ) {
       items {
         id
+        placeID
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getPresence = /* GraphQL */ `
+  query GetPresence($id: ID!) {
+    getPresence(id: $id) {
+      id
+      type
+      placeID
+      userProfileID
+      gameID
+      game {
+        id
+        placeID
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
+      place {
+        id
+        name
+        address
+        createdAt
+        updatedAt
+      }
+      userProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      startingDateTime
+      endingDateTime
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPresences = /* GraphQL */ `
+  query ListPresences(
+    $filter: ModelPresenceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPresences(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        type
+        placeID
         userProfileID
-        friendProfileID
+        gameID
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const presencesByPlaceIDAndStartingDateTimeAndEndingDateTime = /* GraphQL */ `
+  query PresencesByPlaceIDAndStartingDateTimeAndEndingDateTime(
+    $placeID: ID!
+    $startingDateTimeEndingDateTime: ModelPresenceByPlaceCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPresenceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    presencesByPlaceIDAndStartingDateTimeAndEndingDateTime(
+      placeID: $placeID
+      startingDateTimeEndingDateTime: $startingDateTimeEndingDateTime
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        placeID
+        userProfileID
+        gameID
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const presencesByUserProfileIDAndStartingDateTimeAndEndingDateTime = /* GraphQL */ `
+  query PresencesByUserProfileIDAndStartingDateTimeAndEndingDateTime(
+    $userProfileID: ID!
+    $startingDateTimeEndingDateTime: ModelPresenceByUserProfileCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPresenceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    presencesByUserProfileIDAndStartingDateTimeAndEndingDateTime(
+      userProfileID: $userProfileID
+      startingDateTimeEndingDateTime: $startingDateTimeEndingDateTime
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        placeID
+        userProfileID
+        gameID
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const presencesByGameIDAndStartingDateTimeAndEndingDateTime = /* GraphQL */ `
+  query PresencesByGameIDAndStartingDateTimeAndEndingDateTime(
+    $gameID: ID!
+    $startingDateTimeEndingDateTime: ModelPresenceByGameCompositeKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPresenceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    presencesByGameIDAndStartingDateTimeAndEndingDateTime(
+      gameID: $gameID
+      startingDateTimeEndingDateTime: $startingDateTimeEndingDateTime
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        placeID
+        userProfileID
+        gameID
+        startingDateTime
+        endingDateTime
         createdAt
         updatedAt
       }
@@ -477,49 +462,37 @@ export const getNotification = /* GraphQL */ `
   query GetNotification($id: ID!) {
     getNotification(id: $id) {
       id
-      placeID
-      placeName
-      arrivingTime
-      departureTime
-      senderProfileID
-      message
-      receiverProfileID
-      photo
-      createdAt
       type
-      status
-      placeTimeSlotID
-      updatedAt
-      userProfile {
+      receiverProfileID
+      friendshipRequestID
+      friendshipRequest {
         id
-        username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
+        status
+        senderProfileID
+        receiverProfileID
         createdAt
         updatedAt
       }
+      presenceID
+      senderProfileID
       senderProfile {
         id
+        email
         username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
         createdAt
         updatedAt
+        userProfileUserId
       }
-      placeTimeSlot {
+      receiverProfile {
         id
-        numAttendings
-        dateTime
-        placeID
-        startingHour
-        endingHour
+        email
+        username
         createdAt
         updatedAt
+        userProfileUserId
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -532,85 +505,105 @@ export const listNotifications = /* GraphQL */ `
     listNotifications(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        placeID
-        placeName
-        arrivingTime
-        departureTime
-        senderProfileID
-        message
+        type
         receiverProfileID
-        photo
+        friendshipRequestID
+        presenceID
+        senderProfileID
         createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const notificationsBySenderProfileIDAndCreatedAt = /* GraphQL */ `
+  query NotificationsBySenderProfileIDAndCreatedAt(
+    $senderProfileID: ID!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelNotificationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    notificationsBySenderProfileIDAndCreatedAt(
+      senderProfileID: $senderProfileID
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        receiverProfileID
+        friendshipRequestID
+        presenceID
+        senderProfileID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getJoinMeInvitation = /* GraphQL */ `
+  query GetJoinMeInvitation($id: ID!) {
+    getJoinMeInvitation(id: $id) {
+      id
+      type
+      status
+      receiverProfileID
+      senderProfileID
+      gameID
+      receiverProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      senderProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      game {
+        id
+        placeID
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listJoinMeInvitations = /* GraphQL */ `
+  query ListJoinMeInvitations(
+    $filter: ModelJoinMeInvitationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listJoinMeInvitations(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
         type
         status
-        placeTimeSlotID
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getPushNotificationsBatch = /* GraphQL */ `
-  query GetPushNotificationsBatch($id: ID!) {
-    getPushNotificationsBatch(id: $id) {
-      id
-      payloadsList
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listPushNotificationsBatches = /* GraphQL */ `
-  query ListPushNotificationsBatches(
-    $filter: ModelPushNotificationsBatchFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPushNotificationsBatches(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        payloadsList
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getPushNotifications = /* GraphQL */ `
-  query GetPushNotifications($id: ID!) {
-    getPushNotifications(id: $id) {
-      id
-      body
-      userTokens
-      data
-      type
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listPushNotifications = /* GraphQL */ `
-  query ListPushNotifications(
-    $filter: ModelPushNotificationsFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPushNotifications(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        body
-        userTokens
-        data
-        type
+        receiverProfileID
+        senderProfileID
+        gameID
         createdAt
         updatedAt
       }

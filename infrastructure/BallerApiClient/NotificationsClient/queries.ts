@@ -16,32 +16,10 @@ export type FilterNotificationsByUserQueryVariables = {
 export type ListNotificationsQuery = {
     listNotifications?:  {
       __typename: "ModelNotificationConnection",
-      items:  Array< {
-        __typename: "Notification",
-        id: string,
-        type: NotificationType,
-        friendshipRequestID: string | null,
-        friendshipRequest: {
-            __typename: "FriendshipRequest",
-            id: string,
-            senderProfileID: string,
-            receiverProfileID: string
-            receiverProfile: UserProfileData | null
-            senderProfile: UserProfileData | null
-            status: FriendshipRequestStatus
-
-        } | null,
-        receiverProfileID: string 
-        senderProfileID: string,
-        senderProfile: UserProfileData | null
-        createdAt: string,
-        updatedAt: string,
-      } >,
+      items:  Array<Notification>,
       nextToken: string | null,
     } | null,
 };
-
-
 
 
 

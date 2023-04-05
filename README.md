@@ -24,6 +24,10 @@ There must be three different games on three different courts, two at the moment
         - [ ] Implement the previous
             - [ ] Implement Notifications repository
                 - [x] Define and Implement Notifications client
+                    - [x] Implement Notifications filter by receiver
+                    - [x] Implement Notifictaions subscription 
+                    - [ ] Subscribe to notifications on repository initialisation
+                    
                 - [ ] write Tests
 
            

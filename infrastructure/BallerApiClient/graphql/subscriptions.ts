@@ -2,9 +2,47 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateNotificationByReceiver = /* GraphQL */ `
+  subscription OnCreateNotificationByReceiver($receiverProfileID: ID!) {
+    onCreateNotificationByReceiver(receiverProfileID: $receiverProfileID) {
+      id
+      type
+      receiverProfileID
+      friendshipRequestID
+      friendshipRequest {
+        id
+        status
+        senderProfileID
+        receiverProfileID
+        createdAt
+        updatedAt
+      }
+      presenceID
+      senderProfileID
+      senderProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      receiverProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser {
-    onCreateUser {
+  subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput) {
+    onCreateUser(filter: $filter) {
       id
       email
       phoneNumber
@@ -23,8 +61,8 @@ export const onCreateUser = /* GraphQL */ `
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser {
-    onUpdateUser {
+  subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput) {
+    onUpdateUser(filter: $filter) {
       id
       email
       phoneNumber
@@ -43,8 +81,8 @@ export const onUpdateUser = /* GraphQL */ `
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser {
-    onDeleteUser {
+  subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput) {
+    onDeleteUser(filter: $filter) {
       id
       email
       phoneNumber
@@ -63,8 +101,10 @@ export const onDeleteUser = /* GraphQL */ `
   }
 `;
 export const onCreateUserProfile = /* GraphQL */ `
-  subscription OnCreateUserProfile {
-    onCreateUserProfile {
+  subscription OnCreateUserProfile(
+    $filter: ModelSubscriptionUserProfileFilterInput
+  ) {
+    onCreateUserProfile(filter: $filter) {
       id
       email
       username
@@ -89,8 +129,10 @@ export const onCreateUserProfile = /* GraphQL */ `
   }
 `;
 export const onUpdateUserProfile = /* GraphQL */ `
-  subscription OnUpdateUserProfile {
-    onUpdateUserProfile {
+  subscription OnUpdateUserProfile(
+    $filter: ModelSubscriptionUserProfileFilterInput
+  ) {
+    onUpdateUserProfile(filter: $filter) {
       id
       email
       username
@@ -115,8 +157,10 @@ export const onUpdateUserProfile = /* GraphQL */ `
   }
 `;
 export const onDeleteUserProfile = /* GraphQL */ `
-  subscription OnDeleteUserProfile {
-    onDeleteUserProfile {
+  subscription OnDeleteUserProfile(
+    $filter: ModelSubscriptionUserProfileFilterInput
+  ) {
+    onDeleteUserProfile(filter: $filter) {
       id
       email
       username
@@ -141,8 +185,10 @@ export const onDeleteUserProfile = /* GraphQL */ `
   }
 `;
 export const onCreateFriendship = /* GraphQL */ `
-  subscription OnCreateFriendship {
-    onCreateFriendship {
+  subscription OnCreateFriendship(
+    $filter: ModelSubscriptionFriendshipFilterInput
+  ) {
+    onCreateFriendship(filter: $filter) {
       id
       userProfileID
       friendProfileID
@@ -160,8 +206,10 @@ export const onCreateFriendship = /* GraphQL */ `
   }
 `;
 export const onUpdateFriendship = /* GraphQL */ `
-  subscription OnUpdateFriendship {
-    onUpdateFriendship {
+  subscription OnUpdateFriendship(
+    $filter: ModelSubscriptionFriendshipFilterInput
+  ) {
+    onUpdateFriendship(filter: $filter) {
       id
       userProfileID
       friendProfileID
@@ -179,8 +227,10 @@ export const onUpdateFriendship = /* GraphQL */ `
   }
 `;
 export const onDeleteFriendship = /* GraphQL */ `
-  subscription OnDeleteFriendship {
-    onDeleteFriendship {
+  subscription OnDeleteFriendship(
+    $filter: ModelSubscriptionFriendshipFilterInput
+  ) {
+    onDeleteFriendship(filter: $filter) {
       id
       userProfileID
       friendProfileID
@@ -198,8 +248,10 @@ export const onDeleteFriendship = /* GraphQL */ `
   }
 `;
 export const onCreateFriendshipRequest = /* GraphQL */ `
-  subscription OnCreateFriendshipRequest {
-    onCreateFriendshipRequest {
+  subscription OnCreateFriendshipRequest(
+    $filter: ModelSubscriptionFriendshipRequestFilterInput
+  ) {
+    onCreateFriendshipRequest(filter: $filter) {
       id
       status
       senderProfileID
@@ -226,8 +278,10 @@ export const onCreateFriendshipRequest = /* GraphQL */ `
   }
 `;
 export const onUpdateFriendshipRequest = /* GraphQL */ `
-  subscription OnUpdateFriendshipRequest {
-    onUpdateFriendshipRequest {
+  subscription OnUpdateFriendshipRequest(
+    $filter: ModelSubscriptionFriendshipRequestFilterInput
+  ) {
+    onUpdateFriendshipRequest(filter: $filter) {
       id
       status
       senderProfileID
@@ -254,8 +308,10 @@ export const onUpdateFriendshipRequest = /* GraphQL */ `
   }
 `;
 export const onDeleteFriendshipRequest = /* GraphQL */ `
-  subscription OnDeleteFriendshipRequest {
-    onDeleteFriendshipRequest {
+  subscription OnDeleteFriendshipRequest(
+    $filter: ModelSubscriptionFriendshipRequestFilterInput
+  ) {
+    onDeleteFriendshipRequest(filter: $filter) {
       id
       status
       senderProfileID
@@ -282,8 +338,8 @@ export const onDeleteFriendshipRequest = /* GraphQL */ `
   }
 `;
 export const onCreatePlace = /* GraphQL */ `
-  subscription OnCreatePlace {
-    onCreatePlace {
+  subscription OnCreatePlace($filter: ModelSubscriptionPlaceFilterInput) {
+    onCreatePlace(filter: $filter) {
       id
       name
       address
@@ -296,8 +352,8 @@ export const onCreatePlace = /* GraphQL */ `
   }
 `;
 export const onUpdatePlace = /* GraphQL */ `
-  subscription OnUpdatePlace {
-    onUpdatePlace {
+  subscription OnUpdatePlace($filter: ModelSubscriptionPlaceFilterInput) {
+    onUpdatePlace(filter: $filter) {
       id
       name
       address
@@ -310,8 +366,8 @@ export const onUpdatePlace = /* GraphQL */ `
   }
 `;
 export const onDeletePlace = /* GraphQL */ `
-  subscription OnDeletePlace {
-    onDeletePlace {
+  subscription OnDeletePlace($filter: ModelSubscriptionPlaceFilterInput) {
+    onDeletePlace(filter: $filter) {
       id
       name
       address
@@ -324,8 +380,8 @@ export const onDeletePlace = /* GraphQL */ `
   }
 `;
 export const onCreateGame = /* GraphQL */ `
-  subscription OnCreateGame {
-    onCreateGame {
+  subscription OnCreateGame($filter: ModelSubscriptionGameFilterInput) {
+    onCreateGame(filter: $filter) {
       id
       presenceList {
         nextToken
@@ -346,8 +402,8 @@ export const onCreateGame = /* GraphQL */ `
   }
 `;
 export const onUpdateGame = /* GraphQL */ `
-  subscription OnUpdateGame {
-    onUpdateGame {
+  subscription OnUpdateGame($filter: ModelSubscriptionGameFilterInput) {
+    onUpdateGame(filter: $filter) {
       id
       presenceList {
         nextToken
@@ -368,8 +424,8 @@ export const onUpdateGame = /* GraphQL */ `
   }
 `;
 export const onDeleteGame = /* GraphQL */ `
-  subscription OnDeleteGame {
-    onDeleteGame {
+  subscription OnDeleteGame($filter: ModelSubscriptionGameFilterInput) {
+    onDeleteGame(filter: $filter) {
       id
       presenceList {
         nextToken
@@ -390,8 +446,8 @@ export const onDeleteGame = /* GraphQL */ `
   }
 `;
 export const onCreatePresence = /* GraphQL */ `
-  subscription OnCreatePresence {
-    onCreatePresence {
+  subscription OnCreatePresence($filter: ModelSubscriptionPresenceFilterInput) {
+    onCreatePresence(filter: $filter) {
       id
       type
       placeID
@@ -428,8 +484,8 @@ export const onCreatePresence = /* GraphQL */ `
   }
 `;
 export const onUpdatePresence = /* GraphQL */ `
-  subscription OnUpdatePresence {
-    onUpdatePresence {
+  subscription OnUpdatePresence($filter: ModelSubscriptionPresenceFilterInput) {
+    onUpdatePresence(filter: $filter) {
       id
       type
       placeID
@@ -466,8 +522,8 @@ export const onUpdatePresence = /* GraphQL */ `
   }
 `;
 export const onDeletePresence = /* GraphQL */ `
-  subscription OnDeletePresence {
-    onDeletePresence {
+  subscription OnDeletePresence($filter: ModelSubscriptionPresenceFilterInput) {
+    onDeletePresence(filter: $filter) {
       id
       type
       placeID
@@ -504,8 +560,10 @@ export const onDeletePresence = /* GraphQL */ `
   }
 `;
 export const onCreateNotification = /* GraphQL */ `
-  subscription OnCreateNotification {
-    onCreateNotification {
+  subscription OnCreateNotification(
+    $filter: ModelSubscriptionNotificationFilterInput
+  ) {
+    onCreateNotification(filter: $filter) {
       id
       type
       receiverProfileID
@@ -542,8 +600,10 @@ export const onCreateNotification = /* GraphQL */ `
   }
 `;
 export const onUpdateNotification = /* GraphQL */ `
-  subscription OnUpdateNotification {
-    onUpdateNotification {
+  subscription OnUpdateNotification(
+    $filter: ModelSubscriptionNotificationFilterInput
+  ) {
+    onUpdateNotification(filter: $filter) {
       id
       type
       receiverProfileID
@@ -580,8 +640,10 @@ export const onUpdateNotification = /* GraphQL */ `
   }
 `;
 export const onDeleteNotification = /* GraphQL */ `
-  subscription OnDeleteNotification {
-    onDeleteNotification {
+  subscription OnDeleteNotification(
+    $filter: ModelSubscriptionNotificationFilterInput
+  ) {
+    onDeleteNotification(filter: $filter) {
       id
       type
       receiverProfileID
@@ -618,8 +680,10 @@ export const onDeleteNotification = /* GraphQL */ `
   }
 `;
 export const onCreateJoinMeInvitation = /* GraphQL */ `
-  subscription OnCreateJoinMeInvitation {
-    onCreateJoinMeInvitation {
+  subscription OnCreateJoinMeInvitation(
+    $filter: ModelSubscriptionJoinMeInvitationFilterInput
+  ) {
+    onCreateJoinMeInvitation(filter: $filter) {
       id
       type
       status
@@ -656,8 +720,10 @@ export const onCreateJoinMeInvitation = /* GraphQL */ `
   }
 `;
 export const onUpdateJoinMeInvitation = /* GraphQL */ `
-  subscription OnUpdateJoinMeInvitation {
-    onUpdateJoinMeInvitation {
+  subscription OnUpdateJoinMeInvitation(
+    $filter: ModelSubscriptionJoinMeInvitationFilterInput
+  ) {
+    onUpdateJoinMeInvitation(filter: $filter) {
       id
       type
       status
@@ -694,8 +760,10 @@ export const onUpdateJoinMeInvitation = /* GraphQL */ `
   }
 `;
 export const onDeleteJoinMeInvitation = /* GraphQL */ `
-  subscription OnDeleteJoinMeInvitation {
-    onDeleteJoinMeInvitation {
+  subscription OnDeleteJoinMeInvitation(
+    $filter: ModelSubscriptionJoinMeInvitationFilterInput
+  ) {
+    onDeleteJoinMeInvitation(filter: $filter) {
       id
       type
       status
@@ -725,44 +793,6 @@ export const onDeleteJoinMeInvitation = /* GraphQL */ `
         endingDateTime
         createdAt
         updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateNotificationByReceiver = /* GraphQL */ `
-  subscription OnCreateNotificationByReceiver($receiverProfileID: ID!) {
-    onCreateNotificationByReceiver(receiverProfileID: $receiverProfileID) {
-      id
-      type
-      receiverProfileID
-      friendshipRequestID
-      friendshipRequest {
-        id
-        status
-        senderProfileID
-        receiverProfileID
-        createdAt
-        updatedAt
-      }
-      presenceID
-      senderProfileID
-      senderProfile {
-        id
-        email
-        username
-        createdAt
-        updatedAt
-        userProfileUserId
-      }
-      receiverProfile {
-        id
-        email
-        username
-        createdAt
-        updatedAt
-        userProfileUserId
       }
       createdAt
       updatedAt

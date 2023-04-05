@@ -2,770 +2,318 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const deleteAttendance = /* GraphQL */ `
-  mutation DeleteAttendance($id: ID!) {
-    deleteAttendance(id: $id)
-  }
-`;
-export const createBlog = /* GraphQL */ `
-  mutation CreateBlog(
-    $input: CreateBlogInput!
-    $condition: ModelBlogConditionInput
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
   ) {
-    createBlog(input: $input, condition: $condition) {
+    createUser(input: $input, condition: $condition) {
       id
-      name
-      posts {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateBlog = /* GraphQL */ `
-  mutation UpdateBlog(
-    $input: UpdateBlogInput!
-    $condition: ModelBlogConditionInput
-  ) {
-    updateBlog(input: $input, condition: $condition) {
-      id
-      name
-      posts {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteBlog = /* GraphQL */ `
-  mutation DeleteBlog(
-    $input: DeleteBlogInput!
-    $condition: ModelBlogConditionInput
-  ) {
-    deleteBlog(input: $input, condition: $condition) {
-      id
-      name
-      posts {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createPost = /* GraphQL */ `
-  mutation CreatePost(
-    $input: CreatePostInput!
-    $condition: ModelPostConditionInput
-  ) {
-    createPost(input: $input, condition: $condition) {
-      id
-      title
-      blogID
-      blog {
-        id
-        name
-        createdAt
-        updatedAt
-      }
-      comments {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updatePost = /* GraphQL */ `
-  mutation UpdatePost(
-    $input: UpdatePostInput!
-    $condition: ModelPostConditionInput
-  ) {
-    updatePost(input: $input, condition: $condition) {
-      id
-      title
-      blogID
-      blog {
-        id
-        name
-        createdAt
-        updatedAt
-      }
-      comments {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deletePost = /* GraphQL */ `
-  mutation DeletePost(
-    $input: DeletePostInput!
-    $condition: ModelPostConditionInput
-  ) {
-    deletePost(input: $input, condition: $condition) {
-      id
-      title
-      blogID
-      blog {
-        id
-        name
-        createdAt
-        updatedAt
-      }
-      comments {
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createComment = /* GraphQL */ `
-  mutation CreateComment(
-    $input: CreateCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    createComment(input: $input, condition: $condition) {
-      id
-      postID
-      post {
-        id
-        title
-        blogID
-        createdAt
-        updatedAt
-      }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateComment = /* GraphQL */ `
-  mutation UpdateComment(
-    $input: UpdateCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    updateComment(input: $input, condition: $condition) {
-      id
-      postID
-      post {
-        id
-        title
-        blogID
-        createdAt
-        updatedAt
-      }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteComment = /* GraphQL */ `
-  mutation DeleteComment(
-    $input: DeleteCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    deleteComment(input: $input, condition: $condition) {
-      id
-      postID
-      post {
-        id
-        title
-        blogID
-        createdAt
-        updatedAt
-      }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createUserDoc = /* GraphQL */ `
-  mutation CreateUserDoc(
-    $input: CreateUserDocInput!
-    $condition: ModelUserDocConditionInput
-  ) {
-    createUserDoc(input: $input, condition: $condition) {
-      id
-      profileID
       email
-      deviceToken
       phoneNumber
-      createdAt
-      updatedAt
-      uProfile {
-        id
-        username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const updateUserDoc = /* GraphQL */ `
-  mutation UpdateUserDoc(
-    $input: UpdateUserDocInput!
-    $condition: ModelUserDocConditionInput
-  ) {
-    updateUserDoc(input: $input, condition: $condition) {
-      id
       profileID
-      email
-      deviceToken
-      phoneNumber
-      createdAt
-      updatedAt
-      uProfile {
+      profile {
         id
-        username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const deleteUserDoc = /* GraphQL */ `
-  mutation DeleteUserDoc(
-    $input: DeleteUserDocInput!
-    $condition: ModelUserDocConditionInput
-  ) {
-    deleteUserDoc(input: $input, condition: $condition) {
-      id
-      profileID
-      email
-      deviceToken
-      phoneNumber
-      createdAt
-      updatedAt
-      uProfile {
-        id
-        username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const createUprofile = /* GraphQL */ `
-  mutation CreateUprofile(
-    $input: CreateUprofileInput!
-    $condition: ModelUprofileConditionInput
-  ) {
-    createUprofile(input: $input, condition: $condition) {
-      id
-      username
-      name
-      userDocID
-      currentPlaceID
-      expoPushToken
-      createdAt
-      updatedAt
-      userDoc {
-        id
-        profileID
         email
-        deviceToken
-        phoneNumber
+        username
         createdAt
         updatedAt
+        userProfileUserId
       }
-      attendings {
-        nextToken
-      }
-      placeTimeSlots {
-        nextToken
-      }
-      currentPlace {
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      email
+      phoneNumber
+      profileID
+      profile {
         id
-        name
-        address
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
+      id
+      email
+      phoneNumber
+      profileID
+      profile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createUserProfile = /* GraphQL */ `
+  mutation CreateUserProfile(
+    $input: CreateUserProfileInput!
+    $condition: ModelUserProfileConditionInput
+  ) {
+    createUserProfile(input: $input, condition: $condition) {
+      id
+      email
+      username
+      user {
+        id
+        email
+        phoneNumber
+        profileID
         createdAt
         updatedAt
       }
       friends {
         nextToken
       }
-      sentNotifications {
+      presenceList {
         nextToken
       }
-      notifications {
-        nextToken
-      }
+      createdAt
+      updatedAt
+      userProfileUserId
     }
   }
 `;
-export const updateUprofile = /* GraphQL */ `
-  mutation UpdateUprofile(
-    $input: UpdateUprofileInput!
-    $condition: ModelUprofileConditionInput
+export const updateUserProfile = /* GraphQL */ `
+  mutation UpdateUserProfile(
+    $input: UpdateUserProfileInput!
+    $condition: ModelUserProfileConditionInput
   ) {
-    updateUprofile(input: $input, condition: $condition) {
+    updateUserProfile(input: $input, condition: $condition) {
       id
+      email
       username
-      name
-      userDocID
-      currentPlaceID
-      expoPushToken
-      createdAt
-      updatedAt
-      userDoc {
+      user {
         id
-        profileID
         email
-        deviceToken
         phoneNumber
-        createdAt
-        updatedAt
-      }
-      attendings {
-        nextToken
-      }
-      placeTimeSlots {
-        nextToken
-      }
-      currentPlace {
-        id
-        name
-        address
+        profileID
         createdAt
         updatedAt
       }
       friends {
         nextToken
       }
-      sentNotifications {
+      presenceList {
         nextToken
       }
-      notifications {
-        nextToken
-      }
+      createdAt
+      updatedAt
+      userProfileUserId
     }
   }
 `;
-export const deleteUprofile = /* GraphQL */ `
-  mutation DeleteUprofile(
-    $input: DeleteUprofileInput!
-    $condition: ModelUprofileConditionInput
+export const deleteUserProfile = /* GraphQL */ `
+  mutation DeleteUserProfile(
+    $input: DeleteUserProfileInput!
+    $condition: ModelUserProfileConditionInput
   ) {
-    deleteUprofile(input: $input, condition: $condition) {
+    deleteUserProfile(input: $input, condition: $condition) {
       id
+      email
       username
-      name
-      userDocID
-      currentPlaceID
-      expoPushToken
-      createdAt
-      updatedAt
-      userDoc {
+      user {
         id
-        profileID
         email
-        deviceToken
         phoneNumber
-        createdAt
-        updatedAt
-      }
-      attendings {
-        nextToken
-      }
-      placeTimeSlots {
-        nextToken
-      }
-      currentPlace {
-        id
-        name
-        address
+        profileID
         createdAt
         updatedAt
       }
       friends {
         nextToken
       }
-      sentNotifications {
+      presenceList {
         nextToken
       }
-      notifications {
-        nextToken
-      }
+      createdAt
+      updatedAt
+      userProfileUserId
     }
   }
 `;
-export const createUserPlaceConnection = /* GraphQL */ `
-  mutation CreateUserPlaceConnection(
-    $input: CreateUserPlaceConnectionInput!
-    $condition: ModelUserPlaceConnectionConditionInput
+export const createFriendship = /* GraphQL */ `
+  mutation CreateFriendship(
+    $input: CreateFriendshipInput!
+    $condition: ModelFriendshipConditionInput
   ) {
-    createUserPlaceConnection(input: $input, condition: $condition) {
+    createFriendship(input: $input, condition: $condition) {
       id
-      profileID
-      placeID
-      arrivingTime
-      departureTime
-      placeTimeSoltUserPlaceConnection {
+      userProfileID
+      friendProfileID
+      friendProfile {
         id
-        name
-        address
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-      uProfile {
-        id
+        email
         username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
         createdAt
         updatedAt
-      }
-      place {
-        id
-        name
-        address
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const updateUserPlaceConnection = /* GraphQL */ `
-  mutation UpdateUserPlaceConnection(
-    $input: UpdateUserPlaceConnectionInput!
-    $condition: ModelUserPlaceConnectionConditionInput
-  ) {
-    updateUserPlaceConnection(input: $input, condition: $condition) {
-      id
-      profileID
-      placeID
-      arrivingTime
-      departureTime
-      placeTimeSoltUserPlaceConnection {
-        id
-        name
-        address
-        createdAt
-        updatedAt
+        userProfileUserId
       }
       createdAt
       updatedAt
-      uProfile {
+    }
+  }
+`;
+export const updateFriendship = /* GraphQL */ `
+  mutation UpdateFriendship(
+    $input: UpdateFriendshipInput!
+    $condition: ModelFriendshipConditionInput
+  ) {
+    updateFriendship(input: $input, condition: $condition) {
+      id
+      userProfileID
+      friendProfileID
+      friendProfile {
         id
+        email
         username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
         createdAt
         updatedAt
-      }
-      place {
-        id
-        name
-        address
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const deleteUserPlaceConnection = /* GraphQL */ `
-  mutation DeleteUserPlaceConnection(
-    $input: DeleteUserPlaceConnectionInput!
-    $condition: ModelUserPlaceConnectionConditionInput
-  ) {
-    deleteUserPlaceConnection(input: $input, condition: $condition) {
-      id
-      profileID
-      placeID
-      arrivingTime
-      departureTime
-      placeTimeSoltUserPlaceConnection {
-        id
-        name
-        address
-        createdAt
-        updatedAt
+        userProfileUserId
       }
       createdAt
       updatedAt
-      uProfile {
+    }
+  }
+`;
+export const deleteFriendship = /* GraphQL */ `
+  mutation DeleteFriendship(
+    $input: DeleteFriendshipInput!
+    $condition: ModelFriendshipConditionInput
+  ) {
+    deleteFriendship(input: $input, condition: $condition) {
+      id
+      userProfileID
+      friendProfileID
+      friendProfile {
         id
+        email
         username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
         createdAt
         updatedAt
+        userProfileUserId
       }
-      place {
-        id
-        name
-        address
-        createdAt
-        updatedAt
-      }
+      createdAt
+      updatedAt
     }
   }
 `;
-export const createPlaceTimeSlot = /* GraphQL */ `
-  mutation CreatePlaceTimeSlot(
-    $input: CreatePlaceTimeSlotInput!
-    $condition: ModelPlaceTimeSlotConditionInput
+export const createFriendshipRequest = /* GraphQL */ `
+  mutation CreateFriendshipRequest(
+    $input: CreateFriendshipRequestInput!
+    $condition: ModelFriendshipRequestConditionInput
   ) {
-    createPlaceTimeSlot(input: $input, condition: $condition) {
+    createFriendshipRequest(input: $input, condition: $condition) {
       id
-      numAttendings
-      myDate {
-        weekDay
-        monthDay
-        month
-        year
-      }
-      dateTime
-      placeID
-      startingHour
-      endingHour
-      createdAt
-      updatedAt
-      attendings {
-        nextToken
-      }
-      place {
+      status
+      senderProfileID
+      receiverProfileID
+      senderProfile {
         id
-        name
-        address
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const updatePlaceTimeSlot = /* GraphQL */ `
-  mutation UpdatePlaceTimeSlot(
-    $input: UpdatePlaceTimeSlotInput!
-    $condition: ModelPlaceTimeSlotConditionInput
-  ) {
-    updatePlaceTimeSlot(input: $input, condition: $condition) {
-      id
-      numAttendings
-      myDate {
-        weekDay
-        monthDay
-        month
-        year
-      }
-      dateTime
-      placeID
-      startingHour
-      endingHour
-      createdAt
-      updatedAt
-      attendings {
-        nextToken
-      }
-      place {
-        id
-        name
-        address
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const deletePlaceTimeSlot = /* GraphQL */ `
-  mutation DeletePlaceTimeSlot(
-    $input: DeletePlaceTimeSlotInput!
-    $condition: ModelPlaceTimeSlotConditionInput
-  ) {
-    deletePlaceTimeSlot(input: $input, condition: $condition) {
-      id
-      numAttendings
-      myDate {
-        weekDay
-        monthDay
-        month
-        year
-      }
-      dateTime
-      placeID
-      startingHour
-      endingHour
-      createdAt
-      updatedAt
-      attendings {
-        nextToken
-      }
-      place {
-        id
-        name
-        address
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const createPlaceTimeSlotUserPlaceConnection = /* GraphQL */ `
-  mutation CreatePlaceTimeSlotUserPlaceConnection(
-    $input: CreatePlaceTimeSlotUserPlaceConnectionInput!
-    $condition: ModelPlaceTimeSlotUserPlaceConnectionConditionInput
-  ) {
-    createPlaceTimeSlotUserPlaceConnection(
-      input: $input
-      condition: $condition
-    ) {
-      id
-      attendingID
-      profileID
-      placeTimeSlotID
-      createdAt
-      updatedAt
-      uProfile {
-        id
+        email
         username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
         createdAt
         updatedAt
+        userProfileUserId
       }
-      attending {
+      receiverProfile {
         id
-        profileID
-        placeID
-        arrivingTime
-        departureTime
+        email
+        username
         createdAt
         updatedAt
+        userProfileUserId
       }
-      timeSlot {
-        id
-        numAttendings
-        dateTime
-        placeID
-        startingHour
-        endingHour
-        createdAt
-        updatedAt
-      }
+      createdAt
+      updatedAt
     }
   }
 `;
-export const updatePlaceTimeSlotUserPlaceConnection = /* GraphQL */ `
-  mutation UpdatePlaceTimeSlotUserPlaceConnection(
-    $input: UpdatePlaceTimeSlotUserPlaceConnectionInput!
-    $condition: ModelPlaceTimeSlotUserPlaceConnectionConditionInput
+export const updateFriendshipRequest = /* GraphQL */ `
+  mutation UpdateFriendshipRequest(
+    $input: UpdateFriendshipRequestInput!
+    $condition: ModelFriendshipRequestConditionInput
   ) {
-    updatePlaceTimeSlotUserPlaceConnection(
-      input: $input
-      condition: $condition
-    ) {
+    updateFriendshipRequest(input: $input, condition: $condition) {
       id
-      attendingID
-      profileID
-      placeTimeSlotID
+      status
+      senderProfileID
+      receiverProfileID
+      senderProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      receiverProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
       createdAt
       updatedAt
-      uProfile {
-        id
-        username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
-        createdAt
-        updatedAt
-      }
-      attending {
-        id
-        profileID
-        placeID
-        arrivingTime
-        departureTime
-        createdAt
-        updatedAt
-      }
-      timeSlot {
-        id
-        numAttendings
-        dateTime
-        placeID
-        startingHour
-        endingHour
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
-export const deletePlaceTimeSlotUserPlaceConnection = /* GraphQL */ `
-  mutation DeletePlaceTimeSlotUserPlaceConnection(
-    $input: DeletePlaceTimeSlotUserPlaceConnectionInput!
-    $condition: ModelPlaceTimeSlotUserPlaceConnectionConditionInput
+export const deleteFriendshipRequest = /* GraphQL */ `
+  mutation DeleteFriendshipRequest(
+    $input: DeleteFriendshipRequestInput!
+    $condition: ModelFriendshipRequestConditionInput
   ) {
-    deletePlaceTimeSlotUserPlaceConnection(
-      input: $input
-      condition: $condition
-    ) {
+    deleteFriendshipRequest(input: $input, condition: $condition) {
       id
-      attendingID
-      profileID
-      placeTimeSlotID
+      status
+      senderProfileID
+      receiverProfileID
+      senderProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      receiverProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
       createdAt
       updatedAt
-      uProfile {
-        id
-        username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
-        createdAt
-        updatedAt
-      }
-      attending {
-        id
-        profileID
-        placeID
-        arrivingTime
-        departureTime
-        createdAt
-        updatedAt
-      }
-      timeSlot {
-        id
-        numAttendings
-        dateTime
-        placeID
-        startingHour
-        endingHour
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
@@ -778,18 +326,11 @@ export const createPlace = /* GraphQL */ `
       id
       name
       address
-      coords {
-        lon
-        lat
+      gameList {
+        nextToken
       }
       createdAt
       updatedAt
-      currentPlayers {
-        nextToken
-      }
-      timeSlots {
-        nextToken
-      }
     }
   }
 `;
@@ -802,18 +343,11 @@ export const updatePlace = /* GraphQL */ `
       id
       name
       address
-      coords {
-        lon
-        lat
+      gameList {
+        nextToken
       }
       createdAt
       updatedAt
-      currentPlayers {
-        nextToken
-      }
-      timeSlots {
-        nextToken
-      }
     }
   }
 `;
@@ -826,90 +360,209 @@ export const deletePlace = /* GraphQL */ `
       id
       name
       address
-      coords {
-        lon
-        lat
-      }
-      createdAt
-      updatedAt
-      currentPlayers {
+      gameList {
         nextToken
       }
-      timeSlots {
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createGame = /* GraphQL */ `
+  mutation CreateGame(
+    $input: CreateGameInput!
+    $condition: ModelGameConditionInput
+  ) {
+    createGame(input: $input, condition: $condition) {
+      id
+      presenceList {
         nextToken
       }
-    }
-  }
-`;
-export const createFriendConnection = /* GraphQL */ `
-  mutation CreateFriendConnection(
-    $input: CreateFriendConnectionInput!
-    $condition: ModelFriendConnectionConditionInput
-  ) {
-    createFriendConnection(input: $input, condition: $condition) {
-      id
-      userProfileID
-      friendProfileID
-      createdAt
-      updatedAt
-      friendProfile {
+      placeID
+      startingDateTime
+      endingDateTime
+      place {
         id
-        username
         name
-        userDocID
-        currentPlaceID
-        expoPushToken
+        address
         createdAt
         updatedAt
       }
+      createdAt
+      updatedAt
     }
   }
 `;
-export const updateFriendConnection = /* GraphQL */ `
-  mutation UpdateFriendConnection(
-    $input: UpdateFriendConnectionInput!
-    $condition: ModelFriendConnectionConditionInput
+export const updateGame = /* GraphQL */ `
+  mutation UpdateGame(
+    $input: UpdateGameInput!
+    $condition: ModelGameConditionInput
   ) {
-    updateFriendConnection(input: $input, condition: $condition) {
+    updateGame(input: $input, condition: $condition) {
       id
-      userProfileID
-      friendProfileID
-      createdAt
-      updatedAt
-      friendProfile {
+      presenceList {
+        nextToken
+      }
+      placeID
+      startingDateTime
+      endingDateTime
+      place {
         id
-        username
         name
-        userDocID
-        currentPlaceID
-        expoPushToken
+        address
         createdAt
         updatedAt
       }
+      createdAt
+      updatedAt
     }
   }
 `;
-export const deleteFriendConnection = /* GraphQL */ `
-  mutation DeleteFriendConnection(
-    $input: DeleteFriendConnectionInput!
-    $condition: ModelFriendConnectionConditionInput
+export const deleteGame = /* GraphQL */ `
+  mutation DeleteGame(
+    $input: DeleteGameInput!
+    $condition: ModelGameConditionInput
   ) {
-    deleteFriendConnection(input: $input, condition: $condition) {
+    deleteGame(input: $input, condition: $condition) {
       id
-      userProfileID
-      friendProfileID
-      createdAt
-      updatedAt
-      friendProfile {
+      presenceList {
+        nextToken
+      }
+      placeID
+      startingDateTime
+      endingDateTime
+      place {
         id
-        username
         name
-        userDocID
-        currentPlaceID
-        expoPushToken
+        address
         createdAt
         updatedAt
       }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPresence = /* GraphQL */ `
+  mutation CreatePresence(
+    $input: CreatePresenceInput!
+    $condition: ModelPresenceConditionInput
+  ) {
+    createPresence(input: $input, condition: $condition) {
+      id
+      type
+      placeID
+      userProfileID
+      gameID
+      game {
+        id
+        placeID
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
+      place {
+        id
+        name
+        address
+        createdAt
+        updatedAt
+      }
+      userProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      startingDateTime
+      endingDateTime
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePresence = /* GraphQL */ `
+  mutation UpdatePresence(
+    $input: UpdatePresenceInput!
+    $condition: ModelPresenceConditionInput
+  ) {
+    updatePresence(input: $input, condition: $condition) {
+      id
+      type
+      placeID
+      userProfileID
+      gameID
+      game {
+        id
+        placeID
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
+      place {
+        id
+        name
+        address
+        createdAt
+        updatedAt
+      }
+      userProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      startingDateTime
+      endingDateTime
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePresence = /* GraphQL */ `
+  mutation DeletePresence(
+    $input: DeletePresenceInput!
+    $condition: ModelPresenceConditionInput
+  ) {
+    deletePresence(input: $input, condition: $condition) {
+      id
+      type
+      placeID
+      userProfileID
+      gameID
+      game {
+        id
+        placeID
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
+      place {
+        id
+        name
+        address
+        createdAt
+        updatedAt
+      }
+      userProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      startingDateTime
+      endingDateTime
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -920,49 +573,37 @@ export const createNotification = /* GraphQL */ `
   ) {
     createNotification(input: $input, condition: $condition) {
       id
-      placeID
-      placeName
-      arrivingTime
-      departureTime
-      senderProfileID
-      message
-      receiverProfileID
-      photo
-      createdAt
       type
-      status
-      placeTimeSlotID
-      updatedAt
-      userProfile {
+      receiverProfileID
+      friendshipRequestID
+      friendshipRequest {
         id
-        username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
+        status
+        senderProfileID
+        receiverProfileID
         createdAt
         updatedAt
       }
+      presenceID
+      senderProfileID
       senderProfile {
         id
+        email
         username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
         createdAt
         updatedAt
+        userProfileUserId
       }
-      placeTimeSlot {
+      receiverProfile {
         id
-        numAttendings
-        dateTime
-        placeID
-        startingHour
-        endingHour
+        email
+        username
         createdAt
         updatedAt
+        userProfileUserId
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -973,49 +614,37 @@ export const updateNotification = /* GraphQL */ `
   ) {
     updateNotification(input: $input, condition: $condition) {
       id
-      placeID
-      placeName
-      arrivingTime
-      departureTime
-      senderProfileID
-      message
-      receiverProfileID
-      photo
-      createdAt
       type
-      status
-      placeTimeSlotID
-      updatedAt
-      userProfile {
+      receiverProfileID
+      friendshipRequestID
+      friendshipRequest {
         id
-        username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
+        status
+        senderProfileID
+        receiverProfileID
         createdAt
         updatedAt
       }
+      presenceID
+      senderProfileID
       senderProfile {
         id
+        email
         username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
         createdAt
         updatedAt
+        userProfileUserId
       }
-      placeTimeSlot {
+      receiverProfile {
         id
-        numAttendings
-        dateTime
-        placeID
-        startingHour
-        endingHour
+        email
+        username
         createdAt
         updatedAt
+        userProfileUserId
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -1026,185 +655,180 @@ export const deleteNotification = /* GraphQL */ `
   ) {
     deleteNotification(input: $input, condition: $condition) {
       id
-      placeID
-      placeName
-      arrivingTime
-      departureTime
-      senderProfileID
-      message
-      receiverProfileID
-      photo
-      createdAt
       type
-      status
-      placeTimeSlotID
-      updatedAt
-      userProfile {
+      receiverProfileID
+      friendshipRequestID
+      friendshipRequest {
         id
-        username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
+        status
+        senderProfileID
+        receiverProfileID
         createdAt
         updatedAt
+      }
+      presenceID
+      senderProfileID
+      senderProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      receiverProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createJoinMeInvitation = /* GraphQL */ `
+  mutation CreateJoinMeInvitation(
+    $input: CreateJoinMeInvitationInput!
+    $condition: ModelJoinMeInvitationConditionInput
+  ) {
+    createJoinMeInvitation(input: $input, condition: $condition) {
+      id
+      type
+      status
+      receiverProfileID
+      senderProfileID
+      gameID
+      receiverProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
       }
       senderProfile {
         id
+        email
         username
-        name
-        userDocID
-        currentPlaceID
-        expoPushToken
         createdAt
         updatedAt
+        userProfileUserId
       }
-      placeTimeSlot {
+      game {
         id
-        numAttendings
-        dateTime
         placeID
-        startingHour
-        endingHour
+        startingDateTime
+        endingDateTime
         createdAt
         updatedAt
       }
-    }
-  }
-`;
-export const createPushNotificationsBatch = /* GraphQL */ `
-  mutation CreatePushNotificationsBatch(
-    $input: CreatePushNotificationsBatchInput!
-    $condition: ModelPushNotificationsBatchConditionInput
-  ) {
-    createPushNotificationsBatch(input: $input, condition: $condition) {
-      id
-      payloadsList
       createdAt
       updatedAt
     }
   }
 `;
-export const updatePushNotificationsBatch = /* GraphQL */ `
-  mutation UpdatePushNotificationsBatch(
-    $input: UpdatePushNotificationsBatchInput!
-    $condition: ModelPushNotificationsBatchConditionInput
+export const updateJoinMeInvitation = /* GraphQL */ `
+  mutation UpdateJoinMeInvitation(
+    $input: UpdateJoinMeInvitationInput!
+    $condition: ModelJoinMeInvitationConditionInput
   ) {
-    updatePushNotificationsBatch(input: $input, condition: $condition) {
+    updateJoinMeInvitation(input: $input, condition: $condition) {
       id
-      payloadsList
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deletePushNotificationsBatch = /* GraphQL */ `
-  mutation DeletePushNotificationsBatch(
-    $input: DeletePushNotificationsBatchInput!
-    $condition: ModelPushNotificationsBatchConditionInput
-  ) {
-    deletePushNotificationsBatch(input: $input, condition: $condition) {
-      id
-      payloadsList
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createAttendance = /* GraphQL */ `
-  mutation CreateAttendance(
-    $arrivingTime: AWSDateTime!
-    $departureTime: AWSDateTime
-    $placeID: String!
-    $profileID: String!
-  ) {
-    createAttendance(
-      arrivingTime: $arrivingTime
-      departureTime: $departureTime
-      placeID: $placeID
-      profileID: $profileID
-    ) {
-      id
-      attendingID
-      profileID
-      placeTimeSlotID
-      createdAt
-      updatedAt
-      uProfile {
+      type
+      status
+      receiverProfileID
+      senderProfileID
+      gameID
+      receiverProfile {
         id
+        email
         username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      senderProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      game {
+        id
+        placeID
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteJoinMeInvitation = /* GraphQL */ `
+  mutation DeleteJoinMeInvitation(
+    $input: DeleteJoinMeInvitationInput!
+    $condition: ModelJoinMeInvitationConditionInput
+  ) {
+    deleteJoinMeInvitation(input: $input, condition: $condition) {
+      id
+      type
+      status
+      receiverProfileID
+      senderProfileID
+      gameID
+      receiverProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      senderProfile {
+        id
+        email
+        username
+        createdAt
+        updatedAt
+        userProfileUserId
+      }
+      game {
+        id
+        placeID
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const playMutation = /* GraphQL */ `
+  mutation PlayMutation($input: PlayMutationInput) {
+    playMutation(input: $input) {
+      id
+      presenceList {
+        nextToken
+      }
+      placeID
+      startingDateTime
+      endingDateTime
+      place {
+        id
         name
-        userDocID
-        currentPlaceID
-        expoPushToken
+        address
         createdAt
         updatedAt
       }
-      attending {
-        id
-        profileID
-        placeID
-        arrivingTime
-        departureTime
-        createdAt
-        updatedAt
-      }
-      timeSlot {
-        id
-        numAttendings
-        dateTime
-        placeID
-        startingHour
-        endingHour
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const createPushNotifications = /* GraphQL */ `
-  mutation CreatePushNotifications(
-    $input: CreatePushNotificationsInput!
-    $condition: ModelPushNotificationsConditionInput
-  ) {
-    createPushNotifications(input: $input, condition: $condition) {
-      id
-      body
-      userTokens
-      data
-      type
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updatePushNotifications = /* GraphQL */ `
-  mutation UpdatePushNotifications(
-    $input: UpdatePushNotificationsInput!
-    $condition: ModelPushNotificationsConditionInput
-  ) {
-    updatePushNotifications(input: $input, condition: $condition) {
-      id
-      body
-      userTokens
-      data
-      type
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deletePushNotifications = /* GraphQL */ `
-  mutation DeletePushNotifications(
-    $input: DeletePushNotificationsInput!
-    $condition: ModelPushNotificationsConditionInput
-  ) {
-    deletePushNotifications(input: $input, condition: $condition) {
-      id
-      body
-      userTokens
-      data
-      type
       createdAt
       updatedAt
     }

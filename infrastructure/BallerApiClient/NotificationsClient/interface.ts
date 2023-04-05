@@ -4,6 +4,11 @@ import { ListNotificationsQuery } from "./queries"
 
 
 export interface INotificationsClient {
-    filterNotificationsByReceiver(input: ListNotificationsQueryVariables): Promise<ListNotificationsQuery | undefined>
-    subscribeToNotifications(variables: MyNotificationsSubscriptionVariables): Promise<void>
+    filterNotificationsByReceiver(receiverProfileID: string): Promise<ListNotificationsQuery | undefined>
+    subscribeToNotifications(receiverProfileID: string, callback: () => void): void
+}
+
+
+export interface INotificationsSubscriber {
+    onNewNotifications(notification: ListNotificationsQuery): Promise<void>
 }

@@ -1,14 +1,6 @@
 import { UserProfileData } from "../types";
 import { FriendshipRequestStatus, NotificationType } from "../API";
 
-export type MyNotificationsSubscription = {
-    onCreateNotificationByReceiver?:  {
-      __typename: "Notification",
-      id: string,
-      type: NotificationType,
-    } | null,
-};
-
 
 export type MyNotificationsSubscriptionVariables = {
   filter: {
@@ -17,6 +9,13 @@ export type MyNotificationsSubscriptionVariables = {
     }
   }
 };
+
+export type MyNotificationsSubscription = {
+  onCreateNotification?: Notification | null,
+};
+
+
+
 
 
 export const myNotificationsSubscription_gql = /* GraphQL */ `
@@ -29,7 +28,7 @@ export const myNotificationsSubscription_gql = /* GraphQL */ `
 `;
 
 export const onCreateNotificationByReceiver = /* GraphQL */ `
-  subscription OnCreateNotificationByReceiver($receiverProfileID: ID!) {
+  subscription OnCreateNotification($receiverProfileID: ID!) {
     onCreateNotification(receiverProfileID: $receiverProfileID) {
       id
       type
@@ -65,41 +64,48 @@ export const onCreateNotificationByReceiver = /* GraphQL */ `
 `;
 
 
-export const onCreateNotification = /* GraphQL */ `
-  subscription OnCreateNotification {
-    onCreateNotification {
+export const onCreateNotification_gql = /* GraphQL */ `
+  subscription OnCreateNotification(
+    $filter: ModelSubscriptionNotificationFilterInput
+  ) {
+    onCreateNotification(filter: $filter) {
       id
       type
       receiverProfileID
-      friendshipRequestID
-      friendshipRequest {
+      senderProfile{
+        id
+        username
+      }
+      receiverProfileID
+      receiverProfile{
+        id
+        username
+      }
+      friendshipRequest{
         id
         status
         senderProfileID
-        receiverProfileID
-        createdAt
-        updatedAt
-      }
-      presenceID
-      senderProfileID
-      senderProfile {
-        id
-        email
-        username
-        createdAt
-        updatedAt
-        userProfileUserId
-      }
-      receiverProfile {
-        id
-        email
-        username
-        createdAt
-        updatedAt
-        userProfileUserId
+        senderProfile{
+          id
+          username
+        }
       }
       createdAt
       updatedAt
     }
   }
 `;
+
+
+
+
+
+export function genNotificationFilterByReceiverVariables(receiverProfileID: string): MyNotificationsSubscriptionVariables{
+  return {
+    filter: {
+      receiverProfileID: {
+        eq: receiverProfileID
+      }
+    }
+  };
+}
