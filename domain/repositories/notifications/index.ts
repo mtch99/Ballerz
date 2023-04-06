@@ -23,7 +23,7 @@ export class NotificationsRepository implements INotificationsRepository {
         this.client = new NotificationsClient(undefined,"API_KEY");
         if(userProfileID){
             this.subscribeToMyNotifications(userProfileID)
-            this.getNotificationsByUser(userProfileID);
+            // this.getNotificationsByUser(userProfileID);
         }
     }
 

@@ -36,6 +36,9 @@ There must be three different games on three different courts, two at the moment
                         - [ ] Log the subscription event
                         * [ ] Did not work
                             - [ ] try implementing subscription using web socket io
+                            * [ ] Did not work
+                                - [ ] try implement aws-appsync-subscription link and appsync
+                                 
 
            
 

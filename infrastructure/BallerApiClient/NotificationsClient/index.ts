@@ -26,7 +26,6 @@ export default class NotificationsClient extends BallerzApiClient implements INo
         this.lastNotification = null
         Hub.listen("api", (data: any) => {
             const { payload } = data;
-            console.log(`payload ${JSON.stringify(payload)}`);
             if (
               payload.event === CONNECTION_STATE_CHANGE
             ) {
@@ -35,7 +34,7 @@ export default class NotificationsClient extends BallerzApiClient implements INo
                 console.error("connection state changed to connected")
         
               }
-              console.error(payload.data.connectionState);
+              console.error(`connextionState: ${payload.data.connectionState}`);
             }
         });
           
@@ -46,7 +45,10 @@ export default class NotificationsClient extends BallerzApiClient implements INo
         const variables = genNotificationFilterByReceiverVariables(userProfileID)
         const payload = this.genRequestPayload(onCreateNotification_gql, variables)
         this.subscription = API.graphql<GraphQLSubscription<MyNotificationsSubscription>>(
-            graphqlOperation(onCreateNotification_gql)
+            {
+                ...payload,
+                authMode:"API_KEY",
+            }
         ).subscribe(
             {
                 next: ({provider, value}) => {
@@ -60,7 +62,7 @@ export default class NotificationsClient extends BallerzApiClient implements INo
                 }
             }
         )   
-        console.log(this.subscription.closed)
+        console.warn(`subscription closed: ${this.subscription.closed}`)
     }
 
 
