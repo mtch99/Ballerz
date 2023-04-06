@@ -15,11 +15,16 @@ import { MyNotificationsSubscription } from "../../../infrastructure/BallerApiCl
 export class NotificationsRepository implements INotificationsRepository {
     observer: INotificationsUseCase;
     client: INotificationsClient
+    userProfileID: string | undefined;
 
-    constructor(observer: INotificationsUseCase) {
+    constructor(observer: INotificationsUseCase, userProfileID?: string) {
         this.observer = observer;
         console.log(`Notifications repository using a notifications client mock`)
-        this.client = new NotificationsClientMock();
+        this.client = new NotificationsClient(undefined,"API_KEY");
+        if(userProfileID){
+            this.subscribeToMyNotifications(userProfileID)
+            this.getNotificationsByUser(userProfileID);
+        }
     }
 
     async getNotificationsByUser(userProfileId: string): Promise<IGetMyNotificationsResult> {

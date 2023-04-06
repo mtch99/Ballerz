@@ -6,12 +6,12 @@ import BallerzApiClient from "../../../infrastructure/BallerApiClient/client";
 
 
 
-export default class NotificationUseCase implements INotificationsUseCase {
+export default class NotificationsUseCase implements INotificationsUseCase {
     
     repo: INotificationsRepository
     
     constructor(observer: INotificationsObserver,repo?: INotificationsRepository) {
-        this.repo = repo || new NotificationsRepository(this);
+        this.repo = repo || new NotificationsRepository(this, "123");
     }
 
 

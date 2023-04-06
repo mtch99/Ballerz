@@ -31,9 +31,11 @@ There must be three different games on three different courts, two at the moment
 
                     
                 - [ ] Test
-                    - [ ] Initialise Notifications repository with userProfieID 123
+                    - [x] Initialise Notifications repository with userProfieID 123
                     - [ ] Launch the app and execute a mutation  in the console
                         - [ ] Log the subscription event
+                        * [ ] Did not work
+                            - [ ] try implementing subscription using web socket io
 
            
 

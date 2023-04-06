@@ -1,7 +1,8 @@
 import { GraphQLOptions } from "@aws-amplify/api-graphql";
 import { GraphQLResult } from "@aws-amplify/api";
 import { Amplify } from "aws-amplify";
-import { awsmobile, awsmobileAPIMock } from "./aws-exports";
+import awsmobile, {awsmobileAPIMock } from "./aws-exports";
+
 export default class BallerzApiClient {
     
     apiKeyAuthentication: boolean = false;

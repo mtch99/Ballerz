@@ -33,6 +33,9 @@ import AuthController from "./auth";
 import IAuthController from "./auth/interface";
 import { AuthState, selectAuth } from "../app/features/Auth/slice";
 import * as SplashScreen from 'expo-splash-screen'
+import { INotificationsObserver } from "../domain/use-cases/notifications/interface";
+import { IFriendShipRequestNotification } from "../domain/use-cases/types";
+import NotificationsUseCase from "../domain/use-cases/notifications";
 
 
 
@@ -117,6 +120,17 @@ export function AppProvider (props: IProps) {
     const placeListState: IPlaceListState = selector(selectPlaceListState)
     const placeMapState: IPlaceMapState = selector(selectPlaceMapState)
     const placeController: IPlaceController = new PlaceController(placeModel)
+
+    const fakeObserver: INotificationsObserver= {
+        onNewNotification: function (notification: IFriendShipRequestNotification): void {
+            throw new Error("Function not implemented.");
+        },
+        onNewNotificationsList: function (notifications: IFriendShipRequestNotification[]): void {
+            throw new Error("Function not implemented.");
+        }
+    }
+
+    const notificationsUseCase = new NotificationsUseCase(fakeObserver)  
 
     
     

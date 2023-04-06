@@ -60,7 +60,7 @@ export const onCreateNotificationByReceiver = /* GraphQL */ `
 `;
 
 
-export const onCreateNotification_gql = /* GraphQL */ `
+export const onCreateNotification_gql_old = /* GraphQL */ `
   subscription OnCreateNotification(
     $filter: ModelSubscriptionNotificationFilterInput
   ) {
@@ -88,6 +88,17 @@ export const onCreateNotification_gql = /* GraphQL */ `
       }
       createdAt
       updatedAt
+    }
+  }
+`;
+
+export const onCreateNotification_gql = /* GraphQL */ `
+  subscription OnCreateNotification(
+    $filter: ModelSubscriptionNotificationFilterInput
+  ) {
+    onCreateNotification(filter: $filter) {
+      id
+      type
     }
   }
 `;
