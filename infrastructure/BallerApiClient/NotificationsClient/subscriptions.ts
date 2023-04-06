@@ -1,5 +1,4 @@
-import { UserProfileData } from "../types";
-import { FriendshipRequestStatus, NotificationType } from "../API";
+import {Notification} from "./types";
 
 
 export type MyNotificationsSubscriptionVariables = {
@@ -10,13 +9,10 @@ export type MyNotificationsSubscriptionVariables = {
   }
 };
 
+
 export type MyNotificationsSubscription = {
   onCreateNotification?: Notification | null,
 };
-
-
-
-
 
 export const myNotificationsSubscription_gql = /* GraphQL */ `
   subscription OnCreateNotificationByReceiver($receiverProfileID: ID!) {

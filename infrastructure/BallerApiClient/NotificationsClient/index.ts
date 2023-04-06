@@ -1,6 +1,7 @@
 import { MyNotificationsSubscription, onCreateNotification_gql } from "./subscriptions";
 // import { awsmobile_game_feat } from "./../aws-exports";
-import {API, graphqlOperation, } from "aws-amplify"
+import {API} from "aws-amplify";
+import { AWSAppSyncRealTimeProvider } from "@aws-amplify/pubsub"
 import {GraphQLSubscription} from "@aws-amplify/api"
 import BallerzApiClient from "../client";
 import { INotificationsClient, INotificationsSubscriber } from "./interface";
@@ -8,6 +9,8 @@ import { ListNotificationsQuery, FilterNotificationsByUserQueryVariables, listNo
 import {GraphQLQuery, GraphQLResult} from "@aws-amplify/api"
 import { awsmobileAPIMock } from "../aws-exports";
 import { genNotificationFilterByReceiverVariables } from "./subscriptions";
+import { Notification } from "./types";
+import  {Observable, ZenObservable} from "zen-observable-ts";
 
 
 
@@ -15,31 +18,28 @@ import { genNotificationFilterByReceiverVariables } from "./subscriptions";
 export default class NotificationsClient extends BallerzApiClient implements INotificationsClient{
     
     lastNotification: Notification | null
-    subscriber: any
+    subscription: ZenObservable.Subscription| null = null;
 
     constructor(config?:any , authMode?: "API_KEY"){
         super(config, authMode);
         this.lastNotification = null
     }
     
-    subscribeToNotifications(userProfileID: string, callback: (value: GraphQLResult<GraphQLSubscription<MyNotificationsSubscription>>) => void): void {
+
+    subscribeToNotifications(userProfileID: string, callback: (value: Notification) => void): void {
         const variables = genNotificationFilterByReceiverVariables(userProfileID)
         const payload = this.genRequestPayload(onCreateNotification_gql, variables)
-        const subscription = API.graphql<GraphQLSubscription<MyNotificationsSubscription>>(payload)
-            .subscribe(
-                {
-                    next: ({provider, value}) => {
-                        console.error(`NotificationsSubscription received payload: \n ${JSON.stringify({provider, value})}`)
-                        callback(value)
-                    },
-                }
-        )
-
+        this.subscription = API.graphql<GraphQLSubscription<MyNotificationsSubscription>>(payload).subscribe(
+            {
+                next: ({provider, value}) => {
+                    if(value.data?.onCreateNotification){
+                        callback(value.data.onCreateNotification)
+                    }
+                    console.error(`NotificationsSubscription received payload: \n ${JSON.stringify({provider, value})}`)
+                },
+            }
+        )   
     }
-
-    
-
-
 
 
     async filterNotificationsByReceiver(receiverProfileID: string): Promise<ListNotificationsQuery | undefined> {
@@ -49,8 +49,6 @@ export default class NotificationsClient extends BallerzApiClient implements INo
         const result = this._handleResponse(response)
         return result
     }
-
-
 
 }
 

@@ -26,9 +26,14 @@ There must be three different games on three different courts, two at the moment
                 - [x] Define and Implement Notifications client
                     - [x] Implement Notifications filter by receiver
                     - [x] Implement Notifictaions subscription 
-                    - [ ] Subscribe to notifications on repository initialisation
+                    - [ ] Subscribe to notifications on repository initialisation if a userProfile is provided
+                        - [ ] Add userProfileID attribute to notifications repository
+
                     
-                - [ ] write Tests
+                - [ ] Test
+                    - [ ] Initialise Notifications repository with userProfieID 123
+                    - [ ] Launch the app and execute a mutation  in the console
+                        - [ ] Log the subscription event
 
            
 

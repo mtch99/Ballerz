@@ -1,12 +1,16 @@
-import { UserProfileData } from "./../../../infrastructure/BallerApiClient/types";
-import { IFriendShipRequestNotification, IUserProfileData } from "./../../use-cases/types";
+import { GraphQLResult, GraphQLSubscription } from "@aws-amplify/api";
+import { IGetMyNotificationsErrorReason, IgetMyNotificationsError } from "./../../use-cases/notifications/interface";
+import { FriendShipRequestData, UserProfileData } from "./../../../infrastructure/BallerApiClient/types";
+import { IFriendShipRequestNotification, IFriendshipRequest, IUserProfileData } from "./../../use-cases/types";
 import { FilterNotificationsByUserQueryVariables, ListNotificationsQuery } from "./../../../infrastructure/BallerApiClient/NotificationsClient/queries";
 import { INotificationsClient } from "./../../../infrastructure/BallerApiClient/NotificationsClient/interface";
+import { Notification as ClientNotification } from "./../../../infrastructure/BallerApiClient/NotificationsClient/types";
 import { INotificationsRepository, INotificationsUseCase, IGetMyNotificationsResult } from "../../use-cases/notifications/interface";
 import { Notification } from "../../use-cases/types";
 import NotificationsClient, { NotificationsClientMock } from "../../../infrastructure/BallerApiClient/NotificationsClient";
 import { NotificationType } from "../../../infrastructure/BallerApiClient/API";
 import { useTheme } from "react-navigation";
+import { MyNotificationsSubscription } from "../../../infrastructure/BallerApiClient/NotificationsClient/subscriptions";
 
 export class NotificationsRepository implements INotificationsRepository {
     observer: INotificationsUseCase;
@@ -17,21 +21,39 @@ export class NotificationsRepository implements INotificationsRepository {
         console.log(`Notifications repository using a notifications client mock`)
         this.client = new NotificationsClientMock();
     }
+
     async getNotificationsByUser(userProfileId: string): Promise<IGetMyNotificationsResult> {
-        const variables: FilterNotificationsByUserQueryVariables = {
-            filter: {
-                receiverProfileID: {
-                    eq: userProfileId
-                }
+        const response = await this.client.filterNotificationsByReceiver(userProfileId)
+        if(!response){
+            return {
+                error: {
+                    reason: IGetMyNotificationsErrorReason.NETWORK_ERROR,
+                    message: "Network error"
+                },
+                notifications: []
             }
         }
-        const response = await this.client.filterNotificationsByReceiver(variables)
+        const result = ResponseHandler.handleFilterNotificationsByReceiverResponse(response);
+        return result
     }
-    onNewNotification(notification: Notification): Promise<void> {
-        throw new Error("Method not implemented.");
+
+
+    private notificationsSubscriptionHandler(clientNotification: ClientNotification): void {
+        const notification = ResponseHandler.parseClientNotification(clientNotification)
+        if(notification){
+            this.onNewNotification(notification)
+        }
     }
+
+
+
+    onNewNotification(notification: Notification): void {
+        this.observer.onNewNotificatioReceived(notification)
+    }
+
+
     subscribeToMyNotifications(myProfileID: string): void {
-        throw new Error("Method not implemented.");
+        this.client.subscribeToNotifications(myProfileID, this.notificationsSubscriptionHandler.bind(this))
     }
 
 }
@@ -39,49 +61,108 @@ export class NotificationsRepository implements INotificationsRepository {
 
 class ResponseHandler {
     static handleFilterNotificationsByReceiverResponse(response: ListNotificationsQuery): IGetMyNotificationsResult{
+        let error: IGetMyNotificationsResult['error'] = false;
+        let notifications: IFriendShipRequestNotification[] = []
         if(response.listNotifications){
-            return {
-                error: false,
-                notifications: response.listNotifications.items
-            }
+            notifications = this.parseListNotificationsResult(response.listNotifications)
         } else {
+            error = {
+                reason: IGetMyNotificationsErrorReason.NETWORK_ERROR,
+                message: "Network Error"
+            }
+        }
 
+        return {
+            error,
+            notifications
         }
     }
 
 
-    static private parseNotificationsResult(arg: ListNotificationsQuery['listNotifications']): Notification[]{
+    private static parseListNotificationsResult(arg: ListNotificationsQuery['listNotifications']): Notification[]{
         const result: Notification[] = []
         if(arg){
             for(let item of arg.items){
-                if(item.type == NotificationType.friendshipRequest && item.senderProfile && item.friendshipRequest){
-                    const senderProfile: IUserProfileData = {
-                        ...item.senderProfile,
-                        badges: []
-                    }
-                    const notification: IFriendShipRequestNotification = {
-                        type: item.type,
-                        receiverProfileID: item.receiverProfileID,
-                        friendshipRequestID: item.friendshipRequestID as string,
-                        senderProfileID: item.senderProfileID as string,
-                        senderProfile: senderProfile,
-                        friendshipRequest: {
-                            ...item.friendshipRequest,
-                            senderProfile: this.parseUserProfileData(item.friendshipRequest.senderProfile),
-                        },
-                        createdAt: "",
-                        updatedAt: ""
-                    }
+                const notification = this.parseClientNotification(item)
+                if(notification){
+                    result.push(notification)
                 }
             }
         }
+        return result
+
     }
 
-    static private parseUserProfileData(input: UserProfileData): IUserProfileData{
+    static parseClientNotification(clientNotif: ClientNotification): Notification | undefined {
+        const notificationType = clientNotif.type
+        let result: Notification | undefined
+        switch(notificationType){
+            case NotificationType.friendshipRequest:
+                const friendShipRequestNotification = this.parseFriendshipRequestNotification(clientNotif)
+                if(friendShipRequestNotification){
+                    result = friendShipRequestNotification
+                }
+                break;
+            
+            default:
+                break;
+        }
+        return result
+    }
+
+
+    private static parseFriendshipRequestNotification(arg: ClientNotification): IFriendShipRequestNotification | undefined {
+        if(arg.type!= NotificationType.friendshipRequest 
+            || !arg.receiverProfileID || !arg.friendshipRequestID ||!arg.senderProfileID 
+            || !arg.senderProfile || !arg.friendshipRequest
+        ){
+            return undefined
+        }
+
+        const senderProfile = this.parseUserProfileData(arg.senderProfile)
+        const friendshipRequest = this.parseFriendShipRequest(arg.friendshipRequest)
+
+        if(!friendshipRequest){
+            return undefined
+        }
+
+        const result: IFriendShipRequestNotification = {
+            type: arg.type,
+            receiverProfileID: arg.receiverProfileID,
+            senderProfileID: arg.senderProfileID,
+            senderProfile: senderProfile,
+            friendshipRequestID: arg.friendshipRequestID,
+            friendshipRequest: friendshipRequest,
+            createdAt: arg.createdAt,
+            updatedAt: arg.updatedAt
+        }
+
+        return result
+    }
+
+    private static parseUserProfileData(input: UserProfileData): IUserProfileData{
         return {
             ...input,
             badges: []
         }
+    }
+
+    static parseFriendShipRequest(input: FriendShipRequestData): IFriendshipRequest | undefined {
+        
+        if(!input.receiverProfileID ||  !input.receiverProfile  || !input.senderProfileID  || !input.senderProfile){
+            return undefined
+        }
+         
+        const result: IFriendshipRequest = {
+            id: input.id,
+            senderProfileID: input.senderProfileID,
+            senderProfile: this.parseUserProfileData(input.senderProfile),
+            receiverProfileID: input.receiverProfileID,
+            receiverProfile: this.parseUserProfileData(input.receiverProfile),
+            status: input.status
+        }
+
+        return result
     }
 
 }

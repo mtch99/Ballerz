@@ -14,7 +14,7 @@ export interface INotificationsObserver {
 export interface INotificationsRepository{
     observer: INotificationsUseCase
     getNotificationsByUser(userProfileId: string): Promise<IGetMyNotificationsResult>
-    onNewNotification(notification: Notification): Promise<void>
+    onNewNotification(notification: Notification): void
     subscribeToMyNotifications(myProfileID: string): void
 }
 

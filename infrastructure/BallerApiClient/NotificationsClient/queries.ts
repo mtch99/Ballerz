@@ -1,6 +1,7 @@
 import { ModelIDInput, FriendshipRequestStatus } from "./../API";
 import { NotificationType } from "../API";
 import { UserProfileData } from "../types";
+import {Notification} from "./types"
 
 
 
