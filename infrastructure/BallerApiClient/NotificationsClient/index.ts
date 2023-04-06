@@ -11,6 +11,8 @@ import { genNotificationFilterByReceiverVariables } from "./subscriptions";
 import { Notification } from "./types";
 import  {Observable, ZenObservable} from "zen-observable-ts";
 import { CONNECTION_STATE_CHANGE, ConnectionState } from '@aws-amplify/pubsub';
+import { subscriptionClient } from "./subscriptionClient";
+import { gql } from "@apollo/client";
 
 
 let priorConnectionState: ConnectionState;
@@ -42,27 +44,19 @@ export default class NotificationsClient extends BallerzApiClient implements INo
     
 
     async subscribeToNotifications(userProfileID: string, callback: (value: Notification) => void): Promise<void> {
-        const variables = genNotificationFilterByReceiverVariables(userProfileID)
-        const payload = this.genRequestPayload(onCreateNotification_gql, variables)
-        this.subscription = API.graphql<GraphQLSubscription<MyNotificationsSubscription>>(
-            {
-                ...payload,
-                authMode:"API_KEY",
-            }
-        ).subscribe(
-            {
-                next: ({provider, value}) => {
-                    if(value.data?.onCreateNotification){
-                        callback(value.data.onCreateNotification)
-                    }
-                    console.error(`NotificationsSubscription received payload: \n ${JSON.stringify({provider, value})}`)
-                },
-                error: (error: any) => {
-                    console.error(`NotificationsSubscription error: \n ${JSON.stringify(error)}`)
-                }
-            }
-        )   
-        console.warn(`subscription closed: ${this.subscription.closed}`)
+        const sub = subscriptionClient.subscribe({
+            query: gql(onCreateNotification_gql),
+            variables: genNotificationFilterByReceiverVariables(userProfileID),
+        })
+          
+        sub.subscribe({
+          next: (data) => {
+            console.log(data);
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        })
     }
 
 
