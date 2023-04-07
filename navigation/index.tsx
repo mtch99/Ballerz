@@ -56,7 +56,7 @@ export function RootStackNavigator(): JSX.Element {
 		// }
 	}, [])
 
-	if(authState.isDataPrepared && authState.user){
+	if(!authState.isDataPrepared && authState.user){
 		isSignedIn = true
 	}
 	

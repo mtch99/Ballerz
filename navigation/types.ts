@@ -20,7 +20,7 @@ declare global {
 
 export type RootStackParamList = {
 	AuthStack: NavigatorScreenParams<AuthStackParamList>
-  	AppStack:  NavigatorScreenParams<AppStackParamList>
+  	AppStack:  NavigatorScreenParams<AppStackParamList> | undefined
 };
 
 

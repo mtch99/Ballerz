@@ -12,9 +12,7 @@ export default class UserProfileRepository implements IUserProfileRepository {
 
     client: UserProfileClient
     constructor(){
-        // new UserProfileClient()
-        console.log("UserProfileRepository using a userProfileClient mock")
-        this.client = new UserProfileClientMock()
+        this.client = new UserProfileClient()
     }
     cacheMyUserProfileData(myUserProfileData: IMyUserProfileData): Promise<void> {
         throw new Error("Method not implemented.");

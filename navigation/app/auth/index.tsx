@@ -3,32 +3,44 @@ import { AuthStackParamList } from "./types";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { ConfirmSignupScreenWrapper, SignInScreenWrapper, SignupScreenWrapper } from "./wrappers";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { AppContext, IAppContext } from "../../../controllers/provider";
+import React from "react";
+import { globalStyles } from "../../../views/styles";
 
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 
 export function AuthStackNavigator(): JSX.Element {
-    const initialRouteName: keyof AuthStackParamList = "SignupScreen"
+    let initialRouteName: keyof AuthStackParamList = "SigninScreen"
+    const appContext = React.useContext<IAppContext>(AppContext);
+    if(appContext.authState.lastSigninInput.email.length==0){
+        initialRouteName="SignupScreen"
+    }
+
 
     return(
+        
         <Stack.Navigator
-            initialRouteName={initialRouteName}
+            {...{initialRouteName}}
         >
+            <Stack.Screen
+                name="SigninScreen"
+                options={{
+                    headerShown: false,
+                    title: "Connexion",
+                }}
+                component={SignInScreenWrapper}
+            />
             <Stack.Screen
                 name="SignupScreen"
                 options={{
-                    title: "Inscription"
+                    headerStyle: {backgroundColor: globalStyles.global.screenBackGroundColor},
+                    title: "Inscription",
+                    headerShown: false,
                 }}
                 component={SignupScreenWrapper}
             />
 
-            <Stack.Screen
-                name="SigninSreen"
-                options={{
-                    title: "Connexion",
-                }}
-				component={SignInScreenWrapper}
-            />
 
             <Stack.Screen
                 name="ConfirmSignupScreen"

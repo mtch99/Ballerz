@@ -34,8 +34,13 @@ There must be three different games on three different courts, two at the moment
         - [x] Add notification screen to FeedStack
 
     * [ ] Check auth flow
-        - [ ] Signup View
         - [ ] Signin View
+            - [x] Show signin screen if the user has already signed in in the past
+            - [ ] Error display at the view level and error message creation at screen level
+        - [ ] Signup View
+            - [x] Layout
+            - [ ] Error display at the view level and error message creation at screen level
+
         - [ ] Notifications subscriptions after userProfile retrieval or creation
         TODO: Refactor controllers and use cases to be singletons. Take the reent notification controller as example. Why? They can now communicate with each other easily and are not directly affected by components lifecycle
 

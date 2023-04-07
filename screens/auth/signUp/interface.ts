@@ -21,6 +21,7 @@ export interface ISignupScreenProps extends ISignupScreenPropsWithoutNavigation{
 export interface ISignupScreenNavigationController {
     goToConfirmSignup(email: string): void;
     goToApp(): void;
+    goToSignin(): void
 }
 
 
