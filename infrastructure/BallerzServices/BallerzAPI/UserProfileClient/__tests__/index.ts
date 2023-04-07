@@ -1,5 +1,5 @@
-import { UserProfileClientMock } from "./../index";
-import { awsmobileAPIMock } from "../../aws-exports";
+import { UserProfileClientMock } from "../index";
+import { awsmobileAPIMock } from "../../../aws-exports";
 import { GetUserProfileQueryVariables, ListUserProfilesQueryVariables } from "../../API";
 import UserProfileClient from ".."
 import { Amplify } from "aws-amplify";

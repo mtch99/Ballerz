@@ -1,5 +1,5 @@
-import { Friendship } from "./../../infrastructure/BallerApiClient/types";
-import { FriendshipRequest } from "./../../infrastructure/BallerApiClient/API";
+import { Friendship } from "../../infrastructure/BallerzServices/BallerzAPI/types";
+import { FriendshipRequest } from "../../infrastructure/BallerzServices/BallerzAPI/API";
 
 
 export interface IFeed extends Array<IFeedItem>{}

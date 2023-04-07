@@ -1,7 +1,7 @@
 import { IGetMyNotificationsResult, INotificationsObserver, INotificationsRepository, INotificationsUseCase } from "./interface";
 import { Notification } from "../types";
 import { NotificationsRepository } from "../../repositories/notifications";
-import BallerzApiClient from "../../../infrastructure/BallerApiClient/client";
+import BallerzApiClient from "../../../infrastructure/BallerzServices/BallerzAPI/client";
 
 
 

@@ -6,7 +6,7 @@ import BallerzApiClient from "../client";
 import { INotificationsClient, INotificationsSubscriber } from "./interface";
 import { ListNotificationsQuery, FilterNotificationsByUserQueryVariables, listNotifications_gql} from "./queries";
 import {GraphQLQuery, GraphQLSubscription, GraphQLResult} from "@aws-amplify/api"
-import { awsmobileAPIMock } from "../aws-exports";
+import { awsmobileAPIMock } from "../../aws-exports";
 import { genNotificationFilterByReceiverVariables } from "./subscriptions";
 import { Notification } from "./types";
 import  {Observable, ZenObservable} from "zen-observable-ts";

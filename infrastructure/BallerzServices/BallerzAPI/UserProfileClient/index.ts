@@ -10,7 +10,7 @@ import { IUserProfileClient } from "./interface";
 import { CreateUserProfileMutation, CreateUserProfileMutationVariables } from "./mutations";
 import { ListUserProfileQuery } from "./queries";
 import BallerzApiClient from "../client";
-import { awsmobileAPIMock } from "../aws-exports";
+import { awsmobileAPIMock } from "../../aws-exports";
 
 
 export default class UserProfileClient extends BallerzApiClient implements IUserProfileClient {

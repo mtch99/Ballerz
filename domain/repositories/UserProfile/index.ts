@@ -1,10 +1,10 @@
-import { FriendshipRequestStatus } from "./../../../infrastructure/BallerApiClient/API";
-import UserProfileClient, { UserProfileClientMock } from "../../../infrastructure/BallerApiClient/UserProfileClient";
+import { FriendshipRequestStatus } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
+import UserProfileClient, { UserProfileClientMock } from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient";
 import { IUserProfileData, IUserProfile } from "../../use-cases/types";
 import { IDefineUsernameInput, IDefineUsernameResult, IMyUserProfileData, IRequestFriendShipInput, IRequestFriendShipResult, IUserProfileRepository } from "../../use-cases/userProfile/interface";
-import * as queries from "../../../infrastructure/BallerApiClient/UserProfileClient/queries"
-import * as mutations from "../../../infrastructure/BallerApiClient/UserProfileClient/mutations"
-import { GetUserProfileQueryVariables, ListUserProfilesQueryVariables } from "../../../infrastructure/BallerApiClient/API";
+import * as queries from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/queries"
+import * as mutations from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/mutations"
+import { GetUserProfileQueryVariables, ListUserProfilesQueryVariables } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
 
 
 

@@ -11,7 +11,7 @@ import {
   gql
 } from "@apollo/client";
 
-import awsmobile from "../aws-exports";
+import awsmobile from "../../aws-exports";
 import { onCreateNotification_gql } from "./subscriptions";
 
 /* The HTTPS endpoint of the AWS AppSync API 
