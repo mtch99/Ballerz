@@ -24,8 +24,8 @@ There must be three different games on three different courts, two at the moment
             - [x] Define and Implement Notifications client
 
     - [ ] Notifications model
-        - [ ] Define and implement Notifications slice
-        - [ ] Implement Notifications model
+        - [x] Define and implement Notifications slice
+        - [x] Implement Notifications model
         - [ ] Define and implement Notifications controller
         - [ ] Define and implement Notifications screen
             - [ ] Define and implement Notifications View

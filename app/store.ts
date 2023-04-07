@@ -7,7 +7,7 @@ import userProfileSliceReducer from './features/userProfile/userProfileList/slic
 import placeMapSliceReducer from './features/place/placeMap/slice'
 import placeListSliceReducer from './features/place/placeList/slice'
 import userProfileMapSliceReducer from './features/userProfile/userProfileMap/slice'
-
+import notificationSliceReducer from './features/notifications/slice'
 // ...
 
 export const store = configureStore({
@@ -19,7 +19,8 @@ export const store = configureStore({
 		userProfile: userProfileSliceReducer,
 		userProfileMap: userProfileMapSliceReducer,
 		placeMap: placeMapSliceReducer,
-		placeList: placeListSliceReducer
+		placeList: placeListSliceReducer,
+		notifications: notificationSliceReducer,
 	}
 })
 
@@ -27,4 +28,5 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch
+
 
