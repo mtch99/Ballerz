@@ -3,7 +3,7 @@ import { ISelectableUserProfileItemViewProps, IUserProfileItemViewProps } from "
 import {Dimensions, FlatList, TouchableOpacity, View, Text, StyleSheet, Image, NativeSyntheticEvent, NativeScrollEvent } from "react-native"
 import { CheckBox } from "react-native-btr"
 import { ISelectableUserProfileData, IUserProfileListViewProps } from "../../../screens/interface"
-import AddUserButton from "../../../components/Buttons/addUser"
+import ListItemButton from "../../../components/Buttons/ListItemButton"
 import { AppContext, IAppContext } from "../../../controllers/provider"
 import { BallerzFlatList } from "../../../components/Flatlist"
 import { IUserProfileData } from "../../../domain/use-cases/types"
@@ -81,7 +81,7 @@ export class UserProfileItemView extends React.Component<ISelectableUserProfileI
                     <View
                         style={{alignItems: "flex-end", flexGrow: 1}}
                     > 
-                        <AddUserButton
+                        <ListItemButton
                             selected={this.props.selected}
                             onPress={() => {this.props.onPressCheckBox(this.props.userProfile.id)}}
                         />

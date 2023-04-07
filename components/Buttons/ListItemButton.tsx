@@ -7,8 +7,9 @@ import { globalStyles } from "../../views/styles";
 export interface IAddUserButtonProps {
     selected: boolean;
     onPress(): void
+    title?: string;
 }
-export default class AddUserButton extends React.Component<IAddUserButtonProps, boolean>{
+export default class ListItemButton extends React.Component<IAddUserButtonProps, boolean>{
 
 
 
@@ -28,10 +29,10 @@ export default class AddUserButton extends React.Component<IAddUserButtonProps, 
                 >
                     <Text
                         style={styles.addText}
-                    > ajouter </Text>
+                    > {this.props.title?this.props.title:"ajouter"} </Text>
                 </TouchableOpacity>
             </View>
-            )
+        )
     } 
 }
 

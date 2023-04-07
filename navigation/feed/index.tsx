@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { FeedStackParamList } from "./types";
-import { AttendantsListScreenWrapper, BadgeListScreenWrapper, CommentsScreenWrapper, FeedScreenWrapper, MakeFriendsScreenWrapper, UserProfileSearchScreenWrapper } from "./wrappers";
+import { FeedStackNavigationProp, FeedStackParamList } from "./types";
+import { AttendantsListScreenWrapper, BadgeListScreenWrapper, CommentsScreenWrapper, FeedScreenWrapper, MakeFriendsScreenWrapper, NotificationScreenWrapper, UserProfileSearchScreenWrapper } from "./wrappers";
 import { Button, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/AntDesign';
 import React from "react";
@@ -8,6 +8,7 @@ import { FeedStackNavigationContext, IFeedStackNavigationContext } from "./conte
 import LeftHeader from "./components/LeftHeader";
 import { CreateGameStackNavigator } from "./createGameStack";
 import { globalStyles } from "../../views/styles";
+import { useNavigation } from "@react-navigation/native";
 
 
 
@@ -18,6 +19,8 @@ export function FeedStackNavigator(): JSX.Element {
 
 	const _initialRouteName: keyof FeedStackParamList = 'FeedScreen'
 	const [userProfileSearchButtonState, setUserProfileSearchButtonState] = React.useState(false)
+
+	const navigation = useNavigation<FeedStackNavigationProp<any>>()
 
 	
 	const _contextValue: IFeedStackNavigationContext = {
@@ -48,7 +51,14 @@ export function FeedStackNavigator(): JSX.Element {
 						headerShown: true,
 						headerTitle: 'Ballerz',
 						headerStyle: { backgroundColor: globalStyles.global.screenBackGroundColor},
-						headerLeft: () => (<LeftHeader></LeftHeader>)
+						headerLeft: () => (<LeftHeader/>),
+						headerRight: () => (
+							<TouchableOpacity
+                                onPress={() => {navigation.push("NotificationScreen", {})}}
+							>
+
+							</TouchableOpacity>
+						)
 					}}
 					component={FeedScreenWrapper}
 				/>	
@@ -124,6 +134,16 @@ export function FeedStackNavigator(): JSX.Element {
 						headerShown: false
 					}}
 					component={CreateGameStackNavigator}
+				/>
+
+				<Stack.Screen
+
+                    name="NotificationScreen"
+                    options={{
+                        headerShown: true,
+						headerTitle: 'News'
+                    }}
+					component={NotificationScreenWrapper}
 				/>
 
 			</Stack.Navigator>

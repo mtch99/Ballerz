@@ -14,6 +14,7 @@ import { IUserProfileData } from "../../domain/use-cases/types"
 import { IUserProfileListScreenNavigationController } from "../../screens/userProfileList/interface"
 import FindYourFriendsScreen from "../../screens/userProfileList/findYourFriends"
 import { IFindYourFriendsScreenNavigationController } from "../../screens/userProfileList/findYourFriends/interface"
+import NotificationScreen from "../../screens/Notification"
 
 
 
@@ -141,6 +142,16 @@ export function MakeFriendsScreenWrapper(){
     return(
         <MakeFriendsScreen
             navigationController={navigationController}
+        />
+    )
+}
+
+
+export function NotificationScreenWrapper(){
+
+    return(
+        <NotificationScreen
+            
         />
     )
 }

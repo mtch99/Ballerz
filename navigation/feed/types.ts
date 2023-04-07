@@ -1,3 +1,4 @@
+import { INotificationScreenPropsWithoutNavigation } from "./../../screens/Notification/index";
 import { IAttendantsListScreenPropsWithoutNavigation } from "./../../screens/userProfileList/attendantsList/index";
 import { IFindYourFriendsScreenPropsWithoutNavigation } from "./../../screens/userProfileList/findYourFriends/interface";
 import { IUserProfileListScreenPropsWithoutNavigation, IUserProfileSearchScreenProps, IUserProfileSearchScreenPropsWithoutNavigation } from "../../screens/userProfileList/index";
@@ -31,6 +32,7 @@ export type FeedStackParamList = {
 	UserProfileSearch: IUserProfileSearchScreenPropsWithoutNavigation
 	MakeFriends: IFindYourFriendsScreenPropsWithoutNavigation
 	CreateGameStack: {}
+	NotificationScreen: INotificationScreenPropsWithoutNavigation
 };
 
 

@@ -23,13 +23,16 @@ There must be three different games on three different courts, two at the moment
         - [x] Implement Notifications repository
             - [x] Define and Implement Notifications client
 
-    - [ ] Notifications model
+    - [x] Notifications model
         - [x] Define and implement Notifications slice
         - [x] Implement Notifications model
-        - [ ] Define and implement Notifications controller
-        - [ ] Define and implement Notifications screen
-            - [ ] Define and implement Notifications View
-        - [ ] Add notification screen to FeedStack
+
+    - [x] Notifications controller
+        - [x] Define and implement Notifications controller
+        - [x] Define and implement Notification screen
+            - [x] Define and implement Notifications View
+        - [x] Add notification screen to FeedStack
+    
 
 - [ ] Add friend
     - [ ] UserProfileScreen and MyUserProfileScreen

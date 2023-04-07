@@ -36,6 +36,11 @@ import * as SplashScreen from 'expo-splash-screen'
 import { INotificationsObserver, INotificationsUseCase } from "../domain/use-cases/notifications/interface";
 import { IFriendShipRequestNotification } from "../domain/use-cases/types";
 import NotificationsUseCase from "../domain/use-cases/notifications";
+import { INotificationController } from "./notification/interface";
+import NotificationController from "./notification";
+import { NotificationListState } from "../app/features/notifications/slice/interface";
+import { createNotificationModel } from "../app/features/notifications/model";
+import { selectNotificationList } from "../app/features/notifications/slice";
 
 
 
@@ -48,7 +53,8 @@ export interface IAppContext extends IAppController{
     userProfileMapState: IUserProfileMapState
     placeListState: IPlaceListState
     placeMapState: IPlaceMapState,
-    authState: AuthState
+    authState: AuthState,
+    notificationListState: NotificationListState
 }
 
 
@@ -58,6 +64,7 @@ export const AppContext = React.createContext<IAppContext>({
     groupChatController: {} as IGroupChatController,
     userProfileController: {} as IUserProfileController,
     placeController: {} as IPlaceController,
+    notificationController: {} as INotificationController,
     feedState: {items: []},
     groupChatListState: {items: []},
     groupChatMapState: {},
@@ -77,6 +84,7 @@ export const AppContext = React.createContext<IAppContext>({
         isDataPrepared: false
     },
     appControllerEventListener: {} as IAppControllerEventListener,
+    notificationListState: [],
     prepareData: () => {}
 });
 
@@ -121,22 +129,9 @@ export default function AppProvider (props: IProps) {
     const placeMapState: IPlaceMapState = selector(selectPlaceMapState)
     const placeController: IPlaceController = new PlaceController(placeModel)
 
-    const fakeObserver: INotificationsObserver= {
-        onNewNotification: function (notification: IFriendShipRequestNotification): void {
-            throw new Error("Function not implemented.");
-        },
-        onNewNotificationsList: function (notifications: IFriendShipRequestNotification[]): void {
-            throw new Error("Function not implemented.");
-        }
-    }
+    const notificationModel = createNotificationModel(modelInput)
+    const notificationListState: NotificationListState = selector(selectNotificationList)
 
-    // const notificationsUseCase = new NotificationsUseCase(fakeObserver)
-
-    console.log("hey hey")
-
-    
-    
-    
     const prepareData = async() => {
         const isUserSignedIn = await authController.signinLastUser()
         if(isUserSignedIn){
@@ -153,6 +148,7 @@ export default function AppProvider (props: IProps) {
         groupChatController,
         userProfileController,
         placeController,
+        notificationController,
         authController,
         prepareData,
         appControllerEventListener: authModel
@@ -168,14 +164,15 @@ export default function AppProvider (props: IProps) {
         placeListState,
         placeMapState,
         userProfileMapState,
+        notificationListState
     }
 
     React.useEffect(() => {
         // if(!isDataPrepared){
         //     prepareData().then(() => {setIsDataPrepared(true)});
         // }
-        notifController.createUseCase(fakeObserver)  
-        console.warn("use effect of AppProvider")
+        notificationController.createUseCase(notificationModel)  
+        // console.warn("use effect of AppProvider")
     }, [])
 
 
@@ -194,17 +191,8 @@ export const MemoizedAppProvider = React.memo(AppProvider)
 
 // export MemoizedAppProvider;
 
-export class NotificationController {
-    UCI: INotificationsUseCase | undefined
-    constructor(){
-        
-    }
 
-    createUseCase(observer: INotificationsObserver): void {
-        this.UCI = new NotificationsUseCase(observer)
-    }
-}
 
-const notifController = new NotificationController()
+const notificationController = new NotificationController()
 
 

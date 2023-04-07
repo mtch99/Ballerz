@@ -1,3 +1,4 @@
+import { INotificationController } from "./notification/interface";
 import { IUserProfileController } from "./userProfile/interface";
 import { IGroupChat } from "../domain/use-cases/groupchat/types";
 import IFeedController from "./feed/interface";
@@ -14,6 +15,7 @@ export interface IAppController {
     placeController: IPlaceController,
     prepareData: () => void
     appControllerEventListener: IAppControllerEventListener
+    notificationController: INotificationController
 }
 
 
