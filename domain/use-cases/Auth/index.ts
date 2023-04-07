@@ -138,7 +138,7 @@ export default class AuthUCI implements IAuthUCI {
         if(password != confirmPassword){
             result = {
                 reason: types.ConfirmPasswordRejectionReason.mismatchedPasswords,
-                description: "Les deux mots de passe sont différents"
+                description: "Vérifiez que les deux mots de passe sont identiques"
             }
         }
 
@@ -201,7 +201,7 @@ class EmailStrategy {
         } else {
             result = {
                 reason: types.EmailValidationRejectionReason.badFormat,
-                description: "Cet email n'existe pas"
+                description: "Veuillez entrer une adresse courriel valide"
             }
         }
 

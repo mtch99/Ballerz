@@ -8,7 +8,7 @@ import { View, StyleSheet, Text, KeyboardAvoidingView, Platform, Keyboard, Touch
 import { globalStyles } from "../../../views/styles";
 import SigninButton from "../../../views/auth/signIn/signinButton";
 import ConfirmSignupModal from "./confirmSignupModal";
-import SignupView from "../../../views/auth/signup/indext";
+import SignupView from "../../../views/auth/signIn/signup/indext";
 
 
 export default class SignupScreen extends React.Component<ISignupScreenProps, ISignupScreenState> implements ISignupScreen{
@@ -116,8 +116,8 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
         return(
         
             <SignupView
-                onEmailInputChange={this.onEmailInputChange}
-                onPasswordInputChange={this.onPasswordInputChange}
+                onEmailInputChange={this.onEmailInputChange.bind(this)}
+                onPasswordInputChange={this.onPasswordInputChange.bind(this)}
                 onConfirmPasswordInputChange={this.onConfirmPasswordInputChange}
                 onPressSignup={this.onPressSignup}
                 onPressSignIn={this.onPressSignin.bind(this)}
