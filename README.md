@@ -26,18 +26,21 @@ There must be three different games on three different courts, two at the moment
                 - [x] Define and Implement Notifications client
                     - [x] Implement Notifications filter by receiver
                     - [x] Implement Notifictaions subscription 
-                    - [ ] Subscribe to notifications on repository initialisation if a userProfile is provided
-                        - [ ] Add userProfileID attribute to notifications repository
+                    - [x] Subscribe to notifications on repository initialisation if a userProfile is provided
+                        - [x] Add userProfileID attribute to notifications repository
 
                     
-                - [ ] Test
+                - [x] Test Subscribing to notifications
                     - [x] Initialise Notifications repository with userProfieID 123
-                    - [ ] Launch the app and execute a mutation  in the console
-                        - [ ] Log the subscription event
-                        * [ ] Did not work
-                            - [ ] try implementing subscription using web socket io
-                            * [ ] Did not work
-                                - [ ] try implement aws-appsync-subscription link and appsync
+                    - [x] Launch the app and execute a mutation  in the console
+                        * [x] Did not work
+                            - [x] try implementing subscription using web socket io
+                            * [x] Did not work
+                                - [x] try subscribe via apollo client using aws-appsync-subscription-link package
+                        - [x] Log the subscription event
+                
+                - [x] Fix: Notifications client created three times
+                            
                                  
 
            

@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.11",
     "@gorhom/bottom-sheet": "^4",
     "@react-native-async-storage/async-storage": "~1.17.3",
     "@react-native-community/datetimepicker": "6.5.2",
@@ -25,6 +26,7 @@
     "@types/uuid": "^9.0.0",
     "amazon-cognito-identity-js": "^6.1.2",
     "aws-amplify": "^5.0.20",
+    "aws-appsync-subscription-link": "^3.1.2",
     "expo": "~47.0.12",
     "expo-device": "~5.0.0",
     "expo-image": "^1.0.0",
@@ -41,6 +43,7 @@
     "react-native-awesome-alerts": "^2.0.0",
     "react-native-btr": "^2.2.0",
     "react-native-gesture-handler": "~2.8.0",
+    "react-native-get-random-values": "~1.8.0",
     "react-native-material-design-searchbar": "^1.8.0",
     "react-native-modal": "^13.0.1",
     "react-native-modal-datetime-picker": "^14.0.1",
