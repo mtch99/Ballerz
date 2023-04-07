@@ -17,14 +17,9 @@ export class NotificationsRepository implements INotificationsRepository {
     client: INotificationsClient
     userProfileID: string | undefined;
 
-    constructor(observer: INotificationsUseCase, userProfileID?: string) {
+    constructor(observer: INotificationsUseCase) {
         this.observer = observer;
-        console.log(`Notifications repository using a notifications client mock`)
         this.client = new NotificationsClient(undefined,"API_KEY");
-        if(userProfileID){
-            this.subscribeToMyNotifications(userProfileID)
-            // this.getNotificationsByUser(userProfileID);
-        }
     }
 
     async getNotificationsByUser(userProfileId: string): Promise<IGetMyNotificationsResult> {
@@ -53,7 +48,7 @@ export class NotificationsRepository implements INotificationsRepository {
 
 
     onNewNotification(notification: Notification): void {
-        this.observer.onNewNotificatioReceived(notification)
+        this.observer.onNewNotificationReceived(notification)
     }
 
 

@@ -15,42 +15,21 @@ There must be three different games on three different courts, two at the moment
 ## How? (technical)
 
 - [ ] Notifications use case
-    - [ ] Define and implement Notifications usecase
+    - [x] Define and implement Notifications usecase
         - [x] Define Notification type
         - [x] Define useCase interface
         - [x] Define repository interface
         - [x] Define model interface
+        - [x] Implement Notifications repository
+            - [x] Define and Implement Notifications client
 
-        - [ ] Implement the previous
-            - [ ] Implement Notifications repository
-                - [x] Define and Implement Notifications client
-                    - [x] Implement Notifications filter by receiver
-                    - [x] Implement Notifictaions subscription 
-                    - [x] Subscribe to notifications on repository initialisation if a userProfile is provided
-                        - [x] Add userProfileID attribute to notifications repository
-
-                    
-                - [x] Test Subscribing to notifications
-                    - [x] Initialise Notifications repository with userProfieID 123
-                    - [x] Launch the app and execute a mutation  in the console
-                        * [x] Did not work
-                            - [x] try implementing subscription using web socket io
-                            * [x] Did not work
-                                - [x] try subscribe via apollo client using aws-appsync-subscription-link package
-                        - [x] Log the subscription event
-                
-                - [x] Fix: Notifications client created three times
-                            
-                                 
-
-           
-
-    - [ ] Define and implement Notifications slice
-    - [ ] Implement Notifications model
-    - [ ] Define and implement Notifications controller
-    - [ ] Define and implement Notifications screen
-        - [ ] Define and implement Notifications View
-    - [ ] Add notification screen to FeedStack
+    - [ ] Notifications model
+        - [ ] Define and implement Notifications slice
+        - [ ] Implement Notifications model
+        - [ ] Define and implement Notifications controller
+        - [ ] Define and implement Notifications screen
+            - [ ] Define and implement Notifications View
+        - [ ] Add notification screen to FeedStack
 
 - [ ] Add friend
     - [ ] UserProfileScreen and MyUserProfileScreen

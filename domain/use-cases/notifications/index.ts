@@ -9,17 +9,30 @@ import BallerzApiClient from "../../../infrastructure/BallerApiClient/client";
 export default class NotificationsUseCase implements INotificationsUseCase {
     
     repo: INotificationsRepository
+    observer: INotificationsObserver
     
     constructor(observer: INotificationsObserver,repo?: INotificationsRepository) {
-        this.repo = repo || new NotificationsRepository(this, "123");
+        this.repo = repo || new NotificationsRepository(this);
+        this.observer = observer;
+    }
+
+    subscribeToMyNotifications(myProfileID: string) {
+        this.repo.subscribeToMyNotifications(myProfileID);
     }
 
 
-    getMyReceivedNotifications(myProfileID: string): Promise<IGetMyNotificationsResult> {
-        throw new Error("Method not implemented.");
+    async getMyReceivedNotifications(myProfileID: string): Promise<IGetMyNotificationsResult> {
+        const result = await this.repo.getNotificationsByUser(myProfileID);
+        if(result.notifications.length > 0) {
+            this.observer.onNewNotificationsList(result.notifications)
+        }     
+        return result
     }
-    onNewNotificatioReceived(notification: Notification): Promise<void> {
-        throw new Error("Method not implemented.");
+
+
+    async onNewNotificationReceived(notification: Notification): Promise<void> {
+        this.observer.onNewNotification(notification)
+        return 
     }
 
 }
