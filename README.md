@@ -42,10 +42,19 @@ There must be three different games on three different courts, two at the moment
             - [x] Error display at the view level and error message creation at screen level
 
         - [ ] Test the flow on a mobile device
+            - [ ] Unregistered User error message display in signin View 
+            - [ ] Navigate to Signup View
+            - [ ] Signup error messages display
+            - [ ] Define username after signup
+            - [ ] Invite friends after username creation
+            - [ ] Add a user after username creation
+                - [ ] Test that the notification subscription in the console is fired 
         
 
     - [ ] Notifications subscriptions after userProfile retrieval or creation
         - [ ] Refactor controllers and use cases to be singletons. Take the reent notification controller as example. Why? They can now communicate with each other easily and are not directly affected by components lifecycle
+        - [ ] Test 
+            - [ ] accept friendship request in console and check that the user is notified
 
 
     
