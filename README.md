@@ -38,6 +38,8 @@ There must be three different games on three different courts, two at the moment
                             * [x] Did not work
                                 - [x] try subscribe via apollo client using aws-appsync-subscription-link package
                         - [x] Log the subscription event
+                
+                - [x] Fix: Notifications client created three times
                             
                                  
 

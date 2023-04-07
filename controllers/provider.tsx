@@ -33,7 +33,7 @@ import AuthController from "./auth";
 import IAuthController from "./auth/interface";
 import { AuthState, selectAuth } from "../app/features/Auth/slice";
 import * as SplashScreen from 'expo-splash-screen'
-import { INotificationsObserver } from "../domain/use-cases/notifications/interface";
+import { INotificationsObserver, INotificationsUseCase } from "../domain/use-cases/notifications/interface";
 import { IFriendShipRequestNotification } from "../domain/use-cases/types";
 import NotificationsUseCase from "../domain/use-cases/notifications";
 
@@ -86,7 +86,7 @@ interface IProps {
     children?: JSX.Element
 }
 
-export function AppProvider (props: IProps) {
+export default function AppProvider (props: IProps) {
     const selector = useAppSelector;
     const dispatch = useAppDispatch();
     const modelInput = {
@@ -130,7 +130,9 @@ export function AppProvider (props: IProps) {
         }
     }
 
-    const notificationsUseCase = new NotificationsUseCase(fakeObserver)  
+    // const notificationsUseCase = new NotificationsUseCase(fakeObserver)
+
+    console.log("hey hey")
 
     
     
@@ -168,11 +170,13 @@ export function AppProvider (props: IProps) {
         userProfileMapState,
     }
 
-    // React.useEffect(() => {
-    //     if(!isDataPrepared){
-    //         prepareData().then(() => {setIsDataPrepared(true)});
-    //     }
-    // }, [])
+    React.useEffect(() => {
+        // if(!isDataPrepared){
+        //     prepareData().then(() => {setIsDataPrepared(true)});
+        // }
+        notifController.createUseCase(fakeObserver)  
+        console.warn("use effect of AppProvider")
+    }, [])
 
 
     return (
@@ -188,6 +192,19 @@ export function AppProvider (props: IProps) {
 
 export const MemoizedAppProvider = React.memo(AppProvider)
 
-export default MemoizedAppProvider;
+// export MemoizedAppProvider;
+
+export class NotificationController {
+    UCI: INotificationsUseCase | undefined
+    constructor(){
+        
+    }
+
+    createUseCase(observer: INotificationsObserver): void {
+        this.UCI = new NotificationsUseCase(observer)
+    }
+}
+
+const notifController = new NotificationController()
 
 
