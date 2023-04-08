@@ -41,8 +41,13 @@ export default class NotificationsClient extends BallerzApiClient implements INo
 			}
           },
           error: (err) => {
-			console.error(`\n Notification Subscription received error: ${err}\n`);
-            this.resubscribe(userProfileID, callback);
+            try {
+                console.error(`\n Notification Subscription received error: ${JSON.stringify(err)}\n`);
+                this.resubscribe(userProfileID, callback);
+            } catch (e) {
+                console.error(`\n Notification Subscription received error: ${JSON.stringify(err)}\n`);
+                this.resubscribe(userProfileID, callback);
+            }
           },
         })
 
