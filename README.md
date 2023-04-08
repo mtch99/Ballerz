@@ -41,7 +41,7 @@ There must be three different games on three different courts, two at the moment
             - [x] Layout
             - [x] Error display at the view level and error message creation at screen level
 
-        - [ ] Test the flow on a mobile device
+        - [x] Test the flow on a mobile device
             - [x] Unregistered User error message display in signin View 
             - [x] Navigate to Signup View
             * [x] Fix: Did not auto signin at the second launch
@@ -59,12 +59,12 @@ There must be three different games on three different courts, two at the moment
                 - [x] FriendShip Requests and notifications are created successfully
         
 
-    - [ ] Notifications subscriptions after userProfile retrieval or creation
+    - [x] Notifications subscriptions after userProfile retrieval or creation
         - [x] Refactor controllers and use cases to be singletons. Take the reent notification controller as example. Why? They can now communicate with each other easily and are not directly affected by components lifecycle
         * [x] Password input bug
         - [x] Cache My userProfile and all userProfileData list
-        - [ ] Test
-            - [ ] accept friendship request in console and check that the user is notified
+        - [x] Test
+            - [x] accept friendship request in console and check that the user is notified
 
 
     
