@@ -42,6 +42,7 @@ export interface IPlaceData {
 export interface IUserProfile extends IUserProfileData {
     games: IGame[]
     friends: IUserProfileData[]
+    email:string
 }
 
 

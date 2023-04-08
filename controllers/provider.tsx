@@ -135,7 +135,10 @@ export default function AppProvider (props: IProps) {
     const prepareData = async() => {
         const isUserSignedIn = await authController.signinLastUser()
         if(isUserSignedIn){
-            await userProfileController.getMyProfile(isUserSignedIn.user?.email)
+            const userProfile = await userProfileController.getMyProfile(isUserSignedIn.user?.email)
+            if(userProfile){
+                notificationController.subscribeToMyNotifications(userProfile.email)
+            }
         }
         authModel.onDataPreparedEvent()
         await SplashScreen.hideAsync().then(result => {

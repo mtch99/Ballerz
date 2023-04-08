@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FriendshipRequestStatus } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
 import UserProfileClient, { UserProfileClientMock } from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient";
 import { IUserProfileData, IUserProfile } from "../../use-cases/types";
@@ -5,6 +6,7 @@ import { IDefineUsernameInput, IDefineUsernameResult, IMyUserProfileData, IReque
 import * as queries from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/queries"
 import * as mutations from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/mutations"
 import { GetUserProfileQueryVariables, ListUserProfilesQueryVariables } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
+import { throwServerError } from "@apollo/client";
 
 
 
@@ -14,15 +16,45 @@ export default class UserProfileRepository implements IUserProfileRepository {
     constructor(){
         this.client = new UserProfileClient()
     }
-    cacheMyUserProfileData(myUserProfileData: IMyUserProfileData): Promise<void> {
-        throw new Error("Method not implemented.");
+
+
+    async getMyUserProfileData(): Promise<IMyUserProfileData | null> {
+        const result = await this.__getCachedUserProfileData()
+        if(result){
+            return result as IMyUserProfileData
+        }
+        return null
     }
-    getMyUserProfileData(): Promise<IMyUserProfileData | null> {
-        throw new Error("Method not implemented.");
+    
+    __cacheMyUserProfileData(myUserProfileData: IMyUserProfileData): void {
+        AsyncStorage.setItem("myUserProfileData", JSON.stringify(myUserProfileData))
+    }
+
+    private async __getCachedUserProfileData(): Promise<IMyUserProfileData | null> {
+        let result =  await AsyncStorage.getItem("myUserProfileData");
+        if(result){
+            return JSON.parse(result) as IMyUserProfileData;
+        } else {
+            return null;
+        }
+    }
+
+    private __cacheMyUserProfile(myUserProfile: IUserProfile): void {
+        AsyncStorage.setItem("myUserProfile", JSON.stringify(myUserProfile))
+    }
+
+    private async __getCachedMyUserProfile(): Promise<IUserProfile | null> {
+        let result =  await AsyncStorage.getItem("myUserProfile");
+        if(result){
+            return JSON.parse(result) as IUserProfile;
+        } else {
+            return null;
+        }
     }
     
 
     async getUserProfileByEmail(email: string): Promise<IUserProfile | null> {
+        let result: IUserProfile | null = await this.__getCachedMyUserProfile()
         const variables: ListUserProfilesQueryVariables = {
             filter: {
                 email: {
@@ -32,15 +64,22 @@ export default class UserProfileRepository implements IUserProfileRepository {
         }
 
         const response = await this.client.listUserProfiles(variables)
-        .catch((err) => {
+        .catch(async(err) => {
             console.error(err)
             return undefined
         })
+
+        if(!response){
+            return result
+        }
         
-        const parsedResponse = IUserProfileDataAdapter.parseListUserProfileResponse(response)
+        let parsedResponse = IUserProfileDataAdapter.parseListUserProfileResponse(response)
         if(parsedResponse.length == 0){
             console.warn("Could not find a user profile with the email: " + email)
         }else if(parsedResponse.length == 1){
+            this.__cacheMyUserProfileData({id: parsedResponse[0].id, username: parsedResponse[0].username, email, badges: []})
+            const userProfile = parsedResponse[0]
+            this.__cacheMyUserProfile(userProfile)
             return parsedResponse[0]
         }
         else if(parsedResponse.length > 1){
@@ -203,7 +242,8 @@ class IUserProfileDataAdapter {
                     username: response.getUserProfile.username,
                     friends,
                     badges: [],
-                    games: []
+                    games: [],
+                    email: ""
                 }
             }
         }
@@ -224,7 +264,8 @@ class IUserProfileDataAdapter {
                     friends: [],
                     id: response.createUserProfile.id,
                     username: response.createUserProfile.username,
-                    badges: []
+                    badges: [],
+                    email: response.createUserProfile.email
                 }
                 result.userProfile = userProfile
             }

@@ -16,15 +16,15 @@ export class UserProfileController implements IUserProfileController{
         console.log(`\n UserProfile usecase initialized \n`)
     }
 
-    async getMyProfile(email: string | undefined): Promise<boolean> {
+    async getMyProfile(email: string | undefined): Promise<IUserProfile | undefined> {
         if(!email){
-            return false
+            return undefined
         }
         const response = await this.userProfileUseCase.getMyUserProfile(email)
         if(!response){
-            return false
+            return undefined
         }
-        return true
+        return response
     }
 
     async sendFriendShipRequests(input: ISendFriendshipRequestsInput): Promise<void> {
