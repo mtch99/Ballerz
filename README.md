@@ -48,10 +48,10 @@ There must be three different games on three different courts, two at the moment
             - [x] Signup error messages display
             - [x] Define username after signup
             - [ ] Invite friends after username creation
-                - [ ] Works
+                - [x] Works
                     - [x] Flow is executed correctly
-                    - [ ] Refactor find your friends view
-                        - [ ] Fix feedback view height
+                    - [x] Refactor find your friends view
+                        - [x] Fix feedback view height
             - [x] Add a user after username creation
                 - [x] FriendShip Requests and notifications are created successfully
         
