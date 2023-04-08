@@ -1,6 +1,3 @@
-import { IGroupChatModel } from "../../app/features/groupChat/model";
-import IGroupChatMapState from "../../app/features/groupChat/groupChatMap/slice/interface";
-import { IGroupChatListState } from "../../app/features/groupChat/types";
 import GroupChatUseCase from "../../domain/use-cases/groupchat";
 import IGroupChatUseCase, { IGroupChatModelEventListener } from "../../domain/use-cases/groupchat/interface";
 import { IGroupChatList, ISendGroupChatMessageInput } from "../../domain/use-cases/groupchat/types";
@@ -26,7 +23,7 @@ class GroupChatController implements IGroupChatController {
 }
 
 const groupChatController = new GroupChatController()
-export default groupChatController
+export default groupChatController;
 
 
 const fakeUseCase: IGroupChatUseCase = {

@@ -4,6 +4,8 @@ import { IUserProfileData } from "../../domain/use-cases/types";
 import UserProfileUseCase from "../../domain/use-cases/userProfile";
 import { IDefineUsernameInput, IUserProfileModelEventListener, IUserProfileUseCase } from "../../domain/use-cases/userProfile/interface";
 import { ISendFriendshipRequestsInput, IUserProfileController } from "./interface";
+import { resultKeyNameFromField } from "@apollo/client/utilities";
+import notificationController from "../notification";
 
 
 export class UserProfileController implements IUserProfileController{
@@ -58,7 +60,11 @@ export class UserProfileController implements IUserProfileController{
     async defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult> {
         const result = await this.userProfileUseCase.defineUsername(input)
         console.log(`Response of define username function: ${JSON.stringify(result)}`)
+        if(!result.error && result.userProfile){
+            notificationController.subscribeToMyNotifications(result.userProfile.id)
+        }
         return result
+
     }
 }
 

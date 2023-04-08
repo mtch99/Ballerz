@@ -48,12 +48,14 @@ export class NotificationsRepository implements INotificationsRepository {
 
 
     onNewNotification(notification: Notification): void {
+        console.log(`Received new notification: ${JSON.stringify(notification)}`);
         this.observer.onNewNotificationReceived(notification)
     }
 
 
     subscribeToMyNotifications(myProfileID: string): void {
         this.client.subscribeToNotifications(myProfileID, this.notificationsSubscriptionHandler.bind(this))
+        console.log(`Subscribed to notifications for profile ${myProfileID}`);
     }
 
 }
@@ -143,6 +145,7 @@ class ResponseHandler {
     private static parseUserProfileData(input: UserProfileData): IUserProfileData{
         return {
             ...input,
+            isFriend: undefined,
             badges: []
         }
     }

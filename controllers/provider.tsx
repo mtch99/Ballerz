@@ -4,9 +4,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { createFeedModel } from "../app/features/feed/model";
 import feedController from "./feed";
 import { createGroupChatModel } from "../app/features/groupChat/model";
-import GroupChatController from "./groupChat";
 import { createUserProfileModel } from "../app/features/userProfile/model";
-import UserProfileController from "./userProfile";
 import { IFeedState } from "../app/features/feed/slice/interface";
 import { selectFeed } from "../app/features/feed/slice";
 import IFeedModel from "../domain/use-cases/feed/interface";
@@ -23,28 +21,23 @@ import { IPlaceListState, IPlaceMapState } from "../app/features/place/types";
 import { IPlaceModel, createPlaceModel } from "../app/features/place/model";
 import { selectPlaceListState } from "../app/features/place/placeList/slice";
 import { selectPlaceMapState } from "../app/features/place/placeMap/slice";
-import PlaceController from "./place";
 import IPlaceController from "./place/interface";
 import { IUserProfileMapState } from "../app/features/userProfile/types";
 import { selectUserProfileMapState } from "../app/features/userProfile/userProfileMap/slice";
 import { IAuthModel, createAuthModel } from "../app/features/Auth/model";
-import { IAuthUCIEventListener } from "../domain/use-cases/auth/interface";
-import AuthController from "./auth";
 import IAuthController from "./auth/interface";
 import { AuthState, selectAuth } from "../app/features/Auth/slice";
-import * as SplashScreen from 'expo-splash-screen'
-import { INotificationsObserver, INotificationsUseCase } from "../domain/use-cases/notifications/interface";
-import { IFriendShipRequestNotification } from "../domain/use-cases/types";
-import NotificationsUseCase from "../domain/use-cases/notifications";
+import * as SplashScreen from 'expo-splash-screen';
 import { INotificationController } from "./notification/interface";
-import NotificationController from "./notification";
 import { NotificationListState } from "../app/features/notifications/slice/interface";
 import { createNotificationModel } from "../app/features/notifications/model";
 import { selectNotificationList } from "../app/features/notifications/slice";
+
 import userProfileController from "./userProfile";
 import placeController from "./place";
 import groupChatController from "./groupChat";
 import authController from "./auth";
+import notificationController from "./notification";
 
 
 
@@ -106,7 +99,6 @@ export default function AppProvider (props: IProps) {
         dispatchFunc: dispatch
     }
 
-    const [isDataPrepared, setIsDataPrepared] = React.useState(false)
 
     const authModel: IAuthModel = createAuthModel(modelInput)
     const authState: AuthState = selector(selectAuth)
@@ -137,7 +129,7 @@ export default function AppProvider (props: IProps) {
         if(isUserSignedIn){
             const userProfile = await userProfileController.getMyProfile(isUserSignedIn.user?.email)
             if(userProfile){
-                notificationController.subscribeToMyNotifications(userProfile.email)
+                notificationController.subscribeToMyNotifications(userProfile.id)
             }
         }
         authModel.onDataPreparedEvent()
@@ -192,11 +184,3 @@ export default function AppProvider (props: IProps) {
 
 
 export const MemoizedAppProvider = React.memo(AppProvider)
-
-// export MemoizedAppProvider;
-
-
-
-const notificationController = new NotificationController()
-
-
