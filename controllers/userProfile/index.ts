@@ -1,24 +1,21 @@
-import { IUserProfileState } from "./../../app/features/types";
 import { IUserProfile } from "./../../domain/use-cases/types";
-import { IRequestFriendShipInput, IRequestFriendShipResult } from "./../../domain/use-cases/userProfile/interface";
-import { IUserProfileListState } from "../../app/features/userProfile/userProfileList/slice/interface";
-import { IDefineUsernameResult } from "../../domain/use-cases/auth/interface";
+import { IDefineUsernameResult, IRequestFriendShipInput, IRequestFriendShipResult } from "./../../domain/use-cases/userProfile/interface";
 import { IUserProfileData } from "../../domain/use-cases/types";
 import UserProfileUseCase from "../../domain/use-cases/userProfile";
 import { IDefineUsernameInput, IUserProfileModelEventListener, IUserProfileUseCase } from "../../domain/use-cases/userProfile/interface";
 import { ISendFriendshipRequestsInput, IUserProfileController } from "./interface";
 
 
+export class UserProfileController implements IUserProfileController{
 
-export default class UserProfileController implements IUserProfileController{
+    userProfileUseCase: IUserProfileUseCase = fakeUseCase ;
 
-    userProfileUseCase: IUserProfileUseCase;
-    userProfileList: IUserProfileListState;
-    constructor(model: IUserProfileModelEventListener, userProfileList: IUserProfileListState){
+
+    createUseCase(model: IUserProfileModelEventListener){
         this.userProfileUseCase = new UserProfileUseCase(model)
-        this.userProfileList = userProfileList
-        console.log("Creating user profile controller")
+        console.log(`\n UserProfile usecase initialized \n`)
     }
+
     async getMyProfile(email: string | undefined): Promise<boolean> {
         if(!email){
             return false
@@ -63,4 +60,29 @@ export default class UserProfileController implements IUserProfileController{
         console.log(`Response of define username function: ${JSON.stringify(result)}`)
         return result
     }
+}
+
+
+const userProfileController = new UserProfileController();
+export default userProfileController;
+
+
+
+const fakeUseCase: IUserProfileUseCase = {
+    getAllUserProfileData: function (): Promise<IUserProfileData[]> {
+        throw new Error("Function not implemented.");
+    },
+    getUserProfile: function (id: string): Promise<IUserProfile | null> {
+        throw new Error("Function not implemented.");
+    },
+    defineUsername: function (input: IDefineUsernameInput): Promise<IDefineUsernameResult> {
+        throw new Error("Function not implemented.");
+    },
+    requestFriendShip: function (input: IRequestFriendShipInput): Promise<IRequestFriendShipResult> {
+        throw new Error("Function not implemented.");
+    },
+    getMyUserProfile: function (email: string): Promise<IUserProfile | null> {
+        throw new Error("Function not implemented.");
+    },
+    observer: {} as IUserProfileModelEventListener
 }

@@ -5,29 +5,52 @@ import IAuthUCI, { IAuthUCIEventListener, IDefineUsernameInput, IDefineUsernameR
 
 
 
-export default class AuthController implements IAuthController {
+export class AuthController implements IAuthController {
 
-    private authUci: IAuthUCI 
+    private authUseCase: IAuthUCI = fakeUseCase
 
-    constructor(authModel: IAuthUCIEventListener){
-        this.authUci = new AuthUCI(authModel)
+    createUseCase(model: IAuthUCIEventListener){
+        this.authUseCase = new AuthUCI(model)
+        console.log(`\n Auth usecase initialized \n`)
     }
     
     async signinLastUser(): Promise<false | ILoginResult> {
-        const result = await this.authUci.signinLastUser();
+        const result = await this.authUseCase.signinLastUser();
         return result
     }
 
-
     async login(input: ILoginInput): Promise<ILoginResult> {
-        return this.authUci.login(input)
+        return this.authUseCase.login(input)
     }
     signup(input: ISignupInput): Promise<ISignupResult> {
-        return this.authUci.signup(input)
+        return this.authUseCase.signup(input)
     }
     
     confirmSignup(input: IConfirmSignupInput): Promise<IConfirmSignupResult> {
-        return this.authUci.confirmSignup(input)
+        return this.authUseCase.confirmSignup(input)
     }
     
+}
+
+
+const authController = new AuthController();
+export default authController;
+
+
+const fakeUseCase: IAuthUCI = {
+    signup: function (input: ISignupInput): Promise<ISignupResult> {
+        throw new Error("Function not implemented.");
+    },
+    confirmSignup: function (input: IConfirmSignupInput): Promise<IConfirmSignupResult> {
+        throw new Error("Function not implemented.");
+    },
+    login: function (signInInput: ILoginInput): Promise<ILoginResult> {
+        throw new Error("Function not implemented.");
+    },
+    getLastLoginCreds: function (): Promise<ILoginInput | null> {
+        throw new Error("Function not implemented.");
+    },
+    signinLastUser: function (): Promise<false | ILoginResult> {
+        throw new Error("Function not implemented.");
+    }
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { IAppController, IAppControllerEventListener } from "./interface";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { createFeedModel } from "../app/features/feed/model";
-import { FeedController } from "./feed";
+import feedController from "./feed";
 import { createGroupChatModel } from "../app/features/groupChat/model";
 import GroupChatController from "./groupChat";
 import { createUserProfileModel } from "../app/features/userProfile/model";
@@ -41,6 +41,10 @@ import NotificationController from "./notification";
 import { NotificationListState } from "../app/features/notifications/slice/interface";
 import { createNotificationModel } from "../app/features/notifications/model";
 import { selectNotificationList } from "../app/features/notifications/slice";
+import userProfileController from "./userProfile";
+import placeController from "./place";
+import groupChatController from "./groupChat";
+import authController from "./auth";
 
 
 
@@ -59,7 +63,7 @@ export interface IAppContext extends IAppController{
 
 
 export const AppContext = React.createContext<IAppContext>({
-    authController: {} as AuthController,
+    authController: {} as IAuthController,
     feedController: {} as IFeedController,
     groupChatController: {} as IGroupChatController,
     userProfileController: {} as IUserProfileController,
@@ -106,28 +110,24 @@ export default function AppProvider (props: IProps) {
 
     const authModel: IAuthModel = createAuthModel(modelInput)
     const authState: AuthState = selector(selectAuth)
-    const authController: IAuthController = new AuthController(authModel)
 
     const feedModel: IFeedModel = createFeedModel(modelInput)
     const feedState: IFeedState = selector(selectFeed)
-    const feedController = new FeedController(feedModel, feedState)
+
 
 
     const groupChatModel = createGroupChatModel(modelInput)
     const groupChatListState: IGroupChatListState = selector(selectgroupChatListState)
     const groupChatMapState: IGroupChatMapState = selector(selectGroupChatMapState)
-    const groupChatController = new GroupChatController(groupChatModel, groupChatListState, groupChatMapState)
-
     const userProfileModel = createUserProfileModel(modelInput)
     const userProfileListState = selector(selectUserProfileListState)
     const userProfileMapState = selector(selectUserProfileMapState)
-    const userProfileController = new UserProfileController(userProfileModel, userProfileListState)
+
 
 
     const placeModel: IPlaceModel = createPlaceModel(modelInput)
     const placeListState: IPlaceListState = selector(selectPlaceListState)
     const placeMapState: IPlaceMapState = selector(selectPlaceMapState)
-    const placeController: IPlaceController = new PlaceController(placeModel)
 
     const notificationModel = createNotificationModel(modelInput)
     const notificationListState: NotificationListState = selector(selectNotificationList)
@@ -168,11 +168,12 @@ export default function AppProvider (props: IProps) {
     }
 
     React.useEffect(() => {
-        // if(!isDataPrepared){
-        //     prepareData().then(() => {setIsDataPrepared(true)});
-        // }
+        authController.createUseCase(authModel)
+        userProfileController.createUseCase(userProfileModel)
         notificationController.createUseCase(notificationModel)  
-        // console.warn("use effect of AppProvider")
+        placeController.createUseCase(placeModel)
+        groupChatController.createUseCase(groupChatModel)
+        feedController.createUseCase(feedModel)
     }, [])
 
 

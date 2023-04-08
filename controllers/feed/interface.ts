@@ -3,7 +3,6 @@ import { ICheckinEventPayload, ICommentInput, ICreateGameInput, ICreateGameOutpu
 export default interface IFeedController {
     getFeed: IFeedUseCase['getFeed']
     checkIn(payload: ICheckinEventPayload): Promise<boolean>
-    feed: IFeedState
     createGame(input: ICreateGameInput): Promise<ICreateGameOutput>
 }
 
