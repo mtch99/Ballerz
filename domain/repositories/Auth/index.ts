@@ -1,2 +1,2 @@
-export * from '../../../infrastructure/BallerAuthClient/AuthRepository'
+export * from '../../../infrastructure/BallerzServices/BallerzAuth/AuthRepository'
 

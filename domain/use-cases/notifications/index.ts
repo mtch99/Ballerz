@@ -1,7 +1,7 @@
 import { IGetMyNotificationsResult, INotificationsObserver, INotificationsRepository, INotificationsUseCase } from "./interface";
 import { Notification } from "../types";
 import { NotificationsRepository } from "../../repositories/notifications";
-import BallerzApiClient from "../../../infrastructure/BallerApiClient/client";
+import BallerzApiClient from "../../../infrastructure/BallerzServices/BallerzAPI/client";
 
 
 
@@ -31,6 +31,7 @@ export default class NotificationsUseCase implements INotificationsUseCase {
 
 
     async onNewNotificationReceived(notification: Notification): Promise<void> {
+        console.log(`\n Notifications UseCase: \n new notification: ${JSON.stringify(notification)}`)
         this.observer.onNewNotification(notification)
         return 
     }

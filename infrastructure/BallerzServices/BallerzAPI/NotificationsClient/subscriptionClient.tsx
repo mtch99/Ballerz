@@ -11,7 +11,7 @@ import {
   gql
 } from "@apollo/client";
 
-import awsmobile from "../aws-exports";
+import awsmobile from "../../aws-exports";
 import { onCreateNotification_gql } from "./subscriptions";
 
 /* The HTTPS endpoint of the AWS AppSync API 
@@ -25,7 +25,8 @@ const url = awsmobile.aws_appsync_graphqlEndpoint;
 const region = awsmobile.aws_appsync_region;
 
 const auth: AuthOptions = {
-  type: awsmobile.aws_appsync_authenticationType,
+  // @ts-ignore
+  type: awsmobile.aws_appsync_authenticationType ,
   apiKey: awsmobile.aws_appsync_apiKey,
   // jwtToken: async () => token, // Required when you use Cognito UserPools OR OpenID Connect. token object is obtained previously
   // credentials: async () => credentials, // Required when you use IAM-based auth.

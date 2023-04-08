@@ -56,7 +56,7 @@ export function RootStackNavigator(): JSX.Element {
 		// }
 	}, [])
 
-	if(authState.isDataPrepared && authState.user){
+	if(!authState.isDataPrepared && authState.user){
 		isSignedIn = true
 	}
 	
@@ -66,24 +66,43 @@ export function RootStackNavigator(): JSX.Element {
 		!authState.isDataPrepared?(
 			<></>
 		):(
-			<RootStack.Navigator
-				initialRouteName={isSignedIn?'AppStack': 'AuthStack'}
-			>
-						<RootStack.Screen
-							name='AppStack'
-							options={{
-								headerShown: false,
-							}}
-							component={AppStackWrapper}
-						/>
-						<RootStack.Screen
-							name='AuthStack'
-							options={{
-								headerShown: false,
-							}}
-							component={AuthStackWrapper}
-						/>
-			</RootStack.Navigator>
+			authState.user?(
+				<RootStack.Navigator
+				>
+					<RootStack.Screen
+						name='AppStack'
+						options={{
+							headerShown: false,
+						}}
+						component={AppStackWrapper}
+					/>
+					<RootStack.Screen
+						name='AuthStack'
+						options={{
+							headerShown: false,
+						}}
+						component={AuthStackWrapper}
+					/>
+				</RootStack.Navigator>
+			):(
+				<RootStack.Navigator
+				>
+					<RootStack.Screen
+						name='AuthStack'
+						options={{
+							headerShown: false,
+						}}
+						component={AuthStackWrapper}
+					/>
+					<RootStack.Screen
+						name='AppStack'
+						options={{
+							headerShown: false,
+						}}
+						component={AppStackWrapper}
+					/>
+				</RootStack.Navigator>
+			)
 		)
 	)
 	

@@ -26,17 +26,17 @@ export class DefineUsernameView extends React.Component<IDefineUsernameViewProps
                     placeholderTextColor={"#969696"}
                     style={styles.confirmationCodeInputContainer}
                     onChangeText={(input) => {this.props.onUsernameInputChange(input)}}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    autoComplete="off"
                 />
 
 
                 <TouchableOpacity
-                    onPress={() => {this.props.onPressConfirm()}}
-                    style={styles.confirmButton}
-                >
-                    <Text style={styles.confirmButtonText}>
-                        Confirmer
-                    </Text>
-                </TouchableOpacity>
+					onPress={() => {this.props.onPressConfirm()}}
+				>
+					<Text style={styles.footerCreate}>Continuer</Text>
+				</TouchableOpacity>
                 {this.props.error?(<Text>{this.props.error}</Text>):(<></>)}
             </View>
         )
@@ -87,5 +87,12 @@ const styles = StyleSheet.create({
         marginTop: 5,
         color: 'red',
         fontSize: 12
-    }
+    },
+
+    footerCreate: {
+        marginTop: 10,
+		color: '#e78b2f',
+		fontWeight: 'bold',
+		fontSize: 15
+	 },
 })

@@ -1,5 +1,5 @@
 import { mock, mockClear } from 'jest-mock-extended';
-import * as struct  from '../../../domain/use-cases/auth/types'
+import * as struct  from '../../../../domain/use-cases/auth/types'
 import { AuthRepository } from '../AuthRepository';
 /**
  * Given valid creds

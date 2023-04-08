@@ -1,16 +1,16 @@
 import { GraphQLResult, GraphQLSubscription } from "@aws-amplify/api";
 import { IGetMyNotificationsErrorReason, IgetMyNotificationsError } from "./../../use-cases/notifications/interface";
-import { FriendShipRequestData, UserProfileData } from "./../../../infrastructure/BallerApiClient/types";
+import { FriendShipRequestData, UserProfileData } from "../../../infrastructure/BallerzServices/BallerzAPI/types";
 import { IFriendShipRequestNotification, IFriendshipRequest, IUserProfileData } from "./../../use-cases/types";
-import { FilterNotificationsByUserQueryVariables, ListNotificationsQuery } from "./../../../infrastructure/BallerApiClient/NotificationsClient/queries";
-import { INotificationsClient } from "./../../../infrastructure/BallerApiClient/NotificationsClient/interface";
-import { Notification as ClientNotification } from "./../../../infrastructure/BallerApiClient/NotificationsClient/types";
+import { FilterNotificationsByUserQueryVariables, ListNotificationsQuery } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient/queries";
+import { INotificationsClient } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient/interface";
+import { Notification as ClientNotification } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient/types";
 import { INotificationsRepository, INotificationsUseCase, IGetMyNotificationsResult } from "../../use-cases/notifications/interface";
 import { Notification } from "../../use-cases/types";
-import NotificationsClient, { NotificationsClientMock } from "../../../infrastructure/BallerApiClient/NotificationsClient";
-import { NotificationType } from "../../../infrastructure/BallerApiClient/API";
+import NotificationsClient, { NotificationsClientMock } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient";
+import { NotificationType } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
 import { useTheme } from "react-navigation";
-import { MyNotificationsSubscription } from "../../../infrastructure/BallerApiClient/NotificationsClient/subscriptions";
+import { MyNotificationsSubscription } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient/subscriptions";
 
 export class NotificationsRepository implements INotificationsRepository {
     observer: INotificationsUseCase;
@@ -48,12 +48,14 @@ export class NotificationsRepository implements INotificationsRepository {
 
 
     onNewNotification(notification: Notification): void {
+        console.log(`Received new notification: ${JSON.stringify(notification)}`);
         this.observer.onNewNotificationReceived(notification)
     }
 
 
     subscribeToMyNotifications(myProfileID: string): void {
         this.client.subscribeToNotifications(myProfileID, this.notificationsSubscriptionHandler.bind(this))
+        console.log(`Subscribed to notifications for profile ${myProfileID}`);
     }
 
 }
@@ -143,6 +145,7 @@ class ResponseHandler {
     private static parseUserProfileData(input: UserProfileData): IUserProfileData{
         return {
             ...input,
+            isFriend: undefined,
             badges: []
         }
     }

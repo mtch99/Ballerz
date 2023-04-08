@@ -1,20 +1,18 @@
-import { ICheckinEventPayload, ICommentInput, ICreateGameInput, ICreateGameOutput } from "../../domain/use-cases/feed/interface";
+import { ICheckinEventPayload, ICheckinInput, ICommentInput, ICreateGameInput, ICreateGameOutput } from "../../domain/use-cases/feed/interface";
 import { IFeed, IFeedItem, IUserProfileData } from "../../domain/use-cases/types";
 import { FeedUseCase } from "../../domain/use-cases/feed"
-import IFeedModel, { IFeedEventObserver, IFeedUseCase } from "../../domain/use-cases/feed/interface";
+import IFeedModel, { IFeedModelEventListener, IFeedUseCase } from "../../domain/use-cases/feed/interface";
 import IFeedController from "./interface";
 import { IFeedState } from "../../app/features/feed/slice/interface";
 
 
-export class FeedController implements IFeedController {
+class FeedController implements IFeedController {
 
-    private feedUseCase: IFeedUseCase
+    private feedUseCase: IFeedUseCase = fakeUseCase
 
-    feed: IFeedState;
-
-    constructor(feedModel: IFeedModel, feedState: IFeedState ){
-        this.feedUseCase = new FeedUseCase(feedModel)
-        this.feed = feedState
+    createUseCase(model: IFeedModelEventListener){
+        this.feedUseCase = new FeedUseCase(model)
+        console.log(`\n Feed usecase initialized \n`)
     }
     
     async createGame(input: ICreateGameInput): Promise<ICreateGameOutput>{
@@ -36,7 +34,24 @@ export class FeedController implements IFeedController {
         this.feedUseCase.comment(input)
         return
     }
- 
 }
 
 
+const feedController = new FeedController()
+export default feedController
+
+
+const fakeUseCase: IFeedUseCase = {
+    getFeed: function (): Promise<IFeedItem[]> {
+        throw new Error("Function not implemented.");
+    },
+    checkIn: function (payload: ICheckinInput): Promise<boolean> {
+        throw new Error("Function not implemented.");
+    },
+    comment: function (input: ICommentInput): Promise<boolean> {
+        throw new Error("Function not implemented.");
+    },
+    createGame: function (input: ICreateGameInput): Promise<ICreateGameOutput> {
+        throw new Error("Function not implemented.");
+    }
+}

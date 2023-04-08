@@ -1,22 +1,16 @@
-import { IGroupChatModel } from "../../app/features/groupChat/model";
-import IGroupChatMapState from "../../app/features/groupChat/groupChatMap/slice/interface";
-import { IGroupChatListState } from "../../app/features/groupChat/types";
 import GroupChatUseCase from "../../domain/use-cases/groupchat";
-import IGroupChatUseCase from "../../domain/use-cases/groupchat/interface";
-import { ISendGroupChatMessageInput } from "../../domain/use-cases/groupchat/types";
+import IGroupChatUseCase, { IGroupChatModelEventListener } from "../../domain/use-cases/groupchat/interface";
+import { IGroupChatList, ISendGroupChatMessageInput } from "../../domain/use-cases/groupchat/types";
 import IGroupChatController from "./interface";
 
 
-export default class GroupChatController implements IGroupChatController {
+class GroupChatController implements IGroupChatController {
 
-    private groupChatUseCase: IGroupChatUseCase
-    groupChatList: IGroupChatListState
-    groupChatMap: IGroupChatMapState;
+    private groupChatUseCase: IGroupChatUseCase = fakeUseCase
 
-    constructor(groupChatModel: IGroupChatModel, groupChatList: IGroupChatListState, groupChatMap: IGroupChatMapState){
-        this.groupChatUseCase = new GroupChatUseCase(groupChatModel)
-        this.groupChatList = groupChatList
-        this.groupChatMap = groupChatMap
+    createUseCase(model: IGroupChatModelEventListener){
+        this.groupChatUseCase = new GroupChatUseCase(model)
+        console.log(`\n GroupChat usecase initialized \n`)
     }
 
     getGroupChatList(): void {
@@ -25,5 +19,18 @@ export default class GroupChatController implements IGroupChatController {
 
     sendGroupChatMessage(input: ISendGroupChatMessageInput): boolean {
         return this.groupChatUseCase.sendGroupChatMessage(input)
+    }
+}
+
+const groupChatController = new GroupChatController()
+export default groupChatController;
+
+
+const fakeUseCase: IGroupChatUseCase = {
+    getGroupChatList: function (): IGroupChatList {
+        throw new Error("Function not implemented.");
+    },
+    sendGroupChatMessage: function (input: ISendGroupChatMessageInput): boolean {
+        throw new Error("Function not implemented.");
     }
 }

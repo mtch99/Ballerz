@@ -25,6 +25,7 @@ export default class FindYourFriendsScreen<P extends IFindYourFriendsScreenProps
         this.onPressContinue = this.onPressContinue.bind(this)
     }
 
+
     onPressUserProfile(pressedItem: ISelectableUserProfileData): void {
         const newUserProfileList = this.__selectItem(pressedItem)
         const mockUpdatedUserProfileState = this.__mockUpdateUserProfileListState(this.state, newUserProfileList)
@@ -79,9 +80,10 @@ export default class FindYourFriendsScreen<P extends IFindYourFriendsScreenProps
     
     __initState(): void {
         const initialProfiles: ISelectableUserProfileData[] = []
-
         this.context.userProfileListState.items.forEach((item) => {
-            initialProfiles.push({...item, selected: false})
+            if(!item.isFriend){
+                initialProfiles.push({...item, selected: false})
+            }
         })
 
         const newState: ISelectableUserProfileListScreenState = {
@@ -100,7 +102,7 @@ export default class FindYourFriendsScreen<P extends IFindYourFriendsScreenProps
             const receiverProfiles: ISendFriendshipRequestsInput['receiverProfiles'] = []
             this.state.userProfileList.forEach((item) => {
                 if(item.selected){
-                    receiverProfiles.push({id: item.id, username: item.username, badges: item.badges})
+                    receiverProfiles.push({...item})
                 }
             })
             const input: ISendFriendshipRequestsInput = {

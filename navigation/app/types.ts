@@ -19,7 +19,7 @@ declare global {
 
 export type AppStackParamList = {
 	CreateProfile: NavigatorScreenParams<CreateProfileStackParamList>
-  	AppTab:  NavigatorScreenParams<AppTabParamList>
+  	AppTab:  NavigatorScreenParams<AppTabParamList> | undefined
 };
 
 

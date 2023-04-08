@@ -5,7 +5,7 @@ import NotificationsUseCase from "../../domain/use-cases/notifications";
 import { IFriendShipRequestNotification } from "../../domain/use-cases/types";
 
 
-export default class NotificationController implements INotificationController{
+class NotificationController implements INotificationController{
     
     useCase: usecase_types.INotificationsUseCase = fakeNotificationUseCase
     private _userProfileID: string | undefined;
@@ -28,10 +28,7 @@ export default class NotificationController implements INotificationController{
     }
     
     async subscribeToMyNotifications(userProfileID: string): Promise<void>{
-        if(!this.userProfileID){
-            throw new Error('User profile ID is not set')
-        } 
-        this.useCase.subscribeToMyNotifications(this.userProfileID)
+        this.useCase.subscribeToMyNotifications(userProfileID)
     }
     
     get userProfileID(): string | undefined {
@@ -41,6 +38,9 @@ export default class NotificationController implements INotificationController{
         this._userProfileID = value;
     }
 }
+
+const notificationController = new NotificationController();
+export default notificationController;
 
 
 const fakeNotificationUseCase: INotificationsUseCase = {

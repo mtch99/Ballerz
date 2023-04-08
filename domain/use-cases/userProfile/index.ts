@@ -17,8 +17,9 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
 
 
     async getMyUserProfile(email: string): Promise<IUserProfile | null> {
-        const result = await this.repo.getUserProfileByEmail(email)
+        const result = await this.repo.getMyUserProfile(email)
         if(result){
+            this.repo.setMyUserProfileID(result.id)
             this.observer.setMyProfile(result)
         }
         return result
@@ -45,7 +46,7 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
     
     
     async getAllUserProfileData(): Promise<IUserProfileData[]> {
-        const result = initialUserProfileData
+        const result = await this.repo.getAllUserProfileData()
         this.observer.onNewUserProfileList(result);
         console.warn(`UserProfile Use case getAllUserProfileData using hard coded data`)
         return result

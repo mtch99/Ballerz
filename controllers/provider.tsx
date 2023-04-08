@@ -2,11 +2,9 @@ import React from "react";
 import { IAppController, IAppControllerEventListener } from "./interface";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { createFeedModel } from "../app/features/feed/model";
-import { FeedController } from "./feed";
+import feedController from "./feed";
 import { createGroupChatModel } from "../app/features/groupChat/model";
-import GroupChatController from "./groupChat";
 import { createUserProfileModel } from "../app/features/userProfile/model";
-import UserProfileController from "./userProfile";
 import { IFeedState } from "../app/features/feed/slice/interface";
 import { selectFeed } from "../app/features/feed/slice";
 import IFeedModel from "../domain/use-cases/feed/interface";
@@ -23,24 +21,23 @@ import { IPlaceListState, IPlaceMapState } from "../app/features/place/types";
 import { IPlaceModel, createPlaceModel } from "../app/features/place/model";
 import { selectPlaceListState } from "../app/features/place/placeList/slice";
 import { selectPlaceMapState } from "../app/features/place/placeMap/slice";
-import PlaceController from "./place";
 import IPlaceController from "./place/interface";
 import { IUserProfileMapState } from "../app/features/userProfile/types";
 import { selectUserProfileMapState } from "../app/features/userProfile/userProfileMap/slice";
 import { IAuthModel, createAuthModel } from "../app/features/Auth/model";
-import { IAuthUCIEventListener } from "../domain/use-cases/auth/interface";
-import AuthController from "./auth";
 import IAuthController from "./auth/interface";
 import { AuthState, selectAuth } from "../app/features/Auth/slice";
-import * as SplashScreen from 'expo-splash-screen'
-import { INotificationsObserver, INotificationsUseCase } from "../domain/use-cases/notifications/interface";
-import { IFriendShipRequestNotification } from "../domain/use-cases/types";
-import NotificationsUseCase from "../domain/use-cases/notifications";
+import * as SplashScreen from 'expo-splash-screen';
 import { INotificationController } from "./notification/interface";
-import NotificationController from "./notification";
 import { NotificationListState } from "../app/features/notifications/slice/interface";
 import { createNotificationModel } from "../app/features/notifications/model";
 import { selectNotificationList } from "../app/features/notifications/slice";
+
+import userProfileController from "./userProfile";
+import placeController from "./place";
+import groupChatController from "./groupChat";
+import authController from "./auth";
+import notificationController from "./notification";
 
 
 
@@ -59,7 +56,7 @@ export interface IAppContext extends IAppController{
 
 
 export const AppContext = React.createContext<IAppContext>({
-    authController: {} as AuthController,
+    authController: {} as IAuthController,
     feedController: {} as IFeedController,
     groupChatController: {} as IGroupChatController,
     userProfileController: {} as IUserProfileController,
@@ -102,32 +99,27 @@ export default function AppProvider (props: IProps) {
         dispatchFunc: dispatch
     }
 
-    const [isDataPrepared, setIsDataPrepared] = React.useState(false)
 
     const authModel: IAuthModel = createAuthModel(modelInput)
     const authState: AuthState = selector(selectAuth)
-    const authController: IAuthController = new AuthController(authModel)
 
     const feedModel: IFeedModel = createFeedModel(modelInput)
     const feedState: IFeedState = selector(selectFeed)
-    const feedController = new FeedController(feedModel, feedState)
+
 
 
     const groupChatModel = createGroupChatModel(modelInput)
     const groupChatListState: IGroupChatListState = selector(selectgroupChatListState)
     const groupChatMapState: IGroupChatMapState = selector(selectGroupChatMapState)
-    const groupChatController = new GroupChatController(groupChatModel, groupChatListState, groupChatMapState)
-
     const userProfileModel = createUserProfileModel(modelInput)
     const userProfileListState = selector(selectUserProfileListState)
     const userProfileMapState = selector(selectUserProfileMapState)
-    const userProfileController = new UserProfileController(userProfileModel, userProfileListState)
+
 
 
     const placeModel: IPlaceModel = createPlaceModel(modelInput)
     const placeListState: IPlaceListState = selector(selectPlaceListState)
     const placeMapState: IPlaceMapState = selector(selectPlaceMapState)
-    const placeController: IPlaceController = new PlaceController(placeModel)
 
     const notificationModel = createNotificationModel(modelInput)
     const notificationListState: NotificationListState = selector(selectNotificationList)
@@ -135,7 +127,10 @@ export default function AppProvider (props: IProps) {
     const prepareData = async() => {
         const isUserSignedIn = await authController.signinLastUser()
         if(isUserSignedIn){
-            await userProfileController.getMyProfile(isUserSignedIn.user?.email)
+            const userProfile = await userProfileController.getMyProfile(isUserSignedIn.user?.email)
+            if(userProfile){
+                notificationController.subscribeToMyNotifications(userProfile.id)
+            }
         }
         authModel.onDataPreparedEvent()
         await SplashScreen.hideAsync().then(result => {
@@ -168,11 +163,12 @@ export default function AppProvider (props: IProps) {
     }
 
     React.useEffect(() => {
-        // if(!isDataPrepared){
-        //     prepareData().then(() => {setIsDataPrepared(true)});
-        // }
+        authController.createUseCase(authModel)
+        userProfileController.createUseCase(userProfileModel)
         notificationController.createUseCase(notificationModel)  
-        // console.warn("use effect of AppProvider")
+        placeController.createUseCase(placeModel)
+        groupChatController.createUseCase(groupChatModel)
+        feedController.createUseCase(feedModel)
     }, [])
 
 
@@ -188,11 +184,3 @@ export default function AppProvider (props: IProps) {
 
 
 export const MemoizedAppProvider = React.memo(AppProvider)
-
-// export MemoizedAppProvider;
-
-
-
-const notificationController = new NotificationController()
-
-

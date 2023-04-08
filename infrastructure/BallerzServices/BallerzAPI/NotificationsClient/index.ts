@@ -6,58 +6,59 @@ import BallerzApiClient from "../client";
 import { INotificationsClient, INotificationsSubscriber } from "./interface";
 import { ListNotificationsQuery, FilterNotificationsByUserQueryVariables, listNotifications_gql} from "./queries";
 import {GraphQLQuery, GraphQLSubscription, GraphQLResult} from "@aws-amplify/api"
-import { awsmobileAPIMock } from "../aws-exports";
+import { awsmobileAPIMock } from "../../aws-exports";
 import { genNotificationFilterByReceiverVariables } from "./subscriptions";
 import { Notification } from "./types";
-import  {Observable, ZenObservable} from "zen-observable-ts";
-import { CONNECTION_STATE_CHANGE, ConnectionState } from '@aws-amplify/pubsub';
 import { subscriptionClient } from "./subscriptionClient";
-import { gql } from "@apollo/client";
+import { gql, Observable, FetchResult} from "@apollo/client";
+import {Subscription} from "@apollo/client/node_modules/zen-observable-ts";
 
 
-let priorConnectionState: ConnectionState;
 
 
 export default class NotificationsClient extends BallerzApiClient implements INotificationsClient{
     
     lastNotification: Notification | null
-    subscription: ZenObservable.Subscription| null = null;
+    subscription: Subscription | null = null;
     
     constructor(config?:any , authMode?: "API_KEY"){
         super(config, authMode);
-        this.lastNotification = null
-        Hub.listen("api", (data: any) => {
-            const { payload } = data;
-            if (
-              payload.event === CONNECTION_STATE_CHANGE
-            ) {
-              if (priorConnectionState === ConnectionState.Connecting && payload.data.connectionState === ConnectionState.Connected) {
-                // fetchRecentData();
-                console.error("connection state changed to connected")
-        
-              }
-              console.error(`connextionState: ${payload.data.connectionState}`);
-            }
-        });
-          
+        this.lastNotification = null  
     }
     
 
     async subscribeToNotifications(userProfileID: string, callback: (value: Notification) => void): Promise<void> {
+        this.subscription?.unsubscribe()
+        
         const sub = subscriptionClient.subscribe({
             query: gql(onCreateNotification_gql),
             variables: genNotificationFilterByReceiverVariables(userProfileID),
-        })
-          
-        sub.subscribe({
-          next: (data) => {
-            console.log(data);
+        }).subscribe({
+          next: ({data}) => {
+            const subscription: MyNotificationsSubscription = data
+			if(subscription.onCreateNotification){
+				callback(subscription.onCreateNotification)
+			}
           },
           error: (err) => {
-            console.log(err);
+            try {
+                console.error(`\n Notification Subscription received error: ${JSON.stringify(err)}\n`);
+                this.resubscribe(userProfileID, callback);
+            } catch (e) {
+                console.error(`\n Notification Subscription received error: ${JSON.stringify(err)}\n`);
+                this.resubscribe(userProfileID, callback);
+            }
           },
         })
+
+		this.subscription = sub;
     }
+
+	private resubscribe(userProfileID: string, callback: (value: Notification) => void): void{
+		console.log("resubscribing");
+		this.subscription?.unsubscribe()
+		this.subscribeToNotifications(userProfileID, callback)
+	}
 
 
     async filterNotificationsByReceiver(receiverProfileID: string): Promise<ListNotificationsQuery | undefined> {

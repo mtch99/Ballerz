@@ -58,6 +58,10 @@ export default class SigninScreen extends React.Component<ISigninScreenProps, IS
         }))
     }
 
+    onPressCreateAccount(){
+        this.props.navigationController.goToSignup()
+    }
+
     private handleSigninResponse(response: ILoginResult): void {
         if(response.error != false){
             const error: ILoginRejection = response.error
@@ -86,6 +90,7 @@ export default class SigninScreen extends React.Component<ISigninScreenProps, IS
                     emailInput: "stephcurry30@ballerz.com"
                 }}
                 onPressSignin={this.signIn}
+                onPressCreateAccount={this.onPressCreateAccount.bind(this)}
             />
         )
     }

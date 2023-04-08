@@ -17,6 +17,7 @@ export interface ISigninScreenState {
 
 export interface ISigninScreenNavigationController {
     onSigninSuccess(signinInput: ILoginInput): void
+    goToSignup(): void
 }
 export interface ISigninScreen {
     signIn(input: ILoginInput): void

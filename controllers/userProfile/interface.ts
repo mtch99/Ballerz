@@ -8,7 +8,6 @@ import { IUserProfileData } from "../../domain/use-cases/types";
 
 export interface IUserProfileController {
     getAllUserProfiles(): Promise<void>
-    userProfileList: IUserProfileListState
     getUserProfile(id: IUserProfileState['id']): void
     getMyProfile(email: string): void
     defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult>

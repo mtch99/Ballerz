@@ -33,18 +33,45 @@ There must be three different games on three different courts, two at the moment
             - [x] Define and implement Notifications View
         - [x] Add notification screen to FeedStack
 
-    * [ ] Check auth flow
-        - [ ] Signup View
-        - [ ] Signin View
-        - [ ] Notifications subscriptions after userProfile retrieval or creation
-        TODO: Refactor controllers and use cases to be singletons. Take the reent notification controller as example. Why? They can now communicate with each other easily and are not directly affected by components lifecycle
+    * [x] Check auth flow
+        - [x] Signin View
+            - [x] Show signin screen if the user has already signed in in the past
+            - [x] Error display at the view level and error message creation at screen level
+        - [x] Signup View
+            - [x] Layout
+            - [x] Error display at the view level and error message creation at screen level
+
+        - [x] Test the flow on a mobile device
+            - [x] Unregistered User error message display in signin View 
+            - [x] Navigate to Signup View
+            * [x] Fix: Did not auto signin at the second launch
+            - [x] Signup error messages display
+            - [x] Define username after signup
+            - [x] Invite friends after username creation
+                - [x] Works
+                    - [x] Flow is executed correctly
+                    - [x] Refactor find your friends view
+                        - [x] Fix feedback view height
+                    * [x] Add isFriend field to userProfileData an userProfile
+                    - [x] Only Display the users that are not friends to the client user in Find Your Friends and make friends screens
+                        - [x] Test 
+            - [x] Add a user after username creation
+                - [x] FriendShip Requests and notifications are created successfully
+        
+
+    - [x] Notifications subscriptions after userProfile retrieval or creation
+        - [x] Refactor controllers and use cases to be singletons. Take the reent notification controller as example. Why? They can now communicate with each other easily and are not directly affected by components lifecycle
+        * [x] Password input bug
+        - [x] Cache My userProfile and all userProfileData list
+        - [x] Test
+            - [x] accept friendship request in console and check that the user is notified
 
 
     
 
 - [ ] Add friend
     - [ ] UserProfileScreen and MyUserProfileScreen
-        - [ ] UserProfileScreen ... manage data loading, no network, ...
+        - [ ] UserProfileScreen ... manage loading state, no network, ...
             - [ ] UserProfileView 
         - [ ] MyUserProfileScreen
             - [ ] MyUserProfileView
@@ -86,6 +113,8 @@ TODO: auth
 
 TODO: Prevent users from sharing a username
 
+
+TODO: Prevent users from choosing an already used username
 
 
 

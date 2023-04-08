@@ -60,7 +60,7 @@ export const onCreateNotificationByReceiver = /* GraphQL */ `
 `;
 
 
-export const onCreateNotification_gql_old = /* GraphQL */ `
+export const onCreateNotification_gql = /* GraphQL */ `
   subscription OnCreateNotification(
     $filter: ModelSubscriptionNotificationFilterInput
   ) {
@@ -77,6 +77,7 @@ export const onCreateNotification_gql_old = /* GraphQL */ `
         id
         username
       }
+      friendshipRequestID
       friendshipRequest{
         id
         status
@@ -92,16 +93,6 @@ export const onCreateNotification_gql_old = /* GraphQL */ `
   }
 `;
 
-export const onCreateNotification_gql = /* GraphQL */ `
-  subscription OnCreateNotification(
-    $filter: ModelSubscriptionNotificationFilterInput
-  ) {
-    onCreateNotification(filter: $filter) {
-      id
-      type
-    }
-  }
-`;
 
 
 

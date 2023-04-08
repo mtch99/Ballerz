@@ -8,6 +8,7 @@ import { View, StyleSheet, Text, KeyboardAvoidingView, Platform, Keyboard, Touch
 import { globalStyles } from "../../../views/styles";
 import SigninButton from "../../../views/auth/signIn/signinButton";
 import ConfirmSignupModal from "./confirmSignupModal";
+import SignupView from "../../../views/auth/signIn/signup/indext";
 
 
 export default class SignupScreen extends React.Component<ISignupScreenProps, ISignupScreenState> implements ISignupScreen{
@@ -18,7 +19,8 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
         emailInput: "",
         passwordInput: "",
         confirmPasswordInput: "",
-        confirmSignupModalVisible: false
+        confirmSignupModalVisible: false,
+        error: undefined
     }
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
@@ -54,6 +56,9 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
         this.props.navigationController.goToConfirmSignup(this.state.emailInput)
     }
 
+    onPressSignin(): void {
+        this.props.navigationController.goToSignin()
+    }
 
     private handleSignupResponse(response: ISignupResult): void {
         if(response.error){
@@ -109,63 +114,16 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
 
     render(): React.ReactNode {
         return(
-            
-            <TouchableWithoutFeedback
-                onPress={() => {Keyboard.dismiss()}}
-            >
-                <KeyboardAvoidingView
-                    style={styles.container}
-                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                >
-                    <ConfirmSignupModal
-                        onPressCofirmationCodeReceived={this.onPressConfirmationCodeReceived}
-                        email={this.state.emailInput}
-                        visible={this.state.confirmSignupModalVisible}
-                    />
-                    <EmailInput
-                        style={styles.inputsContainer}
-                        onChangeText={(text) => {this.onEmailInputChange(text)}}
-                        placeholder="Email"
-                        placeholderTextColor={styles.placeHolderText.color}
-                        autoCorrect={false}
-                        autoComplete="email"
-                        autoCapitalize="none"
-                    />
-                    <PasswordInput
-                        style={styles.inputsContainer}
-                        onChangeText={(text) => {this.onPasswordInputChange(text)}}
-                        placeholderTextColor={styles.placeHolderText.color}
-                        secureTextEntry={true}
-                        autoComplete="password-new"
-                        autoCapitalize="none"
-                    />
-                    <PasswordInput
-                        style={styles.inputsContainer}
-                        placeholder="Confirmez le mot de passe"
-                        onChangeText={(text) => {this.onConfirmPasswordInputChange(text)}}
-                        placeholderTextColor={styles.placeHolderText.color}
-                        secureTextEntry= {true}
-                        autoComplete="password-new"
-                        autoCapitalize="none"
-                    />
-
-
-                
-
-                <SigninButton
-                    onPress={() => {this.onPressSignup()}}
-                    />
-                    {
-                        this.state.error?(
-                            <Text
-                                style={styles.errorTex}
-                            >
-                                {this.state.error}
-                            </Text>
-                        ):(<></>)
-                    }
-            </KeyboardAvoidingView>
-            </TouchableWithoutFeedback>
+        
+            <SignupView
+                onEmailInputChange={this.onEmailInputChange.bind(this)}
+                onPasswordInputChange={this.onPasswordInputChange.bind(this)}
+                onConfirmPasswordInputChange={this.onConfirmPasswordInputChange}
+                onPressSignup={this.onPressSignup}
+                onPressSignIn={this.onPressSignin.bind(this)}
+                error={this.state.error}
+                placeholders={{}}
+            />
 
         )
     }

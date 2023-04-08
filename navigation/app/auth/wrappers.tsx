@@ -1,5 +1,5 @@
 import {NavigatorScreenParams, useNavigation} from "@react-navigation/native"
-import {AuthStackScreenProps} from "./types"
+import {AuthStackParamList, AuthStackScreenProps} from "./types"
 import React from "react"
 import { ILoginInput } from "../../../domain/use-cases/auth/types"
 import ConfirmSignupScreen, { IConfirmSignupScreenNavigationController } from "../../../screens/auth/confirmSignup"
@@ -8,22 +8,25 @@ import { ISigninScreenNavigationController } from "../../../screens/auth/signIn/
 import SignupScreen from "../../../screens/auth/signUp"
 import { ISignupScreenNavigationController } from "../../../screens/auth/signUp/interface"
 import { RootStackNavigationProp } from "../../types"
+import { AppTabParamList } from "../appTab/types"
 
-export function SignInScreenWrapper(props: AuthStackScreenProps<'SigninSreen'>){
+export function SignInScreenWrapper(props: AuthStackScreenProps<'SigninScreen'>){
 
     const navigation = useNavigation<RootStackNavigationProp<'AuthStack'>>()
     const navigationController: ISigninScreenNavigationController = {
         onSigninSuccess: function (signinInput: ILoginInput): void {
-            //@ts-ignore
-            const params: NavigatorScreenParams<AppTabParamList> = {
-                screen: 'FeedStack',
+            navigation.navigate("AppStack", undefined)
+        },
+        goToSignup: function (): void {
+            const params: NavigatorScreenParams<AuthStackParamList> = {
+                screen:"SignupScreen",
+                params: {}
             }
-            navigation.navigate("AppStack", params)
+            navigation.navigate("AuthStack", params)
         }
     }
 
-
-
+    
     return(
         <SigninScreen
             {...{navigationController}}
@@ -43,6 +46,9 @@ export function SignupScreenWrapper(props: AuthStackScreenProps<'SignupScreen'>)
         goToApp: function (): void {
             //@ts-ignore
             navigation.navigate("AppStack")
+        },
+        goToSignin: function (): void {
+            navigation.navigate("AuthStack", { screen:"SigninScreen", params: {}})
         }
     }
 

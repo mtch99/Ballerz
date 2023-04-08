@@ -15,7 +15,7 @@ declare global {
 
 
 export type AuthStackParamList = {
-    SigninSreen: ISigninScreenPropsWithoutNavigation
+    SigninScreen: ISigninScreenPropsWithoutNavigation
     SignupScreen: ISignupScreenPropsWithoutNavigation
     ConfirmSignupScreen: IConfirmSignupScreenPropsWithoutNavigation
 };
@@ -31,5 +31,5 @@ export type AuthStackNavigationProp<Screen extends keyof AuthStackParamList> = N
 
 export type SigninScreenNavigationProp = CompositeNavigationProp<
 	RootStackNavigationProp<'AuthStack'>,
-	AuthStackNavigationProp<'SigninSreen'>
+	AuthStackNavigationProp<'SigninScreen'>
 >
