@@ -13,6 +13,7 @@ const Stack = createNativeStackNavigator<AuthStackParamList>();
 export function AuthStackNavigator(): JSX.Element {
     let initialRouteName: keyof AuthStackParamList = "SigninScreen"
     const appContext = React.useContext<IAppContext>(AppContext);
+    
     if(appContext.authState.lastSigninInput.email.length==0){
         initialRouteName="SignupScreen"
     }

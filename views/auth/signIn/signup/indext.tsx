@@ -53,6 +53,9 @@ export default function SignupView(props: ISignupViewProps) {
 									placeholderTextColor='#94a3b8'
 									keyboardType="email-address"
 									onChangeText={(input) => {props.onEmailInputChange(input)}}
+									autoCapitalize='none'
+									autoCorrect={false}
+									autoComplete='email'
 								 />
 							<TextInput
 								style={styles.input}
@@ -169,7 +172,7 @@ const styles = StyleSheet.create({
 	 footerCreate: {
 		color: '#e78b2f',
 		fontWeight: 'bold',
-	fontSize: 15
+		fontSize: 15
 	 },
 
 	loginContainer: {

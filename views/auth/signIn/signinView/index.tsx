@@ -54,6 +54,9 @@ export default function Yannick_SigninView(props: ISigninViewProps) {
           				  placeholderTextColor='#94a3b8'
           				  keyboardType="email-address"
           				  onChangeText={(input) => {props.onEmailInputChange(input)}}
+						  autoCapitalize='none'
+						  autoCorrect={false}
+						  autoComplete='email'
           				 />
 
         				<TextInput

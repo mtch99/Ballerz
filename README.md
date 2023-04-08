@@ -42,13 +42,18 @@ There must be three different games on three different courts, two at the moment
             - [x] Error display at the view level and error message creation at screen level
 
         - [ ] Test the flow on a mobile device
-            - [ ] Unregistered User error message display in signin View 
-            - [ ] Navigate to Signup View
-            - [ ] Signup error messages display
-            - [ ] Define username after signup
+            - [x] Unregistered User error message display in signin View 
+            - [x] Navigate to Signup View
+            * [x] Fix: Did not auto signin at the second launch
+            - [x] Signup error messages display
+            - [x] Define username after signup
             - [ ] Invite friends after username creation
-            - [ ] Add a user after username creation
-                - [ ] Test that the notification subscription in the console is fired 
+                - [ ] Works
+                    - [x] Flow is executed correctly
+                    - [ ] Refactor find your friends view
+                        - [ ] Fix feedback view height
+            - [x] Add a user after username creation
+                - [x] FriendShip Requests and notifications are created successfully
         
 
     - [ ] Notifications subscriptions after userProfile retrieval or creation
@@ -61,7 +66,7 @@ There must be three different games on three different courts, two at the moment
 
 - [ ] Add friend
     - [ ] UserProfileScreen and MyUserProfileScreen
-        - [ ] UserProfileScreen ... manage data loading, no network, ...
+        - [ ] UserProfileScreen ... manage loading state, no network, ...
             - [ ] UserProfileView 
         - [ ] MyUserProfileScreen
             - [ ] MyUserProfileView
@@ -103,6 +108,8 @@ TODO: auth
 
 TODO: Prevent users from sharing a username
 
+
+TODO: Prevent users from choosing an already used username
 
 
 

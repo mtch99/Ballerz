@@ -114,6 +114,7 @@ export class AuthRepository implements IAuthRepository {
                         email
                     }
                 }
+                return result
             }
         })
 
