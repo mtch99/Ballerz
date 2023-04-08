@@ -17,7 +17,7 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
 
 
     async getMyUserProfile(email: string): Promise<IUserProfile | null> {
-        const result = await this.repo.getUserProfileByEmail(email)
+        const result = await this.repo.getMyUserProfile(email)
         if(result){
             this.observer.setMyProfile(result)
         }

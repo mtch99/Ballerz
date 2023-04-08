@@ -1,3 +1,4 @@
+import { UserProfile } from "./../../../infrastructure/BallerzServices/BallerzAPI/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FriendshipRequestStatus } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
 import UserProfileClient, { UserProfileClientMock } from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient";
@@ -29,7 +30,6 @@ export default class UserProfileRepository implements IUserProfileRepository {
     __cacheMyUserProfileData(myUserProfileData: IMyUserProfileData): void {
         AsyncStorage.setItem("myUserProfileData", JSON.stringify(myUserProfileData))
     }
-
     private async __getCachedUserProfileData(): Promise<IMyUserProfileData | null> {
         let result =  await AsyncStorage.getItem("myUserProfileData");
         if(result){
@@ -39,10 +39,10 @@ export default class UserProfileRepository implements IUserProfileRepository {
         }
     }
 
+
     private __cacheMyUserProfile(myUserProfile: IUserProfile): void {
         AsyncStorage.setItem("myUserProfile", JSON.stringify(myUserProfile))
     }
-
     private async __getCachedMyUserProfile(): Promise<IUserProfile | null> {
         let result =  await AsyncStorage.getItem("myUserProfile");
         if(result){
@@ -51,10 +51,23 @@ export default class UserProfileRepository implements IUserProfileRepository {
             return null;
         }
     }
+
+
+    private __cacheUserProfileDataList(userProfileDataList: IUserProfileData[]): void {
+        AsyncStorage.setItem("userProfileDataList", JSON.stringify(userProfileDataList))
+    }
+    private async __getCachedUserProfileDataList(): Promise<IUserProfileData[] | null> {
+        let result =  await AsyncStorage.getItem("userProfileDataList");
+        if(result){
+            return JSON.parse(result) as IUserProfileData[];
+        } else {
+            return null;
+        }
+    }
     
 
-    async getUserProfileByEmail(email: string): Promise<IUserProfile | null> {
-        let result: IUserProfile | null = await this.__getCachedMyUserProfile()
+    async getMyUserProfile(email: string): Promise<IUserProfile | null> {
+        const cache: IUserProfile | null = await this.__getCachedMyUserProfile()
         const variables: ListUserProfilesQueryVariables = {
             filter: {
                 email: {
@@ -70,39 +83,56 @@ export default class UserProfileRepository implements IUserProfileRepository {
         })
 
         if(!response){
-            return result
+            return cache
         }
         
         let parsedResponse = IUserProfileDataAdapter.parseListUserProfileResponse(response)
         if(parsedResponse.length == 0){
-            console.warn("Could not find a user profile with the email: " + email)
+            console.log("Could not find a user profile with the email: " + email)
         }else if(parsedResponse.length == 1){
-            this.__cacheMyUserProfileData({id: parsedResponse[0].id, username: parsedResponse[0].username, email, badges: []})
             const userProfile = parsedResponse[0]
+            this.__cacheMyUserProfileData(userProfile)
             this.__cacheMyUserProfile(userProfile)
             return parsedResponse[0]
         }
         else if(parsedResponse.length > 1){
-            console.warn("Found multiple userprofiles with same email in the database. Returned the first one")
-            return parsedResponse[0]
+            console.log("Found multiple userprofiles with same email in the database. Returned the first one")
+            const userProfile = parsedResponse[0]
+            this.__cacheMyUserProfile(userProfile)
+            this.__cacheMyUserProfileData(userProfile)
+
+            return userProfile
         }
 
-        return null
+        return cache
     }
     
 
     async getAllUserProfileData(): Promise<IUserProfileData[]> {
+        let cache: IUserProfileData[] = await this.__getCachedUserProfileDataList().then(data => {return data || []})
         const variables: ListUserProfilesQueryVariables = {
 
         }
-        const response: queries.ListUserProfileDataQuery | undefined = await this.client.listUserProfileData(variables)
+        const response: IUserProfileData[] | undefined = await this.client.listUserProfileData(variables)
+        .then(response => {
+            if(response){
+                let res = IUserProfileDataAdapter.parseListUserProfileDataResponse(response)
+                this.__cacheUserProfileDataList(res)
+                return res
+            }
+            return response
+        })
         .catch((err) => {
             console.error(err)
             return undefined
         })
 
-        return IUserProfileDataAdapter.parseListUserProfileDataResponse(response)
+        if(!response){
+            return cache
+        }
+        return response
     }
+
 
     async getUserProfile(id: string): Promise<IUserProfile | null> {
         const variables: GetUserProfileQueryVariables = {
@@ -121,6 +151,7 @@ export default class UserProfileRepository implements IUserProfileRepository {
 
     /**
      * Creates a profile with a username
+     * User profile stored in the cache upon creation
      * @param input 
      */
     async defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult> {
@@ -134,7 +165,12 @@ export default class UserProfileRepository implements IUserProfileRepository {
             return undefined
         })
 
-        return IUserProfileDataAdapter.parseCreateUserProfileResponse(response)
+        const result = IUserProfileDataAdapter.parseCreateUserProfileResponse(response)
+        if(!result.error && result.userProfile){
+            this.__cacheMyUserProfile(result.userProfile)
+        }
+
+        return result
     }
     
 

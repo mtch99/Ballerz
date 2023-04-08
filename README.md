@@ -58,8 +58,8 @@ There must be three different games on three different courts, two at the moment
 
     - [ ] Notifications subscriptions after userProfile retrieval or creation
         - [x] Refactor controllers and use cases to be singletons. Take the reent notification controller as example. Why? They can now communicate with each other easily and are not directly affected by components lifecycle
-        * [x] Passwork input bug
-        - [ ] 
+        * [x] Password input bug
+        - [x] Cache My userProfile and all userProfileData list
         - [ ] Test
             - [ ] accept friendship request in console and check that the user is notified
 

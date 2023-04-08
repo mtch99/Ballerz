@@ -24,7 +24,7 @@ export interface IUserProfileRepository {
     getUserProfile(id: IUserProfileData['id']): Promise<IUserProfile | null>
     defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult>
     requestFriendship(input: IRequestFriendShipInput): Promise<IRequestFriendShipResult>
-    getUserProfileByEmail(email: string): Promise<IUserProfile | null>
+    getMyUserProfile(email: string): Promise<IUserProfile | null>
     __cacheMyUserProfileData(myUserProfileData: IMyUserProfileData): void
     getMyUserProfileData(): Promise<IMyUserProfileData | null>
 }
