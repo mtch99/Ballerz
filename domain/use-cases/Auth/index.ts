@@ -44,6 +44,7 @@ export default class AuthUCI implements IAuthUCI {
 
     async signup(input: types.ISignupInput): Promise<types.ISignupResult>{
         this.observer.onNewSignupAttempt(input)
+        console.warn(`SIgnup function input: ${JSON.stringify(input)}`)
         const {email, password, confirmPassword} = input
 
         let result: types.ISignupResult  = {

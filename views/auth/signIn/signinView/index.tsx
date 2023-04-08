@@ -60,7 +60,7 @@ export default function Yannick_SigninView(props: ISigninViewProps) {
           				 />
 
         				<TextInput
-        			    style={styles.input}
+        			    	style={styles.input}
         			    	placeholder="Password"
         			    	placeholderTextColor='#94a3b8'
         			    	keyboardType='visible-password'
