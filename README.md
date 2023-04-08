@@ -33,7 +33,7 @@ There must be three different games on three different courts, two at the moment
             - [x] Define and implement Notifications View
         - [x] Add notification screen to FeedStack
 
-    * [ ] Check auth flow
+    * [x] Check auth flow
         - [x] Signin View
             - [x] Show signin screen if the user has already signed in in the past
             - [x] Error display at the view level and error message creation at screen level
