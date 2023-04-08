@@ -8,15 +8,18 @@ import * as queries from "../../../infrastructure/BallerzServices/BallerzAPI/Use
 import * as mutations from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/mutations"
 import { GetUserProfileQueryVariables, ListUserProfilesQueryVariables } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
 import { throwServerError } from "@apollo/client";
+import { values } from "mobx";
 
 
 
 export default class UserProfileRepository implements IUserProfileRepository {
 
     client: UserProfileClient
+    myUserProfileID: string = "dumbID1210e8934"
     constructor(){
         this.client = new UserProfileClient()
     }
+
 
 
     async getMyUserProfileData(): Promise<IMyUserProfileData | null> {
@@ -25,44 +28,6 @@ export default class UserProfileRepository implements IUserProfileRepository {
             return result as IMyUserProfileData
         }
         return null
-    }
-    
-    __cacheMyUserProfileData(myUserProfileData: IMyUserProfileData): void {
-        AsyncStorage.setItem("myUserProfileData", JSON.stringify(myUserProfileData))
-    }
-    private async __getCachedUserProfileData(): Promise<IMyUserProfileData | null> {
-        let result =  await AsyncStorage.getItem("myUserProfileData");
-        if(result){
-            return JSON.parse(result) as IMyUserProfileData;
-        } else {
-            return null;
-        }
-    }
-
-
-    private __cacheMyUserProfile(myUserProfile: IUserProfile): void {
-        AsyncStorage.setItem("myUserProfile", JSON.stringify(myUserProfile))
-    }
-    private async __getCachedMyUserProfile(): Promise<IUserProfile | null> {
-        let result =  await AsyncStorage.getItem("myUserProfile");
-        if(result){
-            return JSON.parse(result) as IUserProfile;
-        } else {
-            return null;
-        }
-    }
-
-
-    private __cacheUserProfileDataList(userProfileDataList: IUserProfileData[]): void {
-        AsyncStorage.setItem("userProfileDataList", JSON.stringify(userProfileDataList))
-    }
-    private async __getCachedUserProfileDataList(): Promise<IUserProfileData[] | null> {
-        let result =  await AsyncStorage.getItem("userProfileDataList");
-        if(result){
-            return JSON.parse(result) as IUserProfileData[];
-        } else {
-            return null;
-        }
     }
     
 
@@ -86,7 +51,7 @@ export default class UserProfileRepository implements IUserProfileRepository {
             return cache
         }
         
-        let parsedResponse = IUserProfileDataAdapter.parseListUserProfileResponse(response)
+        let parsedResponse = IUserProfileDataAdapter.parseListUserProfileResponse(response, this.myUserProfileID)
         if(parsedResponse.length == 0){
             console.log("Could not find a user profile with the email: " + email)
         }else if(parsedResponse.length == 1){
@@ -116,7 +81,7 @@ export default class UserProfileRepository implements IUserProfileRepository {
         const response: IUserProfileData[] | undefined = await this.client.listUserProfileData(variables)
         .then(response => {
             if(response){
-                let res = IUserProfileDataAdapter.parseListUserProfileDataResponse(response)
+                let res = IUserProfileDataAdapter.parseListUserProfileDataResponse(response, this.myUserProfileID)
                 this.__cacheUserProfileDataList(res)
                 return res
             }
@@ -145,7 +110,9 @@ export default class UserProfileRepository implements IUserProfileRepository {
             return undefined
         })
 
-        return IUserProfileDataAdapter.parseGetUserProfileResponse(response)
+
+
+        return IUserProfileDataAdapter.parseGetUserProfileResponse(response, this.myUserProfileID)
     }
 
 
@@ -168,6 +135,7 @@ export default class UserProfileRepository implements IUserProfileRepository {
         const result = IUserProfileDataAdapter.parseCreateUserProfileResponse(response)
         if(!result.error && result.userProfile){
             this.__cacheMyUserProfile(result.userProfile)
+            this.myUserProfileID = result.userProfile.id
         }
 
         return result
@@ -201,6 +169,50 @@ export default class UserProfileRepository implements IUserProfileRepository {
     }
 
 
+
+
+    
+
+    private __cacheMyUserProfileData(myUserProfileData: IMyUserProfileData): void {
+        AsyncStorage.setItem("myUserProfileData", JSON.stringify(myUserProfileData))
+        this.myUserProfileID = myUserProfileData.id
+    }
+    private async __getCachedUserProfileData(): Promise<IMyUserProfileData | null> {
+        let result =  await AsyncStorage.getItem("myUserProfileData");
+        if(result){
+            return JSON.parse(result) as IMyUserProfileData;
+        } else {
+            return null;
+        }
+    }
+
+
+    private __cacheMyUserProfile(myUserProfile: IUserProfile): void {
+        AsyncStorage.setItem("myUserProfile", JSON.stringify(myUserProfile))
+        this.myUserProfileID = myUserProfile.id
+    }
+    private async __getCachedMyUserProfile(): Promise<IUserProfile | null> {
+        let result =  await AsyncStorage.getItem("myUserProfile");
+        if(result){
+            return JSON.parse(result) as IUserProfile;
+        } else {
+            return null;
+        }
+    }
+
+
+    private __cacheUserProfileDataList(userProfileDataList: IUserProfileData[]): void {
+        AsyncStorage.setItem("userProfileDataList", JSON.stringify(userProfileDataList))
+    }
+    private async __getCachedUserProfileDataList(): Promise<IUserProfileData[] | null> {
+        let result =  await AsyncStorage.getItem("userProfileDataList");
+        if(result){
+            return JSON.parse(result) as IUserProfileData[];
+        } else {
+            return null;
+        }
+    }
+
 }
 
 
@@ -218,19 +230,26 @@ export default class UserProfileRepository implements IUserProfileRepository {
  */
 class IUserProfileDataAdapter {
 
-    static parseListUserProfileResponse(response: queries.ListUserProfileQuery | undefined): IUserProfile[]{
+    static parseListUserProfileResponse(response: queries.ListUserProfileQuery | undefined, myProfileID: string): IUserProfile[]{
         const result: IUserProfile[] =[] 
         if(response){
             if(response.listUserProfiles){
                 response.listUserProfiles.items.forEach((value) => {
                     if(value){
-                        const userProfile: IUserProfile = {
-                            ...value,
-                            badges: [],
-                            games: [],
-                            friends: []
+                        if(value.id != myProfileID){
+                            let isFriend = false
+                            if(value.friends.items.length > 0){
+                                isFriend = true
+                            }
+                            const userProfile: IUserProfile = {
+                                ...value,
+                                badges: [],
+                                games: [],
+                                friends: [],
+                                isFriend
+                            }
+                            result.push(userProfile)
                         }
-                        result.push(userProfile)
                     }
                 })
             }
@@ -238,17 +257,24 @@ class IUserProfileDataAdapter {
         return result
     }
 
-    static parseListUserProfileDataResponse(response: queries.ListUserProfileDataQuery | undefined): IUserProfileData[] {
+    static parseListUserProfileDataResponse(response: queries.ListUserProfileDataQuery | undefined, myProfileID: string): IUserProfileData[] {
         const result: IUserProfileData[] =[] 
         if(response){
             if(response.listUserProfiles){
                 response.listUserProfiles.items.forEach((value) => {
                     if(value){
-                        const userProfileData: IUserProfileData = {
-                            ...value,
-                            badges: []
+                        if(value.id != myProfileID){
+                            let isFriend = false
+                            if(value.friends.items.length > 0){
+                                isFriend = true
+                            }
+                            const userProfileData: IUserProfileData = {
+                                ...value,
+                                isFriend,
+                                badges: []
+                            }
+                            result.push(userProfileData)
                         }
-                        result.push(userProfileData)
                     }
                 })
                 return result
@@ -258,29 +284,37 @@ class IUserProfileDataAdapter {
     }
 
 
-    static parseGetUserProfileResponse(response: queries.GetUserProfileQuery | undefined): IUserProfile | null {
+    static parseGetUserProfileResponse(response: queries.GetUserProfileQuery | undefined, myUserProfileID: string): IUserProfile | null {
         let result: IUserProfile | null = null
         
-        if(response){
-            if(response.getUserProfile){
-                const friends: IUserProfileData[] = []
-                response.getUserProfile.friends.items.forEach((item) => {
-                    if(item){
+        if(response?.getUserProfile){
+            let isFriend: IUserProfileData['isFriend'] = false
+            const friends: IUserProfileData[] = []
+            response.getUserProfile.friends.items.forEach((item) => {
+                if(item){
+                    if(item.id != myUserProfileID){
                         friends.push({
                             id: item.friendProfile.id,
                             username: item.friendProfile.username,
-                            badges: []
+                            badges: [],
+                            isFriend: undefined
                         })
+                    } else {
+                        isFriend = true
                     }
-                })
-                result = {
-                    id: response.getUserProfile.id,
-                    username: response.getUserProfile.username,
-                    friends,
-                    badges: [],
-                    games: [],
-                    email: ""
                 }
+            })
+            if(response.getUserProfile.id == myUserProfileID){
+                isFriend = undefined
+            }
+            result = {
+                id: response.getUserProfile.id,
+                username: response.getUserProfile.username,
+                isFriend,
+                friends,
+                badges: [],
+                games: [],
+                email: "",
             }
         }
 
@@ -301,7 +335,8 @@ class IUserProfileDataAdapter {
                     id: response.createUserProfile.id,
                     username: response.createUserProfile.username,
                     badges: [],
-                    email: response.createUserProfile.email
+                    email: response.createUserProfile.email,
+                    isFriend: undefined
                 }
                 result.userProfile = userProfile
             }

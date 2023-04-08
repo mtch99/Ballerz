@@ -52,6 +52,8 @@ There must be three different games on three different courts, two at the moment
                     - [x] Flow is executed correctly
                     - [x] Refactor find your friends view
                         - [x] Fix feedback view height
+                    * [x] Add isFriend field to userProfileData an userProfile
+                    - [ ] Only Display the users that re nit friends to the client user in Find Your Friends and make friends screens 
             - [x] Add a user after username creation
                 - [x] FriendShip Requests and notifications are created successfully
         

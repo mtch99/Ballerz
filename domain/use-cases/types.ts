@@ -50,6 +50,7 @@ export interface IUserProfileData{
     id: string
     username: string
     badges: IBadge[]
+    isFriend: boolean | undefined
 }
 
 
