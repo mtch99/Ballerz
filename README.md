@@ -47,14 +47,14 @@ There must be three different games on three different courts, two at the moment
             * [x] Fix: Did not auto signin at the second launch
             - [x] Signup error messages display
             - [x] Define username after signup
-            - [ ] Invite friends after username creation
+            - [x] Invite friends after username creation
                 - [x] Works
                     - [x] Flow is executed correctly
                     - [x] Refactor find your friends view
                         - [x] Fix feedback view height
                     * [x] Add isFriend field to userProfileData an userProfile
-                    - [ ] Only Display the users that are not friends to the client user in Find Your Friends and make friends screens
-                        - [ ] Test 
+                    - [x] Only Display the users that are not friends to the client user in Find Your Friends and make friends screens
+                        - [x] Test 
             - [x] Add a user after username creation
                 - [x] FriendShip Requests and notifications are created successfully
         

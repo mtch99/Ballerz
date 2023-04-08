@@ -80,9 +80,10 @@ export default class FindYourFriendsScreen<P extends IFindYourFriendsScreenProps
     
     __initState(): void {
         const initialProfiles: ISelectableUserProfileData[] = []
-        const nonFriendsUserProfileList = this.context.userProfileListState.items.filter(item =>!item.isFriend)
-        nonFriendsUserProfileList.forEach((item) => {
-            initialProfiles.push({...item, selected: false})
+        this.context.userProfileListState.items.forEach((item) => {
+            if(!item.isFriend){
+                initialProfiles.push({...item, selected: false})
+            }
         })
 
         const newState: ISelectableUserProfileListScreenState = {

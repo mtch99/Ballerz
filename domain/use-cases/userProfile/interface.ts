@@ -26,6 +26,7 @@ export interface IUserProfileRepository {
     requestFriendship(input: IRequestFriendShipInput): Promise<IRequestFriendShipResult>
     getMyUserProfile(email: string): Promise<IUserProfile | null>
     getMyUserProfileData(): Promise<IMyUserProfileData | null>
+    setMyUserProfileID(id: string): void
 }
 
 export interface IMyUserProfileData extends IUserProfileData {

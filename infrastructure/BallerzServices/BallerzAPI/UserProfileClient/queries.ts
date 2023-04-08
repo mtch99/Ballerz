@@ -32,7 +32,7 @@ export type GetUserProfileQuery = {
 
 export type ListUserProfileDataQueryVariables = {
   filter?: ModelUserProfileFilterInput | null,
-  frendshipFilter: ModelFriendshipFilterInput | null
+  frendshipFilter: ModelFriendshipFilterInput
   limit?: number | null,
   nextToken?: string | null,
 }

@@ -1,4 +1,3 @@
-import { GetUserQuery, GetUserQueryVariables,ListUserProfilesQueryVariables } from "../API";
 // import {GraphQLResult} from "@aws-amplify/api-graphql"
 import {API, Amplify} from "aws-amplify"
 import {GraphQLQuery, GraphQLResult} from "@aws-amplify/api"
@@ -8,7 +7,7 @@ import {GraphQLOptions} from "@aws-amplify/api-graphql"
 import { GetUserProfileQueryVariables} from "../API";
 import { IUserProfileClient } from "./interface";
 import { CreateUserProfileMutation, CreateUserProfileMutationVariables } from "./mutations";
-import { ListUserProfileQuery } from "./queries";
+import { ListUserProfileDataQueryVariables, ListUserProfileQuery } from "./queries";
 import BallerzApiClient from "../client";
 import { awsmobileAPIMock } from "../../aws-exports";
 
@@ -23,7 +22,7 @@ export default class UserProfileClient extends BallerzApiClient implements IUser
         return this._handleResponse(response)
     }
 
-    async listUserProfileData(input: ListUserProfilesQueryVariables): Promise<queries.ListUserProfileDataQuery | undefined> {
+    async listUserProfileData(input: ListUserProfileDataQueryVariables): Promise<queries.ListUserProfileDataQuery | undefined> {
         const payload = this.genRequestPayload(queries.listUserProfileData, input)
         const response = await API.graphql<GraphQLQuery<queries.ListUserProfileDataQuery>>(payload)
 
@@ -31,7 +30,7 @@ export default class UserProfileClient extends BallerzApiClient implements IUser
 
     }
 
-    async listUserProfiles(input: ListUserProfilesQueryVariables): Promise<queries.ListUserProfileQuery | undefined> {
+    async listUserProfiles(input: ListUserProfileDataQueryVariables): Promise<queries.ListUserProfileQuery | undefined> {
         const payload = this.genRequestPayload(queries.listUserProfiles, input)
         const response = await API.graphql<GraphQLQuery<queries.ListUserProfileQuery>>(payload)
 

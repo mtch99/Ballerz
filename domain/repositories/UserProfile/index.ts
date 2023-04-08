@@ -1,14 +1,13 @@
 import { UserProfile } from "./../../../infrastructure/BallerzServices/BallerzAPI/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FriendshipRequestStatus } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
-import UserProfileClient, { UserProfileClientMock } from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient";
+import UserProfileClient from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient";
 import { IUserProfileData, IUserProfile } from "../../use-cases/types";
 import { IDefineUsernameInput, IDefineUsernameResult, IMyUserProfileData, IRequestFriendShipInput, IRequestFriendShipResult, IUserProfileRepository } from "../../use-cases/userProfile/interface";
 import * as queries from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/queries"
 import * as mutations from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/mutations"
 import { GetUserProfileQueryVariables, ListUserProfilesQueryVariables } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
-import { throwServerError } from "@apollo/client";
-import { values } from "mobx";
+import { ListUserProfileDataQueryVariables } from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/queries";
 
 
 
@@ -20,6 +19,9 @@ export default class UserProfileRepository implements IUserProfileRepository {
         this.client = new UserProfileClient()
     }
 
+    setMyUserProfileID(id: string): void{
+        this.myUserProfileID = id
+    }
 
 
     async getMyUserProfileData(): Promise<IMyUserProfileData | null> {
@@ -33,10 +35,15 @@ export default class UserProfileRepository implements IUserProfileRepository {
 
     async getMyUserProfile(email: string): Promise<IUserProfile | null> {
         const cache: IUserProfile | null = await this.__getCachedMyUserProfile()
-        const variables: ListUserProfilesQueryVariables = {
+        const variables: ListUserProfileDataQueryVariables = {
             filter: {
                 email: {
                     eq: email
+                }
+            },
+            frendshipFilter: {
+                id: {
+                    ne: "123"
                 }
             }
         }
@@ -75,8 +82,12 @@ export default class UserProfileRepository implements IUserProfileRepository {
 
     async getAllUserProfileData(): Promise<IUserProfileData[]> {
         let cache: IUserProfileData[] = await this.__getCachedUserProfileDataList().then(data => {return data || []})
-        const variables: ListUserProfilesQueryVariables = {
-
+        const variables: ListUserProfileDataQueryVariables = {
+            frendshipFilter: {
+                friendProfileID: {
+                    eq: this.myUserProfileID
+                }
+            }
         }
         const response: IUserProfileData[] | undefined = await this.client.listUserProfileData(variables)
         .then(response => {
@@ -133,10 +144,12 @@ export default class UserProfileRepository implements IUserProfileRepository {
         })
 
         const result = IUserProfileDataAdapter.parseCreateUserProfileResponse(response)
+        
         if(!result.error && result.userProfile){
             this.__cacheMyUserProfile(result.userProfile)
-            this.myUserProfileID = result.userProfile.id
+            this.setMyUserProfileID(result.userProfile.id)
         }
+
 
         return result
     }
