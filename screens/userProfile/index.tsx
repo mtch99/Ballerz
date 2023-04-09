@@ -3,12 +3,11 @@ import IUserProfileScreen, { IUserProfileListScreenNavigationController, IUserPr
 import { View, Text } from "react-native";
 import { AppContext, IAppContext } from "../../controllers/provider";
 import { UserProfileView } from "../../views/userProfile";
-import { IUserProfileState } from "../../app/features/types";
-// import { UserProfileView } from "../../views/UserProfile";
+import { IUserProfileDataState, IUserProfileState } from "../../app/features/types";
 
 
 export interface IUserProfileScreenPropsWithoutNavigation {
-    userProfileId: string;
+    userProfileData: IUserProfileDataState
 }
 
 
@@ -29,7 +28,8 @@ export class UserProfileScreen extends React.Component<IUserProfileScreenProps, 
         games: [],
         id: "",
         username: "",
-        badges: []
+        badges: [],
+        isFriend: undefined,
     }
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
@@ -53,24 +53,28 @@ export class UserProfileScreen extends React.Component<IUserProfileScreenProps, 
 
 
     componentDidMount(): void {
-        this.context.userProfileController.getUserProfile(this.props.userProfileId)
-        this.setState((prevState) => {
-            const UserProfile = this.context.userProfileMapState[this.props.userProfileId]
-            return {
-                ...prevState,
-                ...UserProfile
-        }})
+        this.context.userProfileController.getUserProfile(this.props.userProfileData.id)
+        const userProfileID = this.props.userProfileData.id
+        const userProfile: IUserProfileState | undefined = this.context.userProfileMapState[userProfileID] as IUserProfileState | undefined
+        if(userProfile){
+            this.setState((prevState) => {
+                return {
+                    ...prevState,
+                    ...userProfile
+            }})
+        }
     }
 
    
 
 
     render(): React.ReactNode {
-        if(this.context.userProfileMapState[this.props.userProfileId]){
-            console.warn("User profile")
+        console.log(`\nUserProfileScreen.render()\n userProfileMapState: ${JSON.stringify(this.context.userProfileMapState, null, 2)}\n userProfile`)
+        const userProfile = this.context.userProfileMapState[this.props.userProfileData.id] as IUserProfileState | undefined
+        if(userProfile){
             return( 
                 <UserProfileView
-                    {...this.context.userProfileMapState[this.props.userProfileId]}
+                    {...userProfile}
                 />
             )
         }

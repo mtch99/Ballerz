@@ -115,6 +115,8 @@ export default class UserProfileRepository implements IUserProfileRepository {
             id
         }
 
+        // console.warn(`getUserProfile(${id})`)
+
         const response: queries.GetUserProfileQuery | undefined = await this.client.getUserProfile(variables)
         .catch((err) => {
             console.error(err)
@@ -157,7 +159,7 @@ export default class UserProfileRepository implements IUserProfileRepository {
 
     async requestFriendship(input: IRequestFriendShipInput): Promise<IRequestFriendShipResult> {
         let result: IRequestFriendShipResult = {error: false}
-        console.log(`AuthRepository: Request FriendShip input: \n ${JSON.stringify(input)}`)
+        // console.log(`AuthRepository: Request FriendShip input: \n ${JSON.stringify(input)}`)
         const variables: mutations.CreateFriendshipRequestMutationVariables = {
             input: {
                 senderProfileID: input.senderProfileID,
@@ -168,7 +170,7 @@ export default class UserProfileRepository implements IUserProfileRepository {
 
         const response: mutations.CreateFriendshipRequestMutation | undefined = await this.client.requestFriendship(variables)
         .then((response) => {
-            console.log(`AuthRepository: CreateFriendshipRequestMutatio response: \n ${JSON.stringify(response)}`)
+            // console.log(`AuthRepository: CreateFriendshipRequestMutatio response: \n ${JSON.stringify(response)}`)
             return response
         })
         .catch(err => {

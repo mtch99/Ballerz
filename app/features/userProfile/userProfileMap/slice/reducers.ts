@@ -17,21 +17,23 @@ const newUserProfileReducer: IUserProfileMapStateReducer<INewUserProfileProfileA
     
     const UserProfileId = action.payload.id
 
-    
-    const newState = {
+    const newState: IUserProfileMapState = {
         ...state,
-        [UserProfileId]: action.payload
+        [UserProfileId]: action.payload,
     }
+    // console.error(`New user profile map received: ${JSON.stringify(newState)}`)
 
     return newState
 }
 
 
 const newUserProfileMapReducer: IUserProfileMapStateReducer<INewUserProfileMapActionPayload> = (state, action) => {
-    return {
+    const result: IUserProfileMapState = {
         ...state,
         ...action.payload
     }
+    // console.log(`New user profile map received: ${JSON.stringify(result)}`)
+    return result
 }
 
 

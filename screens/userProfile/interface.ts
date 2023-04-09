@@ -1,4 +1,5 @@
 import { IUserProfileDataState } from "../../app/features/types";
+import { IUserProfileListState } from "../../app/features/userProfile/userProfileList/slice/interface";
 import { IPlaceData } from "./../../domain/use-cases/types";
 
 
@@ -10,12 +11,12 @@ export default interface IUserProfileScreen{
 
 
 export interface IUserProfileListScreenNavigationController{
-    goToUserProfile(id: IUserProfileDataState['id']): void
+    goToUserProfile(userProfileData: IUserProfileDataState): void
 }
 
 
 export interface IUserProfileScreenNavigationController{
-    goToUserProfile(id: IUserProfileDataState['id']): void
+    goToUserProfile(item: IUserProfileDataState): void
     goToPlaceProfile(id: IPlaceData['id']): void
     goToCommentsScreen(gameId: string): void
     goToAttendantsListScreen(gameId: string): void

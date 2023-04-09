@@ -1,4 +1,5 @@
-import { IUserProfileMapState, IUserProfileState } from "../../types";
+import { IUserProfileState } from "../../../types";
+import { IUserProfileMapState} from "../../types";
 
 
 

@@ -15,7 +15,7 @@ export class SelectableUserProfileListView extends React.Component<ISelectableUs
 
 
     componentDidUpdate(prevProps: Readonly<ISelectableUserProfileListViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
-        console.warn(`SelectableUserProfileListView did update: ${JSON.stringify(this.props.usersList)}`)
+        // console.warn(`SelectableUserProfileListView did update: ${JSON.stringify(this.props.usersList)}`)
     }
 
 

@@ -38,7 +38,7 @@ There must be three different games on three different courts, two at the moment
         - [ ] UserProfileScreen ... manage loading state, no network, ...
             - [ ] A stack containing userProfileStack and placeProfileStack
                 - [ ] UserProfileStack
-                    - [ ] UserProfileScreen
+                    - [x] UserProfileScreen
                     - [ ] FriendsListScreen
                 - [ ] PlaceProfileStack
                     - [ ] placeProfileScreen

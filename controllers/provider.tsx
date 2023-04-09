@@ -68,7 +68,7 @@ export const AppContext = React.createContext<IAppContext>({
     userProfileListState: {items: []},
     placeListState: {items: []},
     placeMapState: {},
-    userProfileMapState: {},
+    userProfileMapState: {} as IUserProfileMapState,
     authState: {
         user: undefined,
         lastSignupInput: {

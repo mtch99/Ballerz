@@ -18,7 +18,8 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
         games: [],
         id: "",
         username: "",
-        badges: []
+        badges: [],
+        isFriend: undefined
     }
 
 

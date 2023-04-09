@@ -35,8 +35,8 @@ export function UserProfileScreenWrapper(props: ExploreStackScreenProps<'UserPro
     const navigation = useNavigation<ExploreStackScreenProps<'SearchStack'>>()
 
     const navigationController: IUserProfileScreenNavigationController = {
-        goToUserProfile(id: IUserProfileDataState['id']) {
-            navigation.navigation.push('UserProfileScreen', { userProfileId: id });
+        goToUserProfile(userProfileData: IUserProfileDataState) {
+            navigation.navigation.push('UserProfileScreen', {userProfileData});
         },
         goToPlaceProfile: function (id: string): void {
             throw new Error("Function not implemented.");
@@ -51,7 +51,7 @@ export function UserProfileScreenWrapper(props: ExploreStackScreenProps<'UserPro
 
     return(
         <UserProfileScreen
-            userProfileId={props.route.params.userProfileId}
+            userProfileData={props.route.params.userProfileData}
             {...{navigationController}}
         />
     )
@@ -62,7 +62,6 @@ export function ExploreTabScreenWrapper(props: ExploreStackScreenProps<'SearchSt
    
     const navigation = useNavigation<ExploreStackNavigationProp<'SearchStack'>>()
 
-
     const placeSearcScreenNavigationController: IPlaceSearchScreenNavigationController = {
         goToPlaceProfile: function (id: string): void {
             navigation.navigate("PlaceProfileScreen", {placeId: id})
@@ -70,10 +69,11 @@ export function ExploreTabScreenWrapper(props: ExploreStackScreenProps<'SearchSt
     }
 
     const userProfileSearchScreenNavigationController: IUserProfileListScreenNavigationController = {
-        goToUserProfile: function (id: string): void {
-            navigation.navigate('UserProfileScreen', {userProfileId: id})
+        goToUserProfile: function (userProfileData: IUserProfileDataState): void {
+            navigation.navigate('UserProfileScreen', {userProfileData})
         }
     }
+
     return (
         <ExploreTabScreen
             {...{

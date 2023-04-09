@@ -31,7 +31,7 @@ export default class NotificationsUseCase implements INotificationsUseCase {
 
 
     async onNewNotificationReceived(notification: Notification): Promise<void> {
-        console.log(`\n Notifications UseCase: \n new notification: ${JSON.stringify(notification)}`)
+        // console.log(`\n Notifications UseCase: \n new notification: ${JSON.stringify(notification)}`)
         this.observer.onNewNotification(notification)
         return 
     }

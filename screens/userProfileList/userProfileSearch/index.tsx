@@ -2,6 +2,7 @@ import { IUserProfileListScreenState } from "../interface";
 import { UserProfileSearchView } from "../../../views/userProfileList/userProfileSearch";
 import { IUserProfileData } from "../../../domain/use-cases/types";
 import { AUserProfileListScreen, IUserProfileListScreenProps } from "..";
+import { AppContext, IAppContext } from "../../../controllers/provider";
 
 
 
@@ -9,6 +10,8 @@ import { AUserProfileListScreen, IUserProfileListScreenProps } from "..";
 export default class UserProfileSearchScreen<T extends IUserProfileListScreenProps = IUserProfileListScreenProps> extends AUserProfileListScreen<T, IUserProfileListScreenState>{
     
 
+    static contextType = AppContext
+    context: React.ContextType<typeof AppContext> = {} as IAppContext
     state: IUserProfileListScreenState = {
         userProfileList: [],
         filteredUserProfileList: [],
@@ -19,7 +22,7 @@ export default class UserProfileSearchScreen<T extends IUserProfileListScreenPro
     }
     
     onPressUserProfile(item: IUserProfileData) {
-        this.props.navigationController.goToUserProfile(item.id)
+        this.props.navigationController.goToUserProfile(item)
     }
 
     

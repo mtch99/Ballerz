@@ -55,7 +55,7 @@ export class NotificationsRepository implements INotificationsRepository {
 
     subscribeToMyNotifications(myProfileID: string): void {
         this.client.subscribeToNotifications(myProfileID, this.notificationsSubscriptionHandler.bind(this))
-        console.log(`Subscribed to notifications for profile ${myProfileID}`);
+        console.log(`\nSubscribed to notifications for profile ${myProfileID}\n`);
     }
 
 }
