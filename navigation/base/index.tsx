@@ -1,12 +1,18 @@
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { BaseStackParamList } from "./types";
-import { PlaceProfileScreenWrapper } from "./wrappers";
+import { PlaceProfileScreenWrapper, UserProfileScreenWrapper } from "./wrappers";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { globalStyles } from "../../views/styles";
+import { Text } from "react-native";
+import { HeaderBackButton } from "@react-navigation/elements";
+import { useNavigation } from "@react-navigation/native";
 
 
-const Stack = createMaterialTopTabNavigator<BaseStackParamList>();
+const Stack = createNativeStackNavigator<BaseStackParamList>();
 
 export function BaseStackNavigator(): JSX.Element {
     const initialRouteName: keyof BaseStackParamList = "PlaceProfileScreen"
+    const navigation = useNavigation();
 
     return(
         <Stack.Navigator
@@ -16,9 +22,33 @@ export function BaseStackNavigator(): JSX.Element {
             <Stack.Screen
                 name="PlaceProfileScreen"
                 options={{
-                    // title: "Terrains",
+                    headerStyle:globalStyles.global.headerStyle,
+                    headerLeft:() => {
+                        return (
+                            <HeaderBackButton
+                                tintColor={globalStyles.global.logoColor}
+                                onPress={() => {navigation.goBack()}}
+                            />
+                        )
+                    }
                 }}
+ 
 				component={PlaceProfileScreenWrapper}
+            />
+            <Stack.Screen
+                name="UserProfileScreen"
+                options={{
+                    headerStyle:globalStyles.global.headerStyle,
+                    headerLeft:() => {
+                        return (
+                            <HeaderBackButton
+                                tintColor={globalStyles.global.logoColor}
+                                onPress={() => {navigation.goBack()}}
+                            />
+                        )
+                    }
+                }}
+                component={UserProfileScreenWrapper}
             />
 
         </Stack.Navigator>

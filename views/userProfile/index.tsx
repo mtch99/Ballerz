@@ -14,19 +14,6 @@ import { IUserProfileState } from "../../app/features/types"
 
 export class UserProfileView extends React.Component<IUserProfileViewProps>{
 
-    state: IUserProfileState = {
-        games: [],
-        id: "",
-        username: "",
-        badges: [],
-        isFriend: undefined
-    }
-
-
-    componentDidMount(): void {
-    }
-
-
 
     render(){
         return(
@@ -35,8 +22,10 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
             >
                 <HeaderView
                     username={this.props.username}
+                    friendsList={this.props.friends}
                     profilePicUri={'../../assets/profilePic'}
                     isFriend={this.props.isFriend}
+                    onPressFriendsNumber={this.props.onPressFriendsNumber}
                 />
                 {/* <BadgeListView
                     badgeList={this.props.badges}

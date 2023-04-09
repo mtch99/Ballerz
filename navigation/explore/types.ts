@@ -4,7 +4,7 @@ import { IPlaceProfileScreenPropsWithoutNavigation } from "./../../screens/place
 import { IUserProfileSearchScreenProps, IUserProfileSearchScreenPropsWithoutNavigation } from "../../screens/userProfileList/index";
 import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
 import { BaseStackParamList } from "../base/types";
-import { SearchStackParamList } from "./search/types";
+import { IFriendListScreenPropsWithoutNavigation } from "../../screens/userProfileList/friendsList";
 
 declare global {
     namespace ReactNavigation {
@@ -14,9 +14,11 @@ declare global {
 
 
 export type ExploreStackParamList = {
-    SearchStack: NavigatorScreenParams<SearchStackParamList>
+    SearchStack: undefined
     PlaceProfileScreen: IPlaceProfileScreenPropsWithoutNavigation
     UserProfileScreen: IUserProfileScreenPropsWithoutNavigation
+    FriendsListScreen: IFriendListScreenPropsWithoutNavigation
+    BaseStack: NavigatorScreenParams<BaseStackParamList>
 };
 
 

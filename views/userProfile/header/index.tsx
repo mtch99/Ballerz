@@ -38,8 +38,9 @@ export class HeaderView extends React.Component<IHeaderViewProps>{
                     <View
                         style={{flexDirection:'row', justifyContent:"center"}}
                     >
-                        <View
+                        <TouchableOpacity
                             style={{justifyContent:"center"}}
+                            onPress={this.props.onPressFriendsNumber}
                         >
                             <Text
                                 style={{
@@ -48,9 +49,9 @@ export class HeaderView extends React.Component<IHeaderViewProps>{
                                     fontWeight: "bold"
                                 }}
                             >
-                                4 amis
+                                {this.props.friendsList.length} amis
                             </Text>
-                        </View>
+                        </TouchableOpacity>
 
                         <View
                             style={{flexDirection:"row", justifyContent:'flex-end', flexGrow:1, alignItems:'center'}}

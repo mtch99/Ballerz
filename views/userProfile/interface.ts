@@ -6,6 +6,8 @@ export interface IHeaderViewProps {
     username: string;
     profilePicUri: string;
     isFriend: IUserProfileState['isFriend']
+    friendsList: IUserProfileState['friends']
+    onPressFriendsNumber: () => void;
 }
 
 export interface IBadgeListViewProps {

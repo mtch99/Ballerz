@@ -30,6 +30,7 @@ export class UserProfileScreen extends React.Component<IUserProfileScreenProps, 
         username: "",
         badges: [],
         isFriend: undefined,
+        friends: []
     }
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
@@ -43,13 +44,23 @@ export class UserProfileScreen extends React.Component<IUserProfileScreenProps, 
         super(props);
         this.navigationController = this.props.navigationController
     }
+
+
+    onPressFriendsNumber(){
+        const userProfile = this.context.userProfileMapState[this.props.userProfileData.id] as IUserProfileState | undefined
+        if(userProfile!== undefined){
+            this.props.navigationController.goToFriendsListScreen(userProfile.friends)
+        }
+    }
     
+
     addPicture(): void {
         throw new Error("Method not implemented.");
     }
     play(): void {
         throw new Error("Method not implemented.");
     }
+
 
     onPressAddButton(item: IUserProfileState): void {
         const senderProfileID = this.context.authState.user?.profile?.id
@@ -69,19 +80,9 @@ export class UserProfileScreen extends React.Component<IUserProfileScreenProps, 
 
 
     componentDidMount(): void {
-        this.context.userProfileController.getUserProfile(this.props.userProfileData.id)
         const userProfileID = this.props.userProfileData.id
-        const userProfile: IUserProfileState | undefined = this.context.userProfileMapState[userProfileID] as IUserProfileState | undefined
-        if(userProfile){
-            this.setState((prevState) => {
-                return {
-                    ...prevState,
-                    ...userProfile
-            }})
-        }
+        this.context.userProfileController.getUserProfile(userProfileID)
     }
-
-   
 
 
     render(): React.ReactNode {
@@ -92,6 +93,7 @@ export class UserProfileScreen extends React.Component<IUserProfileScreenProps, 
                 <UserProfileView
                     {...userProfile}
                     onPressAddButton={this.onPressAddButton.bind(this)}
+                    onPressFriendsNumber={this.onPressFriendsNumber.bind(this)}
                 />
             )
         }
@@ -99,20 +101,17 @@ export class UserProfileScreen extends React.Component<IUserProfileScreenProps, 
             <UserProfileView
                 {...this.userProfile}
                 onPressAddButton={this.onPressAddButton.bind(this)}
+                onPressFriendsNumber={this.onPressFriendsNumber.bind(this)}
             />
         )
     }
 
 } 
 
+
 export class MyProfileScreen extends React.Component {
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
-
-    // componentDidMount(): void {
-    //     this.context.userProfileController.
-    // }
-
 
 
     render(): React.ReactNode {
@@ -124,7 +123,7 @@ export class MyProfileScreen extends React.Component {
                         ...this.context.authState.profile
                     }
                     onPressAddButton={() => {}}
-                       
+                    onPressFriendsNumber={() => {}}
                 />
             )
         }
@@ -133,6 +132,7 @@ export class MyProfileScreen extends React.Component {
 
 export interface IUserProfileViewProps extends IUserProfileState{
     onPressAddButton: (item: IUserProfileState) => void;
+    onPressFriendsNumber: () => void;
 }
 
 

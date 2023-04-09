@@ -42,13 +42,15 @@ export default class NotificationsClient extends BallerzApiClient implements INo
           },
           error: (err) => {
             try {
-                console.error(`\n Notification Subscription received error: ${JSON.stringify(err)}\n`);
+                // console.error(`\n Notification Subscription received error: ${err}\n`);
                 this.resubscribe(userProfileID, callback);
             } catch (e) {
-                console.error(`\n Notification Subscription received error: ${JSON.stringify(err)}\n`);
+                console.error(err)
+                // console.error(`\n Notification Subscription received error: ${JSON.stringify(err)}\n`);
                 this.resubscribe(userProfileID, callback);
             }
-          },
+            console.error(err);
+        },
         })
 
 		this.subscription = sub;
@@ -57,7 +59,7 @@ export default class NotificationsClient extends BallerzApiClient implements INo
 	private resubscribe(userProfileID: string, callback: (value: Notification) => void): void{
 		console.log("resubscribing");
 		this.subscription?.unsubscribe()
-		this.subscribeToNotifications(userProfileID, callback)
+		// this.subscribeToNotifications(userProfileID, callback)
 	}
 
 

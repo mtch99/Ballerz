@@ -1,3 +1,4 @@
+import { IUserProfileScreenPropsWithoutNavigation } from "./../../screens/userProfile/index";
 import { IPlaceProfileScreenPropsWithoutNavigation } from "./../../screens/placeProfile/index";
 import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
 
@@ -10,6 +11,7 @@ declare global {
 
 export type BaseStackParamList = {
     PlaceProfileScreen: IPlaceProfileScreenPropsWithoutNavigation
+    UserProfileScreen: IUserProfileScreenPropsWithoutNavigation
 };
 
 

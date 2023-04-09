@@ -31,7 +31,7 @@ There must be three different games on three different courts, two at the moment
             - [x] Add a user after username creation
     - [x] Notifications subscriptions after userProfile retrieval or creation
 
-    
+* [x] App Icon and splashscreen
 
 - [ ] Add friend
     - [ ] UserProfileScreen and MyUserProfileScreen
@@ -39,11 +39,12 @@ There must be three different games on three different courts, two at the moment
             - [ ] A stack containing userProfileStack and placeProfileStack
                 - [ ] UserProfileStack
                     - [ ] UserProfileScreen
-                        - [ ] Layout
-                            - [ ] display Number of friends
-                            - [ ] implement figma design
+                        - [x] Layout
+                            - [x] display Number of friends
+                            - [x] implement figma design
                         - [ ] Friends Button and Friends List screen
-                    - [ ] FriendsListScreen
+                            - [x] add friends list to UserprofileState
+                            - [ ] FriendsListScreen
                 - [ ] PlaceProfileStack
                     - [ ] placeProfileScreen
             - [ ] Put that stack in the FeedStack and every other tab of the root tab
