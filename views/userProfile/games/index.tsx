@@ -19,7 +19,7 @@ export default class GamesListView extends React.Component<IGamesViewProps> {
     render(): React.ReactNode {
         return(
             <View style={{flexWrap:'wrap'}}>
-                <Text style={styles.gamesText}>Partcipations</Text>
+                <Text style={styles.gamesText}>Partcipations ({this.props.gameList.length})</Text>
                     <FlatList
                         style={{flexGrow: 1}}
                         data={this.props.gameList}
@@ -29,19 +29,19 @@ export default class GamesListView extends React.Component<IGamesViewProps> {
                                 <FeedItemView 
                                     feedItem={item} 
                                     handleBadgeClick={function (feedItem: IFeedItemState): void {
-                                        console.log("Function not implemented.");
+                                        throw new Error("Function not implemented.");
                                     } } 
                                     handleFriendsTherePress={function (feedItem: IFeedItemState): void {
-                                        console.log("Function not implemented.");
+                                        throw new Error("Function not implemented.");
                                     } } 
                                     handleInvitePress={function (feedItem: IFeedItemState): void {
-                                        console.log("Function not implemented.");
+                                        throw new Error("Function not implemented.");
                                     } } 
                                     handlePlayButtonPress={function (feedItem: IFeedItemState): void {
-                                        console.log("Function not implemented.");
+                                        throw new Error("Function not implemented.");
                                     } } 
                                     onPressCommentButton={function (): void {
-                                        console.log("Function not implemented.");
+                                        throw new Error("Function not implemented.");
                                     } }                            
                                 />
                             )

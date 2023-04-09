@@ -38,7 +38,10 @@ There must be three different games on three different courts, two at the moment
         - [ ] UserProfileScreen ... manage loading state, no network, ...
             - [ ] A stack containing userProfileStack and placeProfileStack
                 - [ ] UserProfileStack
-                    - [x] UserProfileScreen
+                    - [ ] UserProfileScreen
+                        - [ ] Layout
+                            - [ ] display Number of friends
+                            - [ ] implement figma design
                         - [ ] Friends Button and Friends List screen
                     - [ ] FriendsListScreen
                 - [ ] PlaceProfileStack

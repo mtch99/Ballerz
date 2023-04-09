@@ -6,10 +6,13 @@ const styles = StyleSheet.create({
         
     },
 
+
     gamesText: {
-        fontSize: 16,
+        fontSize: 24,
         color: "#595085",
-        // marginHorizontal: 20
+        marginLeft: 10,
+        marginTop: 10,
+        paddingBottom: 10
     },
 
 })

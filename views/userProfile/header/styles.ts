@@ -25,11 +25,21 @@ export const styles = StyleSheet.create({
 
     profileDataContainer: {
         marginHorizontal: 20,
-        marginVertical: 16
+        marginVertical: 16,
+        justifyContent:'space-around',
+        flexGrow: 1,
+        height: 70,
+    },
+    
+    usernameContainer: {
+        alignSelf: "flex-start",
+        // borderColor: 'red',
+        // borderWidth: 2,
+        width: "100%"
     },
 
     usernameText: {
-        fontSize: 17,
+        fontSize: 18,
         fontWeight: "500",
         color: "#FFFFFF",
     },
@@ -42,9 +52,7 @@ export const styles = StyleSheet.create({
     },
 
     addActionContainer: {
-        // marginTop: 25,
         alignSelf: 'flex-end',
-        marginRight: 25
     },
 
     addActionText: {

@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ExploreStackParamList } from "./types";
 import {ExploreTabScreenWrapper, PlaceProfileScreenWrapper, UserProfileScreenWrapper} from "./wrappers";
+import { globalStyles } from "../../views/styles";
 
 const Stack = createNativeStackNavigator<ExploreStackParamList>();
 
@@ -15,7 +16,8 @@ export function ExploreStackNavigator(): JSX.Element {
                 name="SearchStack"
                 options={{
                     headerShown: true,
-                    headerTitle: "Explore"
+                    headerTitle: "Explore",
+                    headerStyle: {backgroundColor:globalStyles.global.screenBackGroundColor}
                 }}
 				// component={SearchStackNavigator}
                 component={ExploreTabScreenWrapper}
@@ -34,7 +36,8 @@ export function ExploreStackNavigator(): JSX.Element {
                 component={UserProfileScreenWrapper}
                 options={{
                     // headerShown: false,
-                    title: 'Explore'
+                    title: 'Explore',
+                    headerBackTitleVisible: false,
                 }}
             />
 

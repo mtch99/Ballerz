@@ -1,9 +1,10 @@
 import React from "react";
-import { TabView, SceneMap } from 'react-native-tab-view'
+import { TabView, SceneMap, TabBar, SceneRendererProps, TabBarProps } from 'react-native-tab-view'
 import PlaceSearchScreen, { AbstractPlaceListScreen } from "../placeList";
 import { IPlaceSearchScreenNavigationController } from "../placeList/interface";
 import { IUserProfileListScreenNavigationController } from "../userProfile/interface";
 import UserProfileSearchScreen from "../userProfileList/userProfileSearch";
+import { globalStyles } from "../../views/styles";
 
 
 export interface IExploreTabScreenProps {
@@ -31,6 +32,17 @@ export default class ExploreTabScreen extends React.Component<IExploreTabScreenP
                 key: "second", title: "Personnes"
             }
         ]
+    }
+
+    renderTabBar(props: TabBarProps<any>){
+        return(
+            <TabBar
+                {...props}
+                indicatorStyle={{ backgroundColor: globalStyles.global.logoColor }}
+                style={{ backgroundColor: globalStyles.global.screenBackGroundColor}}
+                activeColor={globalStyles.global.logoColor}
+            />
+        )
     }
 
     renderScene = SceneMap({
@@ -66,6 +78,7 @@ export default class ExploreTabScreen extends React.Component<IExploreTabScreenP
                 renderScene={this.renderScene}
                 onIndexChange={this.setIndex}
                 navigationState={this.navigationState}
+                renderTabBar={this.renderTabBar}
             />
         )
     }

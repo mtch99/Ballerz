@@ -24,12 +24,9 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
 
 
     componentDidMount(): void {
-        // console.warn(`Mounting props: ${JSON.stringify(this.props)}`)
     }
 
-    // componentDidUpdate(prevProps: Readonly<IUserProfileViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
-        // console.warn(`UserProfileView newProps: ${JSON.stringify(this.props.games)})`)
-    // }
+
 
     render(){
         return(
@@ -41,12 +38,12 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
                     profilePicUri={'../../assets/profilePic'}
                     isFriend={this.props.isFriend}
                 />
-                <BadgeListView
+                {/* <BadgeListView
                     badgeList={this.props.badges}
-                />
-                <PictresView
+                /> */}
+                {/* <PictresView
                     pictureUriList={['../../assets/profilePic', '../../assets/dunkPic']}
-                />
+                /> */}
                 <GamesListView
                     gameList={this.props.games}
                 />
