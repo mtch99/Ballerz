@@ -45,6 +45,7 @@ There must be three different games on three different courts, two at the moment
                         - [ ] Friends Button and Friends List screen
                             - [x] add friends list to UserprofileState
                             - [ ] FriendsListScreen
+                            * [ ] Hnadle subscription reconnection. Poll subscription server
                 - [ ] PlaceProfileStack
                     - [ ] placeProfileScreen
             - [ ] Put that stack in the FeedStack and every other tab of the root tab
