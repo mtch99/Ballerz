@@ -42,7 +42,9 @@ export const styles = StyleSheet.create({
     },
 
     addActionContainer: {
-        marginTop: 25
+        // marginTop: 25,
+        alignSelf: 'flex-end',
+        marginRight: 25
     },
 
     addActionText: {

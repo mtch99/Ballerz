@@ -1,10 +1,11 @@
-import { IUserProfileState } from "./../../app/features/userProfile/types";
 import { IBadgeData } from "../../app/features/feed/slice/interface";
+import { IUserProfileState } from "../../app/features/types";
 
 
 export interface IHeaderViewProps {
     username: string;
     profilePicUri: string;
+    isFriend: IUserProfileState['isFriend']
 }
 
 export interface IBadgeListViewProps {

@@ -39,6 +39,7 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
                 <HeaderView
                     username={this.props.username}
                     profilePicUri={'../../assets/profilePic'}
+                    isFriend={this.props.isFriend}
                 />
                 <BadgeListView
                     badgeList={this.props.badges}

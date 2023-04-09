@@ -39,6 +39,7 @@ There must be three different games on three different courts, two at the moment
             - [ ] A stack containing userProfileStack and placeProfileStack
                 - [ ] UserProfileStack
                     - [x] UserProfileScreen
+                        - [ ] Friends Button and Friends List screen
                     - [ ] FriendsListScreen
                 - [ ] PlaceProfileStack
                     - [ ] placeProfileScreen

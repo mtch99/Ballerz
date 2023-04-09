@@ -109,7 +109,7 @@ export default class FindYourFriendsScreen<P extends IFindYourFriendsScreenProps
                 myProfileID,
                 receiverProfiles
             }
-            this.context.userProfileController.sendFriendShipRequests(input)
+            this.context.userProfileController.sendMultipleFriendShipRequests(input)
         }
 
         if(!myProfileID){

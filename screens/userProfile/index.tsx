@@ -51,6 +51,22 @@ export class UserProfileScreen extends React.Component<IUserProfileScreenProps, 
         throw new Error("Method not implemented.");
     }
 
+    onPressAddButton(item: IUserProfileState): void {
+        const senderProfileID = this.context.authState.user?.profile?.id
+        if(item.isFriend){
+            return
+        }
+        if(!senderProfileID){
+            throw new Error("No userProfile in auth state")
+        }else {
+            const input = {
+                senderProfileID,
+                receiverProfileID: item.id,
+            }
+            this.context.userProfileController.sendFriendShipRequest(input)
+        }
+    }
+
 
     componentDidMount(): void {
         this.context.userProfileController.getUserProfile(this.props.userProfileData.id)
@@ -75,12 +91,14 @@ export class UserProfileScreen extends React.Component<IUserProfileScreenProps, 
             return( 
                 <UserProfileView
                     {...userProfile}
+                    onPressAddButton={this.onPressAddButton.bind(this)}
                 />
             )
         }
         return(
             <UserProfileView
                 {...this.userProfile}
+                onPressAddButton={this.onPressAddButton.bind(this)}
             />
         )
     }
@@ -102,7 +120,11 @@ export class MyProfileScreen extends React.Component {
             const userProfileId = this.context.authState.profile.id
             return(
                 <UserProfileView
-                    {...this.context.authState.profile}
+                    {
+                        ...this.context.authState.profile
+                    }
+                    onPressAddButton={() => {}}
+                       
                 />
             )
         }
@@ -110,7 +132,7 @@ export class MyProfileScreen extends React.Component {
 }
 
 export interface IUserProfileViewProps extends IUserProfileState{
-
+    onPressAddButton: (item: IUserProfileState) => void;
 }
 
 

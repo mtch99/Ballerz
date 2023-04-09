@@ -29,7 +29,7 @@ export class UserProfileController implements IUserProfileController{
         return response
     }
 
-    async sendFriendShipRequests(input: ISendFriendshipRequestsInput): Promise<void> {
+    async sendMultipleFriendShipRequests(input: ISendFriendshipRequestsInput): Promise<void> {
         const promises: Promise<IRequestFriendShipResult>[] = []
         const {myProfileID, receiverProfiles} = input
         receiverProfiles.forEach((userProfileData) => {
@@ -42,6 +42,10 @@ export class UserProfileController implements IUserProfileController{
 
         const result = await Promise.all(promises)
         console.warn(`Result of senndFriendshipRequests function: ${JSON.stringify(result)}`) 
+    }
+
+    async sendFriendShipRequest(input: {senderProfileID: string, receiverProfileID: string}): Promise<IRequestFriendShipResult> {
+        return this.userProfileUseCase.requestFriendShip(input)
     }
 
     async getAllUserProfiles(): Promise<void>{

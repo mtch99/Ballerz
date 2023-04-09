@@ -2,6 +2,7 @@ import React from "react";
 import { IHeaderViewProps } from "../interface";
 import { View, Image, Text, TouchableOpacity } from "react-native";
 import styles from "./styles";
+import ListItemButton from "../../../components/Buttons/ListItemButton";
 
 
 
@@ -30,13 +31,22 @@ export class HeaderView extends React.Component<IHeaderViewProps>{
                 >
                     <Text style={styles.usernameText}>{this.props.username}</Text>
                     <Text style={styles.cityText}>Quebec</Text>
-                    <TouchableOpacity
+                </View>
+                <View
+                    style={{flexDirection:"row", justifyContent:'flex-end', flexGrow:1, alignItems:'center'}}
+                >
+                    <View
                         style={styles.addActionContainer}
                     >
-                        <Text style={styles.addActionText}>ajouter</Text>
-                    </TouchableOpacity>
+                        <ListItemButton
+                            onPress={() => {}}
+                            selected={this.props.isFriend || false}
+                            title="ajouter"
+                        />
+                    </View>
                 </View>
             </View>
         )
+
     }
 }
