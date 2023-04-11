@@ -11,7 +11,17 @@ import { MyProfileStackNavigator } from "./myProfile";
 
 
 
-export function FeedStackWrapper(){
+export function FeedStackWrapper(props: AppTabScreenProps<'FeedStack'>) {
+    const { navigation } = props
+    // const {} = React.useContext(AppContext)
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            console.log("User is logged in")
+            //TODO: next line ---> GameController.getAllGames() instead
+            // userProfileController.getMyProfile(authState.user.email)
+        });
+        return unsubscribe;
+    }, [navigation])
     return(
         <FeedStackNavigator/>
     )
@@ -66,7 +76,18 @@ export function MyProfileStackWrapper(props: AppTabScreenProps<'MyProfileStack'>
 }
 
 
-export function ExploreStackWrapper(){
-    return(<ExploreStackNavigator/>)
+export function ExploreStackWrapper(props: AppTabScreenProps<'ExploreStack'>){
+    const { navigation } = props
+    const {placeController, userProfileController} = React.useContext(AppContext)
+    
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            placeController.getAllPlaces()
+            userProfileController.getAllUserProfiles()
+        });
+        return unsubscribe;
+    }, [navigation])
+
+    return <ExploreStackNavigator/>
 }
 
