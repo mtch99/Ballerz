@@ -57,7 +57,6 @@ export class HeaderView extends React.Component<IHeaderViewProps>{
                     <Image
                         style={styles.profilePic}
                         source={require("../../../assets/profilePic.jpg")}
-                        // source={{uri: "../../../assets/profilePic.jpg"}}
                     />
                 </View>
 
@@ -87,9 +86,8 @@ export class HeaderView extends React.Component<IHeaderViewProps>{
                                 {this.props.friendsList.length} amis
                             </Text>
                         </TouchableOpacity> 
+                        <AddButton/>
                     </View>
-
-                    <AddButton/>
                 </View>
             </View>
         )

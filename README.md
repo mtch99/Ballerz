@@ -34,7 +34,7 @@ There must be three different games on three different courts, two at the moment
 * [x] App Icon and splashscreen
 
 - [ ] Add friend
-    - [ ] UserProfileScreen and MyUserProfileScreen
+    - [x] UserProfileScreen and MyUserProfileScreen
         - [x] UserProfileScreen ... manage loading state, no network, ...
             - [x] A stack containing userProfileStack and placeProfileStack
                 - [x] UserProfileScreen
@@ -49,9 +49,9 @@ There must be three different games on three different courts, two at the moment
                         * [x] Handle new sent friendshipRequests at model leve;
                         * [x] Handle subscription reconnection. Poll subscription server
 
-        - [ ] MyUserProfileScreen
+        - [x] MyUserProfileScreen
             - [x] Retrieve userProfile on screen focus
-            - [ ] Fix userProfileView alignment
+            - [x] Fix userProfileView alignment
 
     - [ ] Make sure that everything works properly
         - [ ] implement missing methods
