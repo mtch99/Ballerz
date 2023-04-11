@@ -7,6 +7,7 @@ import { IUserProfileScreenNavigationController } from "../../../screens/userPro
 import { AppContext } from "../../../controllers/provider";
 import { IUserProfileDataState } from "../../../app/features/types";
 import { AppTabScreenProps } from "./types";
+import { MyProfileStackNavigator } from "./myProfile";
 
 
 
@@ -22,7 +23,7 @@ export function GroupChatStackWrapper(){
     )
 }
 
-export function MyProfileScreenWrapper(props: AppTabScreenProps<'MyProfileScreen'>){
+export function MyProfileStackWrapper(props: AppTabScreenProps<'MyProfileStack'>){
 
     const {authState, userProfileController} = React.useContext(AppContext)
     const {navigation, route} = props
@@ -60,9 +61,7 @@ export function MyProfileScreenWrapper(props: AppTabScreenProps<'MyProfileScreen
     }
 
     return(
-        <MyProfileScreen
-            // navigationController={navigationController}
-        />
+        <MyProfileStackNavigator/>
     )
 }
 

@@ -114,12 +114,23 @@ export class UserProfileScreen extends Screen<IUserProfileScreenProps, IUserProf
 } 
 
 
-export class MyProfileScreen extends React.Component {
+
+export interface IMyProfileScreenProps {
+    navigationController: IUserProfileScreenNavigationController
+}
+export class MyProfileScreen extends React.Component<IMyProfileScreenProps> {
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
 
     // Effect is run on navigation wrapper
     componentDidMount(): void {}
+
+    onPressFriendsNumber(){
+        const friends = this.context.authState.profile?.friends
+        if(friends){
+            this.props.navigationController.goToFriendsListScreen(friends)
+        }
+    }
 
     render(): React.ReactNode {
         if(this.context.authState.profile){
@@ -129,7 +140,7 @@ export class MyProfileScreen extends React.Component {
                         ...this.context.authState.profile
                     }
                     onPressAddButton={() => {}}
-                    onPressFriendsNumber={() => {}}
+                    onPressFriendsNumber={this.onPressFriendsNumber.bind(this)}
                 />
             )
         }

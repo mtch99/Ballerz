@@ -70,7 +70,7 @@ export class HeaderView extends React.Component<IHeaderViewProps>{
                     </View>
 
                     <View
-                        style={{flexDirection:'row', justifyContent:"center"}}
+                        style={{flexDirection:'row', justifyContent:"flex-start"}}
                     >
                         <TouchableOpacity
                             style={{justifyContent:"center"}}

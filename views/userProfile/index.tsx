@@ -3,6 +3,7 @@ import { View, Text, ScrollView } from "react-native"
 import { IUserProfileViewProps } from "../../screens/userProfile"
 import { styles } from "./styles"
 import { HeaderView } from "./header"
+import BallerzHeaderView from "../header"
 import { BadgeListView } from "./badges"
 import PictresView from "./pictures"
 import GamesListView from "./games"
@@ -57,6 +58,9 @@ export class MyProfileView extends React.Component<IUserProfileViewProps> {
         return(
             <BallerzSafeAreaView>
                 <>
+                <BallerzHeaderView
+                    title="Profile"
+                />
                 <HeaderView
                     username={this.props.username}
                     friendsList={this.props.friends}

@@ -11,7 +11,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 import { AppTabParamList } from './types';
-import { ExploreStackWrapper, FeedStackWrapper, GroupChatStackWrapper, MyProfileScreenWrapper } from './wrappers';
+import { ExploreStackWrapper, FeedStackWrapper, GroupChatStackWrapper, MyProfileStackWrapper } from './wrappers';
+import { globalStyles } from '../../../views/styles';
 
 // import LinkingConfiguration from './LinkingConfiguration';
 
@@ -43,6 +44,8 @@ const BottomTab = createBottomTabNavigator<AppTabParamList>();
 export function AppTab(): JSX.Element {
 
 	const _initialRouteName: keyof AppTabParamList = 'FeedStack'
+
+	const tabBarActiveTintColor = globalStyles.global.logoColor
 	
 	  return (
 		<BottomTab.Navigator
@@ -55,7 +58,8 @@ export function AppTab(): JSX.Element {
 					headerShown: false,
 					// tabBarLabel: 'Explore',
 					tabBarIcon: undefined,
-					headerTitle: 'Explore'
+					headerTitle: 'Explore',
+					tabBarActiveTintColor,
 				}}
 				component={ExploreStackWrapper}
 			/>
@@ -65,7 +69,8 @@ export function AppTab(): JSX.Element {
 				options={{
 					headerShown: false,
 					tabBarLabel: 'Games',
-					tabBarIcon: undefined
+					tabBarIcon: undefined,
+					tabBarActiveTintColor,
 				}}
 				component={FeedStackWrapper}
 			/>
@@ -76,19 +81,20 @@ export function AppTab(): JSX.Element {
 					headerShown: false,
 					tabBarLabel: 'Groupes',
 					tabBarIcon: undefined,
+					tabBarActiveTintColor,
 				}}
 				component={GroupChatStackWrapper}
 			/>
 
 			<BottomTab.Screen
-				name='MyProfileScreen'
+				name='MyProfileStack'
 				options={{
-					headerShown: true,
-					headerTitle: "Profile",
+					headerShown: false,
 					tabBarLabel: 'Profile',
 					tabBarIcon: undefined,
+					tabBarActiveTintColor,
 				}}
-				component={MyProfileScreenWrapper}
+				component={MyProfileStackWrapper}
 			/>
 		</BottomTab.Navigator>
 	  )
