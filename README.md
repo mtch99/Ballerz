@@ -34,12 +34,16 @@ There must be three different games on three different courts, two at the moment
     - [x] UserProfileScreen and MyUserProfileScreen
     - [x] Make sure that everything works properly
 
+- [ ] Games feature
+    - [ ] Ballerz Game client
+    - [ ] Refactor FeedScreen wrapper to load all games on focus
+
 - [ ] I want see a toast message on new notiication
     - [ ] Display a toast message on new received notification 
         - [ ] yarn add @react-native-material/Snackbar
         - [ ] Notification UseCase send events to the Notifications controller
         - [ ] Notification  controller send events to the snackbar  
-- [ ] Games feature
+        
 
 - [ ] Notificastion screen
 
