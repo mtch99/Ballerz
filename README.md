@@ -35,20 +35,19 @@ There must be three different games on three different courts, two at the moment
 
 - [ ] Add friend
     - [ ] UserProfileScreen and MyUserProfileScreen
-        - [ ] UserProfileScreen ... manage loading state, no network, ...
-            - [ ] A stack containing userProfileStack and placeProfileStack
-                - [ ] UserProfileStack
-                    - [ ] UserProfileScreen
-                        - [x] Layout
-                            - [x] display Number of friends
-                            - [x] implement figma design
-                        - [ ] Friends Button and Friends List screen
-                            - [x] add friends list to UserprofileState
-                            - [x] FriendsListScreen
-                            * [x] Handle loading state in screens
-                                - [x] UserProfileScreen
-                            * [x] Handle new sent friendshipRequests at model leve;
-                            * [x] Handle subscription reconnection. Poll subscription server
+        - [x] UserProfileScreen ... manage loading state, no network, ...
+            - [x] A stack containing userProfileStack and placeProfileStack
+                - [x] UserProfileScreen
+                    - [x] Layout
+                        - [x] display Number of friends
+                        - [x] implement figma design
+                    - [ ] Friends Button and Friends List screen
+                        - [x] add friends list to UserprofileState
+                        - [x] FriendsListScreen
+                        * [x] Handle loading state in screens
+                            - [x] UserProfileScreen
+                        * [x] Handle new sent friendshipRequests at model leve;
+                        * [x] Handle subscription reconnection. Poll subscription server
 
         - [ ] MyUserProfileScreen
             - [ ] MyUserProfileView
