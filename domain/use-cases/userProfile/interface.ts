@@ -16,6 +16,7 @@ export interface IUserProfileModelEventListener {
     onNewUserProfile(input: IUserProfile): void
     onUsernameDefinedEvent(userProfileData: IUserProfileData): void
     setMyProfile(input: IUserProfile): void
+    onNewFriendShipRequest(input: IRequestFriendShipInput): void
 }
 
 

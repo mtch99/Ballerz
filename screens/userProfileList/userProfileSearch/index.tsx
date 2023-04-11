@@ -15,7 +15,8 @@ export default class UserProfileSearchScreen<T extends IUserProfileListScreenPro
     state: IUserProfileListScreenState = {
         userProfileList: [],
         filteredUserProfileList: [],
-        filterInput: ''
+        filterInput: '',
+        loading: false,
     }
     constructor(props: T) {
         super(props);

@@ -65,6 +65,9 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
     
     async requestFriendShip(input: IRequestFriendShipInput): Promise<IRequestFriendShipResult> {
         const response = await this.repo.requestFriendship(input)
+        if(!response.error){
+            this.observer.onNewFriendShipRequest(input)
+        }
         return response
     }
     

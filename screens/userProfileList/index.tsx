@@ -4,6 +4,7 @@ import { AppContext, IAppContext } from "../../controllers/provider";
 import { IUserProfileListScreenNavigationController } from "../userProfile/interface";
 import { IUserProfileDataState } from "../../app/features/types";
 import { IUserProfileListScreenState } from "./interface";
+import {Screen} from '../interface'
 
 
 export interface IUserProfileSearchScreenPropsWithoutNavigation{}
@@ -17,7 +18,7 @@ export interface IUserProfileListScreenProps extends IUserProfileListScreenProps
     navigationController: IUserProfileListScreenNavigationController
 }
 
-export abstract class AUserProfileListScreen<P, S extends IUserProfileListScreenState> extends React.Component<P, S>{
+export abstract class AUserProfileListScreen<P, S extends IUserProfileListScreenState> extends Screen<P, S>{
 
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
@@ -29,6 +30,7 @@ export abstract class AUserProfileListScreen<P, S extends IUserProfileListScreen
     }
 
     componentDidMount(): void {
+        // this.makeRequest<undefined, void>(undefined, this.context.userProfileController.getAllUserProfiles.bind(this.context.userProfileController)).then(() => {this.__initState()})
         this.context.userProfileController.getAllUserProfiles().then(() => {this.__initState()})
     }
 

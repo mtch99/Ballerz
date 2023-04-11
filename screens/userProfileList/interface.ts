@@ -1,10 +1,11 @@
+import { IScreenState } from "./../interface";
 import { IUserProfileDataState } from "../../app/features/types";
 import { IUserProfileListState } from "../../app/features/userProfile/userProfileList/slice/interface";
 import { IUserProfileData } from "../../domain/use-cases/types";
 
 
 
-export interface IUserProfileListScreenState {
+export interface IUserProfileListScreenState extends IScreenState {
     userProfileList: IUserProfileListState['items']
     filteredUserProfileList: IUserProfileListState['items']
     filterInput: string | null

@@ -4,6 +4,8 @@ import { View, Text } from "react-native";
 import { AppContext, IAppContext } from "../../controllers/provider";
 import { UserProfileView } from "../../views/userProfile";
 import { IUserProfileDataState, IUserProfileState } from "../../app/features/types";
+import { IScreenState } from "../interface";
+import { Screen } from "../interface";
 
 
 export interface IUserProfileScreenPropsWithoutNavigation {
@@ -15,29 +17,30 @@ export interface IUserProfileScreenProps extends IUserProfileScreenPropsWithoutN
     navigationController: IUserProfileScreenNavigationController
 }
 
-export interface IUserProfileScreenState extends IUserProfileState {
+export interface IUserProfileScreenState extends IUserProfileState, IScreenState {
 
 }
 
 
-export class UserProfileScreen extends React.Component<IUserProfileScreenProps, IUserProfileScreenState> implements IUserProfileScreen {
+export class UserProfileScreen extends Screen<IUserProfileScreenProps, IUserProfileScreenState> implements IUserProfileScreen {
     
     navigationController: IUserProfileScreenNavigationController;
 
     userProfile: IUserProfileState = {
         games: [],
-        id: "",
-        username: "",
+        id: this.props.userProfileData.id,
+        username: this.props.userProfileData.username,
         badges: [],
         isFriend: undefined,
-        friends: []
+        friends: [],
     }
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
 
 
     state = {
-        ...this.userProfile
+        ...this.userProfile,
+        loading: false
     }
 
     constructor(props: IUserProfileScreenProps){
@@ -74,7 +77,8 @@ export class UserProfileScreen extends React.Component<IUserProfileScreenProps, 
                 senderProfileID,
                 receiverProfileID: item.id,
             }
-            this.context.userProfileController.sendFriendShipRequest(input)
+            const request = this.context.userProfileController.sendFriendShipRequest(input)
+            this.makeRequest__(request)
         }
     }
 
@@ -134,30 +138,3 @@ export interface IUserProfileViewProps extends IUserProfileState{
     onPressAddButton: (item: IUserProfileState) => void;
     onPressFriendsNumber: () => void;
 }
-
-
-// export class UserProfileView extends React.Component<IUserProfileViewProps>{
-
-
-//     componentDidMount(): void {
-//         console.warn(`Mounting props: ${JSON.stringify(this.props)}`)
-//     }
-
-//     componentDidUpdate(prevProps: Readonly<IUserProfileViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
-//         console.warn(`UserProfileView newProps: ${JSON.stringify(this.props)})`)
-//     }
-
-//     render(): React.ReactNode {
-
-//         // if(this.props.UserMap[this.props.userProfileId]){
-//         //     return <></>
-//         // }
-//         return(
-//             <View>
-//                 <Text style={{color: 'white'}}>
-//                     {this.props.name}
-//                 </Text>
-//             </View>
-//         )
-//     }
-// }

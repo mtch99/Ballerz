@@ -15,6 +15,7 @@ export default class FindYourFriendsScreen<P extends IFindYourFriendsScreenProps
         userProfileList: [],
         filteredUserProfileList: [],
         filterInput: '',
+        loading: false,
     }
 
     constructor(props: P){

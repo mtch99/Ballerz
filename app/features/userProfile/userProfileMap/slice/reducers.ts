@@ -1,10 +1,11 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { IUserProfileMapState } from "../../types";
-import { INewUserProfileProfileActionPayload, INewUserProfileMapActionPayload } from "./actions";
+import { INewUserProfileProfileActionPayload, INewUserProfileMapActionPayload, INewSentFriendshipRequestActionPayload } from "./actions";
 
 export enum UserProfileMapActionType {
     NEW_USERPROFILE="NEW_USERPROFILE",
-    NEW_UserProfileMAP="NEW_USERPROFILEMAP"
+    NEW_UserProfileMAP="NEW_USERPROFILEMAP",
+    NEW_SENT_FRIENDSHIPREQUEST="NEW_SENT_FRIENDSHIPREQUEST",
 }
 
 
@@ -36,10 +37,23 @@ const newUserProfileMapReducer: IUserProfileMapStateReducer<INewUserProfileMapAc
     return result
 }
 
+const newSentFriendRequestReducer: IUserProfileMapStateReducer<INewSentFriendshipRequestActionPayload> = (state, action) => {
+    const result: IUserProfileMapState = {
+      ...state,
+      [action.payload.receiverProfileID]: {
+        ...state[action.payload.receiverProfileID],
+        friendshipRequestSent: true
+      }
+    }
+
+    return result
+}
+
 
 const UserProfileMapReducers = {
     NEW_USERPROFILE: newUserProfileReducer,
     NEW_USERPROFILEMAP: newUserProfileMapReducer,
+    NEW_SENT_FRIENDSHIPREQUEST: newSentFriendRequestReducer,
 }
 
 export default UserProfileMapReducers
