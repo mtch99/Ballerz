@@ -19,9 +19,6 @@ There must be three different games on three different courts, two at the moment
     - [x] Notifications model
     - [x] Notifications controller
     * [x] Check auth flow
-        - [x] Signin View
-        - [x] Signup View
-        - [x] Test the flow on a mobile device
             - [x] Unregistered User error message display in signin View 
             - [x] Navigate to Signup View
             * [x] Fix: Did not auto signin at the second launch
@@ -33,34 +30,23 @@ There must be three different games on three different courts, two at the moment
 
 * [x] App Icon and splashscreen
 
-- [ ] Add friend
+- [x] Add friend
     - [x] UserProfileScreen and MyUserProfileScreen
-        - [x] UserProfileScreen ... manage loading state, no network, ...
-            - [x] A stack containing userProfileStack and placeProfileStack
-                - [x] UserProfileScreen
-                    - [x] Layout
-                        - [x] display Number of friends
-                        - [x] implement figma design
-                    - [ ] Friends Button and Friends List screen
-                        - [x] add friends list to UserprofileState
-                        - [x] FriendsListScreen
-                        * [x] Handle loading state in screens
-                            - [x] UserProfileScreen
-                        * [x] Handle new sent friendshipRequests at model leve;
-                        * [x] Handle subscription reconnection. Poll subscription server
-
-        - [x] MyUserProfileScreen
-            - [x] Retrieve userProfile on screen focus
-            - [x] Fix userProfileView alignment
-
     - [x] Make sure that everything works properly
 
+- [ ] I want see a toast message on new notiication
+    - [ ] Display a toast message on new received notification 
+        - [ ] yarn add @react-native-material/Snackbar
+        - [ ] Notification UseCase send events to the Notifications controller
+        - [ ] Notification  controller send events to the snackbar  
+- [ ] Games feature
+
+- [ ] Notificastion screen
 
  
 
 <!-- - [ ] Add place -->
 - [ ] Invitations
-- [ ] Notifications
 - [ ] Comments
 
 
