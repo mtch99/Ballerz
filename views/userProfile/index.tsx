@@ -14,6 +14,11 @@ import { IUserProfileState } from "../../app/features/types"
 
 export class UserProfileView extends React.Component<IUserProfileViewProps>{
 
+    async onPressAdd(): Promise<void> {
+        console.warn("onPressAdd")
+        this.props.onPressAddButton({...this.props})
+    }
+
 
     render(){
         return(
@@ -26,6 +31,8 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
                     profilePicUri={'../../assets/profilePic'}
                     isFriend={this.props.isFriend}
                     onPressFriendsNumber={this.props.onPressFriendsNumber}
+                    friendshipRequestSent={this.props.friendshipRequestSent}
+                    onPressAddButton={this.onPressAdd.bind(this)}
                 />
                 {/* <BadgeListView
                     badgeList={this.props.badges}

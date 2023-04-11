@@ -65,9 +65,10 @@ export class UserProfileScreen extends Screen<IUserProfileScreenProps, IUserProf
     }
 
 
-    onPressAddButton(item: IUserProfileState): void {
-        const senderProfileID = this.context.authState.user?.profile?.id
-        if(item.isFriend){
+    async onPressAddButton(userProfile: IUserProfileState): Promise<void> {
+        console.error(`${JSON.stringify(this.context.authState)}`)
+        const senderProfileID = this.context.authState.profile?.id
+        if(userProfile.isFriend){
             return
         }
         if(!senderProfileID){
@@ -75,10 +76,10 @@ export class UserProfileScreen extends Screen<IUserProfileScreenProps, IUserProf
         }else {
             const input = {
                 senderProfileID,
-                receiverProfileID: item.id,
+                receiverProfileID: userProfile.id,
             }
             const request = this.context.userProfileController.sendFriendShipRequest(input)
-            this.makeRequest__(request)
+            await this.makeRequest(request)
         }
     }
 

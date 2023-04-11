@@ -66,11 +66,24 @@ export class HeaderView extends React.Component<IHeaderViewProps>{
                                         title={"amis"}
                                     />
                                 ):(
-                                    <ListItemButton
+                                    this.props.friendshipRequestSent?(
+                                        <ListItemButton
                                         onPress={() => {}}
-                                        selected={false}
-                                        title="ajouter"
-                                    />
+                                        selected={true}
+                                        title={"ajouter"}
+                                        />
+                                    ):(
+                                        <ListItemButton
+                                            onPress={this.props.onPressAddButton.bind(this)}
+                                            selected={false}
+                                            title="ajouter"
+                                        />
+                                            // <ListItemButton
+                                            //     onPress={() => {}}
+                                            //     selected={false}
+                                            //     title="ajouter"
+                                            // />
+                                    )
                                 )}
                             </View>
                         </View>

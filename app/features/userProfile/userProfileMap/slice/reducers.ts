@@ -16,11 +16,14 @@ type IUserProfileMapStateReducer<PayloadType> = (state: IUserProfileMapState, ac
 
 const newUserProfileReducer: IUserProfileMapStateReducer<INewUserProfileProfileActionPayload> = (state, action) => {
     
-    const UserProfileId = action.payload.id
+    const UserProfileID = action.payload.id
 
     const newState: IUserProfileMapState = {
         ...state,
-        [UserProfileId]: action.payload,
+        [UserProfileID]: {
+            ...action.payload,
+            friendshipRequestSent: state[UserProfileID]?.friendshipRequestSent
+        },
     }
     // console.error(`New user profile map received: ${JSON.stringify(newState)}`)
 

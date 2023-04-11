@@ -18,21 +18,13 @@ export interface IScreenState {
 
 export class Screen<P = any, S extends IScreenState = IScreenState> extends React.Component<P, S> {
 
-    async makeRequest<I, O>(input: I, callback: (input: I) => Promise<O>): Promise<O | null> {
-        if(!this.state.loading){
-            const outPut = await callback(input).then(res => {
-                this.setLoading(false)
-                return res
-            })
-            return outPut
-        }
-        return null
-    }
 
-    async makeRequest__<T>(request: Promise<T>): Promise<T  | void> {
+    async makeRequest<T>(request: Promise<T>): Promise<T  | void> {
+        console.error("diejpioejpioejd")
         if(!this.state.loading){
             const response = await request.then(response => {
                 this.setLoading(false)
+                console.error(`Request response: ${response}`)
                 return response
             })
             return response
