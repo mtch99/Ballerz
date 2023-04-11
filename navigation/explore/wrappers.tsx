@@ -2,13 +2,14 @@ import { NavigatorScreenParams, useNavigation } from "@react-navigation/native";
 import { IPlaceProfileScreenNavigationController } from "../../screens/placeProfile/interface";
 import { PlaceProfileScreen } from "../../screens/placeProfile";
 import { BaseStackScreenProps, BaseStackNavigationProp, BaseStackParamList } from "../base/types";
-import { IUserProfileListScreenNavigationController, IUserProfileScreenNavigationController } from "../../screens/userProfile/interface";
+import { IUserProfileScreenNavigationController } from "../../screens/userProfile/interface";
 import { IUserProfileScreenPropsWithoutNavigation, UserProfileScreen } from "../../screens/userProfile";
 import { ExploreStackNavigationProp, ExploreStackScreenProps } from "./types";
 import ExploreTabScreen from "../../screens/ExploreTabScreen";
 import { IPlaceSearchScreenNavigationController } from "../../screens/placeList/interface";
 import { IUserProfileDataState } from "../../app/features/types";
 import { BaseStackNavigator } from "../base";
+import { IUserProfileListScreenNavigationController } from "../../screens/userProfileList/interface";
 
 
 
@@ -55,7 +56,13 @@ export function UserProfileScreenWrapper(props: ExploreStackScreenProps<'UserPro
             throw new Error("Function not implemented.");
         },
         goToFriendsListScreen(userProfileList) {
-            throw new Error("Function not implemented.");
+            const params: NavigatorScreenParams<BaseStackParamList> = {
+                screen: 'FriendsListScreen',
+                params: {
+                    friendsList: userProfileList
+                }
+            }
+            navigation.push('BaseStack', params);
         },
     }
 
@@ -87,7 +94,13 @@ export function ExploreTabScreenWrapper(props: ExploreStackScreenProps<'SearchSt
 
     const userProfileSearchScreenNavigationController: IUserProfileListScreenNavigationController = {
         goToUserProfile: function (userProfileData: IUserProfileDataState): void {
-            navigation.navigate('UserProfileScreen', {userProfileData})
+            const params: NavigatorScreenParams<BaseStackParamList> = {
+                screen: "UserProfileScreen",
+                params: {
+                    userProfileData,
+                }
+            }
+            navigation.navigate("BaseStack", params)
         }
     }
 

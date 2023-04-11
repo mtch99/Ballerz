@@ -6,6 +6,8 @@ import { TabRouter } from "react-navigation"
 import { IUserProfileScreenNavigationController } from "../../screens/userProfile/interface"
 import { IUserProfileDataState } from "../../app/features/types"
 import { UserProfileScreen } from "../../screens/userProfile"
+import { IUserProfileListScreenNavigationController } from "../../screens/userProfileList/interface"
+import FriendsListScreen from "../../screens/userProfileList/friendsList"
 
 export function PlaceProfileScreenWrapper(props: BaseStackScreenProps<'PlaceProfileScreen'>){
 
@@ -50,7 +52,7 @@ export function UserProfileScreenWrapper(props: BaseStackScreenProps<'UserProfil
             throw new Error("Function not implemented.");
         },
         goToFriendsListScreen(userProfileList) {
-            throw new Error("Function not implemented.");
+            navigation.push('FriendsListScreen', {friendsList: userProfileList});
         },
     }
 
@@ -60,4 +62,22 @@ export function UserProfileScreenWrapper(props: BaseStackScreenProps<'UserProfil
             {...{navigationController}}
         />
     )
+}
+
+
+export function FriendsListScreenWrapper(props: BaseStackScreenProps<'FriendsListScreen'>){
+    const {navigation, route} = props
+
+    const navigationController: IUserProfileListScreenNavigationController = {
+        goToUserProfile: function (userProfileData): void {
+            navigation.push('UserProfileScreen', {userProfileData});
+        }
+    }
+
+    return(
+        <FriendsListScreen
+        {...{navigationController, friendsList: route.params.friendsList}}
+        />
+    )
+
 }

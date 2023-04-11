@@ -26,7 +26,7 @@ export function ExploreStackNavigator(): JSX.Element {
                 name="UserProfileScreen"
                 component={UserProfileScreenWrapper}
                 options={{
-                    // headerShown: false,
+                    headerShown: false,
                     title: 'Explore',
                     headerBackTitleVisible: false,
                     headerStyle: globalStyles.global.headerStyle

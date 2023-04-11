@@ -1,10 +1,10 @@
-import {IUserProfileListScreenProps, IUserProfileListScreenPropsWithoutNavigation } from "..";
+import {IUserProfileListScreenProps } from "..";
 import { IUserProfileData } from "../../../domain/use-cases/types";
 
 import UserProfileSearchScreen from '../userProfileSearch';
 
 
-export interface IFriendListScreenPropsWithoutNavigation extends IUserProfileListScreenPropsWithoutNavigation{
+export interface IFriendListScreenPropsWithoutNavigation {
     friendsList: IUserProfileData[]
 }
 export interface IFriendsListScreenProps extends IUserProfileListScreenProps,  IFriendListScreenPropsWithoutNavigation{}

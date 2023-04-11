@@ -44,7 +44,7 @@ There must be three different games on three different courts, two at the moment
                             - [x] implement figma design
                         - [ ] Friends Button and Friends List screen
                             - [x] add friends list to UserprofileState
-                            - [ ] FriendsListScreen
+                            - [x] FriendsListScreen
                             * [x] Handle loading state in screens
                                 - [x] UserProfileScreen
                             * [x] Handle new sent friendshipRequests at model leve;

@@ -17,7 +17,7 @@ export interface ISelectableUserProfileListViewProps extends IUserProfileListVie
 
 
 export interface IUserProfileListScreenNavigationController{
-    goToUserProfile(id: IUserProfileDataState['id']): void
+    goToUserProfile(userProfileData: IUserProfileDataState): void
 }
 
 export interface IUserProfileListViewProps {
@@ -37,3 +37,6 @@ export interface ISelectableUserProfileData extends IUserProfileData {
 }
 
 
+export interface IUserProfileListScreenProps {
+    userProfileList: IUserProfileData[]
+}

@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { BaseStackParamList } from "./types";
-import { PlaceProfileScreenWrapper, UserProfileScreenWrapper } from "./wrappers";
+import { FriendsListScreenWrapper, PlaceProfileScreenWrapper, UserProfileScreenWrapper } from "./wrappers";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { globalStyles } from "../../views/styles";
 import { Text } from "react-native";
@@ -49,6 +49,21 @@ export function BaseStackNavigator(): JSX.Element {
                     }
                 }}
                 component={UserProfileScreenWrapper}
+            />
+            <Stack.Screen
+                name="FriendsListScreen"
+                options={{
+                    headerLeft:() => {
+                        return (
+                            <HeaderBackButton
+                                tintColor={globalStyles.global.logoColor}
+                                onPress={() => {navigation.goBack()}}
+                            />
+                        )
+                    },
+                    title: "Amis"
+                }}
+                component={FriendsListScreenWrapper}
             />
 
         </Stack.Navigator>

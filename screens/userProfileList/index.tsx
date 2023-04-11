@@ -1,10 +1,12 @@
 import React from "react";
 import { IUserProfileListState} from "../../app/features/userProfile/userProfileList/slice/interface";
 import { AppContext, IAppContext } from "../../controllers/provider";
-import { IUserProfileListScreenNavigationController } from "../userProfile/interface";
 import { IUserProfileDataState } from "../../app/features/types";
-import { IUserProfileListScreenState } from "./interface";
-import {Screen} from '../interface'
+import { IUserProfileListScreenNavigationController, IUserProfileListScreenState } from "./interface";
+import {IUserProfileListViewProps, Screen} from '../interface'
+import { UserProfileListView } from "../../views/userProfileList";
+import { IUserProfileData } from "../../domain/use-cases/types";
+
 
 
 export interface IUserProfileSearchScreenPropsWithoutNavigation{}
@@ -13,12 +15,11 @@ export interface IUserProfileSearchScreenProps extends IUserProfileSearchScreenP
     navigationController: IUserProfileListScreenNavigationController
 }
 
-export interface IUserProfileListScreenPropsWithoutNavigation {}
-export interface IUserProfileListScreenProps extends IUserProfileListScreenPropsWithoutNavigation{
+export interface IUserProfileListScreenProps{
     navigationController: IUserProfileListScreenNavigationController
 }
 
-export abstract class AUserProfileListScreen<P, S extends IUserProfileListScreenState> extends Screen<P, S>{
+export abstract class AUserProfileListScreen<P, S extends IUserProfileListScreenState = IUserProfileListScreenState> extends Screen<P, S>{
 
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
@@ -82,3 +83,47 @@ export abstract class AUserProfileListScreen<P, S extends IUserProfileListScreen
     abstract __initState(): void 
 
 }
+
+
+export abstract class AUserProfileListScreenWithProps<P extends IUserProfileListScreenProps = IUserProfileListScreenProps, 
+    S extends IUserProfileListScreenState = IUserProfileListScreenState> extends AUserProfileListScreen<P, S> {
+
+    componentDidMount(): void {
+        
+    }
+}
+
+
+// export interface IDisplayUserProfileListScreenPropsWithoutNavigation {
+//     userProfileList: IUserProfileListState['items']
+// }
+
+// export interface IDisplayUserProfileListScreenProps extends IDisplayUserProfileListScreenPropsWithoutNavigation{
+//     navigationController: IUserProfileListScreenNavigationController
+// }
+
+// export default class DisplayUserProfileListScreen extends AUserProfileListScreen<IDisplayUserProfileListScreenProps> {
+    
+    
+//     __initState(): void {}
+//     // Shadow parent class effect because there is no request to be done given the userList firld in props
+//     componentDidMount(): void {}
+
+//     onPressUserProfile(userProfileData: IUserProfileDataState): void {
+//         this.props.navigationController.goToUserProfile(userProfileData)
+//     }
+
+    
+//     render(): React.ReactNode {
+//         const props: IUserProfileListViewProps = {
+//             usersList: this.props.userProfileList,
+//             onPressUserProfile: this.onPressUserProfile.bind(this)
+//         }
+
+//         return (
+//             <UserProfileListView
+//                 {...props}
+//             />
+//         )
+//     }
+// }

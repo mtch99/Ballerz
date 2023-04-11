@@ -10,9 +10,7 @@ export default interface IUserProfileScreen{
 }
 
 
-export interface IUserProfileListScreenNavigationController{
-    goToUserProfile(userProfileData: IUserProfileDataState): void
-}
+
 
 
 export interface IUserProfileScreenNavigationController{
