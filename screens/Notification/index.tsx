@@ -25,7 +25,7 @@ export default class NotificationScreen extends React.Component<INotificationScr
 
 
     getMyNotifications(): void {
-        const userProfileID = this.context.authState.user?.profile?.id;
+        const userProfileID = this.context.authState.profile?.id;
         if(userProfileID) {
             this.context.notificationController.getMyNotifications(userProfileID)
         }

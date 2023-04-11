@@ -11,7 +11,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 import { AppTabParamList } from './types';
-import { ExploreStackWrapper, FeedStackWrapper, GroupChatStackWrapper, UserProfileScreenWrapper } from './wrappers';
+import { ExploreStackWrapper, FeedStackWrapper, GroupChatStackWrapper, MyProfileScreenWrapper } from './wrappers';
 
 // import LinkingConfiguration from './LinkingConfiguration';
 
@@ -88,7 +88,7 @@ export function AppTab(): JSX.Element {
 					tabBarLabel: 'Profile',
 					tabBarIcon: undefined,
 				}}
-				component={UserProfileScreenWrapper}
+				component={MyProfileScreenWrapper}
 			/>
 		</BottomTab.Navigator>
 	  )

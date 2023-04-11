@@ -7,6 +7,7 @@ import { BadgeListView } from "./badges"
 import PictresView from "./pictures"
 import GamesListView from "./games"
 import { IUserProfileState } from "../../app/features/types"
+import BallerzSafeAreaView from "../safeArea"
 
 
 
@@ -44,6 +45,34 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
                     gameList={this.props.games}
                 />
             </ScrollView>
+        )
+    }
+}
+
+
+
+
+export class MyProfileView extends React.Component<IUserProfileViewProps> {
+    render(){
+        return(
+            <BallerzSafeAreaView>
+                <>
+                <HeaderView
+                    username={this.props.username}
+                    friendsList={this.props.friends}
+                    profilePicUri={'../../assets/profilePic'}
+                    isFriend={this.props.isFriend}
+                    onPressFriendsNumber={this.props.onPressFriendsNumber}
+                    friendshipRequestSent={this.props.friendshipRequestSent}
+                    onPressAddButton={() => {}}
+                    myProfile={true}
+                />
+                <GamesListView
+                        gameList={this.props.games}
+                />
+                </>
+
+            </BallerzSafeAreaView>
         )
     }
 }

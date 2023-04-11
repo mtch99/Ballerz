@@ -36,7 +36,6 @@ export const createAuthModel = (input: IAuthModelInput): IAuthModel => {
             }
             const payload: UserState = {
                 email: userData.email,
-                profile
             }
 
             input.dispatchFunc(setUser(payload))
@@ -46,6 +45,8 @@ export const createAuthModel = (input: IAuthModelInput): IAuthModel => {
             const actionPayload: IUserProfileState = AuthModelAdapter.parseUserProfile(userProfile)
             input.dispatchFunc(setUserProfile({ profile: actionPayload }))
         },
+
+
         onDataPreparedEvent: function (): void {
             input.dispatchFunc(preparedData())
         }
@@ -58,13 +59,10 @@ export const createAuthModel = (input: IAuthModelInput): IAuthModel => {
 export class AuthModelAdapter {
 
     static parseUserProfile(userProfile: IUserProfile): IUserProfileState {
-        const {id, username, badges} = userProfile
         const games: IUserProfileState['games'] = this.parseGameList(userProfile.games)
         
         const result: IUserProfileState = {
-            id,
-            username,
-            badges,
+            ...userProfile,
             games
         }
 

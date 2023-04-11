@@ -77,18 +77,20 @@ export function FeedScreenWrapper(): JSX.Element {
 
 export function AttendantsListScreenWrapper(props: FeedStackScreenProps<'AttendantsListScreen'>){
 
-    const navigation = useNavigation<FeedStackNavigationProp<'AttendantsListScreen'>>
+    const {navigation, route} = props
 
     const attendantsList = props.route.params.attendantsList
 
     const navigationController: IUserProfileListScreenNavigationController = {
-        goToUserProfile: function (id: string): void {
+        goToUserProfile: function (userProfileData: IUserProfileData): void {
             throw new Error("Function not implemented.")
         }
     }
     return(
         <AttendantsListScreen
-            attendantsList={attendantsList} navigationController={navigationController}/>
+             navigationController={navigationController}
+             friendsList={attendantsList}
+        />
     )
 }
 

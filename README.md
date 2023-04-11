@@ -50,7 +50,8 @@ There must be three different games on three different courts, two at the moment
                         * [x] Handle subscription reconnection. Poll subscription server
 
         - [ ] MyUserProfileScreen
-            - [ ] MyUserProfileView
+            - [x] Retrieve userProfile on screen focus
+            - [ ] Fix userProfileView alignment
 
     - [ ] Make sure that everything works properly
         - [ ] implement missing methods

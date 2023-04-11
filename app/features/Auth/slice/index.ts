@@ -11,7 +11,6 @@ export interface IUserStateProfileData {
 
 export type UserState = {
   email: string,
-  profile?: IUserProfileState
 } | undefined
 
 export interface ILastSignupInput {

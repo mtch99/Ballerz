@@ -5,6 +5,8 @@ import { GroupChatStackNavigator } from "../../groupChat";
 import { MyProfileScreen, UserProfileScreen } from "../../../screens/userProfile";
 import { IUserProfileScreenNavigationController } from "../../../screens/userProfile/interface";
 import { AppContext } from "../../../controllers/provider";
+import { IUserProfileDataState } from "../../../app/features/types";
+import { AppTabScreenProps } from "./types";
 
 
 
@@ -20,21 +22,27 @@ export function GroupChatStackWrapper(){
     )
 }
 
-export function UserProfileScreenWrapper(){
+export function MyProfileScreenWrapper(props: AppTabScreenProps<'MyProfileScreen'>){
 
-    const [userProfileId, setUserProfileId] = React.useState("")
-    const {authState} = React.useContext(AppContext)
+    const {authState, userProfileController} = React.useContext(AppContext)
+    const {navigation, route} = props
 
 
     React.useEffect(() => {
-        if(authState.profile){
-            console.warn("User profile is " + JSON.stringify(authState.profile))
-            setUserProfileId(authState.profile.id)
-        }
-    }, [authState])
+        const unsubscribe = navigation.addListener('focus', () => {
+            if(authState.user){
+                console.log("User is logged in")
+                userProfileController.getMyProfile(authState.user.email)
+            }
+            else{
+                throw new Error('No profile found')
+            }
+        });
+        return unsubscribe;
+    }, [navigation])
 
     const navigationController: IUserProfileScreenNavigationController = {
-        goToUserProfile: function (id: string): void {
+        goToUserProfile: function (userProfileData: IUserProfileDataState): void {
             console.log("Function not implemented.");
         },
         goToPlaceProfile: function (id: string): void {
@@ -45,6 +53,9 @@ export function UserProfileScreenWrapper(){
         },
         goToAttendantsListScreen: function (gameId: string): void {
             console.log("Function not implemented.");
+        },
+        goToFriendsListScreen: function (userProfileList: IUserProfileDataState[]): void {
+            throw new Error("Function not implemented.");
         }
     }
 

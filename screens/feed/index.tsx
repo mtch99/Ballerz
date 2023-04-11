@@ -71,7 +71,8 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
             userProfile: {
                 id: "moiId",
                 username: "moi",
-                badges: []
+                badges: [],
+                isFriend: undefined
             }
         }).then(res => {
             if(res == true){
@@ -102,7 +103,8 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
             author: {
                 id: "moiId",
                 username: "moi",
-                badges: []
+                badges: [],
+                isFriend: undefined
             },
             text: input.commentText
         }

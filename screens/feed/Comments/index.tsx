@@ -2,7 +2,7 @@ import React from "react";
 import { IFeedItemState } from "../../../app/features/feed/slice/interface";
 import ICommentsScreen, { ICommentsScreenNavigator } from "./interface";
 import { IComment } from "../../../domain/use-cases/types";
-import ICommentsController from "../../../controllers/feed/Comments/interface";
+// import ICommentsController from "../../../controllers/feed/Comments/interface";
 import { ICommentInput } from "../../../domain/use-cases/feed/interface";
 import { FeedContext, IFeedContext } from "../../../controllers/feed/provider";
 import { Text } from "react-native";
@@ -21,10 +21,10 @@ export default class CommentScreen extends React.Component<ICommentScreenProps> 
 
     static contextType = FeedContext
     context: React.ContextType<typeof FeedContext> = {} as IFeedContext
-    commentsController: ICommentsController = {} as ICommentsController
+    // commentsController: ICommentsController = {} as ICommentsController
 
     componentDidMount(): void {
-        this.commentsController = this.context.controller.commentsController
+        // this.commentsController = this.context.controller.commentsController
     }
 
     feedItem  = this.props.feedItem
@@ -41,8 +41,9 @@ export default class CommentScreen extends React.Component<ICommentScreenProps> 
     }
 
 
-    postComment(payload: ICommentInput): Promise<boolean> {
-        return this.commentsController.postComment(payload)
+    async postComment(payload: ICommentInput): Promise<boolean> {
+        // return this.commentsController.postComment(payload)
+        return true
     }
 
 

@@ -34,7 +34,6 @@ export function createUserProfileModel(modelInput: IUserProfileModelInput): IUse
         },
 
         setMyProfile(input) {
-            // throw new Error("setMyProfile Method not implemented in createUserProfileModel")
             const actionPayload: IUserProfileState = AuthModelAdapter.parseUserProfile(input)
             modelInput.dispatchFunc(setUserProfile({profile: actionPayload}))
         },

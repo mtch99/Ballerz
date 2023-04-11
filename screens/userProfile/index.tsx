@@ -1,8 +1,8 @@
 import React from "react";
-import IUserProfileScreen, { IUserProfileListScreenNavigationController, IUserProfileScreenNavigationController } from "./interface";
+import IUserProfileScreen, { IUserProfileScreenNavigationController } from "./interface";
 import { View, Text } from "react-native";
 import { AppContext, IAppContext } from "../../controllers/provider";
-import { UserProfileView } from "../../views/userProfile";
+import { MyProfileView, UserProfileView } from "../../views/userProfile";
 import { IUserProfileDataState, IUserProfileState } from "../../app/features/types";
 import { IScreenState } from "../interface";
 import { Screen } from "../interface";
@@ -118,12 +118,13 @@ export class MyProfileScreen extends React.Component {
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
 
+    // Effect is run on navigation wrapper
+    componentDidMount(): void {}
 
     render(): React.ReactNode {
         if(this.context.authState.profile){
-            const userProfileId = this.context.authState.profile.id
             return(
-                <UserProfileView
+                <MyProfileView
                     {
                         ...this.context.authState.profile
                     }

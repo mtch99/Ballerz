@@ -1,27 +1,5 @@
-import {IUserProfileListScreenProps, IDisplayUserProfileListScreenPropsWithoutNavigation } from "..";
-import { IUserProfileData } from "../../../domain/use-cases/types";
-
-import UserProfileSearchScreen from '../userProfileSearch';
+import FriendsListScreen from "../friendsList";
 
 
-export interface IAttendantsListScreenPropsWithoutNavigation extends IDisplayUserProfileListScreenPropsWithoutNavigation{
-    attendantsList: IUserProfileData[]
-}
-export interface IAttendantsListScreenProps extends IUserProfileListScreenProps,  IAttendantsListScreenPropsWithoutNavigation{}
 
-export default class AttendantsListScreen 
-    extends UserProfileSearchScreen<IAttendantsListScreenProps>{
-
-        componentDidMount(): void { 
-            this.__initState()
-        }
-
-        __initState() {
-            this.setState((prevState) => ({
-                ...prevState,
-                userProfileList: this.props.attendantsList,
-                filteredUserProfileList: this.props.attendantsList,
-                filterInput: ''
-            }))
-        }
-}
+export default class AttendantsListScreen extends FriendsListScreen {}

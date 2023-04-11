@@ -10,6 +10,7 @@ export interface IHeaderViewProps {
     friendshipRequestSent: IUserProfileState['friendshipRequestSent']
     onPressFriendsNumber: () => void;
     onPressAddButton: () => void
+    myProfile?: true
 }
 
 export interface IBadgeListViewProps {
