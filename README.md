@@ -48,13 +48,7 @@ There must be three different games on three different courts, two at the moment
                             * [x] Handle loading state in screens
                                 - [x] UserProfileScreen
                             * [x] Handle new sent friendshipRequests at model leve;
-                            * [ ] Handle subscription reconnection. Poll subscription server
-                - [ ] PlaceProfileStack
-                    - [ ] placeProfileScreen
-            - [ ] Put that stack in the FeedStack and every other tab of the root tab
-
-                - [ ] Create BaseStack
-            - [ ] UserProfileView 
+                            * [x] Handle subscription reconnection. Poll subscription server
 
         - [ ] MyUserProfileScreen
             - [ ] MyUserProfileView

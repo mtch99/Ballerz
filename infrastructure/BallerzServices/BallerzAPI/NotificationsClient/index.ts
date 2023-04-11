@@ -1,16 +1,14 @@
 import { MyNotificationsSubscription, onCreateNotification_gql } from "./subscriptions";
-// import { awsmobile_game_feat } from "./../aws-exports";
-import {API, Hub, graphqlOperation} from "aws-amplify";
-import { AWSAppSyncRealTimeProvider } from "@aws-amplify/pubsub"
+import {API} from "aws-amplify";
 import BallerzApiClient from "../client";
-import { INotificationsClient, INotificationsSubscriber } from "./interface";
-import { ListNotificationsQuery, FilterNotificationsByUserQueryVariables, listNotifications_gql} from "./queries";
+import { INotificationsClient} from "./interface";
+import { ListNotificationsQuery, listNotifications_gql} from "./queries";
 import {GraphQLQuery, GraphQLSubscription, GraphQLResult} from "@aws-amplify/api"
 import { awsmobileAPIMock } from "../../aws-exports";
 import { genNotificationFilterByReceiverVariables } from "./subscriptions";
 import { Notification } from "./types";
-import { subscriptionClient } from "./subscriptionClient";
-import { gql, Observable, FetchResult} from "@apollo/client";
+import { subscriptionClient } from "../subscriptionClient";
+import { gql } from "@apollo/client";
 import {Subscription} from "@apollo/client/node_modules/zen-observable-ts";
 
 
@@ -34,31 +32,32 @@ export default class NotificationsClient extends BallerzApiClient implements INo
             query: gql(onCreateNotification_gql),
             variables: genNotificationFilterByReceiverVariables(userProfileID),
         }).subscribe({
-          next: ({data}) => {
+            next: ({data}) => {
             const subscription: MyNotificationsSubscription = data
 			if(subscription.onCreateNotification){
 				callback(subscription.onCreateNotification)
 			}
-          },
-          error: (err) => {
-            try {
-                // console.error(`\n Notification Subscription received error: ${err}\n`);
-                this.resubscribe(userProfileID, callback);
-            } catch (e) {
-                console.error(err)
-                // console.error(`\n Notification Subscription received error: ${JSON.stringify(err)}\n`);
-                this.resubscribe(userProfileID, callback);
-            }
-            console.error(err);
-        },
+            },
+            error: (err) => {
+                try {
+                    this.resubscribe(userProfileID, callback);
+                } catch (e) {
+                    console.error(err)
+                    // console.error(`\n Notification Subscription received error: ${JSON.stringify(err)}\n`);
+                    this.resubscribe(userProfileID, callback);
+                }
+                console.error(err);
+            },
         })
-
 		this.subscription = sub;
     }
 
 	private resubscribe(userProfileID: string, callback: (value: Notification) => void): void{
 		console.log("resubscribing");
-		this.subscription?.unsubscribe()
+        this.subscription?.unsubscribe()
+        setTimeout(() => {
+            this.subscribeToNotifications(userProfileID, callback)
+        }, 60000)
 		// this.subscribeToNotifications(userProfileID, callback)
 	}
 
@@ -80,9 +79,3 @@ export class NotificationsClientMock extends NotificationsClient {
         super(awsmobileAPIMock, "API_KEY")
     }
 }
-
-// export class NotificationClient_gamefeat extends NotificationsClient {
-//     constructor(){
-//         super(awsmobile_game_feat, "API_KEY")
-//     }
-// }
