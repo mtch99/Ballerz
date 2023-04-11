@@ -53,8 +53,7 @@ There must be three different games on three different courts, two at the moment
             - [x] Retrieve userProfile on screen focus
             - [x] Fix userProfileView alignment
 
-    - [ ] Make sure that everything works properly
-        - [ ] implement missing methods
+    - [x] Make sure that everything works properly
 
 
  
