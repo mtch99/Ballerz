@@ -1,11 +1,11 @@
-import { useNavigation } from "@react-navigation/native"
+import { NavigatorScreenParams, useNavigation } from "@react-navigation/native"
 import { IBadgeData, } from "../../app/features/feed/slice/interface"
 import BadgeListScreen from "../../screens/badgeList"
 import { FeedScreen } from "../../screens/feed"
-import CommentScreen from "../../screens/feed/Comments"
+import CommentScreen, { ICommentScreenPropsWithoutNavigation } from "../../screens/feed/Comments"
 import { IFeedScreenNavigationController } from "../../screens/feed/interface"
 import AttendantsListScreen from "../../screens/userProfileList/attendantsList"
-import { FeedStackScreenProps, FeedStackNavigationProp } from "./types"
+import { FeedStackScreenProps, FeedStackNavigationProp, FeedStackParamList } from "./types"
 import { IMakeFriendsScreenNavigationController, MakeFriendsScreen } from "../../screens/userProfileList/makeFriends"
 import React from "react"
 import { FeedStackNavigationContext, IFeedStackNavigationContext } from "./context"
@@ -15,6 +15,8 @@ import { IUserProfileListScreenNavigationController } from "../../screens/userPr
 import FindYourFriendsScreen from "../../screens/userProfileList/findYourFriends"
 import { IFindYourFriendsScreenNavigationController } from "../../screens/userProfileList/findYourFriends/interface"
 import NotificationScreen from "../../screens/Notification"
+import { AppTabParamList, AppTabScreenProps } from "../app/appTab/types"
+import { AppContext } from "../../controllers/provider"
 
 
 
@@ -24,22 +26,54 @@ import NotificationScreen from "../../screens/Notification"
  * @param props FeedScreen props without navigation
  * @returns A FeedScreen
  */
-export function FeedScreenWrapper(): JSX.Element {
+export function FeedScreenWrapper(props: AppTabScreenProps<'FeedStack'>): JSX.Element {
 
-    const navigation = useNavigation<FeedStackNavigationProp<'FeedScreen'>>()
+    const {navigation, route} = props
+
+    const {feedController, authState} = React.useContext(AppContext)
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            feedController.getFeed(authState.user?.email)
+        });
+        return unsubscribe;
+    }, [navigation])
 
     const navigationController: IFeedScreenNavigationController = {
         goToBadgeListScreen: (badgeList: IBadgeData[]) => {
-            navigation.navigate('BadgeListScreen', {badgeList})
+            const params: AppTabParamList['FeedStack'] = {
+                screen: "BadgeListScreen",
+                params: {
+                    badgeList,
+                },
+            }
+            navigation.navigate('FeedStack', params)
         },
         goToAttendantsScreen: (attendantsList: IUserProfileData[]) => {
-            navigation.navigate('AttendantsListScreen', {attendantsList})
+            const params: AppTabParamList['FeedStack'] = {
+                screen: "AttendantsListScreen",
+                params: {
+                    attendantsList,
+                },
+            }
+            navigation.navigate('FeedStack', params)
         },
         goToCommentScreen(feedItem) {
-            navigation.navigate('CommentsScreen', {feedItem: feedItem, comments: feedItem.comments})
+            const params: AppTabParamList['FeedStack'] = {
+                
+                screen: "CommentsScreen",
+                params: {
+                    feedItem,
+                    comments: feedItem.comments
+                }
+            }
+            navigation.navigate('FeedStack', params)        
         },
         goToMakeFriendsScreen() {
-            navigation.navigate('MakeFriends', {})
+            const params: AppTabParamList['FeedStack'] = {
+                screen: "MakeFriends",
+                params: {}
+            }
+            navigation.navigate('FeedStack', params) 
         },
         
     }

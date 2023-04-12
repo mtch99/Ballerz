@@ -40,13 +40,14 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
         this.getFeed = this.getFeed.bind(this)
     }
 
+    // Data retrieved on focus, managed by the navigator screen wrapper
     componentDidMount(): void {
-        this.feedController = this.context.feedController
-        this.getFeed();
-        this.feed = this.context.feedState
-        console.log(`Feed Screen just mounted \n
-            authState: ${JSON.stringify(this.context.authState)}`
-        )
+        // this.feedController = this.context.feedController
+        // this.getFeed();
+        // this.feed = this.context.feedState
+        // console.log(`Feed Screen just mounted \n
+        //     authState: ${JSON.stringify(this.context.authState)}`
+        // )
     }
 
     getFeed() {

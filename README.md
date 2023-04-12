@@ -36,7 +36,8 @@ There must be three different games on three different courts, two at the moment
 
 - [ ] Games feature
     - [x] Ballerz Game client
-    - [ ] Refactor FeedScreen wrapper to load all games on focus
+    - [x] Refactor FeedScreen wrapper to load all games on focus
+    - [ ] Display real game Time 
 
 - [ ] I want see a toast message on new notiication
     - [ ] Display a toast message on new received notification 
