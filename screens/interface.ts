@@ -24,7 +24,7 @@ export class Screen<P = any, S extends IScreenState = IScreenState> extends Reac
         if(!this.state.loading){
             const response = await request.then(response => {
                 this.setLoading(false)
-                console.error(`Request response: ${response}`)
+                console.error(`Request response: ${JSON.stringify(response)}`)
                 return response
             })
             return response

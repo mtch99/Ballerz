@@ -9,6 +9,7 @@ export interface ISelectPlaceScreenNavigationController{
 }
 
 export class SelectPlaceScreen extends AbstractPlaceListScreen<ISelectPlaceScreenNavigationController>{
+    
     navigationController: ISelectPlaceScreenNavigationController = this.props.navigationController
     onPressPlace(placeData: IPlaceListItemState){
         this.navigationController.goToSelectTimeSlot(placeData)

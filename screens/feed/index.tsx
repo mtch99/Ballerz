@@ -167,8 +167,9 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
                     handleBadgeClick={(item) => {this.handleBadgeClick(item)}}
                     handleFriendsTherePress={(item) => {this.handleFriendsTherePress(item)}}
                     handleInvitePress={(item) => {this.handleInvitePress(item)}}
-                    handlePlayButtonPress={(item) => {this.handlePlayButtonPress(item)}}
+                    // handlePlayButtonPress={(item) => {this.handlePlayButtonPress(item)}}
                     handleCommentButtonPress={(input: IFeedItemState) => {this.handleCommentButtonPress(input)}}
+                    handlePlayButtonPress={() => {}}
                 />
         )
     }

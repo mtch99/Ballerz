@@ -40,6 +40,7 @@ export class NotificationsRepository implements INotificationsRepository {
 
     private notificationsSubscriptionHandler(clientNotification: ClientNotification): void {
         const notification = ResponseHandler.parseClientNotification(clientNotification)
+        console.warn(`Notification received: ${JSON.stringify(notification)}`)
         if(notification){
             this.onNewNotification(notification)
         }

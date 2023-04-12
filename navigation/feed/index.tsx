@@ -54,7 +54,7 @@ export function FeedStackNavigator(): JSX.Element {
 						headerLeft: () => (<LeftHeader/>),
 						headerRight: () => (
 							<TouchableOpacity
-                                onPress={() => {navigation.push("NotificationScreen", {})}}
+                                onPress={() => {navigation.push("CreateGameStack", {})}}
 							>
 
 							</TouchableOpacity>

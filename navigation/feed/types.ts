@@ -1,7 +1,5 @@
 import { INotificationScreenPropsWithoutNavigation } from "./../../screens/Notification/index";
-import { IAttendantsListScreenPropsWithoutNavigation } from "./../../screens/userProfileList/attendantsList/index";
 import { IFindYourFriendsScreenPropsWithoutNavigation } from "./../../screens/userProfileList/findYourFriends/interface";
-import { IDisplayUserProfileListScreenPropsWithoutNavigation, IUserProfileSearchScreenProps, IUserProfileSearchScreenPropsWithoutNavigation } from "../../screens/userProfileList/index";
 
 /**
  * Learn more about using TypeScript with React Navigation:
@@ -15,6 +13,7 @@ import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-naviga
 import { IBadgeListScreenPropsWithoutNavigation } from '../../screens/badgeList';
 import { IFeedScreenPropsWithoutNavigation } from '../../screens/feed';
 import { ICommentScreenPropsWithoutNavigation } from '../../screens/feed/Comments';
+import { IUserProfileSearchScreenPropsWithoutNavigation } from "../../screens/userProfileList";
 
 
  
