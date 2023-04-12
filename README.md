@@ -37,10 +37,11 @@ There must be three different games on three different courts, two at the moment
 - [ ] Games feature
     - [x] Ballerz Game client
     - [x] Refactor FeedScreen wrapper to load all games on focus
-    - [x] Display real game Time 
+    - [ ] Display real game Time 
         - [x] Format date in feed item view
     TODO: Warning: for now, akk the games with 0 attendants are not displayed
         - [ ] Undo the lasy warning
+        - [ ] Undo onNewNotification warning in Notifications repository
     - [ ] Test with Dani 
     - [ ] Create a game
     - [ ] Checkin

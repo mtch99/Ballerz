@@ -48,7 +48,7 @@ export class NotificationsRepository implements INotificationsRepository {
 
 
     onNewNotification(notification: Notification): void {
-        console.log(`Received new notification: ${JSON.stringify(notification)}`);
+        console.warn(`Notification bien recue: ${JSON.stringify(notification)}`);
         this.observer.onNewNotificationReceived(notification)
     }
 
