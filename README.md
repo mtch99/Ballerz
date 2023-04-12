@@ -37,7 +37,15 @@ There must be three different games on three different courts, two at the moment
 - [ ] Games feature
     - [x] Ballerz Game client
     - [x] Refactor FeedScreen wrapper to load all games on focus
-    - [ ] Display real game Time 
+    - [x] Display real game Time 
+        - [x] Format date in feed item view
+    TODO: Warning: for now, akk the games with 0 attendants are not displayed
+        - [ ] Undo the lasy warning
+    - [ ] Test with Dani 
+    - [ ] Create a game
+    - [ ] Checkin
+
+- [ ] Notification screen
 
 - [ ] I want see a toast message on new notiication
     - [ ] Display a toast message on new received notification 
@@ -46,7 +54,7 @@ There must be three different games on three different courts, two at the moment
         - [ ] Notification  controller send events to the snackbar  
         
 
-- [ ] Notificastion screen
+TODO: Add {day}/month to items that are more than 6 days later than the current day at midnight
 
  
 

@@ -74,8 +74,8 @@ export class FeedModelAdapter {
     static parseFeedItem(feedItem: IFeedItem): IFeedItemState {
         return {
             ...feedItem,
-            startingTime: feedItem.startingTime.toLocaleDateString(),
-            endingTime: feedItem.endingTime.toLocaleDateString()
+            startingTime: feedItem.startingTime.toString(),
+            endingTime: feedItem.endingTime.toString()
         }
     }
 }

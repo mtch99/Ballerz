@@ -11,6 +11,8 @@ export interface IBodyContainerProps{
 	badgeList: IBadgeData[]
 	playerNum: number
 	onBadgeClick: () => void
+	startingDateTime: string
+	endingDateTime: string
 }
 
 
@@ -23,7 +25,10 @@ export function BodyView(props: IBodyContainerProps){
 				onBadgeClick={() => {props.onBadgeClick()}}
 				badgeList={props.badgeList}
 	        />
-			<BodyRightView/>
+			<BodyRightView
+                startingDateTime={props.startingDateTime}
+				endingDateTime={props.endingDateTime}
+			/>
 	    </View>
 	)
 }

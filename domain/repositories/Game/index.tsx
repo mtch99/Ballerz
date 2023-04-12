@@ -49,7 +49,8 @@ export default class GameRepository implements IGameRepository {
 export class GameAdapter {
 
     static parseGame(game: GameDoc): IFeedItem | null {
-        if(game?.place){
+        //TODO: Remove the preesence list length condition
+        if(game?.place && game.presenceList.items.length > 0){
             const result: IFeedItem = {
                 place: game.place,
                 id: game.id,
