@@ -16,7 +16,16 @@ export interface ICommentEventPayload{
 }
 
 export interface IFeedUseCase {
-    getFeed(): Promise<IFeedItem[]>
+    getFeed(email?: string): Promise<IFeedItem[]>
+    checkIn(payload: ICheckinInput): Promise<boolean>
+    comment(input: ICommentInput): Promise<boolean>
+    createGame(input: ICreateGameInput): Promise<ICreateGameOutput>
+}
+
+
+export interface IGameRepository {
+    createGame(input: ICreateGameInput): Promise<ICreateGameOutput>
+    getAllGames(email?: string): Promise<IFeedItem[]>
     checkIn(payload: ICheckinInput): Promise<boolean>
     comment(input: ICommentInput): Promise<boolean>
     createGame(input: ICreateGameInput): Promise<ICreateGameOutput>

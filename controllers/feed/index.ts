@@ -21,7 +21,7 @@ class FeedController implements IFeedController {
     }
 
 
-    async getFeed(): Promise<IFeedItem[]>{
+    async getFeed(email?:string): Promise<IFeedItem[]>{
         const result = await this.feedUseCase.getFeed()
         return result
     }

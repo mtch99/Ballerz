@@ -35,7 +35,7 @@ There must be three different games on three different courts, two at the moment
     - [x] Make sure that everything works properly
 
 - [ ] Games feature
-    - [ ] Ballerz Game client
+    - [x] Ballerz Game client
     - [ ] Refactor FeedScreen wrapper to load all games on focus
 
 - [ ] I want see a toast message on new notiication

@@ -59,7 +59,7 @@ export type ListUserProfileDataQueryItem = {
     username: string
     email: string
     friends: {
-      items: Array<{id: string, frinedProfileID: string}| null>,
+      items: Array<{id: string, friendProfileID: string} | null>,
     }
 }
 

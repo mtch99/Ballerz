@@ -50,7 +50,7 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
     }
 
     getFeed() {
-        this.feedController.getFeed()
+        this.feedController.getFeed(this.context.authState.user?.email)
     }
 
     handleBadgeClick = (feedItem: IFeedItemState): void => {
