@@ -34,6 +34,15 @@ There must be three different games on three different courts, two at the moment
     - [x] UserProfileScreen and MyUserProfileScreen
     - [x] Make sure that everything works properly
 
+
+* [ ] Add profile picture after profile creation
+    - [x] ImagePicker
+    - [ ] Create S3 client
+        - [ ] Upload picture
+        - [ ] Get url
+
+    - [ ] Onboarding and authflow
+
 - [ ] Games feature
     - [x] Ballerz Game client
     - [x] Refactor FeedScreen wrapper to load all games on focus
@@ -42,7 +51,7 @@ There must be three different games on three different courts, two at the moment
     TODO: Warning: for now, akk the games with 0 attendants are not displayed
         - [ ] Undo the lasy warning
         - [ ] Undo onNewNotification warning in Notifications repository
-    - [ ] Test with Dani 
+    - [x] Test with Dani 
     - [ ] Create a game
     - [ ] Checkin
 

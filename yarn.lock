@@ -4434,14 +4434,9 @@
     react-is "^16.13.0"
     use-latest-callback "^0.1.5"
 
-"@react-navigation/elements@^1.3.14", "@react-navigation/elements@^1.3.15":
+"@react-navigation/elements@^1.3.14", "@react-navigation/elements@^1.3.15", "@react-navigation/elements@^1.3.17":
   version "1.3.17"
   resolved "https://registry.npmjs.org/@react-navigation/elements/-/elements-1.3.17.tgz"
-  integrity sha512-sui8AzHm6TxeEvWT/NEXlz3egYvCUog4tlXA4Xlb2Vxvy3purVXDq/XsM56lJl344U5Aj/jDzkVanOTMWyk4UA==
-
-"@react-navigation/elements@^1.3.17":
-  version "1.3.17"
-  resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-1.3.17.tgz#9cb95765940f2841916fc71686598c22a3e4067e"
   integrity sha512-sui8AzHm6TxeEvWT/NEXlz3egYvCUog4tlXA4Xlb2Vxvy3purVXDq/XsM56lJl344U5Aj/jDzkVanOTMWyk4UA==
 
 "@react-navigation/material-top-tabs@^6.6.2":
@@ -6693,6 +6688,11 @@ expo-asset@~8.7.0:
     path-browserify "^1.0.0"
     url-parse "^1.5.9"
 
+expo-clipboard@~4.0.1:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/expo-clipboard/-/expo-clipboard-4.0.2.tgz#1d7510f299e05b5f8e653db544aedac0eee402cf"
+  integrity sha512-Iq0k5JKrLk3YlD0ZGIcDPBzwdzw7qt7NWwn8JTtzhre/7oKyH8JPDAODAL9zMR5Jmahv+Uysn9Igsbp6Ttuu1Q==
+
 expo-constants@~14.0.0, expo-constants@~14.0.2:
   version "14.0.2"
   resolved "https://registry.npmjs.org/expo-constants/-/expo-constants-14.0.2.tgz"
@@ -6726,6 +6726,18 @@ expo-font@~11.0.1:
   integrity sha512-LGAIluWZfru0J0n87dzb6pwAB6TVMTEiLcsd/ktozzbn4DlN7SeQy40+ruU6bvAKCOGrnRneYbKSIOGkrd7oNg==
   dependencies:
     fontfaceobserver "^2.1.0"
+
+expo-image-loader@~4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/expo-image-loader/-/expo-image-loader-4.0.0.tgz#a17e5f95a4c1671791168dd5dfc221bf2f88480c"
+  integrity sha512-hVMhXagsO1cSng5s70IEjuJAuHy2hX/inu5MM3T0ecJMf7L/7detKf22molQBRymerbk6Tzu+20h11eU0n/3jQ==
+
+expo-image-picker@~14.0.2:
+  version "14.0.3"
+  resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-14.0.3.tgz#ea0bbe796ccc3bd5e58fc00487be22bac317afeb"
+  integrity sha512-VN5wMWzhYhIRhFq8I1pjMbn/ivjlhWfxzJpz5jUOf3mQ8vxrI5GcR8cJO9kyYwuCrI9W3GUzh/aDt7QRSTQDDA==
+  dependencies:
+    expo-image-loader "~4.0.0"
 
 expo-image@^1.0.0:
   version "1.0.0"

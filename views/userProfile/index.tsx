@@ -64,7 +64,8 @@ export class MyProfileView extends React.Component<IUserProfileViewProps> {
                 <HeaderView
                     username={this.props.username}
                     friendsList={this.props.friends}
-                    profilePicUri={'../../assets/profilePic'}
+                    // profilePicUri={'../../assets/profilePic'}
+                    profilePicUri="https://mybucket195747-profilepic.s3.us-east-2.amazonaws.com/public/demo.jpg"
                     isFriend={this.props.isFriend}
                     onPressFriendsNumber={this.props.onPressFriendsNumber}
                     friendshipRequestSent={this.props.friendshipRequestSent}

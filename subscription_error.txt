@@ -1,0 +1,3 @@
+Resolve subscription error on subscription : 
+insert line 72: require("react-native-get-random-values");
+file: node-modules/aws-appsync-subscription-link/lib/realtime-subscription-handshake-link
