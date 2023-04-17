@@ -14,6 +14,7 @@ import { AppStackWrapper, AuthStackWrapper} from './wrappers';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AppContext } from '../controllers/provider';
+import { OnboardingStackNavigator } from './onboarding';
 
 // import LinkingConfiguration from './LinkingConfiguration';
 
@@ -70,6 +71,13 @@ export function RootStackNavigator(): JSX.Element {
 				<RootStack.Navigator
 				>
 					<RootStack.Screen
+					    name='OnbordingStack'
+						options={{
+							headerShown: false,
+						}}
+						component={OnboardingStackNavigator}
+					/>
+					<RootStack.Screen
 						name='AppStack'
 						options={{
 							headerShown: false,
@@ -87,6 +95,13 @@ export function RootStackNavigator(): JSX.Element {
 			):(
 				<RootStack.Navigator
 				>
+					<RootStack.Screen
+					    name='OnbordingStack'
+						options={{
+							headerShown: false,
+						}}
+						component={OnboardingStackNavigator}
+					/>
 					<RootStack.Screen
 						name='AuthStack'
 						options={{

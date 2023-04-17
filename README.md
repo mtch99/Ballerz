@@ -42,6 +42,8 @@ There must be three different games on three different courts, two at the moment
         - [ ] Get url
 
     - [ ] Onboarding and authflow
+        - [ ] Onboarding Stack
+        
 
 - [ ] Games feature
     - [x] Ballerz Game client
