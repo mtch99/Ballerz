@@ -1,12 +1,12 @@
 import { GraphQLResult, GraphQLSubscription } from "@aws-amplify/api";
 import { IGetMyNotificationsErrorReason, IgetMyNotificationsError } from "./../../use-cases/notifications/interface";
 import { FriendShipRequestData, UserProfileData } from "../../../infrastructure/BallerzServices/BallerzAPI/types";
-import { IFriendShipRequestNotification, IFriendshipRequest, IUserProfileData } from "./../../use-cases/types";
+import { IFriendShipRequestNotification, IFriendshipRequest, INewFriendNotification, IUserProfileData } from "./../../use-cases/types";
 import { FilterNotificationsByUserQueryVariables, ListNotificationsQuery } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient/queries";
 import { INotificationsClient } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient/interface";
 import { Notification as ClientNotification } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient/types";
 import { INotificationsRepository, INotificationsUseCase, IGetMyNotificationsResult } from "../../use-cases/notifications/interface";
-import { Notification } from "../../use-cases/types";
+import { Notification, NotificationType as DomainNotificationType } from "../../use-cases/types";
 import NotificationsClient, { NotificationsClientMock } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient";
 import { NotificationType } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
 import { useTheme } from "react-navigation";
@@ -65,7 +65,7 @@ export class NotificationsRepository implements INotificationsRepository {
 class ResponseHandler {
     static handleFilterNotificationsByReceiverResponse(response: ListNotificationsQuery): IGetMyNotificationsResult{
         let error: IGetMyNotificationsResult['error'] = false;
-        let notifications: IFriendShipRequestNotification[] = []
+        let notifications: Notification[] = []
         if(response.listNotifications){
             notifications = this.parseListNotificationsResult(response.listNotifications)
         } else {
@@ -102,10 +102,12 @@ class ResponseHandler {
         switch(notificationType){
             case NotificationType.friendshipRequest:
                 const friendShipRequestNotification = this.parseFriendshipRequestNotification(clientNotif)
-                if(friendShipRequestNotification){
-                    result = friendShipRequestNotification
-                }
+                result = friendShipRequestNotification
                 break;
+
+            case NotificationType.newFriend:
+                const newFriendNotification = this.parseNewFriendNotification(clientNotif)
+                result = newFriendNotification
             
             default:
                 break;
@@ -116,7 +118,7 @@ class ResponseHandler {
 
     private static parseFriendshipRequestNotification(arg: ClientNotification): IFriendShipRequestNotification | undefined {
         if(arg.type!= NotificationType.friendshipRequest 
-            || !arg.receiverProfileID || !arg.friendshipRequestID ||!arg.senderProfileID 
+            || !arg.friendshipRequestID ||!arg.senderProfileID 
             || !arg.senderProfile || !arg.friendshipRequest
         ){
             return undefined
@@ -141,6 +143,21 @@ class ResponseHandler {
         }
 
         return result
+    }
+
+    private static parseNewFriendNotification(arg: ClientNotification): INewFriendNotification | undefined {
+        if(arg.type != NotificationType.newFriend 
+            || !arg.senderProfile || !arg.senderProfileID
+        ){
+            return undefined
+        } 
+
+        return {
+            ...arg,
+            type: DomainNotificationType.newFriend, 
+            senderProfileID: arg.senderProfileID,
+            senderProfile: this.parseUserProfileData(arg.senderProfile)
+        }
     }
 
     private static parseUserProfileData(input: UserProfileData): IUserProfileData{

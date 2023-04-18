@@ -57,7 +57,7 @@ export default class NotificationsClient extends BallerzApiClient implements INo
         this.subscription?.unsubscribe()
         setTimeout(() => {
             this.subscribeToNotifications(userProfileID, callback)
-        }, 60000)
+        }, 60000*2)
 		// this.subscribeToNotifications(userProfileID, callback)
 	}
 

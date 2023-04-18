@@ -21,10 +21,24 @@ export default class NotificationListView extends Component<IProps> {
                     data={this.props.notificationList}
                     extraData={this.props.notificationList}
                     renderItem={({item}) => (<NotificationItem {...item}/>)}
+                    ItemSeparatorComponent={ItemSeparatorComponent}
                 />     
             </BallerzSafeAreaView>
         ) 
     }
+}
+
+
+function ItemSeparatorComponent(){
+    return(
+        <View
+            style={styles.separatorContainer}
+        >
+            <View
+                style={styles.separator}
+            />
+        </View>
+    )
 }
 
 
@@ -40,5 +54,16 @@ const styles = StyleSheet.create({
     notificationText: {
         color: "#FFFFFF",
         fontSize: 16,
-    }
+    },
+
+    separatorContainer: {
+        height: 20,
+        backgroundColor:'transparent',
+        alignItems: 'center'
+    },
+
+    separator: {
+        borderWidth: 1,
+        borderColor: '#333333'
+    },
 })

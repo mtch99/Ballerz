@@ -66,8 +66,11 @@ There must be three different games on three different courts, two at the moment
     - [x] NotificationStack
     - [ ] Notification Screen
     - [ ] Notification View 
-        - [ ] FiendshipRequest Notification
-        - [ ] NewFriend Notification
+        - [x] FiendshipRequest Notification
+        - [x] NewFriend Notification
+        - [ ] Notification Icon and badge 
+        - [ ] FriendPlaying Notification
+        - [ ] GameInvitation Notification
 
 
 

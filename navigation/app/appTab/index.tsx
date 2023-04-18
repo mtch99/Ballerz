@@ -5,6 +5,8 @@
  */
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from "react-native-vector-icons/Entypo"
+import FeatherIcon from "react-native-vector-icons/Feather"
 import { NavigationContainer, DarkTheme} from '@react-navigation/native';
 import { ColorSchemeName } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -57,7 +59,14 @@ export function AppTab(): JSX.Element {
 				options={{
 					headerShown: false,
 					// tabBarLabel: 'Explore',
-					tabBarIcon: undefined,
+					tabBarIcon: ({focused, color, size }) => (
+                        <FeatherIcon
+                            name='search'
+                            color={focused?(globalStyles.global.logoColor):('grey')}
+                            size={size}
+                        />
+                    ),
+					tabBarBadge: undefined,
 					headerTitle: 'Explore',
 					tabBarActiveTintColor,
 				}}
@@ -101,9 +110,16 @@ export function AppTab(): JSX.Element {
                 name='NotificationStack'
                 options={{
 					headerShown: false,
-                    tabBarLabel: 'Notification',
-                    tabBarIcon: undefined,
-                    tabBarActiveTintColor,
+					tabBarLabel: 'notifications',
+					tabBarIcon: ({focused}) => 
+						<Icon
+                            name='bell'
+							size={24}
+							color={focused?(globalStyles.global.logoColor):('grey')}
+						/>,
+					tabBarBadge: undefined,
+					headerTitle: 'Notifications',
+					tabBarActiveTintColor,
 				}}
 				component={NotificationStackWrapper}
 			/>

@@ -1,6 +1,3 @@
-import { Friendship } from "../../infrastructure/BallerzServices/BallerzAPI/types";
-import { FriendshipRequest } from "../../infrastructure/BallerzServices/BallerzAPI/API";
-
 
 export interface IFeed extends Array<IFeedItem>{}
 
@@ -78,7 +75,7 @@ export enum NotificationType{
     newGroupChatMember="newGroupChatMember"
 }
 
-export type Notification = IFriendShipRequestNotification
+export type Notification = IFriendShipRequestNotification | INewFriendNotification | IFriendPlayingNotification
 
 
 export interface IFriendshipRequest{
@@ -90,21 +87,34 @@ export interface IFriendshipRequest{
     status: keyof typeof FriendshipRequestStatus
 }
 
-export interface IFriendShipRequestNotification{
-    type: NotificationType.friendshipRequest
+export interface _INotification{
+    type: keyof typeof NotificationType
     receiverProfileID: string;
     senderProfileID: string;
     senderProfile: IUserProfileData;
-    friendshipRequestID: string;
-    friendshipRequest: IFriendshipRequest
     createdAt: string;
     updatedAt: string;
+}
+
+export interface IFriendShipRequestNotification extends _INotification{
+    type: NotificationType.friendshipRequest
+    friendshipRequestID: string;
+    friendshipRequest: IFriendshipRequest
 }
 
 export enum FriendshipRequestStatus {
     pending="pending",
     accepted="accepted",
     rejected="rejected"
+}
+
+export interface INewFriendNotification extends _INotification{
+    type: NotificationType.newFriend
+}
+
+export interface IFriendPlayingNotification extends _INotification{
+    type: NotificationType.friendPlaying
+    game: IGame
 }
 
 
