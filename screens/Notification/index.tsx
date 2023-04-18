@@ -5,13 +5,13 @@ import NotificationListView from "../../views/notificationList";
 export interface INotificationScreenPropsWithoutNavigation {
 
 }
-export interface INotificationScreenProps {
-
-}
-
 export interface INotificationScreenNavigationController {
 
 }
+export interface INotificationScreenProps {
+    navigationController: INotificationScreenNavigationController
+}
+
 
 export default class NotificationScreen extends React.Component<INotificationScreenProps> {
 

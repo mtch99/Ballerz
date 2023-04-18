@@ -12,6 +12,7 @@ import { NavigatorScreenParams } from "@react-navigation/native";
 import { ExploreStackParamList } from "../../explore/types";
 import { FeedStackParamList } from "../../feed/types";
 import { GroupChatStackParamList } from "../../groupChat/types";
+import { NotificationStackParamList } from "./notifications/types";
 
 
  
@@ -26,6 +27,7 @@ export type AppTabParamList = {
 	FeedStack: NavigatorScreenParams<FeedStackParamList>
 	GroupChatStack: NavigatorScreenParams<GroupChatStackParamList>
 	MyProfileStack: NavigatorScreenParams<MyProfileStackParamList>
+	NotificationStack: NavigatorScreenParams<NotificationStackParamList>
 };
 
 

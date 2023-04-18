@@ -62,8 +62,8 @@ There must be three different games on three different courts, two at the moment
         - [ ] Popup after checkin
 
 - [ ] Notification screen
-    - [ ] Add notificationn tab
-    - [ ] NotificationStack
+    - [x] Add notificationn tab
+    - [x] NotificationStack
     - [ ] Notification Screen
     - [ ] Notification View 
         - [ ] FiendshipRequest Notification

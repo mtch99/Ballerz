@@ -11,7 +11,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 import { AppTabParamList } from './types';
-import { ExploreStackWrapper, FeedStackWrapper, GroupChatStackWrapper, MyProfileStackWrapper } from './wrappers';
+import { ExploreStackWrapper, FeedStackWrapper, GroupChatStackWrapper, MyProfileStackWrapper, NotificationStackWrapper } from './wrappers';
 import { globalStyles } from '../../../views/styles';
 
 // import LinkingConfiguration from './LinkingConfiguration';
@@ -95,6 +95,17 @@ export function AppTab(): JSX.Element {
 					tabBarActiveTintColor,
 				}}
 				component={MyProfileStackWrapper}
+			/>
+
+			<BottomTab.Screen
+                name='NotificationStack'
+                options={{
+					headerShown: false,
+                    tabBarLabel: 'Notification',
+                    tabBarIcon: undefined,
+                    tabBarActiveTintColor,
+				}}
+				component={NotificationStackWrapper}
 			/>
 		</BottomTab.Navigator>
 	  )

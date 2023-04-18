@@ -7,6 +7,7 @@ import { AppContext } from "../../../controllers/provider";
 import { IUserProfileDataState } from "../../../app/features/types";
 import { AppTabScreenProps } from "./types";
 import { MyProfileStackNavigator } from "./myProfile";
+import { NotificationStackNavigator } from "./notifications";
 
 
 
@@ -88,5 +89,10 @@ export function ExploreStackWrapper(props: AppTabScreenProps<'ExploreStack'>){
     }, [navigation])
 
     return <ExploreStackNavigator/>
+}
+
+
+export function NotificationStackWrapper(props: AppTabScreenProps<'NotificationStack'>){
+    return <NotificationStackNavigator/>
 }
 
