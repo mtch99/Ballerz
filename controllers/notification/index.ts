@@ -1,19 +1,26 @@
-import { INotificationsObserver, INotificationsUseCase } from "./../../domain/use-cases/notifications/interface";
+import { INotificationsUseCase } from "./../../domain/use-cases/notifications/interface";
 import { GetMyNotificationsResult, INotificationController } from "./interface";
 import * as usecase_types from '../../domain/use-cases/notifications/interface'
 import NotificationsUseCase from "../../domain/use-cases/notifications";
 import { IFriendShipRequestNotification } from "../../domain/use-cases/types";
+import { INotificationsModel } from "../../app/features/notifications/model";
 
 
 class NotificationController implements INotificationController{
+    model: INotificationsModel | undefined
+
+    reinitBadge(): void {
+        this.model?.reinitializeBadge();
+    };
     
     useCase: usecase_types.INotificationsUseCase = fakeNotificationUseCase
     private _userProfileID: string | undefined;
 
 
 
-    createUseCase(model: INotificationsObserver){
+    createUseCase(model: INotificationsModel){
         this.useCase = new NotificationsUseCase(model)
+        this.model = model
         console.log(`\n Notification usecase initialized \n`)
     }
     

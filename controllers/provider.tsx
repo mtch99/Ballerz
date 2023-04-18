@@ -82,7 +82,7 @@ export const AppContext = React.createContext<IAppContext>({
         isFirstLaunch: true
     },
     appControllerEventListener: {} as IAppControllerEventListener,
-    notificationListState: [],
+    notificationListState: {items: [], badge: undefined},
     prepareData: () => {}
 });
 
@@ -131,6 +131,7 @@ export default function AppProvider (props: IProps) {
         if(isUserSignedIn){
             const userProfile = await userProfileController.getMyProfile(isUserSignedIn.user?.email)
             if(userProfile){
+                notificationController.getMyNotifications(userProfile.id)
                 notificationController.subscribeToMyNotifications(userProfile.id)
             }
         }

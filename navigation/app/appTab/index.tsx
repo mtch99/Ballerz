@@ -15,6 +15,9 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppTabParamList } from './types';
 import { ExploreStackWrapper, FeedStackWrapper, GroupChatStackWrapper, MyProfileStackWrapper, NotificationStackWrapper } from './wrappers';
 import { globalStyles } from '../../../views/styles';
+import { AppContext } from '../../../controllers/provider';
+import { useAppSelector } from '../../../app/hooks';
+import { selectNotificationList } from '../../../app/features/notifications/slice';
 
 // import LinkingConfiguration from './LinkingConfiguration';
 
@@ -44,6 +47,8 @@ const BottomTab = createBottomTabNavigator<AppTabParamList>();
 
 
 export function AppTab(): JSX.Element {
+
+	const {badge} = useAppSelector(selectNotificationList)
 
 	const _initialRouteName: keyof AppTabParamList = 'FeedStack'
 
@@ -117,7 +122,7 @@ export function AppTab(): JSX.Element {
 							size={24}
 							color={focused?(globalStyles.global.logoColor):('grey')}
 						/>,
-					tabBarBadge: undefined,
+					tabBarBadge: badge,
 					headerTitle: 'Notifications',
 					tabBarActiveTintColor,
 				}}

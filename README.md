@@ -68,7 +68,10 @@ There must be three different games on three different courts, two at the moment
     - [ ] Notification View 
         - [x] FiendshipRequest Notification
         - [x] NewFriend Notification
-        - [ ] Notification Icon and badge 
+        - [x] Notification Icon and badge 
+            - [x] Add NotificationBadge to the Model
+            - [x] Assign notification badge to the Notification Tab Icon
+            - [x] Set badge to undefined on NotificationScreen Focus event
         - [ ] FriendPlaying Notification
         - [ ] GameInvitation Notification
 

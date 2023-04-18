@@ -33,7 +33,7 @@ export default class NotificationScreen extends React.Component<INotificationScr
 
     render(): React.ReactNode {
         return(
-            <NotificationListView notificationList={this.context.notificationListState}/>
+            <NotificationListView notificationList={this.context.notificationListState.items}/>
         ) 
     }
 }

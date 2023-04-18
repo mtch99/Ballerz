@@ -21,11 +21,13 @@ export function BaseStackWrapper(props: NotificationStackScreenProps<'BaseStack'
 export function NotificationScreenWrapper(props: NotificationStackScreenProps<'NotificationScreen'>){
     const {authState, notificationController} = React.useContext(AppContext)
     const {navigation, route} = props
+    const {notificationListState} = React.useContext(AppContext)
 
 
     React.useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
             if(authState.user){
+                notificationController.reinitBadge()
                 notificationController.getMyNotifications(authState.profile?.id || 'invalidID')
             }
             else{
@@ -34,6 +36,7 @@ export function NotificationScreenWrapper(props: NotificationStackScreenProps<'N
         });
         return unsubscribe;
     }, [navigation])
+
 
     const navigationController: INotificationScreenNavigationController = {
         goToUserProfile: function (userProfileData: IUserProfileDataState): void {

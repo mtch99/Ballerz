@@ -2,12 +2,12 @@ import { FlatList, Text, View, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import ListItemButton from '../../components/Buttons/ListItemButton'
 import BallerzSafeAreaView from '../safeArea'
-import { NotificationListState } from '../../app/features/notifications/slice/interface'
+import { NotificationListState, NotificationState } from '../../app/features/notifications/slice/interface'
 import { globalStyles } from '../styles'
 import NotificationItem from './item'
 
 export interface IProps {
-    notificationList: NotificationListState
+    notificationList: NotificationState[]
 }
 export default class NotificationListView extends Component<IProps> {
     
@@ -20,7 +20,12 @@ export default class NotificationListView extends Component<IProps> {
                 <FlatList
                     data={this.props.notificationList}
                     extraData={this.props.notificationList}
-                    renderItem={({item}) => (<NotificationItem {...item}/>)}
+                    renderItem={({item}) => (
+                        <NotificationItem 
+                            {...item}
+                            onPress={() => {}}
+                        />
+                    )}
                     ItemSeparatorComponent={ItemSeparatorComponent}
                 />     
             </BallerzSafeAreaView>

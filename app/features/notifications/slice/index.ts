@@ -4,7 +4,7 @@ import notificationReducers from "./reducers";
 import { RootState } from "../../../store";
 
 
-const initialState: NotificationListState = []
+const initialState: NotificationListState = {items: [], badge: undefined};
 
 
 const NotificationSlice = createSlice({
@@ -18,7 +18,7 @@ const NotificationSlice = createSlice({
 
 
 
-export const {NEW_NOTIFICATION, NEW_NOTIFICATIONLIST} = NotificationSlice.actions
+export const {NEW_NOTIFICATION, NEW_NOTIFICATIONLIST, REINIT_BADGE} = NotificationSlice.actions
 
 export const selectNotificationList = (state: RootState) => state.notifications
 
