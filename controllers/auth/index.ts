@@ -6,6 +6,9 @@ import IAuthUCI, { IAuthUCIEventListener, IDefineUsernameInput, IDefineUsernameR
 
 
 export class AuthController implements IAuthController {
+    async isFirstLaunch(): Promise<boolean> {
+        return await this.authUseCase.isFirstLaunch()
+    }
 
     private authUseCase: IAuthUCI = fakeUseCase
 
@@ -51,6 +54,9 @@ const fakeUseCase: IAuthUCI = {
         throw new Error("Function not implemented.");
     },
     signinLastUser: function (): Promise<false | ILoginResult> {
+        throw new Error("Function not implemented.");
+    },
+    isFirstLaunch: function (): Promise<boolean> {
         throw new Error("Function not implemented.");
     }
 }

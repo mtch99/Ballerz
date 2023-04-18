@@ -25,7 +25,8 @@ export type  AuthState = {
 	password: string
   }
   profile?: IUserProfileState
-  isDataPrepared: boolean
+  isDataPrepared: boolean,
+  isFirstLaunch: boolean,
 }
 
 // Define the initial state using that type
@@ -37,6 +38,7 @@ const initialState: AuthState = {
 		password: ''
 	},
 	isDataPrepared: false,
+	isFirstLaunch: true,
 };
 
 
@@ -90,6 +92,13 @@ export const authSlice = createSlice({
 			...state,
 			isDataPrepared: true
 		}
+	},
+
+	setFirstLaunch: (state: AuthState, action: PayloadAction<boolean>) => {
+		return {
+            ...state,
+            isFirstLaunch: action.payload
+        }
 	}
 
   }
@@ -98,7 +107,7 @@ export const authSlice = createSlice({
 
 
 
-export const { setUser, setLastSignupInput, setLoginInput, setUserProfile, preparedData } = authSlice.actions
+export const { setUser, setLastSignupInput, setLoginInput, setUserProfile, preparedData, setFirstLaunch } = authSlice.actions
 
 
 // Other code such as selectors can use the imported `RootState` type

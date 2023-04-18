@@ -6,6 +6,7 @@ export default interface IAuthController {
     signup(input: types.ISignupInput): Promise<types.ISignupResult>
     confirmSignup(input: types.IConfirmSignupInput): Promise<types.IConfirmSignupResult>
     signinLastUser(): Promise<types.ILoginResult| false>
+    isFirstLaunch(): Promise<boolean>
 }
 
 

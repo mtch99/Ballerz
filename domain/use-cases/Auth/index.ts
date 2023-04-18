@@ -24,6 +24,11 @@ export default class AuthUCI implements IAuthUCI {
     }
 
 
+    async isFirstLaunch(): Promise<boolean> {
+        const isFirstLaunch = await this.repo.isFirstLaunch();
+        this.observer.setFirstLaunch(isFirstLaunch)
+        return isFirstLaunch;
+    }
 
     async signinLastUser(): Promise<types.ILoginResult | false> {
         const lastLoginCreds = await this.repo.getLastLoginCreds()
@@ -35,6 +40,7 @@ export default class AuthUCI implements IAuthUCI {
             return false
         }
     }
+
     
     
     async confirmSignup(input: types.IConfirmSignupInput): Promise<types.IConfirmSignupResult> {

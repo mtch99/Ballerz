@@ -9,6 +9,15 @@ Amplify.configure(awsmobile);
 import {isDevice} from 'expo-device';
 
 export class AuthRepository implements IAuthRepository {
+    
+    async isFirstLaunch(): Promise<boolean> {
+        const isFirstLaunch = await AsyncStorage.getItem('isFirstLaunch');
+        if(isFirstLaunch == 'false'){
+            return false
+        }
+        await AsyncStorage.setItem('isFirstLaunch', 'false');
+        return true
+    }
 
     async confirmSignup(input: struct.IConfirmSignupInput): Promise<struct.IConfirmSignupResult> {
         const error: struct.IConfirmSignupResult['error'] = await Auth.confirmSignUp(input.email, input.code, {forceAliasCreation:true})

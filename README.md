@@ -42,7 +42,9 @@ There must be three different games on three different courts, two at the moment
         - [ ] Get url
 
     - [ ] Onboarding and authflow
-        - [ ] Onboarding Stack
+        - [x] Onboarding Stack
+        - [x] Check first launch
+        - [ ] Load asssets before launch 
         
 
 - [ ] Games feature
@@ -55,9 +57,19 @@ There must be three different games on three different courts, two at the moment
         - [ ] Undo onNewNotification warning in Notifications repository
     - [x] Test with Dani 
     - [ ] Create a game
+        - [ ] Fix PickPlaceScreen Header
     - [ ] Checkin
+        - [ ] Popup after checkin
 
 - [ ] Notification screen
+    - [ ] Add notificationn tab
+    - [ ] NotificationStack
+    - [ ] Notification Screen
+    - [ ] Notification View 
+        - [ ] FiendshipRequest Notification
+        - [ ] NewFriend Notification
+
+
 
 - [ ] I want see a toast message on new notiication
     - [ ] Display a toast message on new received notification 

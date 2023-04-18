@@ -6,7 +6,7 @@ import { useAppSelector } from "../../../hooks"
 import { AppDispatch } from "../../../store"
 import { UserProfileModelAdapter } from "../../adapters"
 import { IGameState, IUserProfileState } from "../../types"
-import { UserState, preparedData, setLastSignupInput, setLoginInput, setUser, setUserProfile } from "../slice"
+import { UserState, preparedData, setFirstLaunch, setLastSignupInput, setLoginInput, setUser, setUserProfile } from "../slice"
 
 interface IAuthModelInput {
     dispatchFunc: AppDispatch
@@ -49,6 +49,10 @@ export const createAuthModel = (input: IAuthModelInput): IAuthModel => {
 
         onDataPreparedEvent: function (): void {
             input.dispatchFunc(preparedData())
+        },
+
+        setFirstLaunch: function (firstLaunch: boolean): void {
+            input.dispatchFunc(setFirstLaunch(firstLaunch))
         }
     }
     return authModel

@@ -70,13 +70,13 @@ export function RootStackNavigator(): JSX.Element {
 			authState.user?(
 				<RootStack.Navigator
 				>
-					<RootStack.Screen
+					{/* <RootStack.Screen
 					    name='OnbordingStack'
 						options={{
 							headerShown: false,
 						}}
 						component={OnboardingStackNavigator}
-					/>
+					/> */}
 					<RootStack.Screen
 						name='AppStack'
 						options={{

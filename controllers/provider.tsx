@@ -78,7 +78,8 @@ export const AppContext = React.createContext<IAppContext>({
             email: "",
             password: ""
         },
-        isDataPrepared: false
+        isDataPrepared: false,
+        isFirstLaunch: true
     },
     appControllerEventListener: {} as IAppControllerEventListener,
     notificationListState: [],
@@ -125,6 +126,7 @@ export default function AppProvider (props: IProps) {
     const notificationListState: NotificationListState = selector(selectNotificationList)
 
     const prepareData = async() => {
+        await authController.isFirstLaunch()
         const isUserSignedIn = await authController.signinLastUser()
         if(isUserSignedIn){
             const userProfile = await userProfileController.getMyProfile(isUserSignedIn.user?.email)
