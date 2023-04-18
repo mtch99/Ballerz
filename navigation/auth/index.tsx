@@ -36,8 +36,8 @@ export function AuthStackNavigator(): JSX.Element {
                 name="SignupScreen"
                 options={{
                     headerStyle: {backgroundColor: globalStyles.global.screenBackGroundColor},
-                    title: "Inscription",
-                    headerShown: false,
+                    title: "Crée ton compte",
+                    headerShown: true,
                 }}
                 component={SignupScreenWrapper}
             />

@@ -35,18 +35,19 @@ export class GatherWithYourFriendsScreen extends React.Component<IGatherWithYour
                         <Text
                             style={styles.header}
                         >
-                            Découvre les ballerz de la ville
+                            Réunissez-vous entre amis
                         </Text>
 
                         <Text
                             style={styles.body}
                         >
-                            Rejoins le réseau local d'amoureux de basketball pour trouver des matchs et rencontrer des personnes qui partagent la même passion
+                            Profitez de l'été pour vous réunir, tisser des liens et et passer des moments inoubliables
                         </Text>
 
                         <ProgressButton
                           style={{justifyContent:'center', alignItems:'center'}}
                           percentage={100}
+                          onPress={this.advance.bind(this)}
                         />
 
                     </View>
@@ -61,18 +62,20 @@ export class GatherWithYourFriendsScreen extends React.Component<IGatherWithYour
 
 const styles = StyleSheet.create({
     container: {
-        // justifyContent: 'flex-end',
+        justifyContent: 'flex-end',
         // flexDirection: 'column-reverse',
         flexGrow: 1
     },
 
     bottomSheetContainer: {
         // flex:1,
-        height: '25%',
+        maxHeight: '45%',
         justifyContent:'space-evenly',
         borderColor: 'white',
-        borderBottomRightRadius: 50,
-        borderBottomLeftRadius: 50,
+        // borderBottomRightRadius: 50,
+        // borderBottomLeftRadius: 50,
+        borderTopRightRadius: 50,
+        borderTopLeftRadius: 50,
         // borderWidth: 10,
         backgroundColor:'#0A0A0C',
     },
@@ -82,13 +85,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         fontStyle: 'italic',
-        color: 'white'
+        color: 'white',
+        padding: 15,
     },
 
     body: {
         fontSize: 19,
         textAlign: 'center',
-        color: '#777777'
+        color: '#777777',
+        paddingBottom: 20,
+        paddingHorizontal: 25,
     }
 
 

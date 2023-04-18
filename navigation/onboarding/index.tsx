@@ -34,6 +34,7 @@ export function OnboardingStackNavigator(): JSX.Element {
                 options={{
                     headerShown: false,
                 }}
+                //@ts-ignore
                 component={GatherWithYourFriendsScreenWrapper}
             />
         </Stack.Navigator>
