@@ -67,7 +67,7 @@ export const onCreateNotification_gql = /* GraphQL */ `
     onCreateNotification(filter: $filter) {
       id
       type
-      receiverProfileID
+      senderProfileID
       senderProfile{
         id
         username

@@ -67,17 +67,17 @@ function NewFriendNotificationItem(props: INewFriendNotification) {
             style={styles.container}
         >
             <View
-                style={styles.textContainer}
+                style={{...styles.textContainer, width: '100%' }}
             >
-                <Text
-                    style={styles.notificationText}
-                >
-                    Vous êtes maintenant amis avec {props.senderProfile.username}
-                </Text>
                 <Text
                     style={{...styles.notificationText, fontWeight: "bold"}}
                 >
-                    {props.senderProfile.username}
+                    {props.senderProfile.username + ' '}
+                </Text>
+                <Text
+                    style={styles.notificationText}
+                >
+                    et vous êtes maintenant amis
                 </Text>
             </View>
 
@@ -97,12 +97,14 @@ function NewFriendNotificationItem(props: INewFriendNotification) {
     )
 }
 
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         // width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
+        // justifyContent: 'center',
         justifyContent:'space-between',
         padding: 10,
         borderRadius: 10,
@@ -113,20 +115,20 @@ const styles = StyleSheet.create({
 
     buttonContainer: {
         alignSelf: 'flex-end',
-        marginRight: 10,
-    },
-    
-    textContainer: {
-        marginLeft: 30,
-        marginRight: 30,
-        flexDirection: 'row',
-        // justifyContent: 'flex-start'
     },
 
     notificationText: {
         color: "#FFFFFF",
-        fontSize: 16,
+        fontSize: 14,
+        flexWrap: 'wrap'
     },
+    textContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        // paddingRight: 15,
+        width: '80%'
+
+    }
 
 
 })

@@ -74,6 +74,7 @@ There must be three different games on three different courts, two at the moment
             - [x] Set badge to undefined on NotificationScreen Focus event
 
         - [x] Accept frienship notification
+        - [x] NewFriend Notification
         - [ ] FriendPlaying Notification
         - [ ] GameInvitation Notification
 

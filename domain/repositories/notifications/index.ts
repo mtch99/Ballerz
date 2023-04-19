@@ -157,6 +157,7 @@ class ResponseHandler {
         if(arg.type != NotificationType.newFriend 
             || !arg.senderProfile || !arg.senderProfileID
         ){
+            console.warn(JSON.stringify(arg))
             return undefined
         } 
 
