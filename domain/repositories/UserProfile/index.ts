@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FriendshipRequestStatus } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
 import UserProfileClient from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient";
 import { IUserProfileData, IUserProfile } from "../../use-cases/types";
-import { IDefineUsernameInput, IDefineUsernameResult, IMyUserProfileData, IRequestFriendShipInput, IRequestFriendShipResult, IUserProfileRepository } from "../../use-cases/userProfile/interface";
+import { IAcceptFriendshipRequestInput, IAcceptFriendshipRequestResult, IDefineUsernameInput, IDefineUsernameResult, IMyUserProfileData, IRequestFriendShipInput, IRequestFriendShipResult, IUserProfileRepository } from "../../use-cases/userProfile/interface";
 import * as queries from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/queries"
 import * as mutations from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/mutations"
 import { GetUserProfileQueryVariables, ListUserProfilesQueryVariables } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
@@ -186,10 +186,20 @@ export default class UserProfileRepository implements IUserProfileRepository {
 
     }
 
-
-
-
-    
+    async acceptFriendshipRequest(input: IAcceptFriendshipRequestInput): Promise<IAcceptFriendshipRequestResult> {
+        let result: IAcceptFriendshipRequestResult = {error: false, friendshipRequestID: input.friendshipRequestID}
+        const repsonse = await this.client.acceptFriendship(input.friendshipRequestID)
+        .then((response) => {
+            // console.log(`AuthRepository: CreateFriendshipRequestMutatio response: \n ${JSON.stringify(response)}`)
+            return response
+        })
+        .catch(err => {
+            console.error(err)
+            result.error = err
+            return undefined
+        })
+        return result
+    }
 
     private __cacheMyUserProfileData(myUserProfileData: IMyUserProfileData): void {
         AsyncStorage.setItem("myUserProfileData", JSON.stringify(myUserProfileData))

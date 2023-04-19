@@ -7,6 +7,6 @@ export interface IUserProfileClient {
     listUserProfileData(input: ListUserProfilesQueryVariables): Promise<ListUserProfileDataQuery | undefined>
     createUserProfile(input: CreateUserProfileMutationVariables): Promise<CreateUserProfileMutation | undefined>
     requestFriendship(input: CreateFriendshipRequestMutationVariables): Promise<CreateFriendshipRequestMutation | undefined>
-    acceptFriendship(input: UpdateFriendshipRequestMutationVariables): Promise<UpdateFriendshipRequestMutation | undefined>
+    acceptFriendship(friendshipRequestID: string): Promise<UpdateFriendshipRequestMutation | undefined>
 }
 

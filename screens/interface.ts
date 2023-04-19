@@ -18,6 +18,10 @@ export interface IScreenState {
 
 export class Screen<P = any, S extends IScreenState = IScreenState> extends React.Component<P, S> {
 
+    state: S = {
+        ...this.state,
+        loading: false
+    }
 
     async makeRequest<T>(request: Promise<T>): Promise<T  | void> {
         console.error("diejpioejpioejd")

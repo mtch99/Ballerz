@@ -2,7 +2,7 @@ import { AuthRepository } from "../../repositories/Auth";
 import UserProfileRepository from "../../repositories/UserProfile";
 import initialUserProfileData, { initialUserProfiles } from "../data/userProfile";
 import { IUserProfile, IUserProfileData } from "../types";
-import { IDefineUsernameInput, IDefineUsernameResult, IRequestFriendShipInput, IRequestFriendShipResult, IUserProfileModelEventListener, IUserProfileRepository, IUserProfileUseCase } from "./interface";
+import { IAcceptFriendshipRequestInput, IAcceptFriendshipRequestResult, IDefineUsernameInput, IDefineUsernameResult, IRequestFriendShipInput, IRequestFriendShipResult, IUserProfileModelEventListener, IUserProfileRepository, IUserProfileUseCase } from "./interface";
 
 
 export default class UserProfileUseCase implements IUserProfileUseCase{
@@ -70,5 +70,15 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
         }
         return response
     }
+
+
+    async acceptFriendshipRequest(input: IAcceptFriendshipRequestInput): Promise<IAcceptFriendshipRequestResult> {
+        const response = await this.repo.acceptFriendshipRequest(input)
+        if(!response.error){
+            this.observer.onAcceptedFriendshipRequest(input.notificationID)
+        }
+        return response
+    }
     
 }
+

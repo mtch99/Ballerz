@@ -8,6 +8,7 @@ export interface IUserProfileUseCase {
     defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult>
     requestFriendShip(input: IRequestFriendShipInput): Promise<IRequestFriendShipResult>
     getMyUserProfile(email: string): Promise<IUserProfile | null>
+    acceptFriendshipRequest(input: IAcceptFriendshipRequestInput): Promise<IAcceptFriendshipRequestResult>
 }
 
 
@@ -17,6 +18,7 @@ export interface IUserProfileModelEventListener {
     onUsernameDefinedEvent(userProfileData: IUserProfileData): void
     setMyProfile(input: IUserProfile): void
     onNewFriendShipRequest(input: IRequestFriendShipInput): void
+    onAcceptedFriendshipRequest(notificationID: string): void
 }
 
 
@@ -28,6 +30,7 @@ export interface IUserProfileRepository {
     getMyUserProfile(email: string): Promise<IUserProfile | null>
     getMyUserProfileData(): Promise<IMyUserProfileData | null>
     setMyUserProfileID(id: string): void
+    acceptFriendshipRequest(input: IAcceptFriendshipRequestInput): Promise<IAcceptFriendshipRequestResult>
 }
 
 export interface IMyUserProfileData extends IUserProfileData {
@@ -54,3 +57,12 @@ export interface IDefineUsernameResult {
     userProfile?: IUserProfile
 }
 
+export interface IAcceptFriendshipRequestInput {
+    friendshipRequestID: string, 
+    notificationID: string
+}
+
+export interface IAcceptFriendshipRequestResult {
+    error: false | string
+    friendshipRequestID: string
+}

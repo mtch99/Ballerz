@@ -2,12 +2,14 @@ import { FlatList, Text, View, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import ListItemButton from '../../components/Buttons/ListItemButton'
 import BallerzSafeAreaView from '../safeArea'
-import { NotificationListState, NotificationState } from '../../app/features/notifications/slice/interface'
+import { IFriendShipRequestNotificationState, NotificationListState, NotificationState } from '../../app/features/notifications/slice/interface'
 import { globalStyles } from '../styles'
 import NotificationItem from './item'
+import { IFriendShipRequestNotification } from '../../domain/use-cases/types'
 
 export interface IProps {
     notificationList: NotificationState[]
+    onPressAcceptFriendshipRequest: (notification: IFriendShipRequestNotificationState) => void
 }
 export default class NotificationListView extends Component<IProps> {
     
@@ -24,6 +26,7 @@ export default class NotificationListView extends Component<IProps> {
                         <NotificationItem 
                             {...item}
                             onPress={() => {}}
+                            onPressAcceptFriendshipRequest={this.props.onPressAcceptFriendshipRequest}
                         />
                     )}
                     ItemSeparatorComponent={ItemSeparatorComponent}

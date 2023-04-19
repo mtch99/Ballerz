@@ -5,6 +5,7 @@ import { AppDispatch } from "../../../store"
 import { AuthModelAdapter } from "../../Auth/model"
 import { setUserProfile } from "../../Auth/slice"
 import { UserProfileModelAdapter } from "../../adapters"
+import { ACCEPTED_FRIENDSHIP_REQUEST } from "../../notifications/slice"
 import { parseGame, parseGameList } from "../../place/model"
 import { IGameState, IUserProfileState } from "../../types"
 import { NEW_SENTFRIENDSHIPREQUEST, NEW_USERPROFILELIST } from "../userProfileList/slice"
@@ -48,7 +49,9 @@ export function createUserProfileModel(modelInput: IUserProfileModelInput): IUse
             modelInput.dispatchFunc(NEW_SENT_FRIENDSHIPREQUEST_formap(input))
         },
 
-        
+        onAcceptedFriendshipRequest(notificationID){
+            modelInput.dispatchFunc(ACCEPTED_FRIENDSHIP_REQUEST({notificationID}))
+        }
     }
 }
 

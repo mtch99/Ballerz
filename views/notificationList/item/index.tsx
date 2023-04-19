@@ -23,22 +23,34 @@ export default class NotificationItem extends Component<INotificationItemProps> 
 }
 
 
-function FriendshipRequestNotificationItem(props: IFriendShipRequestNotification & {onPress: () => void}) {
+function FriendshipRequestNotificationItem(props: IFriendShipRequestNotification & 
+    {onPressAcceptFriendshipRequest: (item: IFriendShipRequestNotification) => void}
+) {
     return(
         <View
             style={styles.container}
         >
-            <Text
-                style={styles.notificationText}
+            <View
+                style={styles.textContainer}
             >
-                {props.senderProfile.username} veut être votre ami
-            </Text>
+                <Text
+                    style={{...styles.notificationText, fontWeight: 'bold' }}
+                >
+                    {props.senderProfile.username + " "}
+                </Text>
+                <Text
+                    style={styles.notificationText}
+                >
+                    veut être votre ami
+                </Text>
+
+            </View>
 
             <View
                 style={styles.buttonContainer}
             >
                 <ListItemButton
-                    onPress={props.onPress}
+                    onPress={() => {props.onPressAcceptFriendshipRequest(props)}}
                     selected={props.friendshipRequest.status=="accepted"}
                     title={"accepter"}
                 />
@@ -54,11 +66,20 @@ function NewFriendNotificationItem(props: INewFriendNotification) {
         <View
             style={styles.container}
         >
-            <Text
-                style={styles.notificationText}
+            <View
+                style={styles.textContainer}
             >
-                Vous êtes maintenant amis avec {props.senderProfile.username} veut être votre ami
-            </Text>
+                <Text
+                    style={styles.notificationText}
+                >
+                    Vous êtes maintenant amis avec {props.senderProfile.username}
+                </Text>
+                <Text
+                    style={{...styles.notificationText, fontWeight: "bold"}}
+                >
+                    {props.senderProfile.username}
+                </Text>
+            </View>
 
             {/* <View
                 style={styles.buttonContainer}
@@ -92,14 +113,19 @@ const styles = StyleSheet.create({
 
     buttonContainer: {
         alignSelf: 'flex-end',
-        marginRight: 10
+        marginRight: 10,
+    },
+    
+    textContainer: {
+        marginLeft: 30,
+        marginRight: 30,
+        flexDirection: 'row',
+        // justifyContent: 'flex-start'
     },
 
     notificationText: {
         color: "#FFFFFF",
         fontSize: 16,
-        marginLeft: 30,
-        marginRight: 30,
     },
 
 

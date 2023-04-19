@@ -61,7 +61,6 @@ export type UpdateFriendshipRequestMutationVariables = {
 export type UpdateFriendshipRequestInput = {
     id: string,
     status: FriendshipRequestStatus | null,
-    receiverProfileID: string | null,
 };
 
 export enum FriendshipRequestStatus {

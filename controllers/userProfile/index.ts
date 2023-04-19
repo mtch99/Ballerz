@@ -1,5 +1,5 @@
 import { IUserProfile } from "./../../domain/use-cases/types";
-import { IDefineUsernameResult, IRequestFriendShipInput, IRequestFriendShipResult } from "./../../domain/use-cases/userProfile/interface";
+import { IAcceptFriendshipRequestInput, IAcceptFriendshipRequestResult, IDefineUsernameResult, IRequestFriendShipInput, IRequestFriendShipResult } from "./../../domain/use-cases/userProfile/interface";
 import { IUserProfileData } from "../../domain/use-cases/types";
 import UserProfileUseCase from "../../domain/use-cases/userProfile";
 import { IDefineUsernameInput, IUserProfileModelEventListener, IUserProfileUseCase } from "../../domain/use-cases/userProfile/interface";
@@ -68,7 +68,10 @@ export class UserProfileController implements IUserProfileController{
             notificationController.subscribeToMyNotifications(result.userProfile.id)
         }
         return result
+    }
 
+    async acceptFriendshipRequest(input: IAcceptFriendshipRequestInput): Promise<IAcceptFriendshipRequestResult> {
+        return await this.userProfileUseCase.acceptFriendshipRequest(input)
     }
 }
 
@@ -94,5 +97,8 @@ const fakeUseCase: IUserProfileUseCase = {
     getMyUserProfile: function (email: string): Promise<IUserProfile | null> {
         throw new Error("Function not implemented.");
     },
-    observer: {} as IUserProfileModelEventListener
+    observer: {} as IUserProfileModelEventListener,
+    acceptFriendshipRequest: function (input: IAcceptFriendshipRequestInput): Promise<IAcceptFriendshipRequestResult> {
+        throw new Error("Function not implemented.");
+    }
 }

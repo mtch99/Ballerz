@@ -1,5 +1,5 @@
 import { IDefineUsernameResult } from "../../domain/use-cases/auth/interface";
-import { IDefineUsernameInput, IRequestFriendShipResult } from "./../../domain/use-cases/userProfile/interface";
+import { IAcceptFriendshipRequestInput, IAcceptFriendshipRequestResult, IDefineUsernameInput, IRequestFriendShipResult } from "./../../domain/use-cases/userProfile/interface";
 import { IUserProfileUseCase } from "../../domain/use-cases/userProfile/interface";
 import { IUserProfileListState } from "../../app/features/userProfile/userProfileList/slice/interface";
 import { IUserProfileState } from "../../app/features/types";
@@ -13,6 +13,7 @@ export interface IUserProfileController {
     defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult>
     sendFriendShipRequest(input: {senderProfileID: string, receiverProfileID: string}): Promise<IRequestFriendShipResult>
     sendMultipleFriendShipRequests(input: ISendFriendshipRequestsInput): Promise<void>
+    acceptFriendshipRequest(input: IAcceptFriendshipRequestInput): Promise<IAcceptFriendshipRequestResult>
 }
 
 

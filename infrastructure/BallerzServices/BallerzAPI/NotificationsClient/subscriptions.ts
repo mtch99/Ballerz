@@ -82,7 +82,12 @@ export const onCreateNotification_gql = /* GraphQL */ `
         id
         status
         senderProfileID
+        receiverProfileID
         senderProfile{
+          id
+          username
+        }
+        receiverProfile{
           id
           username
         }

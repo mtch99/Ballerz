@@ -88,6 +88,7 @@ export interface IFriendshipRequest{
 }
 
 export interface _INotification{
+    id: string
     type: keyof typeof NotificationType
     receiverProfileID: string;
     senderProfileID: string;

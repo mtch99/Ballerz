@@ -115,12 +115,19 @@ class ResponseHandler {
         return result
     }
 
+    // parseSubscription(clientNotif: )
 
     private static parseFriendshipRequestNotification(arg: ClientNotification): IFriendShipRequestNotification | undefined {
-        if(arg.type!= NotificationType.friendshipRequest 
-            || !arg.friendshipRequestID ||!arg.senderProfileID 
-            || !arg.senderProfile || !arg.friendshipRequest
+        console.log(`\nReceived friendship request for ${JSON.stringify(arg)}`)
+        if(arg.type != NotificationType.friendshipRequest 
+            || (!arg.friendshipRequestID) || (!arg.senderProfile) || (!arg.friendshipRequest)
         ){
+            // console.error(
+            //     arg.type != NotificationType.friendshipRequest 
+            //     || (!arg.senderProfileID)
+            //     //|| (!arg.friendshipRequestID)
+            // )
+            // console.warn(arg.senderProfileID)
             return undefined
         }
 
@@ -132,9 +139,10 @@ class ResponseHandler {
         }
 
         const result: IFriendShipRequestNotification = {
+            id: arg.id,
             type: arg.type,
             receiverProfileID: arg.receiverProfileID,
-            senderProfileID: arg.senderProfileID,
+            senderProfileID: arg.senderProfile.id,
             senderProfile: senderProfile,
             friendshipRequestID: arg.friendshipRequestID,
             friendshipRequest: friendshipRequest,
@@ -170,7 +178,16 @@ class ResponseHandler {
 
     static parseFriendShipRequest(input: FriendShipRequestData): IFriendshipRequest | undefined {
         
-        if(!input.receiverProfileID ||  !input.receiverProfile  || !input.senderProfileID  || !input.senderProfile){
+        if(!input.receiverProfileID ||  !input.receiverProfile  || !input.senderProfile){
+            if(!input.senderProfile){
+                console.error("FriendshipRequest missing senderProfile")
+            }
+            if(!input.receiverProfile){
+                console.error("FriendshipRequest missing receiverProfile")
+            }
+            if(!input.receiverProfileID){
+                console.error("FriendshipRequest missing receiverProfileID")
+            }
             return undefined
         }
          

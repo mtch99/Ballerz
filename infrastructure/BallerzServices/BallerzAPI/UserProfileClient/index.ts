@@ -1,3 +1,4 @@
+import { FriendshipRequest } from "./../API";
 // import {GraphQLResult} from "@aws-amplify/api-graphql"
 import {API, Amplify} from "aws-amplify"
 import {GraphQLQuery, GraphQLResult} from "@aws-amplify/api"
@@ -56,13 +57,20 @@ export default class UserProfileClient extends BallerzApiClient implements IUser
     }
 
 
-    async acceptFriendship(input: mutations.UpdateFriendshipRequestMutationVariables): Promise<mutations.UpdateFriendshipRequestMutation | undefined> {
-        const payload = this.genRequestPayload(mutations.updateFriendshipRequest, input)
+    async acceptFriendship(friendshipRequestID: string): Promise<mutations.UpdateFriendshipRequestMutation | undefined> {
+        const variables: mutations.UpdateFriendshipRequestMutationVariables = {
+            input: {
+                id: friendshipRequestID,
+                status: mutations.FriendshipRequestStatus.accepted
+            }
+        }
+        const payload = this.genRequestPayload(mutations.updateFriendshipRequest, variables)
         const response = await API.graphql<GraphQLQuery<mutations.UpdateFriendshipRequestMutation>>(payload)
 
         return this._handleResponse<mutations.UpdateFriendshipRequestMutation>(response)
-
     }
+
+
 }
 
 

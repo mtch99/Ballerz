@@ -72,10 +72,12 @@ There must be three different games on three different courts, two at the moment
             - [x] Add NotificationBadge to the Model
             - [x] Assign notification badge to the Notification Tab Icon
             - [x] Set badge to undefined on NotificationScreen Focus event
+
+        - [x] Accept frienship notification
         - [ ] FriendPlaying Notification
         - [ ] GameInvitation Notification
 
-
+* [ ] Badge display on new Notification
 
 - [ ] I want see a toast message on new notiication
     - [ ] Display a toast message on new received notification 
