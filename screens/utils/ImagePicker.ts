@@ -5,9 +5,7 @@ import awsmobile from "../../infrastructure/BallerzServices/aws-exports";
 Amplify.configure({
     ...awsmobile,
 })
-
-
-const imageExtension = ".jpg";
+const DEFAULT_IMAGE_EXTENSION = ".jpg";
 
 
 export interface IUploadImageResult {
@@ -17,7 +15,7 @@ export interface IUploadImageResult {
 
 
 export async function getProfilePicUri(profileID: string): Promise<string | undefined> {
-  const uri = await Storage.get(`public/${profileID+imageExtension}`).catch(err => {
+  const uri = await Storage.get(`public/${profileID+DEFAULT_IMAGE_EXTENSION}`).catch(err => {
     console.log(`Error getting profile pic: ${err}`);
     return undefined;
   })
@@ -62,13 +60,13 @@ export async function uploadImage(filename: string, img: any, progressCallback: 
 export async function handleImagePicked(pickerResult:ImagePicker.ImagePickerResult): Promise<void>{
     try {
       if (pickerResult.canceled) {
-        alert("Upload cancelled");
+        console.log("Upload cancelled");
         return;
       } else {
         const asset = pickerResult.assets[0];
         const uri = 'data:image/jpeg;base64,' + asset.base64
         const img = await fetchImageFromUri(uri);
-        const uploadUrl = await uploadImage("demo.jpg", img, (progress) => {});
+        // const uploadUrl = await uploadImage("demo.jpg", img, (progress) => {});
       }
     } catch (e) {
       console.log(e);

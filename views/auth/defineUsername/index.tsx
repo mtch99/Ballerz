@@ -5,6 +5,7 @@ import { globalStyles } from "../../styles"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import BallerzSafeAreaView from "../../safeArea"
 import { pickImage } from "../../../screens/utils/ImagePicker"
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export class DefineUsernameView extends React.Component<IDefineUsernameViewProps> {
     
@@ -55,22 +56,44 @@ export class DefineUsernameView extends React.Component<IDefineUsernameViewProps
                         >
                             Ajoute une photo
                         </Text>
-                        <TouchableOpacity
-                            onPress={() => {this.props.onPressProfilePic()}}
-                        >
-                            <Image
-                                style={{height: 70, width: 70, borderRadius: 70}}
-                                source={this.props.profilePicSource}
-                            />
-                        </TouchableOpacity>
+                        <View
+                                style={{flexDirection:'row'}}
+                            >
+                                <Image
+                                    style={{height: 70, width: 70, borderRadius: 70}}
+                                    source={this.props.profilePicSource}
+                                />
+                                <View
+                                    style={{justifyContent: 'flex-end'}}
+                                >
+                                    <TouchableOpacity
+                                        onPress={() => {this.props.onPressProfilePic()}}
+                                    >
+                                        <MaterialIcons
+                                            name="add-a-photo"
+                                            size={30}
+                                            color={"#969696"}
+                                            style={{alignSelf: "flex-end"}}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                        </View>
                     </View>
 
-
-                    <TouchableOpacity
-                        onPress={() => {this.props.onPressConfirm()}}
+                    <View
+                        style={{
+                            flexGrow: 1,
+                            justifyContent: "center",
+                            marginBottom: 120,
+                        }}
                     >
-                        <Text style={styles.footerCreate}>Continuer</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.buttonLogin}
+                            onPress={() => {this.props.onPressConfirm()}}
+                        >
+                            <Text style={styles.footerCreate}>Continuer</Text>
+                        </TouchableOpacity>
+                    </View>
                     {this.props.error?(<Text>{this.props.error}</Text>):(<></>)}
                 </View>
             </BallerzSafeAreaView>
@@ -83,39 +106,28 @@ const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
         alignItems: "center",
-        // justifyContent: "center",
-        backgroundColor: globalStyles.global.screenBackGroundColor
     },
 
     titleContainer: {
-        // marginHorizontal: 10,
         margin: 10,
         marginBottom: 40,
-        // width: "90%",
-        // flexWrap: "wrap",
-        // alignItems: "center",
         alignSelf: 'flex-start',
         justifyContent: "center",
-        // flex: 1,
     },
 
     title: {
-        // flex: 1,
         fontSize: 34,
         fontWeight: "500",
         color: "white",
-        // flexWrap: "wrap",
     },
 
     subTitle: {
         fontSize: 25,
-        // color: "white",
         color: "#B1B1B1",
         fontWeight: "500",
     },
 
     confirmationCodeInputContainer: {
-        // flex: 1,
         marginTop: 15,
         height: 52,
         borderRadius: 56,
@@ -141,9 +153,16 @@ const styles = StyleSheet.create({
     },
 
     footerCreate: {
-        marginTop: 10,
-		color: '#e78b2f',
-		fontWeight: 'bold',
-		fontSize: 15
-	 },
+		color: 'white',
+		fontWeight: '500',
+		fontSize: 15,
+	},
+
+    buttonLogin: {
+		marginTop: 20,
+		alignItems: 'center',
+		backgroundColor: '#e78b2f',
+		borderRadius: 5,
+		padding: 10,
+	},
 })

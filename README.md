@@ -35,12 +35,13 @@ There must be three different games on three different courts, two at the moment
     - [x] Make sure that everything works properly
 
 
-* [ ] Add profile picture after profile creation
+* [x] Add profile picture after profile creation
     - [x] ImagePicker
-    - [ ] Create S3 client
+    - [x] Create S3 client
         - [x] Upload picture
         - [x] Get url
-        - [ | ] DefineUsername Screen
+        - [x] DefineUsername Screen
+        - [x] profilePic S3 credentials
 
     - [x] Onboarding and authflow
         - [x] Onboarding Stack
