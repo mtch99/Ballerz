@@ -19,14 +19,10 @@ There must be three different games on three different courts, two at the moment
     - [x] Notifications model
     - [x] Notifications controller
     * [x] Check auth flow
-            - [x] Unregistered User error message display in signin View 
-            - [x] Navigate to Signup View
-            * [x] Fix: Did not auto signin at the second launch
-            - [x] Signup error messages display
-            - [x] Define username after signup
-            - [x] Invite friends after username creation
-            - [x] Add a user after username creation
     - [x] Notifications subscriptions after userProfile retrieval or creation
+    - [ ] Friend Playing notification
+    - [ ] HotCourt notification
+    - [ ] GameInvitation Notification
 
 * [x] App Icon and splashscreen
 
@@ -38,16 +34,11 @@ There must be three different games on three different courts, two at the moment
 * [x] Add profile picture after profile creation
     - [x] ImagePicker
     - [x] Create S3 client
-        - [x] Upload picture
-        - [x] Get url
-        - [x] DefineUsername Screen
-        - [x] profilePic S3 credentials
 
     - [x] Onboarding and authflow
-        - [x] Onboarding Stack
-        - [x] Check first launch
     TODO:
     - [ ] Load asssets before launch 
+    - [ ] Add default profile pic to assets
         
 
 - [ ] Games feature
@@ -56,13 +47,13 @@ There must be three different games on three different courts, two at the moment
     - [ ] Display real game Time 
         - [x] Format date in feed item view
     TODO: Warning: for now, akk the games with 0 attendants are not displayed
-        - [ ] Undo the lasy warning
+        - [ ] Undo the last warning
         - [ ] Undo onNewNotification warning in Notifications repository
     - [x] Test with Dani 
+    - [ ] Add place icon as header for FeedItem
     - [ ] Create a game
         - [ ] Fix PickPlaceScreen Header
     - [ ] FriendPlaying Notification
-    - [ ] GameInvitation Notification
     - [ ] Checkin
         - [ ] Popup after checkin
 

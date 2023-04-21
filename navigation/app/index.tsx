@@ -18,13 +18,13 @@ export function AppStack(): JSX.Element {
         authState.profile?(
             <Stack.Navigator
             >
-                {/* <Stack.Screen
+                <Stack.Screen
                     name="AppTab"
                     options={{
                         headerShown: false,
                     }}
                     component={AppTabWrapper}
-                /> */}
+                />
                 <Stack.Screen
                     name="CreateProfile"
                     options={{
