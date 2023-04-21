@@ -3,11 +3,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FriendshipRequestStatus } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
 import UserProfileClient from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient";
 import { IUserProfileData, IUserProfile } from "../../use-cases/types";
-import { IAcceptFriendshipRequestInput, IAcceptFriendshipRequestResult, IDefineUsernameInput, IDefineUsernameResult, IMyUserProfileData, IRequestFriendShipInput, IRequestFriendShipResult, IUserProfileRepository } from "../../use-cases/userProfile/interface";
+import { IAcceptFriendshipRequestInput, IAcceptFriendshipRequestResult, IDefineUsernameInput, IDefineUsernameResult, IMyUserProfileData, IRequestFriendShipInput, IRequestFriendShipResult, IUploadProfilePicInput, IUploadProfilePicResult, IUserProfileRepository } from "../../use-cases/userProfile/interface";
 import * as queries from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/queries"
 import * as mutations from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/mutations"
 import { GetUserProfileQueryVariables, ListUserProfilesQueryVariables } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
 import { ListUserProfileDataQueryVariables } from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/queries";
+import { ImageSourcePropType } from "react-native";
+import { uploadImage } from "../../../screens/utils/ImagePicker";
 
 
 
@@ -15,8 +17,18 @@ export default class UserProfileRepository implements IUserProfileRepository {
 
     client: UserProfileClient
     myUserProfileID: string = "dumbID1210e8934"
+    userProfilePicUri: ImageSourcePropType = require("../../../assets/images/profilePic.jpg")
     constructor(){
         this.client = new UserProfileClient()
+    }
+
+    async uploadProfilePic(input: IUploadProfilePicInput): Promise<IUploadProfilePicResult> {
+        let result: IUploadProfilePicResult = {error: false}; 
+        const response = await uploadImage(input.userProfileID, input.image, (progress: number) => {})
+        if(response.error){
+            result.error = "La photo de profile n'a pas été modifiée. Veuillez réessayer plus tard."
+        }
+        return result
     }
 
     setMyUserProfileID(id: string): void{

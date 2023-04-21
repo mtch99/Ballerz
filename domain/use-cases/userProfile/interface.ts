@@ -9,6 +9,7 @@ export interface IUserProfileUseCase {
     requestFriendShip(input: IRequestFriendShipInput): Promise<IRequestFriendShipResult>
     getMyUserProfile(email: string): Promise<IUserProfile | null>
     acceptFriendshipRequest(input: IAcceptFriendshipRequestInput): Promise<IAcceptFriendshipRequestResult>
+    uploadProfilePic(input: IUploadProfilePicInput): Promise<IUploadProfilePicResult>
 }
 
 
@@ -31,6 +32,8 @@ export interface IUserProfileRepository {
     getMyUserProfileData(): Promise<IMyUserProfileData | null>
     setMyUserProfileID(id: string): void
     acceptFriendshipRequest(input: IAcceptFriendshipRequestInput): Promise<IAcceptFriendshipRequestResult>
+    uploadProfilePic(input: IUploadProfilePicInput): Promise<IUploadProfilePicResult>
+    
 }
 
 export interface IMyUserProfileData extends IUserProfileData {
@@ -65,4 +68,13 @@ export interface IAcceptFriendshipRequestInput {
 export interface IAcceptFriendshipRequestResult {
     error: false | string
     friendshipRequestID: string
+}
+
+export interface IUploadProfilePicInput {
+    userProfileID: string,
+    image: Blob
+}
+
+export interface IUploadProfilePicResult {
+    error: false | string
 }

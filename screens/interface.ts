@@ -24,7 +24,6 @@ export class Screen<P = any, S extends IScreenState = IScreenState> extends Reac
     }
 
     async makeRequest<T>(request: Promise<T>): Promise<T  | void> {
-        console.error("diejpioejpioejd")
         if(!this.state.loading){
             const response = await request.then(response => {
                 this.setLoading(false)

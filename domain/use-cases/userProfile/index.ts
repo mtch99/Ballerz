@@ -2,7 +2,7 @@ import { AuthRepository } from "../../repositories/Auth";
 import UserProfileRepository from "../../repositories/UserProfile";
 import initialUserProfileData, { initialUserProfiles } from "../data/userProfile";
 import { IUserProfile, IUserProfileData } from "../types";
-import { IAcceptFriendshipRequestInput, IAcceptFriendshipRequestResult, IDefineUsernameInput, IDefineUsernameResult, IRequestFriendShipInput, IRequestFriendShipResult, IUserProfileModelEventListener, IUserProfileRepository, IUserProfileUseCase } from "./interface";
+import { IAcceptFriendshipRequestInput, IAcceptFriendshipRequestResult, IDefineUsernameInput, IDefineUsernameResult, IRequestFriendShipInput, IRequestFriendShipResult, IUploadProfilePicInput, IUploadProfilePicResult, IUserProfileModelEventListener, IUserProfileRepository, IUserProfileUseCase } from "./interface";
 
 
 export default class UserProfileUseCase implements IUserProfileUseCase{
@@ -78,6 +78,11 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
             this.observer.onAcceptedFriendshipRequest(input.notificationID)
         }
         return response
+    }
+
+
+    async uploadProfilePic(input: IUploadProfilePicInput): Promise<IUploadProfilePicResult> {
+        return await this.repo.uploadProfilePic(input)
     }
     
 }

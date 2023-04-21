@@ -1,5 +1,5 @@
 import { IUserProfile } from "./../../domain/use-cases/types";
-import { IAcceptFriendshipRequestInput, IAcceptFriendshipRequestResult, IDefineUsernameResult, IRequestFriendShipInput, IRequestFriendShipResult } from "./../../domain/use-cases/userProfile/interface";
+import { IAcceptFriendshipRequestInput, IAcceptFriendshipRequestResult, IDefineUsernameResult, IRequestFriendShipInput, IRequestFriendShipResult, IUploadProfilePicInput, IUploadProfilePicResult } from "./../../domain/use-cases/userProfile/interface";
 import { IUserProfileData } from "../../domain/use-cases/types";
 import UserProfileUseCase from "../../domain/use-cases/userProfile";
 import { IDefineUsernameInput, IUserProfileModelEventListener, IUserProfileUseCase } from "../../domain/use-cases/userProfile/interface";
@@ -9,6 +9,9 @@ import notificationController from "../notification";
 
 
 export class UserProfileController implements IUserProfileController{
+    async uploadProfilePic(input: IUploadProfilePicInput): Promise<IUploadProfilePicResult>{
+        return await this.userProfileUseCase.uploadProfilePic(input);
+    }
 
     userProfileUseCase: IUserProfileUseCase = fakeUseCase ;
 
@@ -99,6 +102,9 @@ const fakeUseCase: IUserProfileUseCase = {
     },
     observer: {} as IUserProfileModelEventListener,
     acceptFriendshipRequest: function (input: IAcceptFriendshipRequestInput): Promise<IAcceptFriendshipRequestResult> {
+        throw new Error("Function not implemented.");
+    },
+    uploadProfilePic: function (input: IUploadProfilePicInput): Promise<IUploadProfilePicResult> {
         throw new Error("Function not implemented.");
     }
 }

@@ -38,13 +38,15 @@ There must be three different games on three different courts, two at the moment
 * [ ] Add profile picture after profile creation
     - [x] ImagePicker
     - [ ] Create S3 client
-        - [ ] Upload picture
-        - [ ] Get url
+        - [x] Upload picture
+        - [x] Get url
+        - [ | ] DefineUsername Screen
 
-    - [ ] Onboarding and authflow
+    - [x] Onboarding and authflow
         - [x] Onboarding Stack
         - [x] Check first launch
-        - [ ] Load asssets before launch 
+    TODO:
+    - [ ] Load asssets before launch 
         
 
 - [ ] Games feature
@@ -58,14 +60,16 @@ There must be three different games on three different courts, two at the moment
     - [x] Test with Dani 
     - [ ] Create a game
         - [ ] Fix PickPlaceScreen Header
+    - [ ] FriendPlaying Notification
+    - [ ] GameInvitation Notification
     - [ ] Checkin
         - [ ] Popup after checkin
 
-- [ ] Notification screen
+- [x] Notification screen
     - [x] Add notificationn tab
     - [x] NotificationStack
-    - [ ] Notification Screen
-    - [ ] Notification View 
+    - [x] Notification Screen
+    - [x] Notification View 
         - [x] FiendshipRequest Notification
         - [x] NewFriend Notification
         - [x] Notification Icon and badge 
@@ -75,8 +79,7 @@ There must be three different games on three different courts, two at the moment
 
         - [x] Accept frienship notification
         - [x] NewFriend Notification
-        - [ ] FriendPlaying Notification
-        - [ ] GameInvitation Notification
+        
 
 * [x] Badge display on new Notification
 

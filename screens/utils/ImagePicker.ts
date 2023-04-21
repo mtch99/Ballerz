@@ -4,10 +4,25 @@ import {Storage, PutResult} from "@aws-amplify/storage";
 import awsmobile from "../../infrastructure/BallerzServices/aws-exports";
 Amplify.configure({
     ...awsmobile,
-
 })
 
 
+const imageExtension = ".jpg";
+
+
+export interface IUploadImageResult {
+  error: false | any
+  putResult?: PutResult
+}
+
+
+export async function getProfilePicUri(profileID: string): Promise<string | undefined> {
+  const uri = await Storage.get(`public/${profileID+imageExtension}`).catch(err => {
+    console.log(`Error getting profile pic: ${err}`);
+    return undefined;
+  })
+  return uri
+}
 
 
 export async function pickImage(handleImagePicked: (result:ImagePicker.ImagePickerResult) => Promise<void>) {
@@ -21,21 +36,27 @@ export async function pickImage(handleImagePicked: (result:ImagePicker.ImagePick
     await handleImagePicked(result);
 }
 
-export async function uploadImage(filename: string, img: any, progressCallback: (progress: number) => void): Promise<PutResult> {
-    return Storage.put(filename, img, {
+
+export async function uploadImage(filename: string, img: any, progressCallback: (progress: number) => void): Promise<IUploadImageResult> {
+    const result: IUploadImageResult = {
+      error: false,
+    }
+    await Storage.put(filename, img, {
       level: "public",
       contentType: "image/jpeg",
       progressCallback
     })
-      .then((response) => {
-        return response.key;
-      })
-      .catch((error) => {
-        console.log(error);
-        return error.response;
+        .then((response) => {
+          result.putResult = response;
+        })
+        .catch((error) => {
+          console.log(error);
+          result.error = error;
     });
 
+    return result;
 };
+
 
 
 export async function handleImagePicked(pickerResult:ImagePicker.ImagePickerResult): Promise<void>{
@@ -55,8 +76,19 @@ export async function handleImagePicked(pickerResult:ImagePicker.ImagePickerResu
     }
 };
 
+export async function getAssetUri(pickerResult:ImagePicker.ImagePickerResult): Promise<string | undefined> {
+  if (pickerResult.canceled) {
+    alert("Upload cancelled");
+    return;
+  } else {
+    const asset = pickerResult.assets[0];
+    const uri = 'data:image/jpeg;base64,' + asset.base64
+    return uri
+  }
+}
 
-const fetchImageFromUri = async (uri: string) => {
+
+export const fetchImageFromUri = async (uri: string) => {
     const response = await fetch(uri);
     const blob = await response.blob();
     return blob;
