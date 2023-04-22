@@ -5,7 +5,7 @@ import BottomView from "./Bottom";
 import Header from "./Header";
 import { BodyView } from "./Body";
 import IFeedScreen, { IPostCommentInput } from "../../../screens/feed/interface";
-import { style } from "../../groupChatConversation/messageItem/GameInvitation/styles";
+import { style } from "./styles";
 import CommentsView from "./Bottom/Comments";
 
 interface IFeedItemViewProps{
@@ -56,6 +56,8 @@ export default function FeedItemView(props: IFeedItemViewProps){
 				playerNum={props.feedItem.attendants.length}
 				onBadgeClick={() => {onBadgeClick()}}
 				badgeList={feedItem.badges}
+				onPressPlayersNum={onPressFriendsThere}
+				friendsHere={feedItem.friendsThere}
 			/>
 			<BottomView
 				onPressCommentButton={() => {onPressCommentButton()}}
@@ -64,6 +66,15 @@ export default function FeedItemView(props: IFeedItemViewProps){
 				onPressFriendsThere={() => {onPressFriendsThere()}}
 				onPressInvite={() => {onPressInvite()}}
 			/>
+		</View>
+	)
+}
+
+
+function CommentView(props: IFeedItemViewProps){
+	const feedItem = props.feedItem
+	return(
+		<>
 			{
 				props.feedItem.comments.length>0?(
 					<CommentsView
@@ -72,7 +83,7 @@ export default function FeedItemView(props: IFeedItemViewProps){
 					/>
 				):(null)
 			}
-		</View>
+		</>
 	)
 }
 

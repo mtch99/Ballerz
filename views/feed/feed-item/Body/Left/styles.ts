@@ -3,25 +3,22 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
-        height: 60,     
     },
     playerNumContainer: {
-        height: 30,
-        alignSelf: "center",
         alignItems: "center",
         flexDirection: "row",
     },
     playersNumText: {
         color: "#F5F8FA",
-        fontSize: 23,
-        fontWeight: "300",
+        fontSize: 30,
+        fontWeight: "500",
         marginLeft: 6,
     },
     playersText: {
         color: "#F7F7F7",
         flexGrow:1,
         marginLeft: 2,
-        fontSize: 10,
+        fontSize: 15,
     },
     badgeNumContainer: {
         width: 68,

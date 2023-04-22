@@ -1,12 +1,12 @@
 import styles from "./styles"
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { IUserProfileData } from "../../../../../app/features/feed/slice/interface";
+import { IUserProfileDataState } from "../../../../../app/features/types";
 
 
 interface IFriendsThereViewProps {
     onPress: () => void;
-    friendsHere: IUserProfileData[]
+    friendsHere: IUserProfileDataState[]
 }
 
 export default function FriendsThereView(props: IFriendsThereViewProps) {
@@ -24,17 +24,14 @@ export default function FriendsThereView(props: IFriendsThereViewProps) {
             {
                 props.friendsHere.length==0?(
                     <><Text style={styles.friendsThereText}>
-                        0 amis
+                        0 amis ici
                     </Text></>
                 ):(
                     <Text style={styles.friendsThereText}>
-                        {props.friendsHere[0].username} et {props.friendsHere.length-1} autres amis
+                        {props.friendsHere[0].username} et {props.friendsHere.length-1} autres amis ici
                     </Text>
                 )
             }
-            <Text style={styles.hereText}>
-                y vont
-            </Text>
         </TouchableOpacity>
     )
 }

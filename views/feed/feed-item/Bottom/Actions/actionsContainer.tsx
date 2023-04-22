@@ -23,13 +23,11 @@ export function ActionsContainer(props:IActionContainerProps) {
 			</TouchableOpacity>
 
 
-			<TouchableOpacity
+			{/* <TouchableOpacity
 				onPress={() => {props.onPressCommentButton()}}
 			>
         		<Icon name="commenting-o" style={styles.commentIcon}></Icon>
-				{/* <Text style={styles.playText}> commenter </Text> */}
-			</TouchableOpacity>
-
+			</TouchableOpacity> */}
 
 			<TouchableOpacity
 				onPress={() => {props.onPressInvite()}}
@@ -38,7 +36,5 @@ export function ActionsContainer(props:IActionContainerProps) {
 			</TouchableOpacity>
 
 		</View>
-
-      
     )
 }

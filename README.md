@@ -50,9 +50,15 @@ There must be three different games on three different courts, two at the moment
         - [ ] Undo the last warning
         - [ ] Undo onNewNotification warning in Notifications repository
     - [x] Test with Dani 
-    - [ ] Add place icon as header for FeedItem
+    - [ ] Feed Item View
+        - [x] Organize Card
+        - [ ] Display day and month when the game is occur more than 6 days later
+        - [ ] Change the game item color to green on checkin
+
+    - [x] Add place icon as header for FeedItem
     - [ ] Create a game
-        - [ ] Fix PickPlaceScreen Header
+        - [x] Fix PickPlaceScreen Header
+
     - [ ] FriendPlaying Notification
     - [ ] Checkin
         - [ ] Popup after checkin
@@ -91,11 +97,6 @@ TODO: Add {day}/month to items that are more than 6 days later than the current 
 - [ ] Comments
 
 
-- [ ] Add Profile Picture
-
-
-
-
 TODO: Fixes
 - [ ] remove trailing space from define username input and search inputs 
 
@@ -112,9 +113,6 @@ TODO: scenario10
 TODO: auth
 * [ ] Enable email confirmation to allow users to signin 
 - [ ] FeedBack in auth flow, after defining username, befor find your friends screen
-
-
-TODO: Prevent users from sharing a username
 
 
 TODO: Prevent users from choosing an already used username
