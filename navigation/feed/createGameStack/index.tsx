@@ -6,6 +6,7 @@ import { HeaderBackButton } from '@react-navigation/elements';
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { FeedStackNavigationProp } from "../types";
+import { globalStyles } from "../../../views/styles";
 
 
 
@@ -36,6 +37,9 @@ export function CreateGameStackNavigator(): JSX.Element {
 								onPress={() => {navigation.goBack()}}
 							/>
 						)
+					},
+					headerStyle: {
+						backgroundColor: globalStyles.global.screenBackGroundColor
 					}
 				}}
 				component={SelectPlaceScreenWrapper}
@@ -44,7 +48,10 @@ export function CreateGameStackNavigator(): JSX.Element {
 			<Stack.Screen
 				name="SelectTimeSlot"
 				options={{
-					headerTitle: "Choisissez votre horaire"
+					headerTitle: "Choisissez votre horaire",
+					headerStyle: {
+						backgroundColor: globalStyles.global.screenBackGroundColor
+					}
 				}}
 				component={SelectTimeSlotScreenWrapper}
 			/>

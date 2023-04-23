@@ -37,6 +37,8 @@ export default class SearchBarView extends React.Component<ISearchBarViewProps>{
                 onSearchChange={(text) => {this.props.onSearchInputChange(text)}}
                 padding={5}
                 height={42}
+                textStyle={{color: 'white'}}
+                
                 // iconColor={globalStyles.global.logoColor}
             />
             // <TextInput

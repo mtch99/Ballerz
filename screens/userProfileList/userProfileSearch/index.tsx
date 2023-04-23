@@ -12,12 +12,12 @@ export default class UserProfileSearchScreen<T extends IUserProfileListScreenPro
 
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
-    state: IUserProfileListScreenState = {
-        userProfileList: [],
-        filteredUserProfileList: [],
-        filterInput: '',
-        loading: false,
-    }
+    // state: IUserProfileListScreenState = {
+    //     userProfileList: this.context.userProfileListState.items,
+    //     filteredUserProfileList: this.context.userProfileListState.items,
+    //     filterInput: '',
+    //     loading: false,
+    // }
     constructor(props: T) {
         super(props);
     }
@@ -26,13 +26,14 @@ export default class UserProfileSearchScreen<T extends IUserProfileListScreenPro
         this.props.navigationController.goToUserProfile(item)
     }
 
+
+
     
     __initState(): void {
         this.setState((prevState) => ({
             ...prevState,
             userProfileList: this.context.userProfileListState.items,
             filteredUserProfileList: this.context.userProfileListState.items,
-            filterInput: ''
         }))
     }
 

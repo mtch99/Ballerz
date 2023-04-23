@@ -1,4 +1,3 @@
-import SvgUri from 'react-native-svg-uri';
 import React from 'react';
 import Svg, { Circle, Rect, Path } from 'react-native-svg';
 import {View, Text, StyleSheet, Image, TouchableOpacity, TouchableOpacityProps} from 'react-native'

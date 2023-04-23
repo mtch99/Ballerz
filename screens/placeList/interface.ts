@@ -10,6 +10,6 @@ export interface IPlaceSearchScreenNavigationController {
 }
 
 export interface IPlaceListViewProps {
-    placeList: IPlaceListState
+    placeList: IPlaceListState['items']
     onPressPlaceItem: (placeData: IPlaceListItemState) => void
 }

@@ -16,8 +16,8 @@ export class PlaceController implements IPlaceController{
         console.log(`\n Place usecase initialized \n`)
     }
 
-    getAllPlaces(): void {
-        this.placeUseCase.getAllPlaces()
+    async getAllPlaces(): Promise<void> {
+        await this.placeUseCase.getAllPlaces()
     }
 
     getPlaceProfile(id: string): void {

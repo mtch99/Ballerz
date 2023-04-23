@@ -56,11 +56,9 @@ There must be three different games on three different courts, two at the moment
         - [ ] Change the game item color to green on checkin
 
     - [x] Add place icon as header for FeedItem
-    - [ ] Create a game
-        - [x] Fix PickPlaceScreen Header
-
-    - [ ] FriendPlaying Notification
-    - [ ] Checkin
+    - [ ] Create a game and check in
+        - [ ] Fix PickPlaceScreen Header
+        - [ ] Checkin
         - [ ] Popup after checkin
 
 - [x] Notification screen

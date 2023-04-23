@@ -18,6 +18,9 @@ export function SelectPlaceScreenWrapper(props: CreateGameStackScreenProps<'Sele
                 chosenPlace: placeData,
             })
         },
+        goToPlaceProfile: function (id: string): void {
+            throw new Error("Function not implemented.")
+        }
     }
 
     return(
