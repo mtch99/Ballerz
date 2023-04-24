@@ -1,4 +1,4 @@
-import { ICheckinEventPayload, ICheckinInput, ICheckoutInput, ICommentInput, ICreateGameInput, ICreateGameOutput } from "../../domain/use-cases/feed/interface";
+import { ICheckInResult, ICheckinEventPayload, ICheckinInput, ICheckoutInput, ICommentInput, ICreateGameInput, ICreateGameResult } from "../../domain/use-cases/feed/interface";
 import { IFeed, IFeedItem, IUserProfileData } from "../../domain/use-cases/types";
 import { FeedUseCase } from "../../domain/use-cases/feed"
 import IFeedModel, { IFeedModelEventListener, IFeedUseCase } from "../../domain/use-cases/feed/interface";
@@ -15,7 +15,7 @@ class FeedController implements IFeedController {
         console.log(`\n Feed usecase initialized \n`)
     }
     
-    async createGame(input: ICreateGameInput): Promise<ICreateGameOutput>{
+    async createGame(input: ICreateGameInput): Promise<ICreateGameResult>{
         const result = await this.feedUseCase.createGame(input)
         return result
     }
@@ -26,7 +26,7 @@ class FeedController implements IFeedController {
         return result
     }
 
-    async checkIn(payload: ICheckinEventPayload): Promise<boolean>{
+    async checkIn(payload: ICheckinEventPayload): Promise<ICheckInResult>{
         return this.feedUseCase.checkIn(payload)
     }
 
@@ -49,13 +49,13 @@ const fakeUseCase: IFeedUseCase = {
     getFeed: function (): Promise<IFeedItem[]> {
         throw new Error("Function not implemented.");
     },
-    checkIn: function (payload: ICheckinInput): Promise<boolean> {
+    checkIn: function (payload: ICheckinInput): Promise<ICheckInResult> {
         throw new Error("Function not implemented.");
     },
     comment: function (input: ICommentInput): Promise<boolean> {
         throw new Error("Function not implemented.");
     },
-    createGame: function (input: ICreateGameInput): Promise<ICreateGameOutput> {
+    createGame: function (input: ICreateGameInput): Promise<ICreateGameResult> {
         throw new Error("Function not implemented.");
     },
     checkOut: function (input: ICheckoutInput): Promise<boolean> {

@@ -58,7 +58,12 @@ export class FeedModelAdapter {
     static parseCheckinEventPayload(payload: ICheckinEventPayload): ICheckInActionPayload {
         return {
             keyToUpdate: payload.id,
-            userProfileData: payload.userProfile
+            attendance: {
+                id: payload.attendanceID,
+                arrivalDateTime: payload.attendance.arrivalDateTime.toString(),
+                departureDateTime: payload.attendance.departureDateTime.toString(),
+                userProfileData: payload.attendance.userProfileData
+            }
         }
     }
 
@@ -83,6 +88,7 @@ export class FeedModelAdapter {
             endingTime: feedItem.endingTime.toString()
         }
     }
+
 }
 
 

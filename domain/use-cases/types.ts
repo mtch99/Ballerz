@@ -12,6 +12,12 @@ export interface IFeedItem extends IGame {
     place: IPlaceData
 }
 
+export interface IAttendance {
+    id: string;
+    arrivalDateTime: string;
+    departureDateTime: string;
+    userProfileData: IUserProfileData
+}
 
 export interface IGame {
     id: string;
@@ -20,7 +26,7 @@ export interface IGame {
     badges: IBadge[]
     startingTime: Date
     endingTime: Date
-    attendants: IUserProfileData[]
+    attendants: IAttendance[]
     place: IPlaceData
 }
 

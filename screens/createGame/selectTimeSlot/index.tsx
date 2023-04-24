@@ -1,7 +1,7 @@
 import React from "react";
 import { IPlaceData } from "../../../domain/use-cases/types";
 import { ISelectTimeSlotScreen } from "../interface";
-import { ICreateGameInput, ICreateGameOutput } from "../../../domain/use-cases/feed/interface";
+import { ICreateGameInput, ICreateGameResult } from "../../../domain/use-cases/feed/interface";
 import { AppContext, IAppContext } from "../../../controllers/provider";
 import { SelectTimeSlotView } from "../../../views/selectTimeSlot";
 
@@ -62,10 +62,10 @@ export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlo
         endingTime: this.props.endingTime?(this.props.endingTime):(new Date())
     }
     
-    async createGame(): Promise<ICreateGameOutput> {
+    async createGame(): Promise<ICreateGameResult> {
         const input: ICreateGameInput = {
-            placeId:this.state.chosenPlaceId,
-            userProfileId: "moiId",
+            placeID:this.state.chosenPlaceId,
+            userProfileID: "moiId",
             startingTime: this.state.startingTime,
             endingTime: this.state.endingTime
         }

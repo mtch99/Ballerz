@@ -13,7 +13,7 @@ export interface IFeedItemState {
     place: IPlaceData
     startingTime: string
     endingTime: string
-    attendants: IUserProfileData[],
+    attendants: IFeedItem['attendants'],
     friendsThere: IUserProfileData[],
     comments: IFeedItem['comments']
 }

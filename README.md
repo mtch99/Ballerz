@@ -58,7 +58,8 @@ There must be three different games on three different courts, two at the moment
     - [x] Add place icon as header for FeedItem
     - [ ] Create a game and check in
         - [x] Fix PickPlaceScreen Header
-        - [ ] Checkin
+        - [x] Checkin
+        - [ ] Disable Play button during checkin request
         - [ ] Popup after checkin
 
 - [x] Notification screen

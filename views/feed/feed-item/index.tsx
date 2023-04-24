@@ -55,7 +55,7 @@ export default function FeedItemView(props: IFeedItemViewProps){
 
 	const isAttending = (): boolean => {
 		const {attendants} = feedItem
-		const userFoundInAttendants = attendants.find(attendant => (attendant.id == authState.profile?.id))
+		const userFoundInAttendants = attendants.find(attendant => (attendant.userProfileData.id == authState.profile?.id))
 		return userFoundInAttendants?true:false 
 	}
 

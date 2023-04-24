@@ -1,3 +1,4 @@
+import { IAttendance } from "./../types";
 import { IPlaceData } from "../types";
 import { IComment, IFeed, IFeedItem, IUserProfileData } from "../types";
 
@@ -17,19 +18,24 @@ export interface ICommentEventPayload{
 
 export interface IFeedUseCase {
     getFeed(email?: string): Promise<IFeedItem[]>
-    checkIn(payload: ICheckinInput): Promise<boolean>
+    checkIn(payload: ICheckinInput): Promise<ICheckInResult>
     comment(input: ICommentInput): Promise<boolean>
-    createGame(input: ICreateGameInput): Promise<ICreateGameOutput>
+    createGame(input: ICreateGameInput): Promise<ICreateGameResult>
     checkOut(input: ICheckoutInput): Promise<boolean>
+}
+
+export interface ICheckInResult {
+    error: boolean,
+    attendanceID?: string,
 }
 
 
 export interface IGameRepository {
-    createGame(input: ICreateGameInput): Promise<ICreateGameOutput>
+    createGame(input: ICreateGameInput): Promise<ICreateGameResult>
     getAllGames(email?: string): Promise<IFeedItem[]>
-    checkIn(payload: ICheckinInput): Promise<boolean>
+    checkIn(payload: ICheckinInput): Promise<ICheckInResult>
     comment(input: ICommentInput): Promise<boolean>
-    createGame(input: ICreateGameInput): Promise<ICreateGameOutput>
+    createGame(input: ICreateGameInput): Promise<ICreateGameResult>
     checkOut(input: ICheckoutInput): Promise<boolean>
 }
 
@@ -43,14 +49,15 @@ export interface ICommentInput {
 
 
 export interface ICreateGameInput{
-    placeId: IPlaceData['id'],
-    userProfileId: IUserProfileData['id'],
+    placeID: IPlaceData['id'],
+    userProfileID: IUserProfileData['id'],
     startingTime: Date
     endingTime: Date
 }
-export interface ICreateGameOutput{
+export interface ICreateGameResult{
     error: boolean
-    feedItem: IFeedItem
+    feedItem?: IFeedItem 
+    attendanceID?: string 
 }
 export interface INewGameEventPayload extends IFeedItem{}
 
@@ -58,15 +65,23 @@ export interface INewGameEventPayload extends IFeedItem{}
 
 export interface ICheckinInput {
     id: IFeedItem['id']
-    userProfile: IUserProfileData
+    attendance: {
+        userProfileData: IUserProfileData
+        arrivalDateTime: Date,
+        departureDateTime: Date,
+    }
+    placeData: IPlaceData
 }
 
 
 export interface ICheckoutInput {
-    id: IFeedItem['id']
+    attendanceID: string,
+    feedItemID: string
     userProfile: IUserProfileData
 }
-export interface ICheckinEventPayload extends ICheckinInput{}
+export interface ICheckinEventPayload extends ICheckinInput{
+    attendanceID: string
+}
 
 
 

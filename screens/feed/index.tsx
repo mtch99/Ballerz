@@ -4,10 +4,11 @@ import { IFeedItemState, IFeedState} from "../../app/features/feed/slice/interfa
 import IFeedScreen, { IFeedScreenNavigationController, IPostCommentInput } from "./interface";
 import { Modal, View, Text, SafeAreaView, Alert } from "react-native";
 import IFeedController from "../../controllers/feed/interface";
-import { ICommentInput } from "../../domain/use-cases/feed/interface";
+import { ICheckinEventPayload, ICheckinInput, ICommentInput } from "../../domain/use-cases/feed/interface";
 import { AppContext, IAppContext } from "../../controllers/provider";
 import { globalStyles } from "../../views/styles";
 import FindYourFriendsBottomSheetView from "../../views/makeFriends/findYourFriendsBottomSheet";
+import { IScreenState, Screen } from "../interface";
 
 
 export interface IFeedScreenPropsWithoutNavigation {
@@ -18,17 +19,18 @@ export interface IFeedScreenProps extends IFeedScreenPropsWithoutNavigation{
     navigationController: IFeedScreenNavigationController
 }
 
-interface IFeedScreenState{
+interface IFeedScreenState extends IScreenState{
     modalVisible: boolean
 }
 
 
-export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenState> implements IFeedScreen{
+export class FeedScreen extends Screen<IFeedScreenProps, IFeedScreenState> implements IFeedScreen{
 
     navigationController: IFeedScreenNavigationController = this.props.navigationController;
     
     state = {
         modalVisible: false,
+        loading: false
     }
 
     static contextType = AppContext
@@ -60,27 +62,46 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
     }
 
     handlePlayButtonPress(feedItem: IFeedItemState): void {
-
         const userProfile = this.context.authState.profile
+        if(this.state.loading){
+            console.error("iuhodhdoihwso")
+            return;
+        } 
         if(userProfile){
-            console.log("ajanjnajn")
-            this.context.feedController.checkIn({
+            const input: ICheckinInput = {
                 id: feedItem.id,
-                userProfile
-            })
+                attendance: {
+                    arrivalDateTime: new Date(feedItem.startingTime),
+                    departureDateTime: new Date(feedItem.endingTime),
+                    userProfileData: userProfile
+                },
+                placeData: feedItem.place
+            }
+            this.makeRequest(this.context.feedController.checkIn(input))
         } 
         else {
             this.handleNoUserProfile()
         }
     }
 
+    isAttending(feedItem: IFeedItemState): boolean {
+        const {attendants} = feedItem
+		const userFoundInAttendants = attendants.find(attendant => (attendant.userProfileData.id == this.context.authState.profile?.id))
+		return userFoundInAttendants?true:false 
+    }
+
     handleCheckoutButtonPress(feedItem: IFeedItemState): void {
         const userProfile = this.context.authState.profile
         if(userProfile){
-            this.context.feedController.checkOut({
-                id: feedItem.id,
-                userProfile
-            })
+            const attendanceToDelete = feedItem.attendants.find(attendance => attendance.userProfileData.id == userProfile.id)
+            if(attendanceToDelete){
+                console.log(JSON.stringify(attendanceToDelete))
+                this.context.feedController.checkOut({
+                    feedItemID: feedItem.id,
+                    attendanceID: attendanceToDelete.id,
+                    userProfile
+                })
+            }
         } 
         else {
             this.handleNoUserProfile()

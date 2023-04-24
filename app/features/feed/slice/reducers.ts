@@ -1,3 +1,4 @@
+import { IAttendance } from "./../../../../domain/use-cases/types";
 import { IUserProfileDataState } from "./../../types";
 import { IComment, IFeedItem } from "../../../../domain/use-cases/types";
 import { IFeedItemState, IFeedState } from "./interface";
@@ -57,7 +58,7 @@ const removeItemReducer: FeedReducer<IRemoveItemActionPayload> = (state, action)
 const checkInReducer: FeedReducer<ICheckInActionPayload> = (state, action) => {
 	const currentItems = [...state.items]
 	const newItems: IFeedItemState[] = []
-    const {keyToUpdate, userProfileData} = action.payload
+    const {keyToUpdate, attendance: userProfileData} = action.payload
     for(let feedItem of currentItems) {
 		if(feedItem.id == keyToUpdate){
 			const newItem = addAttendantToFeedItem(feedItem, userProfileData)
@@ -76,9 +77,8 @@ const checkInReducer: FeedReducer<ICheckInActionPayload> = (state, action) => {
 const checkOutReducer: FeedReducer<ICheckOutActionPayload> = (state, action) => {
 	const newItems: IFeedState['items'] = []
 	state.items.forEach(feedItem => {
-		if(feedItem.id == action.payload.id){
+		if(feedItem.id == action.payload.feedItemID){
 			const newFeedItem = removeAttendantFromFeedItem(feedItem, action.payload.userProfile)
-			console.error(newFeedItem)
 			newItems.push(newFeedItem)
 		} else {
 			newItems.push(feedItem)
@@ -130,9 +130,9 @@ export const feedReducers = {
 } 
 
 
-function addAttendantToFeedItem(feedItem: IFeedItemState, userProfileData: ICheckInActionPayload['userProfileData']): IFeedItemState {
+function addAttendantToFeedItem(feedItem: IFeedItemState, attendant: IAttendance): IFeedItemState {
 	const currentAttendants = [...feedItem.attendants]
-	currentAttendants.push(userProfileData)
+	currentAttendants.push(attendant)
 
 	return {
 		...feedItem,
@@ -143,9 +143,9 @@ function addAttendantToFeedItem(feedItem: IFeedItemState, userProfileData: IChec
 
 function removeAttendantFromFeedItem(feedItem: IFeedItemState, userProfileData: IUserProfileDataState): IFeedItemState{
 	const currentAttendants: IFeedItemState['attendants'] = []
-	feedItem.attendants.forEach(attendant => {
-        if(attendant.id != userProfileData.id){
-            currentAttendants.push(attendant)
+	feedItem.attendants.forEach(attendance => {
+        if(attendance.userProfileData.id != userProfileData.id){
+            currentAttendants.push(attendance)
         }
     })
 
