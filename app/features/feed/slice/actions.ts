@@ -1,6 +1,7 @@
 import { IFeedItemState, IFeedState,} from "./interface";
 import { PayloadAction, createAction } from "@reduxjs/toolkit";
 import { IFeedItem, IUserProfile, IUserProfileData } from "../../../../domain/use-cases/types";
+import { ICheckoutInput } from "../../../../domain/use-cases/feed/interface";
 
 
 enum FeedActionType {
@@ -26,6 +27,10 @@ export interface ICheckInActionPayload {
     userProfileData: IUserProfileData
 }
 export interface ICheckInAction extends PayloadAction<ICheckInActionPayload>{}
+
+export interface ICheckOutActionPayload extends ICheckoutInput{}
+
+export interface ICheckOutAction extends PayloadAction<ICheckOutActionPayload>{}
 
 
 export interface ICommentActionPayload {

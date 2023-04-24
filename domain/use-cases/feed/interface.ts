@@ -2,7 +2,7 @@ import { IPlaceData } from "../types";
 import { IComment, IFeed, IFeedItem, IUserProfileData } from "../types";
 
 
-export default interface IFeedModel extends Partial<IFeedModelEventListener>{
+export default interface IFeedModel extends IFeedModelEventListener{
     newFeedEventHandler: (payload: IFeed) => void
     checkInEventHandler: (payload: ICheckinEventPayload) => void
     commentEventHandler: (payload: ICommentEventPayload) => void
@@ -20,6 +20,7 @@ export interface IFeedUseCase {
     checkIn(payload: ICheckinInput): Promise<boolean>
     comment(input: ICommentInput): Promise<boolean>
     createGame(input: ICreateGameInput): Promise<ICreateGameOutput>
+    checkOut(input: ICheckoutInput): Promise<boolean>
 }
 
 
@@ -29,6 +30,7 @@ export interface IGameRepository {
     checkIn(payload: ICheckinInput): Promise<boolean>
     comment(input: ICommentInput): Promise<boolean>
     createGame(input: ICreateGameInput): Promise<ICreateGameOutput>
+    checkOut(input: ICheckoutInput): Promise<boolean>
 }
 
 
@@ -58,6 +60,12 @@ export interface ICheckinInput {
     id: IFeedItem['id']
     userProfile: IUserProfileData
 }
+
+
+export interface ICheckoutInput {
+    id: IFeedItem['id']
+    userProfile: IUserProfileData
+}
 export interface ICheckinEventPayload extends ICheckinInput{}
 
 
@@ -67,4 +75,5 @@ export interface IFeedModelEventListener {
     checkInEventHandler: (payload: ICheckinEventPayload) => any
     newGameEventHandler: (payload: INewGameEventPayload) => any
     commentEventHandler: (payload: ICommentEventPayload) => any
+    onCheckout: (payload: ICheckoutInput) => any
 }

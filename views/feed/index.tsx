@@ -14,6 +14,7 @@ interface IProps {
 	handleInvitePress: IFeedScreen['handleInvitePress']
 	handlePlayButtonPress: IFeedScreen['handlePlayButtonPress']
 	handleCommentButtonPress: (item: IFeedItemState) => void
+	handleCheckoutButtonPress: (item: IFeedItemState) => void
 }
 
 
@@ -67,6 +68,7 @@ class FeedView extends React.Component<IProps> {
 								handleInvitePress={() => {this.handleInvitePress(item)}}
 								handlePlayButtonPress={() => {this.handlePlayButtonPress(item)}}
 								onPressCommentButton={() => {this.handleCommentButtonPress(item)}}
+								handleCheckoutButtonPress={() => {this.props.handleCheckoutButtonPress(item)}}
 							/>
 						)
 					}}

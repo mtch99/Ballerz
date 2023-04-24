@@ -50,14 +50,14 @@ There must be three different games on three different courts, two at the moment
         - [ ] Undo the last warning
         - [ ] Undo onNewNotification warning in Notifications repository
     - [x] Test with Dani 
-    - [ ] Feed Item View
+    - [x] Feed Item View
         - [x] Organize Card
-        - [ ] Display day and month when the game is occur more than 6 days later
-        - [ ] Change the game item color to green on checkin
+        - [x] Display day and month when the game starts more than 6 days later
+        - [x] Change the game item color to green on checkin
 
     - [x] Add place icon as header for FeedItem
     - [ ] Create a game and check in
-        - [ ] Fix PickPlaceScreen Header
+        - [x] Fix PickPlaceScreen Header
         - [ ] Checkin
         - [ ] Popup after checkin
 

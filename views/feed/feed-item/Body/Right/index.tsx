@@ -2,9 +2,22 @@ import style from "./styles";
 import React from "react";
 import { View, Text } from "react-native";
 
+
 export interface IBodyRightViewProps {
     startingDateTime: string
     endingDateTime: string 
+}
+
+const dateTimeFormatOptions: Intl.DateTimeFormatOptions = {
+    hour: "2-digit",
+    hourCycle: "h24",
+    dayPeriod: "long",
+    timeZone: "UTC",
+    weekday: "long",
+    month: "long",
+    year: "numeric",
+    minute:"2-digit",
+    day:"2-digit"
 }
 
 export default class BodyRightView extends React.Component<IBodyRightViewProps> {
@@ -14,50 +27,49 @@ export default class BodyRightView extends React.Component<IBodyRightViewProps> 
     endingDate = new Date (this.props.endingDateTime)
     endingHour = `${this.endingDate.getHours()<10?(`0${this.endingDate.getHours()}`):(this.endingDate.getHours())}`
 
-    startingDate_str = new Intl.DateTimeFormat("fr-CA", {
-        hour: "2-digit",
-        hourCycle: "h24",
-        dayPeriod: "long",
-        timeZone: "UTC",
-          weekday: "long",
-          month: "long",
-          year: "numeric",
-          minute:"2-digit",
-          day:"2-digit"
-    }).format(this.startingDate)
-    endingDate_str = new Intl.DateTimeFormat("fr-CA", {
-        hour: "2-digit",
-        hourCycle: "h24",
-        dayPeriod: "long",
-        timeZone: "UTC",
-          weekday: "long",
-          month: "long",
-          year: "numeric",
-          minute:"2-digit",
-          day:"2-digit"
-    }).format(this.endingDate)
+    startingDate_str = new Intl.DateTimeFormat("fr-CA", dateTimeFormatOptions).format(this.startingDate)
+    endingDate_str = new Intl.DateTimeFormat("fr-CA", dateTimeFormatOptions).format(this.endingDate)
 
     
 
-
-
-
-    captalizeFirstLetter(str: string): string{
-        const wordsList = str.split(" ");
+    getWeekDay(date_str: string): string{
+        const wordsList = date_str.split(" ");
         if(wordsList.length>0){
             const firstWord = wordsList[0];
-            const capitalizedFirstLetter = wordsList[0].charAt(0).toUpperCase()
-            return capitalizedFirstLetter + firstWord.substring(1)
+            const weekDay = firstWord.charAt(0).toUpperCase() + firstWord.substring(1);
+            return weekDay
         } else {
-            return str
+            return date_str
+        }
+    }
+
+    getMonth(date_str: string): string{
+        const wordsList = date_str.split(" ");
+        if(wordsList.length>0){
+            const month = wordsList[2];
+            return month.charAt(0).toUpperCase() + month.substring(1);
+        } else {
+            return date_str
         }
     }
 
     render(): React.ReactNode {
-        const startingWeekDay = this.captalizeFirstLetter(this.startingDate_str)
+        const startingWeekDay = this.getWeekDay(this.startingDate_str)
+        const todayAtMidnight = this.toMidnight(new Date())
+        const sevenDayTimeSpanMS = 7*24*60*60*1000
+        let DateView = () => (<Text style={style.weekDay}>{startingWeekDay}</Text>)
+        if(Math.abs(this.startingDate.valueOf() - todayAtMidnight.valueOf()) >= sevenDayTimeSpanMS){
+            try{
+                const day = this.startingDate_str.split(" ")[1]
+                const month = this.getMonth(this.startingDate_str)
+                DateView = () => (<Text style={style.weekDay}>{startingWeekDay} {day} {month}</Text>)
+            } catch(err){
+                console.warn(err)
+            }
+        }
         return(
             <View style={style.dateTimeContatiner}>
-                <Text style={style.mardi}>{startingWeekDay}</Text>
+                <DateView/>
                 <View style={style.timeContainer}>
                     <View style={style.startingHourTextContainer}>
                       <Text style={style.startingHourText}>{this.startingHour}:00</Text>
@@ -73,5 +85,12 @@ export default class BodyRightView extends React.Component<IBodyRightViewProps> 
                 </View>
             </View>
         )
+    }
+
+
+    private toMidnight(date: Date): Date {
+        const newDate = date
+        newDate.setHours(0)
+        return newDate
     }
 }

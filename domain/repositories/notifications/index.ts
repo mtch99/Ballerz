@@ -118,16 +118,10 @@ class ResponseHandler {
     // parseSubscription(clientNotif: )
 
     private static parseFriendshipRequestNotification(arg: ClientNotification): IFriendShipRequestNotification | undefined {
-        console.log(`\nReceived friendship request for ${JSON.stringify(arg)}`)
+        // console.log(`\nReceived friendship request for ${JSON.stringify(arg)}`)
         if(arg.type != NotificationType.friendshipRequest 
             || (!arg.friendshipRequestID) || (!arg.senderProfile) || (!arg.friendshipRequest)
         ){
-            // console.error(
-            //     arg.type != NotificationType.friendshipRequest 
-            //     || (!arg.senderProfileID)
-            //     //|| (!arg.friendshipRequestID)
-            // )
-            // console.warn(arg.senderProfileID)
             return undefined
         }
 

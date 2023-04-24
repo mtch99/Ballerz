@@ -1,4 +1,4 @@
-import { ICheckinEventPayload, ICheckinInput, ICommentInput, ICreateGameInput, ICreateGameOutput } from "../../domain/use-cases/feed/interface";
+import { ICheckinEventPayload, ICheckinInput, ICheckoutInput, ICommentInput, ICreateGameInput, ICreateGameOutput } from "../../domain/use-cases/feed/interface";
 import { IFeed, IFeedItem, IUserProfileData } from "../../domain/use-cases/types";
 import { FeedUseCase } from "../../domain/use-cases/feed"
 import IFeedModel, { IFeedModelEventListener, IFeedUseCase } from "../../domain/use-cases/feed/interface";
@@ -30,6 +30,10 @@ class FeedController implements IFeedController {
         return this.feedUseCase.checkIn(payload)
     }
 
+    async checkOut(input: ICheckoutInput): Promise<boolean>{
+        return this.feedUseCase.checkOut(input)
+    }
+
     async comment(input: ICommentInput): Promise<void> {
         this.feedUseCase.comment(input)
         return
@@ -52,6 +56,9 @@ const fakeUseCase: IFeedUseCase = {
         throw new Error("Function not implemented.");
     },
     createGame: function (input: ICreateGameInput): Promise<ICreateGameOutput> {
+        throw new Error("Function not implemented.");
+    },
+    checkOut: function (input: ICheckoutInput): Promise<boolean> {
         throw new Error("Function not implemented.");
     }
 }

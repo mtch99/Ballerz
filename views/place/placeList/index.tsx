@@ -11,7 +11,7 @@ export default class PlaceListView extends React.Component<IPlaceListViewProps>{
     render(): React.ReactNode {
         return(
             <KeyboardAvoidingView
-                style={{backgroundColor: globalStyles.global.screenBackGroundColor}}
+                style={{backgroundColor: globalStyles.global.screenBackGroundColor, flex:1}}
             >
                 <FlatList
                     style={{backgroundColor: globalStyles.global.screenBackGroundColor}}

@@ -68,7 +68,7 @@ export default class NotificationsClient extends BallerzApiClient implements INo
         const payload = this.genRequestPayload(listNotifications_gql, variables)
         const response = await API.graphql<GraphQLQuery<ListNotificationsQuery>>(payload)
         const result = this._handleResponse(response)
-        console.error(`${JSON.stringify(result)}`)
+        // console.error(`${JSON.stringify(result)}`)
         return result
     }
 

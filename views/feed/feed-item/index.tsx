@@ -7,18 +7,21 @@ import { BodyView } from "./Body";
 import IFeedScreen, { IPostCommentInput } from "../../../screens/feed/interface";
 import { style } from "./styles";
 import CommentsView from "./Bottom/Comments";
+import { AppContext } from "../../../controllers/provider";
 
 interface IFeedItemViewProps{
 	feedItem: IFeedItemState
 	handleBadgeClick: IFeedScreen['handleBadgeClick']
 	handleFriendsTherePress: IFeedScreen['handleFriendsTherePress']
 	handleInvitePress: IFeedScreen['handleInvitePress']
-	handlePlayButtonPress: IFeedScreen['handlePlayButtonPress']
+	handlePlayButtonPress: () => void
 	onPressCommentButton: () => void
+	handleCheckoutButtonPress: () => void
 }
 
 
 export default function FeedItemView(props: IFeedItemViewProps){
+	const {authState} = React.useContext(AppContext) 
 	const feedItem = props.feedItem
 	const handleBadgeClick = props.handleBadgeClick
 	const onBadgeClick = () => {
@@ -31,7 +34,11 @@ export default function FeedItemView(props: IFeedItemViewProps){
 		props.handleInvitePress(feedItem)
 	}
 	const onPressPlay = () => {
-		props.handlePlayButtonPress(feedItem)
+		if(isAttending()){
+			props.handleCheckoutButtonPress()
+		} else {
+			props.handlePlayButtonPress()
+		}
 	}
 
 	const handlePostComment = (commentText: string) => {
@@ -44,9 +51,17 @@ export default function FeedItemView(props: IFeedItemViewProps){
 	const onPressCommentButton = () => {
 		props.onPressCommentButton()
 	}
+
+
+	const isAttending = (): boolean => {
+		const {attendants} = feedItem
+		const userFoundInAttendants = attendants.find(attendant => (attendant.id == authState.profile?.id))
+		return userFoundInAttendants?true:false 
+	}
+
 	
 	return (
-		<View style={style.container}>
+		<View style={{...style.container, backgroundColor:(isAttending()?("#00312A"):(style.container.backgroundColor))}}>
 			<Header
 				text={feedItem?(feedItem.place.name):""}
 			/>
@@ -65,6 +80,7 @@ export default function FeedItemView(props: IFeedItemViewProps){
 				friendsThere={feedItem.friendsThere}
 				onPressFriendsThere={() => {onPressFriendsThere()}}
 				onPressInvite={() => {onPressInvite()}}
+				isAttending={isAttending()}
 			/>
 		</View>
 	)

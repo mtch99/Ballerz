@@ -31,8 +31,6 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
         modalVisible: false,
     }
 
-    private feedController: IFeedController = {} as IFeedController
-    private feed: IFeedState = {items: []} 
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
     constructor(props: IFeedScreenProps){
@@ -42,16 +40,11 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
 
     // Data retrieved on focus, managed by the navigator screen wrapper
     componentDidMount(): void {
-        // this.feedController = this.context.feedController
-        // this.getFeed();
-        // this.feed = this.context.feedState
-        // console.log(`Feed Screen just mounted \n
-        //     authState: ${JSON.stringify(this.context.authState)}`
-        // )
+
     }
 
     getFeed() {
-        this.feedController.getFeed(this.context.authState.user?.email)
+        this.context.feedController.getFeed(this.context.authState.user?.email)
     }
 
     handleBadgeClick = (feedItem: IFeedItemState): void => {
@@ -67,21 +60,31 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
     }
 
     handlePlayButtonPress(feedItem: IFeedItemState): void {
-        this.feedController.checkIn({
-            id: feedItem.id,
-            userProfile: {
-                id: "moiId",
-                username: "moi",
-                badges: [],
-                isFriend: undefined
-            }
-        }).then(res => {
-            if(res == true){
-                this.showXthGameThisMobthAlert()
-            }
-        }).catch(err => {
-            // console.error(err)
-        })
+
+        const userProfile = this.context.authState.profile
+        if(userProfile){
+            console.log("ajanjnajn")
+            this.context.feedController.checkIn({
+                id: feedItem.id,
+                userProfile
+            })
+        } 
+        else {
+            this.handleNoUserProfile()
+        }
+    }
+
+    handleCheckoutButtonPress(feedItem: IFeedItemState): void {
+        const userProfile = this.context.authState.profile
+        if(userProfile){
+            this.context.feedController.checkOut({
+                id: feedItem.id,
+                userProfile
+            })
+        } 
+        else {
+            this.handleNoUserProfile()
+        }
     }
 
     viewBadgeList(badgeList: IFeedItemState['badges']): void {
@@ -134,6 +137,33 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
     }
 
 
+    render() {
+        return (
+                <FeedView
+                    feedState={this.context.feedState}
+                    handleBadgeClick={(item) => {this.handleBadgeClick(item)}}
+                    handleFriendsTherePress={(item) => {this.handleFriendsTherePress(item)}}
+                    handleInvitePress={(item) => {this.handleInvitePress(item)}}
+                    // handlePlayButtonPress={(item) => {this.handlePlayButtonPress(item)}}
+                    handleCommentButtonPress={(input: IFeedItemState) => {this.handleCommentButtonPress(input)}}
+                    handlePlayButtonPress={this.handlePlayButtonPress.bind(this)}
+                    handleCheckoutButtonPress={this.handleCheckoutButtonPress.bind(this)}
+                />
+        )
+    }
+
+
+    handleNoUserProfile(){
+        Alert.alert(
+            "Créez votre profile",
+            "Vous devez céer un profile pour signaler votre présence sur un terrain",
+            [
+                { text: "OK", onPress: () => console.log("OK Pressed") },
+            ],
+            { cancelable: false }
+        )
+    }
+
     private showNoFriendsAlert(){
         Alert.alert(
           'Fais toi des amis',
@@ -156,21 +186,5 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
             ],
             { cancelable: false }
           );
-    }
-
-
-
-    render() {
-        return (
-                <FeedView
-                    feedState={this.context.feedState}
-                    handleBadgeClick={(item) => {this.handleBadgeClick(item)}}
-                    handleFriendsTherePress={(item) => {this.handleFriendsTherePress(item)}}
-                    handleInvitePress={(item) => {this.handleInvitePress(item)}}
-                    // handlePlayButtonPress={(item) => {this.handlePlayButtonPress(item)}}
-                    handleCommentButtonPress={(input: IFeedItemState) => {this.handleCommentButtonPress(input)}}
-                    handlePlayButtonPress={() => {}}
-                />
-        )
     }
 }

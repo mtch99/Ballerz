@@ -23,12 +23,13 @@ query ListGames(
       presenceList{
         items{
             userProfile{
-                friends(filter: $frendshipFilter){
-                    items {
-                      id
-                      friendProfileID
-                    }
-                }
+              id
+              friends(filter: $frendshipFilter){
+                  items {
+                    id
+                    friendProfileID
+                  }
+              }
             }
             startingDateTime
             endingDateTime

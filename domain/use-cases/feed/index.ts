@@ -1,7 +1,7 @@
 import uuid from "react-native-uuid";
 import initialFeed from "./data/feed";
 import initialUserProfileData from "../data/userProfile";
-import { ICheckinEventPayload, ICommentEventPayload, ICommentInput, ICreateGameInput, ICreateGameOutput, IFeedModelEventListener, IFeedUseCase, IGameRepository } from "./interface";
+import { ICheckinEventPayload, ICheckoutInput, ICommentEventPayload, ICommentInput, ICreateGameInput, ICreateGameOutput, IFeedModelEventListener, IFeedUseCase, IGameRepository } from "./interface";
 import { IComment, IFeed, IFeedItem, IUserProfile, IUserProfileData } from "../types";
 import { initialPlaceProfiles } from "../data/places";
 import GameRepository from "../../repositories/Game";
@@ -50,6 +50,11 @@ export class FeedUseCase implements IFeedUseCase {
 
     async checkIn(payload: ICheckinEventPayload): Promise<boolean> {
         this.observer.checkInEventHandler(payload)
+        return true
+    }
+
+    async checkOut(input: ICheckoutInput): Promise<boolean> {
+        this.observer.onCheckout(input)
         return true
     }
 

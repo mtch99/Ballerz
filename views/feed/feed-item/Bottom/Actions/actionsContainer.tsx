@@ -7,11 +7,13 @@ export interface IActionContainerProps{
 	onPressInvite: () => void
 	onPressPlay: () => void
 	onPressCommentButton: () => void
+	isAttending: boolean
 }
 
 
 export function ActionsContainer(props:IActionContainerProps) {
 
+	const playButtonLabel = props.isAttending?("annuler"):("jouer")
 
     return(
       	<View style={styles.actionsContainer}>
@@ -19,7 +21,7 @@ export function ActionsContainer(props:IActionContainerProps) {
 			<TouchableOpacity
 				onPress={() => {props.onPressPlay()}}
 			>
-				<Text style={styles.playText}>jouer</Text>
+				<Text style={styles.playText}>{playButtonLabel}</Text>
 			</TouchableOpacity>
 
 

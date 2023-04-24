@@ -61,7 +61,7 @@ export default class UserProfileRepository implements IUserProfileRepository {
         }
 
         const response = await this.client.listUserProfiles(variables).then((data) => {
-            console.warn(JSON.stringify(data))
+            // console.warn(JSON.stringify(data))
             return data
         })
         .catch(async(err) => {

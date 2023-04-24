@@ -28,10 +28,13 @@ export default function LeftBodyView(props: ILeftBodyProps) {
   		return(
 
   		    <View style={styles.container}>
-  		        <View style={styles.playerNumContainer}>
+  		        <TouchableOpacity 
+					style={styles.playerNumContainer}
+					onPress={props.onPress}
+				>
   		          <Text style={styles.playersNumText}>{props.playersNum}</Text>
   		          <Text style={styles.playersText}>Joueurs</Text>
-  		        </View>
+  		        </TouchableOpacity>
 				<FriendsThereView
 					friendsHere={props.friendsHere}
 					onPress={props.onPress}
