@@ -15,22 +15,23 @@ export class HeaderView extends React.Component<IHeaderViewProps>{
     }
 
 
-    componentDidMount(): void {
-        this.fetchImageUrl("demo.jpg")
-    }
-    async fetchImageUrl(key: string): Promise<string> {
-        const allKeys  = await Storage.Storage.list('');
-        allKeys.results.forEach((currentKey) => {
-            console.warn(currentKey);
-        })
-        const signedUrl = await Storage.Storage.get(key)
-        this.setState((prevState) => ({
-            ...prevState,
-            imageUrl: signedUrl
-        }))
-        console.log(signedUrl)
-        return signedUrl
-    }
+    // componentDidMount(): void {
+    //     this.fetchImageUrl("demo.jpg")
+    // }
+
+    // async fetchImageUrl(key: string): Promise<string> {
+    //     const allKeys  = await Storage.Storage.list('');
+    //     allKeys.results.forEach((currentKey) => {
+    //         console.warn(currentKey);
+    //     })
+    //     const signedUrl = await Storage.Storage.get(key)
+    //     this.setState((prevState) => ({
+    //         ...prevState,
+    //         imageUrl: signedUrl
+    //     }))
+    //     console.log(signedUrl)
+    //     return signedUrl
+    // }
 
 
     constructor(props: IHeaderViewProps){
@@ -80,7 +81,7 @@ export class HeaderView extends React.Component<IHeaderViewProps>{
                 <View style={styles.profilePicContainer}>
                     <Image
                         style={styles.profilePic}
-                        source={{uri:this.state.imageUrl}}
+                        source={this.props.profilePicSource}
                     />
                 </View>
 

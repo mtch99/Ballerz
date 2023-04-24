@@ -1,6 +1,6 @@
 import * as ImagePicker from "expo-image-picker";
 import { Amplify } from "aws-amplify";
-import {Storage, PutResult} from "@aws-amplify/storage";
+import {Storage, PutResult, StorageGetConfig} from "@aws-amplify/storage";
 import awsmobile from "../../infrastructure/BallerzServices/aws-exports";
 Amplify.configure({
     ...awsmobile,
@@ -15,10 +15,15 @@ export interface IUploadImageResult {
 
 
 export async function getProfilePicUri(profileID: string): Promise<string | undefined> {
-  const uri = await Storage.get(`public/${profileID+DEFAULT_IMAGE_EXTENSION}`).catch(err => {
+  const configMap: StorageGetConfig<any> = {
+    
+  }
+  const uri = await Storage.get(`public/${profileID+DEFAULT_IMAGE_EXTENSION}`, {
+  }).catch(err => {
     console.log(`Error getting profile pic: ${err}`);
     return undefined;
   })
+  console.log(uri);
   return uri
 }
 

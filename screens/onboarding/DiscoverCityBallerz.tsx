@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
 
     bottomSheetContainer: {
         // flex:1,
-        height: '25%',
+        height: '35%',
         justifyContent:'space-evenly',
         borderColor: 'white',
         borderBottomRightRadius: 50,

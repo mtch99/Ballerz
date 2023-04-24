@@ -47,7 +47,7 @@ export class WelcomeScreen extends React.Component<IWelcomeScreenProps>{
                         </Text>
 
                         <ProgressButton
-                          style={{justifyContent:'center', alignItems:'center'}}
+                          style={{justifyContent:'center', alignItems:'center', marginTop:10}}
                           percentage={25}
                           onPress={this.advance.bind(this)}
                         />
@@ -68,10 +68,11 @@ const styles = StyleSheet.create({
         // flexDirection: 'column-reverse',
         flexGrow: 1
     },
-
+    
     bottomSheetContainer: {
         // flex:1,
-        maxHeight: '35%',
+        maxHeight: '50%',
+        padding: 20,
         justifyContent:'space-evenly',
         borderColor: 'white',
         // borderBottomRightRadius: 20,
@@ -92,6 +93,7 @@ const styles = StyleSheet.create({
     },
 
     body: {
+        marginTop: 10,
         fontSize: 19,
         textAlign: 'center',
         color: '#777777'

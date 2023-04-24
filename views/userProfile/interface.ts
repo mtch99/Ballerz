@@ -1,10 +1,11 @@
+import { ImageSourcePropType } from "react-native";
 import { IBadgeData } from "../../app/features/feed/slice/interface";
 import { IUserProfileState } from "../../app/features/types";
 
 
 export interface IHeaderViewProps {
     username: string;
-    profilePicUri: string;
+    profilePicSource: ImageSourcePropType;
     isFriend: IUserProfileState['isFriend']
     friendsList: IUserProfileState['friends']
     friendshipRequestSent: IUserProfileState['friendshipRequestSent']

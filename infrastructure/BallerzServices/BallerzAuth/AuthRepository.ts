@@ -14,9 +14,10 @@ export class AuthRepository implements IAuthRepository {
         const isFirstLaunch = await AsyncStorage.getItem('isFirstLaunch');
         if(isFirstLaunch == 'false'){
             return false
+        } else {
+            await AsyncStorage.setItem('isFirstLaunch', 'false');
+            return true
         }
-        await AsyncStorage.setItem('isFirstLaunch', 'false');
-        return true
     }
 
     async confirmSignup(input: struct.IConfirmSignupInput): Promise<struct.IConfirmSignupResult> {

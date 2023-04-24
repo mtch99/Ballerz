@@ -1,5 +1,5 @@
 import React from "react"
-import { View, Text, ScrollView } from "react-native"
+import { View, Text, ScrollView, ImageSourcePropType } from "react-native"
 import { IUserProfileViewProps } from "../../screens/userProfile"
 import { styles } from "./styles"
 import { HeaderView } from "./header"
@@ -9,18 +9,31 @@ import PictresView from "./pictures"
 import GamesListView from "./games"
 import { IUserProfileState } from "../../app/features/types"
 import BallerzSafeAreaView from "../safeArea"
+import { getProfilePicUri } from "../../screens/utils/ImagePicker"
 
 
 
 
 
-export class UserProfileView extends React.Component<IUserProfileViewProps>{
+
+export class UserProfileView extends React.Component<IUserProfileViewProps, IProfileViewState>{
 
     async onPressAdd(): Promise<void> {
         console.warn("onPressAdd")
         this.props.onPressAddButton({...this.props})
     }
 
+    state = {
+        profilePicSource: require('../../assets/profilePic.jpg'), 
+    }
+
+    componentDidMount(): void {
+        getProfilePicUri(this.props.id).then(uri => {
+            if(uri){
+                this.setState({profilePicSource: {uri}})
+            }
+        })
+    }
 
     render(){
         return(
@@ -30,7 +43,7 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
                 <HeaderView
                     username={this.props.username}
                     friendsList={this.props.friends}
-                    profilePicUri={'../../assets/profilePic'}
+                    profilePicSource={this.state.profilePicSource}
                     isFriend={this.props.isFriend}
                     onPressFriendsNumber={this.props.onPressFriendsNumber}
                     friendshipRequestSent={this.props.friendshipRequestSent}
@@ -52,8 +65,22 @@ export class UserProfileView extends React.Component<IUserProfileViewProps>{
 
 
 
+export interface IProfileViewState {
+    profilePicSource: ImageSourcePropType
+}
 
-export class MyProfileView extends React.Component<IUserProfileViewProps> {
+export class MyProfileView extends React.Component<IUserProfileViewProps, IProfileViewState> {
+    state = {
+        profilePicSource: require('../../assets/profilePic.jpg'), 
+    }
+
+    componentDidMount(): void {
+        getProfilePicUri(this.props.id).then(uri => {
+            if(uri){
+                this.setState({profilePicSource: {uri}})
+            }
+        })
+    }
     render(){
         return(
             <BallerzSafeAreaView>
@@ -65,7 +92,7 @@ export class MyProfileView extends React.Component<IUserProfileViewProps> {
                     username={this.props.username}
                     friendsList={this.props.friends}
                     // profilePicUri={'../../assets/profilePic'}
-                    profilePicUri="https://mybucket195747-profilepic.s3.us-east-2.amazonaws.com/public/demo.jpg"
+                    profilePicSource={this.state.profilePicSource}
                     isFriend={this.props.isFriend}
                     onPressFriendsNumber={this.props.onPressFriendsNumber}
                     friendshipRequestSent={this.props.friendshipRequestSent}
