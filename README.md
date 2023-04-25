@@ -14,7 +14,7 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 
-- [x] Notifications use case
+- [ ] Notifications use case
     - [x] Define and implement Notifications usecase
     - [x] Notifications model
     - [x] Notifications controller
@@ -54,6 +54,8 @@ There must be three different games on three different courts, two at the moment
         - [x] Organize Card
         - [x] Display day and month when the game starts more than 6 days later
         - [x] Change the game item color to green on checkin
+    TODO:     
+    - [ ] Refactor Game interface. Change date fields to string type
 
     - [x] Add place icon as header for FeedItem
     - [ ] Create a game and check in

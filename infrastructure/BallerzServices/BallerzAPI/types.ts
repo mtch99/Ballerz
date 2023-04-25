@@ -19,14 +19,13 @@ export type Presence = {
 	place: PlaceData
 	startingDateTime: string
 	endingDateTime: string
-	startingTime: string
-	endingTime: string
 }
 
 export type PlaceData = {
     __typename: "Place",
     id: string,
     name: string
+    address: string
 }
 
 

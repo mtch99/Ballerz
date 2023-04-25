@@ -52,9 +52,9 @@ export const getGame_gql = /* GraphQL */ `
     getGame(id: $id) {
       id
       presenceList (filter: $presenceFilter){
-		items {
-			id
-		}
+		    items {
+		    	id
+		    }
         nextToken
       }
       placeID

@@ -1,6 +1,6 @@
 import { ModelIDInput, FriendshipRequestStatus } from "../API";
 import { NotificationType } from "../API";
-import { UserProfileData } from "../types";
+import { PlaceData, UserProfileData } from "../types";
 import {Notification} from "./types"
 
 
@@ -21,7 +21,6 @@ export type ListNotificationsQuery = {
       nextToken: string | null,
     } | null,
 };
-
 
 
 export const listNotifications_gql = /* GraphQL */ `
@@ -56,6 +55,34 @@ export const listNotifications_gql = /* GraphQL */ `
             id
             username
         }
+        presenceID
+        presence{
+          __typename
+          id
+          userProfile{
+            id
+            username
+            friends(filter: $frendshipFilter){
+                items {
+                  id
+                  friendProfileID
+                }
+            }
+          }
+          game{
+            id
+            placeID
+        	  place{
+            	id
+              name
+              address
+        	  }
+            startingDateTime
+            endingDateTime
+          }
+          startingDateTime
+          endingDateTime
+        }
         createdAt
         updatedAt
       }
@@ -63,3 +90,5 @@ export const listNotifications_gql = /* GraphQL */ `
       }
     }
 `;
+
+

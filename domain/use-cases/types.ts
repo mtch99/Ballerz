@@ -19,13 +19,18 @@ export interface IAttendance {
     userProfileData: IUserProfileData
 }
 
-export interface IGame {
-    id: string;
+export interface IGameData {
+    id: string
+    placeID: string
+    place: IPlaceData
+    startingTime: Date
+    endingTime: Date
+}
+
+export interface IGame extends IGameData {
     friendsThere: IUserProfileData[]
     comments: IComment[]
     badges: IBadge[]
-    startingTime: Date
-    endingTime: Date
     attendants: IAttendance[]
     place: IPlaceData
 }
@@ -121,8 +126,11 @@ export interface INewFriendNotification extends _INotification{
 
 export interface IFriendPlayingNotification extends _INotification{
     type: NotificationType.friendPlaying
-    game: IGame
+    game: IGameData
 }
+
+
+
 
 
 

@@ -1,16 +1,13 @@
-import { GraphQLResult, GraphQLSubscription } from "@aws-amplify/api";
 import { IGetMyNotificationsErrorReason, IgetMyNotificationsError } from "./../../use-cases/notifications/interface";
 import { FriendShipRequestData, UserProfileData } from "../../../infrastructure/BallerzServices/BallerzAPI/types";
-import { IFriendShipRequestNotification, IFriendshipRequest, INewFriendNotification, IUserProfileData } from "./../../use-cases/types";
-import { FilterNotificationsByUserQueryVariables, ListNotificationsQuery } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient/queries";
+import { IFriendPlayingNotification, IFriendShipRequestNotification, IFriendshipRequest, INewFriendNotification, IUserProfileData } from "./../../use-cases/types";
+import { ListNotificationsQuery } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient/queries";
 import { INotificationsClient } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient/interface";
 import { Notification as ClientNotification } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient/types";
 import { INotificationsRepository, INotificationsUseCase, IGetMyNotificationsResult } from "../../use-cases/notifications/interface";
 import { Notification, NotificationType as DomainNotificationType } from "../../use-cases/types";
-import NotificationsClient, { NotificationsClientMock } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient";
+import NotificationsClient from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient";
 import { NotificationType } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
-import { useTheme } from "react-navigation";
-import { MyNotificationsSubscription } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient/subscriptions";
 
 export class NotificationsRepository implements INotificationsRepository {
     observer: INotificationsUseCase;
@@ -110,18 +107,33 @@ class ResponseHandler {
                 result = newFriendNotification
 
             case NotificationType.friendPlaying:
-                // const friendPlayingNotification = this.parseFriendPlayingNotification(clientNotif)
-            
+                const friendPlayingNotification = this.parseFriendPlayingNotification(clientNotif)
+                result = friendPlayingNotification
             default:
                 break;
         }
         return result
     }
 
-    // static parseFriendPlayingNotification(clientNotif: ClientNotification): Notification | undefined {
-    //     if(arguments.type != NotificationType.friendPlaying || clientNotif.presenceID) 
-    // }
-    // parseSubscription(clientNotif: )
+    static parseFriendPlayingNotification(clientNotif: ClientNotification): IFriendPlayingNotification | undefined {
+        let result: IFriendPlayingNotification | undefined;
+        if(clientNotif.type == NotificationType.friendPlaying && clientNotif.presenceID && clientNotif.presence
+            && clientNotif.receiverProfileID && clientNotif.senderProfile && clientNotif.senderProfileID)
+         {
+                result = {
+                    ...clientNotif,
+                    senderProfileID: clientNotif.senderProfileID,
+                    senderProfile: this.parseUserProfileData(clientNotif.senderProfile),
+                    type: NotificationType.friendPlaying,
+                    game: {
+                        ...clientNotif.presence.game,
+                        startingTime: new Date(clientNotif.presence.game.startingDateTime),
+                        endingTime: new Date(clientNotif.presence.game.endingDateTime),
+                    }
+                }
+        }
+        return result
+    }
 
     private static parseFriendshipRequestNotification(arg: ClientNotification): IFriendShipRequestNotification | undefined {
         // console.log(`\nReceived friendship request for ${JSON.stringify(arg)}`)

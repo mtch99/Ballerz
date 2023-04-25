@@ -29,7 +29,7 @@ export default class BallerzPlaceClient extends BallerzApiClient {
     }
 
 
-    async listPlaces(): Promise<ListPlacesQuery|undefined>{
+    async listAllPlaces(): Promise<ListPlacesQuery|undefined>{
         const response = await API.graphql<GraphQLQuery<ListPlacesQuery>>({
             query: listPlaces_gql,
         });

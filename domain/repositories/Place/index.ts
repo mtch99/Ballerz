@@ -13,7 +13,7 @@ export default class PlaceRepository implements IPlaceRepository {
 
     async getAllPlaces(): Promise<IPlaceData[]> {
         const result: IPlaceData[] = []
-        const response = await this.client.listPlaces()
+        const response = await this.client.listAllPlaces()
         if (response?.listPlaces?.items) {
             const items = response.listPlaces.items 
             items.forEach(item => {
@@ -67,6 +67,7 @@ function parseGameConnection(items: (Game | null)[]): IGame[] {
             const friendsThere: IUserProfileData[] = getFriendsThereListFromPresenceList(attendants)
             const game: IGame = {
                 id: item.id,
+                placeID: item.placeID,
                 friendsThere,
                 comments: [],
                 badges: [],

@@ -143,6 +143,7 @@ export class GameAdapter {
         //TODO: Remove the preesence list length condition
         if(game?.place && game.presenceList.items.length > 0){
             const result: IFeedItem = {
+                placeID: game.place.id,
                 place: game.place,
                 id: game.id,
                 friendsThere: [],
