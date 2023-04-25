@@ -80,6 +80,9 @@ There must be three different games on three different courts, two at the moment
 
 * [x] Badge display on new Notification
 
+- [x] Place Profile View
+
+
 - [ ] I want see a toast message on new notiication
     - [ ] Display a toast message on new received notification 
         - [ ] yarn add @react-native-material/Snackbar
@@ -87,31 +90,11 @@ There must be three different games on three different courts, two at the moment
         - [ ] Notification  controller send events to the snackbar  
         
 
-TODO: Add {day}/month to items that are more than 6 days later than the current day at midnight
-
- 
-
-<!-- - [ ] Add place -->
-- [ ] Invitations
-- [ ] Comments
-
-
-TODO: Fixes
-- [ ] remove trailing space from define username input and search inputs 
-
-* [ ] TODO: Save userProfile in the local storage upon creation
-
-
 TODO: scenario10
-- [ ] UserProfileScreen
-            - [ ] add stats
-* [ ] inject profilepic uri
 * [ ] Fix userProfileScreen virtualized list in scrollView Error
 
 
 TODO: auth
-* [ ] Enable email confirmation to allow users to signin 
-- [ ] FeedBack in auth flow, after defining username, befor find your friends screen
 
 
 TODO: Prevent users from choosing an already used username

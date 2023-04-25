@@ -2038,6 +2038,7 @@ export type GetPlaceQuery = {
     address: string,
     gameList?:  {
       __typename: "ModelGameConnection",
+      
       nextToken?: string | null,
     } | null,
     createdAt: string,

@@ -3,6 +3,11 @@ import { View, Text } from "react-native"
 import { IPlaceProfileState } from "../../app/features/place/types"
 import { styles } from "./styles"
 import { IPlaceProfileViewProps } from "../../screens/placeProfile"
+import BallerzSafeAreaView from "../safeArea"
+import { style } from "../feed/feed-item/styles"
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"
+import { SectionList, SectionListProps } from "react-native"
+import { IFeedItemState } from "../../app/features/feed/slice/interface"
 
 
 
@@ -16,6 +21,15 @@ export class PlaceProfileView extends React.Component<IPlaceProfileViewProps>{
         address: ""
     }
 
+    sectionListProps: SectionListProps<IFeedItemState> = {
+        sections: [
+            {
+                data: this.props.games,
+                key: "Parties"
+            }
+        ]
+    }
+
 
     componentDidMount(): void {
         // console.warn(`Mounting props: ${JSON.stringify(this.props)}`)
@@ -27,17 +41,31 @@ export class PlaceProfileView extends React.Component<IPlaceProfileViewProps>{
 
     render(): React.ReactNode {
         return(
-            <View>
-                <View
-                    style={styles.profilePictureContainer}
-                />
-                <Text style={{color: 'white'}}>
-                    {this.props.name}
-                </Text>
-                <Text style={{color: 'white'}}>
-                    {this.props.address}
-                </Text>
-            </View>
+            <BallerzSafeAreaView>
+                <>
+                    <View style={style.container}>
+                        <View
+                            style={styles.profileDataContainer}
+                        >
+                            <View
+                                style={{flexDirection: "row", ...styles.usernameContainer}}
+                            >
+                                <MaterialIcons
+                                    name="place"
+                                    size={17}
+                                    color="grey"
+                                />
+                                <Text style={styles.usernameText}>
+                                    {this.props.name}
+                                </Text>
+                            </View>
+                            <Text style={{color: 'lightgrey'}}>
+                                {this.props.address}
+                            </Text>
+                        </View>
+                    </View>
+                </>
+            </BallerzSafeAreaView>
         )
     }
 }

@@ -25,6 +25,7 @@ query ListGames(
             id
             userProfile{
               id
+              username
               friends(filter: $frendshipFilter){
                   items {
                     id

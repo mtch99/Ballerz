@@ -10,6 +10,7 @@ export type Notification = {
     receiverProfileID: string 
     senderProfileID: string | null,
     senderProfile: UserProfileData | null
+    presenceID: string
     createdAt: string,
     updatedAt: string,
 }

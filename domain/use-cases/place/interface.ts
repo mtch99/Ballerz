@@ -3,9 +3,16 @@ import { IPlaceProfile } from "./types";
 
 
 export default interface IPlaceUseCase{
+    repository: IPlaceRepository
     observer: IPlaceModelEventListener
-    getAllPlaces(): IPlaceData[]
-    getPlaceProfile(id: string): IPlaceProfile | null
+    getAllPlaces(): Promise<IPlaceData[]>
+    getPlaceProfile(id: string, userProfielID?:string): Promise<IPlaceProfile | null>
+}
+
+
+export interface IPlaceRepository {
+    getAllPlaces(): Promise<IPlaceData[]>
+    getPlaceProfile(id: string, userProfileID?:string): Promise<IPlaceProfile | null>
 }
 
 

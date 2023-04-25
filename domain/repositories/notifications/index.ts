@@ -108,6 +108,9 @@ class ResponseHandler {
             case NotificationType.newFriend:
                 const newFriendNotification = this.parseNewFriendNotification(clientNotif)
                 result = newFriendNotification
+
+            case NotificationType.friendPlaying:
+                // const friendPlayingNotification = this.parseFriendPlayingNotification(clientNotif)
             
             default:
                 break;
@@ -115,6 +118,9 @@ class ResponseHandler {
         return result
     }
 
+    // static parseFriendPlayingNotification(clientNotif: ClientNotification): Notification | undefined {
+    //     if(arguments.type != NotificationType.friendPlaying || clientNotif.presenceID) 
+    // }
     // parseSubscription(clientNotif: )
 
     private static parseFriendshipRequestNotification(arg: ClientNotification): IFriendShipRequestNotification | undefined {
