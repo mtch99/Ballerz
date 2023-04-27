@@ -105,6 +105,7 @@ class ResponseHandler {
             case NotificationType.newFriend:
                 const newFriendNotification = this.parseNewFriendNotification(clientNotif)
                 result = newFriendNotification
+                break;
 
             case NotificationType.friendPlaying:
                 const friendPlayingNotification = this.parseFriendPlayingNotification(clientNotif)
@@ -136,10 +137,10 @@ class ResponseHandler {
     }
 
     private static parseFriendshipRequestNotification(arg: ClientNotification): IFriendShipRequestNotification | undefined {
-        // console.log(`\nReceived friendship request for ${JSON.stringify(arg)}`)
         if(arg.type != NotificationType.friendshipRequest 
             || (!arg.friendshipRequestID) || (!arg.senderProfile) || (!arg.friendshipRequest)
-        ){
+            ){
+            console.log(`\nReceived friendship request for ${JSON.stringify(arg)}`)
             return undefined
         }
 
@@ -166,19 +167,23 @@ class ResponseHandler {
     }
 
     private static parseNewFriendNotification(arg: ClientNotification): INewFriendNotification | undefined {
+        let result: INewFriendNotification|undefined
         if(arg.type != NotificationType.newFriend 
             || !arg.senderProfile || !arg.senderProfileID
         ){
             console.warn(JSON.stringify(arg))
-            return undefined
-        } 
-
-        return {
-            ...arg,
-            type: DomainNotificationType.newFriend, 
-            senderProfileID: arg.senderProfileID,
-            senderProfile: this.parseUserProfileData(arg.senderProfile)
+        } else {
+            result = {
+                ...arg,
+                type: DomainNotificationType.newFriend, 
+                senderProfileID: arg.senderProfileID,
+                senderProfile: this.parseUserProfileData(arg.senderProfile)
+            }
         }
+
+        console.log(JSON.stringify(result?.type))
+
+        return result
     }
 
     private static parseUserProfileData(input: UserProfileData): IUserProfileData{

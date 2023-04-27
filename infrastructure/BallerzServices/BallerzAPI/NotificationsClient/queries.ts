@@ -28,6 +28,7 @@ export const listNotifications_gql = /* GraphQL */ `
     $filter: ModelNotificationFilterInput
     $limit: Int
     $nextToken: String
+    $frendshipFilter: ModelFriendshipFilterInput
   ) {
     listNotifications(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
