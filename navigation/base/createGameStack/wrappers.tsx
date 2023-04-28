@@ -40,6 +40,9 @@ export function SelectTimeSlotScreenWrapper(props: CreateGameStackScreenProps<'S
         onGameCreated: function (): void {
             navigation.navigate('FeedScreen', {})
         },
+        goToSelectPlace(): void {
+            navigation.navigate('SelectPlace', {})
+        },
         goBack(): void {
             navigation.goBack()
         }

@@ -1,6 +1,6 @@
-import { useNavigation } from "@react-navigation/native"
+import { NavigatorScreenParams, useNavigation } from "@react-navigation/native"
 import { IPlaceProfileScreenNavigationController } from "../../screens/placeProfile/interface"
-import { BaseStackNavigationProp, BaseStackScreenProps } from "./types"
+import { BaseStackNavigationProp, BaseStackParamList, BaseStackScreenProps } from "./types"
 import { PlaceProfileScreen } from "../../screens/placeProfile"
 import { TabRouter } from "react-navigation"
 import { IUserProfileScreenNavigationController } from "../../screens/userProfile/interface"
@@ -8,15 +8,25 @@ import { IUserProfileDataState } from "../../app/features/types"
 import { UserProfileScreen } from "../../screens/userProfile"
 import { IUserProfileListScreenNavigationController } from "../../screens/userProfileList/interface"
 import FriendsListScreen from "../../screens/userProfileList/friendsList"
+import { CreateGameStackNavigator } from "./createGameStack"
+import { IPlaceData } from "../../domain/use-cases/types"
+import { NativeStackScreenProps } from "@react-navigation/native-stack"
+import { CreateGameStackParamList } from "./createGameStack/types"
 
 export function PlaceProfileScreenWrapper(props: BaseStackScreenProps<'PlaceProfileScreen'>){
 
     const navigation = useNavigation<BaseStackNavigationProp<'PlaceProfileScreen'>>()
 
     const navigationController: IPlaceProfileScreenNavigationController = {
-        goToAttendantsListScreen() {
-            navigation.goBack()
-        },
+        goToCreateTimeSlot: function (placeDate: IPlaceData): void {
+            const navigationParams: NavigatorScreenParams<CreateGameStackParamList> = {
+                screen: "SelectTimeSlot",
+                params: {
+                    chosenPlace: placeDate
+                }
+            }
+            navigation.navigate("CreateGameStack", navigationParams)
+        }
     }
 
     if(!props.route.params){
@@ -80,4 +90,13 @@ export function FriendsListScreenWrapper(props: BaseStackScreenProps<'FriendsLis
         />
     )
 
+}
+
+
+export function CreateGameStackWrapper(props: BaseStackScreenProps<'CreateGameStack'>){
+    const {navigation, route} = props
+
+    return(
+        <CreateGameStackNavigator/>
+    )
 }

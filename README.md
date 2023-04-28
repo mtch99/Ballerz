@@ -84,6 +84,7 @@ There must be three different games on three different courts, two at the moment
 
 - [ ] Place Profile View
     - [x] Add games list to Place profile
+    - [x] PickTimeSlotScreen callBack on game Created
     - [ ] Header right icon for playing
 
 

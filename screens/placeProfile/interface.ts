@@ -1,3 +1,4 @@
+import { IPlaceData } from "./../../domain/use-cases/types";
 
 
 export default interface IPlaceProfileScreen{
@@ -8,5 +9,5 @@ export default interface IPlaceProfileScreen{
 
 
 export interface IPlaceProfileScreenNavigationController{
-
+    goToCreateTimeSlot(placeDate: IPlaceData): void
 }

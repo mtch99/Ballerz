@@ -1,5 +1,5 @@
-import { ISelectTimeSlotScreenPropsWithoutNavigation } from "./../../../screens/createGame/selectTimeSlot/index";
-import { IPlaceListScreenPropsWithoutNavigation } from "./../../../screens/placeList/index";
+import { ISelectTimeSlotScreenPropsWithoutNavigation } from "../../../screens/createGame/selectTimeSlot/index";
+import { IPlaceListScreenPropsWithoutNavigation } from "../../../screens/placeList/index";
 
 /**
  * Learn more about using TypeScript with React Navigation:
@@ -9,7 +9,7 @@ import { IPlaceListScreenPropsWithoutNavigation } from "./../../../screens/place
 import React from 'react';
 import { CompositeNavigationProp, CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
-import { FeedStackNavigationProp } from "../types";
+import { FeedStackNavigationProp } from "../../feed/types";
 
 
 
@@ -37,3 +37,5 @@ export type SelectTimeSlotScreenNavigationProps = CompositeNavigationProp<
 	CreateGameStackNavigationProp<'SelectTimeSlot'>,
 	FeedStackNavigationProp<'CreateGameStack'>
 >
+
+

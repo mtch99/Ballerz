@@ -97,7 +97,7 @@ export class PlaceProfileView extends React.Component<IPlaceProfileViewProps>{
                         </Text>
 
                         <ListItemButton
-                            onPress={() => {}}
+                            onPress={() => {this.props.onPressPlayHere()}}
                             title="jouer ici"
                             selected={false}
                         />

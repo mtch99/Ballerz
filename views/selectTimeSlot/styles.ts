@@ -1,3 +1,4 @@
+import { globalStyles } from "./../styles";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -80,6 +81,13 @@ const styles = StyleSheet.create({
     placeNameText: {
       fontWeight: "bold",
       maxWidth: "75%"
+    },
+
+    errorText: {
+      marginTop: 15,
+      fontSize: 15,
+      padding: 13,
+      color: globalStyles.global.logoColor
     }
 });
 

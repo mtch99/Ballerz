@@ -54,11 +54,24 @@ export interface ICreateGameInput{
     startingTime: Date
     endingTime: Date
 }
+
+export interface ICreateGameError {
+    reason: CreateGameErrorReason
+    description: string
+}
+
+export enum CreateGameErrorReason {
+    INVALID_ENDING_HOUR="INVALID_ENDING_HOUR",
+    OTHER="OTHER"
+}
+
 export interface ICreateGameResult{
-    error: boolean
+    error?: ICreateGameError
     feedItem?: IFeedItem 
     attendanceID?: string 
 }
+
+
 export interface INewGameEventPayload extends IFeedItem{}
 
 

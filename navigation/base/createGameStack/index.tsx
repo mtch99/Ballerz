@@ -5,7 +5,7 @@ import { HeaderBackButton } from '@react-navigation/elements';
 ;
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { FeedStackNavigationProp } from "../types";
+import { FeedStackNavigationProp } from "../../feed/types";
 import { globalStyles } from "../../../views/styles";
 
 

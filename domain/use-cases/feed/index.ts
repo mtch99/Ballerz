@@ -24,6 +24,7 @@ export class FeedUseCase implements IFeedUseCase {
         if(!response.error && response.feedItem){
             this.observer.newGameEventHandler(response.feedItem);
         }
+        // console.error(JSON.stringify(console.error()));
         return response;
     }
 

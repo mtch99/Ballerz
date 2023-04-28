@@ -2,6 +2,8 @@ import { IUserProfileScreenPropsWithoutNavigation } from "./../../screens/userPr
 import { IPlaceProfileScreenPropsWithoutNavigation } from "./../../screens/placeProfile/index";
 import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
 import { IFriendListScreenPropsWithoutNavigation } from "../../screens/userProfileList/friendsList";
+import { CreateGameStackParamList } from "./createGameStack/types";
+import { NavigatorScreenParams } from "@react-navigation/native";
 
 declare global {
     namespace ReactNavigation {
@@ -14,6 +16,7 @@ export type BaseStackParamList = {
     PlaceProfileScreen: IPlaceProfileScreenPropsWithoutNavigation
     UserProfileScreen: IUserProfileScreenPropsWithoutNavigation
     FriendsListScreen: IFriendListScreenPropsWithoutNavigation
+    CreateGameStack: NavigatorScreenParams<CreateGameStackParamList>
 };
 
 

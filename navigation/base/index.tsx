@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { BaseStackParamList } from "./types";
-import { FriendsListScreenWrapper, PlaceProfileScreenWrapper, UserProfileScreenWrapper } from "./wrappers";
+import { CreateGameStackWrapper, FriendsListScreenWrapper, PlaceProfileScreenWrapper, UserProfileScreenWrapper } from "./wrappers";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { globalStyles } from "../../views/styles";
 import { Text } from "react-native";
@@ -64,6 +64,21 @@ export function BaseStackNavigator(): JSX.Element {
                     title: "Amis"
                 }}
                 component={FriendsListScreenWrapper}
+            />
+            <Stack.Screen
+                name={"CreateGameStack"}
+                options={{
+                    headerShown: false,
+                    headerLeft:() => {
+                        return (
+                            <HeaderBackButton
+                                tintColor={globalStyles.global.logoColor}
+                                onPress={() => {navigation.goBack()}}
+                            />
+                        )
+                    },
+                }}
+                component={CreateGameStackWrapper}
             />
 
         </Stack.Navigator>

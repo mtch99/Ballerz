@@ -47,6 +47,7 @@ export class PlaceProfileScreen extends React.Component<IPlaceProfileScreenProps
     addPicture(): void {
         throw new Error("Method not implemented.");
     }
+    
     play(): void {
         throw new Error("Method not implemented.");
     }
@@ -63,6 +64,10 @@ export class PlaceProfileScreen extends React.Component<IPlaceProfileScreenProps
         this.context.placeController.getPlaceProfile(this.props.placeId)
     }
 
+    onPressPlayHere(): void {
+        this.navigationController.goToCreateTimeSlot(this.context.placeMapState[this.props.placeId])
+    }
+
     viewProps = {...this.state}
 
 
@@ -71,12 +76,14 @@ export class PlaceProfileScreen extends React.Component<IPlaceProfileScreenProps
             return( 
                 <PlaceProfileView
                     {...this.context.placeMapState[this.props.placeId]}
+                    onPressPlayHere={this.onPressPlayHere.bind(this)}
                 />
             )
         }else{
             return(
                 <PlaceProfileView
                     {...this.state}
+                    onPressPlayHere={this.onPressPlayHere.bind(this)}
                 /> 
             )
         }
@@ -85,7 +92,7 @@ export class PlaceProfileScreen extends React.Component<IPlaceProfileScreenProps
 } 
 
 export interface IPlaceProfileViewProps extends IPlaceProfileState{
-
+    onPressPlayHere: () => void;
 }
 
 

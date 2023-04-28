@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import React from "react";
 import { FeedStackNavigationContext, IFeedStackNavigationContext } from "./context";
 import LeftHeader from "./components/LeftHeader";
-import { CreateGameStackNavigator } from "./createGameStack";
+import { CreateGameStackNavigator } from "../base/createGameStack";
 import { globalStyles } from "../../views/styles";
 import { useNavigation } from "@react-navigation/native";
 

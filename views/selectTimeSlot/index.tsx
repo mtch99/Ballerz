@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, View, Text } from "react-native";
+import { SafeAreaView, View, Text, Appearance, useColorScheme } from "react-native";
 import styles from "./styles";
 import AwesomeAlert from 'react-native-awesome-alerts';
 import DateTimePickerModal, {ReactNativeModalDateTimePickerProps} from "react-native-modal-datetime-picker";
@@ -55,18 +55,8 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 		this.__bindMethods()
 	}
 
-	private __bindMethods(){
-		this.onCancelTimeEdit = this.onCancelTimeEdit.bind(this)
-		this.onConfirmDateEdit = this.onConfirmDateEdit.bind(this)
-		this.onConfirmEndingTimeEdit = this.onConfirmEndingTimeEdit.bind(this)
-		this.onPressModifyEndingTimeButton = this.onPressModifyEndingTimeButton.bind(this)
-		this.onEndingTimeEdit = this.onEndingTimeEdit?.bind(this)
-		this.onDateEdit = this.onDateEdit?.bind(this)
-		this.onStartingTimeEdit = this.onStartingTimeEdit?.bind(this)
-		this.onPressDateTimePickerConfirm = this.onPressDateTimePickerConfirm.bind(this)
-		this.onConfirmStartingTimeEdit = this.onConfirmStartingTimeEdit.bind(this)
-		this.onPressModifyStartingTimeButton = this.onPressModifyStartingTimeButton.bind(this)
-		this.onPressModifyDateButton = this.onPressModifyDateButton.bind(this)
+	componentDidUpdate(prevProps: Readonly<ISelectTimeSlotViewProps>, prevState: Readonly<ISelectTimeSlotViewState>, snapshot?: any): void {
+		console.log(`NewProps: ${JSON.stringify(this.props)}`)
 	}
 
 
@@ -91,13 +81,13 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 			mode: "time",
 		}
 		const currentEditState: EditState = 'STARTING_TIME'
-		this.setState((prevState) => (
-			{
-				...prevState,
-				dateTimePickerState,
-				currentEditState
-			}
-		))
+		// this.setState((prevState) => (
+		// 	{
+		// 		...prevState,
+		// 		dateTimePickerState,
+		// 		currentEditState
+		// 	}
+		// ))
 	}
 
 	onPressModifyEndingTimeButton(){
@@ -122,8 +112,10 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 			minute: newDate.getMinutes()
 		}
 
-		switch(type){
+		const typee = this.state.currentEditState 
+		switch(typee){
 			case 'STARTING_TIME': 
+				console.log(`Editing starting time`)
 				this.setState((prevState) => (
 					{
 						...prevState,
@@ -133,6 +125,7 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 				break;
 			
 			case 'ENDING_TIME':
+				console.log(`Editing ending time`)
 				this.setState((prevState) => (
 					{
 						...prevState,
@@ -142,12 +135,14 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 				break;
 			
 			case 'DATE':
+				console.log(`Editing date`)
 				this.setState((prevState) => (
 					{
 						...prevState,
 						tempDate: newDate
 					}
 				))
+				break;
 			
 		}
 	}
@@ -164,7 +159,6 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 	onDateEdit: ReactNativeModalDateTimePickerProps['onChange'] = (newDate: Date) => {
 		this.onTimeEdit('DATE', newDate)
 	}
-
 
 
 	/**
@@ -188,36 +182,38 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 					{
 						...prevState,
 						editStartingTimeViewState: {
-							time: timeEdit
+							time: this.state.tempStartingTime
 						},
 					}
 				))
 
 				// Update SelectTimeSlotScreen StartingTime 
-				newStartingTime = this.state.editDateViewState.date
+				console.warn(`onConfirmTimeEdit: startingTimeEdit`)
+				newStartingTime = new Date(this.state.editDateViewState.date)
 				newStartingTime.setHours(date.getHours())
 				newStartingTime.setMinutes(date.getMinutes())
 				this.props.modifyStartingTime(newStartingTime)
 				break;
-
-			
-			case 'ENDING_TIME':
-				// Update EditEntingTimeView
-				this.setState((prevState) => (
-					{
-						...prevState,
-						editEndingTimeViewState: {
-							time: timeEdit
-						},
-					}
-				))
-
-
-				// Update SelectTimeSlotScreen EndingTime 
-				newEndingTime = this.state.editDateViewState.date
-				newEndingTime.setHours(date.getHours())
-				newEndingTime.setMinutes(date.getMinutes())
-				this.props.modifyEndingTime(newEndingTime)
+				
+				
+				case 'ENDING_TIME':
+					// Update EditEntingTimeView
+					
+					// this.setState((prevState) => (
+					// 	{
+					// 		...prevState,
+					// 		editEndingTimeViewState: {
+					// 			time: this.state.tempEndingTime
+					// 		},
+					// 	}
+					// ))
+					
+					console.warn(`onConfirmTimeEdit: endingTimeEdit`)
+					// Update SelectTimeSlotScreen EndingTime 
+					newEndingTime = new Date(this.state.editDateViewState.date)
+					newEndingTime.setHours(date.getHours())
+					newEndingTime.setMinutes(date.getMinutes())
+					this.props.modifyEndingTime(newEndingTime)
 				break;
 			
 			case 'DATE':
@@ -231,18 +227,21 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 					}
 				))
 
-
+				console.warn(`onConfirmTimeEdit: DateEdit`)
 				// Update SelectTimeSlotScreen startingTime
-				newStartingTime = date
+				newStartingTime = new Date(date)
 				newStartingTime.setHours(this.state.editStartingTimeViewState.time.hour)
 				newStartingTime.setMinutes(this.state.editStartingTimeViewState.time.minute)
 				this.props.modifyStartingTime(newStartingTime)
 
 				// Update SelectTimeSlotScreen EndingTime
-				newEndingTime = date
+				newEndingTime = new Date(date)
 				newEndingTime.setHours(this.state.editEndingTimeViewState.time.hour)
 				newEndingTime.setMinutes(this.state.editEndingTimeViewState.time.minute)
 				this.props.modifyEndingTime(newEndingTime)
+				break;
+
+			default:
 				break;
 		}
 
@@ -251,7 +250,6 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 	}
 
 	
-
 	onConfirmStartingTimeEdit: ReactNativeModalDateTimePickerProps['onConfirm'] = (date: Date) => {
 		this.onConfirmTimeEdit('STARTING_TIME', date)
 	}
@@ -357,7 +355,7 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 
             <BallerzSafeAreaView>
 				<>
-                <DateTimePickerModal
+                <BallerzDateTimePickerModal
 					onConfirm={(date) => {this.onPressDateTimePickerConfirm(date)}}
 					onCancel={(date) => {this.onPressDateTimePickerCancel(date)}}
 					onChange={(date) => {
@@ -379,22 +377,55 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 
 				<EditStartingTimeView
 					onPressModify={this.onPressModifyStartingTimeButton}
-					{...this.state.editStartingTimeViewState}
-				/>
+					time={{hour: this.props.startingTime.getHours(), minute: this.props.startingTime.getMinutes()}}
+					/>
 
 				<EditEndingTimeView
 					onPressModify={this.onPressModifyEndingTimeButton}
-					{...this.state.editEndingTimeViewState}
+					time={{hour: this.props.endingTime.getHours(), minute: this.props.endingTime.getMinutes()}}
 				/>
 
 				<ConfirmButton
 					onPress={() => {this.props.onPressPlay()}}
 				/>
+				{this.props.error?(
+					<Text
+                        style={styles.errorText}
+					>
+						{this.props.error}
+					</Text>
+				): (<></>)}
 				</>
          </BallerzSafeAreaView>
         )
     }
+
+	private __bindMethods(){
+		this.onCancelTimeEdit = this.onCancelTimeEdit.bind(this)
+		this.onConfirmDateEdit = this.onConfirmDateEdit.bind(this)
+		this.onConfirmEndingTimeEdit = this.onConfirmEndingTimeEdit.bind(this)
+		this.onPressModifyEndingTimeButton = this.onPressModifyEndingTimeButton.bind(this)
+		this.onEndingTimeEdit = this.onEndingTimeEdit?.bind(this)
+		this.onDateEdit = this.onDateEdit?.bind(this)
+		this.onStartingTimeEdit = this.onStartingTimeEdit?.bind(this)
+		this.onPressDateTimePickerConfirm = this.onPressDateTimePickerConfirm.bind(this)
+		this.onConfirmStartingTimeEdit = this.onConfirmStartingTimeEdit.bind(this)
+		this.onPressModifyStartingTimeButton = this.onPressModifyStartingTimeButton.bind(this)
+		this.onPressModifyDateButton = this.onPressModifyDateButton.bind(this)
+	}
 }
 
 
+
+
+export function BallerzDateTimePickerModal(props: ReactNativeModalDateTimePickerProps){
+	let colorScheme = Appearance.getColorScheme();
+
+	return(
+		<DateTimePickerModal
+			{...props}
+			isDarkModeEnabled={(colorScheme=="dark")?true:false}
+        />
+	)
+}
 
