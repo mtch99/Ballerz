@@ -92,6 +92,22 @@ export const onCreateNotification_gql = /* GraphQL */ `
           username
         }
       }
+      presenceID
+          presence {
+            id
+            placeID
+            place{
+              name
+              address
+            }
+            userProfileID
+            userProfile{
+              id
+              username
+            }
+            startingDateTime
+            endingDateTime
+      }
       createdAt
       updatedAt
     }

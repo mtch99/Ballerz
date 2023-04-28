@@ -82,7 +82,9 @@ There must be three different games on three different courts, two at the moment
 
 * [x] Badge display on new Notification
 
-- [x] Place Profile View
+- [ ] Place Profile View
+    - [x] Add games list to Place profile
+    - [ ] Header right icon for playing
 
 
 - [ ] I want see a toast message on new notiication

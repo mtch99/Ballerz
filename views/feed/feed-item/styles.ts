@@ -9,6 +9,7 @@ const borderRadius = (10/356)*containerWidth
 
 export const style = StyleSheet.create({
     container: {
+		// flex:1,
     	backgroundColor: "#292D39",
     	marginTop: 5,
     	marginHorizontal,

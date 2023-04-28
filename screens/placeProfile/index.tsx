@@ -53,13 +53,14 @@ export class PlaceProfileScreen extends React.Component<IPlaceProfileScreenProps
 
 
     componentDidMount(): void {
-        this.context.placeController.getPlaceProfile(this.props.placeId)
         this.setState((prevState) => {
             const placeProfile = this.context.placeMapState[this.props.placeId]
             return {
                 ...prevState,
                 ...placeProfile
-        }})
+            }
+        })
+        this.context.placeController.getPlaceProfile(this.props.placeId)
     }
 
     viewProps = {...this.state}
@@ -72,12 +73,13 @@ export class PlaceProfileScreen extends React.Component<IPlaceProfileScreenProps
                     {...this.context.placeMapState[this.props.placeId]}
                 />
             )
+        }else{
+            return(
+                <PlaceProfileView
+                    {...this.state}
+                /> 
+            )
         }
-        return(
-            <PlaceProfileView
-                {...this.placeProfile}
-            />
-        )
     }
 
 } 
