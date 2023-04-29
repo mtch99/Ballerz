@@ -74,8 +74,8 @@ export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlo
                 this.handleCreateGameError(checkInput.error)
                 return {error: checkInput.error}
             }
-            else{
-                const response = await this.context.feedController.createGame(input)
+            else {
+                const response = await this.context.feedController.createGame(checkInput.input)
                 if(!response.error){
                     this.props.navigationController.onGameCreated()
                 }

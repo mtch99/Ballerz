@@ -2,7 +2,7 @@ import { PlayMutationInput, presenceType } from "../../../infrastructure/Ballerz
 import BallerzGameClient from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient";
 import { PlayMutation } from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient/mutations";
 import { GameDoc, PresenceDoc } from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient/types";
-import { ICheckInResult, ICheckinInput, ICheckoutInput, ICommentInput, ICreateGameInput, ICreateGameResult, IGameRepository } from "../../use-cases/feed/interface";
+import { CreateGameErrorReason, ICheckInResult, ICheckinInput, ICheckoutInput, ICommentInput, ICreateGameInput, ICreateGameResult, IGameRepository } from "../../use-cases/feed/interface";
 import { IAttendance, IFeedItem, IGame, IUserProfileData } from "../../use-cases/types";
 
 
@@ -27,7 +27,6 @@ export default class GameRepository implements IGameRepository {
 
     async createGame(input: ICreateGameInput): Promise<ICreateGameResult>{
         let result: ICreateGameResult = {
-            error: true,
             feedItem: undefined
         }
         
@@ -48,11 +47,17 @@ export default class GameRepository implements IGameRepository {
                 if(presenceList && presenceList.length > 0){
                     attendanceID = presenceList[0].id
                 }
-            }
-            result = {
-                error: false,
-                feedItem,
-                attendanceID
+                result = {
+                    feedItem,
+                    attendanceID
+                }
+            } else {
+                result = {
+                    error: {
+                        reason: CreateGameErrorReason.OTHER,
+                        description: "Veuillez réessayez plus tard"
+                    },
+                }
             }
         }
         return result
@@ -77,7 +82,14 @@ export default class GameRepository implements IGameRepository {
 
     private async playRequest(input: PlayMutationInput): Promise<IFeedItem|undefined> {
         let result: IFeedItem|undefined;
-        const response = await this.gameClient.play(input, input.userProfileID)
+        const mutationInput: PlayMutationInput = {
+            placeID: input.placeID,
+            startingDateTime: input.startingDateTime,
+            endingDateTime: input.endingDateTime,
+            userProfileID: input.userProfileID,
+            presenceType: presenceType.spontaneous
+        }
+        const response = await this.gameClient.play(mutationInput, input.userProfileID)
         if(response?.playMutation){
             const length = response.playMutation.length
             if(length > 0){

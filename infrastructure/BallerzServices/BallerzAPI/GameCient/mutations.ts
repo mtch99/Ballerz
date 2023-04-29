@@ -12,7 +12,6 @@ export type DeletePresenceMutation = {
 
 export type PlayMutationVariables = {
   input: PlayMutationInput,
-  friendshipFilter: ModelFriendshipFilterInput
 }
 
 export type PlayMutation = {
@@ -32,7 +31,7 @@ export const deletePresence_gql = /* GraphQL */ `
 `;
 
 export const playMutation_gql = /* GraphQL */ `
-  mutation PlayMutation($input: PlayMutationInput, $friendshipFilter: ModelFriendshipFilterInput) {
+  mutation PlayMutation($input: PlayMutationInput) {
     playMutation(input: $input) {
       id
       presenceList {
@@ -43,7 +42,7 @@ export const playMutation_gql = /* GraphQL */ `
             id
             username
             email
-            friends (filter: $friendshipFilter){
+            friends{
               items{
                 id
                 friendProfileID

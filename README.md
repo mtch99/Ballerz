@@ -56,13 +56,14 @@ There must be three different games on three different courts, two at the moment
         - [x] Change the game item color to green on checkin
     TODO:     
     - [ ] Refactor Game interface. Change date fields to string type
+    TODO:
+    - [ ] Disable Play button during checkin request
+    - [ ] Popup after checkin
 
     - [x] Add place icon as header for FeedItem
     - [ ] Create a game and check in
         - [x] Fix PickPlaceScreen Header
         - [x] Checkin
-        - [ ] Disable Play button during checkin request
-        - [ ] Popup after checkin
 
 - [x] Notification screen
     - [x] Add notificationn tab
@@ -85,6 +86,7 @@ There must be three different games on three different courts, two at the moment
 - [ ] Place Profile View
     - [x] Add games list to Place profile
     - [x] PickTimeSlotScreen callBack on game Created
+    - [x] Fix Create Game Mutation error on the client
     - [ ] Header right icon for playing
 
 

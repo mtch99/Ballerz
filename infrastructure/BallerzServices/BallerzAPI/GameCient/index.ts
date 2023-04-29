@@ -68,12 +68,9 @@ export default class BallerzGameClient extends BallerzApiClient{
     async play(input: PlayMutationInput, userProfileID: string): Promise<PlayMutation | undefined>{
         const variables: PlayMutationVariables = {
             input,
-            friendshipFilter: {
-                friendProfileID: {
-                    eq: userProfileID
-                }
-            }
         }
+
+        console.log(`Play Mutaion Input: ${JSON.stringify(variables.input)}`)
 
         const payload = this.genRequestPayload(playMutation_gql, variables)
         const response = await API.graphql<GraphQLQuery<PlayMutation>>(payload)
