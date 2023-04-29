@@ -87,7 +87,7 @@ There must be three different games on three different courts, two at the moment
     - [x] Add games list to Place profile
     - [x] PickTimeSlotScreen callBack on game Created
     - [x] Fix Create Game Mutation error on the client
-    - [ ] Header right icon for playing
+    - [x] play here button
 
 
 - [ ] I want see a toast message on new notiication
