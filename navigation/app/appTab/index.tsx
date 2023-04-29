@@ -89,7 +89,7 @@ export function AppTab(): JSX.Element {
 				component={FeedStackWrapper}
 			/>
 
-			<BottomTab.Screen
+			{/* <BottomTab.Screen
 				name='GroupChatStack'
 				options={{
 					headerShown: false,
@@ -98,7 +98,7 @@ export function AppTab(): JSX.Element {
 					tabBarActiveTintColor,
 				}}
 				component={GroupChatStackWrapper}
-			/>
+			/> */}
 
 			<BottomTab.Screen
 				name='MyProfileStack'

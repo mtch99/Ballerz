@@ -6,6 +6,9 @@ import { IFriendShipRequestNotificationState, NotificationListState, Notificatio
 import { globalStyles } from '../styles'
 import NotificationItem from './item'
 import { IFriendShipRequestNotification } from '../../domain/use-cases/types'
+import BallerzHeaderView from '../../components/header'
+import { HeaderBackButton } from '@react-navigation/elements'
+import BallerzHeaderBackButton from '../../components/header/buttons/headerBackButton'
 
 export interface IProps {
     notificationList: NotificationState[]
@@ -19,6 +22,12 @@ export default class NotificationListView extends Component<IProps> {
     render(): React.ReactNode {
         return(
             <BallerzSafeAreaView>
+                <>
+                <BallerzHeaderView
+                    title="Notifications"
+                    leftButton={<></>}
+                    rightButton={<></>}
+                />
                 <FlatList
                     data={this.props.notificationList}
                     extraData={this.props.notificationList}
@@ -31,10 +40,12 @@ export default class NotificationListView extends Component<IProps> {
                     )}
                     ItemSeparatorComponent={ItemSeparatorComponent}
                 />     
+                </>
             </BallerzSafeAreaView>
         ) 
     }
 }
+
 
 
 function ItemSeparatorComponent(){
