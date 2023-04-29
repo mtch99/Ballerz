@@ -7,7 +7,7 @@ export default function BallerzHeaderBackButton(){
     return (
         <HeaderBackButton
             tintColor={globalStyles.global.logoColor}
-            onPress={() => navigation.goBack()}
+            onPress={() => {navigation.goBack()}}
         />
     )
 }

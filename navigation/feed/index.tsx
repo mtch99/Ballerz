@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { FeedStackNavigationProp, FeedStackParamList } from "./types";
-import { AttendantsListScreenWrapper, BadgeListScreenWrapper, CommentsScreenWrapper, FeedScreenWrapper, MakeFriendsScreenWrapper, NotificationScreenWrapper, UserProfileSearchScreenWrapper } from "./wrappers";
+import { BadgeListScreenWrapper, CommentsScreenWrapper, FeedScreenWrapper, MakeFriendsScreenWrapper, UserProfileSearchScreenWrapper } from "./wrappers";
 import { Button, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/AntDesign';
 import React from "react";
@@ -9,6 +9,8 @@ import LeftHeader from "./components/LeftHeader";
 import { CreateGameStackNavigator } from "../base/createGameStack";
 import { globalStyles } from "../../views/styles";
 import { useNavigation } from "@react-navigation/native";
+import { BaseStackNavigator } from "../base";
+import { ExploreStackNavigator } from "../explore";
 
 
 
@@ -16,6 +18,7 @@ const Stack = createNativeStackNavigator<FeedStackParamList>();
 
 
 export function FeedStackNavigator(): JSX.Element {
+
 
 	const _initialRouteName: keyof FeedStackParamList = 'FeedScreen'
 	const [userProfileSearchButtonState, setUserProfileSearchButtonState] = React.useState(false)
@@ -54,11 +57,15 @@ export function FeedStackNavigator(): JSX.Element {
 						headerLeft: () => (<LeftHeader/>),
 						headerRight: () => (
 							<TouchableOpacity
-                                onPress={() => {navigation.push("CreateGameStack", {})}}
+								//@ts-ignore
+								onPress={() => {navigation.navigate("ExploreStack")}}
 							>
-
+								<Icon name="search1" size={18} 
+									color={globalStyles.global.logoColor}
+								/>
 							</TouchableOpacity>
 						)
+
 					}}
 					component={FeedScreenWrapper}
 				/>	
@@ -88,18 +95,6 @@ export function FeedStackNavigator(): JSX.Element {
 				/>
 
 				<Stack.Screen
-					name='AttendantsListScreen'
-					options={{
-						headerShown: true,
-						headerTitle: 'Amis présents',
-						headerBackTitleVisible: false,
-						headerStyle: { backgroundColor: globalStyles.global.screenBackGroundColor},
-					}}
-					component={AttendantsListScreenWrapper}
-				/>
-
-
-				<Stack.Screen
 					name="UserProfileSearch"
 					options={{
 						headerShown: true,
@@ -126,26 +121,21 @@ export function FeedStackNavigator(): JSX.Element {
 					component={MakeFriendsScreenWrapper}
 				/>
 
-		
-
 				<Stack.Screen
-					name="CreateGameStack"
-					options={{
-						headerShown: false
-					}}
-					component={CreateGameStackNavigator}
-				/>
-
-				<Stack.Screen
-
-                    name="NotificationScreen"
+                    name="BaseStack"
                     options={{
-                        headerShown: true,
-						headerTitle: 'News'
-                    }}
-					component={NotificationScreenWrapper}
+						headerShown: false,
+					}}
+					component={BaseStackNavigator}
 				/>
 
+				<Stack.Screen
+					name="ExploreStack"
+					options={{
+                        headerShown: false,
+                    }}
+					component={ExploreStackNavigator}
+				/>
 			</Stack.Navigator>
 		</FeedStackNavigationContext.Provider>
 	)

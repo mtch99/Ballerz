@@ -2,12 +2,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ExploreStackParamList } from "./types";
 import {BaseStackWrapper, ExploreTabScreenWrapper, PlaceProfileScreenWrapper, UserProfileScreenWrapper} from "./wrappers";
 import { globalStyles } from "../../views/styles";
+import BallerzHeaderBackButton from "../../components/header/buttons/headerBackButton";
+import { useNavigation } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator<ExploreStackParamList>();
 
 export function ExploreStackNavigator(): JSX.Element {
     const initialRouteName: keyof ExploreStackParamList = "SearchStack"
-
+    const navigation = useNavigation()
     return(
         <Stack.Navigator
             initialRouteName={initialRouteName}
@@ -15,7 +17,8 @@ export function ExploreStackNavigator(): JSX.Element {
             <Stack.Screen
                 name="SearchStack"
                 options={{
-                    headerShown: true,
+                    headerShown: false,
+                    headerBackVisible: true,
                     headerTitle: "Explore",
                     headerStyle: globalStyles.global.headerStyle
                 }}

@@ -10,6 +10,7 @@ import { IPlaceSearchScreenNavigationController } from "../../screens/placeList/
 import { IUserProfileDataState } from "../../app/features/types";
 import { BaseStackNavigator } from "../base";
 import { IUserProfileListScreenNavigationController } from "../../screens/userProfileList/interface";
+import { IPlaceData } from "../../domain/use-cases/types";
 
 
 
@@ -18,9 +19,9 @@ export function PlaceProfileScreenWrapper(props: BaseStackScreenProps<'PlaceProf
     const navigation = useNavigation<BaseStackNavigationProp<'PlaceProfileScreen'>>()
 
     const navigationController: IPlaceProfileScreenNavigationController = {
-        goToAttendantsListScreen() {
-            navigation.goBack()
-        },
+        goToCreateTimeSlot: function (placeDate: IPlaceData): void {
+            throw new Error("Function not implemented.");
+        }
     }
 
     return(
@@ -43,7 +44,7 @@ export function UserProfileScreenWrapper(props: ExploreStackScreenProps<'UserPro
                 params: {
                     userProfileData
                 }
-            }
+            };
             navigation.push('BaseStack', params);
         },
         goToPlaceProfile: function (id: string): void {
@@ -61,9 +62,12 @@ export function UserProfileScreenWrapper(props: ExploreStackScreenProps<'UserPro
                 params: {
                     friendsList: userProfileList
                 }
-            }
+            };
             navigation.push('BaseStack', params);
         },
+        goBack: function (): void {
+            navigation.goBack()
+        }
     }
 
     return(

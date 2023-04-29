@@ -15,7 +15,6 @@ import { IUserProfileListScreenNavigationController } from "../../screens/userPr
 import FindYourFriendsScreen from "../../screens/userProfileList/findYourFriends"
 import { IFindYourFriendsScreenNavigationController } from "../../screens/userProfileList/findYourFriends/interface"
 import NotificationScreen from "../../screens/Notification"
-import { AppTabParamList, AppTabScreenProps } from "../app/appTab/types"
 import { AppContext } from "../../controllers/provider"
 
 
@@ -26,7 +25,7 @@ import { AppContext } from "../../controllers/provider"
  * @param props FeedScreen props without navigation
  * @returns A FeedScreen
  */
-export function FeedScreenWrapper(props: AppTabScreenProps<'FeedStack'>): JSX.Element {
+export function FeedScreenWrapper(props: FeedStackScreenProps<'FeedScreen'>): JSX.Element {
 
     const {navigation, route} = props
 
@@ -40,25 +39,25 @@ export function FeedScreenWrapper(props: AppTabScreenProps<'FeedStack'>): JSX.El
 
     const navigationController: IFeedScreenNavigationController = {
         goToBadgeListScreen: (badgeList: IBadgeData[]) => {
-            const params: AppTabParamList['FeedStack'] = {
+            const params: FeedStackParamList['FeedScreen'] = {
                 screen: "BadgeListScreen",
                 params: {
                     badgeList,
                 },
             }
-            navigation.navigate('FeedStack', params)
+            navigation.navigate('FeedScreen', params)
         },
         goToAttendantsScreen: (attendantsList: IUserProfileData[]) => {
-            const params: AppTabParamList['FeedStack'] = {
+            const params: FeedStackParamList['FeedScreen'] = {
                 screen: "AttendantsListScreen",
                 params: {
                     attendantsList,
                 },
             }
-            navigation.navigate('FeedStack', params)
+            navigation.navigate('FeedScreen', params)
         },
         goToCommentScreen(feedItem) {
-            const params: AppTabParamList['FeedStack'] = {
+            const params: FeedStackParamList['FeedScreen'] = {
                 
                 screen: "CommentsScreen",
                 params: {
@@ -66,14 +65,14 @@ export function FeedScreenWrapper(props: AppTabScreenProps<'FeedStack'>): JSX.El
                     comments: feedItem.comments
                 }
             }
-            navigation.navigate('FeedStack', params)        
+            navigation.navigate('FeedScreen', params)        
         },
         goToMakeFriendsScreen() {
-            const params: AppTabParamList['FeedStack'] = {
+            const params: FeedStackParamList['FeedScreen'] = {
                 screen: "MakeFriends",
                 params: {}
             }
-            navigation.navigate('FeedStack', params) 
+            navigation.navigate('FeedScreen', params) 
         },
         
     }
@@ -104,26 +103,6 @@ export function FeedScreenWrapper(props: AppTabScreenProps<'FeedStack'>): JSX.El
     return (
         <BadgeListScreen
             badgeList={props.route.params.badgeList}
-        />
-    )
-}
-
-
-export function AttendantsListScreenWrapper(props: FeedStackScreenProps<'AttendantsListScreen'>){
-
-    const {navigation, route} = props
-
-    const attendantsList = props.route.params.attendantsList
-
-    const navigationController: IUserProfileListScreenNavigationController = {
-        goToUserProfile: function (userProfileData: IUserProfileData): void {
-            throw new Error("Function not implemented.")
-        }
-    }
-    return(
-        <AttendantsListScreen
-             navigationController={navigationController}
-             friendsList={attendantsList}
         />
     )
 }
@@ -183,11 +162,3 @@ export function MakeFriendsScreenWrapper(){
 }
 
 
-export function NotificationScreenWrapper(){
-
-    return(
-        <NotificationScreen
-            
-        />
-    )
-}

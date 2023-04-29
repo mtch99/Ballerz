@@ -60,58 +60,6 @@ export function AppTab(): JSX.Element {
 		>
 
 			<BottomTab.Screen
-				name='ExploreStack'
-				options={{
-					headerShown: false,
-					// tabBarLabel: 'Explore',
-					tabBarIcon: ({focused, color, size }) => (
-                        <FeatherIcon
-                            name='search'
-                            color={focused?(globalStyles.global.logoColor):('grey')}
-                            size={size}
-                        />
-                    ),
-					tabBarBadge: undefined,
-					headerTitle: 'Explore',
-					tabBarActiveTintColor,
-				}}
-				component={ExploreStackWrapper}
-			/>
-
-			<BottomTab.Screen
-				name='FeedStack'
-				options={{
-					headerShown: false,
-					tabBarLabel: 'Games',
-					tabBarIcon: undefined,
-					tabBarActiveTintColor,
-				}}
-				component={FeedStackWrapper}
-			/>
-
-			{/* <BottomTab.Screen
-				name='GroupChatStack'
-				options={{
-					headerShown: false,
-					tabBarLabel: 'Groupes',
-					tabBarIcon: undefined,
-					tabBarActiveTintColor,
-				}}
-				component={GroupChatStackWrapper}
-			/> */}
-
-			<BottomTab.Screen
-				name='MyProfileStack'
-				options={{
-					headerShown: false,
-					tabBarLabel: 'Profile',
-					tabBarIcon: undefined,
-					tabBarActiveTintColor,
-				}}
-				component={MyProfileStackWrapper}
-			/>
-
-			<BottomTab.Screen
                 name='NotificationStack'
                 options={{
 					headerShown: false,
@@ -128,6 +76,30 @@ export function AppTab(): JSX.Element {
 				}}
 				component={NotificationStackWrapper}
 			/>
+
+
+			<BottomTab.Screen
+				name='FeedStack'
+				options={{
+					headerShown: false,
+					tabBarLabel: 'Games',
+					tabBarIcon: undefined,
+					tabBarActiveTintColor,
+				}}
+				component={FeedStackWrapper}
+			/>
+			<BottomTab.Screen
+				name='MyProfileStack'
+				options={{
+					headerShown: false,
+					tabBarLabel: 'Profile',
+					tabBarIcon: undefined,
+					tabBarActiveTintColor,
+				}}
+				component={MyProfileStackWrapper}
+			/>
+
+
 		</BottomTab.Navigator>
 	  )
 }

@@ -23,7 +23,7 @@ declare global {
 }
 
 export type AppTabParamList = {
-	ExploreStack: NavigatorScreenParams<ExploreStackParamList>
+	// ExploreStack: NavigatorScreenParams<ExploreStackParamList>
 	FeedStack: NavigatorScreenParams<FeedStackParamList>
 	GroupChatStack: NavigatorScreenParams<GroupChatStackParamList>
 	MyProfileStack: NavigatorScreenParams<MyProfileStackParamList>
