@@ -87,12 +87,12 @@ export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlo
         }
     }
 
-    componentDidMount(): void {
-        console.log(`Initial starting time: ${this.state.startingTime}`)
-    }
 
     componentDidUpdate(prevProps: Readonly<ISelectTimeSlotScreenProps>, prevState: Readonly<ISelectTimeSlotScreenState>, snapshot?: any): void {
-        console.error(`SelectTimeSlotScreen updated: ${this.state.startingTime}`)
+        console.log(`SelectTimeSlotScreen updated: ${JSON.stringify({
+            startingTime: this.state.startingTime,
+            endingTime: this.state.endingTime,
+        })}`)
     }
 
 	onPressModifyPlace(): void {
@@ -100,33 +100,21 @@ export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlo
 	}
 
 	modifyStartingTime(startingTime: Date): void {
-		this.setState((prevState) => (
-			{
-				...prevState,
-				startingTime
-			}
-		))
-        console.error(`newState after modifying Starting time ${JSON.stringify(this.state)}`)
+		this.modifyTime(startingTime, "STARTING")
 	}
 
 	modifyEndingTime(endingTime: Date): void {
-
-        const newState = {
-            ...this.state,
-            endingTime
-        }
-		this.setState((prevState) => (
-            newState
-        ))
-        console.error(`newState after modifying Ending time ${JSON.stringify(this.state)}`)
+        this.modifyTime(endingTime, "ENDING")
     }
+
+    
 
     handleCreateGameError(error: ICreateGameError): void {
         const newState: ISelectTimeSlotScreenState = {
             ...this.state,
             error: error.description
         }
-        // this.setState(newState)
+        this.setState(newState)
     }
 
     render(): React.ReactNode {
@@ -139,9 +127,43 @@ export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlo
 				onPressModifyPlace={this.onPressModifyPlace.bind(this)}
 				modifyEndingTime={this.modifyEndingTime.bind(this)}
 				modifyStartingTime={this.modifyStartingTime.bind(this)}
+                modifyStartingAndEndingTimes={this.modifyStartingAndEndingTimes.bind(this)}
                 error={this.state.error}
             />
         )
+    }
+
+    modifyStartingAndEndingTimes(startingTime: Date, endingTime: Date): void {
+        this.setState((prevState) => ({
+            ...prevState,
+            startingTime, 
+            endingTime
+        }))
+    }
+
+
+    private modifyTime(time: Date, type: "ENDING" | "STARTING"): void {
+        let newState:ISelectTimeSlotScreenState = {
+            ...this.state
+        }
+        switch (type) {
+            case "STARTING":
+                newState = { 
+                    ...newState,
+                    startingTime: new Date(time)
+                }
+                break;
+            case "ENDING":
+                newState = { 
+                    ...newState,
+                    endingTime: new Date(time)
+                }
+                break;
+            default:
+                throw new Error("Invalid type")
+        }
+        console.log(`Modified ${type} time: ${JSON.stringify(newState)}`)
+        this.setState(newState)
     }
 
 }
@@ -156,6 +178,7 @@ export interface ISelectTimeSlotViewProps{
 	onPressModifyPlace: () => void
 	modifyEndingTime: SelectTimeSlotScreen['modifyEndingTime']
 	modifyStartingTime: SelectTimeSlotScreen['modifyStartingTime']
+    modifyStartingAndEndingTimes: SelectTimeSlotScreen['modifyStartingAndEndingTimes']
     error?:string
 }
 
@@ -165,7 +188,7 @@ function checkGameInput(input: ICreateGameInput): ICheckGameInputResult {
     let result: ICheckGameInputResult = {
         input
     }
-    console.warn(JSON.stringify(input))
+    // console.warn(JSON.stringify(input))
     if(startingTime.valueOf() >= endingTime.valueOf() ){
         if(endingTime.getHours() >= 6){
             result = {

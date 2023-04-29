@@ -27,8 +27,6 @@ There must be three different games on three different courts, two at the moment
 * [x] App Icon and splashscreen
 
 - [x] Add friend
-    - [x] UserProfileScreen and MyUserProfileScreen
-    - [x] Make sure that everything works properly
 
 
 * [x] Add profile picture after profile creation
@@ -42,18 +40,11 @@ There must be three different games on three different courts, two at the moment
         
 
 - [ ] Games feature
-    - [x] Ballerz Game client
-    - [x] Refactor FeedScreen wrapper to load all games on focus
-    - [ ] Display real game Time 
-        - [x] Format date in feed item view
     TODO: Warning: for now, akk the games with 0 attendants are not displayed
         - [ ] Undo the last warning
         - [ ] Undo onNewNotification warning in Notifications repository
     - [x] Test with Dani 
     - [x] Feed Item View
-        - [x] Organize Card
-        - [x] Display day and month when the game starts more than 6 days later
-        - [x] Change the game item color to green on checkin
     TODO:     
     - [ ] Refactor Game interface. Change date fields to string type
     TODO:
@@ -61,29 +52,7 @@ There must be three different games on three different courts, two at the moment
     - [ ] Popup after checkin
 
     - [x] Add place icon as header for FeedItem
-    - [ ] Create a game and check in
-        - [x] Fix PickPlaceScreen Header
-        - [x] Checkin
 
-- [x] Notification screen
-    - [x] Add notificationn tab
-    - [x] NotificationStack
-    - [x] Notification Screen
-    - [x] Notification View 
-        - [x] FiendshipRequest Notification
-        - [x] NewFriend Notification
-        - [x] Notification Icon and badge 
-            - [x] Add NotificationBadge to the Model
-            - [x] Assign notification badge to the Notification Tab Icon
-            - [x] Set badge to undefined on NotificationScreen Focus event
-
-        - [x] Accept frienship notification
-        - [x] NewFriend Notification
-        
-
-* [x] Badge display on new Notification
-
-- [ ] Place Profile View
     - [x] Add games list to Place profile
     - [x] PickTimeSlotScreen callBack on game Created
     - [x] Fix Create Game Mutation error on the client

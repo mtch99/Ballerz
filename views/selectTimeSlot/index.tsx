@@ -56,7 +56,6 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 	}
 
 	componentDidUpdate(prevProps: Readonly<ISelectTimeSlotViewProps>, prevState: Readonly<ISelectTimeSlotViewState>, snapshot?: any): void {
-		console.log(`NewProps: ${JSON.stringify(this.props)}`)
 	}
 
 
@@ -81,13 +80,13 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 			mode: "time",
 		}
 		const currentEditState: EditState = 'STARTING_TIME'
-		// this.setState((prevState) => (
-		// 	{
-		// 		...prevState,
-		// 		dateTimePickerState,
-		// 		currentEditState
-		// 	}
-		// ))
+		this.setState((prevState) => (
+			{
+				...prevState,
+				dateTimePickerState,
+				currentEditState
+			}
+		))
 	}
 
 	onPressModifyEndingTimeButton(){
@@ -165,55 +164,20 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 	 * Update TimeViewState
 	 * 
 	 * @param type 
-	 * @param date 
+	 * @param inputDate 
 	 */
-	private onConfirmTimeEdit(type: TimeEditActionType, date: Date): void{
-		const timeEdit: ITime = {
-			hour: date.getHours(),
-			minute: date.getMinutes()
-		}
-
+	private onConfirmTimeEdit(type: TimeEditActionType, inputDate: Date): void{
 		let newStartingTime: Date;
 		let newEndingTime: Date;
 		switch(type){
 			case 'STARTING_TIME': 
-				// Update EditTimeView
-				this.setState((prevState) => (
-					{
-						...prevState,
-						editStartingTimeViewState: {
-							time: this.state.tempStartingTime
-						},
-					}
-				))
-
 				// Update SelectTimeSlotScreen StartingTime 
-				console.warn(`onConfirmTimeEdit: startingTimeEdit`)
-				newStartingTime = new Date(this.state.editDateViewState.date)
-				newStartingTime.setHours(date.getHours())
-				newStartingTime.setMinutes(date.getMinutes())
-				this.props.modifyStartingTime(newStartingTime)
-				break;
+				this.updateTime(inputDate, "STARTING")
+				break;	
 				
-				
-				case 'ENDING_TIME':
-					// Update EditEntingTimeView
-					
-					// this.setState((prevState) => (
-					// 	{
-					// 		...prevState,
-					// 		editEndingTimeViewState: {
-					// 			time: this.state.tempEndingTime
-					// 		},
-					// 	}
-					// ))
-					
-					console.warn(`onConfirmTimeEdit: endingTimeEdit`)
-					// Update SelectTimeSlotScreen EndingTime 
-					newEndingTime = new Date(this.state.editDateViewState.date)
-					newEndingTime.setHours(date.getHours())
-					newEndingTime.setMinutes(date.getMinutes())
-					this.props.modifyEndingTime(newEndingTime)
+			case 'ENDING_TIME':
+				// Update SelectTimeSlotScreen EndingTime 
+				this.updateTime(inputDate, "ENDING")
 				break;
 			
 			case 'DATE':
@@ -222,23 +186,22 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 					{
 						...prevState,
 						editDateViewState: {
-							date
+							date: inputDate
 						},
 					}
 				))
 
-				console.warn(`onConfirmTimeEdit: DateEdit`)
 				// Update SelectTimeSlotScreen startingTime
-				newStartingTime = new Date(date)
-				newStartingTime.setHours(this.state.editStartingTimeViewState.time.hour)
-				newStartingTime.setMinutes(this.state.editStartingTimeViewState.time.minute)
-				this.props.modifyStartingTime(newStartingTime)
+				newStartingTime = new Date(inputDate)
+				newStartingTime.setHours(this.props.startingTime.getHours())
+				newStartingTime.setMinutes(this.props.startingTime.getMinutes())
 
 				// Update SelectTimeSlotScreen EndingTime
-				newEndingTime = new Date(date)
-				newEndingTime.setHours(this.state.editEndingTimeViewState.time.hour)
-				newEndingTime.setMinutes(this.state.editEndingTimeViewState.time.minute)
-				this.props.modifyEndingTime(newEndingTime)
+				newEndingTime = new Date(inputDate)
+				newEndingTime.setHours(this.props.endingTime.getHours())
+				newEndingTime.setMinutes(this.props.endingTime.getMinutes())
+
+				this.props.modifyStartingAndEndingTimes(newStartingTime, newEndingTime)
 				break;
 
 			default:
@@ -249,7 +212,32 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 		this.endEditing()
 	}
 
+	private updateTime(inputDate: Date, type:"STARTING"|"ENDING"): void{
+		const currentDate = this.state.editDateViewState.date
+		switch(type){
+			case "STARTING":
+				const newStartingTime = new Date(currentDate)
+				newStartingTime.setHours(inputDate.getHours())
+				newStartingTime.setMinutes(inputDate.getMinutes())
+				this.props.modifyStartingTime(newStartingTime)
+				break;
+
+			case "ENDING":
+				const newEndingTime = new Date(currentDate)
+                newEndingTime.setHours(inputDate.getHours())
+                newEndingTime.setMinutes(inputDate.getMinutes())
+                this.props.modifyEndingTime(newEndingTime)
+				break;
+
+            default:
+				break;
+		}
+	}
+
 	
+
+
+
 	onConfirmStartingTimeEdit: ReactNativeModalDateTimePickerProps['onConfirm'] = (date: Date) => {
 		this.onConfirmTimeEdit('STARTING_TIME', date)
 	}
@@ -378,7 +366,7 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 				<EditStartingTimeView
 					onPressModify={this.onPressModifyStartingTimeButton}
 					time={{hour: this.props.startingTime.getHours(), minute: this.props.startingTime.getMinutes()}}
-					/>
+				/>
 
 				<EditEndingTimeView
 					onPressModify={this.onPressModifyEndingTimeButton}
@@ -420,11 +408,17 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 
 export function BallerzDateTimePickerModal(props: ReactNativeModalDateTimePickerProps){
 	let colorScheme = Appearance.getColorScheme();
+	let display: ReactNativeModalDateTimePickerProps['display'] = "spinner"
+	if(props.mode == "date"){
+		display = "inline"
+	}
 
 	return(
 		<DateTimePickerModal
 			{...props}
 			isDarkModeEnabled={(colorScheme=="dark")?true:false}
+			locale="fr_CA"
+			display={display}
         />
 	)
 }
