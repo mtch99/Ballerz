@@ -10,6 +10,7 @@ import { globalStyles } from "../../views/styles";
 import BallerzSafeAreaView from "../../views/safeArea";
 import { IScreenState, Screen } from "../interface";
 import SearchBar from "../../views/makeFriends/SearchBar";
+import placeController from "../../controllers/place";
 
 
 export interface IPlaceListScreenPropsWithoutNavigation {
@@ -45,7 +46,7 @@ export abstract class APlaceListScreen<P, S extends IPlaceListScreenState = IPla
 
     componentDidMount(): void {
         // this.makeRequest<undefined, void>(undefined, this.context.PlaceController.getAllPlaces.bind(this.context.PlaceController)).then(() => {this.__initState()})
-        this.context.placeController.getAllPlaces().then(() => {this.__initState()})
+        placeController.getAllPlaces().then(() => {this.__initState()})
     }
 
     

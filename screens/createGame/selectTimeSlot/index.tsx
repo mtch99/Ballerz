@@ -195,7 +195,7 @@ function checkGameInput(input: ICreateGameInput): ICheckGameInputResult {
                 ...result,
                 error: {
                     reason: CreateGameErrorReason.INVALID_ENDING_HOUR,
-                    description: "Veuillez choisir une heure de fin inférieure à 5:00 am le lendemain"
+                    description: "Veuillez choisir une heure de départ inférieure à l'heure d'arrivée am le lendemain"
                 }
             }
         } else {
@@ -205,6 +205,18 @@ function checkGameInput(input: ICreateGameInput): ICheckGameInputResult {
                     ...result.input,
                     endingTime: newEndingTime
                 }
+            }
+        }
+    }
+
+    const maxDuration = 9 * 3600 * 1000
+
+    if(Math.abs(startingTime.valueOf() - endingTime.valueOf()) > maxDuration){
+        result = {
+            ...result,
+            error: {
+                reason: CreateGameErrorReason.INVALID_TIME_RANGE,
+                description: "Vous ne pouvez pas signaler votre présence pendant plus de 9 heures"
             }
         }
     }

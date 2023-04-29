@@ -30,7 +30,9 @@ export function BaseStackNavigator(): JSX.Element {
                                 onPress={() => {navigation.goBack()}}
                             />
                         )
-                    }
+                    },
+                    title:"Lieu",
+                    headerShown: false    
                 }}
  
 				component={PlaceProfileScreenWrapper}
@@ -39,28 +41,14 @@ export function BaseStackNavigator(): JSX.Element {
                 name="UserProfileScreen"
                 options={{
                     headerStyle:globalStyles.global.headerStyle,
-                    headerLeft:() => {
-                        return (
-                            <HeaderBackButton
-                                tintColor={globalStyles.global.logoColor}
-                                onPress={() => {navigation.goBack()}}
-                            />
-                        )
-                    }
+                    headerShown: false    
                 }}
                 component={UserProfileScreenWrapper}
             />
             <Stack.Screen
                 name="FriendsListScreen"
                 options={{
-                    headerLeft:() => {
-                        return (
-                            <HeaderBackButton
-                                tintColor={globalStyles.global.logoColor}
-                                onPress={() => {navigation.goBack()}}
-                            />
-                        )
-                    },
+                    headerShown: false,
                     title: "Amis"
                 }}
                 component={FriendsListScreenWrapper}

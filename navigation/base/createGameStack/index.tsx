@@ -34,6 +34,8 @@ export function CreateGameStackNavigator(): JSX.Element {
 						const navigation = useNavigation() as CreateGameStackNavigationProp<'SelectPlace'>
 						return (
 							<HeaderBackButton
+
+                                tintColor={globalStyles.global.logoColor}
 								onPress={() => {navigation.goBack()}}
 							/>
 						)

@@ -62,7 +62,8 @@ export interface ICreateGameError {
 
 export enum CreateGameErrorReason {
     INVALID_ENDING_HOUR="INVALID_ENDING_HOUR",
-    OTHER="OTHER"
+    INVALID_TIME_RANGE="INVALID_TIME_RANGE",
+    SERVER_ERROR="SERVER_ERROR"
 }
 
 export interface ICreateGameResult{

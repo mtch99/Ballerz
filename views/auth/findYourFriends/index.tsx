@@ -1,8 +1,8 @@
 import React from "react";
 import { IFindYourFriendsViewProps } from "../../../screens/userProfileList/findYourFriends/interface";
 import {SelectableUserProfileListView, UserProfileItemView} from "../../userProfileList/selectable";
-import HeaderView from "../../header";
-import HeaderCheckButton from "../../header/buttons/checkButton"
+import BallerzHeaderView from "../../../components/header";
+import HeaderCheckButton from "../../../components/header/buttons/checkButton"
 import { globalStyles } from "../../styles";
 import { Alert, Share, StyleSheet, View } from "react-native";
 import InviteYourFriendsFeedBackView from "../../FeedBack/inviteYourFriends";
@@ -44,7 +44,7 @@ export default class FindYourFriendsView<P extends IFindYourFriendsViewProps = I
             <BallerzSafeAreaView
             >
                 <View style={{flex:1}}>
-                <HeaderView
+                <BallerzHeaderView
                     title="Trouve tes amis"
                     rightButton={HeaderCheckButton}
                     leftButtonProps={{onPress: () => {}}}

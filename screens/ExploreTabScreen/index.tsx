@@ -1,6 +1,6 @@
 import React from "react";
 import { TabView, SceneMap, TabBar, SceneRendererProps, TabBarProps } from 'react-native-tab-view'
-import PlaceSearchScreen, { AbstractPlaceListScreen } from "../placeList";
+import PlaceSearchScreen from "../placeList";
 import { IPlaceSearchScreenNavigationController } from "../placeList/interface";
 import UserProfileSearchScreen from "../userProfileList/userProfileSearch";
 import { globalStyles } from "../../views/styles";
@@ -26,7 +26,7 @@ export default class ExploreTabScreen extends React.Component<IExploreTabScreenP
         index:0, 
         routes: [
             {
-                key: "first", title: "Terrains"
+                key: "first", title: "Lieu"
             }, 
             {
                 key: "second", title: "Personnes"

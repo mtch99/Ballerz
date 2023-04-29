@@ -2,14 +2,15 @@ import React from "react"
 import { View, Text, ScrollView, ImageSourcePropType } from "react-native"
 import { IUserProfileViewProps } from "../../screens/userProfile"
 import { styles } from "./styles"
-import { HeaderView } from "./header"
-import BallerzHeaderView from "../header"
+import { HeaderView } from "./profileHeader"
+import BallerzHeaderView from "../../components/header"
 import { BadgeListView } from "./badges"
 import PictresView from "./pictures"
 import GamesListView from "./games"
 import { IUserProfileState } from "../../app/features/types"
 import BallerzSafeAreaView from "../safeArea"
 import { getProfilePicUri } from "../../screens/utils/ImagePicker"
+import ProfileViewHeader from "./screenHeader"
 
 
 
@@ -37,9 +38,13 @@ export class UserProfileView extends React.Component<IUserProfileViewProps, IPro
 
     render(){
         return(
-            <ScrollView
-                style={styles.container}
+            <BallerzSafeAreaView
             >
+                <>
+                <ProfileViewHeader 
+                    username={this.props.username} 
+                    goBack={this.props.goBack}                
+                />
                 <HeaderView
                     username={this.props.username}
                     friendsList={this.props.friends}
@@ -58,7 +63,8 @@ export class UserProfileView extends React.Component<IUserProfileViewProps, IPro
                 <GamesListView
                     gameList={this.props.games}
                 />
-            </ScrollView>
+                </>
+            </BallerzSafeAreaView>
         )
     }
 }
@@ -87,6 +93,8 @@ export class MyProfileView extends React.Component<IUserProfileViewProps, IProfi
                 <>
                 <BallerzHeaderView
                     title="Profile"
+                    leftButton={<></>}
+                    rightButton={<></>}
                 />
                 <HeaderView
                     username={this.props.username}

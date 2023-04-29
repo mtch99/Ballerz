@@ -53,8 +53,8 @@ class PlaceModelAdapter {
     private static parseGame(input: IGame): IGameState{
         return {
             ...input,
-            startingTime: input.startingTime.toLocaleDateString(),
-            endingTime: input.endingTime.toLocaleDateString()
+            startingTime: input.startingTime.toString(),
+            endingTime: input.endingTime.toString()
         }
     }
 
@@ -72,8 +72,8 @@ class PlaceModelAdapter {
 export function parseGame(game: IGame): IGameState{
     return {
         ...game,
-        startingTime: game.startingTime.toLocaleDateString(),
-        endingTime: game.endingTime.toLocaleDateString()
+        startingTime: game.startingTime.toString(),
+        endingTime: game.endingTime.toString()
     }
 }
 

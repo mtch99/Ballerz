@@ -50,20 +50,23 @@ export function UserProfileScreenWrapper(props: BaseStackScreenProps<'UserProfil
 
     const navigationController: IUserProfileScreenNavigationController = {
         goToUserProfile(userProfileData: IUserProfileDataState) {
-            navigation.push('UserProfileScreen', {userProfileData});
+            navigation.push('UserProfileScreen', { userProfileData })
         },
         goToPlaceProfile: function (id: string): void {
-            throw new Error("Function not implemented.");
+            throw new Error("Function not implemented.")
         },
         goToCommentsScreen: function (gameId: string): void {
-            throw new Error("Function not implemented.");
+            throw new Error("Function not implemented.")
         },
         goToAttendantsListScreen: function (gameId: string): void {
-            throw new Error("Function not implemented.");
+            throw new Error("Function not implemented.")
         },
         goToFriendsListScreen(userProfileList) {
-            navigation.push('FriendsListScreen', {friendsList: userProfileList});
+            navigation.push('FriendsListScreen', { friendsList: userProfileList })
         },
+        goBack: function (): void {
+            navigation.goBack()
+        }
     }
 
     return(

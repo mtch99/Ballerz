@@ -5,6 +5,7 @@ import PlaceSearchScreen, {IPlaceListScreenNavigationController } from "../../pl
 import PlaceListView from "../../../views/place/placeList";
 import BallerzSafeAreaView from "../../../views/safeArea";
 import SearchBar from "../../../views/makeFriends/SearchBar";
+import { AppContext, IAppContext } from "../../../controllers/provider";
 
 
 
@@ -17,6 +18,9 @@ export interface ISelectPlaceScreenProps {
 }
 
 export class SelectPlaceScreen extends PlaceSearchScreen<ISelectPlaceScreenNavigationController>{
+    static contextType = AppContext
+    context: React.ContextType<typeof AppContext> = {} as IAppContext
+    
     navigationController: ISelectPlaceScreenNavigationController = this.props.navigationController
     onPressPlace(placeData: IPlaceListItemState){
         this.navigationController.goToSelectTimeSlot(placeData)

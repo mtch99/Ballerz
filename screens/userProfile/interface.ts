@@ -19,4 +19,5 @@ export interface IUserProfileScreenNavigationController{
     goToCommentsScreen(gameId: string): void
     goToAttendantsListScreen(gameId: string): void
     goToFriendsListScreen(userProfileList: IUserProfileDataState[]): void
+    goBack(): void
 }

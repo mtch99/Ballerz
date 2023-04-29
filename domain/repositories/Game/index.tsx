@@ -54,7 +54,7 @@ export default class GameRepository implements IGameRepository {
             } else {
                 result = {
                     error: {
-                        reason: CreateGameErrorReason.OTHER,
+                        reason: CreateGameErrorReason.SERVER_ERROR,
                         description: "Veuillez réessayez plus tard"
                     },
                 }
@@ -72,6 +72,7 @@ export default class GameRepository implements IGameRepository {
                 const parsedGame = GameAdapter.parseGame(gameDoc)
                 if(parsedGame){
                     result.push(parsedGame)
+                    // console.log(`\n Game.startinnTime: ${parsedGame.startingTime} \n`)
                 }
             })
             return result

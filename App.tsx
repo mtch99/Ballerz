@@ -5,7 +5,7 @@ import { store } from './app/store';
 import FeedProvider from './controllers/feed/provider';
 import Navigation from './navigation';
 import React from 'react';
-import AppProvider from './controllers/provider';
+import AppProvider, {MemoizedAppProvider} from './controllers/provider';
 import { globalStyles } from './views/styles';
 import * as Clipboard from "expo-clipboard";
 import Constants from "expo-constants";
@@ -40,12 +40,12 @@ export default function App() {
         backgroundColor={globalStyles.global.screenBackGroundColor}
       />
         <Provider store={store}>
-          <AppProvider
+          <MemoizedAppProvider
           >
             <Navigation
               colorScheme={"dark"} 
             />
-          </AppProvider>
+          </MemoizedAppProvider>
         </Provider>
     </>
   )

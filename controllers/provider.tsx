@@ -100,6 +100,8 @@ export default function AppProvider (props: IProps) {
         dispatchFunc: dispatch
     }
 
+    // console.info("AppProvider rendering")
+
 
     const authModel: IAuthModel = createAuthModel(modelInput)
     const authState: AuthState = selector(selectAuth)

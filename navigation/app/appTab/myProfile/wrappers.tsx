@@ -43,8 +43,8 @@ export function MyProfileScreenWrapper(props: MyProfileStackScreenProps<'MyProfi
                 params: {
                     userProfileData: userProfileData
                 }
-            }
-            navigation.navigate('BaseStack', params)
+            };
+            navigation.navigate('BaseStack', params);
         },
         goToPlaceProfile: function (id: string): void {
             console.log("Function not implemented.");
@@ -61,8 +61,11 @@ export function MyProfileScreenWrapper(props: MyProfileStackScreenProps<'MyProfi
                 params: {
                     friendsList: friendsList
                 }
-            }
-            navigation.navigate('BaseStack', params)
+            };
+            navigation.navigate('BaseStack', params);
+        },
+        goBack: function (): void {
+            navigation.goBack()
         }
     }
 

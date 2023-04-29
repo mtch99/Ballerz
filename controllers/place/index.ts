@@ -13,11 +13,12 @@ export class PlaceController implements IPlaceController{
 
     createUseCase(model: IPlaceModelEventListener){
         this.placeUseCase = new PlaceUseCase(model)
-        console.log(`\n Place usecase initialized \n`)
+        console.error(`\n Place usecase initialized \n`)
     }
 
     async getAllPlaces(): Promise<void> {
         await this.placeUseCase.getAllPlaces()
+        return;
     }
 
     getPlaceProfile(id: string): void {
@@ -31,10 +32,18 @@ export default placeController;
 
 const fakeUseCase: IPlaceUseCase = {
     observer: {} as IPlaceModelEventListener,
-    getAllPlaces: function (): IPlaceData[] {
+    repository: {
+        getAllPlaces: function (): Promise<IPlaceData[]> {
+            throw new Error("Function not implemented.");
+        },
+        getPlaceProfile: function (id: string, userProfileID?: string | undefined): Promise<IPlaceProfile | null> {
+            throw new Error("Function not implemented.");
+        }
+    },
+    getAllPlaces: function (): Promise<IPlaceData[]> {
         throw new Error("Function not implemented.");
     },
-    getPlaceProfile: function (id: string): IPlaceProfile | null {
+    getPlaceProfile: function (id: string, userProfielID?: string | undefined): Promise<IPlaceProfile | null> {
         throw new Error("Function not implemented.");
     }
 }

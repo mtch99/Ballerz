@@ -16,8 +16,7 @@ type IPlaceMapStateReducer<PayloadType> = (state: IPlaceMapState, action: Payloa
 const newPlaceProfileReducer: IPlaceMapStateReducer<INewPlaceProfileActionPayload> = (state, action) => {
     
     const placeId = action.payload.id
-
-    
+ 
     const newState = {
         ...state,
         [placeId]: action.payload

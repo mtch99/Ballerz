@@ -31,6 +31,7 @@ export default class PlaceRepository implements IPlaceRepository {
         const response = await this.client.getPlace(id, userProfileID)
         if (response) {
             const parsedResult =  parseGetPlaceQuery(response)
+            // console.log(`Get Place Response: \n ${parsedResult?.name}.games:  ${JSON.stringify(parsedResult?.games)} \n \n`)
             result = parsedResult
         } 
         return result
@@ -76,7 +77,9 @@ function parseGameConnection(items: (Game | null)[]): IGame[] {
                 attendants: parsePresenceList(item.presenceList.items),
                 place: item.place
             }
-            result.push(game)
+            if(game.attendants.length > 0){
+                result.push(game)
+            }
         }
     }
     return result

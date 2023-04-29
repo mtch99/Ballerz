@@ -7,7 +7,7 @@ export interface ITextHeaderButtonProps extends IHeaderButtonProps{
     text: string;
     color?: string;
 }
-export default class HeaderTextButton extends React.Component<ITextHeaderButtonProps>{
+export default class BalerzHeaderTextButton extends React.Component<ITextHeaderButtonProps>{
 
    constructor(props: ITextHeaderButtonProps){
         super(props);

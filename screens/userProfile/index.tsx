@@ -99,6 +99,7 @@ export class UserProfileScreen extends Screen<IUserProfileScreenProps, IUserProf
                     {...userProfile}
                     onPressAddButton={this.onPressAddButton.bind(this)}
                     onPressFriendsNumber={this.onPressFriendsNumber.bind(this)}
+                    goBack={this.props.navigationController.goBack}
                 />
             )
         }
@@ -107,6 +108,7 @@ export class UserProfileScreen extends Screen<IUserProfileScreenProps, IUserProf
                 {...this.userProfile}
                 onPressAddButton={this.onPressAddButton.bind(this)}
                 onPressFriendsNumber={this.onPressFriendsNumber.bind(this)}
+                goBack={this.props.navigationController.goBack}
             />
         )
     }
@@ -141,6 +143,7 @@ export class MyProfileScreen extends React.Component<IMyProfileScreenProps> {
                     }
                     onPressAddButton={() => {}}
                     onPressFriendsNumber={this.onPressFriendsNumber.bind(this)}
+                    goBack={this.props.navigationController.goBack}
                 />
             )
         }
@@ -150,4 +153,5 @@ export class MyProfileScreen extends React.Component<IMyProfileScreenProps> {
 export interface IUserProfileViewProps extends IUserProfileState{
     onPressAddButton: (item: IUserProfileState) => void;
     onPressFriendsNumber: () => void;
+    goBack: () => void;
 }
