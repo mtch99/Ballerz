@@ -7,10 +7,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from "react-native-vector-icons/Entypo"
 import FeatherIcon from "react-native-vector-icons/Feather"
-import { NavigationContainer, DarkTheme} from '@react-navigation/native';
-import { ColorSchemeName } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
 import { AppTabParamList } from './types';
 import { ExploreStackWrapper, FeedStackWrapper, GroupChatStackWrapper, MyProfileStackWrapper, NotificationStackWrapper } from './wrappers';
@@ -83,7 +80,13 @@ export function AppTab(): JSX.Element {
 				options={{
 					headerShown: false,
 					tabBarLabel: 'Games',
-					tabBarIcon: undefined,
+					tabBarIcon: ({focused}) => (
+						<Ionicons 
+							name="basketball-outline" 
+							size={24} 
+							color={focused?(globalStyles.global.logoColor):('grey')} 
+						/>
+					),
 					tabBarActiveTintColor,
 				}}
 				component={FeedStackWrapper}
@@ -93,7 +96,14 @@ export function AppTab(): JSX.Element {
 				options={{
 					headerShown: false,
 					tabBarLabel: 'Profile',
-					tabBarIcon: undefined,
+					tabBarShowLabel: false,
+					tabBarIcon: ({focused}) => (
+						<FontAwesome 
+							name="user-circle" 
+							size={24} 
+							color={focused?(globalStyles.global.logoColor):('grey')} 
+						/>
+					),
 					tabBarActiveTintColor,
 				}}
 				component={MyProfileStackWrapper}

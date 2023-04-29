@@ -15,11 +15,6 @@ There must be three different games on three different courts, two at the moment
 ## How? (technical)
 
 - [ ] Notifications use case
-    - [x] Define and implement Notifications usecase
-    - [x] Notifications model
-    - [x] Notifications controller
-    * [x] Check auth flow
-    - [x] Notifications subscriptions after userProfile retrieval or creation
     - [ ] Friend Playing notification
     - [ ] HotCourt notification
     - [ ] GameInvitation Notification
@@ -29,11 +24,7 @@ There must be three different games on three different courts, two at the moment
 - [x] Add friend
 
 
-* [x] Add profile picture after profile creation
-    - [x] ImagePicker
-    - [x] Create S3 client
-
-    - [x] Onboarding and authflow
+* [ ] Add profile picture after profile creation
     TODO:
     - [ ] Load asssets before launch 
     - [ ] Add default profile pic to assets
@@ -43,27 +34,22 @@ There must be three different games on three different courts, two at the moment
     TODO: Warning: for now, akk the games with 0 attendants are not displayed
         - [ ] Undo the last warning
         - [ ] Undo onNewNotification warning in Notifications repository
-    - [x] Test with Dani 
-    - [x] Feed Item View
     TODO:     
     - [ ] Refactor Game interface. Change date fields to string type
     TODO:
     - [ ] Disable Play button during checkin request
     - [ ] Popup after checkin
 
-    - [x] Add place icon as header for FeedItem
-
-    - [x] Add games list to Place profile
-    - [x] PickTimeSlotScreen callBack on game Created
-    - [x] Fix Create Game Mutation error on the client
-    - [x] play here button
-
 
 - [ ] I want see a toast message on new notiication
     - [ ] Display a toast message on new received notification 
         - [ ] yarn add @react-native-material/Snackbar
         - [ ] Notification UseCase send events to the Notifications controller
-        - [ ] Notification  controller send events to the snackbar  
+        - [ ] Notification  controller send events to the snackbar 
+
+- [ ] ProfilePic
+    - [ ] Make sure profile pic is uploaded on userProfileCreation
+    - [ ] Display respective profile pics on all UserList screens
         
 
 TODO: scenario10
