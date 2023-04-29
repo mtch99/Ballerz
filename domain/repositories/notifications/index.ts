@@ -37,7 +37,7 @@ export class NotificationsRepository implements INotificationsRepository {
 
     private notificationsSubscriptionHandler(clientNotification: ClientNotification): void {
         const notification = ResponseHandler.parseClientNotification(clientNotification)
-        console.warn(`Notification received: ${JSON.stringify(notification)}`)
+        console.log(`New Notification received: ${JSON.stringify(notification)}`)
         if(notification){
             this.onNewNotification(notification)
         }
@@ -46,7 +46,7 @@ export class NotificationsRepository implements INotificationsRepository {
 
 
     onNewNotification(notification: Notification): void {
-        console.warn(`Notification bien recue: ${JSON.stringify(notification)}`);
+        // console.warn(`Notification bien recue: ${JSON.stringify(notification)}`);
         this.observer.onNewNotificationReceived(notification)
     }
 
@@ -171,7 +171,7 @@ class ResponseHandler {
         if(arg.type != NotificationType.newFriend 
             || !arg.senderProfile || !arg.senderProfileID
         ){
-            console.warn(JSON.stringify(arg))
+            // console.warn(JSON.stringify(arg))
         } else {
             result = {
                 ...arg,
@@ -180,8 +180,6 @@ class ResponseHandler {
                 senderProfile: this.parseUserProfileData(arg.senderProfile)
             }
         }
-
-        console.log(JSON.stringify(result?.type))
 
         return result
     }

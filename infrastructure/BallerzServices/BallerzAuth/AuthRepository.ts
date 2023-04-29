@@ -102,7 +102,7 @@ export class AuthRepository implements IAuthRepository {
         let password: string = creds.password
 
         if(!isDevice){
-            console.warn(`Auth Repository detected simulator. Auto signing in default user`)
+            console.log(`Auth Repository detected simulator. Auto signing in default user`)
             email = creds.email
             password = creds.password
             const user: CognitoUser = default_user

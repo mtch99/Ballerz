@@ -27,7 +27,6 @@ export default class NotificationsClient extends BallerzApiClient implements INo
 
     async subscribeToNotifications(userProfileID: string, callback: (value: Notification) => void): Promise<void> {
         this.subscription?.unsubscribe()
-        console.log("subscribing to notifications: " + this)
         
         const sub = subscriptionClient.subscribe({
             query: gql(onCreateNotification_gql),

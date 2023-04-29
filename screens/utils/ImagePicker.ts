@@ -23,7 +23,6 @@ export async function getProfilePicUri(profileID: string): Promise<string | unde
     console.log(`Error getting profile pic: ${err}`);
     return undefined;
   })
-  console.log(uri);
   return uri
 }
 

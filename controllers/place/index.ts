@@ -13,7 +13,7 @@ export class PlaceController implements IPlaceController{
 
     createUseCase(model: IPlaceModelEventListener){
         this.placeUseCase = new PlaceUseCase(model)
-        console.error(`\n Place usecase initialized \n`)
+        console.log(`\n Place usecase initialized \n`)
     }
 
     async getAllPlaces(): Promise<void> {
