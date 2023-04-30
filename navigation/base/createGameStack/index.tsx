@@ -7,6 +7,7 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { FeedStackNavigationProp } from "../../feed/types";
 import { globalStyles } from "../../../views/styles";
+import BallerzHeaderBackButton from "../../../components/header/buttons/headerBackButton";
 
 
 
@@ -34,7 +35,6 @@ export function CreateGameStackNavigator(): JSX.Element {
 						const navigation = useNavigation() as CreateGameStackNavigationProp<'SelectPlace'>
 						return (
 							<HeaderBackButton
-
                                 tintColor={globalStyles.global.logoColor}
 								onPress={() => {navigation.goBack()}}
 							/>
@@ -50,10 +50,11 @@ export function CreateGameStackNavigator(): JSX.Element {
 			<Stack.Screen
 				name="SelectTimeSlot"
 				options={{
-					headerTitle: "Choisissez votre horaire",
+					headerTitle: "Choisissez un horaire",
 					headerStyle: {
 						backgroundColor: globalStyles.global.screenBackGroundColor
-					}
+					},
+					headerLeft: () => (<BallerzHeaderBackButton/>)
 				}}
 				component={SelectTimeSlotScreenWrapper}
 			/>

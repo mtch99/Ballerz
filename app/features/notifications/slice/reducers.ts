@@ -19,7 +19,7 @@ type INotificationReducer<PayloadType> = (state: NotificationListState, action: 
 const newNotificationListReducer: INotificationReducer<INewNotificationListPayload> = (state, action) => {
     const items = action.payload
     items.sort((a, b) => {
-        return new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf();
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     })
     let badge: number|undefined = items.length - state.items.length;
     if(badge == 0){

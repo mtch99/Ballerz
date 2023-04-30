@@ -1,6 +1,7 @@
 import style from "./styles";
 import React from "react";
 import { View, Text } from "react-native";
+import moment from "moment";
 
 
 export interface IBodyRightViewProps {
@@ -58,7 +59,7 @@ export default class BodyRightView extends React.Component<IBodyRightViewProps> 
         const todayAtMidnight = this.toMidnight(new Date())
         const sevenDayTimeSpanMS = 7*24*60*60*1000
         let DateView = () => (<Text style={style.weekDay}>{startingWeekDay}</Text>)
-        if(Math.abs(this.startingDate.valueOf() - todayAtMidnight.valueOf()) >= sevenDayTimeSpanMS){
+        if(this.startingDate.getTime() >= sevenDayTimeSpanMS){
             try{
                 const day = this.startingDate_str.split(" ")[1]
                 const month = this.getMonth(this.startingDate_str)
@@ -89,7 +90,7 @@ export default class BodyRightView extends React.Component<IBodyRightViewProps> 
 
 
     private toMidnight(date: Date): Date {
-        const newDate = date
+        const newDate = new Date(date)
         newDate.setHours(0)
         return newDate
     }

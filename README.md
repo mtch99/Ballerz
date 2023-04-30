@@ -28,8 +28,7 @@ There must be three different games on three different courts, two at the moment
 - [ ] Games feature
     - [x] Undo onNewNotification warning in Notifications repository    
     - [x] Disable Play button during checkin request
-        - [x] Display loading indicator during the play request
-    - [ ] Create Game from feedScreen
+    - [x] Create Game from feedScreen
     - [ ] Popup after checkin
 
 

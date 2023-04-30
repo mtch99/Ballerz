@@ -191,7 +191,7 @@ export interface ISelectTimeSlotViewProps{
 
 
 function checkGameInput(input: ICreateGameInput): ICheckGameInputResult {
-    const {startingTime, endingTime} = input
+    let {startingTime, endingTime} = input
     let result: ICheckGameInputResult = {
         input
     }
@@ -207,15 +207,18 @@ function checkGameInput(input: ICreateGameInput): ICheckGameInputResult {
             }
         } else {
             const newEndingTime = new Date(endingTime.valueOf() + 24*60*60*1000)
-            result = {
-                input: {
-                    ...result.input,
-                    endingTime: newEndingTime
-                }
-            }
+            endingTime = newEndingTime
         }
     }
-
+    
+    result = {
+        ...result,
+        input: {
+            ...result.input,
+            endingTime,
+            startingTime
+        }
+    }
     const maxDuration = 9 * 3600 * 1000
 
     if(Math.abs(startingTime.valueOf() - endingTime.valueOf()) > maxDuration){

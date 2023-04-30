@@ -93,7 +93,12 @@ const checkOutReducer: FeedReducer<ICheckOutActionPayload> = (state, action) => 
 
 
 const newFeedReducer: FeedReducer<INewFeedActionPayload> = (state, action) => {
-	return action.payload
+	const newFeed = action.payload
+	newFeed.items.sort((a, b) => {
+        return new Date(b.startingTime).valueOf() - new Date(a.startingTime).valueOf();
+    })
+	return newFeed
+	// return action.payload
 }
 
 const commentReducer: FeedReducer<ICommentActionPayload> = (state, action) => {
