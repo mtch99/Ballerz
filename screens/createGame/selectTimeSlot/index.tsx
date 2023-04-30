@@ -4,6 +4,7 @@ import { ISelectTimeSlotScreen } from "../interface";
 import { CreateGameErrorReason, ICreateGameError, ICreateGameInput, ICreateGameResult } from "../../../domain/use-cases/feed/interface";
 import { AppContext, IAppContext } from "../../../controllers/provider";
 import { SelectTimeSlotView } from "../../../views/selectTimeSlot";
+import { IScreenState, Screen } from "../../interface";
 
 
 
@@ -25,7 +26,7 @@ export interface IGameCreatedEventListener{
     onGameCreated(): void
 }
 
-export interface ISelectTimeSlotScreenState{
+export interface ISelectTimeSlotScreenState extends IScreenState{
     chosenPlaceId: string
     chosenPlaceName: string
     startingTime: Date
@@ -39,7 +40,7 @@ export interface ITime {
 }
 
 
-export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlotScreenProps, ISelectTimeSlotScreenState> implements ISelectTimeSlotScreen{
+export default class SelectTimeSlotScreen extends Screen<ISelectTimeSlotScreenProps, ISelectTimeSlotScreenState> implements ISelectTimeSlotScreen{
     
 
     static contextType = AppContext
@@ -55,10 +56,11 @@ export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlo
         chosenPlaceId: this.props.chosenPlace.id,
         chosenPlaceName: this.props.chosenPlace.name,
         startingTime: this.props.startingTime?(this.props.startingTime):(new Date()),
-        endingTime: this.props.endingTime?(this.props.endingTime):(new Date())
+        endingTime: this.props.endingTime?(this.props.endingTime):(new Date()),
+        loading: false
     }
     
-    async createGame(): Promise<ICreateGameResult> {
+    private async __createGame(): Promise<ICreateGameResult> {
         const userProfileID = this.context.authState.profile?.id
         if(!userProfileID){
             throw new Error("User not logged in")
@@ -87,6 +89,9 @@ export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlo
         }
     }
 
+    async createGame(): Promise<ICreateGameResult | void> {
+        return this.makeRequest(this.__createGame())
+    }
 
     componentDidUpdate(prevProps: Readonly<ISelectTimeSlotScreenProps>, prevState: Readonly<ISelectTimeSlotScreenState>, snapshot?: any): void {
         console.log(`SelectTimeSlotScreen updated: ${JSON.stringify({
@@ -129,6 +134,7 @@ export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlo
 				modifyStartingTime={this.modifyStartingTime.bind(this)}
                 modifyStartingAndEndingTimes={this.modifyStartingAndEndingTimes.bind(this)}
                 error={this.state.error}
+                loading={this.state.loading}
             />
         )
     }
@@ -180,6 +186,7 @@ export interface ISelectTimeSlotViewProps{
 	modifyStartingTime: SelectTimeSlotScreen['modifyStartingTime']
     modifyStartingAndEndingTimes: SelectTimeSlotScreen['modifyStartingAndEndingTimes']
     error?:string
+    loading: boolean
 }
 
 

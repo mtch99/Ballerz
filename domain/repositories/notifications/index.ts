@@ -180,7 +180,6 @@ class ResponseHandler {
                 senderProfile: this.parseUserProfileData(arg.senderProfile)
             }
         }
-
         return result
     }
 

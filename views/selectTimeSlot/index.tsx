@@ -1,17 +1,16 @@
 import React from "react";
-import { SafeAreaView, View, Text, Appearance, useColorScheme } from "react-native";
+import { Text, Appearance} from "react-native";
 import styles from "./styles";
-import AwesomeAlert from 'react-native-awesome-alerts';
 import DateTimePickerModal, {ReactNativeModalDateTimePickerProps} from "react-native-modal-datetime-picker";
 import { ISelectTimeSlotViewProps, ITime } from "../../screens/createGame/selectTimeSlot";
-import { StatusBar } from "expo-status-bar";
 import EditPlaceView from "./EditPlace";
 import { ISelectTimeSlotViewState, IDateTimePickerState, EditState, TimeEditActionType } from "./interface";
-import EditTimeView, { EditDateView, EditEndingTimeView, EditStartingTimeView } from "./EditTime";
+import { EditDateView, EditEndingTimeView, EditStartingTimeView } from "./EditTime";
 import { ConfirmButton } from "./CreateGameButton";
 import BallerzSafeAreaView from "../safeArea";
-
-
+import Modal, {ModalProps} from 'react-native-modal';
+import { ActivityIndicator } from "react-native";
+import { globalStyles } from "../styles";
 
 
 
@@ -56,6 +55,7 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 	}
 
 	componentDidUpdate(prevProps: Readonly<ISelectTimeSlotViewProps>, prevState: Readonly<ISelectTimeSlotViewState>, snapshot?: any): void {
+		// console.log(`\n \n SelectTimeSlotView.componentDidUpdate: \n prevProps: ${JSON.stringify(prevProps)}\n new: ${JSON.stringify(this.props)} \n \n`)
 	}
 
 
@@ -236,8 +236,6 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 
 	
 
-
-
 	onConfirmStartingTimeEdit: ReactNativeModalDateTimePickerProps['onConfirm'] = (date: Date) => {
 		this.onConfirmTimeEdit('STARTING_TIME', date)
 	}
@@ -343,6 +341,10 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 
             <BallerzSafeAreaView>
 				<>
+				<LoadingModalScreen
+                    isVisible={this.props.loading}
+				/>
+					
                 <BallerzDateTimePickerModal
 					onConfirm={(date) => {this.onPressDateTimePickerConfirm(date)}}
 					onCancel={(date) => {this.onPressDateTimePickerCancel(date)}}
@@ -384,7 +386,7 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 					</Text>
 				): (<></>)}
 				</>
-         </BallerzSafeAreaView>
+         	</BallerzSafeAreaView>
         )
     }
 
@@ -404,8 +406,6 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 }
 
 
-
-
 export function BallerzDateTimePickerModal(props: ReactNativeModalDateTimePickerProps){
 	let colorScheme = Appearance.getColorScheme();
 	let display: ReactNativeModalDateTimePickerProps['display'] = "spinner"
@@ -423,3 +423,25 @@ export function BallerzDateTimePickerModal(props: ReactNativeModalDateTimePicker
 	)
 }
 
+export interface ILoadingModalProps {
+	isVisible: boolean;
+}
+export function LoadingModalScreen(props: ILoadingModalProps){
+	console.log(`LoadingScreen props: ${JSON.stringify(props)}`)
+	return(
+		<Modal 
+			isVisible={props.isVisible} 
+			style={{ 
+				backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+				margin: 0, 
+				justifyContent: 'center' 
+			}}
+		>
+			<ActivityIndicator
+                size="large"
+                color={globalStyles.global.logoColor}
+			/>
+			{/* Your modal content here */}
+		</Modal>
+	)
+}

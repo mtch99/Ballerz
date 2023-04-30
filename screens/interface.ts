@@ -26,7 +26,7 @@ export class Screen<P = any, S extends IScreenState = IScreenState> extends Reac
     async makeRequest<T>(request: Promise<T>): Promise<T  | void> {
         if(!this.state.loading){
             this.setLoading(true)
-            const response = /*await*/ request.then(response => {
+            const response = await request.then(response => {
                 console.error(`Request response: ${JSON.stringify(response)}`)
                 return response
             })
@@ -38,8 +38,8 @@ export class Screen<P = any, S extends IScreenState = IScreenState> extends Reac
 
 
     setLoading(value: boolean) {
-        this.setState((prevState) => ({
-            ...prevState,
+        this.setState((prevSate) => ({
+            ...prevSate,
             loading: value
         }))
     }
