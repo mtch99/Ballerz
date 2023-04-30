@@ -29,7 +29,7 @@ There must be three different games on three different courts, two at the moment
     - [x] Undo onNewNotification warning in Notifications repository    
     - [x] Disable Play button during checkin request
     - [x] Create Game from feedScreen
-    - [ ] Popup after checkin
+    - [x] Popup after checkin
 
 
 - [ ] I want see a toast message on new notiication

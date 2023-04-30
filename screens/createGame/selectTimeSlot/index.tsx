@@ -5,6 +5,7 @@ import { CreateGameErrorReason, ICreateGameError, ICreateGameInput, ICreateGameR
 import { AppContext, IAppContext } from "../../../controllers/provider";
 import { SelectTimeSlotView } from "../../../views/selectTimeSlot";
 import { IScreenState, Screen } from "../../interface";
+import { Alert } from "react-native";
 
 
 
@@ -79,7 +80,7 @@ export default class SelectTimeSlotScreen extends Screen<ISelectTimeSlotScreenPr
             else {
                 const response = await this.context.feedController.createGame(checkInput.input)
                 if(!response.error){
-                    this.props.navigationController.onGameCreated()
+                    // this.props.navigationController.onGameCreated()
                 }
                 else{
                     console.warn("SelectTimeSlotScreen: Error in use controller create game output")
@@ -90,7 +91,20 @@ export default class SelectTimeSlotScreen extends Screen<ISelectTimeSlotScreenPr
     }
 
     async createGame(): Promise<ICreateGameResult | void> {
-        return this.makeRequest(this.__createGame())
+        const res = await this.makeRequest(this.__createGame())
+        if(!res?.error && res?.feedItem){
+            Alert.alert(
+                "Super! ",
+                `Super, d'autres joueurs vous rejoindront à ${res.feedItem.place.name}.
+                Vos amis seront aussi notifiés de votre présence.
+                BALL IS LIFE 🔥🔥🔥
+                `,
+                [
+                    {text: "Cool", onPress: () => {this.props.navigationController.onGameCreated()}}
+                ],
+                {cancelable: false}
+            )
+        }
     }
 
     componentDidUpdate(prevProps: Readonly<ISelectTimeSlotScreenProps>, prevState: Readonly<ISelectTimeSlotScreenState>, snapshot?: any): void {

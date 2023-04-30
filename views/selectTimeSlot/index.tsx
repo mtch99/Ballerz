@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Appearance} from "react-native";
+import { Text, Appearance, View} from "react-native";
 import styles from "./styles";
 import DateTimePickerModal, {ReactNativeModalDateTimePickerProps} from "react-native-modal-datetime-picker";
 import { ISelectTimeSlotViewProps, ITime } from "../../screens/createGame/selectTimeSlot";
@@ -441,6 +441,53 @@ export function LoadingModalScreen(props: ILoadingModalProps){
                 size="large"
                 color={globalStyles.global.logoColor}
 			/>
+			{/* Your modal content here */}
+		</Modal>
+	)
+}
+
+export interface ILoadingModalProps {
+	isVisible: boolean;
+}
+export function CreatedGameModal(props: ILoadingModalProps){
+	console.log(`LoadingScreen props: ${JSON.stringify(props)}`)
+	return(
+		<Modal 
+			isVisible={props.isVisible} 
+			style={{ 
+				backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+				margin: 0, 
+				justifyContent: 'center' 
+			}}
+		>
+            <View
+                style={{
+                    flexGrow: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'white'
+                }}
+            >
+                <View
+                    style={{
+                        padding: 10,
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}
+                >
+                    <Text
+                        style={{
+                            fontSize: 17,
+                            fontWeight: "bold",
+                            color: "black",
+                        }}
+                    >
+                        Ball is life 🔥🔥🔥
+                    </Text>
+
+                </View>
+
+            </View>
 			{/* Your modal content here */}
 		</Modal>
 	)

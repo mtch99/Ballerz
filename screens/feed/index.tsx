@@ -9,6 +9,7 @@ import { AppContext, IAppContext } from "../../controllers/provider";
 import { globalStyles } from "../../views/styles";
 import FindYourFriendsBottomSheetView from "../../views/makeFriends/findYourFriendsBottomSheet";
 import { IScreenState, Screen } from "../interface";
+import CommunityModal, {ModalProps} from 'react-native-modal';
 
 
 export interface IFeedScreenPropsWithoutNavigation {
@@ -21,6 +22,7 @@ export interface IFeedScreenProps extends IFeedScreenPropsWithoutNavigation{
 
 interface IFeedScreenState extends IScreenState{
     modalVisible: boolean
+
 }
 
 
@@ -30,7 +32,7 @@ export class FeedScreen extends Screen<IFeedScreenProps, IFeedScreenState> imple
     
     state = {
         modalVisible: false,
-        loading: false
+        loading: false,
     }
 
     static contextType = AppContext
@@ -208,4 +210,55 @@ export class FeedScreen extends Screen<IFeedScreenProps, IFeedScreenState> imple
             { cancelable: false }
           );
     }
+}
+
+
+
+
+export interface ILoadingModalProps {
+	isVisible: boolean;
+    onPressOk: () => void;
+}
+export function CreatedGameModal(props: ILoadingModalProps){
+	console.log(`LoadingScreen props: ${JSON.stringify(props)}`)
+	return(
+		<CommunityModal 
+			isVisible={props.isVisible} 
+			style={{ 
+				backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+				margin: 0, 
+				justifyContent: 'center' 
+			}}
+		>
+            <View
+                style={{
+                    flexGrow: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'white'
+                }}
+            >
+                <View
+                    style={{
+                        padding: 10,
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}
+                >
+                    <Text
+                        style={{
+                            fontSize: 17,
+                            fontWeight: "bold",
+                            color: "black",
+                        }}
+                    >
+                        Ball is life 🔥🔥🔥
+                    </Text>
+
+                </View>
+
+            </View>
+			{/* Your modal content here */}
+		</CommunityModal>
+	)
 }
