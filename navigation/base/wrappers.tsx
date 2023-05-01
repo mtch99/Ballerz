@@ -7,7 +7,7 @@ import { IUserProfileScreenNavigationController } from "../../screens/userProfil
 import { IUserProfileDataState } from "../../app/features/types"
 import { UserProfileScreen } from "../../screens/userProfile"
 import { IUserProfileListScreenNavigationController } from "../../screens/userProfileList/interface"
-import FriendsListScreen from "../../screens/userProfileList/friendsList"
+import FriendsListScreen, { AttendantsListScreen } from "../../screens/userProfileList/friendsList"
 import { CreateGameStackNavigator } from "./createGameStack"
 import { IPlaceData } from "../../domain/use-cases/types"
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
@@ -89,6 +89,24 @@ export function FriendsListScreenWrapper(props: BaseStackScreenProps<'FriendsLis
 
     return(
         <FriendsListScreen
+        {...{navigationController, friendsList: route.params.friendsList}}
+        />
+    )
+
+}
+
+
+export function AttendantsListScreenWrapper(props: BaseStackScreenProps<'AttendantsListScreen'>){
+    const {navigation, route} = props
+
+    const navigationController: IUserProfileListScreenNavigationController = {
+        goToUserProfile: function (userProfileData): void {
+            navigation.push('UserProfileScreen', {userProfileData});
+        }
+    }
+
+    return(
+        <AttendantsListScreen
         {...{navigationController, friendsList: route.params.friendsList}}
         />
     )

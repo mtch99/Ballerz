@@ -12,7 +12,7 @@ import { AppContext } from "../../../controllers/provider";
 interface IFeedItemViewProps{
 	feedItem: IFeedItemState
 	handleBadgeClick: IFeedScreen['handleBadgeClick']
-	handleFriendsTherePress: IFeedScreen['handleFriendsTherePress']
+	handleFriendsTherePress: IFeedScreen['handleParticipantsPress']
 	handleInvitePress: IFeedScreen['handleInvitePress']
 	handlePlayButtonPress: () => void
 	onPressCommentButton: () => void

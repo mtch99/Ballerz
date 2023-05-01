@@ -15,14 +15,15 @@ There must be three different games on three different courts, two at the moment
 ## How? (technical)
 
 
-- [ ] Friend Playing notification
+- [x] Friend Playing notification
     - [x] FriendPlaying Notification View
     - [x] Fix FriendshipRequestNotification Layout
     - [x] Display
-    - [ ] Join friend
-    - [ ] Join button conditionally activated
+    - [x] Join button conditionally activated
         - [x] My PresenceList in authState
         - [x] isPresent field in IFriendPlayingNotification
+
+
 
 
 
@@ -38,6 +39,9 @@ There must be three different games on three different courts, two at the moment
     - [x] Popup after checkin
 
 
+- [x] See Game Participants
+
+
 - [ ] I want see a toast message on new notification
     - [ ] Display a toast message on new received notification 
         - [ ] yarn add @react-native-material/Snackbar
@@ -48,7 +52,15 @@ There must be three different games on three different courts, two at the moment
 - [ ] ProfilePic
     - [ ] Make sure profile pic is uploaded on userProfileCreation
     - [ ] Display respective profile pics on all UserList screens
+    - [ ] Retrieve user profile on MyProfile screen focus
         
+- [ ] Test Joining friends from notifications screen on real device
+
+
+- [ ] Notifications
+    - [ ] Test on real device
+    - [ ] Hot court notification 
+
 
 TODO: scenario10
 * [ ] Fix userProfileScreen virtualized list in scrollView Error

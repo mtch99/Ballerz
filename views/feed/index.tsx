@@ -10,7 +10,7 @@ import BallerzSafeAreaView from "../safeArea";
 interface IProps {
     feedState: IFeedState
 	handleBadgeClick: IFeedScreen['handleBadgeClick']
-	handleFriendsTherePress: IFeedScreen['handleFriendsTherePress']
+	handleParticipantsPress: IFeedScreen['handleParticipantsPress']
 	handleInvitePress: IFeedScreen['handleInvitePress']
 	handlePlayButtonPress: IFeedScreen['handlePlayButtonPress']
 	handleCommentButtonPress: (item: IFeedItemState) => void
@@ -25,7 +25,7 @@ class FeedView extends React.Component<IProps> {
 	}
 
 	handleFriendsTherePress(item: IFeedItemState) {
-		this.props.handleFriendsTherePress(item)
+		this.props.handleParticipantsPress(item)
 	}
 
 	handleInvitePress(item: IFeedItemState) {

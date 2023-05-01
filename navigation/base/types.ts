@@ -17,6 +17,7 @@ export type BaseStackParamList = {
     UserProfileScreen: IUserProfileScreenPropsWithoutNavigation
     FriendsListScreen: IFriendListScreenPropsWithoutNavigation
     CreateGameStack: NavigatorScreenParams<CreateGameStackParamList>
+    AttendantsListScreen: IFriendListScreenPropsWithoutNavigation
 };
 
 

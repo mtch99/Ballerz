@@ -5,7 +5,7 @@ export default interface IFeedScreen {
     getFeed(): void
     viewBadgeList(badgeList: IFeedItemState['badges']): void
     handleBadgeClick(feedItem: IFeedItemState): void
-    handleFriendsTherePress(feedItem: IFeedItemState): void
+    handleParticipantsPress(feedItem: IFeedItemState): void
     handleInvitePress(feedItem: IFeedItemState): void
     handlePlayButtonPress(feedItem: IFeedItemState): void
     postComment(input: IPostCommentInput): void

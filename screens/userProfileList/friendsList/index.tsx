@@ -31,12 +31,14 @@ export default class FriendsListScreen
             }))
         }
 
+        headerTitle = "Amis"
+
         render(){
             return (
                 <BallerzSafeAreaView>
                 <>
                     <BallerzHeaderView
-                        title="Amis"
+                        title={this.headerTitle}
                         leftButton={<HeaderLeft/>}
                         rightButton={<></>}
                     />
@@ -49,6 +51,11 @@ export default class FriendsListScreen
                 </BallerzSafeAreaView>
             )
         }
+}
+
+
+export class AttendantsListScreen extends FriendsListScreen {
+    headerTitle = "Participants"
 }
 
 

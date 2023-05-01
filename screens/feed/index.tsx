@@ -10,6 +10,7 @@ import { globalStyles } from "../../views/styles";
 import FindYourFriendsBottomSheetView from "../../views/makeFriends/findYourFriendsBottomSheet";
 import { IScreenState, Screen } from "../interface";
 import CommunityModal, {ModalProps} from 'react-native-modal';
+import { IUserProfileData } from "../../domain/use-cases/types";
 
 
 export interface IFeedScreenPropsWithoutNavigation {
@@ -55,8 +56,8 @@ export class FeedScreen extends Screen<IFeedScreenProps, IFeedScreenState> imple
         this.viewBadgeList(feedItem.badges)
     }
 
-    handleFriendsTherePress(feedItem: IFeedItemState): void {
-        this.viewFriendsThere(feedItem)
+    handleParticipantsPress(feedItem: IFeedItemState): void {
+        this.viewParticipants(feedItem)
     }
 
     handleInvitePress(feedItem: IFeedItemState): void {
@@ -114,13 +115,12 @@ export class FeedScreen extends Screen<IFeedScreenProps, IFeedScreenState> imple
         this.navigationController.goToBadgeListScreen(badgeList)
     }
 
-    viewFriendsThere(feedItem: IFeedItemState): void {
-        const friendsThereList = feedItem.friendsThere
-        if(friendsThereList.length>0){
-            this.navigationController.goToAttendantsScreen(feedItem.friendsThere)
-        }else{
-            this.displayNoFriendsHereModal()
-        }
+    viewParticipants(feedItem: IFeedItemState): void {
+        const attendants: IUserProfileData[] = []
+        feedItem.attendants.forEach(attendance => {
+            attendants.push(attendance.userProfileData)
+        })
+        this.navigationController.goToAttendantsScreen(attendants)
     }
 
     
@@ -165,7 +165,7 @@ export class FeedScreen extends Screen<IFeedScreenProps, IFeedScreenState> imple
                 <FeedView
                     feedState={this.context.feedState}
                     handleBadgeClick={(item) => {this.handleBadgeClick(item)}}
-                    handleFriendsTherePress={(item) => {this.handleFriendsTherePress(item)}}
+                    handleParticipantsPress={(item) => {this.handleParticipantsPress.bind(this)(item)}}
                     handleInvitePress={(item) => {this.handleInvitePress(item)}}
                     // handlePlayButtonPress={(item) => {this.handlePlayButtonPress(item)}}
                     handleCommentButtonPress={(input: IFeedItemState) => {this.handleCommentButtonPress(input)}}
@@ -198,18 +198,6 @@ export class FeedScreen extends Screen<IFeedScreenProps, IFeedScreenState> imple
           { cancelable: false }
         );
     };
-    
-
-    private showXthGameThisMobthAlert(){
-        Alert.alert(
-            'Nice!!!',
-            "C'est votre 4ième participation ce mois. Vous êtes à une participation de gagner un nouveau badge 🔜🙌🏽",
-            [
-                { text: 'Cool', onPress: () => {}, style: 'cancel' },
-            ],
-            { cancelable: false }
-          );
-    }
 }
 
 

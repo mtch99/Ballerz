@@ -16,6 +16,7 @@ import FindYourFriendsScreen from "../../screens/userProfileList/findYourFriends
 import { IFindYourFriendsScreenNavigationController } from "../../screens/userProfileList/findYourFriends/interface"
 import NotificationScreen from "../../screens/Notification"
 import { AppContext } from "../../controllers/provider"
+import { BaseStackParamList } from "../base/types"
 
 
 
@@ -48,13 +49,14 @@ export function FeedScreenWrapper(props: FeedStackScreenProps<'FeedScreen'>): JS
             navigation.navigate('FeedScreen', params)
         },
         goToAttendantsScreen: (attendantsList: IUserProfileData[]) => {
-            const params: FeedStackParamList['FeedScreen'] = {
-                screen: "AttendantsListScreen",
+            const screen: keyof BaseStackParamList = 'AttendantsListScreen'
+            const params: NavigatorScreenParams<BaseStackParamList> = {
+                screen,
                 params: {
-                    attendantsList,
+                    friendsList: attendantsList
                 },
             }
-            navigation.navigate('FeedScreen', params)
+            navigation.navigate('BaseStack', params)
         },
         goToCommentScreen(feedItem) {
             const params: FeedStackParamList['FeedScreen'] = {

@@ -35,10 +35,14 @@ export default function LeftBodyView(props: ILeftBodyProps) {
   		          <Text style={styles.playersNumText}>{props.playersNum}</Text>
   		          <Text style={styles.playersText}>Joueurs</Text>
   		        </TouchableOpacity>
-				<FriendsThereView
-					friendsHere={props.friendsHere}
-					onPress={props.onPress}
-				/>
+				{(props.friendsHere.length>0)?(
+					<FriendsThereView
+						friendsHere={props.friendsHere}
+						onPress={props.onPress}
+					/>
+				):(
+					<></>
+				)}
   		    </View>
 		)
 
