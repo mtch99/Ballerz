@@ -22,6 +22,7 @@ export interface IDefineUsernameViewProps{
     onPressProfilePic(): void
     profilePicSource: ImageSourcePropType
     error: string | undefined
+    loading: boolean
 }
 
 

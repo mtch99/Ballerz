@@ -39,7 +39,7 @@ export async function pickImage(handleImagePicked: (result:ImagePicker.ImagePick
 }
 
 
-export async function uploadImage(filename: string, img: any, progressCallback: (progress: number) => void): Promise<IUploadImageResult> {
+export async function uploadImage(filename: string, img: Blob, progressCallback: (progress: number) => void): Promise<IUploadImageResult> {
     const result: IUploadImageResult = {
       error: false,
     }

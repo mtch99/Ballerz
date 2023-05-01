@@ -14,7 +14,7 @@ export default class ClickableUserProfileItemView extends React.Component<IUserP
                     onPress={() => {this.props.onPressUserProfileItem(this.props.userProfile.id)}}
                 >
                     <View style={styles.groupPhotoContainer}>
-                        <Image style = {styles.groupPhoto} source = {require("../../../assets/profilePic.jpg")}/>
+                        <Image style = {styles.groupPhoto} source = {require("../../../assets/blank-pp.jpg")}/>
                     </View> 
                     <View>
                         <Text

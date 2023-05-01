@@ -61,7 +61,6 @@ export default class UserProfileRepository implements IUserProfileRepository {
         }
 
         const response = await this.client.listUserProfiles(variables).then((data) => {
-            // console.warn(JSON.stringify(data))
             return data
         })
         .catch(async(err) => {
@@ -73,7 +72,8 @@ export default class UserProfileRepository implements IUserProfileRepository {
             return cache
         }
         
-        let parsedResponse = IUserProfileDataAdapter.parseListUserProfileResponse(response, this.myUserProfileID)
+        
+        let parsedResponse = IUserProfileDataAdapter.parseListUserProfileResponse(response, "fakeUserProfileID")
         if(parsedResponse.length == 0){
             console.log("Could not find a user profile with the email: " + email)
         }else if(parsedResponse.length == 1){
@@ -272,6 +272,7 @@ class IUserProfileDataAdapter {
 
     static parseListUserProfileResponse(response: queries.ListUserProfileQuery | undefined, myProfileID: string): IUserProfile[]{
         const result: IUserProfile[] =[] 
+        
         if(response){
             if(response.listUserProfiles){
                 response.listUserProfiles.items.forEach((value) => {
@@ -332,21 +333,18 @@ class IUserProfileDataAdapter {
             const friends: IUserProfileData[] = []
             response.getUserProfile.friends.items.forEach((item) => {
                 if(item){
-                    if(item.id != myUserProfileID){
-                        friends.push({
-                            id: item.friendProfile.id,
-                            username: item.friendProfile.username,
-                            badges: [],
-                            isFriend: undefined
-                        })
-                    } else {
+                    const friendProfile = item.friendProfile
+                    friends.push({
+                        id: friendProfile.id,
+                        username: friendProfile.username,
+                        badges: [],
+                        isFriend: undefined
+                    })
+                    if(friendProfile.id == myUserProfileID){
                         isFriend = true
                     }
                 }
             })
-            if(response.getUserProfile.id == myUserProfileID){
-                isFriend = undefined
-            }
             result = {
                 id: response.getUserProfile.id,
                 username: response.getUserProfile.username,

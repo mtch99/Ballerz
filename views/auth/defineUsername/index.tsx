@@ -6,6 +6,7 @@ import { TouchableOpacity } from "react-native-gesture-handler"
 import BallerzSafeAreaView from "../../safeArea"
 import { pickImage } from "../../../screens/utils/ImagePicker"
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { LoadingModalView } from "../../../components/Modals/loadingView"
 
 export class DefineUsernameView extends React.Component<IDefineUsernameViewProps> {
     
@@ -13,6 +14,10 @@ export class DefineUsernameView extends React.Component<IDefineUsernameViewProps
     render(): React.ReactNode {
         return(
             <BallerzSafeAreaView>
+                <>
+                <LoadingModalView
+                    isVisible={this.props.loading}
+                />
                 <View
                     style={styles.container}
                 >
@@ -96,6 +101,7 @@ export class DefineUsernameView extends React.Component<IDefineUsernameViewProps
                     </View>
                     {this.props.error?(<Text>{this.props.error}</Text>):(<></>)}
                 </View>
+                </>
             </BallerzSafeAreaView>
         )
     }

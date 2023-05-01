@@ -8,9 +8,10 @@ import { ISelectTimeSlotViewState, IDateTimePickerState, EditState, TimeEditActi
 import { EditDateView, EditEndingTimeView, EditStartingTimeView } from "./EditTime";
 import { ConfirmButton } from "./CreateGameButton";
 import BallerzSafeAreaView from "../safeArea";
-import Modal, {ModalProps} from 'react-native-modal';
+import Modal from 'react-native-modal';
 import { ActivityIndicator } from "react-native";
 import { globalStyles } from "../styles";
+import { LoadingModalView } from "../../components/Modals/loadingView";
 
 
 
@@ -341,7 +342,7 @@ export class SelectTimeSlotView extends React.Component<ISelectTimeSlotViewProps
 
             <BallerzSafeAreaView>
 				<>
-				<LoadingModalScreen
+				<LoadingModalView
                     isVisible={this.props.loading}
 				/>
 					
@@ -420,29 +421,6 @@ export function BallerzDateTimePickerModal(props: ReactNativeModalDateTimePicker
 			locale="fr_CA"
 			display={display}
         />
-	)
-}
-
-export interface ILoadingModalProps {
-	isVisible: boolean;
-}
-export function LoadingModalScreen(props: ILoadingModalProps){
-	console.log(`LoadingScreen props: ${JSON.stringify(props)}`)
-	return(
-		<Modal 
-			isVisible={props.isVisible} 
-			style={{ 
-				backgroundColor: 'rgba(0, 0, 0, 0.5)', 
-				margin: 0, 
-				justifyContent: 'center' 
-			}}
-		>
-			<ActivityIndicator
-                size="large"
-                color={globalStyles.global.logoColor}
-			/>
-			{/* Your modal content here */}
-		</Modal>
 	)
 }
 

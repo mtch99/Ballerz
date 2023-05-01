@@ -1,4 +1,6 @@
 import React from "react";
+import { Image } from "react-native";
+import { Asset } from 'expo-asset';
 import { IAppController, IAppControllerEventListener } from "./interface";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { createFeedModel } from "../app/features/feed/model";
@@ -32,6 +34,7 @@ import { INotificationController } from "./notification/interface";
 import { NotificationListState } from "../app/features/notifications/slice/interface";
 import { createNotificationModel } from "../app/features/notifications/model";
 import { selectNotificationList } from "../app/features/notifications/slice";
+
 
 import userProfileController from "./userProfile";
 import placeController from "./place";
@@ -128,7 +131,11 @@ export default function AppProvider (props: IProps) {
     const notificationListState: NotificationListState = selector(selectNotificationList)
 
     const prepareData = async() => {
-        await authController.isFirstLaunch()
+        await Promise.all([
+            authController.isFirstLaunch(),
+            loadResourcesAndData()
+        ])
+
         const isUserSignedIn = await authController.signinLastUser()
         if(isUserSignedIn){
             const userProfile = await userProfileController.getMyProfile(isUserSignedIn.user?.email)
@@ -189,3 +196,32 @@ export default function AppProvider (props: IProps) {
 
 
 export const MemoizedAppProvider = React.memo(AppProvider)
+
+
+function getCacheImages(images: any[]) {
+    return images.map(image => {
+      if (typeof image === 'string') {
+        return Image.prefetch(image);
+      } else {
+        return Asset.fromModule(image).downloadAsync();
+      }
+    });
+}
+
+
+async function loadResourcesAndData(): Promise<void> {
+    try {
+      const imageAssets = await getCacheImages([
+        require('../assets/profilePic.jpg'),
+        require('../assets/onboarding1.jpg'),
+        require('../assets/onboarding2.jpg'),
+        require('../assets/onboarding3.jpg'),
+        require('../assets/blank-pp.jpg'),
+      ]);
+      return
+    } catch (e) {
+      // You might want to provide this error information to an error reporting service
+      console.warn(e);
+    }
+}
+  

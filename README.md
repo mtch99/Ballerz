@@ -20,12 +20,12 @@ There must be three different games on three different courts, two at the moment
     - [ ] GameInvitation Notification
 
 
-* [ ] Add profile picture after profile creation
-    - [ ] Load asssets before launch 
-    - [ ] Add default profile pic to assets
+* [x] Add profile picture after profile creation
+    - [x] Load asssets before launch 
+    - [x] Add default profile pic to assets
         
 
-- [ ] Games feature
+- [x] Games feature
     - [x] Undo onNewNotification warning in Notifications repository    
     - [x] Disable Play button during checkin request
     - [x] Create Game from feedScreen
