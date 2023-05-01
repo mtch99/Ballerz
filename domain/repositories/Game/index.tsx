@@ -1,6 +1,7 @@
 import { PlayMutationInput, presenceType } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
 import BallerzGameClient from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient";
 import { PlayMutation } from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient/mutations";
+import { GetMyPresencesQuery } from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient/queries";
 import { GameDoc, PresenceDoc } from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient/types";
 import { CreateGameErrorReason, ICheckInResult, ICheckinInput, ICheckoutInput, ICommentInput, ICreateGameInput, ICreateGameResult, IGameRepository } from "../../use-cases/feed/interface";
 import { IAttendance, IFeedItem, IGame, IUserProfileData } from "../../use-cases/types";
@@ -12,6 +13,16 @@ export default class GameRepository implements IGameRepository {
     gameClient = new BallerzGameClient()
 
     constructor(){
+
+    }
+    
+    async getMyGamesList(userProfileID: string): Promise<{ gameID: string; }[]> {
+        const response = await this.gameClient.getMyPresences(userProfileID)
+        if(response){
+            return GameAdapter.parseMyPresenceList(response)
+        } else {
+            return []
+        }
 
     }
 
@@ -162,8 +173,8 @@ export class GameAdapter {
                 friendsThere: [],
                 comments: [],
                 badges: [],
-                startingTime: new Date(game.startingDateTime),
-                endingTime: new Date(game.endingDateTime),
+                startingTime: game.startingDateTime,
+                endingTime: game.endingDateTime,
                 attendants: this.parsePresenceList(game.presenceList.items)
             }
             return result
@@ -201,6 +212,20 @@ export class GameAdapter {
                 result.push(parsedPresence)
             }
         })
+        return result
+    }
+
+
+    static parseMyPresenceList(response: GetMyPresencesQuery): {gameID: string}[]{
+        const result: {gameID: string}[] = []
+        const presenceList = response.listPresences?.items
+        if(presenceList){
+            for(let presence of presenceList){
+                if(presence?.gameID){
+                    result.push({gameID: presence?.gameID})
+                }
+            }
+        }
         return result
     }
 

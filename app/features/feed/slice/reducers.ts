@@ -28,6 +28,8 @@ enum FeedActionType {
 	CHECK_OUT = "CHECK_OUT",
 	NEW_FEED ='NEW_FEED',
 	COMMENT='COMMENT',
+	SET_MY_GAMES_LIST = "SET_MY_GAMES_LIST",
+	NEW_PRESENCE = "NEW_PRESENCE"
 }
 export type FeedActionString = keyof typeof FeedActionType
 
@@ -97,7 +99,7 @@ const newFeedReducer: FeedReducer<INewFeedActionPayload> = (state, action) => {
 	newFeed.items.sort((a, b) => {
         return new Date(b.startingTime).valueOf() - new Date(a.startingTime).valueOf();
     })
-	return newFeed
+	return {...state, items: newFeed.items}
 	// return action.payload
 }
 
@@ -122,6 +124,22 @@ const commentReducer: FeedReducer<ICommentActionPayload> = (state, action) => {
 }
 
 
+const setMyGameList: FeedReducer<IFeedState['myGamesList']> = (state, action) => {
+	return {
+		...state,
+		  myGamesList: action.payload
+  	}
+}
+
+
+const newPresence: FeedReducer<IFeedState['myGamesList']> = (state, action) => {
+	return {
+		...state,
+		myGamesList: [...action.payload, ...state.myGamesList]
+	}
+}
+
+
 /**
  * An object containing all the reducers
  */
@@ -132,6 +150,8 @@ export const feedReducers = {
 	"NEW_FEED": newFeedReducer,
 	"COMMENT": commentReducer,
 	"CHECK_OUT": checkOutReducer,
+	"SET_MY_GAME_LIST": setMyGameList,
+	"NEW_PRESENCE": newPresence
 } 
 
 

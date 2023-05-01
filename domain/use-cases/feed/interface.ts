@@ -22,6 +22,7 @@ export interface IFeedUseCase {
     comment(input: ICommentInput): Promise<boolean>
     createGame(input: ICreateGameInput): Promise<ICreateGameResult>
     checkOut(input: ICheckoutInput): Promise<boolean>
+    getMyGamesList(userProfileID: string): Promise<Array<{gameID: string}>>
 }
 
 export interface ICheckInResult {
@@ -37,6 +38,7 @@ export interface IGameRepository {
     comment(input: ICommentInput): Promise<boolean>
     createGame(input: ICreateGameInput): Promise<ICreateGameResult>
     checkOut(input: ICheckoutInput): Promise<boolean>
+    getMyGamesList(userProfileID: string): Promise<Array<{gameID: string}>>
 }
 
 
@@ -105,4 +107,5 @@ export interface IFeedModelEventListener {
     newGameEventHandler: (payload: INewGameEventPayload) => any
     commentEventHandler: (payload: ICommentEventPayload) => any
     onCheckout: (payload: ICheckoutInput) => any
+    onNewMyGamesList: (payload: Array<{gameID: string}>) => any
 }

@@ -7,7 +7,6 @@ export interface ILoadingModalProps {
 }
 
 export function LoadingModalView(props: ILoadingModalProps){
-	console.log(`LoadingScreen props: ${JSON.stringify(props)}`)
 	return(
 		<Modal 
 			isVisible={props.isVisible} 

@@ -2,7 +2,7 @@ import { PlayMutationInput} from "./../API";
 import { GraphQLQuery } from "@aws-amplify/api";
 import { getAdministration } from "mobx/dist/internal";
 import BallerzApiClient from "../client";
-import { GetAllGamesQuery, GetAllGamesQueryVariables, GetGameQuery, GetGameQueryVariables, getAllGames_gql, getGame_gql } from "./queries";
+import { GetAllGamesQuery, GetAllGamesQueryVariables, GetGameQuery, GetGameQueryVariables, GetMyPresencesQuery, GetMyPresencesQueryVariables, getAllGames_gql, getGame_gql, listPresences_gql } from "./queries";
 import { API } from "aws-amplify";
 import { DeletePresenceMutationVariables } from "../API";
 import { DeletePresenceMutation, PlayMutation, deletePresence_gql, playMutation_gql, PlayMutationVariables } from "./mutations";
@@ -74,6 +74,20 @@ export default class BallerzGameClient extends BallerzApiClient{
 
         const payload = this.genRequestPayload(playMutation_gql, variables)
         const response = await API.graphql<GraphQLQuery<PlayMutation>>(payload)
+        const result = this._handleResponse(response)
+        return result
+    }
+
+    async getMyPresences(userProfileID: string): Promise<GetMyPresencesQuery | undefined> {
+        const variables: GetMyPresencesQueryVariables = {
+            filter: {
+                userProfileID: {
+                eq: userProfileID
+                }
+            }
+        }
+        const payload = this.genRequestPayload(listPresences_gql, variables)
+        const response = await API.graphql<GraphQLQuery<GetMyPresencesQuery>>(payload)
         const result = this._handleResponse(response)
         return result
     }

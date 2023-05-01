@@ -4,6 +4,7 @@ import { IFeed, IUserProfile } from "../../../../domain/use-cases/types";
 
 export interface IFeedState {
     items: IFeedItemState[]
+    myGamesList: Array<{gameID: string}>
 }
 
 

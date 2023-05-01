@@ -6,5 +6,6 @@ export default interface IFeedController {
     checkIn(payload: ICheckinInput): Promise<ICheckInResult>
     createGame(input: ICreateGameInput): Promise<ICreateGameResult>
     checkOut(input: ICheckoutInput): Promise<boolean>
+    getMyGamesList: IFeedUseCase['getMyGamesList']
 }
 

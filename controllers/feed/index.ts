@@ -7,6 +7,11 @@ import { IFeedState } from "../../app/features/feed/slice/interface";
 
 
 class FeedController implements IFeedController {
+    
+    getMyGamesList(userProfileID: string) : Promise<{ gameID: string; }[]> {
+        return this.feedUseCase.getMyGamesList(userProfileID)
+    }
+
 
     private feedUseCase: IFeedUseCase = fakeUseCase
 
@@ -59,6 +64,9 @@ const fakeUseCase: IFeedUseCase = {
         throw new Error("Function not implemented.");
     },
     checkOut: function (input: ICheckoutInput): Promise<boolean> {
+        throw new Error("Function not implemented.");
+    },
+    getMyGamesList: function (userProfileID: string): Promise<{ gameID: string; }[]> {
         throw new Error("Function not implemented.");
     }
 }

@@ -94,8 +94,10 @@ function NewFriendNotificationView(props: INewFriendNotificationViewProps) {
     )
 }
 
-
-function FriendPlayingNotificationView(props: IFriendPlayingNotification){
+export interface IFriendPlayingNotificationViewProps extends IFriendPlayingNotification{
+    onPressJoinButton: () => void;
+}
+function FriendPlayingNotificationView(props: IFriendPlayingNotificationViewProps){
     return(
         <View
             style={styles.container}
@@ -132,6 +134,7 @@ function FriendPlayingNotificationView(props: IFriendPlayingNotification){
             <ListItemButton
                 selected={false}
                 onPress={() => {
+                    props.onPressJoinButton()
                 }}
                 title={"rejoindre"}
             />

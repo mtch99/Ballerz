@@ -8,7 +8,8 @@ import { feedReducers } from "./reducers";
 
 // Define the initial state using that type
 const initialState: IFeedState = {
-  items: []
+  items: [],
+  myGamesList: []
 }
 
 export const feedSlice = createSlice({
@@ -23,7 +24,7 @@ export const feedSlice = createSlice({
 
 
 
-export const {ADD_ITEM, REMOVE_ITEM, CHECK_IN, NEW_FEED, COMMENT, CHECK_OUT} = feedSlice.actions
+export const {ADD_ITEM, REMOVE_ITEM, CHECK_IN, NEW_FEED, COMMENT, CHECK_OUT, SET_MY_GAME_LIST, NEW_PRESENCE} = feedSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectFeed = (state: RootState) => state.feed

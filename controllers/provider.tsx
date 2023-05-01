@@ -65,7 +65,7 @@ export const AppContext = React.createContext<IAppContext>({
     userProfileController: {} as IUserProfileController,
     placeController: {} as IPlaceController,
     notificationController: {} as INotificationController,
-    feedState: {items: []},
+    feedState: {items: [], myGamesList:[]},
     groupChatListState: {items: []},
     groupChatMapState: {},
     userProfileListState: {items: []},
@@ -135,13 +135,15 @@ export default function AppProvider (props: IProps) {
             authController.isFirstLaunch(),
             loadResourcesAndData()
         ])
-
         const isUserSignedIn = await authController.signinLastUser()
         if(isUserSignedIn){
             const userProfile = await userProfileController.getMyProfile(isUserSignedIn.user?.email)
             if(userProfile){
-                notificationController.getMyNotifications(userProfile.id)
-                notificationController.subscribeToMyNotifications(userProfile.id)
+                await Promise.all([
+                    notificationController.getMyNotifications(userProfile.id),
+                    notificationController.subscribeToMyNotifications(userProfile.id),
+                    feedController.getMyGamesList(userProfile.id)
+                ])
             }
         }
         authModel.onDataPreparedEvent()

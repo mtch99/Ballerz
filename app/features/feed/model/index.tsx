@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks";
 import { IFeed, IFeedItem, IUserProfile, IUserProfileData } from "../../../../domain/use-cases/types";
-import { ADD_ITEM, CHECK_IN, CHECK_OUT, COMMENT, NEW_FEED, selectFeed } from "../slice";
+import { ADD_ITEM, CHECK_IN, CHECK_OUT, COMMENT, NEW_FEED, SET_MY_GAME_LIST, selectFeed } from "../slice";
 import { IFeedItemState, IFeedState} from "../slice/interface";
 import { useSelector } from "react-redux";
 import { AppDispatch } from "../../../store";
@@ -39,6 +39,9 @@ export const createFeedModel = (input: IFeedModelInput): IFeedModel => {
         newGameEventHandler(payload) {
             const addItemActionPayload: IAddItemActionPayload = FeedModelAdapter.parseFeedItem(payload)
             input.dispatchFunc(ADD_ITEM(addItemActionPayload))
+        },
+        onNewMyGamesList(payload) {
+            input.dispatchFunc(SET_MY_GAME_LIST(payload))
         },
 
     }

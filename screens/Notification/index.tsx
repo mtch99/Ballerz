@@ -4,7 +4,8 @@ import NotificationListView from "../../views/notificationList";
 import { IFriendShipRequestNotification } from "../../domain/use-cases/types";
 import { IAcceptFriendshipRequestInput } from "../../domain/use-cases/userProfile/interface";
 import {Screen} from "../interface"
-import { IFriendShipRequestNotificationState } from "../../app/features/notifications/slice/interface";
+import { IFriendPlayingNotificationState, IFriendShipRequestNotificationState } from "../../app/features/notifications/slice/interface";
+import { ICreateGameInput, ICreateGameResult } from "../../domain/use-cases/feed/interface";
 
 export interface INotificationScreenPropsWithoutNavigation {
 
@@ -48,11 +49,32 @@ export default class NotificationScreen extends Screen<INotificationScreenProps>
         this.makeRequest(this.__acceptFriendshipRequest(notification))
     }
 
+    async joinFriend(notification: IFriendPlayingNotificationState): Promise<ICreateGameResult> {
+        if(this.context.authState.profile) {
+            const playRequestInput: ICreateGameInput = {
+                placeID: notification.game.placeID,
+                userProfileID: this.context.authState.profile.id,
+                startingTime: new Date(notification.presence.startingDateTime),
+                endingTime: new Date(notification.presence.endingDateTime)
+            }
+            const response = await this.context.feedController.createGame(playRequestInput)
+            return response
+        } else {
+            throw new Error("Logged in user profle undefined")
+        }
+    }
+
+    async onPressJoinFriendButton(notification: IFriendPlayingNotificationState): Promise<void>{
+        await this.makeRequest(this.joinFriend(notification))
+    }
+
     render(): React.ReactNode {
         return(
             <NotificationListView 
                 notificationList={this.context.notificationListState.items}
                 onPressAcceptFriendshipRequest={this.onPressAcceptFriendshipRequest.bind(this)}
+                onPressJoinFriendButton={this.onPressJoinFriendButton.bind(this)}
+                loading={this.state.loading}
             />
         ) 
     }

@@ -42,4 +42,8 @@ export interface ICommentAction extends PayloadAction<ICommentActionPayload>{
 }
 
 
-export interface INewFeedActionPayload extends IFeedState{}
+export interface INewFeedActionPayload  {
+	items: IFeedItemState[]
+}
+
+

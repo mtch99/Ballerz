@@ -1,4 +1,4 @@
-import { ListGamesQueryVariables, ModelFriendshipFilterInput, ModelGameFilterInput, ModelPresenceFilterInput } from "./../API";
+import { ListGamesQueryVariables, ModelFriendshipFilterInput, ModelGameFilterInput, ModelPresenceFilterInput, presenceType } from "./../API";
 import { UserProfileData } from "../types";
 import { ListUserProfileDataQueryItem } from "../UserProfileClient/queries";
 import { GameDoc } from "./types";
@@ -101,11 +101,7 @@ export type GetGameQuery = {
 	  createdAt: string,
 	  updatedAt: string,
 	} | null,
-  };
-
-
-
-
+};
 
 export type GetAllGamesQuery = {
     listGames?:  {
@@ -116,11 +112,58 @@ export type GetAllGamesQuery = {
 };
 
 
-
-
 export type GetAllGamesQueryVariables = {
     filter?: ModelGameFilterInput | null,
     limit?: number | null,
     nextToken?: string | null,
     frendshipFilter: ModelFriendshipFilterInput
 }
+
+
+export type GetMyPresencesQuery = {
+  listPresences?:  {
+    __typename: "ModelPresenceConnection",
+    items:  Array< {
+      __typename: "Presence",
+      id: string,
+      type: presenceType,
+      placeID: string,
+      userProfileID: string,
+      gameID: string,
+      startingDateTime: string,
+      endingDateTime: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+}
+
+
+export const listPresences_gql = /* GraphQL */ `
+  query ListPresences(
+    $filter: ModelPresenceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPresences(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        type
+        placeID
+        userProfileID
+        gameID
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+
+export type GetMyPresencesQueryVariables = {
+	filter: ModelPresenceFilterInput
+};
+
