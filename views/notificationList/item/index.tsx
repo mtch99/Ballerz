@@ -5,7 +5,8 @@ import React, { Component } from 'react'
 import { INotificationItemProps } from '../interface'
 import ListItemButton from '../../../components/Buttons/ListItemButton'
 import { globalStyles } from '../../styles'
-import { IFriendShipRequestNotification, INewFriendNotification, NotificationType } from '../../../domain/use-cases/types'
+import { IFriendPlayingNotification, IFriendShipRequestNotification, INewFriendNotification, NotificationType } from '../../../domain/use-cases/types'
+import { parseTimeSlotToString } from './utils/dateParser'
 
 export default class NotificationItem extends Component<INotificationItemProps> {
   
@@ -15,11 +16,15 @@ export default class NotificationItem extends Component<INotificationItemProps> 
                 return <FriendshipRequestNotificationItem {...this.props} />
 
             case NotificationType.newFriend:
-                return <NewFriendNotificationItem {...this.props} />
+                return <NewFriendNotificationView {...this.props} />
+
+            case NotificationType.friendPlaying:
+                return <FriendPlayingNotificationView {...this.props} />
 
             default:
+                return <></>
         }
-  }
+    }
 }
 
 
@@ -61,7 +66,12 @@ function FriendshipRequestNotificationItem(props: IFriendShipRequestNotification
 }
 
 
-function NewFriendNotificationItem(props: INewFriendNotification) {
+export interface INewFriendNotificationViewProps extends INewFriendNotification{
+
+}
+
+
+function NewFriendNotificationView(props: INewFriendNotificationViewProps) {
     return(
         <View
             style={styles.container}
@@ -98,6 +108,49 @@ function NewFriendNotificationItem(props: INewFriendNotification) {
 }
 
 
+function FriendPlayingNotificationView(props: IFriendPlayingNotification){
+    return(
+        <View
+            style={styles.container}
+        >
+            <View
+                style={{...styles.textContainer }}
+            >
+                <Text
+                    style={{...styles.notificationText, fontWeight: "bold"}}
+                >
+                    {props.senderProfile.username + ' '}
+                </Text>
+                <Text
+                    style={styles.notificationText}
+                >
+                    sera à {" "}
+                </Text>
+                <Text
+                    style={styles.notificationText}
+                >
+                    {props.game.place.name + " "}
+                </Text>
+                <Text
+                    style={styles.notificationText}
+                >
+                    {parseTimeSlotToString(props.game.startingTime, props.game.endingTime) + " "}
+                </Text>
+                <Text>
+                    Rejoignez le !
+                </Text>
+            </View>
+            <ListItemButton
+                selected={false}
+                onPress={() => {
+                }}
+                title={"rejoindre"}
+            />
+        </View>
+    )
+}
+
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -126,7 +179,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         // paddingRight: 15,
-        width: '80%'
+        width: '100%'
 
     }
 

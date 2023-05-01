@@ -57,15 +57,24 @@ export default class BodyRightView extends React.Component<IBodyRightViewProps> 
     render(): React.ReactNode {
         const startingWeekDay = this.getWeekDay(this.startingDate_str)
         const todayAtMidnight = this.toMidnight(new Date())
-        const sevenDayTimeSpanMS = 7*24*60*60*1000
+        const sevenDayTimeSpanMS = 7*24*3600*1000
         let DateView = () => (<Text style={style.weekDay}>{startingWeekDay}</Text>)
-        if(this.startingDate.getTime() >= sevenDayTimeSpanMS){
-            try{
-                const day = this.startingDate_str.split(" ")[1]
-                const month = this.getMonth(this.startingDate_str)
+        if(
+            Math.abs(moment(this.startingDate.toISOString()).diff(moment(todayAtMidnight.toISOString()))) >= sevenDayTimeSpanMS
+            || this.startingDate.getTime() < todayAtMidnight.getTime()
+        ){
+            const day = this.startingDate_str.split(" ")[1]
+            const month = this.getMonth(this.startingDate_str)
+            if(this.startingDate.getTime() < todayAtMidnight.getTime()){
+                if(Math.abs(moment(this.startingDate.toISOString()).diff(moment(todayAtMidnight.toISOString()))) <= sevenDayTimeSpanMS){
+                    DateView = () => (<Text style={style.weekDay}>{startingWeekDay} dernier</Text>)
+                }
+                else {
+                    DateView = () => (<Text style={style.weekDay}>{startingWeekDay} {day} {month}</Text>)
+                }
+            }
+            else{
                 DateView = () => (<Text style={style.weekDay}>{startingWeekDay} {day} {month}</Text>)
-            } catch(err){
-                console.warn(err)
             }
         }
         return(

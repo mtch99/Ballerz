@@ -16,6 +16,8 @@ There must be three different games on three different courts, two at the moment
 
 - [ ] Notifications use case
     - [ ] Friend Playing notification
+        - [x] FriendPlaying Notification View
+        - [ ] Display
     - [ ] HotCourt notification
     - [ ] GameInvitation Notification
 
@@ -32,7 +34,7 @@ There must be three different games on three different courts, two at the moment
     - [x] Popup after checkin
 
 
-- [ ] I want see a toast message on new notiication
+- [ ] I want see a toast message on new notification
     - [ ] Display a toast message on new received notification 
         - [ ] yarn add @react-native-material/Snackbar
         - [ ] Notification UseCase send events to the Notifications controller
