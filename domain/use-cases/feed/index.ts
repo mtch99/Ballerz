@@ -31,6 +31,7 @@ export class FeedUseCase implements IFeedUseCase {
         const response = await this.repo.createGame(input);
         if(!response.error && response.feedItem){
             this.observer.newGameEventHandler(response.feedItem);
+            this.observer.onNewPresence({gameID: response.feedItem.id});
         }
         // console.error(JSON.stringify(console.error()));
         return response;

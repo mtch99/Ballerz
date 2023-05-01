@@ -7,6 +7,7 @@ import ListItemButton from '../../../components/Buttons/ListItemButton'
 import { globalStyles } from '../../styles'
 import { IFriendPlayingNotification, IFriendShipRequestNotification, INewFriendNotification, NotificationType } from '../../../domain/use-cases/types'
 import { parseTimeSlotToString } from './utils/dateParser'
+import { IFriendPlayingNotificationState } from '../../../app/features/notifications/slice/interface'
 
 export default class NotificationItem extends Component<INotificationItemProps> {
   
@@ -96,8 +97,10 @@ function NewFriendNotificationView(props: INewFriendNotificationViewProps) {
 
 export interface IFriendPlayingNotificationViewProps extends IFriendPlayingNotification{
     onPressJoinButton: () => void;
+    isPresent:(notification: IFriendPlayingNotificationState) => boolean;
 }
 function FriendPlayingNotificationView(props: IFriendPlayingNotificationViewProps){
+    const isPresent = props.isPresent(props)
     return(
         <View
             style={styles.container}
@@ -132,7 +135,7 @@ function FriendPlayingNotificationView(props: IFriendPlayingNotificationViewProp
                 </Text>
             </View>
             <ListItemButton
-                selected={false}
+                selected={!isPresent}
                 onPress={() => {
                     props.onPressJoinButton()
                 }}

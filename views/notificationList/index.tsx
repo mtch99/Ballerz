@@ -16,6 +16,7 @@ export interface IProps {
     onPressAcceptFriendshipRequest: (notification: IFriendShipRequestNotificationState) => void
     onPressJoinFriendButton: (notification: IFriendPlayingNotificationState) => void
     loading: boolean
+    isPresent: (notification: IFriendPlayingNotificationState) => boolean
 }
 export default class NotificationListView extends Component<IProps> {
     
@@ -44,6 +45,7 @@ export default class NotificationListView extends Component<IProps> {
                                     this.props.onPressJoinFriendButton(item)
                                 }
                             }}
+                            isPresent={this.props.isPresent}
                         />
                     )}
                     ItemSeparatorComponent={ItemSeparatorComponent}

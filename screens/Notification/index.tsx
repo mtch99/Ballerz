@@ -68,6 +68,16 @@ export default class NotificationScreen extends Screen<INotificationScreenProps>
         await this.makeRequest(this.joinFriend(notification))
     }
 
+    isPresent(notification: IFriendPlayingNotificationState): boolean {
+        const gamesList = this.context.feedState.myGamesList
+        const gameID = notification.game.id
+        if(gamesList.find((predicate) => predicate.gameID === gameID)) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     render(): React.ReactNode {
         return(
             <NotificationListView 
@@ -75,6 +85,7 @@ export default class NotificationScreen extends Screen<INotificationScreenProps>
                 onPressAcceptFriendshipRequest={this.onPressAcceptFriendshipRequest.bind(this)}
                 onPressJoinFriendButton={this.onPressJoinFriendButton.bind(this)}
                 loading={this.state.loading}
+                isPresent={this.isPresent.bind(this)}
             />
         ) 
     }

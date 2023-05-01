@@ -5,4 +5,5 @@ export type INotificationItemProps = NotificationState & {
     onPress: () => void
     onPressAcceptFriendshipRequest: (notification: IFriendShipRequestNotificationState) => void
     onPressJoinButton: () => void
+    isPresent: (notification: IFriendPlayingNotificationState) => boolean
 };

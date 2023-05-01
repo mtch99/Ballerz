@@ -22,7 +22,7 @@ There must be three different games on three different courts, two at the moment
     - [ ] Join friend
     - [ ] Join button conditionally activated
         - [x] My PresenceList in authState
-        - [ ] isPresent field in IFriendPlayingNotification
+        - [x] isPresent field in IFriendPlayingNotification
 
 
 

@@ -108,4 +108,5 @@ export interface IFeedModelEventListener {
     commentEventHandler: (payload: ICommentEventPayload) => any
     onCheckout: (payload: ICheckoutInput) => any
     onNewMyGamesList: (payload: Array<{gameID: string}>) => any
+    onNewPresence: (payload: {gameID: string}) => any
 }

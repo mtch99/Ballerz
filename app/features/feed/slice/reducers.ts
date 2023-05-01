@@ -132,10 +132,10 @@ const setMyGameList: FeedReducer<IFeedState['myGamesList']> = (state, action) =>
 }
 
 
-const newPresence: FeedReducer<IFeedState['myGamesList']> = (state, action) => {
+const newPresence: FeedReducer<{gameID: string}> = (state, action) => {
 	return {
 		...state,
-		myGamesList: [...action.payload, ...state.myGamesList]
+		myGamesList: [action.payload, ...state.myGamesList]
 	}
 }
 
