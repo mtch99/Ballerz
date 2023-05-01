@@ -93,20 +93,25 @@ export const onCreateNotification_gql = /* GraphQL */ `
         }
       }
       presenceID
-          presence {
-            id
-            placeID
-            place{
-              name
-              address
-            }
-            userProfileID
-            userProfile{
-              id
-              username
-            }
-            startingDateTime
-            endingDateTime
+      presence {
+        id
+        placeID
+        place{
+          name
+          address
+        }
+        userProfileID
+        userProfile{
+          id
+          username
+        }
+        game{
+          id
+          startingDateTime
+          endingDateTime
+        }
+        startingDateTime
+        endingDateTime
       }
       createdAt
       updatedAt

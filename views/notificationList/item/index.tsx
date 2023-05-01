@@ -36,16 +36,16 @@ function FriendshipRequestNotificationItem(props: IFriendShipRequestNotification
             style={styles.container}
         >
             <View
-                style={styles.textContainer}
+                style={{...styles.textContainer, width:"80%"}}
             >
-                <Text
-                    style={{...styles.notificationText, fontWeight: 'bold' }}
-                >
-                    {props.senderProfile.username + " "}
-                </Text>
                 <Text
                     style={styles.notificationText}
                 >
+                    <Text
+                        style={{...styles.notificationText, fontWeight: 'bold' }}
+                        >
+                        {props.senderProfile.username + " "}
+                    </Text>
                     veut être votre ami
                 </Text>
 
@@ -79,30 +79,17 @@ function NewFriendNotificationView(props: INewFriendNotificationViewProps) {
             <View
                 style={{...styles.textContainer, width: '100%' }}
             >
-                <Text
-                    style={{...styles.notificationText, fontWeight: "bold"}}
-                >
-                    {props.senderProfile.username + ' '}
-                </Text>
-                <Text
-                    style={styles.notificationText}
-                >
-                    et vous êtes maintenant amis
-                </Text>
+                    <Text
+                        style={styles.notificationText}
+                    >
+                    <Text
+                        style={{...styles.notificationText, fontWeight: "bold"}}
+                    >
+                        {props.senderProfile.username + ' '}
+                    </Text>
+                        et vous êtes maintenant amis 
+                    </Text>
             </View>
-
-            {/* <View
-                style={styles.buttonContainer}
-            >
-                <ListItemButton
-                    onPress={() => {
-                        // this.context.notificationController.deleteNotification(item.id)
-                    }}
-                    selected={props.friendshipRequest.status=="accepted"}
-                    title={"accepter"}
-                />
-            </View> */}
-
         </View>
     )
 }
@@ -127,16 +114,18 @@ function FriendPlayingNotificationView(props: IFriendPlayingNotification){
                     sera à {" "}
                 </Text>
                 <Text
-                    style={styles.notificationText}
+                    style={{...styles.notificationText, fontWeight: "bold"}}
                 >
                     {props.game.place.name + " "}
                 </Text>
                 <Text
                     style={styles.notificationText}
                 >
-                    {parseTimeSlotToString(props.game.startingTime, props.game.endingTime) + " "}
+                    {parseTimeSlotToString(new Date(props.game.startingTime), new Date(props.game.endingTime)) + ". "}
                 </Text>
-                <Text>
+                <Text
+                    style={styles.notificationText}
+                >
                     Rejoignez le !
                 </Text>
             </View>
@@ -179,9 +168,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         // paddingRight: 15,
-        width: '100%'
+        width: '80%'
 
     }
-
 
 })

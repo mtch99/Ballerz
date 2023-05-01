@@ -26,7 +26,7 @@ export function parseTimeSlotToString(startingDate: Date, endingDate: Date): str
     const startingMonth = getMonth(startingDate_str)
     const startingDay = getDate(startingDate_str)
     const startingHour = startingDate.getHours()
-    const string = startingWeekDay + "le" + startingDay + startingMonth + "à" + startingHour
+    const string = startingWeekDay + " le " + startingDay + " " + startingMonth + " à " + startingHour + "h"
     return string
 }
 

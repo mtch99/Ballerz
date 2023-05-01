@@ -14,12 +14,13 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 
-- [ ] Notifications use case
-    - [ ] Friend Playing notification
-        - [x] FriendPlaying Notification View
-        - [ ] Display
-    - [ ] HotCourt notification
-    - [ ] GameInvitation Notification
+
+- [ ] Friend Playing notification
+    - [x] FriendPlaying Notification View
+    - [x] Fix FriendshipRequestNotification Layout
+    - [x] Display
+    - [ ] Join friend
+    - [ ] Join button conditionally activated
 
 
 * [x] Add profile picture after profile creation

@@ -23,8 +23,8 @@ export interface IGameData {
     id: string
     placeID: string
     place: IPlaceData
-    startingTime: Date
-    endingTime: Date
+    startingTime: string
+    endingTime: string
 }
 
 export interface IGame extends IGameData {
@@ -127,8 +127,17 @@ export interface INewFriendNotification extends _INotification{
 export interface IFriendPlayingNotification extends _INotification{
     type: NotificationType.friendPlaying
     game: IGameData
+    presence: {
+        id: string
+        place: {
+            id: string
+            name: string
+            address: string
+        }
+        startingDateTime: string
+        endingDateTime: string
+    }
 }
-
 
 
 

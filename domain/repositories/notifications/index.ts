@@ -116,6 +116,44 @@ class ResponseHandler {
         return result
     }
 
+
+    static parseFriendPlayingNotificationSubscription(clientNotif: ClientNotification): IFriendPlayingNotification | undefined {
+        let result: IFriendPlayingNotification | undefined;
+        if(clientNotif.type == NotificationType.friendPlaying && clientNotif.presenceID && clientNotif.presence
+             && clientNotif.senderProfile && clientNotif.senderProfileID)
+         {
+                result = {
+                    ...clientNotif,
+                    senderProfileID: clientNotif.senderProfileID,
+                    senderProfile: this.parseUserProfileData(clientNotif.senderProfile),
+                    type: NotificationType.friendPlaying,
+                    game: {
+                        ...clientNotif.presence.game,
+                        placeID: clientNotif.presence.placeID,
+                        place: {
+                            id: clientNotif.presence.placeID,
+                            name: clientNotif.presence.place.name,
+                            address: clientNotif.presence.place.address,
+                        },
+                        startingTime: clientNotif.presence.game.startingDateTime,
+                        endingTime: clientNotif.presence.game.endingDateTime
+                    },
+                    presence: {
+                        id: clientNotif.presenceID,
+                        place: {
+                            id: clientNotif.presence.placeID,
+                            name: clientNotif.presence.place.name,
+                            address: clientNotif.presence.place.address,
+                        },
+                        startingDateTime: clientNotif.presence.startingDateTime,
+                        endingDateTime: clientNotif.presence.endingDateTime,
+                    }
+                }
+        }
+        return result
+    }
+
+
     static parseFriendPlayingNotification(clientNotif: ClientNotification): IFriendPlayingNotification | undefined {
         let result: IFriendPlayingNotification | undefined;
         if(clientNotif.type == NotificationType.friendPlaying && clientNotif.presenceID && clientNotif.presence
@@ -128,8 +166,8 @@ class ResponseHandler {
                     type: NotificationType.friendPlaying,
                     game: {
                         ...clientNotif.presence.game,
-                        startingTime: new Date(clientNotif.presence.startingDateTime),
-                        endingTime: new Date(clientNotif.presence.endingDateTime),
+                        startingTime: clientNotif.presence.startingDateTime,
+                        endingTime: clientNotif.presence.endingDateTime,
                     }
                 }
         }
