@@ -41,6 +41,9 @@ There must be three different games on three different courts, two at the moment
 
 - [x] See Game Participants
 
+- [x] Replace invite button with share button
+
+
 
 - [ ] I want see a toast message on new notification
     - [ ] Display a toast message on new received notification 
@@ -58,7 +61,6 @@ There must be three different games on three different courts, two at the moment
 
 
 - [ ] Notifications
-    - [ ] Test on real device
     - [ ] Hot court notification 
 
 

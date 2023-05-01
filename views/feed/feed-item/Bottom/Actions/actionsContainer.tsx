@@ -34,7 +34,7 @@ export function ActionsContainer(props:IActionContainerProps) {
 			<TouchableOpacity
 				onPress={() => {props.onPressInvite()}}
 			>
-        		<Text style={styles.inviteText}>inviter</Text>
+        		<Text style={styles.inviteText}>partager</Text>
 			</TouchableOpacity>
 
 		</View>

@@ -22,8 +22,8 @@ export default class FindYourFriendsView<P extends IFindYourFriendsViewProps = I
         try {
             const result = await Share.share({
               message:'https://testflight.apple.com/join/6GBFVtwg',
-			  title: "https://testflight.apple.com/join/6GBFVtwg",
-			  url: "https://testflight.apple.com/join/6GBFVtwg"
+			        title: "https://testflight.apple.com/join/6GBFVtwg",
+			        url: "https://testflight.apple.com/join/6GBFVtwg"
             });
             if (result.action === Share.sharedAction) {
               if (result.activityType) {
@@ -46,9 +46,12 @@ export default class FindYourFriendsView<P extends IFindYourFriendsViewProps = I
                 <View style={{flex:1}}>
                 <BallerzHeaderView
                     title="Trouve tes amis"
-                    rightButton={HeaderCheckButton}
-                    leftButtonProps={{onPress: () => {}}}
-                    rightButtonProps={{onPress: this.props.onPressContinue}}
+                    rightButton={
+                      <HeaderCheckButton
+                        onPress={this.props.onPressContinue}
+                      />
+                    }
+                    leftButton={<></>}
                 />
                 <SearchBarView
                   onSearchInputChange={this.props.onFilterInputChange}

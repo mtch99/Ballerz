@@ -1,8 +1,9 @@
 import React, { ContextType } from "react";
+import * as Sharing from 'expo-sharing';
 import FeedView from "../../views/feed";
 import { IFeedItemState, IFeedState} from "../../app/features/feed/slice/interface";
 import IFeedScreen, { IFeedScreenNavigationController, IPostCommentInput } from "./interface";
-import { Modal, View, Text, SafeAreaView, Alert } from "react-native";
+import { Modal, View, Text, SafeAreaView, Alert, Share } from "react-native";
 import IFeedController from "../../controllers/feed/interface";
 import { ICheckinEventPayload, ICheckinInput, ICommentInput } from "../../domain/use-cases/feed/interface";
 import { AppContext, IAppContext } from "../../controllers/provider";
@@ -12,7 +13,7 @@ import { IScreenState, Screen } from "../interface";
 import CommunityModal, {ModalProps} from 'react-native-modal';
 import { IUserProfileData } from "../../domain/use-cases/types";
 
-
+const betaAppUrl = "https://testflight.apple.com/join/6GBFVtwg"
 export interface IFeedScreenPropsWithoutNavigation {
 
 }
@@ -60,8 +61,26 @@ export class FeedScreen extends Screen<IFeedScreenProps, IFeedScreenState> imple
         this.viewParticipants(feedItem)
     }
 
-    handleInvitePress(feedItem: IFeedItemState): void {
-        this.displayNoFriendsToInviteModal()
+    async handleSharePress(feedItem: IFeedItemState): Promise<void>{
+        try {
+            const result = await Share.share({
+                message:'Hey, Rejoins moi sur Ballerz pour être informé lorsque je vais jouer au basketball. \n\nBall is life 🔥',
+			    title: "https://testflight.apple.com/join/6GBFVtwg",
+			    url: "https://testflight.apple.com/join/6GBFVtwg"
+            });
+            if (result.action === Share.sharedAction) {
+              if (result.activityType) {
+                // shared with activity type of result.activityType
+              } else {
+                // shared
+              }
+            } else if (result.action === Share.dismissedAction) {
+              // dismissed
+            }
+        } catch (error: any) {
+            Alert.alert(error.message);
+        }
+        // Sharing.shareAsync(betaAppUrl, {dialogTitle:"aioiwiodshiowdhi"})
     }
 
     handlePlayButtonPress(feedItem: IFeedItemState): void {
@@ -166,7 +185,7 @@ export class FeedScreen extends Screen<IFeedScreenProps, IFeedScreenState> imple
                     feedState={this.context.feedState}
                     handleBadgeClick={(item) => {this.handleBadgeClick(item)}}
                     handleParticipantsPress={(item) => {this.handleParticipantsPress.bind(this)(item)}}
-                    handleInvitePress={(item) => {this.handleInvitePress(item)}}
+                    handleSharePress={(item) => {return this.handleSharePress(item)}}
                     // handlePlayButtonPress={(item) => {this.handlePlayButtonPress(item)}}
                     handleCommentButtonPress={(input: IFeedItemState) => {this.handleCommentButtonPress(input)}}
                     handlePlayButtonPress={this.handlePlayButtonPress.bind(this)}

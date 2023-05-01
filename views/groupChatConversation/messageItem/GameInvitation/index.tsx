@@ -14,7 +14,7 @@ interface IFeedItemViewProps{
 	feedItem: IFeedItemState
 	handleBadgeClick: IFeedScreen['handleBadgeClick']
 	handleFriendsTherePress: IFeedScreen['handleParticipantsPress']
-	handleInvitePress: IFeedScreen['handleInvitePress']
+	handleInvitePress: IFeedScreen['handleSharePress']
 	handlePlayButtonPress: IFeedScreen['handlePlayButtonPress']
 	onPressCommentButton: () => void
 }

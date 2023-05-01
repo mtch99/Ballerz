@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
 	},
 	inviteText: {
 		color: "#b26700",
-		marginLeft: 10
+		marginLeft: 20
 	},
 
 })
