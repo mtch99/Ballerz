@@ -19,18 +19,18 @@ export function AppStack(): JSX.Element {
             <Stack.Navigator
             >
                 <Stack.Screen
-                    name="CreateProfile"
-                    options={{
-                        headerShown: false
-                    }}
-                    component={CreateProfileStackWrapper}
-                />
-                <Stack.Screen
                     name="AppTab"
                     options={{
                         headerShown: false,
                     }}
                     component={AppTabWrapper}
+                />
+                <Stack.Screen
+                    name="CreateProfile"
+                    options={{
+                        headerShown: false
+                    }}
+                    component={CreateProfileStackWrapper}
                 />
             </Stack.Navigator>
         ):

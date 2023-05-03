@@ -18,11 +18,12 @@ export async function getProfilePicUri(profileID: string): Promise<string | unde
   const configMap: StorageGetConfig<any> = {
     
   }
-  const uri = await Storage.get(`public/${profileID+DEFAULT_IMAGE_EXTENSION}`, {
-  }).catch(err => {
+  const uri = await Storage.get(`public/${profileID+DEFAULT_IMAGE_EXTENSION}`)
+  .catch(err => {
     console.log(`Error getting profile pic: ${err}`);
     return undefined;
   })
+  console.log("Response of getProfilePicUri: ", uri);
   return uri
 }
 

@@ -33,7 +33,7 @@ import { DefineUsernameScreenWrapper, FindYourFriendsScreenWrapper } from './wra
 
  export function CreateProfileStack(): JSX.Element {
  
-    	const _initialRouteName: keyof CreateProfileStackParamList = 'FindYourFriends'
+    	const _initialRouteName: keyof CreateProfileStackParamList = 'DefineUsername';
 	
     	  	return (
     	   		<Stack.Navigator
