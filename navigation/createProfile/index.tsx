@@ -33,26 +33,26 @@ import { DefineUsernameScreenWrapper, FindYourFriendsScreenWrapper } from './wra
 
  export function CreateProfileStack(): JSX.Element {
  
-    	const _initialRouteName: keyof CreateProfileStackParamList = 'DefineUsername'
+    	const _initialRouteName: keyof CreateProfileStackParamList = 'FindYourFriends'
 	
     	  	return (
     	   		<Stack.Navigator
     	   		  initialRouteName={_initialRouteName}
     	   		>
-    	   		   <Stack.Screen
-    	   		       name='DefineUsername'
-    	   		       options={{
-    	   		           headerShown: false,
-    	   		       }}
-    	   		       component={DefineUsernameScreenWrapper}
-    	   		   />
-    	   		   <Stack.Screen
-    	   		       name='FindYourFriends'
-    	   		       options={{
-    	   		           headerShown: false,
-    	   		       }}
-    	   		       component={FindYourFriendsScreenWrapper}
-    	   		   />
+    	   		    <Stack.Screen
+    	   		        name='DefineUsername'
+    	   		        options={{
+    	   		            headerShown: false,
+    	   		        }}
+    	   		        component={DefineUsernameScreenWrapper}
+    	   		    />
+    	   		    <Stack.Screen
+    	   		        name='FindYourFriends'
+    	   		        options={{
+    	   		            headerShown: false,
+    	   		        }}
+    	   		        component={FindYourFriendsScreenWrapper}
+    	   		    />
     	   		</Stack.Navigator>
 
     	  )

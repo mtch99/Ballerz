@@ -5,7 +5,7 @@ import { globalStyles } from '../../views/styles';
 
 
 export interface IBallerzHeaderViewProps {
-    title: string, 
+    title: string,
     leftButton: JSX.Element
     rightButton: JSX.Element
 }
@@ -19,10 +19,10 @@ export default class BallerzHeaderView extends React.Component<IBallerzHeaderVie
     render(): React.ReactNode {
         const LeftButton = () => (this.props.leftButton)
         const RightButton = () => (this.props.rightButton)
-        
+
         return (
           <View style={styles.header}>
-            
+
             <View style={styles.leftButton}>
                 <LeftButton/>
             </View>
@@ -32,8 +32,8 @@ export default class BallerzHeaderView extends React.Component<IBallerzHeaderVie
             >
               <Text style={styles.title}>{this.props.title}</Text>
             </View>
-            
-            
+
+
             <View style={styles.rightButton}>
                 <RightButton/>
             </View>
@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
   },
   rightButton: {
     marginRight: 10,
-    width: 40,
   },
   title: {
     color: 'white',

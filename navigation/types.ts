@@ -4,7 +4,7 @@ import { AppTabParamList } from './app/appTab/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AuthStackParamList } from './auth/types';
 import { AppStackParamList } from './app/types';
-import { OnboardingStackParamList } from './onboarding/types';
+import { OnboardingStackParamList } from './discovery/types';
 
 /**
  * Learn more about using TypeScript with React Navigation:
@@ -20,7 +20,7 @@ declare global {
 }
 
 export type RootStackParamList = {
-	OnbordingStack: NavigatorScreenParams<OnboardingStackParamList>
+	DiscoveryStack: NavigatorScreenParams<OnboardingStackParamList>
 	AuthStack: NavigatorScreenParams<AuthStackParamList>
   	AppStack:  NavigatorScreenParams<AppStackParamList> | undefined
 };

@@ -33,7 +33,7 @@ export default class ClickableUserProfileItemView extends React.Component<IUserP
                                 }}
                                 style={{flexDirection: "row"}}
                                 />
-                        <Text style={styles.gameNumText}>4 parties </Text>
+                        {/* <Text style={styles.gameNumText}>4 parties </Text> */}
                     </View>
                 </TouchableOpacity>
         )

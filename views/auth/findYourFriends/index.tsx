@@ -42,17 +42,18 @@ export default class FindYourFriendsView<P extends IFindYourFriendsViewProps = I
     render(): React.ReactNode {
         return(
             <BallerzSafeAreaView
-            >
+            >  
+                <>
                 <View style={{flex:1}}>
-                <BallerzHeaderView
-                    title="Trouve tes amis"
-                    rightButton={
-                      <HeaderCheckButton
-                        onPress={this.props.onPressContinue}
-                      />
-                    }
-                    leftButton={<></>}
-                />
+                  <BallerzHeaderView
+                      title="Trouve tes amis"
+                      rightButton={
+                        <HeaderCheckButton
+                          onPress={this.props.onPressContinue}
+                        />
+                      }
+                      leftButton={<></>}
+                  />
                 <SearchBarView
                   onSearchInputChange={this.props.onFilterInputChange}
                 />
@@ -64,6 +65,7 @@ export default class FindYourFriendsView<P extends IFindYourFriendsViewProps = I
                     usersList={this.props.usersList}
                 />
                 </View>
+                </>
             </BallerzSafeAreaView>
         )
     }

@@ -14,7 +14,7 @@ import { AppStackWrapper, AuthStackWrapper} from './wrappers';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AppContext } from '../controllers/provider';
-import { OnboardingStackNavigator } from './onboarding';
+import { DiscoveryStackNavigator } from './discovery';
 
 // import LinkingConfiguration from './LinkingConfiguration';
 
@@ -96,11 +96,11 @@ export function RootStackNavigator(): JSX.Element {
 				<RootStack.Navigator
 				>
 					<RootStack.Screen
-					    name='OnbordingStack'
+					    name='DiscoveryStack'
 						options={{
 							headerShown: false,
 						}}
-						component={OnboardingStackNavigator}
+						component={DiscoveryStackNavigator}
 					/>
 					<RootStack.Screen
 						name='AuthStack'
@@ -120,47 +120,4 @@ export function RootStackNavigator(): JSX.Element {
 			)
 		)
 	)
-	
-
-		// 	<RootStack.Navigator
-		// 		initialRouteName={initialRouteName}
-		// 	>
-		// 		{isSignedIn?(
-		// 			<>
-		// 				<RootStack.Screen
-		// 					name='AppStack'
-		// 					options={{
-		// 						headerShown: false,
-		// 					}}
-		// 					component={AppStackWrapper}
-		// 				/>
-		// 				<RootStack.Screen
-		// 					name='AuthStack'
-		// 					options={{
-		// 						headerShown: false,
-		// 					}}
-		// 					component={AuthStackWrapper}
-		// 				/>
-		// 			</>
-		// 		):(
-		// 			<>
-		// 				<RootStack.Screen
-		// 				name='AuthStack'
-		// 				options={{
-		// 					headerShown: false,
-		// 				}}
-		// 				component={AuthStackWrapper}
-		// 				/>
-		// 				<RootStack.Screen
-		// 					name='AppStack'
-		// 					options={{
-		// 						headerShown: false,
-		// 					}}
-		// 					component={AppStackWrapper}
-		// 				/>
-						
-		// 			</>
-		// 		)}
-		// 	</RootStack.Navigator>
-		// )
 }

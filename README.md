@@ -24,9 +24,6 @@ There must be three different games on three different courts, two at the moment
         - [x] isPresent field in IFriendPlayingNotification
 
 
-
-
-
 * [x] Add profile picture after profile creation
     - [x] Load asssets before launch 
     - [x] Add default profile pic to assets
@@ -43,6 +40,15 @@ There must be three different games on three different courts, two at the moment
 
 - [x] Replace invite button with share button
 
+- [x] Test and refine Discovery flow
+    - [x] DefineUsernameView 
+    - [x] FindYourFriendsView
+
+- [ ] ProfilePic
+    - [ ] Display fetched images in userProfileList view
+    - [ ] Retrieve user profile on MyProfile screen focus
+    - [ ] Display respective profile pics on all UserList screens
+    - [ ] Make sure profile pic is uploaded on userProfileCreation
 
 
 - [ ] I want see a toast message on new notification
@@ -52,16 +58,18 @@ There must be three different games on three different courts, two at the moment
         - [ ] Notification  controller send events to the snackbar 
 
 
-- [ ] ProfilePic
-    - [ ] Make sure profile pic is uploaded on userProfileCreation
-    - [ ] Display respective profile pics on all UserList screens
-    - [ ] Retrieve user profile on MyProfile screen focus
         
 - [ ] Test Joining friends from notifications screen on real device
 
 
 - [ ] Notifications
     - [ ] Hot court notification 
+
+
+
+
+TODO: Display number of games per players
+
 
 
 TODO: scenario10

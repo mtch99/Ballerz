@@ -56,9 +56,10 @@ export class UserProfileItemView extends React.Component<ISelectableUserProfileI
                     style={styles.container}
                 >
                     <View style={styles.groupPhotoContainer}>
-                        <Image style = {styles.groupPhoto} source = {require("../../../assets/profilePic.jpg")}/>
+                        <Image style = {styles.groupPhoto} source = {require("../../../assets/blank-pp.jpg")}/>
                     </View> 
-                    <View>
+                    <View
+                    >
                         <Text
                             style={{color:"#F5F8FA", fontSize:16, fontWeight: "500"}}
                             >
@@ -74,8 +75,8 @@ export class UserProfileItemView extends React.Component<ISelectableUserProfileI
 			    				)
                                 }}
                                 style={{flexDirection: "row"}}
-                                />
-                        <Text style={styles.gameNumText}>4 parties </Text>
+                        />
+                        {/* <Text style={styles.gameNumText}>4 parties </Text> */}
                     </View>
 
                     <View
@@ -99,6 +100,7 @@ const styles = StyleSheet.create({
         borderBottomColor:"#657786",
         borderBottomWidth:0.2,
         marginTop: 15,
+        paddingBottom: 10,
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: 'transparent',
@@ -109,14 +111,13 @@ const styles = StyleSheet.create({
     groupPhotoContainer: {
         paddingRight: 10
     },
-
     
     groupPhoto: {
         width: 50,
 		height: 50,
 		borderRadius: 1000,
 		backgroundColor: "rgba(0,0,0,0)",
-        marginBottom: 10
+        // marginBottom: 10
 	},
     
     gameNumText: {

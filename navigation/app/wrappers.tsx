@@ -3,7 +3,7 @@ import { CreateProfileStack } from "../createProfile"
 import { AppTab } from "./appTab"
 
 
-export function CreateProfileScreenWrapper(props: AppStackScreenProps<'CreateProfile'>){
+export function CreateProfileStackWrapper(props: AppStackScreenProps<'CreateProfile'>){
     return(
         <CreateProfileStack/>
     )

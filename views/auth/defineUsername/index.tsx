@@ -52,7 +52,7 @@ export class DefineUsernameView extends React.Component<IDefineUsernameViewProps
 
                     <View
                         style={{
-                            margin: 20,
+                            margin: 50,
                             alignItems: "center",
                         }}
                     >
@@ -62,7 +62,7 @@ export class DefineUsernameView extends React.Component<IDefineUsernameViewProps
                             Ajoute une photo
                         </Text>
                         <View
-                                style={{flexDirection:'row'}}
+                                style={{flexDirection:'row', marginTop:10}}
                             >
                                 <Image
                                     style={{height: 70, width: 70, borderRadius: 70}}
@@ -99,7 +99,11 @@ export class DefineUsernameView extends React.Component<IDefineUsernameViewProps
                             <Text style={styles.footerCreate}>Continuer</Text>
                         </TouchableOpacity>
                     </View>
-                    {this.props.error?(<Text>{this.props.error}</Text>):(<></>)}
+                    {this.props.error?
+                        (<Text style={styles.errorText}>
+                            {this.props.error}
+                        </Text>):(<></>)
+                    }
                 </View>
                 </>
             </BallerzSafeAreaView>
@@ -153,8 +157,8 @@ const styles = StyleSheet.create({
     },
 
     errorText: {
-        marginTop: 5,
-        color: 'red',
+        marginTop: 10,
+        color: globalStyles.global.logoColor,
         fontSize: 12
     },
 

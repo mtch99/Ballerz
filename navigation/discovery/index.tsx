@@ -5,7 +5,7 @@ import { DiscoverCityBallerzScreenWrapper, GatherWithYourFriendsScreenWrapper, W
 const Stack = createNativeStackNavigator<OnboardingStackParamList>();
 
 
-export function OnboardingStackNavigator(): JSX.Element {
+export function DiscoveryStackNavigator(): JSX.Element {
 
     const _initialRouteName: keyof OnboardingStackParamList = 'Welcome'
 

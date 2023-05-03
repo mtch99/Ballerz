@@ -1,8 +1,8 @@
 import React from "react";
 import { OnboardingStackScreenProps } from "./types";
-import { WelcomeScreen } from "../../screens/onboarding/Welcome";
-import { DiscoverCityBallerzScreen } from "../../screens/onboarding/DiscoverCityBallerz";
-import { GatherWithYourFriendsScreen } from "../../screens/onboarding/GatherWithYourFriends";
+import { WelcomeScreen } from "../../screens/discovery/Welcome";
+import { DiscoverCityBallerzScreen } from "../../screens/discovery/DiscoverCityBallerz";
+import { GatherWithYourFriendsScreen } from "../../screens/discovery/GatherWithYourFriends";
 import { RootStackScreenProps } from "../types";
 
 
@@ -36,9 +36,8 @@ export function DiscoverCityBallerzScreenWrapper(props: OnboardingStackScreenPro
 }
 
 
-export function GatherWithYourFriendsScreenWrapper(props: RootStackScreenProps<'OnbordingStack'>){
+export function GatherWithYourFriendsScreenWrapper(props: RootStackScreenProps<'DiscoveryStack'>){
     const {navigation} = props;
-
 
 
     const advance = () => {
