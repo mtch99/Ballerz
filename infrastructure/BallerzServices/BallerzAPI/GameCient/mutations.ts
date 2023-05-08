@@ -1,6 +1,6 @@
 import { ModelFriendshipFilterInput, PlayMutationInput } from "./../API";
 import { presenceType } from "../API";
-import { GameDoc, PresenceDoc } from "./types";
+import { Game } from "../types";
 
 export type DeletePresenceMutation = {
     deletePresence?:  {
@@ -15,7 +15,7 @@ export type PlayMutationVariables = {
 }
 
 export type PlayMutation = {
-  playMutation:  Array< GameDoc | null > | null,
+  playMutation:  Array< Game | null > | null,
 };
 
 

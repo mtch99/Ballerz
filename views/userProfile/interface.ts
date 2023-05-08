@@ -24,4 +24,6 @@ export interface IPicturesViewProps {
 
 export interface IGamesViewProps{
     gameList: IUserProfileState['games']
-}
+    onPressFriendsThere: () => void;
+    onPressGameAttendants: () => void;
+} 

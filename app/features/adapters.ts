@@ -33,8 +33,6 @@ export class UserProfileModelAdapter{
     static parseGame(game: IGame): IGameState{
         return {
             ...game,
-            startingTime: game.startingTime.toLocaleDateString(),
-            endingTime: game.endingTime.toLocaleDateString()
         }
     }
 }

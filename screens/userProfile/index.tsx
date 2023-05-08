@@ -92,6 +92,7 @@ export class UserProfileScreen extends Screen<IUserProfileScreenProps, IUserProf
 
     render(): React.ReactNode {
         const userProfile = this.context.userProfileMapState[this.props.userProfileData.id] as IUserProfileState | undefined
+        // console.warn(`${JSON.stringify(userProfile?.games)}`)
         if(userProfile){
             return( 
                 <UserProfileView

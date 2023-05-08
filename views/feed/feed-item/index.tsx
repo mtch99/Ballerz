@@ -27,6 +27,8 @@ export default function FeedItemView(props: IFeedItemViewProps){
 	const onBadgeClick = () => {
 		handleBadgeClick(feedItem)
 	}
+
+	// console.log(props.feedItem)
 	const onPressFriendsThere = () => {
 		props.handleFriendsTherePress(feedItem)
 	}

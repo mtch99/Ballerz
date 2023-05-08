@@ -58,7 +58,7 @@ export default class BodyRightView extends React.Component<IBodyRightViewProps> 
         const startingWeekDay = this.getWeekDay(this.startingDate_str)
         const todayAtMidnight = this.toMidnight(new Date())
         const sevenDayTimeSpanMS = 7*24*3600*1000
-        let DateView = () => (<Text style={style.weekDay}>{startingWeekDay}</Text>)
+        let DateView = () => (<Text style={style.weekDay}>{startingWeekDay} prochain</Text>)
         if(
             Math.abs(moment(this.startingDate.toISOString()).diff(moment(todayAtMidnight.toISOString()))) >= sevenDayTimeSpanMS
             || this.startingDate.getTime() < todayAtMidnight.getTime()

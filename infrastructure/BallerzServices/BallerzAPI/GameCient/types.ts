@@ -1,11 +1,6 @@
-import { ListUserProfileDataQueryItem } from "../UserProfileClient/queries"
+import { Presence } from "../types"
 
-export type PresenceDoc = {
-    id: string,
-    userProfile: ListUserProfileDataQueryItem
-	startingDateTime: string,
-    endingDateTime: string,
-} | null
+
 
 
 export type GameDoc = {
@@ -18,7 +13,7 @@ export type GameDoc = {
         address: string
     } | null,
     presenceList: {
-        items: Array<PresenceDoc>
+        items: Array<Presence>
     }
     startingDateTime: string,
     endingDateTime: string,

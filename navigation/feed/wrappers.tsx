@@ -33,7 +33,8 @@ export function FeedScreenWrapper(props: FeedStackScreenProps<'FeedScreen'>): JS
     const {feedController, authState} = React.useContext(AppContext)
     React.useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
-            feedController.getFeed(authState.user?.email)
+            console.log(`My UserProfile ID: ${authState.profile?.id}`)
+            feedController.getFeed(authState.profile?.id)
         });
         return unsubscribe;
     }, [navigation])

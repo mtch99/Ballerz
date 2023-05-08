@@ -17,11 +17,11 @@ export type Game = {
     startingDateTime: string
     endingDateTime: string
     placeID: string
+    place: PlaceData
     presenceList: {
         items: Array<Presence | null>
         nextToken: string | null
     }
-    place: PlaceData
 }
 
 

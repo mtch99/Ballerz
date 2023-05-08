@@ -36,6 +36,10 @@ export class UserProfileView extends React.Component<IUserProfileViewProps, IPro
         })
     }
 
+    componentDidUpdate(prevProps: Readonly<IUserProfileViewProps>, prevState: Readonly<IProfileViewState>, snapshot?: any): void {
+        // console.log("New games: ", JSON.stringify(this.props.games))
+    }
+
     render(){
         return(
             <BallerzSafeAreaView
@@ -62,6 +66,8 @@ export class UserProfileView extends React.Component<IUserProfileViewProps, IPro
                 /> */}
                 <GamesListView
                     gameList={this.props.games}
+                    onPressFriendsThere={this.props.onPressFriendsNumber}
+                    onPressGameAttendants={this.props.onPressFriendsNumber}
                 />
                 </>
             </BallerzSafeAreaView>
@@ -109,6 +115,8 @@ export class MyProfileView extends React.Component<IUserProfileViewProps, IProfi
                 />
                 <GamesListView
                         gameList={this.props.games}
+                        onPressFriendsThere={this.props.onPressFriendsNumber}
+                        onPressGameAttendants={this.props.onPressFriendsNumber}
                 />
                 </>
 

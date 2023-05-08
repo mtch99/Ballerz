@@ -3,7 +3,7 @@ import { ModelFriendshipFilterInput, ModelUserProfileFilterInput } from "../API"
 import { ModelFriendshipConnection, UserProfile } from "../types";
 import { Presence, Friendship, GroupChatDataWithMembers, GroupChatUserProfileConnectionConnection, GroupChatData, UserProfileData } from "../types";
 
-export const getUserProfile = /* GraphQL */ `
+export const getUserProfile_gql = /* GraphQL */ `
   query GetUserProfile(
     $id: ID!
     $frendshipFilter: ModelFriendshipFilterInput

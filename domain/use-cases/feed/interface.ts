@@ -17,7 +17,7 @@ export interface ICommentEventPayload{
 }
 
 export interface IFeedUseCase {
-    getFeed(email?: string): Promise<IFeedItem[]>
+    getFeed(myUserProfileID?: string): Promise<IFeedItem[]>
     checkIn(payload: ICheckinInput): Promise<ICheckInResult>
     comment(input: ICommentInput): Promise<boolean>
     createGame(input: ICreateGameInput): Promise<ICreateGameResult>

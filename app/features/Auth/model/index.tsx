@@ -59,7 +59,6 @@ export const createAuthModel = (input: IAuthModelInput): IAuthModel => {
 }
 
 
-
 export class AuthModelAdapter {
 
     static parseUserProfile(userProfile: IUserProfile): IUserProfileState {
@@ -76,8 +75,8 @@ export class AuthModelAdapter {
     private static parseGame(input: IGame): IGameState{
         return {
             ...input,
-            startingTime: input.startingTime.toLocaleDateString(),
-            endingTime: input.endingTime.toLocaleDateString()
+            startingTime: input.startingTime,
+            endingTime: input.endingTime
         }
     }
     

@@ -24,25 +24,37 @@ export default function LeftBodyView(props: ILeftBodyProps) {
 	const onBadgeClick = () => {
 		handleBadgeClick()
 	}
+	const friendsHere: IUserProfileDataState[] = props.friendsHere
 
   		return(
 
   		    <View style={styles.container}>
   		        <TouchableOpacity 
-					style={styles.playerNumContainer}
 					onPress={props.onPress}
+					style={styles.playerNumContainer}
 				>
-  		          <Text style={styles.playersNumText}>{props.playersNum}</Text>
-  		          <Text style={styles.playersText}>Joueurs</Text>
+					<View
+					>
+						<View
+							style={{flexDirection: "row", alignItems: "center"}}
+						>
+							<Text style={styles.playersNumText}>{props.playersNum}</Text>
+							<Text style={styles.playersText}>Joueurs</Text>
+						</View>
+						<FriendsThereView
+							friendsHere={friendsHere}
+							onPress={props.onPress}
+						/>
+					</View>
   		        </TouchableOpacity>
-				{(props.friendsHere.length>0)?(
+				{/* {(props.friendsHere.length>0)?(
 					<FriendsThereView
 						friendsHere={props.friendsHere}
 						onPress={props.onPress}
 					/>
 				):(
 					<></>
-				)}
+				)} */}
   		    </View>
 		)
 

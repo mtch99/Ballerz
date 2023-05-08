@@ -16,9 +16,10 @@ export default class GamesListView extends React.Component<IGamesViewProps> {
         this.gameList = this.parseGameList(this.props.gameList)
     }
 
+
     render(): React.ReactNode {
         return(
-            <View style={{flexWrap:'wrap'}}>
+            <View style={{flex:1}}>
                 <Text style={styles.gamesText}>Partcipations ({this.props.gameList.length})</Text>
                     <FlatList
                         style={{flexGrow: 1}}
@@ -31,18 +32,17 @@ export default class GamesListView extends React.Component<IGamesViewProps> {
                                     handleBadgeClick={function (feedItem: IFeedItemState): void {
                                         throw new Error("Function not implemented.");
                                     } } 
-                                    handleFriendsTherePress={function (feedItem: IFeedItemState): void {
+                                    handleFriendsTherePress={this.props.onPressFriendsThere}
+                                    handleInvitePress={async function (feedItem: IFeedItemState): Promise<void> {
                                         throw new Error("Function not implemented.");
                                     } } 
-                                    handleInvitePress={function (feedItem: IFeedItemState): void {
-                                        throw new Error("Function not implemented.");
-                                    } } 
-                                    handlePlayButtonPress={function (feedItem: IFeedItemState): void {
+                                    handlePlayButtonPress={function (): void {
                                         throw new Error("Function not implemented.");
                                     } } 
                                     onPressCommentButton={function (): void {
                                         throw new Error("Function not implemented.");
-                                    } }                            
+                                    } }                       
+                                    handleCheckoutButtonPress={() => {}}     
                                 />
                             )
                         }}

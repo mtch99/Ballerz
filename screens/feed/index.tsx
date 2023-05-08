@@ -50,7 +50,7 @@ export class FeedScreen extends Screen<IFeedScreenProps, IFeedScreenState> imple
     }
 
     getFeed() {
-        this.context.feedController.getFeed(this.context.authState.user?.email)
+        this.context.feedController.getFeed(this.context.authState.profile?.id)
     }
 
     handleBadgeClick = (feedItem: IFeedItemState): void => {

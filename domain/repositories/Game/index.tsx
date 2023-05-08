@@ -2,7 +2,8 @@ import { PlayMutationInput, presenceType } from "../../../infrastructure/Ballerz
 import BallerzGameClient from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient";
 import { PlayMutation } from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient/mutations";
 import { GetMyPresencesQuery } from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient/queries";
-import { GameDoc, PresenceDoc } from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient/types";
+import { GameDoc } from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient/types";
+import { Game, Presence } from "../../../infrastructure/BallerzServices/BallerzAPI/types";
 import { CreateGameErrorReason, ICheckInResult, ICheckinInput, ICheckoutInput, ICommentInput, ICreateGameInput, ICreateGameResult, IGameRepository } from "../../use-cases/feed/interface";
 import { IAttendance, IFeedItem, IGame, IUserProfileData } from "../../use-cases/types";
 
@@ -74,8 +75,8 @@ export default class GameRepository implements IGameRepository {
         return result
     };
 
-    async getAllGames(email?: string): Promise<IFeedItem[]> {
-        const userEmail = email? email:"undefined"
+    async getAllGames(myUserProfileID?: string): Promise<IFeedItem[]> {
+        const userEmail = myUserProfileID? myUserProfileID:"undefined"
         const response = await this.gameClient.getAllGames(userEmail)
         if(response?.listGames){
             const result: IFeedItem[] = []
@@ -163,14 +164,14 @@ export default class GameRepository implements IGameRepository {
 
 export class GameAdapter {
 
-    static parseGame(game: GameDoc): IFeedItem | null {
+    static parseGame(game: Game | null): IFeedItem | null {
         //TODO: Remove the preesence list length condition
-        if(game?.place && game.presenceList.items.length > 0){
+        if(game?.place){
             const result: IFeedItem = {
                 placeID: game.place.id,
                 place: game.place,
                 id: game.id,
-                friendsThere: [],
+                friendsThere: parseFriendsThere(game),
                 comments: [],
                 badges: [],
                 startingTime: game.startingDateTime,
@@ -183,11 +184,17 @@ export class GameAdapter {
     }
 
 
-    static parsePresenceDoc(presenceDoc: PresenceDoc): IAttendance | null {
+    static parsePresenceDoc(presenceDoc: Presence): IAttendance | null {
         if(presenceDoc?.userProfile){
             let isFriend = false
-            if(presenceDoc.userProfile.friends.items.length > 0){
-                isFriend = true
+            if(presenceDoc.userProfile.friends){
+                const friendList = presenceDoc.userProfile.friends.items
+                if(friendList.length > 0){
+                    isFriend = true
+                }
+            } else {
+                console.error(`Could not yield friendship.. Returned false`)
+                isFriend = false
             }
             return {
                 id: presenceDoc.id,
@@ -204,12 +211,14 @@ export class GameAdapter {
 
     }
 
-    static parsePresenceList(presenceList: Array<PresenceDoc | null>): IGame['attendants'] {
+    static parsePresenceList(presenceList: Array<Presence | null>): IGame['attendants'] {
         const result: IGame['attendants'] = []
         presenceList?.forEach((presenceDoc) => {
-            const parsedPresence = this.parsePresenceDoc(presenceDoc)
-            if(parsedPresence){
-                result.push(parsedPresence)
+            if(presenceDoc){
+                const parsedPresence = this.parsePresenceDoc(presenceDoc)
+                if(parsedPresence){
+                    result.push(parsedPresence)
+                }
             }
         })
         return result
@@ -229,4 +238,32 @@ export class GameAdapter {
         return result
     }
 
+}
+
+
+function parseFriendsThere(game: Game): IUserProfileData[]{
+    const friendsThere: IUserProfileData[] = [] 
+    game.presenceList.items.forEach((item) => {
+        if(item){
+            if(item.userProfile.friends){
+                // Friends list is filtered in the query
+                // Here the filter is supposed to be the current user email
+                const filteredFriendList = item.userProfile.friends
+                const isFriend =  filteredFriendList.items.length > 0
+                if(isFriend){
+                    const userProfileData: IUserProfileData = {
+                        id: item.userProfile.id,
+                        username: item.userProfile.username,
+                        badges: [],
+                        isFriend: true
+                    }
+                    friendsThere.push(userProfileData)
+                }
+            } else {
+                console.error("Friends list is empty, could not find the game's friends there")
+            }
+        }
+    })
+
+    return friendsThere
 }

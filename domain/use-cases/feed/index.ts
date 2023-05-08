@@ -37,8 +37,8 @@ export class FeedUseCase implements IFeedUseCase {
         return response;
     }
 
-    async getFeed(email?:string): Promise<IFeed> {
-        const result = await this.repo.getAllGames(email)
+    async getFeed(myUserProfileID?:string): Promise<IFeed> {
+        const result = await this.repo.getAllGames(myUserProfileID)
         this.observer.newFeedEventHandler(result)
         return result
     }

@@ -20,11 +20,11 @@ export default class BallerzGameClient extends BallerzApiClient{
 
 
 
-    async getAllGames(email: string): Promise<GetAllGamesQuery | undefined> {
+    async getAllGames(myUserProfileID: string): Promise<GetAllGamesQuery | undefined> {
         const variables: GetAllGamesQueryVariables = {
             frendshipFilter: {
                 friendProfileID: {
-                    eq: email
+                    eq: myUserProfileID
                 }
             }
         }

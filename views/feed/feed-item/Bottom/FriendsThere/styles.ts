@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
         marginBottom: 7,
 
         // alignItems: "center",
-        justifyContent: "flex-end",
+        // justifyContent: "flex-end",
+        marginRight: 10
     },
     friendsThereText: {
     	color: "#AAB8C2",

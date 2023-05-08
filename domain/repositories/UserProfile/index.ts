@@ -88,8 +88,6 @@ export default class UserProfileRepository implements IUserProfileRepository {
     
 
     async getAllUserProfileData(): Promise<IUserProfileData[]> {
-
-
         const variables: ListUserProfileDataQueryVariables = {
             frendshipFilter: {
                 id: {
@@ -121,10 +119,11 @@ export default class UserProfileRepository implements IUserProfileRepository {
 
     async getUserProfile(id: string): Promise<IUserProfile | null> {
         const myUserProfileID = await this.__getCachedMyUserProfile().then(res => (res?.id)) || "123"
+        console.log(`Get user profile, myUserProfileID: ${myUserProfileID}, id: ${id}`)
         const variables: GetUserProfileQueryVariables = {
             id,
             frendshipFilter: {
-                id: {
+                friendProfileID: {
                     eq: myUserProfileID
                 }
             }
@@ -366,7 +365,6 @@ class IUserProfileDataAdapter {
     }
 
     static parseGameListFromPresenceList(presenceList: Array<Presence|null>): IGame[] {
-        const attendanceList: IAttendance[] = parsePresenceList(presenceList)
         const result: IGame[] = []
         presenceList.forEach((presence) => {
             if(presence){
@@ -374,13 +372,14 @@ class IUserProfileDataAdapter {
                     friendsThere: this.parseFriendsThere(presence.game),
                     comments: [],
                     badges: [],
-                    attendants: parsePresenceList(presenceList),
+                    attendants: parsePresenceList(presence.game.presenceList.items),
                     place: presence.place,
                     id: presence.game.id,
                     placeID: presence.placeID,
                     startingTime: presence.game.startingDateTime,
                     endingTime: presence.game.endingDateTime
                 }
+                result.push(game)
             }
         })
         return result

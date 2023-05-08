@@ -1,6 +1,5 @@
-import { ListGamesQueryVariables, ModelFriendshipFilterInput, ModelGameFilterInput, ModelPresenceFilterInput, presenceType } from "./../API";
-import { UserProfileData } from "../types";
-import { ListUserProfileDataQueryItem } from "../UserProfileClient/queries";
+import { Game } from "../types";
+import { ModelFriendshipFilterInput, ModelGameFilterInput, ModelPresenceFilterInput, presenceType } from "./../API";
 import { GameDoc } from "./types";
 
 
@@ -14,6 +13,8 @@ query ListGames(
   listGames(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      startingDateTime
+      endingDateTime
       placeID
       place{
         id
@@ -23,6 +24,13 @@ query ListGames(
       presenceList{
         items{
             id
+            placeID
+            userProfileID
+            place{
+              id
+              name
+              address
+            }
             userProfile{
               id
               username
@@ -37,8 +45,6 @@ query ListGames(
             endingDateTime
         }
       }
-      startingDateTime
-      endingDateTime
       createdAt
       updatedAt
     }
@@ -106,7 +112,7 @@ export type GetGameQuery = {
 export type GetAllGamesQuery = {
     listGames?:  {
       __typename: "ModelGameConnection",
-      items:  Array<GameDoc>,
+      items:  Array<Game>,
       nextToken?: string | null,
     } | null,
 };

@@ -49,8 +49,9 @@ There must be three different games on three different courts, two at the moment
     - [x] Make sure profile pic is uploaded on userProfileCreation
     - [x] Display respective profile pics on all UserList screens
 
-- [ ] My Profile
-    - [ ] See my friends list
+- [x] My Profile
+    - [x] See my friends list
+    - [x] I Want to see my games list
 
 
 - [ ] I want see a toast message on new notification

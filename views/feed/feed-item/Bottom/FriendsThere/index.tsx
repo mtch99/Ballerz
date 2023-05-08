@@ -17,9 +17,8 @@ export default function FriendsThereView(props: IFriendsThereViewProps) {
         handlePress()
     }
     return(
-        <TouchableOpacity 
+        <View 
             style={styles.friendsThereContainer}
-            onPress={() => {onPress()}}
         >
             {
                 props.friendsHere.length==0?(
@@ -32,6 +31,6 @@ export default function FriendsThereView(props: IFriendsThereViewProps) {
                     </Text>
                 )
             }
-        </TouchableOpacity>
+        </View>
     )
 }

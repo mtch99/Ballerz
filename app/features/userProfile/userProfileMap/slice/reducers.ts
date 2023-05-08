@@ -24,8 +24,8 @@ const newUserProfileReducer: IUserProfileMapStateReducer<INewUserProfileProfileA
             ...action.payload,
             friendshipRequestSent: state[UserProfileID]?.friendshipRequestSent
         },
+        // console.error(`New user profile map received: ${JSON.stringify(newState)}`)
     }
-    // console.error(`New user profile map received: ${JSON.stringify(newState)}`)
 
     return newState
 }
