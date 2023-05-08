@@ -44,11 +44,10 @@ There must be three different games on three different courts, two at the moment
     - [x] DefineUsernameView 
     - [x] FindYourFriendsView
 
-- [ ] ProfilePic
-    - [ ] Display fetched images in userProfileList view
-    - [ ] Retrieve user profile on MyProfile screen focus
-    - [ ] Display respective profile pics on all UserList screens
-    - [ ] Make sure profile pic is uploaded on userProfileCreation
+- [x] ProfilePic
+    - [x] Retrieve user profile on MyProfile screen focus
+    - [x] Make sure profile pic is uploaded on userProfileCreation
+    - [x] Display respective profile pics on all UserList screens
 
 - [ ] My Profile
     - [ ] See my friends list

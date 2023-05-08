@@ -11,14 +11,30 @@ export type FriendShipRequestData = {
 }
 
 
+export type Game = {
+    __typename: "Game"
+    id: string
+    startingDateTime: string
+    endingDateTime: string
+    placeID: string
+    presenceList: {
+        items: Array<Presence | null>
+        nextToken: string | null
+    }
+    place: PlaceData
+}
+
+
 export type Presence = {
     __typename: "Presence",
-    id: string,
-    placeID: string,
+    id: string
+    placeID: string
     userProfileID: string
+    userProfile: UserProfileData
 	place: PlaceData
 	startingDateTime: string
 	endingDateTime: string
+    game: Game
 }
 
 export type PlaceData = {
@@ -58,21 +74,26 @@ export type UserProfileData = {
     id: string,
     username: string
     email: string
+    friends?: {
+        items: Array<UserProfileData | null>
+        nextToken: string | null
+    }
 }
+
+
 
 export type UserProfile = {
     __typename: "UserProfile",
     id: string,
+    email: string
     username: string,
     friends: ModelFriendshipConnection,
     createdAt: string,
-    updatedAt: string
-    // groupChatUserProfileConnectionList: GroupChatUserProfileConnectionConnection | null,
-    //   createdGroupChatList?:  {
-    //     __typename: "ModelGroupChatConnection",
-    //     items: Array<GroupChatData | null>
-    //     nextToken?: string | null,
-    //   } | null,
+    updatedAt: string,
+    presenceList: {
+        items: Array<Presence | null>
+        nextToken: string | null
+    }
 }
 
 

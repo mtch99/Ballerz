@@ -1,4 +1,5 @@
 import { ModelFriendshipFilterInput, presenceType } from "../API";
+import { Game } from "../types";
 
 export const getPlace_gql = /* GraphQL */ `
   query GetPlace(
@@ -102,60 +103,10 @@ export type GetPlaceQuery = {
       address: string,
       gameList:  {
         __typename: "ModelGameConnection",
-        items: Array< Game | null> | null
+        items: Array< Game | null>
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
 };
-
-
-export type Game = {
-    __typename: "Game",
-    id: string,
-    presenceList: {
-        __typename: "ModelPresenceConnection",
-        items:  Array<Presence | null >,
-        nextToken?: string | null
-    },
-    placeID: string,
-    startingDateTime: string,
-    endingDateTime: string,
-    place: PlaceData | null,
-    createdAt: string,
-    updatedAt: string,
-};
-
-
-export type Presence = {
-    __typename: "Presence",
-    id: string,
-    type: presenceType,
-    userProfileID: string,
-    userProfile: UserProfileData | null
-    startingDateTime: string,
-    endingDateTime: string,
-    createdAt: string,
-    updatedAt: string,
-};
-
-
-type UserProfileData = {
-    __typename: "UserProfile",
-    id: string,
-    username: string
-    email: string
-    friends: {
-      items: Array<{id: string, friendProfileID: string} | null>,
-    }
-}
-
-
-
-
-export type PlaceData = {
-    id: string
-    name: string
-    address: string
-}

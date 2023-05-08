@@ -1,4 +1,5 @@
-import { UserProfile } from "./../../../infrastructure/BallerzServices/BallerzAPI/types";
+import { IAttendance, IGame } from "./../../use-cases/types";
+import { Game, Presence, UserProfile } from "./../../../infrastructure/BallerzServices/BallerzAPI/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FriendshipRequestStatus } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
 import UserProfileClient from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient";
@@ -6,10 +7,10 @@ import { IUserProfileData, IUserProfile } from "../../use-cases/types";
 import { IAcceptFriendshipRequestInput, IAcceptFriendshipRequestResult, IDefineUsernameInput, IDefineUsernameResult, IMyUserProfileData, IRequestFriendShipInput, IRequestFriendShipResult, IUploadProfilePicInput, IUploadProfilePicResult, IUserProfileRepository } from "../../use-cases/userProfile/interface";
 import * as queries from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/queries"
 import * as mutations from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/mutations"
-import { GetUserProfileQueryVariables, ListUserProfilesQueryVariables } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
-import { ListUserProfileDataQueryVariables } from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/queries";
+import { GetUserProfileQueryVariables, ListUserProfileDataQueryVariables } from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient/queries";
 import { ImageSourcePropType } from "react-native";
 import { uploadImage } from "../../../screens/utils/ImagePicker";
+import { parseGameList, parsePresenceList } from "../adapter";
 
 
 
@@ -47,6 +48,7 @@ export default class UserProfileRepository implements IUserProfileRepository {
 
     async getMyUserProfile(email: string): Promise<IUserProfile | null> {
         const cache: IUserProfile | null = await this.__getCachedMyUserProfile()
+
         const variables: ListUserProfileDataQueryVariables = {
             filter: {
                 email: {
@@ -55,12 +57,12 @@ export default class UserProfileRepository implements IUserProfileRepository {
             },
             frendshipFilter: {
                 id: {
-                    ne: "123"
+                    eq: "123"
                 }
             }
         }
 
-        const response = await this.client.listUserProfiles(variables).then((data) => {
+        const response = await this.client.listUserProfilesByEmail(variables).then((data) => {
             return data
         })
         .catch(async(err) => {
@@ -72,35 +74,26 @@ export default class UserProfileRepository implements IUserProfileRepository {
             return cache
         }
         
-        
-        let parsedResponse = IUserProfileDataAdapter.parseListUserProfileResponse(response, "fakeUserProfileID")
-        if(parsedResponse.length == 0){
-            console.log("Could not find a user profile with the email: " + email)
-        }else if(parsedResponse.length == 1){
-            const userProfile = parsedResponse[0]
-            this.__cacheMyUserProfileData(userProfile)
-            this.__cacheMyUserProfile(userProfile)
-            return parsedResponse[0]
-        }
-        else if(parsedResponse.length > 1){
-            console.log("Found multiple userprofiles with same email in the database. Returned the first one")
-            const userProfile = parsedResponse[0]
-            this.__cacheMyUserProfile(userProfile)
-            this.__cacheMyUserProfileData(userProfile)
 
+        let userProfile = IUserProfileDataAdapter.parseListUserProfileByEmailResponse(response)
+        if(!userProfile){
+            console.log("Could not find a user profile with the email: " + email)
+            return cache
+        }else{
+            this.__cacheMyUserProfileData(userProfile)
+            this.__cacheMyUserProfile(userProfile)
             return userProfile
         }
-
-        return cache
     }
     
 
     async getAllUserProfileData(): Promise<IUserProfileData[]> {
-        let cache: IUserProfileData[] = await this.__getCachedUserProfileDataList().then(data => {return data || []})
+
+
         const variables: ListUserProfileDataQueryVariables = {
             frendshipFilter: {
-                friendProfileID: {
-                    eq: this.myUserProfileID
+                id: {
+                    eq: "123"
                 }
             }
         }
@@ -117,8 +110,9 @@ export default class UserProfileRepository implements IUserProfileRepository {
             console.error(err)
             return undefined
         })
-
+        
         if(!response){
+            const cache: IUserProfileData[] = await this.__getCachedUserProfileDataList().then(data => {return data || []})
             return cache
         }
         return response
@@ -126,19 +120,21 @@ export default class UserProfileRepository implements IUserProfileRepository {
 
 
     async getUserProfile(id: string): Promise<IUserProfile | null> {
+        const myUserProfileID = await this.__getCachedMyUserProfile().then(res => (res?.id)) || "123"
         const variables: GetUserProfileQueryVariables = {
-            id
+            id,
+            frendshipFilter: {
+                id: {
+                    eq: myUserProfileID
+                }
+            }
         }
-
-        // console.warn(`getUserProfile(${id})`)
 
         const response: queries.GetUserProfileQuery | undefined = await this.client.getUserProfile(variables)
         .catch((err) => {
             console.error(err)
             return undefined
         })
-
-
 
         return IUserProfileDataAdapter.parseGetUserProfileResponse(response, this.myUserProfileID)
     }
@@ -259,62 +255,49 @@ export default class UserProfileRepository implements IUserProfileRepository {
 
 
 
-
-
-
-
-
-
 /**
  * UserProfileClient Adapter
  */
 class IUserProfileDataAdapter {
 
-    static parseListUserProfileResponse(response: queries.ListUserProfileQuery | undefined, myProfileID: string): IUserProfile[]{
-        const result: IUserProfile[] =[] 
-        
-        if(response){
-            if(response.listUserProfiles){
-                response.listUserProfiles.items.forEach((value) => {
-                    if(value){
-                        if(value.id != myProfileID){
-                            let isFriend = false
-                            if(value.friends.items.length > 0){
-                                isFriend = true
-                            }
-                            const userProfile: IUserProfile = {
-                                ...value,
-                                badges: [],
-                                games: [],
-                                friends: [],
-                                isFriend
-                            }
-                            result.push(userProfile)
-                        }
-                    }
-                })
+
+    static parseListUserProfileByEmailResponse(response: queries.ListUserProfileByEmailQuery): IUserProfile | null {
+        if(response.listUserProfiles.items){
+            if(response.listUserProfiles.items.length > 0){
+                const userProfileDoc = response.listUserProfiles.items[0]
+                if(userProfileDoc){
+                    return this.parseMyUserProfile(userProfileDoc)
+                }else{
+                    return null
+                }
+            } else {
+                return null
             }
+        } else {
+            return null
         }
-        return result
     }
 
     static parseListUserProfileDataResponse(response: queries.ListUserProfileDataQuery | undefined, myProfileID: string): IUserProfileData[] {
         const result: IUserProfileData[] =[] 
         if(response){
             if(response.listUserProfiles){
-                response.listUserProfiles.items.forEach((value) => {
-                    if(value){
-                        if(value.id != myProfileID){
+                response.listUserProfiles.items.forEach((userProfileData) => {
+                    if(userProfileData){
+                        if(userProfileData.id != myProfileID){
                             let isFriend = false
-                            if(value.friends.items.length > 0){
-                                isFriend = true
+                            if(userProfileData.friends){
+                                const friendList = userProfileData.friends.items
+                                if(friendList.length > 0){
+                                    isFriend = true
+                                }
                             }
-                            const userProfileData: IUserProfileData = {
-                                ...value,
+                            const newItem: IUserProfileData = {
+                                ...userProfileData,
                                 isFriend,
                                 badges: []
                             }
-                            result.push(userProfileData)
+                            result.push(newItem)
                         }
                     }
                 })
@@ -322,6 +305,29 @@ class IUserProfileDataAdapter {
             }
         }
         return result
+    }
+
+
+    static parseMyUserProfile(userProfileDoc: UserProfile): IUserProfile {
+        const friends: IUserProfileData[] = []
+        userProfileDoc.friends.items.forEach((item) => {
+            if(item){
+                const friendProfile = item.friendProfile
+                friends.push({
+                    id: friendProfile.id,
+                    username: friendProfile.username,
+                    badges: [],
+                    isFriend: undefined
+                })
+            }
+        })
+        return {
+            ...userProfileDoc,
+            badges: [],
+            friends,
+            games: this.parseGameListFromPresenceList(userProfileDoc.presenceList.items),
+            isFriend: undefined
+        }
     }
 
 
@@ -351,12 +357,61 @@ class IUserProfileDataAdapter {
                 isFriend,
                 friends,
                 badges: [],
-                games: [],
+                games: this.parseGameListFromPresenceList(response.getUserProfile.presenceList.items),
                 email: "",
             }
         }
 
         return result
+    }
+
+    static parseGameListFromPresenceList(presenceList: Array<Presence|null>): IGame[] {
+        const attendanceList: IAttendance[] = parsePresenceList(presenceList)
+        const result: IGame[] = []
+        presenceList.forEach((presence) => {
+            if(presence){
+                const game: IGame = {
+                    friendsThere: this.parseFriendsThere(presence.game),
+                    comments: [],
+                    badges: [],
+                    attendants: parsePresenceList(presenceList),
+                    place: presence.place,
+                    id: presence.game.id,
+                    placeID: presence.placeID,
+                    startingTime: presence.game.startingDateTime,
+                    endingTime: presence.game.endingDateTime
+                }
+            }
+        })
+        return result
+    }
+
+
+    static parseFriendsThere(game: Game): IUserProfileData[]{
+        const friendsThere: IUserProfileData[] = [] 
+        game.presenceList.items.forEach((item) => {
+            if(item){
+                if(item.userProfile.friends){
+                    // Friends list is filtered in the query
+                    // Here the filter is supposed to be the current user email
+                    const filteredFriendList = item.userProfile.friends
+                    const isFriend =  filteredFriendList.items.length > 0
+                    if(isFriend){
+                        const userProfileData: IUserProfileData = {
+                            id: item.userProfile.id,
+                            username: item.userProfile.username,
+                            badges: [],
+                            isFriend: true
+                        }
+                        friendsThere.push(userProfileData)
+                    }
+                } else {
+                    console.error("Friends list is empty, could not find the game's friends there")
+                }
+            }
+        })
+
+        return friendsThere
     }
 
     static parseCreateUserProfileResponse(response: mutations.CreateUserProfileMutation | undefined): IDefineUsernameResult {

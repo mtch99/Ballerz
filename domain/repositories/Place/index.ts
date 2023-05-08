@@ -1,10 +1,11 @@
 import { IUserProfileData } from "./../../use-cases/types";
 import BallerzPlaceClient from "../../../infrastructure/BallerzServices/BallerzAPI/PlaceClient";
-import { Game, GetPlaceQuery, Presence } from "../../../infrastructure/BallerzServices/BallerzAPI/PlaceClient/queries";
+import { GetPlaceQuery} from "../../../infrastructure/BallerzServices/BallerzAPI/PlaceClient/queries";
 import { IPlaceProfile } from "../../use-cases/place/types";
 import { IAttendance, IGame, IPlaceData } from "../../use-cases/types";
 
 import { IPlaceRepository } from "./../../use-cases/place/interface";
+import { parseGameList } from "../adapter";
 
 
 export default class PlaceRepository implements IPlaceRepository {
@@ -47,7 +48,7 @@ export default class PlaceRepository implements IPlaceRepository {
 function parseGetPlaceQuery(response: GetPlaceQuery): IPlaceProfile | null {
     let result: IPlaceProfile|null = null
     if(response.getPlace?.gameList?.items){
-        const gameList: IGame[] = parseGameConnection(response.getPlace.gameList?.items)
+        const gameList: IGame[] = parseGameList(response.getPlace.gameList?.items)
         result = {
             ...response.getPlace,
             games: gameList
@@ -58,83 +59,4 @@ function parseGetPlaceQuery(response: GetPlaceQuery): IPlaceProfile | null {
 }
 
 
-function parseGameConnection(items: (Game | null)[]): IGame[] {
-    const result: IGame[] = []
-    for (const item of items) {
-        if (item?.place) {
-            const startingTime = new Date(item.startingDateTime)
-            const endingTime = new Date(item.endingDateTime)
-            const attendants = item.presenceList.items
-            const friendsThere: IUserProfileData[] = getFriendsThereListFromPresenceList(attendants)
-            const game: IGame = {
-                id: item.id,
-                placeID: item.placeID,
-                friendsThere,
-                comments: [],
-                badges: [],
-                startingTime,
-                endingTime,
-                attendants: parsePresenceList(item.presenceList.items),
-                place: item.place
-            }
-            if(game.attendants.length > 0){
-                result.push(game)
-            }
-        }
-    }
-    return result
-}
 
-
-
-function parsePresenceList(presenceList: (Presence|null)[]): IGame['attendants']{
-    const result: IGame['attendants'] = []
-    presenceList.forEach((presenceDoc) => {
-        if(presenceDoc){
-            const parsedPresence = parsePresenceDoc(presenceDoc)
-            if(parsedPresence){
-                result.push(parsedPresence)
-            }
-        }
-    })
-    return result
-}
-
-
-function parsePresenceDoc(presenceDoc: Presence): IAttendance | null {
-    if(presenceDoc.userProfile){
-        let isFriend = false
-        if(presenceDoc.userProfile.friends.items.length > 0){
-            isFriend = true
-        }
-        return {
-            id: presenceDoc.id,
-            userProfileData: {
-                ...presenceDoc.userProfile,
-                isFriend,
-                badges: []
-            },
-            arrivalDateTime: presenceDoc.startingDateTime,
-            departureDateTime: presenceDoc.endingDateTime,
-        }
-    }
-    else {
-        return null
-    }
-
-}
-
-
-function getFriendsThereListFromPresenceList(presenceList: (Presence|null)[]): IUserProfileData[] {
-    const result: IUserProfileData[] = []
-    const friendsThere: IUserProfileData[] = []
-    presenceList.forEach(attendant => {
-        const attendantProfile = attendant?.userProfile
-        const friends = attendantProfile?.friends
-        if(friends && friends.items.length > 0 && attendantProfile){
-            friendsThere.push({...attendantProfile, badges: [], isFriend: true})
-        }
-    })
-
-    return result
-}

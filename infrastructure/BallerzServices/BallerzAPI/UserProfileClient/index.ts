@@ -8,7 +8,7 @@ import {GraphQLOptions} from "@aws-amplify/api-graphql"
 import { GetUserProfileQueryVariables} from "../API";
 import { IUserProfileClient } from "./interface";
 import { CreateUserProfileMutation, CreateUserProfileMutationVariables } from "./mutations";
-import { ListUserProfileDataQueryVariables, ListUserProfileQuery } from "./queries";
+import { ListUserProfileDataQueryVariables} from "./queries";
 import BallerzApiClient from "../client";
 import { awsmobileAPIMock } from "../../aws-exports";
 
@@ -31,11 +31,11 @@ export default class UserProfileClient extends BallerzApiClient implements IUser
 
     }
 
-    async listUserProfiles(input: ListUserProfileDataQueryVariables): Promise<queries.ListUserProfileQuery | undefined> {
-        const payload = this.genRequestPayload(queries.listUserProfiles, input)
-        const response = await API.graphql<GraphQLQuery<queries.ListUserProfileQuery>>(payload)
+    async listUserProfilesByEmail(input: ListUserProfileDataQueryVariables): Promise<queries.ListUserProfileByEmailQuery | undefined> {
+        const payload = this.genRequestPayload(queries.listUserProfilesByEmail_gql, input)
+        const response = await API.graphql<GraphQLQuery<queries.ListUserProfileByEmailQuery>>(payload)
 
-        return this._handleResponse<queries.ListUserProfileQuery>(response)
+        return this._handleResponse<queries.ListUserProfileByEmailQuery>(response)
     }
 
 

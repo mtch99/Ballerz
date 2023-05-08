@@ -67,6 +67,9 @@ export function MyProfileStackWrapper(props: AppTabScreenProps<'MyProfileStack'>
         },
         goToFriendsListScreen: function (userProfileList: IUserProfileDataState[]): void {
             throw new Error("Function not implemented.");
+        },
+        goBack: function (): void {
+            throw new Error("Function not implemented.");
         }
     }
 
@@ -74,23 +77,6 @@ export function MyProfileStackWrapper(props: AppTabScreenProps<'MyProfileStack'>
         <MyProfileStackNavigator/>
     )
 }
-
-
-export function ExploreStackWrapper(props: AppTabScreenProps<'ExploreStack'>){
-    const { navigation } = props
-    const {placeController, userProfileController} = React.useContext(AppContext)
-    
-    React.useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => {
-            placeController.getAllPlaces()
-            userProfileController.getAllUserProfiles()
-        });
-        return unsubscribe;
-    }, [navigation])
-
-    return <ExploreStackNavigator/>
-}
-
 
 export function NotificationStackWrapper(props: AppTabScreenProps<'NotificationStack'>){
     return <NotificationStackNavigator/>

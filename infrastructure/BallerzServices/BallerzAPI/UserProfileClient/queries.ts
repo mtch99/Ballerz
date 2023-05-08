@@ -1,3 +1,4 @@
+import { EmailInput } from "./../../../../views/auth/signIn/index";
 import { ModelFriendshipFilterInput, ModelUserProfileFilterInput } from "../API";
 import { ModelFriendshipConnection, UserProfile } from "../types";
 import { Presence, Friendship, GroupChatDataWithMembers, GroupChatUserProfileConnectionConnection, GroupChatData, UserProfileData } from "../types";
@@ -5,6 +6,7 @@ import { Presence, Friendship, GroupChatDataWithMembers, GroupChatUserProfileCon
 export const getUserProfile = /* GraphQL */ `
   query GetUserProfile(
     $id: ID!
+    $frendshipFilter: ModelFriendshipFilterInput
   ) {
     getUserProfile(id: $id) {
         id
@@ -19,49 +21,175 @@ export const getUserProfile = /* GraphQL */ `
               }
           }
         }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            place{
+              id
+              name
+              address
+            }
+            userProfileID
+            gameID
+            game {
+              id
+              startingDateTime
+              endingDateTime
+              presenceList{
+                items{
+                  userProfileID
+                  userProfile{
+                    id
+                    username
+                    email
+                    friends(filter: $frendshipFilter) {
+                      items {
+                        id
+                        friendProfileID
+                      }
+                      nextToken
+                    }
+                  }
+                  startingDateTime
+                  endingDateTime
+                }
+              }
+            }
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
     }
   }
 `;
 
+export type GetUserProfileQueryVariables = {
+  id: string,
+  frendshipFilter: ModelFriendshipFilterInput
+};
+
+export type ListUserProfilesQueryVariables = {
+  filter: ModelUserProfileFilterInput,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUserProfileByEmailQuery = {
+  listUserProfiles: {    
+    items:  Array< UserProfile | null >,
+    nextToken: string | null,
+  }
+}
 
 export type GetUserProfileQuery = {
   getUserProfile:  UserProfile | null
 };
 
+
 export type ListUserProfileDataQueryVariables = {
   filter?: ModelUserProfileFilterInput | null,
-  frendshipFilter: ModelFriendshipFilterInput
+  frendshipFilter?: ModelFriendshipFilterInput
   limit?: number | null,
   nextToken?: string | null,
 }
 
+
 export type ListUserProfileDataQuery = {
   listUserProfiles:  {
     __typename: "ModelUserProfileConnection",
-    items:  Array< ListUserProfileDataQueryItem | null >,
-    nextToken: string | null,
-  } | null,
-};
-
-export type ListUserProfileQuery = {
-  listUserProfiles:  {
-    __typename: "ModelUserProfileConnection",
-    items:  Array< ListUserProfileDataQueryItem | null >,
+    items:  Array< UserProfileData | null >,
     nextToken: string | null,
   } | null,
 }
 
-export type ListUserProfileDataQueryItem = {
-    __typename: "UserProfile",
-    id: string,
-    username: string
-    email: string
-    friends: {
-      items: Array<{id: string, friendProfileID: string} | null>,
+
+
+export const listUserProfilesByEmail_gql = /* GraphQL */ `
+  query ListUserProfiles(
+    $filter: ModelUserProfileFilterInput
+    $limit: Int
+    $nextToken: String
+    $frendshipFilter: ModelFriendshipFilterInput
+  ) {
+    listUserProfiles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        email
+        username
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            friendProfile{
+              id
+              username
+              email
+            }
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            place{
+              id
+              name
+              address
+            }
+            userProfileID
+            gameID
+            game {
+              id
+              startingDateTime
+              endingDateTime
+              presenceList{
+                items{
+                  userProfileID
+                  userProfile{
+                    id
+                    username
+                    email
+                    friends(filter: $frendshipFilter) {
+                      items {
+                        id
+                        friendProfileID
+                      }
+                      nextToken
+                    }
+                  }
+                  startingDateTime
+                  endingDateTime
+                }
+              }
+            }
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
     }
-}
+  }
+`;
+
+
 
 export const listUserProfileData = /* GraphQL */ `
   query ListUserProfiles(
@@ -80,56 +208,10 @@ export const listUserProfileData = /* GraphQL */ `
             id
             friendProfileID
           }
+          nextToken
         }
       }
       nextToken
     }
   }
 `;
-
-
-export const listUserProfiles = /* GraphQL */ `
-  query ListUserProfiles(
-    $filter: ModelUserProfileFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUserProfiles(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        email
-        username
-        friends {
-          items {
-              id
-              friendProfile {
-                  id
-                  username
-              }
-          }
-        }
-        # groupChatUserProfileConnectionList {
-        #   items {
-        #     groupChatID
-        #     userProfileID
-        #     userProfile {
-        #         id
-        #         username
-        #     }
-        #     groupChat {
-        #         id
-        #         name
-        #     }
-        #   }
-        # }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-
-
-
-

@@ -54,6 +54,5 @@ import { DefineUsernameScreenWrapper, FindYourFriendsScreenWrapper } from './wra
     	   		        component={FindYourFriendsScreenWrapper}
     	   		    />
     	   		</Stack.Navigator>
-
-    	  )
+    	  	)
 }	  
