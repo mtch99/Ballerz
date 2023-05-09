@@ -1,3 +1,4 @@
+import AsyncStorage  from "@react-native-async-storage/async-storage";
 import { IGetMyNotificationsErrorReason, IgetMyNotificationsError } from "./../../use-cases/notifications/interface";
 import { FriendShipRequestData, UserProfileData } from "../../../infrastructure/BallerzServices/BallerzAPI/types";
 import { IFriendPlayingNotification, IFriendShipRequestNotification, IFriendshipRequest, INewFriendNotification, IUserProfileData } from "./../../use-cases/types";
@@ -29,9 +30,11 @@ export class NotificationsRepository implements INotificationsRepository {
                 },
                 notifications: []
             }
+        } else {
+            const result = ResponseHandler.handleFilterNotificationsByReceiverResponse(response);
+            this.__cacheNotifications(result.notifications);
+            return result
         }
-        const result = ResponseHandler.handleFilterNotificationsByReceiverResponse(response);
-        return result
     }
 
 
@@ -44,7 +47,6 @@ export class NotificationsRepository implements INotificationsRepository {
     }
 
 
-
     onNewNotification(notification: Notification): void {
         // console.warn(`Notification bien recue: ${JSON.stringify(notification)}`);
         this.observer.onNewNotificationReceived(notification)
@@ -55,6 +57,24 @@ export class NotificationsRepository implements INotificationsRepository {
         this.client.subscribeToNotifications(myProfileID, this.notificationsSubscriptionHandler.bind(this))
         console.log(`\nSubscribed to notifications for profile ${myProfileID}\n`);
     }
+
+    async __getCacheNotifications(): Promise<Notification[]> {
+        const notificationList = await AsyncStorage.getItem("notificationList").then((response) => {
+            if(response){
+                const result = JSON.parse(response) as Notification[]
+                return result
+            } else {
+                return []
+            }
+        })
+
+        return notificationList
+    }
+
+    __cacheNotifications(notificationList: Notification[]): void{
+        AsyncStorage.setItem("notificationList", JSON.stringify(notificationList))
+    }
+
 
 }
 

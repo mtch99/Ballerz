@@ -18,7 +18,11 @@ const NotificationSlice = createSlice({
 
 
 
-export const {NEW_NOTIFICATION, NEW_NOTIFICATIONLIST, REINIT_BADGE, ACCEPTED_FRIENDSHIP_REQUEST} = NotificationSlice.actions
+export const {
+    NEW_NOTIFICATION, NEW_NOTIFICATIONLIST, 
+    REINIT_BADGE, ACCEPTED_FRIENDSHIP_REQUEST,
+    INIT_NOTIFICATIONSTATE
+} = NotificationSlice.actions
 
 export const selectNotificationList = (state: RootState) => state.notifications
 

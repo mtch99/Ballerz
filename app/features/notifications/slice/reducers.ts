@@ -1,7 +1,7 @@
 import { IFriendShipRequestNotification } from "./../../../../domain/use-cases/types";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { NotificationListState, NotificationState } from "./interface";
-import { INewNotificationPayload, INewNotificationListPayload, AcceptedFriendshipRequestNotificationPayload } from "./actions";
+import { INewNotificationPayload, INewNotificationListPayload, AcceptedFriendshipRequestNotificationPayload, InitNotificationStatePayload } from "./actions";
 import { NotificationType } from "../../../../domain/use-cases/types";
 
 
@@ -10,6 +10,7 @@ export enum UserProfileActionType{
     NEW_NOTIFICATION="NEW_NOTIFICATION",
     REINIT_BADGE="REINIT_BADGE",
     ACCEPTED_FRIENDSHIP_REQUEST="ACCEPTED_FRIENDSHIP_FRIENDSHIP_REQUEST",
+    INIT_NOTIFICATIONSTATE="INIT_NOTIFICATIONSTATE"
 }
 
 
@@ -66,11 +67,20 @@ const acceptedFriendshipRequestReducer: INotificationReducer<AcceptedFriendshipR
     return {...state, items}
 }
 
+const initNotificationStateReducer: INotificationReducer<InitNotificationStatePayload> = (state, action) => {
+    return {
+        ...state, 
+        items: action.payload.notifications,
+        badge: action.payload.badge
+    }
+}
+
 const userProfileListReducers = {
     NEW_NOTIFICATIONLIST: newNotificationListReducer,
     NEW_NOTIFICATION: newNotificationReducer,
     REINIT_BADGE: reinitBadgeReducer,
-    ACCEPTED_FRIENDSHIP_REQUEST: acceptedFriendshipRequestReducer
+    ACCEPTED_FRIENDSHIP_REQUEST: acceptedFriendshipRequestReducer,
+    INIT_NOTIFICATIONSTATE: initNotificationStateReducer
 }
 
 export default userProfileListReducers

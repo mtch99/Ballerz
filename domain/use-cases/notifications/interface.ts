@@ -4,12 +4,14 @@ export interface INotificationsUseCase{
     getMyReceivedNotifications(myProfileID: string): Promise<IGetMyNotificationsResult>
     onNewNotificationReceived(notification: Notification): Promise<void>
     subscribeToMyNotifications(myProfileID: string): void
+    initNotifications(myProfileID: string): Promise<void>
 }
 
 
 export interface INotificationsObserver {
     onNewNotification(notification: Notification): void
     onNewNotificationsList(notifications: Notification[]): void
+    initNotificationState(notification: Notification[], badge: number|undefined): void
 }
 
 export interface INotificationsRepository{
@@ -17,6 +19,7 @@ export interface INotificationsRepository{
     getNotificationsByUser(userProfileId: string): Promise<IGetMyNotificationsResult>
     onNewNotification(notification: Notification): void
     subscribeToMyNotifications(myProfileID: string): void
+    __getCacheNotifications(): Promise<Notification[]>
 }
 
 

@@ -7,6 +7,9 @@ import { INotificationsModel } from "../../app/features/notifications/model";
 
 
 class NotificationController implements INotificationController{
+    async initNotifications(myProfileID: string): Promise<void> {
+        return this.useCase.initNotifications(myProfileID)
+    }
     model: INotificationsModel | undefined
 
     reinitBadge(): void {
@@ -33,6 +36,8 @@ class NotificationController implements INotificationController{
         }
         return result
     }
+
+    
     
     async subscribeToMyNotifications(userProfileID: string): Promise<void>{
         this.useCase.subscribeToMyNotifications(userProfileID)
@@ -59,5 +64,8 @@ const fakeNotificationUseCase: INotificationsUseCase = {
     },
     subscribeToMyNotifications: function (myProfileID: string): void {
         throw new Error("UseCase not initialized");
+    },
+    initNotifications: function (myProfileID: string): Promise<void> {
+        throw new Error("Function not implemented.");
     }
 }

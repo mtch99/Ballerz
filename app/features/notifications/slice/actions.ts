@@ -6,3 +6,7 @@ export type INewNotificationListPayload = NotificationState[]
 export type AcceptedFriendshipRequestNotificationPayload = {
     notificationID: string
 }
+export type InitNotificationStatePayload = {
+    notifications: NotificationState[]
+    badge: number
+}

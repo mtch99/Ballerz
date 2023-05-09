@@ -54,6 +54,12 @@ There must be three different games on three different courts, two at the moment
     - [x] I Want to see my games list
 
 
+- [x] Cache notifications and use it for badge diff
+
+- [ ] Place Profile
+    - [ ] Sort games by date
+
+
 - [ ] I want see a toast message on new notification
     - [ ] Display a toast message on new received notification 
         - [ ] yarn add @react-native-material/Snackbar

@@ -133,14 +133,14 @@ export default function AppProvider (props: IProps) {
     const prepareData = async() => {
         await Promise.all([
             authController.isFirstLaunch(),
-            loadResourcesAndData()
+            loadResources()
         ])
         const isUserSignedIn = await authController.signinLastUser()
         if(isUserSignedIn){
             const userProfile = await userProfileController.getMyProfile(isUserSignedIn.user?.email)
             if(userProfile){
                 await Promise.all([
-                    notificationController.getMyNotifications(userProfile.id),
+                    notificationController.initNotifications(userProfile.id),
                     notificationController.subscribeToMyNotifications(userProfile.id),
                     feedController.getMyGamesList(userProfile.id)
                 ])
@@ -211,7 +211,7 @@ function getCacheImages(images: any[]) {
 }
 
 
-async function loadResourcesAndData(): Promise<void> {
+async function loadResources(): Promise<void> {
     try {
       const imageAssets = await getCacheImages([
         require('../assets/profilePic.jpg'),
