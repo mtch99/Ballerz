@@ -12,6 +12,7 @@ import { globalStyles } from "../styles"
 import { FlatList } from "react-native-gesture-handler"
 import FeedItemView from "../feed/feed-item"
 import ListItemButton from "../../components/Buttons/ListItemButton"
+import { handleSharePress } from "../../screens/utils"
 
 
 
@@ -43,8 +44,8 @@ export class PlaceProfileView extends React.Component<IPlaceProfileViewProps>{
                       onPressCommentButton={() => {}}
                       handleCheckoutButtonPress={()=> {}}
                       handlePlayButtonPress={() => {}}
-                      handleFriendsTherePress={() => {}}
-                      handleInvitePress={() => {}}
+                      handleFriendsTherePress={() => {this.props.onPressAttendantsNum(item)}}
+                      handleInvitePress={handleSharePress}
                     />
                 )
             }

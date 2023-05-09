@@ -4,6 +4,8 @@ import { View, Text } from "react-native";
 import { AppContext, IAppContext } from "../../controllers/provider";
 import { IPlaceMapState, IPlaceProfileState } from "../../app/features/place/types";
 import { PlaceProfileView } from "../../views/placeProfile";
+import { IFeedItemState } from "../../app/features/feed/slice/interface";
+import { IUserProfileData } from "../../domain/use-cases/types";
 // import { PlaceProfileView } from "../../views/placeProfile";
 
 
@@ -68,6 +70,14 @@ export class PlaceProfileScreen extends React.Component<IPlaceProfileScreenProps
         this.navigationController.goToCreateTimeSlot(this.context.placeMapState[this.props.placeId])
     }
 
+    onPressAttendantsNum(feedItem: IFeedItemState): void {
+        const attendants: IUserProfileData[] = []
+        feedItem.attendants.forEach(attendance => {
+            attendants.push(attendance.userProfileData)
+        })    
+        this.navigationController.goToAttendantsScreen(attendants)
+    }
+
     viewProps = {...this.state}
 
 
@@ -77,6 +87,7 @@ export class PlaceProfileScreen extends React.Component<IPlaceProfileScreenProps
                 <PlaceProfileView
                     {...this.context.placeMapState[this.props.placeId]}
                     onPressPlayHere={this.onPressPlayHere.bind(this)}
+                    onPressAttendantsNum={this.onPressAttendantsNum.bind(this)}
                 />
             )
         }else{
@@ -84,6 +95,7 @@ export class PlaceProfileScreen extends React.Component<IPlaceProfileScreenProps
                 <PlaceProfileView
                     {...this.state}
                     onPressPlayHere={this.onPressPlayHere.bind(this)}
+                    onPressAttendantsNum={this.onPressAttendantsNum.bind(this)}
                 /> 
             )
         }
@@ -93,6 +105,7 @@ export class PlaceProfileScreen extends React.Component<IPlaceProfileScreenProps
 
 export interface IPlaceProfileViewProps extends IPlaceProfileState{
     onPressPlayHere: () => void;
+    onPressAttendantsNum: (item: IFeedItemState) => void
 }
 
 

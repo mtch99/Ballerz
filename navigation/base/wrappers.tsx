@@ -7,9 +7,9 @@ import { IUserProfileScreenNavigationController } from "../../screens/userProfil
 import { IUserProfileDataState } from "../../app/features/types"
 import { UserProfileScreen } from "../../screens/userProfile"
 import { IUserProfileListScreenNavigationController } from "../../screens/userProfileList/interface"
-import FriendsListScreen, { AttendantsListScreen } from "../../screens/userProfileList/friendsList"
+import FriendsListScreen, { AttendantsListScreen, IFriendListScreenPropsWithoutNavigation } from "../../screens/userProfileList/friendsList"
 import { CreateGameStackNavigator } from "./createGameStack"
-import { IPlaceData } from "../../domain/use-cases/types"
+import { IPlaceData, IUserProfileData } from "../../domain/use-cases/types"
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { CreateGameStackParamList } from "./createGameStack/types"
 
@@ -26,7 +26,14 @@ export function PlaceProfileScreenWrapper(props: BaseStackScreenProps<'PlaceProf
                 }
             }
             navigation.navigate("CreateGameStack", navigationParams)
-        }
+        },
+        goToAttendantsScreen: (attendantsList: IUserProfileData[]) => {
+            const screen: keyof BaseStackParamList = 'AttendantsListScreen'
+            const params: IFriendListScreenPropsWithoutNavigation = {
+                friendsList: attendantsList
+            }
+            navigation.navigate('AttendantsListScreen', params)
+        },
     }
 
     if(!props.route.params){

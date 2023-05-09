@@ -1,8 +1,6 @@
 import { PlayMutationInput, presenceType } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
 import BallerzGameClient from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient";
-import { PlayMutation } from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient/mutations";
 import { GetMyPresencesQuery } from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient/queries";
-import { GameDoc } from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient/types";
 import { Game, Presence } from "../../../infrastructure/BallerzServices/BallerzAPI/types";
 import { CreateGameErrorReason, ICheckInResult, ICheckinInput, ICheckoutInput, ICommentInput, ICreateGameInput, ICreateGameResult, IGameRepository } from "../../use-cases/feed/interface";
 import { IAttendance, IFeedItem, IGame, IUserProfileData } from "../../use-cases/types";

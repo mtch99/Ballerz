@@ -5,6 +5,7 @@ import { FlatList, View, Text, SectionList, ScrollView } from "react-native";
 import FeedItemView from "../../feed/feed-item";
 import styles from "./styles"
 import { IGameState } from "../../../app/features/types";
+import { handleSharePress } from "../../../screens/utils";
 
 
 export default class GamesListView extends React.Component<IGamesViewProps> {
@@ -33,9 +34,7 @@ export default class GamesListView extends React.Component<IGamesViewProps> {
                                         throw new Error("Function not implemented.");
                                     } } 
                                     handleFriendsTherePress={this.props.onPressFriendsThere}
-                                    handleInvitePress={async function (feedItem: IFeedItemState): Promise<void> {
-                                        throw new Error("Function not implemented.");
-                                    } } 
+                                    handleInvitePress={handleSharePress } 
                                     handlePlayButtonPress={function (): void {
                                         throw new Error("Function not implemented.");
                                     } } 
