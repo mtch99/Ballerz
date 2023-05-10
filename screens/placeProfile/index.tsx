@@ -56,6 +56,7 @@ export class PlaceProfileScreen extends React.Component<IPlaceProfileScreenProps
 
 
     componentDidMount(): void {
+        const myUserProfileID = this.context.authState.profile?.id
         this.setState((prevState) => {
             const placeProfile = this.context.placeMapState[this.props.placeId]
             return {
@@ -63,7 +64,7 @@ export class PlaceProfileScreen extends React.Component<IPlaceProfileScreenProps
                 ...placeProfile
             }
         })
-        this.context.placeController.getPlaceProfile(this.props.placeId)
+        this.context.placeController.getPlaceProfile(this.props.placeId, myUserProfileID)
     }
 
     onPressPlayHere(): void {

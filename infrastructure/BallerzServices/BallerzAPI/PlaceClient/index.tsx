@@ -4,21 +4,19 @@ import { GetPlaceQuery, GetPlaceQueryVariables, ListPlacesQuery, getPlace_gql, l
 import { GraphQLQuery } from "@aws-amplify/api";
 
 
-
-
-
 export default class BallerzPlaceClient extends BallerzApiClient {
 
 
     async getPlace(id: string, userProfileID?: string): Promise<GetPlaceQuery | undefined> {
         const variables: GetPlaceQueryVariables = { id };
-        if(userProfileID){
-            variables.frendshipFilter= {
-                friendProfileID: {
-                    eq: userProfileID
-                }
-            }
-        }
+        // if(userProfileID){
+        //     variables.frendshipFilter= {
+        //         friendProfileID: {
+        //             eq: userProfileID
+        //         }
+        //     }
+        // }
+
         const response = await API.graphql<GraphQLQuery<GetPlaceQuery>>({
             query: getPlace_gql,
             variables,

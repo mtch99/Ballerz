@@ -56,8 +56,9 @@ There must be three different games on three different courts, two at the moment
 
 - [x] Cache notifications and use it for badge diff
 
-- [ ] Place Profile
-    - [ ] Sort games by date
+- [x] Place Profile
+    - [x] Sort games by date
+    - [x] Friends there in game
 
 
 - [ ] I want see a toast message on new notification

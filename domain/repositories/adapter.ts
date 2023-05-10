@@ -50,7 +50,7 @@ export function parsePresenceDoc(presenceDoc: Presence): IAttendance | null{
         if(presenceDoc.userProfile.friends){
             isFriend = true
         } else {
-            console.error("Friends list is empty, could yield 'isFriend' field in IAtttendance")
+            console.error("Friends list is empty, could not yield 'isFriend' field in IAtttendance")
         }
         return {
             id: presenceDoc.id,
@@ -71,7 +71,6 @@ export function parsePresenceDoc(presenceDoc: Presence): IAttendance | null{
 
 
 export function getFriendsThereListFromPresenceList(presenceList: (Presence|null)[]): IUserProfileData[] {
-    const result: IUserProfileData[] = []
     const friendsThere: IUserProfileData[] = []
     presenceList.forEach(attendant => {
         const attendantProfile = attendant?.userProfile
@@ -80,6 +79,7 @@ export function getFriendsThereListFromPresenceList(presenceList: (Presence|null
             friendsThere.push({...attendantProfile, badges: [], isFriend: true})
         }
     })
+    // console.log(JSON.stringify(friendsThere))
 
-    return result
+    return friendsThere
 }

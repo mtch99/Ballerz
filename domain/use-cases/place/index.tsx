@@ -20,8 +20,8 @@ export default class PlaceUseCase implements IPlaceUseCase {
         return response;
     }
 
-   async getPlaceProfile(id: string, email?: string): Promise<IPlaceProfile | null> {
-        const response = await this.repository.getPlaceProfile(id, email)
+   async getPlaceProfile(id: string, myUserProfileID?: string): Promise<IPlaceProfile | null> {
+        const response = await this.repository.getPlaceProfile(id, myUserProfileID)
         if(response){
             this.observer.onNewPlaceProfile(response);
         }

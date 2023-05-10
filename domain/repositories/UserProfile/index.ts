@@ -119,7 +119,6 @@ export default class UserProfileRepository implements IUserProfileRepository {
 
     async getUserProfile(id: string): Promise<IUserProfile | null> {
         const myUserProfileID = await this.__getCachedMyUserProfile().then(res => (res?.id)) || "123"
-        console.log(`Get user profile, myUserProfileID: ${myUserProfileID}, id: ${id}`)
         const variables: GetUserProfileQueryVariables = {
             id,
             frendshipFilter: {

@@ -21,7 +21,7 @@ export class PlaceController implements IPlaceController{
         return;
     }
 
-    getPlaceProfile(id: string): void {
+    getPlaceProfile(id: string, myUserProfileID?: string): void {
         this.placeUseCase.getPlaceProfile(id)
     }
 }

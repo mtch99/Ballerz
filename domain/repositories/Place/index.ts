@@ -32,16 +32,12 @@ export default class PlaceRepository implements IPlaceRepository {
         const response = await this.client.getPlace(id, userProfileID)
         if (response) {
             const parsedResult =  parseGetPlaceQuery(response)
-            // console.log(`Get Place Response: \n ${parsedResult?.name}.games:  ${JSON.stringify(parsedResult?.games)} \n \n`)
             result = parsedResult
         } 
         return result
     }
 
 }
-
-
-
 
 
 

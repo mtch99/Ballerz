@@ -198,7 +198,6 @@ class ResponseHandler {
         if(arg.type != NotificationType.friendshipRequest 
             || (!arg.friendshipRequestID) || (!arg.senderProfile) || (!arg.friendshipRequest)
             ){
-            console.log(`\nReceived friendship request for ${JSON.stringify(arg)}`)
             return undefined
         }
 

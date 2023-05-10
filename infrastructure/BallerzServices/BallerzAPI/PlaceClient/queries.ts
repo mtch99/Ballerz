@@ -4,7 +4,6 @@ import { Game } from "../types";
 export const getPlace_gql = /* GraphQL */ `
   query GetPlace(
     $id: ID!
-    $frendshipFilter: ModelFriendshipFilterInput
     ) {
     getPlace(id: $id) {
       id
@@ -15,23 +14,23 @@ export const getPlace_gql = /* GraphQL */ `
             id
             presenceList{
                 items{
+                  id
+                  type
+                  userProfileID
+                  userProfile{
                     id
-                    type
-                    userProfileID
-                    userProfile{
-                        id
-                        username
-                        friends(filter: $frendshipFilter){
-                            items {
-                              id
-                              friendProfileID
-                            }
+                    username
+                    friends{
+                        items {
+                          id
+                          friendProfileID
                         }
                     }
-                    startingDateTime
-                    endingDateTime
-                    createdAt
-                    updatedAt
+                  }
+                  startingDateTime
+                  endingDateTime
+                  createdAt
+                  updatedAt
                 }
             }
             placeID

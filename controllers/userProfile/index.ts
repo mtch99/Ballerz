@@ -18,7 +18,6 @@ export class UserProfileController implements IUserProfileController{
 
     createUseCase(model: IUserProfileModelEventListener){
         this.userProfileUseCase = new UserProfileUseCase(model)
-        console.log(`\n UserProfile usecase initialized \n`)
     }
 
     async getMyProfile(email: string | undefined): Promise<IUserProfile | undefined> {
