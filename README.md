@@ -60,6 +60,10 @@ There must be three different games on three different courts, two at the moment
     - [x] Sort games by date
     - [x] Friends there in game
 
+- [ ] FeedItemView
+    - [x] Fix layout
+    - [ ] Display "Today" when a game is happemimg the same day
+
 
 - [ ] I want see a toast message on new notification
     - [ ] Display a toast message on new received notification 

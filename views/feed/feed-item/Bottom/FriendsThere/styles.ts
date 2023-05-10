@@ -5,15 +5,12 @@ const styles = StyleSheet.create({
 		flex:1,
         flexDirection:"row",
         marginBottom: 7,
-
-        // alignItems: "center",
-        // justifyContent: "flex-end",
-        marginRight: 10
     },
     friendsThereText: {
     	color: "#AAB8C2",
-    	fontSize: 14,
-    	padding: 5
+    	fontSize: 12,
+    	padding: 5,
+        flex: 1,
     },
     hereText: {
     	color: "#AAB8C2",

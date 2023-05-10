@@ -22,11 +22,18 @@ export default function FriendsThereView(props: IFriendsThereViewProps) {
         >
             {
                 props.friendsHere.length==0?(
-                    <><Text style={styles.friendsThereText}>
+                    <><Text 
+                        ellipsizeMode="tail"
+                        style={styles.friendsThereText}
+                    >
                         0 amis ici
                     </Text></>
                 ):(
-                    <Text style={styles.friendsThereText}>
+                    <Text 
+                        ellipsizeMode="tail"
+                        numberOfLines={1}
+                        style={styles.friendsThereText}
+                    >
                         {props.friendsHere[0].username} et {props.friendsHere.length-1} autres amis ici
                     </Text>
                 )

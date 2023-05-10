@@ -3,13 +3,14 @@ import { StyleSheet} from "react-native";
 
 const style = StyleSheet.create({
     dateTimeContatiner: {
+        flex: 1,
         height: 48,
         backgroundColor: "#F12F12F12",
         flexDirection: "column",
         marginLeft: 20,
         alignItems: "center",
-        justifyContent: "center",
-        flexGrow: 1
+        // justifyContent: "center",
+        // flexGrow: 1
     },
     weekDay: {
         color: "#F5F8FA",

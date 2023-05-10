@@ -3,10 +3,11 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
+        flex:1,
     },
     playerNumContainer: {
         alignItems: "center",
-        flexDirection: "row",
+        // flexDirection: "row",
     },
     playersNumText: {
         color: "#F5F8FA",

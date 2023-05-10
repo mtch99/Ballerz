@@ -49,9 +49,6 @@ class FeedView extends React.Component<IProps> {
         
     }
 
-	// componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<{}>, snapshot?: any): void {
-	// 	console.error(`FeedItemView updated: \n \n Pevious props: ${JSON.stringify(prevProps)}`)
-	// }
   
     render(): React.ReactNode {
 		return(
@@ -65,7 +62,7 @@ class FeedView extends React.Component<IProps> {
 								feedItem={item}
 								handleBadgeClick={() => {this.handleBadgeClick(item)}}
 								handleFriendsTherePress={() => {this.handleFriendsTherePress(item)}}
-								handleInvitePress={() => {this.handleInvitePress(item)}}
+								handleInvitePress={async(item) => {this.handleInvitePress(item)}}
 								handlePlayButtonPress={() => {this.handlePlayButtonPress(item)}}
 								onPressCommentButton={() => {this.handleCommentButtonPress(item)}}
 								handleCheckoutButtonPress={() => {this.props.handleCheckoutButtonPress(item)}}

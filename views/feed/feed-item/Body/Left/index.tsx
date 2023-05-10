@@ -33,8 +33,6 @@ export default function LeftBodyView(props: ILeftBodyProps) {
 					onPress={props.onPress}
 					style={styles.playerNumContainer}
 				>
-					<View
-					>
 						<View
 							style={{flexDirection: "row", alignItems: "center"}}
 						>
@@ -45,7 +43,6 @@ export default function LeftBodyView(props: ILeftBodyProps) {
 							friendsHere={friendsHere}
 							onPress={props.onPress}
 						/>
-					</View>
   		        </TouchableOpacity>
 				{/* {(props.friendsHere.length>0)?(
 					<FriendsThereView
