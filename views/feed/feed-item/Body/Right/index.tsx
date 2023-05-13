@@ -58,24 +58,38 @@ export default class BodyRightView extends React.Component<IBodyRightViewProps> 
         const startingWeekDay = this.getWeekDay(this.startingDate_str)
         const todayAtMidnight = this.toMidnight(new Date())
         const sevenDayTimeSpanMS = 7*24*3600*1000
+        const oneDayMS = 24*3600*1000
         let DateView = () => (<Text style={style.weekDay}>{startingWeekDay} prochain</Text>)
+        const day = this.startingDate_str.split(" ")[1]
+        const month = this.getMonth(this.startingDate_str)
+        console.log(`startingDate: ${this.startingDate_str}, today: ${todayAtMidnight}`)
+        const dateDifferenceInDays = Math.abs((moment(this.startingDate).diff(moment(todayAtMidnight))/(24*3600*1000)))
+        // const dateDifferenceInDays = Math.floor(dateDifferenceInDays/(24*3600*1000))
+        console.log(dateDifferenceInDays)
         if(
-            Math.abs(moment(this.startingDate.toISOString()).diff(moment(todayAtMidnight.toISOString()))) >= sevenDayTimeSpanMS
-            || this.startingDate.getTime() < todayAtMidnight.getTime()
+            dateDifferenceInDays >= 7
         ){
-            const day = this.startingDate_str.split(" ")[1]
-            const month = this.getMonth(this.startingDate_str)
             if(this.startingDate.getTime() < todayAtMidnight.getTime()){
-                if(Math.abs(moment(this.startingDate.toISOString()).diff(moment(todayAtMidnight.toISOString()))) <= sevenDayTimeSpanMS){
-                    DateView = () => (<Text style={style.weekDay}>{startingWeekDay} dernier</Text>)
-                }
-                else {
-                    DateView = () => (<Text style={style.weekDay}>{startingWeekDay} {day} {month}</Text>)
-                }
-            }
-            else{
+                DateView = () => (<Text style={style.weekDay}>il y a {Math.floor(dateDifferenceInDays)} jours</Text>)
+            } else {
                 DateView = () => (<Text style={style.weekDay}>{startingWeekDay} {day} {month}</Text>)
             }
+        }
+        else if(this.startingDate.getTime() < todayAtMidnight.getTime()){
+            if(dateDifferenceInDays <= 1){
+                DateView = () => (<Text style={style.weekDay}>hier</Text>)
+            }
+            else {
+                DateView = () => (<Text style={style.weekDay}>{startingWeekDay} dernier</Text>)
+            }
+        }
+        else if(this.startingDate.getTime() > todayAtMidnight.getTime()){
+            if(dateDifferenceInDays <= 1){
+                DateView = () => (<Text style={style.weekDay}>Demain</Text>)
+            }
+            else {
+                DateView = () => (<Text style={style.weekDay}>{startingWeekDay} prochain</Text>)
+            }        
         }
         return(
             <View style={style.dateTimeContatiner}>
