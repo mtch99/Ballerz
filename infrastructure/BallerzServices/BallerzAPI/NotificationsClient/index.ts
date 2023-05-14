@@ -2,10 +2,9 @@ import { MyNotificationsSubscription, onCreateNotification_gql } from "./subscri
 import {API} from "aws-amplify";
 import BallerzApiClient from "../client";
 import { INotificationsClient} from "./interface";
-import { ListNotificationsQuery, listNotifications_gql} from "./queries";
+import { FilterNotificationsByUserQueryVariables, NotificationsByReceiverQueryVariables, listNotificationsByReceiverQuery, listNotificationsByReceiver_gql} from "./queries";
 import {GraphQLQuery, GraphQLSubscription, GraphQLResult} from "@aws-amplify/api"
 import { awsmobileAPIMock } from "../../aws-exports";
-import { genNotificationFilterByReceiverVariables } from "./subscriptions";
 import { Notification } from "./types";
 import { subscriptionClient } from "../subscriptionClient";
 import { gql } from "@apollo/client";
@@ -30,7 +29,7 @@ export default class NotificationsClient extends BallerzApiClient implements INo
         
         const sub = subscriptionClient.subscribe({
             query: gql(onCreateNotification_gql),
-            variables: genNotificationFilterByReceiverVariables(userProfileID),
+            variables: genMyNotificationsSubscriptionVariables(userProfileID),
         }).subscribe({
             next: ({data}) => {
             const subscription: MyNotificationsSubscription = data
@@ -62,10 +61,10 @@ export default class NotificationsClient extends BallerzApiClient implements INo
 	}
 
 
-    async filterNotificationsByReceiver(receiverProfileID: string): Promise<ListNotificationsQuery | undefined> {
-        const variables = genNotificationFilterByReceiverVariables(receiverProfileID)
-        const payload = this.genRequestPayload(listNotifications_gql, variables)
-        const response = await API.graphql<GraphQLQuery<ListNotificationsQuery>>(payload)
+    async filterNotificationsByReceiver(receiverProfileID: string): Promise<listNotificationsByReceiverQuery | undefined> {
+        const variables = genNotificationsByReceiverVariables(receiverProfileID)
+        const payload = this.genRequestPayload(listNotificationsByReceiver_gql, variables)
+        const response = await API.graphql<GraphQLQuery<listNotificationsByReceiverQuery>>(payload)
         const result = this._handleResponse(response)
         // console.error(`${JSON.stringify(result)}`)
         return result
@@ -74,8 +73,35 @@ export default class NotificationsClient extends BallerzApiClient implements INo
 }
 
 
+function genNotificationsByReceiverVariables(receiverProfileID: string): NotificationsByReceiverQueryVariables{
+    return {
+      receiverProfileID,
+      frendshipFilter: {
+        friendProfileID: {
+          eq: receiverProfileID
+        }
+      }
+    };
+}
+function genMyNotificationsSubscriptionVariables(receiverProfileID: string): FilterNotificationsByUserQueryVariables{
+  return {
+    filter: {
+      receiverProfileID: {
+        eq: receiverProfileID
+      }
+    }
+  };
+}
+
+
+
+
+
 export class NotificationsClientMock extends NotificationsClient {
     constructor(){
         super(awsmobileAPIMock, "API_KEY")
     }
 }
+
+
+

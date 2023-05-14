@@ -121,15 +121,3 @@ export const onCreateNotification_gql = /* GraphQL */ `
 
 
 
-
-
-
-export function genNotificationFilterByReceiverVariables(receiverProfileID: string): MyNotificationsSubscriptionVariables{
-  return {
-    filter: {
-      receiverProfileID: {
-        eq: receiverProfileID
-      }
-    }
-  };
-}

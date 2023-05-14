@@ -1,4 +1,4 @@
-import { ModelIDInput, FriendshipRequestStatus } from "../API";
+import { ModelIDInput, FriendshipRequestStatus, NotificationsByReceiverProfileIDAndCreatedAtQueryVariables, ModelFriendshipFilterInput } from "../API";
 import { NotificationType } from "../API";
 import { PlaceData, UserProfileData } from "../types";
 import {Notification} from "./types"
@@ -10,12 +10,15 @@ export type ModelNotificationFilterByReceiverUserProfileInput = {
     receiverProfileID: ModelIDInput
 }
 
+export type NotificationsByReceiverQueryVariables = NotificationsByReceiverProfileIDAndCreatedAtQueryVariables & {frendshipFilter: ModelFriendshipFilterInput}
+
+
 export type FilterNotificationsByUserQueryVariables = {
-    filter: ModelNotificationFilterByReceiverUserProfileInput
+  filter: ModelNotificationFilterByReceiverUserProfileInput
 }
 
-export type ListNotificationsQuery = {
-    listNotifications?:  {
+export type listNotificationsByReceiverQuery = {
+  notificationsByReceiverProfileIDAndCreatedAt?:  {
       __typename: "ModelNotificationConnection",
       items:  Array<Notification>,
       nextToken: string | null,
@@ -23,14 +26,24 @@ export type ListNotificationsQuery = {
 };
 
 
-export const listNotifications_gql = /* GraphQL */ `
-  query ListNotifications(
+export const listNotificationsByReceiver_gql = /* GraphQL */ `
+  query NotificationsByReceiverProfileIDAndCreatedAt(
+    $receiverProfileID: ID!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
     $filter: ModelNotificationFilterInput
+    $frendshipFilter: ModelFriendshipFilterInput
     $limit: Int
     $nextToken: String
-    $frendshipFilter: ModelFriendshipFilterInput
   ) {
-    listNotifications(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    notificationsByReceiverProfileIDAndCreatedAt(
+      receiverProfileID: $receiverProfileID
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
       items {
         id
         type
@@ -70,14 +83,14 @@ export const listNotifications_gql = /* GraphQL */ `
                 }
             }
           }
+        	place{
+          	id
+            name
+            address
+        	}
           game{
             id
             placeID
-        	  place{
-            	id
-              name
-              address
-        	  }
             startingDateTime
             endingDateTime
           }

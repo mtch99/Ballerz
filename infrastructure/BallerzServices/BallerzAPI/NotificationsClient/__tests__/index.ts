@@ -1,5 +1,5 @@
 import NotificationsClient, { NotificationsClientMock } from ".."
-import { FilterNotificationsByUserQueryVariables, ListNotificationsQuery } from "../queries"
+import { NotificationsByReceiverQueryVariables, listNotificationsByReceiverQuery } from "../queries"
 
 
 
@@ -8,7 +8,7 @@ describe('Notifications client tests', () => {
     describe('filterNotificationsByReceiver function tests', () => {
 
         describe('given valid arguments', () => {
-            const given: FilterNotificationsByUserQueryVariables = {
+            const given: NotificationsByReceiverQueryVariables = {
                 filter: {
                     receiverProfileID: {
                         eq: '123'

@@ -2,7 +2,7 @@ import AsyncStorage  from "@react-native-async-storage/async-storage";
 import { IGetMyNotificationsErrorReason, IgetMyNotificationsError } from "./../../use-cases/notifications/interface";
 import { FriendShipRequestData, UserProfileData } from "../../../infrastructure/BallerzServices/BallerzAPI/types";
 import { IFriendPlayingNotification, IFriendShipRequestNotification, IFriendshipRequest, INewFriendNotification, IUserProfileData } from "./../../use-cases/types";
-import { ListNotificationsQuery } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient/queries";
+import { listNotificationsByReceiverQuery } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient/queries";
 import { INotificationsClient } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient/interface";
 import { Notification as ClientNotification } from "../../../infrastructure/BallerzServices/BallerzAPI/NotificationsClient/types";
 import { INotificationsRepository, INotificationsUseCase, IGetMyNotificationsResult } from "../../use-cases/notifications/interface";
@@ -20,6 +20,7 @@ export class NotificationsRepository implements INotificationsRepository {
         this.client = new NotificationsClient(undefined,"API_KEY");
     }
 
+    
     async getNotificationsByUser(userProfileId: string): Promise<IGetMyNotificationsResult> {
         const response = await this.client.filterNotificationsByReceiver(userProfileId)
         if(!response){
@@ -80,11 +81,11 @@ export class NotificationsRepository implements INotificationsRepository {
 
 
 class ResponseHandler {
-    static handleFilterNotificationsByReceiverResponse(response: ListNotificationsQuery): IGetMyNotificationsResult{
+    static handleFilterNotificationsByReceiverResponse(response: listNotificationsByReceiverQuery): IGetMyNotificationsResult{
         let error: IGetMyNotificationsResult['error'] = false;
         let notifications: Notification[] = []
-        if(response.listNotifications){
-            notifications = this.parseListNotificationsResult(response.listNotifications)
+        if(response.notificationsByReceiverProfileIDAndCreatedAt){
+            notifications = this.parseListNotificationsResult(response.notificationsByReceiverProfileIDAndCreatedAt)
         } else {
             error = {
                 reason: IGetMyNotificationsErrorReason.NETWORK_ERROR,
@@ -99,7 +100,7 @@ class ResponseHandler {
     }
 
 
-    private static parseListNotificationsResult(arg: ListNotificationsQuery['listNotifications']): Notification[]{
+    private static parseListNotificationsResult(arg: listNotificationsByReceiverQuery['notificationsByReceiverProfileIDAndCreatedAt']): Notification[]{
         const result: Notification[] = []
         if(arg){
             for(let item of arg.items){
@@ -141,7 +142,7 @@ class ResponseHandler {
         let result: IFriendPlayingNotification | undefined;
         if(clientNotif.type == NotificationType.friendPlaying && clientNotif.presenceID && clientNotif.presence
              && clientNotif.senderProfile && clientNotif.senderProfileID)
-         {
+        {
                 result = {
                     ...clientNotif,
                     senderProfileID: clientNotif.senderProfileID,
@@ -186,6 +187,7 @@ class ResponseHandler {
                     type: NotificationType.friendPlaying,
                     game: {
                         ...clientNotif.presence.game,
+                        place: clientNotif.presence.place,
                         startingTime: clientNotif.presence.startingDateTime,
                         endingTime: clientNotif.presence.endingDateTime,
                     }

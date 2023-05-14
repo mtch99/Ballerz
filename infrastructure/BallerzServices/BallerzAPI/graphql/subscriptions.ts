@@ -14,15 +14,160 @@ export const onCreateNotificationByReceiver = /* GraphQL */ `
         status
         senderProfileID
         receiverProfileID
+        senderProfile {
+          id
+          email
+          username
+          user {
+            id
+            email
+            phoneNumber
+            profileID
+            createdAt
+            updatedAt
+          }
+          friends {
+            nextToken
+          }
+          presenceList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          userProfileUserId
+        }
+        receiverProfile {
+          id
+          email
+          username
+          user {
+            id
+            email
+            phoneNumber
+            profileID
+            createdAt
+            updatedAt
+          }
+          friends {
+            nextToken
+          }
+          presenceList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          userProfileUserId
+        }
         createdAt
         updatedAt
       }
       presenceID
       senderProfileID
+      presence {
+        id
+        type
+        placeID
+        userProfileID
+        gameID
+        game {
+          id
+          presenceList {
+            nextToken
+          }
+          placeID
+          startingDateTime
+          endingDateTime
+          place {
+            id
+            name
+            address
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        place {
+          id
+          name
+          address
+          gameList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        userProfile {
+          id
+          email
+          username
+          user {
+            id
+            email
+            phoneNumber
+            profileID
+            createdAt
+            updatedAt
+          }
+          friends {
+            nextToken
+          }
+          presenceList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          userProfileUserId
+        }
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
       senderProfile {
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -31,6 +176,46 @@ export const onCreateNotificationByReceiver = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -51,6 +236,46 @@ export const onCreateUser = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -71,6 +296,46 @@ export const onUpdateUser = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -91,6 +356,46 @@ export const onDeleteUser = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -113,13 +418,84 @@ export const onCreateUserProfile = /* GraphQL */ `
         email
         phoneNumber
         profileID
+        profile {
+          id
+          email
+          username
+          user {
+            id
+            email
+            phoneNumber
+            profileID
+            createdAt
+            updatedAt
+          }
+          friends {
+            nextToken
+          }
+          presenceList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          userProfileUserId
+        }
         createdAt
         updatedAt
       }
       friends {
+        items {
+          id
+          userProfileID
+          friendProfileID
+          friendProfile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       presenceList {
+        items {
+          id
+          type
+          placeID
+          userProfileID
+          gameID
+          game {
+            id
+            placeID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          place {
+            id
+            name
+            address
+            createdAt
+            updatedAt
+          }
+          userProfile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          startingDateTime
+          endingDateTime
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -141,13 +517,84 @@ export const onUpdateUserProfile = /* GraphQL */ `
         email
         phoneNumber
         profileID
+        profile {
+          id
+          email
+          username
+          user {
+            id
+            email
+            phoneNumber
+            profileID
+            createdAt
+            updatedAt
+          }
+          friends {
+            nextToken
+          }
+          presenceList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          userProfileUserId
+        }
         createdAt
         updatedAt
       }
       friends {
+        items {
+          id
+          userProfileID
+          friendProfileID
+          friendProfile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       presenceList {
+        items {
+          id
+          type
+          placeID
+          userProfileID
+          gameID
+          game {
+            id
+            placeID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          place {
+            id
+            name
+            address
+            createdAt
+            updatedAt
+          }
+          userProfile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          startingDateTime
+          endingDateTime
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -169,13 +616,84 @@ export const onDeleteUserProfile = /* GraphQL */ `
         email
         phoneNumber
         profileID
+        profile {
+          id
+          email
+          username
+          user {
+            id
+            email
+            phoneNumber
+            profileID
+            createdAt
+            updatedAt
+          }
+          friends {
+            nextToken
+          }
+          presenceList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          userProfileUserId
+        }
         createdAt
         updatedAt
       }
       friends {
+        items {
+          id
+          userProfileID
+          friendProfileID
+          friendProfile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       presenceList {
+        items {
+          id
+          type
+          placeID
+          userProfileID
+          gameID
+          game {
+            id
+            placeID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          place {
+            id
+            name
+            address
+            createdAt
+            updatedAt
+          }
+          userProfile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          startingDateTime
+          endingDateTime
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -196,6 +714,46 @@ export const onCreateFriendship = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -217,6 +775,46 @@ export const onUpdateFriendship = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -238,6 +836,46 @@ export const onDeleteFriendship = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -260,6 +898,46 @@ export const onCreateFriendshipRequest = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -268,6 +946,46 @@ export const onCreateFriendshipRequest = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -290,6 +1008,46 @@ export const onUpdateFriendshipRequest = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -298,6 +1056,46 @@ export const onUpdateFriendshipRequest = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -320,6 +1118,46 @@ export const onDeleteFriendshipRequest = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -328,6 +1166,46 @@ export const onDeleteFriendshipRequest = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -344,6 +1222,24 @@ export const onCreatePlace = /* GraphQL */ `
       name
       address
       gameList {
+        items {
+          id
+          presenceList {
+            nextToken
+          }
+          placeID
+          startingDateTime
+          endingDateTime
+          place {
+            id
+            name
+            address
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -358,6 +1254,24 @@ export const onUpdatePlace = /* GraphQL */ `
       name
       address
       gameList {
+        items {
+          id
+          presenceList {
+            nextToken
+          }
+          placeID
+          startingDateTime
+          endingDateTime
+          place {
+            id
+            name
+            address
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -372,6 +1286,24 @@ export const onDeletePlace = /* GraphQL */ `
       name
       address
       gameList {
+        items {
+          id
+          presenceList {
+            nextToken
+          }
+          placeID
+          startingDateTime
+          endingDateTime
+          place {
+            id
+            name
+            address
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       createdAt
@@ -384,6 +1316,40 @@ export const onCreateGame = /* GraphQL */ `
     onCreateGame(filter: $filter) {
       id
       presenceList {
+        items {
+          id
+          type
+          placeID
+          userProfileID
+          gameID
+          game {
+            id
+            placeID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          place {
+            id
+            name
+            address
+            createdAt
+            updatedAt
+          }
+          userProfile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          startingDateTime
+          endingDateTime
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       placeID
@@ -393,6 +1359,17 @@ export const onCreateGame = /* GraphQL */ `
         id
         name
         address
+        gameList {
+          items {
+            id
+            placeID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -406,6 +1383,40 @@ export const onUpdateGame = /* GraphQL */ `
     onUpdateGame(filter: $filter) {
       id
       presenceList {
+        items {
+          id
+          type
+          placeID
+          userProfileID
+          gameID
+          game {
+            id
+            placeID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          place {
+            id
+            name
+            address
+            createdAt
+            updatedAt
+          }
+          userProfile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          startingDateTime
+          endingDateTime
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       placeID
@@ -415,6 +1426,17 @@ export const onUpdateGame = /* GraphQL */ `
         id
         name
         address
+        gameList {
+          items {
+            id
+            placeID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -428,6 +1450,40 @@ export const onDeleteGame = /* GraphQL */ `
     onDeleteGame(filter: $filter) {
       id
       presenceList {
+        items {
+          id
+          type
+          placeID
+          userProfileID
+          gameID
+          game {
+            id
+            placeID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          place {
+            id
+            name
+            address
+            createdAt
+            updatedAt
+          }
+          userProfile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          startingDateTime
+          endingDateTime
+          createdAt
+          updatedAt
+        }
         nextToken
       }
       placeID
@@ -437,6 +1493,17 @@ export const onDeleteGame = /* GraphQL */ `
         id
         name
         address
+        gameList {
+          items {
+            id
+            placeID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -455,9 +1522,33 @@ export const onCreatePresence = /* GraphQL */ `
       gameID
       game {
         id
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         placeID
         startingDateTime
         endingDateTime
+        place {
+          id
+          name
+          address
+          gameList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -465,6 +1556,17 @@ export const onCreatePresence = /* GraphQL */ `
         id
         name
         address
+        gameList {
+          items {
+            id
+            placeID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -472,6 +1574,46 @@ export const onCreatePresence = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -493,9 +1635,33 @@ export const onUpdatePresence = /* GraphQL */ `
       gameID
       game {
         id
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         placeID
         startingDateTime
         endingDateTime
+        place {
+          id
+          name
+          address
+          gameList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -503,6 +1669,17 @@ export const onUpdatePresence = /* GraphQL */ `
         id
         name
         address
+        gameList {
+          items {
+            id
+            placeID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -510,6 +1687,46 @@ export const onUpdatePresence = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -531,9 +1748,33 @@ export const onDeletePresence = /* GraphQL */ `
       gameID
       game {
         id
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         placeID
         startingDateTime
         endingDateTime
+        place {
+          id
+          name
+          address
+          gameList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -541,6 +1782,17 @@ export const onDeletePresence = /* GraphQL */ `
         id
         name
         address
+        gameList {
+          items {
+            id
+            placeID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -548,6 +1800,46 @@ export const onDeletePresence = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -573,15 +1865,160 @@ export const onCreateNotification = /* GraphQL */ `
         status
         senderProfileID
         receiverProfileID
+        senderProfile {
+          id
+          email
+          username
+          user {
+            id
+            email
+            phoneNumber
+            profileID
+            createdAt
+            updatedAt
+          }
+          friends {
+            nextToken
+          }
+          presenceList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          userProfileUserId
+        }
+        receiverProfile {
+          id
+          email
+          username
+          user {
+            id
+            email
+            phoneNumber
+            profileID
+            createdAt
+            updatedAt
+          }
+          friends {
+            nextToken
+          }
+          presenceList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          userProfileUserId
+        }
         createdAt
         updatedAt
       }
       presenceID
       senderProfileID
+      presence {
+        id
+        type
+        placeID
+        userProfileID
+        gameID
+        game {
+          id
+          presenceList {
+            nextToken
+          }
+          placeID
+          startingDateTime
+          endingDateTime
+          place {
+            id
+            name
+            address
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        place {
+          id
+          name
+          address
+          gameList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        userProfile {
+          id
+          email
+          username
+          user {
+            id
+            email
+            phoneNumber
+            profileID
+            createdAt
+            updatedAt
+          }
+          friends {
+            nextToken
+          }
+          presenceList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          userProfileUserId
+        }
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
       senderProfile {
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -590,6 +2027,46 @@ export const onCreateNotification = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -613,15 +2090,160 @@ export const onUpdateNotification = /* GraphQL */ `
         status
         senderProfileID
         receiverProfileID
+        senderProfile {
+          id
+          email
+          username
+          user {
+            id
+            email
+            phoneNumber
+            profileID
+            createdAt
+            updatedAt
+          }
+          friends {
+            nextToken
+          }
+          presenceList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          userProfileUserId
+        }
+        receiverProfile {
+          id
+          email
+          username
+          user {
+            id
+            email
+            phoneNumber
+            profileID
+            createdAt
+            updatedAt
+          }
+          friends {
+            nextToken
+          }
+          presenceList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          userProfileUserId
+        }
         createdAt
         updatedAt
       }
       presenceID
       senderProfileID
+      presence {
+        id
+        type
+        placeID
+        userProfileID
+        gameID
+        game {
+          id
+          presenceList {
+            nextToken
+          }
+          placeID
+          startingDateTime
+          endingDateTime
+          place {
+            id
+            name
+            address
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        place {
+          id
+          name
+          address
+          gameList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        userProfile {
+          id
+          email
+          username
+          user {
+            id
+            email
+            phoneNumber
+            profileID
+            createdAt
+            updatedAt
+          }
+          friends {
+            nextToken
+          }
+          presenceList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          userProfileUserId
+        }
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
       senderProfile {
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -630,6 +2252,46 @@ export const onUpdateNotification = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -653,15 +2315,160 @@ export const onDeleteNotification = /* GraphQL */ `
         status
         senderProfileID
         receiverProfileID
+        senderProfile {
+          id
+          email
+          username
+          user {
+            id
+            email
+            phoneNumber
+            profileID
+            createdAt
+            updatedAt
+          }
+          friends {
+            nextToken
+          }
+          presenceList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          userProfileUserId
+        }
+        receiverProfile {
+          id
+          email
+          username
+          user {
+            id
+            email
+            phoneNumber
+            profileID
+            createdAt
+            updatedAt
+          }
+          friends {
+            nextToken
+          }
+          presenceList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          userProfileUserId
+        }
         createdAt
         updatedAt
       }
       presenceID
       senderProfileID
+      presence {
+        id
+        type
+        placeID
+        userProfileID
+        gameID
+        game {
+          id
+          presenceList {
+            nextToken
+          }
+          placeID
+          startingDateTime
+          endingDateTime
+          place {
+            id
+            name
+            address
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        place {
+          id
+          name
+          address
+          gameList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+        userProfile {
+          id
+          email
+          username
+          user {
+            id
+            email
+            phoneNumber
+            profileID
+            createdAt
+            updatedAt
+          }
+          friends {
+            nextToken
+          }
+          presenceList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+          userProfileUserId
+        }
+        startingDateTime
+        endingDateTime
+        createdAt
+        updatedAt
+      }
       senderProfile {
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -670,6 +2477,46 @@ export const onDeleteNotification = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -694,6 +2541,46 @@ export const onCreateJoinMeInvitation = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -702,15 +2589,79 @@ export const onCreateJoinMeInvitation = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
       }
       game {
         id
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         placeID
         startingDateTime
         endingDateTime
+        place {
+          id
+          name
+          address
+          gameList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -734,6 +2685,46 @@ export const onUpdateJoinMeInvitation = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -742,15 +2733,79 @@ export const onUpdateJoinMeInvitation = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
       }
       game {
         id
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         placeID
         startingDateTime
         endingDateTime
+        place {
+          id
+          name
+          address
+          gameList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -774,6 +2829,46 @@ export const onDeleteJoinMeInvitation = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
@@ -782,15 +2877,79 @@ export const onDeleteJoinMeInvitation = /* GraphQL */ `
         id
         email
         username
+        user {
+          id
+          email
+          phoneNumber
+          profileID
+          profile {
+            id
+            email
+            username
+            createdAt
+            updatedAt
+            userProfileUserId
+          }
+          createdAt
+          updatedAt
+        }
+        friends {
+          items {
+            id
+            userProfileID
+            friendProfileID
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         createdAt
         updatedAt
         userProfileUserId
       }
       game {
         id
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
         placeID
         startingDateTime
         endingDateTime
+        place {
+          id
+          name
+          address
+          gameList {
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }

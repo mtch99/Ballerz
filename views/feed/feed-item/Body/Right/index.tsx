@@ -62,10 +62,7 @@ export default class BodyRightView extends React.Component<IBodyRightViewProps> 
         let DateView = () => (<Text style={style.weekDay}>{startingWeekDay} prochain</Text>)
         const day = this.startingDate_str.split(" ")[1]
         const month = this.getMonth(this.startingDate_str)
-        console.log(`startingDate: ${this.startingDate_str}, today: ${todayAtMidnight}`)
         const dateDifferenceInDays = Math.abs((moment(this.startingDate).diff(moment(todayAtMidnight))/(24*3600*1000)))
-        // const dateDifferenceInDays = Math.floor(dateDifferenceInDays/(24*3600*1000))
-        console.log(dateDifferenceInDays)
         if(
             dateDifferenceInDays >= 7
         ){

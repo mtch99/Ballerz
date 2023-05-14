@@ -64,6 +64,14 @@ There must be three different games on three different courts, two at the moment
     - [x] Fix layout
     - [x] Display "Today" when a game is happemimg the same day
 
+- [ ] Test Joining friends from notifications screen on real device
+    - [x] Fix FriendPlayingNotification bug
+    - [x] Update Notifications query to index the receiverProfile
+    - [ ] Fix Joining action logic
+
+
+- [ ] Notifications
+    - [ ] Hot court notification 
 
 - [ ] I want see a toast message on new notification
     - [ ] Display a toast message on new received notification 
@@ -73,11 +81,6 @@ There must be three different games on three different courts, two at the moment
 
 
         
-- [ ] Test Joining friends from notifications screen on real device
-
-
-- [ ] Notifications
-    - [ ] Hot court notification 
 
 
 
