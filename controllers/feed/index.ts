@@ -28,6 +28,7 @@ class FeedController implements IFeedController {
 
     async getFeed(myUserProfileID?:string): Promise<IFeedItem[]>{
         const result = await this.feedUseCase.getFeed(myUserProfileID)
+        console.log(result.length + " items in the feed")
         return result
     }
 

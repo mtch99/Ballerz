@@ -81,7 +81,7 @@ export const getGame_gql = /* GraphQL */ `
 
 export type GetGameQueryVariables = {
 	id: string,
-    presenceFilter: ModelPresenceFilterInput
+  presenceFilter: ModelPresenceFilterInput
 }
 
 export type GetGameQuery = {

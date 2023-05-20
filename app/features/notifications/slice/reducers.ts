@@ -20,7 +20,7 @@ type INotificationReducer<PayloadType> = (state: NotificationListState, action: 
 const newNotificationListReducer: INotificationReducer<INewNotificationListPayload> = (state, action) => {
     const items = action.payload
     items.sort((a, b) => {
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        return new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf();
     })
     let badge: number|undefined = items.length - state.items.length;
     if(badge == 0){
@@ -34,14 +34,14 @@ const newNotificationListReducer: INotificationReducer<INewNotificationListPaylo
 }
 
 const newNotificationReducer: INotificationReducer<INewNotificationPayload> = (state, action) => {
-    let badge: number | undefined
-    if(state.badge){
-        badge = state.badge + 1
+    const notificationExists = checkIfNotificationExists(action.payload, state)
+    if(notificationExists){
+        return {...state}
     } else {
-        badge = 1
+        const badge = incrementBadge(state)
+        const items: NotificationState[] = [action.payload, ...state.items]
+        return {...state, items, badge}
     }
-    const items: NotificationState[] = [action.payload, ...state.items]
-    return {...state, items, badge}
 }
 
 const reinitBadgeReducer: INotificationReducer<void> = (state, action) => {
@@ -75,6 +75,10 @@ const initNotificationStateReducer: INotificationReducer<InitNotificationStatePa
     }
 }
 
+
+
+
+
 const userProfileListReducers = {
     NEW_NOTIFICATIONLIST: newNotificationListReducer,
     NEW_NOTIFICATION: newNotificationReducer,
@@ -84,3 +88,26 @@ const userProfileListReducers = {
 }
 
 export default userProfileListReducers
+
+
+
+function checkIfNotificationExists(notif: NotificationState, currentState: NotificationListState){
+    let result = false
+    currentState.items.forEach((notificationListItem)  => {
+        if(notificationListItem.id == notif.id){
+            result = true
+        }
+    })
+    return result
+
+}
+
+function incrementBadge(currentState: NotificationListState){
+    let incrementedBadge: number
+    if(currentState.badge){
+        incrementedBadge = currentState.badge + 1
+    } else {
+        incrementedBadge = 1
+    }
+    return incrementedBadge
+}

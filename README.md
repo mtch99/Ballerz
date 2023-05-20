@@ -64,14 +64,19 @@ There must be three different games on three different courts, two at the moment
     - [x] Fix layout
     - [x] Display "Today" when a game is happemimg the same day
 
-- [ ] Test Joining friends from notifications screen on real device
+
+- [x] Test Joining friends from notifications screen on real device
     - [x] Fix FriendPlayingNotification bug
     - [x] Update Notifications query to index the receiverProfile
-    - [ ] Fix Joining action logic
+    - [x] Fix Joining action logic
+
+
+- [ ] Load games on feed screen focus
 
 
 - [ ] Notifications
     - [ ] Hot court notification 
+    - [ ] Prevent Notifications and feed states from having elaments with the same keys
 
 - [ ] I want see a toast message on new notification
     - [ ] Display a toast message on new received notification 
@@ -97,6 +102,10 @@ TODO: scenario10
 TODO: Prevent users from choosing an already used username
 
 
+TODO: Post test Rémi
+* [ ] Majuscule activee au onboarding
+* [ ] Mot de passe visible
+* [ ] Pense pas etre capable d emettre de photo
 
 
 

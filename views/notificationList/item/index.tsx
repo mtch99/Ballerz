@@ -126,7 +126,7 @@ function FriendPlayingNotificationView(props: IFriendPlayingNotificationViewProp
                 <Text
                     style={styles.notificationText}
                 >
-                    {parseTimeSlotToString(new Date(props.game.startingTime), new Date(props.game.endingTime)) + ". "}
+                    {parseTimeSlotToString(new Date(props.presence.startingDateTime), new Date(props.presence.endingDateTime)) + ". "}
                 </Text>
                 <Text
                     style={styles.notificationText}
@@ -135,7 +135,7 @@ function FriendPlayingNotificationView(props: IFriendPlayingNotificationViewProp
                 </Text>
             </View>
             <ListItemButton
-                selected={!isPresent}
+                selected={isPresent}
                 onPress={() => {
                     props.onPressJoinButton()
                 }}

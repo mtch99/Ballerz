@@ -3,7 +3,7 @@ import {API} from "aws-amplify";
 import BallerzApiClient from "../client";
 import { INotificationsClient} from "./interface";
 import { FilterNotificationsByUserQueryVariables, NotificationsByReceiverQueryVariables, listNotificationsByReceiverQuery, listNotificationsByReceiver_gql} from "./queries";
-import {GraphQLQuery, GraphQLSubscription, GraphQLResult} from "@aws-amplify/api"
+import {GraphQLQuery} from "@aws-amplify/api"
 import { awsmobileAPIMock } from "../../aws-exports";
 import { Notification } from "./types";
 import { subscriptionClient } from "../subscriptionClient";

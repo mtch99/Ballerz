@@ -69,9 +69,10 @@ export default class NotificationScreen extends Screen<INotificationScreenProps>
     }
 
     isPresent(notification: IFriendPlayingNotificationState): boolean {
-        const gamesList = this.context.feedState.myGamesList
+        const myGamesList = this.context.feedState.myGamesList
         const gameID = notification.game.id
-        if(gamesList.find((predicate) => predicate.gameID === gameID)) {
+        console.log(`My games list length: ${myGamesList.length}`)
+        if(myGamesList.find((predicate) => predicate.gameID === gameID)) {
             return true
         } else {
             return false

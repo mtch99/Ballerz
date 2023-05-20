@@ -43,10 +43,24 @@ type FeedReducer<PayloadType> = (state: IFeedState, action: PayloadAction<Payloa
 
 
 const addItemReducer: FeedReducer<IAddItemActionPayload> = (state, action) => {
-	return {
-		...state,
-		items: [action.payload, ...state.items,],
-	};
+
+	let gameExists = state.items.find((feedItem) => {feedItem.id == action.payload.id})?true:false
+	state.items.forEach((feedItem) => {
+		if(feedItem.id){
+			gameExists = true
+		}
+	})
+	if(gameExists){
+		return{
+			...state,
+		}
+	} else {
+		console.warn("Game does not exits")
+		return {
+			...state,
+			items: [action.payload, ...state.items],
+		};
+	}
 }
 
 
@@ -66,7 +80,7 @@ const checkInReducer: FeedReducer<ICheckInActionPayload> = (state, action) => {
 			const newItem = addAttendantToFeedItem(feedItem, userProfileData)
 			newItems.push(newItem)
 		}else{
-			console.error(feedItem)
+			// console.error(feedItem)
 			newItems.push(feedItem)
 		}
 	}
@@ -87,8 +101,15 @@ const checkOutReducer: FeedReducer<ICheckOutActionPayload> = (state, action) => 
 		}
 	})
 
+	const newMygamesList: IFeedState['myGamesList'] = []
+	state.myGamesList.forEach((item)=> {
+		if(item.gameID != action.payload.feedItemID){
+			newMygamesList.push(item)
+		}
+	})
 	return {
         ...state,
+		myGamesList: newMygamesList,
         items: newItems
     }
 }
@@ -127,7 +148,7 @@ const commentReducer: FeedReducer<ICommentActionPayload> = (state, action) => {
 const setMyGameList: FeedReducer<IFeedState['myGamesList']> = (state, action) => {
 	return {
 		...state,
-		  myGamesList: action.payload
+		myGamesList: action.payload
   	}
 }
 

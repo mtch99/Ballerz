@@ -108,8 +108,13 @@ export class FeedScreen extends Screen<IFeedScreenProps, IFeedScreenState> imple
 
     isAttending(feedItem: IFeedItemState): boolean {
         const {attendants} = feedItem
-		const userFoundInAttendants = attendants.find(attendant => (attendant.userProfileData.id == this.context.authState.profile?.id))
-		return userFoundInAttendants?true:false 
+        let result = false;
+        attendants.forEach((attendant)=> {
+            if(attendant.userProfileData.id){
+                result = true
+            }
+        })
+		return result 
     }
 
     handleCheckoutButtonPress(feedItem: IFeedItemState): void {
