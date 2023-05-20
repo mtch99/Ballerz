@@ -71,12 +71,12 @@ There must be three different games on three different courts, two at the moment
     - [x] Fix Joining action logic
 
 
-- [ ] Load games on feed screen focus
+- [x] Load games on feed screen focus
 
 
 - [ ] Notifications
     - [ ] Hot court notification 
-    - [ ] Prevent Notifications and feed states from having elaments with the same keys
+    - [x] Prevent Notifications and feed states from having elaments with the same keys
 
 - [ ] I want see a toast message on new notification
     - [ ] Display a toast message on new received notification 
@@ -86,9 +86,6 @@ There must be three different games on three different courts, two at the moment
 
 
         
-
-
-
 
 TODO: Display number of games per players
 
