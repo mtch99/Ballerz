@@ -7,6 +7,7 @@ import React from 'react';
 import { CreateProfileStackParamList } from './types';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { DefineUsernameScreenWrapper, FindYourFriendsScreenWrapper } from './wrappers';
+import { Keyboard, TouchableNativeFeedback } from 'react-native';
  
  // import LinkingConfiguration from './LinkingConfiguration';
  
@@ -36,23 +37,27 @@ import { DefineUsernameScreenWrapper, FindYourFriendsScreenWrapper } from './wra
     	const _initialRouteName: keyof CreateProfileStackParamList = 'DefineUsername';
 	
     	  	return (
-    	   		<Stack.Navigator
-    	   		  initialRouteName={_initialRouteName}
-    	   		>
-    	   		    <Stack.Screen
-    	   		        name='DefineUsername'
-    	   		        options={{
-    	   		            headerShown: false,
-    	   		        }}
-    	   		        component={DefineUsernameScreenWrapper}
-    	   		    />
-    	   		    <Stack.Screen
-    	   		        name='FindYourFriends'
-    	   		        options={{
-    	   		            headerShown: false,
-    	   		        }}
-    	   		        component={FindYourFriendsScreenWrapper}
-    	   		    />
-    	   		</Stack.Navigator>
+				<TouchableNativeFeedback
+					onPress={Keyboard.dismiss}
+				>
+					<Stack.Navigator
+					initialRouteName={_initialRouteName}
+					>
+						<Stack.Screen
+							name='DefineUsername'
+							options={{
+								headerShown: false,
+							}}
+							component={DefineUsernameScreenWrapper}
+						/>
+						<Stack.Screen
+							name='FindYourFriends'
+							options={{
+								headerShown: false,
+							}}
+							component={FindYourFriendsScreenWrapper}
+						/>
+					</Stack.Navigator>
+				</TouchableNativeFeedback>
     	  	)
 }	  

@@ -16,7 +16,11 @@ There must be three different games on three different courts, two at the moment
 
 
 - [ ] release v2.0.0
-    - [x] update git ignore
+    * [ ] Last adjustments:
+        - [x] Signin View Title
+        - [ ] Get places and users on Search View focus
+        - [ ] (Find your friends view)'s "continue" top right corner icon
+    - [ ] update git ignore
     - [x] setup backend prod env config
 
 - [x] Friend Playing notification

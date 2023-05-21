@@ -1,31 +1,28 @@
-
 import { Image, StyleSheet, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView, Keyboard } from 'react-native';
 // @ts-ignore
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import BallerzSafeAreaView from '../../safeArea';
 import { globalStyles } from '../../styles';
+import { color } from 'react-native-reanimated';
 
-export interface ISigninViewProps {
+export interface ISignupViewProps {
 		onEmailInputChange: (input: string) => void;
 		onPasswordInputChange: (input: string) => void;
+		onConfirmPasswordInputChange(input: string): void;
 		error: string | undefined;
 		placeholders: {
 				emailInput?: string 
 		}
-		onPressGoToSignup(): void
-		onPressSignin(): void
+		onPressSignup(): void
+		onPressSignIn(): void
 }
 
-export default function SigninView(props: ISigninViewProps) {
+export default function SignupView(props: ISignupViewProps) {
 	const logo = "BALLERZ";
-	const login = "Connectez-vous";
-	const texted = "Or continue with";
-	const signUp = "Inscription";
-	const Google = "Google";
-	const Facebook = "Facebook"
+	const signUpButtonText = "Inscription";
 	// const footerText = "Don't have account? "
-	const footerText = "Vous ne possédez pas de compte?"
-	const createNow = "Inscrivez vous maintenant!";
+	const footerText = "Vous possédez déjà un compte?"
+	const goToSignupText = "Connectez vous";
 	// const createNow = "Create now";
 
 	return (
@@ -46,7 +43,7 @@ export default function SigninView(props: ISigninViewProps) {
 								style={{width:150, height:150}}
 							/>			
 						</TouchableWithoutFeedback>
-				</View>
+				</View>		
 
 				<View style={styles.loginContainer}>
 
@@ -64,7 +61,7 @@ export default function SigninView(props: ISigninViewProps) {
 								marginHorizontal: 10,
 							}}
 						>
-							Se connecter
+							Crées ton compte
 						</Text>
 					</TouchableWithoutFeedback>
 
@@ -92,12 +89,22 @@ export default function SigninView(props: ISigninViewProps) {
 							onChangeText={(input) => {props.onPasswordInputChange(input)}}
 						/>
 
+						<Text style={styles.inputTitle}>Confirmer le mot de passe</Text>
+						<TextInput
+							style={styles.input}
+							placeholder=""
+							placeholderTextColor='#94a3b8'
+							keyboardType='visible-password'
+							secureTextEntry={true}
+							// maxLength={10}
+							onChangeText={(input) => {props.onConfirmPasswordInputChange(input)}}
+						/>
 										
 						<TouchableOpacity
-							style={styles.buttonLogin}
-							onPress={() => {props.onPressSignin()}}
+								style={styles.buttonLogin}
+								onPress={() => {props.onPressSignup()}}
 						>
-								<Text style={{color: 'white', fontSize: 15}}>Se connecter</Text>
+								<Text style={{color: 'white', fontSize: 15}}>{signUpButtonText}</Text>
 						</TouchableOpacity>
 						{
 							props.error?(
@@ -106,24 +113,16 @@ export default function SigninView(props: ISigninViewProps) {
 							(<></>)
 						}
 						<View
-							style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 20, marginHorizontal:20}}
+							style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 20}}
 						>
-							<Text 
-								style={styles.footer}
-								numberOfLines={2}
-							>
+							<Text style={styles.footer}>
 								{footerText + '  '}
-								{<TouchableOpacity
-									onPress={() => {props.onPressGoToSignup()}}
-								>
-									<Text 
-										style={styles.footerCreate}
-										numberOfLines={1}
-									>
-										{createNow}
-									</Text>
-								</TouchableOpacity>}
 							</Text>
+							<TouchableOpacity
+								onPress={() => {props.onPressSignIn()}}
+							>
+								<Text style={styles.footerCreate}>{goToSignupText}</Text>
+							</TouchableOpacity>
 						</View>
 					</View>
 				</View>
@@ -136,9 +135,7 @@ const styles = StyleSheet.create({
 	container: {		
 		flexGrow: 1,
 	  	backgroundColor: globalStyles.global.screenBackGroundColor,
-		justifyContent: "space-between",
-		// alignItems:"center",
-
+		justifyContent: "space-between"
 	},
 	logoContainer: {		
 		flexGrow: 1,
@@ -154,6 +151,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		borderBottomColor: "white",
 		paddingBottom: 100,
+		// borderBottomWidth: 5,
 		backgroundColor: globalStyles.global.screenBackGroundColor,
 	},	
 
@@ -164,7 +162,6 @@ const styles = StyleSheet.create({
 		backgroundColor: '#e78b2f',
 		borderRadius: 5,
 		padding: 10,
-		marginHorizontal:20,
 	},	
 	buttons: {
 	  marginTop: 10,
@@ -184,7 +181,6 @@ const styles = StyleSheet.create({
 	footer: {
 		color: '#94a3b8',
 		fontSize: 15,
-		flexDirection:'row'
 	},	
 	footerCreate: {
 	 	color: '#e78b2f',

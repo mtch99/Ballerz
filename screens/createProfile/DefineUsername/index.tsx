@@ -7,7 +7,6 @@ import { DefineUsernameView } from '../../../views/auth/defineUsername';
 import { Screen } from '../../interface';
 import { fetchImageFromUri, getAssetUri, pickImage } from '../../utils/ImagePicker';
 import { ImagePickerResult } from 'expo-image-picker';
-import { IUploadProfilePicResult } from '../../../domain/use-cases/userProfile/interface';
 
 const defaultProfilePicSource = require("../../../assets/blank-pp.jpg")
 export default class DefineUsernameScreen extends Screen<IDefineUsernameScreenProps, IDefineUsernameScreenState> {

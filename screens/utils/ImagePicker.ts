@@ -80,7 +80,7 @@ export async function handleImagePicked(pickerResult:ImagePicker.ImagePickerResu
 
 export async function getAssetUri(pickerResult:ImagePicker.ImagePickerResult): Promise<string | undefined> {
   if (pickerResult.canceled) {
-    alert("Upload cancelled");
+    // alert("Upload cancelled");
     return;
   } else {
     const asset = pickerResult.assets[0];

@@ -8,6 +8,7 @@ import { Alert, Share, StyleSheet, View } from "react-native";
 import InviteYourFriendsFeedBackView from "../../FeedBack/inviteYourFriends";
 import SearchBarView from "../../makeFriends/SearchBar";
 import BallerzSafeAreaView from "../../safeArea";
+import { RightArrowButton } from "../../../components/Buttons/rightArrowButton";
 
 
 export default class FindYourFriendsView<P extends IFindYourFriendsViewProps = IFindYourFriendsViewProps> extends React.Component<P>{
@@ -48,7 +49,7 @@ export default class FindYourFriendsView<P extends IFindYourFriendsViewProps = I
                   <BallerzHeaderView
                       title="Trouve tes amis"
                       rightButton={
-                        <HeaderCheckButton
+                        <RightArrowButton
                           onPress={this.props.onPressContinue}
                         />
                       }

@@ -209,7 +209,7 @@ class EmailStrategy {
         } else {
             result = {
                 reason: types.EmailValidationRejectionReason.badFormat,
-                description: "Veuillez entrer une adresse courriel valide"
+                description: "Veuillez entrer une adresse email valide"
             }
         }
 

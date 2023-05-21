@@ -5,6 +5,7 @@ import { ISelectableUserProfileData } from '../../interface';
 import FindYourFriendsView from '../../../views/auth/findYourFriends';
 import { ISelectableUserProfileListScreenState } from '../interface';
 import { AUserProfileListScreen } from '..';
+import { AppContext, IAppContext } from '../../../controllers/provider';
 
 
 
@@ -17,6 +18,10 @@ export default class FindYourFriendsScreen<P extends IFindYourFriendsScreenProps
         filterInput: '',
         loading: false,
     }
+
+    static contextType: React.Context<IAppContext>;
+    context: React.ContextType<typeof AppContext> = {} as IAppContext
+
 
     constructor(props: P){
         super(props)

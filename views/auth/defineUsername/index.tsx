@@ -1,8 +1,8 @@
 import React from "react"
 import { IDefineUsernameViewProps } from "../../../screens/createProfile/DefineUsername/interface"
-import { View, Image, TextInput, Text, StyleSheet } from "react-native"
+import { View, Image, TextInput, Text, StyleSheet, Keyboard } from "react-native"
 import { globalStyles } from "../../styles"
-import { TouchableOpacity } from "react-native-gesture-handler"
+import { TouchableOpacity, TouchableWithoutFeedback } from "react-native-gesture-handler"
 import BallerzSafeAreaView from "../../safeArea"
 import { pickImage } from "../../../screens/utils/ImagePicker"
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -20,26 +20,30 @@ export class DefineUsernameView extends React.Component<IDefineUsernameViewProps
                 />
                 <View
                     style={styles.container}
-                >
-                    <View
-                        style={styles.titleContainer}
                     >
-                        <Text
-                            style={styles.title}
-                            numberOfLines={2}
-                            ellipsizeMode="tail"
+                    <TouchableWithoutFeedback
+                        onPress={Keyboard.dismiss}
+                    >
+                        <View
+                            style={styles.titleContainer}
                         >
-                            Crée ton profile
-                        </Text>
-                    </View>
+                                <Text
+                                    style={styles.title}
+                                    numberOfLines={2}
+                                    ellipsizeMode="tail"
+                                >
+                                    Crée ton profile
+                                </Text>
+                        </View>
 
-                    <View>
-                        <Text
-                            style={styles.subTitle}
-                        >
-                            Définis ton nom
-                        </Text>
-                    </View>
+                        <View>
+                            <Text
+                                style={styles.subTitle}
+                            >
+                                Définis ton nom
+                            </Text>
+                        </View>
+                    </TouchableWithoutFeedback>
                     <TextInput
                         placeholder="Giannis Antetokumpo"
                         placeholderTextColor={"#969696"}
@@ -50,55 +54,67 @@ export class DefineUsernameView extends React.Component<IDefineUsernameViewProps
                         autoComplete="off"
                     />
 
-                    <View
-                        style={{
-                            margin: 50,
-                            alignItems: "center",
-                        }}
+                    <TouchableWithoutFeedback
+                        onPress={Keyboard.dismiss}
                     >
-                        <Text
-                            style={styles.subTitle}
-                        >
-                            Ajoute une photo
-                        </Text>
+                        <>
                         <View
-                                style={{flexDirection:'row', marginTop:10}}
+                            style={{
+                                margin: 50,
+                                alignItems: "center",
+                            }}
+                        >
+
+                                <Text
+                                style={styles.subTitle}
                             >
-                                <Image
-                                    style={{height: 70, width: 70, borderRadius: 70}}
-                                    source={this.props.profilePicSource}
-                                />
+                                Ajoute une photo
+                                </Text>
                                 <View
-                                    style={{justifyContent: 'flex-end'}}
+                                    style={{flexDirection:'row', marginTop:10}}
                                 >
-                                    <TouchableOpacity
-                                        onPress={() => {this.props.onPressProfilePic()}}
+                                    <Image
+                                        style={{height: 70, width: 70, borderRadius: 70}}
+                                        source={this.props.profilePicSource}
+                                    />
+                                    <View
+                                        style={{justifyContent: 'flex-end'}}
                                     >
-                                        <MaterialIcons
-                                            name="add-a-photo"
-                                            size={30}
-                                            color={"#969696"}
-                                            style={{alignSelf: "flex-end"}}
-                                        />
-                                    </TouchableOpacity>
+                                        <TouchableOpacity
+                                            onPress={() => {this.props.onPressProfilePic()}}
+                                        >
+                                            <MaterialIcons
+                                                name="add-a-photo"
+                                                size={30}
+                                                color={"#969696"}
+                                                style={{alignSelf: "flex-end"}}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
                         </View>
-                    </View>
+                    
 
-                    <View
-                        style={{
-                            flexGrow: 1,
-                            justifyContent: "center",
-                            marginBottom: 120,
-                        }}
-                    >
-                        <TouchableOpacity
-                            style={styles.buttonLogin}
-                            onPress={() => {this.props.onPressConfirm()}}
+                        <View
+                            style={{
+                                flexGrow: 1,
+                                // justifyContent: "center",
+                                marginBottom: 120,
+                                marginTop: 40
+                                // alignItems:"center"
+                            }}
                         >
-                            <Text style={styles.footerCreate}>Continuer</Text>
-                        </TouchableOpacity>
-                    </View>
+                            <TouchableOpacity
+                                style={styles.buttonLogin}
+                                onPress={() => {this.props.onPressConfirm()}}
+
+                            >
+                                <Text style={styles.footerCreate}>Continuer</Text>
+                            </TouchableOpacity>
+                        </View>
+                        </>
+                    </TouchableWithoutFeedback>
+
                     {this.props.error?
                         (<Text style={styles.errorText}>
                             {this.props.error}

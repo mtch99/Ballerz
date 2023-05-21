@@ -3,12 +3,10 @@ import ISignupScreen, { ISignupScreenProps, ISignupScreenState } from "./interfa
 import { AppContext, IAppContext } from "../../../controllers/provider";
 import IAuthController from "../../../controllers/auth/interface";
 import { ISignupInput, ISignupResult } from "../../../domain/use-cases/auth/types";
-import { EmailInput, PasswordInput } from "../../../views/auth/signIn";
-import { View, StyleSheet, Text, KeyboardAvoidingView, Platform, Keyboard, TouchableWithoutFeedback, Modal } from "react-native";
+import { StyleSheet} from "react-native";
 import { globalStyles } from "../../../views/styles";
-import SigninButton from "../../../views/auth/signIn/signinButton";
-import ConfirmSignupModal from "./confirmSignupModal";
-import SignupView from "../../../views/auth/signIn/signup/indext";
+
+import SignupView from "../../../views/auth/signup";
 
 
 export default class SignupScreen extends React.Component<ISignupScreenProps, ISignupScreenState> implements ISignupScreen{

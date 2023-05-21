@@ -60,43 +60,18 @@ export function RootStackNavigator(): JSX.Element {
 	if(!authState.isDataPrepared && authState.user){
 		isSignedIn = true
 	}
-	
-	
 
-	return (
-		!authState.isDataPrepared?(
-			<></>
-		):(
-			authState.user?(
-				<RootStack.Navigator
-				>
-					{/* <RootStack.Screen
-					    name='OnbordingStack'
-						options={{
-							headerShown: false,
-						}}
-						component={OnboardingStackNavigator}
-					/> */}
-					<RootStack.Screen
-						name='AppStack'
-						options={{
-							headerShown: false,
-						}}
-						component={AppStackWrapper}
-					/>
-					<RootStack.Screen
-						name='AuthStack'
-						options={{
-							headerShown: false,
-						}}
-						component={AuthStackWrapper}
-					/>
-				</RootStack.Navigator>
-			):(
+	const render = () => {
+		if(!authState.isDataPrepared){
+			return <></>
+		}
+
+		if(authState.isFirstLaunch){
+			return (
 				<RootStack.Navigator
 				>
 					<RootStack.Screen
-					    name='DiscoveryStack'
+						name='DiscoveryStack'
 						options={{
 							headerShown: false,
 						}}
@@ -118,6 +93,49 @@ export function RootStackNavigator(): JSX.Element {
 					/>
 				</RootStack.Navigator>
 			)
-		)
-	)
+		}
+
+		if(authState.user){
+			return(
+				<RootStack.Navigator>
+					<RootStack.Screen
+						name='AppStack'
+						options={{
+							headerShown: false,
+						}}
+						component={AppStackWrapper}
+					/>
+					<RootStack.Screen
+						name='AuthStack'
+						options={{
+							headerShown: false,
+						}}
+						component={AuthStackWrapper}
+					/>
+				</RootStack.Navigator>
+			)
+		} else {
+			return(
+				<RootStack.Navigator
+				>
+					<RootStack.Screen
+						name='AuthStack'
+						options={{
+							headerShown: false,
+						}}
+						component={AuthStackWrapper}
+					/>
+					<RootStack.Screen
+						name='AppStack'
+						options={{
+							headerShown: false,
+						}}
+						component={AppStackWrapper}
+					/>
+				</RootStack.Navigator>
+			)
+		}
+	}
+
+	return render()
 }

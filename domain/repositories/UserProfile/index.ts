@@ -18,7 +18,7 @@ export default class UserProfileRepository implements IUserProfileRepository {
 
     client: UserProfileClient
     myUserProfileID: string = "dumbID1210e8934"
-    userProfilePicUri: ImageSourcePropType = require("../../../assets/profilePic.jpg")
+    userProfilePicUri: ImageSourcePropType = {uri:""}
     constructor(){
         this.client = new UserProfileClient()
     }

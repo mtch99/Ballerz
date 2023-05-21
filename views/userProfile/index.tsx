@@ -25,7 +25,7 @@ export class UserProfileView extends React.Component<IUserProfileViewProps, IPro
     }
 
     state = {
-        profilePicSource: require('../../assets/profilePic.jpg'), 
+        profilePicSource: {uri:""}, 
     }
 
     componentDidMount(): void {
@@ -34,10 +34,6 @@ export class UserProfileView extends React.Component<IUserProfileViewProps, IPro
                 this.setState({profilePicSource: {uri}})
             }
         })
-    }
-
-    componentDidUpdate(prevProps: Readonly<IUserProfileViewProps>, prevState: Readonly<IProfileViewState>, snapshot?: any): void {
-        // console.log("New games: ", JSON.stringify(this.props.games))
     }
 
     render(){

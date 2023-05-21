@@ -11,7 +11,7 @@ export class HeaderView extends React.Component<IHeaderViewProps>{
 
 
     state = {
-        imageUrl: "https://mybucket195747-profilepic.s3.us-east-2.amazonaws.com/public/demo.jpg"
+        imageUrl: ""
     }
 
 
@@ -82,7 +82,6 @@ export class HeaderView extends React.Component<IHeaderViewProps>{
                     <Image
                         style={styles.profilePic}
                         source={this.props.profilePicSource}
-                        // source={{uri: "https://mybucket195747-profilepic.s3.us-east-2.amazonaws.com/public/demo.jpg"}}
                     />
                 </View>
 

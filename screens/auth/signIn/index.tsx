@@ -4,6 +4,7 @@ import { ISigninScreen, ISigninScreenProps, ISigninScreenState } from "./interfa
 import { AppContext, IAppContext } from "../../../controllers/provider";
 import IAuthController from "../../../controllers/auth/interface";
 import SigninScreenView from "../../../views/auth/signIn";
+import SigninView from "../../../views/auth/signIn";
 
 
 
@@ -82,7 +83,7 @@ export default class SigninScreen extends React.Component<ISigninScreenProps, IS
     
     render(): React.ReactNode {
         return(
-            <SigninScreenView 
+            <SigninView 
                 onEmailInputChange={this.onEmailInputChange}
                 onPasswordInputChange={this.onPasswordInputChange}
                 error={this.state.error} 
@@ -90,7 +91,7 @@ export default class SigninScreen extends React.Component<ISigninScreenProps, IS
                     emailInput: "stephcurry30@ballerz.com"
                 }}
                 onPressSignin={this.signIn}
-                onPressCreateAccount={this.onPressCreateAccount.bind(this)}
+                onPressGoToSignup={this.onPressCreateAccount.bind(this)}
             />
         )
     }

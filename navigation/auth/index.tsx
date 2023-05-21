@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AppContext, IAppContext } from "../../controllers/provider";
 import React from "react";
 import { globalStyles } from "../../views/styles";
+import { KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
 
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
@@ -20,38 +21,49 @@ export function AuthStackNavigator(): JSX.Element {
 
 
     return(
-        
-        <Stack.Navigator
-            {...{initialRouteName}}
-        >
-            <Stack.Screen
-                name="SigninScreen"
-                options={{
-                    headerShown: false,
-                    title: "Connexion",
-                }}
-                component={SignInScreenWrapper}
-            />
-            <Stack.Screen
-                name="SignupScreen"
-                options={{
-                    headerStyle: {backgroundColor: globalStyles.global.screenBackGroundColor},
-                    title: "Inscris toi",
-                    headerShown: true,
-                }}
-                component={SignupScreenWrapper}
-            />
+        <KeyboardAvoidingView
+				style={styles.container}
+				behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+		>
+            <Stack.Navigator
+                {...{initialRouteName}}
+            >
+                <Stack.Screen
+                    name="SigninScreen"
+                    options={{
+                        headerShown: false,
+                        title: "Connexion",
+                    }}
+                    component={SignInScreenWrapper}
+                />
+                <Stack.Screen
+                    name="SignupScreen"
+                    options={{
+                        headerStyle: {backgroundColor: globalStyles.global.screenBackGroundColor},
+                        title: "Inscris toi",
+                        headerShown: false,
+                    }}
+                    component={SignupScreenWrapper}
+                />
 
 
-            <Stack.Screen
-                name="ConfirmSignupScreen"
-                options={{
-                    title: "Inscription",
-                    headerBackTitleVisible: false
-                }}
-				component={ConfirmSignupScreenWrapper}
-            />
+                <Stack.Screen
+                    name="ConfirmSignupScreen"
+                    options={{
+                        title: "Inscription",
+                        headerBackTitleVisible: false
+                    }}
+		    		component={ConfirmSignupScreenWrapper}
+                />
 
-        </Stack.Navigator>
+            </Stack.Navigator>
+        </KeyboardAvoidingView>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+		flexGrow: 1,
+		backgroundColor: globalStyles.global.screenBackGroundColor,
+	},
+})
