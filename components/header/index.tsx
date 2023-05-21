@@ -3,47 +3,39 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { globalStyles } from '../../views/styles';
 
-export interface IHeaderViewProps {
-    title: string, 
-    leftButton?: typeof React.Component<IHeaderButtonProps> 
-    rightButton?: typeof React.Component<IHeaderButtonProps>
-    leftButtonProps?: IHeaderButtonProps
-    rightButtonProps?: IHeaderButtonProps
+
+export interface IBallerzHeaderViewProps {
+    title: string,
+    leftButton: JSX.Element
+    rightButton: JSX.Element
 }
 
 export interface IHeaderButtonProps {
     onPress(): void
 }
 
-export default class HeaderView extends React.Component<IHeaderViewProps> {
+export default class BallerzHeaderView extends React.Component<IBallerzHeaderViewProps> {
 
     render(): React.ReactNode {
-        const LeftButton = this.props.leftButton
-        const RightButton = this.props.rightButton
-        const leftButtonProps: IHeaderButtonProps = this.props.leftButtonProps?(this.props.leftButtonProps):({onPress: () =>{}})
-        const rightButtonProps: IHeaderButtonProps = this.props.rightButtonProps?(this.props.rightButtonProps):({onPress: () =>{}})
-        
+        const LeftButton = () => (this.props.leftButton)
+        const RightButton = () => (this.props.rightButton)
+
         return (
           <View style={styles.header}>
-            
+
             <View style={styles.leftButton}>
-                {LeftButton?(
-                    <LeftButton
-                        {...{...leftButtonProps}}
-                    />
-                ):(
-                    <></>
-                )}
+                <LeftButton/>
             </View>
-            
-            <Text style={styles.title}>{this.props.title}</Text>
-            
+
+            <View
+              style={{flexGrow: 1, alignItems: 'center'}}
+            >
+              <Text style={styles.title}>{this.props.title}</Text>
+            </View>
+
+
             <View style={styles.rightButton}>
-                {RightButton?(
-                    <RightButton
-                        {...{...rightButtonProps}}
-                    />
-                ):(<></>)}
+                <RightButton/>
             </View>
 
           </View>
@@ -58,18 +50,18 @@ const styles = StyleSheet.create({
     backgroundColor: globalStyles.global.screenBackGroundColor,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    // justifyContent: 'center',
   },
   leftButton: {
     marginLeft: 10,
   },
   rightButton: {
-    // marginRight: 10,
+    marginRight: 10,
   },
   title: {
     color: 'white',
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '500',
   },
 });
 

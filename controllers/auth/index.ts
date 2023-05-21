@@ -1,33 +1,62 @@
-import AuthUCI from "../../domain/use-cases/Auth";
-import { ISignupInput, ISignupResult, IConfirmSignupInput, IConfirmSignupResult, ILoginInput, ILoginResult } from "../../domain/use-cases/Auth/types";
+import AuthUCI from "../../domain/use-cases/auth";
+import { ISignupInput, ISignupResult, IConfirmSignupInput, IConfirmSignupResult, ILoginInput, ILoginResult } from "../../domain/use-cases/auth/types";
 import IAuthController from "./interface";
-import IAuthUCI, { IAuthUCIEventListener, IDefineUsernameInput, IDefineUsernameResult } from "../../domain/use-cases/Auth/interface";
+import IAuthUCI, { IAuthUCIEventListener, IDefineUsernameInput, IDefineUsernameResult } from "../../domain/use-cases/auth/interface";
 
 
 
-export default class AuthController implements IAuthController {
+export class AuthController implements IAuthController {
+    async isFirstLaunch(): Promise<boolean> {
+        return await this.authUseCase.isFirstLaunch()
+    }
 
-    private authUci: IAuthUCI 
+    private authUseCase: IAuthUCI = fakeUseCase
 
-    constructor(authModel: IAuthUCIEventListener){
-        this.authUci = new AuthUCI(authModel)
+    createUseCase(model: IAuthUCIEventListener){
+        this.authUseCase = new AuthUCI(model)
+        console.log(`\n Auth usecase initialized \n`)
     }
     
     async signinLastUser(): Promise<false | ILoginResult> {
-        const result = await this.authUci.signinLastUser();
+        const result = await this.authUseCase.signinLastUser();
         return result
     }
 
-
     async login(input: ILoginInput): Promise<ILoginResult> {
-        return this.authUci.login(input)
+        return this.authUseCase.login(input)
     }
     signup(input: ISignupInput): Promise<ISignupResult> {
-        return this.authUci.signup(input)
+        return this.authUseCase.signup(input)
     }
     
     confirmSignup(input: IConfirmSignupInput): Promise<IConfirmSignupResult> {
-        return this.authUci.confirmSignup(input)
+        return this.authUseCase.confirmSignup(input)
     }
     
+}
+
+
+const authController = new AuthController();
+export default authController;
+
+
+const fakeUseCase: IAuthUCI = {
+    signup: function (input: ISignupInput): Promise<ISignupResult> {
+        throw new Error("Function not implemented.");
+    },
+    confirmSignup: function (input: IConfirmSignupInput): Promise<IConfirmSignupResult> {
+        throw new Error("Function not implemented.");
+    },
+    login: function (signInInput: ILoginInput): Promise<ILoginResult> {
+        throw new Error("Function not implemented.");
+    },
+    getLastLoginCreds: function (): Promise<ILoginInput | null> {
+        throw new Error("Function not implemented.");
+    },
+    signinLastUser: function (): Promise<false | ILoginResult> {
+        throw new Error("Function not implemented.");
+    },
+    isFirstLaunch: function (): Promise<boolean> {
+        throw new Error("Function not implemented.");
+    }
 }

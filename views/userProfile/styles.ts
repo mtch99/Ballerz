@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native'
 export const styles = StyleSheet.create({
     container: {
         backgroundColor:"#181C28",
-        flexGrow: 1
+        flex: 1
     },
 
     profilePictureContainer: {

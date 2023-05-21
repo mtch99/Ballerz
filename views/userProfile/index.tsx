@@ -1,54 +1,126 @@
 import React from "react"
-import { View, Text, ScrollView } from "react-native"
+import { View, Text, ScrollView, ImageSourcePropType } from "react-native"
 import { IUserProfileViewProps } from "../../screens/userProfile"
 import { styles } from "./styles"
-import { HeaderView } from "./header"
+import { HeaderView } from "./profileHeader"
+import BallerzHeaderView from "../../components/header"
 import { BadgeListView } from "./badges"
 import PictresView from "./pictures"
 import GamesListView from "./games"
 import { IUserProfileState } from "../../app/features/types"
+import BallerzSafeAreaView from "../safeArea"
+import { getProfilePicUri } from "../../screens/utils/ImagePicker"
+import ProfileViewHeader from "./screenHeader"
 
 
 
 
 
-export class UserProfileView extends React.Component<IUserProfileViewProps>{
 
-    state: IUserProfileState = {
-        games: [],
-        id: "",
-        username: "",
-        badges: []
+export class UserProfileView extends React.Component<IUserProfileViewProps, IProfileViewState>{
+
+    async onPressAdd(): Promise<void> {
+        console.warn("onPressAdd")
+        this.props.onPressAddButton({...this.props})
     }
 
+    state = {
+        profilePicSource: require('../../assets/profilePic.jpg'), 
+    }
 
     componentDidMount(): void {
-        // console.warn(`Mounting props: ${JSON.stringify(this.props)}`)
+        getProfilePicUri(this.props.id).then(uri => {
+            if(uri){
+                this.setState({profilePicSource: {uri}})
+            }
+        })
     }
 
-    // componentDidUpdate(prevProps: Readonly<IUserProfileViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
-        // console.warn(`UserProfileView newProps: ${JSON.stringify(this.props.games)})`)
-    // }
+    componentDidUpdate(prevProps: Readonly<IUserProfileViewProps>, prevState: Readonly<IProfileViewState>, snapshot?: any): void {
+        // console.log("New games: ", JSON.stringify(this.props.games))
+    }
 
     render(){
         return(
-            <ScrollView
-                style={styles.container}
+            <BallerzSafeAreaView
             >
+                <>
+                <ProfileViewHeader 
+                    username={this.props.username} 
+                    goBack={this.props.goBack}                
+                />
                 <HeaderView
                     username={this.props.username}
-                    profilePicUri={'../../assets/profilePic'}
+                    friendsList={this.props.friends}
+                    profilePicSource={this.state.profilePicSource}
+                    isFriend={this.props.isFriend}
+                    onPressFriendsNumber={this.props.onPressFriendsNumber}
+                    friendshipRequestSent={this.props.friendshipRequestSent}
+                    onPressAddButton={this.onPressAdd.bind(this)}
                 />
-                <BadgeListView
+                {/* <BadgeListView
                     badgeList={this.props.badges}
-                />
-                <PictresView
+                /> */}
+                {/* <PictresView
                     pictureUriList={['../../assets/profilePic', '../../assets/dunkPic']}
-                />
+                /> */}
                 <GamesListView
                     gameList={this.props.games}
+                    onPressFriendsThere={this.props.onPressFriendsNumber}
+                    onPressGameAttendants={this.props.onPressFriendsNumber}
                 />
-            </ScrollView>
+                </>
+            </BallerzSafeAreaView>
+        )
+    }
+}
+
+
+
+export interface IProfileViewState {
+    profilePicSource: ImageSourcePropType
+}
+
+export class MyProfileView extends React.Component<IUserProfileViewProps, IProfileViewState> {
+    state = {
+        profilePicSource: require('../../assets/profilePic.jpg'), 
+    }
+
+    componentDidMount(): void {
+        getProfilePicUri(this.props.id).then(uri => {
+            if(uri){
+                this.setState({profilePicSource: {uri}})
+            }
+        })
+    }
+    render(){
+        return(
+            <BallerzSafeAreaView>
+                <>
+                <BallerzHeaderView
+                    title="Profile"
+                    leftButton={<></>}
+                    rightButton={<></>}
+                />
+                <HeaderView
+                    username={this.props.username}
+                    friendsList={this.props.friends}
+                    // profilePicUri={'../../assets/profilePic'}
+                    profilePicSource={this.state.profilePicSource}
+                    isFriend={this.props.isFriend}
+                    onPressFriendsNumber={this.props.onPressFriendsNumber}
+                    friendshipRequestSent={this.props.friendshipRequestSent}
+                    onPressAddButton={() => {}}
+                    myProfile={true}
+                />
+                <GamesListView
+                        gameList={this.props.games}
+                        onPressFriendsThere={this.props.onPressFriendsNumber}
+                        onPressGameAttendants={this.props.onPressFriendsNumber}
+                />
+                </>
+
+            </BallerzSafeAreaView>
         )
     }
 }

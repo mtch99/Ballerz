@@ -1,4 +1,4 @@
-import {ISignupResult} from '../../../domain/use-cases/Auth/types'
+import {ISignupResult} from '../../../domain/use-cases/auth/types'
 
 export default interface ISignupScreen {
     onPressSignup(): void;
@@ -21,6 +21,7 @@ export interface ISignupScreenProps extends ISignupScreenPropsWithoutNavigation{
 export interface ISignupScreenNavigationController {
     goToConfirmSignup(email: string): void;
     goToApp(): void;
+    goToSignin(): void
 }
 
 

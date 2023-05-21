@@ -1,6 +1,7 @@
 import { IFeedItemState, IFeedState,} from "./interface";
 import { PayloadAction, createAction } from "@reduxjs/toolkit";
-import { IFeedItem, IUserProfile, IUserProfileData } from "../../../../domain/use-cases/types";
+import { IAttendance, IFeedItem, IUserProfile, IUserProfileData } from "../../../../domain/use-cases/types";
+import { ICheckoutInput } from "../../../../domain/use-cases/feed/interface";
 
 
 enum FeedActionType {
@@ -23,9 +24,13 @@ export interface IRemoveItemAction extends PayloadAction<IRemoveItemActionPayloa
 
 export interface ICheckInActionPayload {
     keyToUpdate: IFeedItem['id']
-    userProfileData: IUserProfileData
+    attendance: IAttendance
 }
 export interface ICheckInAction extends PayloadAction<ICheckInActionPayload>{}
+
+export interface ICheckOutActionPayload extends ICheckoutInput{}
+
+export interface ICheckOutAction extends PayloadAction<ICheckOutActionPayload>{}
 
 
 export interface ICommentActionPayload {
@@ -37,4 +42,8 @@ export interface ICommentAction extends PayloadAction<ICommentActionPayload>{
 }
 
 
-export interface INewFeedActionPayload extends IFeedState{}
+export interface INewFeedActionPayload  {
+	items: IFeedItemState[]
+}
+
+

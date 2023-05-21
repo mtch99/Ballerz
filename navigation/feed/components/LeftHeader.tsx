@@ -23,15 +23,10 @@ export default function LeftHeader(){
     const feedController: IFeedController = context.feedController
 
 
-    const createGame = (): void => {
-        // const input: ICreateGameInput = {
-        //     placeId: "",
-        //     userProfileId: "",
-        //     startingTime: new Date(),
-        //     endingTime: new Date()
-        // }
-        // this.feedController.createGame(input)
-        navigation.navigate('CreateGameStack', {})
+    const createGame = (): void => { 
+        // navigation.navigate('CreateGameStack', {})
+        console.error("Method createGame is not implemented yet")
+
     }
 
         return (

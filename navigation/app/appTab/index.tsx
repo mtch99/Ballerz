@@ -5,13 +5,16 @@
  */
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DarkTheme} from '@react-navigation/native';
-import { ColorSchemeName } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-
+import Icon from "react-native-vector-icons/Entypo"
+import FeatherIcon from "react-native-vector-icons/Feather"
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
 import { AppTabParamList } from './types';
-import { ExploreStackWrapper, FeedStackWrapper, GroupChatStackWrapper, UserProfileScreenWrapper } from './wrappers';
+import { ExploreStackWrapper, FeedStackWrapper, GroupChatStackWrapper, MyProfileStackWrapper, NotificationStackWrapper } from './wrappers';
+import { globalStyles } from '../../../views/styles';
+import { AppContext } from '../../../controllers/provider';
+import { useAppSelector } from '../../../app/hooks';
+import { selectNotificationList } from '../../../app/features/notifications/slice';
 
 // import LinkingConfiguration from './LinkingConfiguration';
 
@@ -42,7 +45,11 @@ const BottomTab = createBottomTabNavigator<AppTabParamList>();
 
 export function AppTab(): JSX.Element {
 
+	const {badge} = useAppSelector(selectNotificationList)
+
 	const _initialRouteName: keyof AppTabParamList = 'FeedStack'
+
+	const tabBarActiveTintColor = globalStyles.global.logoColor
 	
 	  return (
 		<BottomTab.Navigator
@@ -50,46 +57,59 @@ export function AppTab(): JSX.Element {
 		>
 
 			<BottomTab.Screen
-				name='ExploreStack'
-				options={{
+                name='NotificationStack'
+                options={{
 					headerShown: false,
-					// tabBarLabel: 'Explore',
-					tabBarIcon: undefined,
-					headerTitle: 'Explore'
+					tabBarLabel: 'notifications',
+					tabBarIcon: ({focused}) => 
+						<Icon
+                            name='bell'
+							size={24}
+							color={focused?(globalStyles.global.logoColor):('grey')}
+						/>,
+					tabBarBadge: badge,
+					headerTitle: 'Notifications',
+					tabBarActiveTintColor,
 				}}
-				component={ExploreStackWrapper}
+				component={NotificationStackWrapper}
 			/>
+
 
 			<BottomTab.Screen
 				name='FeedStack'
 				options={{
 					headerShown: false,
 					tabBarLabel: 'Games',
-					tabBarIcon: undefined
+					tabBarIcon: ({focused}) => (
+						<Ionicons 
+							name="basketball-outline" 
+							size={24} 
+							color={focused?(globalStyles.global.logoColor):('grey')} 
+						/>
+					),
+					tabBarActiveTintColor,
 				}}
 				component={FeedStackWrapper}
 			/>
-
 			<BottomTab.Screen
-				name='GroupChatStack'
+				name='MyProfileStack'
 				options={{
 					headerShown: false,
-					tabBarLabel: 'Groupes',
-					tabBarIcon: undefined,
+					tabBarLabel: 'Profile',
+					tabBarShowLabel: false,
+					tabBarIcon: ({focused}) => (
+						<FontAwesome 
+							name="user-circle" 
+							size={24} 
+							color={focused?(globalStyles.global.logoColor):('grey')} 
+						/>
+					),
+					tabBarActiveTintColor,
 				}}
-				component={GroupChatStackWrapper}
+				component={MyProfileStackWrapper}
 			/>
 
-			<BottomTab.Screen
-				name='MyProfileScreen'
-				options={{
-					headerShown: true,
-					headerTitle: "Profile",
-					tabBarLabel: 'Profile',
-					tabBarIcon: undefined,
-				}}
-				component={UserProfileScreenWrapper}
-			/>
+
 		</BottomTab.Navigator>
 	  )
 }

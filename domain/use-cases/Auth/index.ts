@@ -1,8 +1,9 @@
 import { TouchableHighlightBase } from "react-native"
-import {AuthRepository} from "../../repositories/Auth"
+
 import IAuthUCI, {IAuthUCIEventListener, IAuthRepository, IDefineUsernameInput, IDefineUsernameResult} from "./interface"
-import * as types from './types'
 import { ThemeProvider } from "@react-navigation/native";
+import * as types from "./types"
+import { AuthRepository } from "../../repositories/Auth";
 
 
 
@@ -13,15 +14,21 @@ import { ThemeProvider } from "@react-navigation/native";
  */
 export default class AuthUCI implements IAuthUCI {
 
-    private repo: IAuthRepository = new AuthRepository();
+    private repo: IAuthRepository
     
     private observer: IAuthUCIEventListener
     
-    constructor(observer: IAuthUCIEventListener){
+    constructor(observer: IAuthUCIEventListener, authRepo?: IAuthRepository){
+        this.repo = authRepo || new AuthRepository(); 
         this.observer = observer;
     }
 
 
+    async isFirstLaunch(): Promise<boolean> {
+        const isFirstLaunch = await this.repo.isFirstLaunch();
+        this.observer.setFirstLaunch(isFirstLaunch)
+        return isFirstLaunch;
+    }
 
     async signinLastUser(): Promise<types.ILoginResult | false> {
         const lastLoginCreds = await this.repo.getLastLoginCreds()
@@ -33,6 +40,7 @@ export default class AuthUCI implements IAuthUCI {
             return false
         }
     }
+
     
     
     async confirmSignup(input: types.IConfirmSignupInput): Promise<types.IConfirmSignupResult> {
@@ -42,6 +50,7 @@ export default class AuthUCI implements IAuthUCI {
 
     async signup(input: types.ISignupInput): Promise<types.ISignupResult>{
         this.observer.onNewSignupAttempt(input)
+        console.warn(`SIgnup function input: ${JSON.stringify(input)}`)
         const {email, password, confirmPassword} = input
 
         let result: types.ISignupResult  = {
@@ -137,7 +146,7 @@ export default class AuthUCI implements IAuthUCI {
         if(password != confirmPassword){
             result = {
                 reason: types.ConfirmPasswordRejectionReason.mismatchedPasswords,
-                description: "Les deux mots de passe sont différents"
+                description: "Vérifiez que les deux mots de passe sont identiques"
             }
         }
 
@@ -200,7 +209,7 @@ class EmailStrategy {
         } else {
             result = {
                 reason: types.EmailValidationRejectionReason.badFormat,
-                description: "Cet email n'existe pas"
+                description: "Veuillez entrer une adresse courriel valide"
             }
         }
 
@@ -210,6 +219,7 @@ class EmailStrategy {
 
 
 // TODO: Create Factory for AuthUCI
+
 
 
 // export const authUCI = new AuthUCI(new AuthRepository())

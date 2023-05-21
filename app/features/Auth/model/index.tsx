@@ -1,12 +1,12 @@
 import { IAppControllerEventListener } from "../../../../controllers/interface"
-import { IAuthUCIEventListener } from "../../../../domain/use-cases/Auth/interface"
-import { ILoginInput, ISignupInput, UserBasicData } from "../../../../domain/use-cases/Auth/types"
+import { IAuthUCIEventListener } from "../../../../domain/use-cases/auth/interface"
+import { ILoginInput, ISignupInput, UserBasicData } from "../../../../domain/use-cases/auth/types"
 import { IGame, IUserProfile, IUserProfileData } from "../../../../domain/use-cases/types"
 import { useAppSelector } from "../../../hooks"
 import { AppDispatch } from "../../../store"
 import { UserProfileModelAdapter } from "../../adapters"
 import { IGameState, IUserProfileState } from "../../types"
-import { UserState, preparedData, setLastSignupInput, setLoginInput, setUser, setUserProfile } from "../slice"
+import { UserState, preparedData, setFirstLaunch, setLastSignupInput, setLoginInput, setUser, setUserProfile } from "../slice"
 
 interface IAuthModelInput {
     dispatchFunc: AppDispatch
@@ -36,7 +36,6 @@ export const createAuthModel = (input: IAuthModelInput): IAuthModel => {
             }
             const payload: UserState = {
                 email: userData.email,
-                profile
             }
 
             input.dispatchFunc(setUser(payload))
@@ -46,25 +45,27 @@ export const createAuthModel = (input: IAuthModelInput): IAuthModel => {
             const actionPayload: IUserProfileState = AuthModelAdapter.parseUserProfile(userProfile)
             input.dispatchFunc(setUserProfile({ profile: actionPayload }))
         },
+
+
         onDataPreparedEvent: function (): void {
             input.dispatchFunc(preparedData())
+        },
+
+        setFirstLaunch: function (firstLaunch: boolean): void {
+            input.dispatchFunc(setFirstLaunch(firstLaunch))
         }
     }
     return authModel
 }
 
 
-
 export class AuthModelAdapter {
 
     static parseUserProfile(userProfile: IUserProfile): IUserProfileState {
-        const {id, username, badges} = userProfile
         const games: IUserProfileState['games'] = this.parseGameList(userProfile.games)
         
         const result: IUserProfileState = {
-            id,
-            username,
-            badges,
+            ...userProfile,
             games
         }
 
@@ -74,8 +75,8 @@ export class AuthModelAdapter {
     private static parseGame(input: IGame): IGameState{
         return {
             ...input,
-            startingTime: input.startingTime.toLocaleDateString(),
-            endingTime: input.endingTime.toLocaleDateString()
+            startingTime: input.startingTime,
+            endingTime: input.endingTime
         }
     }
     

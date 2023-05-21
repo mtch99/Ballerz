@@ -5,6 +5,7 @@ import { FlatList, View, Text, SectionList, ScrollView } from "react-native";
 import FeedItemView from "../../feed/feed-item";
 import styles from "./styles"
 import { IGameState } from "../../../app/features/types";
+import { handleSharePress } from "../../../screens/utils";
 
 
 export default class GamesListView extends React.Component<IGamesViewProps> {
@@ -16,10 +17,11 @@ export default class GamesListView extends React.Component<IGamesViewProps> {
         this.gameList = this.parseGameList(this.props.gameList)
     }
 
+
     render(): React.ReactNode {
         return(
-            <View style={{flexWrap:'wrap'}}>
-                <Text style={styles.gamesText}>Partcipations</Text>
+            <View style={{flex:1}}>
+                <Text style={styles.gamesText}>Partcipations ({this.props.gameList.length})</Text>
                     <FlatList
                         style={{flexGrow: 1}}
                         data={this.props.gameList}
@@ -29,20 +31,17 @@ export default class GamesListView extends React.Component<IGamesViewProps> {
                                 <FeedItemView 
                                     feedItem={item} 
                                     handleBadgeClick={function (feedItem: IFeedItemState): void {
-                                        console.log("Function not implemented.");
+                                        throw new Error("Function not implemented.");
                                     } } 
-                                    handleFriendsTherePress={function (feedItem: IFeedItemState): void {
-                                        console.log("Function not implemented.");
-                                    } } 
-                                    handleInvitePress={function (feedItem: IFeedItemState): void {
-                                        console.log("Function not implemented.");
-                                    } } 
-                                    handlePlayButtonPress={function (feedItem: IFeedItemState): void {
-                                        console.log("Function not implemented.");
+                                    handleFriendsTherePress={this.props.onPressFriendsThere}
+                                    handleInvitePress={handleSharePress } 
+                                    handlePlayButtonPress={function (): void {
+                                        throw new Error("Function not implemented.");
                                     } } 
                                     onPressCommentButton={function (): void {
-                                        console.log("Function not implemented.");
-                                    } }                            
+                                        throw new Error("Function not implemented.");
+                                    } }                       
+                                    handleCheckoutButtonPress={() => {}}     
                                 />
                             )
                         }}

@@ -5,13 +5,17 @@ import { store } from './app/store';
 import FeedProvider from './controllers/feed/provider';
 import Navigation from './navigation';
 import React from 'react';
-import AppProvider from './controllers/provider';
+import AppProvider, {MemoizedAppProvider} from './controllers/provider';
 import { globalStyles } from './views/styles';
-
-
+import * as Clipboard from "expo-clipboard";
+import Constants from "expo-constants";
+import * as ImagePicker from "expo-image-picker";
+import { handleImagePicked, pickImage, uploadImage } from './screens/utils/ImagePicker';
 
 export default function App() {
   const colorScheme = useColorScheme()
+
+
   return (
     <>
       <StatusBar 
@@ -19,12 +23,12 @@ export default function App() {
         backgroundColor={globalStyles.global.screenBackGroundColor}
       />
         <Provider store={store}>
-          <AppProvider
+          <MemoizedAppProvider
           >
             <Navigation
               colorScheme={"dark"} 
             />
-          </AppProvider>
+          </MemoizedAppProvider>
         </Provider>
     </>
   )

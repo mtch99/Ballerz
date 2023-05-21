@@ -1,9 +1,11 @@
 import React from "react";
 import { IPlaceData } from "../../../domain/use-cases/types";
 import { ISelectTimeSlotScreen } from "../interface";
-import { ICreateGameInput, ICreateGameOutput } from "../../../domain/use-cases/feed/interface";
+import { CreateGameErrorReason, ICreateGameError, ICreateGameInput, ICreateGameResult } from "../../../domain/use-cases/feed/interface";
 import { AppContext, IAppContext } from "../../../controllers/provider";
 import { SelectTimeSlotView } from "../../../views/selectTimeSlot";
+import { IScreenState, Screen } from "../../interface";
+import { Alert } from "react-native";
 
 
 
@@ -18,17 +20,19 @@ export interface ISelectTimeSlotScreenProps extends ISelectTimeSlotScreenPropsWi
 }
 
 export interface ISelectTimeSlotScreenNavigationController extends IGameCreatedEventListener {
-	goBack(): void
+	goToSelectPlace(): void
+    goBack(): void
 }
 export interface IGameCreatedEventListener{
     onGameCreated(): void
 }
 
-export interface ISelectTimeSlotScreenState{
+export interface ISelectTimeSlotScreenState extends IScreenState{
     chosenPlaceId: string
     chosenPlaceName: string
     startingTime: Date
     endingTime: Date
+    error?: string
 }
 
 export interface ITime {
@@ -37,7 +41,7 @@ export interface ITime {
 }
 
 
-export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlotScreenProps, ISelectTimeSlotScreenState> implements ISelectTimeSlotScreen{
+export default class SelectTimeSlotScreen extends Screen<ISelectTimeSlotScreenProps, ISelectTimeSlotScreenState> implements ISelectTimeSlotScreen{
     
 
     static contextType = AppContext
@@ -45,61 +49,92 @@ export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlo
 
     constructor(props: ISelectTimeSlotScreenProps){
         super(props)
-		this.__bindMethods()
     }
 
-	private __bindMethods(){
-		this.createGame = this.createGame.bind(this)
-		this.modifyEndingTime = this.modifyEndingTime.bind(this)
-		this.modifyStartingTime = this.modifyStartingTime.bind(this)
-		this.onPressModifyPlace = this.onPressModifyPlace.bind(this)
-	}
+
 
     state: ISelectTimeSlotScreenState = {
         chosenPlaceId: this.props.chosenPlace.id,
         chosenPlaceName: this.props.chosenPlace.name,
         startingTime: this.props.startingTime?(this.props.startingTime):(new Date()),
-        endingTime: this.props.endingTime?(this.props.endingTime):(new Date())
+        endingTime: this.props.endingTime?(this.props.endingTime):(new Date()),
+        loading: false
     }
     
-    async createGame(): Promise<ICreateGameOutput> {
-        const input: ICreateGameInput = {
-            placeId:this.state.chosenPlaceId,
-            userProfileId: "moiId",
+    private async __createGame(): Promise<ICreateGameResult> {
+        const userProfileID = this.context.authState.profile?.id
+        if(!userProfileID){
+            throw new Error("User not logged in")
+        } else {
+            let input: ICreateGameInput = {
+                placeID:this.state.chosenPlaceId,
+                userProfileID,
+                startingTime: this.state.startingTime,
+                endingTime: this.state.endingTime
+            }
+            const checkInput = checkGameInput(input)
+            if(checkInput.error){
+                this.handleCreateGameError(checkInput.error)
+                return {error: checkInput.error}
+            }
+            else {
+                const response = await this.context.feedController.createGame(checkInput.input)
+                if(!response.error){
+                    // this.props.navigationController.onGameCreated()
+                }
+                else{
+                    console.warn("SelectTimeSlotScreen: Error in use controller create game output")
+                }
+                return response
+            }
+        }
+    }
+
+    async createGame(): Promise<ICreateGameResult | void> {
+        const res = await this.makeRequest(this.__createGame())
+        if(!res?.error && res?.feedItem){
+            Alert.alert(
+                "Super! ",
+                `Super, d'autres joueurs vous rejoindront à ${res.feedItem.place.name}.
+                Vos amis seront aussi notifiés de votre présence.
+                BALL IS LIFE 🔥🔥🔥
+                `,
+                [
+                    {text: "Cool", onPress: () => {this.props.navigationController.onGameCreated()}}
+                ],
+                {cancelable: false}
+            )
+        }
+    }
+
+    componentDidUpdate(prevProps: Readonly<ISelectTimeSlotScreenProps>, prevState: Readonly<ISelectTimeSlotScreenState>, snapshot?: any): void {
+        console.log(`SelectTimeSlotScreen updated: ${JSON.stringify({
             startingTime: this.state.startingTime,
-            endingTime: this.state.endingTime
-        }
-        const response = await this.context.feedController.createGame(input)
-        if(!response.error){
-            this.props.navigationController.onGameCreated()
-        }
-        else{
-            console.warn("SelectTimeSlotScreen: Error in use controller create game output")
-        }
-        return response
+            endingTime: this.state.endingTime,
+        })}`)
     }
 
 	onPressModifyPlace(): void {
-		this.props.navigationController.goBack()
+		this.props.navigationController.goToSelectPlace()
 	}
 
 	modifyStartingTime(startingTime: Date): void {
-		this.setState((prevState) => (
-			{
-				...prevState,
-				startingTime
-			}
-		))
+		this.modifyTime(startingTime, "STARTING")
 	}
 
 	modifyEndingTime(endingTime: Date): void {
-		this.setState((prevState) => (
-			{
-				...prevState,
-				endingTime
-			}
-		))
-	}
+        this.modifyTime(endingTime, "ENDING")
+    }
+
+    
+
+    handleCreateGameError(error: ICreateGameError): void {
+        const newState: ISelectTimeSlotScreenState = {
+            ...this.state,
+            error: error.description
+        }
+        this.setState(newState)
+    }
 
     render(): React.ReactNode {
         return(
@@ -107,13 +142,50 @@ export default class SelectTimeSlotScreen extends React.Component<ISelectTimeSlo
                 startingTime={this.state.startingTime}
                 endingTime={this.state.endingTime}
                 placeName={this.state.chosenPlaceName}
-                onPressPlay={this.createGame}
-				onPressModifyPlace={this.onPressModifyPlace}
-				modifyEndingTime={this.modifyEndingTime}
-				modifyStartingTime={this.modifyStartingTime}
+                onPressPlay={this.createGame.bind(this)}
+				onPressModifyPlace={this.onPressModifyPlace.bind(this)}
+				modifyEndingTime={this.modifyEndingTime.bind(this)}
+				modifyStartingTime={this.modifyStartingTime.bind(this)}
+                modifyStartingAndEndingTimes={this.modifyStartingAndEndingTimes.bind(this)}
+                error={this.state.error}
+                loading={this.state.loading}
             />
         )
     }
+
+    modifyStartingAndEndingTimes(startingTime: Date, endingTime: Date): void {
+        this.setState((prevState) => ({
+            ...prevState,
+            startingTime, 
+            endingTime
+        }))
+    }
+
+
+    private modifyTime(time: Date, type: "ENDING" | "STARTING"): void {
+        let newState:ISelectTimeSlotScreenState = {
+            ...this.state
+        }
+        switch (type) {
+            case "STARTING":
+                newState = { 
+                    ...newState,
+                    startingTime: new Date(time)
+                }
+                break;
+            case "ENDING":
+                newState = { 
+                    ...newState,
+                    endingTime: new Date(time)
+                }
+                break;
+            default:
+                throw new Error("Invalid type")
+        }
+        console.log(`Modified ${type} time: ${JSON.stringify(newState)}`)
+        this.setState(newState)
+    }
+
 }
 
 
@@ -126,5 +198,60 @@ export interface ISelectTimeSlotViewProps{
 	onPressModifyPlace: () => void
 	modifyEndingTime: SelectTimeSlotScreen['modifyEndingTime']
 	modifyStartingTime: SelectTimeSlotScreen['modifyStartingTime']
+    modifyStartingAndEndingTimes: SelectTimeSlotScreen['modifyStartingAndEndingTimes']
+    error?:string
+    loading: boolean
 }
+
+
+function checkGameInput(input: ICreateGameInput): ICheckGameInputResult {
+    let {startingTime, endingTime} = input
+    let result: ICheckGameInputResult = {
+        input
+    }
+    // console.warn(JSON.stringify(input))
+    if(startingTime.valueOf() >= endingTime.valueOf() ){
+        if(endingTime.getHours() >= 6){
+            result = {
+                ...result,
+                error: {
+                    reason: CreateGameErrorReason.INVALID_ENDING_HOUR,
+                    description: "Veuillez choisir une heure de départ inférieure à l'heure d'arrivée am le lendemain"
+                }
+            }
+        } else {
+            const newEndingTime = new Date(endingTime.valueOf() + 24*60*60*1000)
+            endingTime = newEndingTime
+        }
+    }
+    
+    result = {
+        ...result,
+        input: {
+            ...result.input,
+            endingTime,
+            startingTime
+        }
+    }
+    const maxDuration = 9 * 3600 * 1000
+
+    if(Math.abs(startingTime.valueOf() - endingTime.valueOf()) > maxDuration){
+        result = {
+            ...result,
+            error: {
+                reason: CreateGameErrorReason.INVALID_TIME_RANGE,
+                description: "Vous ne pouvez pas signaler votre présence pendant plus de 9 heures"
+            }
+        }
+    }
+    return result
+}
+
+
+export type ICheckGameInputResult = {
+    input: ICreateGameInput
+    error?: ICreateGameError
+}
+
+
 

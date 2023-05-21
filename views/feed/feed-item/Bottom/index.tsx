@@ -3,15 +3,16 @@ import React from "react";
 import { View, Text } from "react-native";
 import FriendsThereView from "./FriendsThere";
 import { ActionsContainer } from "./Actions/actionsContainer";
-import { IUserProfileData } from "../../../../app/features/feed/slice/interface";
+import { IUserProfileDataState } from "../../../../app/features/types";
 
 
 interface IBottomViewProps{
-    friendsThere: IUserProfileData[]
+    friendsThere: IUserProfileDataState[]
     onPressFriendsThere: () => void
     onPressInvite: () => void
     onPressPlay: () => void
     onPressCommentButton: () => void
+    isAttending: boolean
 }
 
 export default function BottomView(props: IBottomViewProps) {
@@ -22,11 +23,13 @@ export default function BottomView(props: IBottomViewProps) {
                 onPressCommentButton={() => {props.onPressCommentButton()}}
                 onPressInvite={() => {props.onPressInvite()}}
                 onPressPlay={() => {props.onPressPlay()}}
+                isAttending={props.isAttending}
             />
-            <FriendsThereView
+
+            {/* <FriendsThereView
                 friendsHere={props.friendsThere}
                 onPress={() => {props.onPressFriendsThere()}}
-            />
+            /> */}
         </View>
     )
 }

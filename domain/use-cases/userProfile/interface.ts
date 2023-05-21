@@ -8,6 +8,8 @@ export interface IUserProfileUseCase {
     defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult>
     requestFriendShip(input: IRequestFriendShipInput): Promise<IRequestFriendShipResult>
     getMyUserProfile(email: string): Promise<IUserProfile | null>
+    acceptFriendshipRequest(input: IAcceptFriendshipRequestInput): Promise<IAcceptFriendshipRequestResult>
+    uploadProfilePic(input: IUploadProfilePicInput): Promise<IUploadProfilePicResult>
 }
 
 
@@ -16,6 +18,8 @@ export interface IUserProfileModelEventListener {
     onNewUserProfile(input: IUserProfile): void
     onUsernameDefinedEvent(userProfileData: IUserProfileData): void
     setMyProfile(input: IUserProfile): void
+    onNewFriendShipRequest(input: IRequestFriendShipInput): void
+    onAcceptedFriendshipRequest(notificationID: string): void
 }
 
 
@@ -24,9 +28,12 @@ export interface IUserProfileRepository {
     getUserProfile(id: IUserProfileData['id']): Promise<IUserProfile | null>
     defineUsername(input: IDefineUsernameInput): Promise<IDefineUsernameResult>
     requestFriendship(input: IRequestFriendShipInput): Promise<IRequestFriendShipResult>
-    getUserProfileByEmail(email: string): Promise<IUserProfile | null>
-    cacheMyUserProfileData(myUserProfileData: IMyUserProfileData): Promise<void>
+    getMyUserProfile(email: string): Promise<IUserProfile | null>
     getMyUserProfileData(): Promise<IMyUserProfileData | null>
+    setMyUserProfileID(id: string): void
+    acceptFriendshipRequest(input: IAcceptFriendshipRequestInput): Promise<IAcceptFriendshipRequestResult>
+    uploadProfilePic(input: IUploadProfilePicInput): Promise<IUploadProfilePicResult>
+    
 }
 
 export interface IMyUserProfileData extends IUserProfileData {
@@ -53,3 +60,21 @@ export interface IDefineUsernameResult {
     userProfile?: IUserProfile
 }
 
+export interface IAcceptFriendshipRequestInput {
+    friendshipRequestID: string, 
+    notificationID: string
+}
+
+export interface IAcceptFriendshipRequestResult {
+    error: false | string
+    friendshipRequestID: string
+}
+
+export interface IUploadProfilePicInput {
+    userProfileID: string,
+    image: Blob
+}
+
+export interface IUploadProfilePicResult {
+    error: false | string
+}

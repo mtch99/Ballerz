@@ -4,7 +4,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AppContext } from "../../controllers/provider";
 import React, { useEffect } from "react";
-import { CreateProfileScreenWrapper, AppTabWrapper } from "./wrappers";
+import { CreateProfileStackWrapper, AppTabWrapper } from "./wrappers";
 
 
 
@@ -30,7 +30,7 @@ export function AppStack(): JSX.Element {
                     options={{
                         headerShown: false
                     }}
-                    component={CreateProfileScreenWrapper}
+                    component={CreateProfileStackWrapper}
                 />
             </Stack.Navigator>
         ):
@@ -40,7 +40,7 @@ export function AppStack(): JSX.Element {
                 options={{
                     headerShown: false
                 }}
-                component={CreateProfileScreenWrapper}
+                component={CreateProfileStackWrapper}
             />
             <Stack.Screen
                 name="AppTab"

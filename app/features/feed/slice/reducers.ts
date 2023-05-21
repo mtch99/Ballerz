@@ -1,6 +1,8 @@
+import { IAttendance } from "./../../../../domain/use-cases/types";
+import { IUserProfileDataState } from "./../../types";
 import { IComment, IFeedItem } from "../../../../domain/use-cases/types";
 import { IFeedItemState, IFeedState } from "./interface";
-import {IAddItemActionPayload, ICheckInActionPayload, ICommentActionPayload, INewFeedActionPayload, IRemoveItemActionPayload} from "./actions";
+import {IAddItemActionPayload, ICheckInActionPayload, ICheckOutActionPayload, ICommentActionPayload, INewFeedActionPayload, IRemoveItemActionPayload} from "./actions";
 import { PayloadAction } from "@reduxjs/toolkit";
 import uuid from "uuid"
 
@@ -23,8 +25,11 @@ enum FeedActionType {
 	ADD_ITEM='ADD_ITEM',
 	REMOVE_ITEM="REMOVE_ITEM",
 	CHECK_IN="CHECK_IN",
+	CHECK_OUT = "CHECK_OUT",
 	NEW_FEED ='NEW_FEED',
 	COMMENT='COMMENT',
+	SET_MY_GAMES_LIST = "SET_MY_GAMES_LIST",
+	NEW_PRESENCE = "NEW_PRESENCE"
 }
 export type FeedActionString = keyof typeof FeedActionType
 
@@ -38,10 +43,23 @@ type FeedReducer<PayloadType> = (state: IFeedState, action: PayloadAction<Payloa
 
 
 const addItemReducer: FeedReducer<IAddItemActionPayload> = (state, action) => {
-	return {
-		...state,
-		items: [action.payload, ...state.items,],
-	};
+
+	let gameExists = state.items.find((feedItem) => {feedItem.id == action.payload.id})?true:false
+	state.items.forEach((feedItem) => {
+		if(feedItem.id){
+			gameExists = true
+		}
+	})
+	if(gameExists){
+		return{
+			...state,
+		}
+	} else {
+		return {
+			...state,
+			items: [action.payload, ...state.items],
+		};
+	}
 }
 
 
@@ -55,12 +73,13 @@ const removeItemReducer: FeedReducer<IRemoveItemActionPayload> = (state, action)
 const checkInReducer: FeedReducer<ICheckInActionPayload> = (state, action) => {
 	const currentItems = [...state.items]
 	const newItems: IFeedItemState[] = []
-    const {keyToUpdate, userProfileData} = action.payload
+    const {keyToUpdate, attendance: userProfileData} = action.payload
     for(let feedItem of currentItems) {
 		if(feedItem.id == keyToUpdate){
 			const newItem = addAttendantToFeedItem(feedItem, userProfileData)
 			newItems.push(newItem)
 		}else{
+			// console.error(feedItem)
 			newItems.push(feedItem)
 		}
 	}
@@ -70,9 +89,38 @@ const checkInReducer: FeedReducer<ICheckInActionPayload> = (state, action) => {
     }
 }
 
+const checkOutReducer: FeedReducer<ICheckOutActionPayload> = (state, action) => {
+	const newItems: IFeedState['items'] = []
+	state.items.forEach(feedItem => {
+		if(feedItem.id == action.payload.feedItemID){
+			const newFeedItem = removeAttendantFromFeedItem(feedItem, action.payload.userProfile)
+			newItems.push(newFeedItem)
+		} else {
+			newItems.push(feedItem)
+		}
+	})
+
+	const newMygamesList: IFeedState['myGamesList'] = []
+	state.myGamesList.forEach((item)=> {
+		if(item.gameID != action.payload.feedItemID){
+			newMygamesList.push(item)
+		}
+	})
+	return {
+        ...state,
+		myGamesList: newMygamesList,
+        items: newItems
+    }
+}
+
 
 const newFeedReducer: FeedReducer<INewFeedActionPayload> = (state, action) => {
-	return action.payload
+	const newFeed = action.payload
+	newFeed.items.sort((a, b) => {
+        return new Date(b.startingTime).valueOf() - new Date(a.startingTime).valueOf();
+    })
+	return {...state, items: newFeed.items}
+	// return action.payload
 }
 
 const commentReducer: FeedReducer<ICommentActionPayload> = (state, action) => {
@@ -96,6 +144,22 @@ const commentReducer: FeedReducer<ICommentActionPayload> = (state, action) => {
 }
 
 
+const setMyGameList: FeedReducer<IFeedState['myGamesList']> = (state, action) => {
+	return {
+		...state,
+		myGamesList: action.payload
+  	}
+}
+
+
+const newPresence: FeedReducer<{gameID: string}> = (state, action) => {
+	return {
+		...state,
+		myGamesList: [action.payload, ...state.myGamesList]
+	}
+}
+
+
 /**
  * An object containing all the reducers
  */
@@ -105,17 +169,35 @@ export const feedReducers = {
 	"REMOVE_ITEM": removeItemReducer,
 	"NEW_FEED": newFeedReducer,
 	"COMMENT": commentReducer,
+	"CHECK_OUT": checkOutReducer,
+	"SET_MY_GAME_LIST": setMyGameList,
+	"NEW_PRESENCE": newPresence
 } 
 
 
-function addAttendantToFeedItem(feedItem: IFeedItemState, userProfileData: ICheckInActionPayload['userProfileData']): IFeedItemState {
+function addAttendantToFeedItem(feedItem: IFeedItemState, attendant: IAttendance): IFeedItemState {
 	const currentAttendants = [...feedItem.attendants]
-	currentAttendants.push(userProfileData)
+	currentAttendants.push(attendant)
 
 	return {
 		...feedItem,
 		attendants: currentAttendants
 	}
+}
+
+
+function removeAttendantFromFeedItem(feedItem: IFeedItemState, userProfileData: IUserProfileDataState): IFeedItemState{
+	const currentAttendants: IFeedItemState['attendants'] = []
+	feedItem.attendants.forEach(attendance => {
+        if(attendance.userProfileData.id != userProfileData.id){
+            currentAttendants.push(attendance)
+        }
+    })
+
+    return {
+        ...feedItem,
+        attendants: currentAttendants
+    }
 }
 
 

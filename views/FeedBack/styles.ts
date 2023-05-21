@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         borderRadius: 10,
-        flexGrow: 1
     },
     cant_find_ur_friends_text: {
         color:"#E5E6E8",

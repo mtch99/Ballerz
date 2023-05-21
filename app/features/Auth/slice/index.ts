@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../../store'
-import { ILoginInput } from '../../../../domain/use-cases/Auth/types'
+import { ILoginInput } from '../../../../domain/use-cases/auth/types'
 import { IUserProfileState } from '../../types'
 
 // Define a type for the slice state
@@ -11,7 +11,6 @@ export interface IUserStateProfileData {
 
 export type UserState = {
   email: string,
-  profile?: IUserProfileState
 } | undefined
 
 export interface ILastSignupInput {
@@ -26,7 +25,8 @@ export type  AuthState = {
 	password: string
   }
   profile?: IUserProfileState
-  isDataPrepared: boolean
+  isDataPrepared: boolean,
+  isFirstLaunch: boolean,
 }
 
 // Define the initial state using that type
@@ -38,6 +38,7 @@ const initialState: AuthState = {
 		password: ''
 	},
 	isDataPrepared: false,
+	isFirstLaunch: true,
 };
 
 
@@ -47,59 +48,65 @@ export const authSlice = createSlice({
   name: 'auth',
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
-  reducers: {
-    setUser: (state: AuthState, action: PayloadAction<UserState>) => {
-		const result = {
-			...state,
-			user: action.payload
-		}
-		return {
-			...state,
-			user: action.payload
-		}
-    },
-
-    setLastSignupInput: (state: AuthState, action: PayloadAction<{email: string, password: string}>) => {
-		return {
-			...state,
-			lastSignupInput: action.payload
-		}
-    },
-
-	setLoginInput: (state: AuthState, action: PayloadAction<ILoginInput>) => {
-		return {
-			...state,
-			lastSigninInput: action.payload
-		}
-    },
-
-	setUserProfile: (state: AuthState, action: PayloadAction<{profile: IUserProfileState}>) => {
+  	reducers: {
+		setUser: (state: AuthState, action: PayloadAction<UserState>) => {
+				const result = {
+					...state,
+					user: action.payload
+				}
+				return {
+					...state,
+					user: action.payload
+				}
+		},
 		
-		if(state.user){
+		setLastSignupInput: (state: AuthState, action: PayloadAction<{email: string, password: string}>) => {
+				return {
+					...state,
+					lastSignupInput: action.payload
+				}
+		},
+		
+		setLoginInput: (state: AuthState, action: PayloadAction<ILoginInput>) => {
+				return {
+					...state,
+					lastSigninInput: action.payload
+				}
+		},
+
+		setUserProfile: (state: AuthState, action: PayloadAction<{profile: IUserProfileState}>) => {
+
+			if(state.user){
+				return {
+					...state,
+					profile: action.payload.profile
+				}
+			} else {
+				throw new Error("User state is undefined")
+			}
+
+		},
+
+		preparedData: (state: AuthState, action: PayloadAction<undefined>) => {
 			return {
 				...state,
-				profile: action.payload.profile
+				isDataPrepared: true
 			}
-		} else {
-			throw new Error("User state is undefined")
-		}
-		
-	},
+		},
 
-	preparedData: (state: AuthState, action: PayloadAction<undefined>) => {
-		return {
-			...state,
-			isDataPrepared: true
-		}
-	}
-
-  }
+		setFirstLaunch: (state: AuthState, action: PayloadAction<boolean>) => {
+			return {
+  	          ...state,
+  	          isFirstLaunch: action.payload
+  	      	}
+		},
+  	}
 })
 
 
 
 
-export const { setUser, setLastSignupInput, setLoginInput, setUserProfile, preparedData } = authSlice.actions
+export const { setUser, setLastSignupInput, setLoginInput, setUserProfile, preparedData, setFirstLaunch} = authSlice.actions
 
 
 // Other code such as selectors can use the imported `RootState` type

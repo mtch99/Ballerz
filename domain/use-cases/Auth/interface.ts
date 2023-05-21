@@ -16,6 +16,7 @@ export default interface IAuthUCI {
     login(signInInput: types.ILoginInput): Promise<types.ILoginResult>
     getLastLoginCreds(): Promise<types.ILoginInput | null>
     signinLastUser(): Promise<types.ILoginResult | false>
+    isFirstLaunch(): Promise<boolean>
 }
 
 
@@ -36,6 +37,7 @@ export interface IAuthUCIEventListener {
     onNewLoginAttempt(input: types.ILoginInput): void;
     onhNewUserLoggedInEvent(userData: types.UserBasicData): void
     onUsernameDefinedEvent(userProfile: IUserProfile): void
+    setFirstLaunch(firstLaunch: boolean): void
 }
 
 
@@ -48,4 +50,5 @@ export interface IAuthRepository{
     getCurrentUser(): Promise<types.UserBasicData | null>
     __storeLoginCreds(creds: types.ILoginInput): void
     __storeSignupCreds(creds: types.ISignupInput): void
+    isFirstLaunch(): Promise<boolean>
 }

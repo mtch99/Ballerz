@@ -1,53 +1,62 @@
 import uuid from "react-native-uuid";
 import initialFeed from "./data/feed";
 import initialUserProfileData from "../data/userProfile";
-import { ICheckinEventPayload, ICommentEventPayload, ICommentInput, ICreateGameInput, ICreateGameOutput, IFeedEventObserver, IFeedUseCase } from "./interface";
+import { ICheckInResult, ICheckinEventPayload, ICheckoutInput, ICommentEventPayload, ICommentInput, ICreateGameInput, ICreateGameResult, IFeedModelEventListener, IFeedUseCase, IGameRepository } from "./interface";
 import { IComment, IFeed, IFeedItem, IUserProfile, IUserProfileData } from "../types";
 import { initialPlaceProfiles } from "../data/places";
+import GameRepository from "../../repositories/Game";
 
 
 export class FeedUseCase implements IFeedUseCase {
 
     // An object whose reponsibilty is to dispatch feed use case events to the right subscribers
-    private observer: IFeedEventObserver;
+    private observer: IFeedModelEventListener;
+    private repo: IGameRepository = new GameRepository();
 
     private feed = initialFeed
 
-    constructor(observer: IFeedEventObserver){
+    constructor(observer: IFeedModelEventListener){
         this.observer = observer;
     }
-    
-    async createGame(input: ICreateGameInput): Promise<ICreateGameOutput> {
 
-        const result: ICreateGameOutput ={
-            error: false,
-            feedItem: {
-                ...input,
-                place: {
-                    id: input.placeId,
-                    name: `Fake ${initialPlaceProfiles[0].name}`,
-                    address: `Fake ${initialPlaceProfiles[0].address}`
-                },
-                id: uuid.v4().toString(),
-                friendsThere: [],
-                comments: [],
-                badges: [],
-                attendants: []
-            }
+    async getMyGamesList(userProfileID: string): Promise<{ gameID: string; }[]> {
+        const response = await this.repo.getMyGamesList(userProfileID)
+        if(response.length > 0){
+            this.observer.onNewMyGamesList(response)
         }
-        this.observer.newGameEventHandler(result.feedItem)
+        return response
+    }
+    
+    async createGame(input: ICreateGameInput): Promise<ICreateGameResult> {
+        const response = await this.repo.createGame(input);
+        if(!response.error && response.feedItem){
+            this.observer.newGameEventHandler(response.feedItem);
+            this.observer.onNewPresence({gameID: response.feedItem.id});
+        }
+        // console.error(JSON.stringify(console.error()));
+        return response;
+    }
+
+    async getFeed(myUserProfileID?:string): Promise<IFeed> {
+        const result = await this.repo.getAllGames(myUserProfileID)
+        this.observer.newFeedEventHandler(result)
         return result
     }
 
-    async getFeed(): Promise<IFeed> {
-        const result = this.feed
-        this.observer.newFeedEventHandler(this.feed)
-        return result
+    async checkIn(payload: ICheckinEventPayload): Promise<ICheckInResult> {
+        const response = await this.repo.checkIn(payload)
+        if(!response.error && response.attendanceID){
+            this.observer.checkInEventHandler({...payload, attendanceID: response.attendanceID})
+        }
+        return response
     }
 
-    async checkIn(payload: ICheckinEventPayload): Promise<boolean> {
-        this.observer.checkInEventHandler(payload)
-        return true
+    async checkOut(input: ICheckoutInput): Promise<boolean> {
+        const response = await this.repo.checkOut(input)
+        if(response){
+            this.observer.onCheckout(input)
+        }
+        return response
     }
 
     async comment(input: ICommentInput): Promise<boolean> {

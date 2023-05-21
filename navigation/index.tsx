@@ -14,6 +14,7 @@ import { AppStackWrapper, AuthStackWrapper} from './wrappers';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AppContext } from '../controllers/provider';
+import { DiscoveryStackNavigator } from './discovery';
 
 // import LinkingConfiguration from './LinkingConfiguration';
 
@@ -56,7 +57,7 @@ export function RootStackNavigator(): JSX.Element {
 		// }
 	}, [])
 
-	if(authState.isDataPrepared && authState.user){
+	if(!authState.isDataPrepared && authState.user){
 		isSignedIn = true
 	}
 	
@@ -66,67 +67,57 @@ export function RootStackNavigator(): JSX.Element {
 		!authState.isDataPrepared?(
 			<></>
 		):(
-			<RootStack.Navigator
-				initialRouteName={isSignedIn?'AppStack': 'AuthStack'}
-			>
-						<RootStack.Screen
-							name='AppStack'
-							options={{
-								headerShown: false,
-							}}
-							component={AppStackWrapper}
-						/>
-						<RootStack.Screen
-							name='AuthStack'
-							options={{
-								headerShown: false,
-							}}
-							component={AuthStackWrapper}
-						/>
-			</RootStack.Navigator>
+			authState.user?(
+				<RootStack.Navigator
+				>
+					{/* <RootStack.Screen
+					    name='OnbordingStack'
+						options={{
+							headerShown: false,
+						}}
+						component={OnboardingStackNavigator}
+					/> */}
+					<RootStack.Screen
+						name='AppStack'
+						options={{
+							headerShown: false,
+						}}
+						component={AppStackWrapper}
+					/>
+					<RootStack.Screen
+						name='AuthStack'
+						options={{
+							headerShown: false,
+						}}
+						component={AuthStackWrapper}
+					/>
+				</RootStack.Navigator>
+			):(
+				<RootStack.Navigator
+				>
+					<RootStack.Screen
+					    name='DiscoveryStack'
+						options={{
+							headerShown: false,
+						}}
+						component={DiscoveryStackNavigator}
+					/>
+					<RootStack.Screen
+						name='AuthStack'
+						options={{
+							headerShown: false,
+						}}
+						component={AuthStackWrapper}
+					/>
+					<RootStack.Screen
+						name='AppStack'
+						options={{
+							headerShown: false,
+						}}
+						component={AppStackWrapper}
+					/>
+				</RootStack.Navigator>
+			)
 		)
 	)
-	
-
-		// 	<RootStack.Navigator
-		// 		initialRouteName={initialRouteName}
-		// 	>
-		// 		{isSignedIn?(
-		// 			<>
-		// 				<RootStack.Screen
-		// 					name='AppStack'
-		// 					options={{
-		// 						headerShown: false,
-		// 					}}
-		// 					component={AppStackWrapper}
-		// 				/>
-		// 				<RootStack.Screen
-		// 					name='AuthStack'
-		// 					options={{
-		// 						headerShown: false,
-		// 					}}
-		// 					component={AuthStackWrapper}
-		// 				/>
-		// 			</>
-		// 		):(
-		// 			<>
-		// 				<RootStack.Screen
-		// 				name='AuthStack'
-		// 				options={{
-		// 					headerShown: false,
-		// 				}}
-		// 				component={AuthStackWrapper}
-		// 				/>
-		// 				<RootStack.Screen
-		// 					name='AppStack'
-		// 					options={{
-		// 						headerShown: false,
-		// 					}}
-		// 					component={AppStackWrapper}
-		// 				/>
-						
-		// 			</>
-		// 		)}
-		// 	</RootStack.Navigator>
-		// )
 }

@@ -1,8 +1,18 @@
 import React from "react"
-import { View, Text } from "react-native"
+import { View, Text, ScrollView } from "react-native"
 import { IPlaceProfileState } from "../../app/features/place/types"
 import { styles } from "./styles"
 import { IPlaceProfileViewProps } from "../../screens/placeProfile"
+import BallerzSafeAreaView from "../safeArea"
+import { style } from "../feed/feed-item/styles"
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"
+import { SectionList, SectionListProps } from "react-native"
+import { IFeedItemState } from "../../app/features/feed/slice/interface"
+import { globalStyles } from "../styles"
+import { FlatList } from "react-native-gesture-handler"
+import FeedItemView from "../feed/feed-item"
+import ListItemButton from "../../components/Buttons/ListItemButton"
+import { handleSharePress } from "../../screens/utils"
 
 
 
@@ -16,28 +26,90 @@ export class PlaceProfileView extends React.Component<IPlaceProfileViewProps>{
         address: ""
     }
 
+    sectionListProps(games: IPlaceProfileState['games']): SectionListProps<IFeedItemState> {
+        return (
+            {
+                sections: [
+                    {
+                        data: games,
+                        key: "Parties",
+                        extraData: this.props.games,
+                        title: "Parties"
+                    }
+                ],
+                renderItem: ({ item }) => (
+                    <FeedItemView
+                      feedItem={item}
+                      handleBadgeClick={() => {}}
+                      onPressCommentButton={() => {}}
+                      handleCheckoutButtonPress={()=> {}}
+                      handlePlayButtonPress={() => {}}
+                      handleFriendsTherePress={() => {this.props.onPressAttendantsNum(item)}}
+                      handleInvitePress={handleSharePress}
+                    />
+                )
+            }
+        )
+        
+    }
+
 
     componentDidMount(): void {
-        // console.warn(`Mounting props: ${JSON.stringify(this.props)}`)
     }
 
     componentDidUpdate(prevProps: Readonly<IPlaceProfileViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
-        // console.warn(`PlaceProfileView newProps: ${JSON.stringify(this.props)})`)
     }
 
     render(): React.ReactNode {
         return(
-            <View>
-                <View
-                    style={styles.profilePictureContainer}
-                />
-                <Text style={{color: 'white'}}>
-                    {this.props.name}
-                </Text>
-                <Text style={{color: 'white'}}>
-                    {this.props.address}
-                </Text>
-            </View>
+            <BallerzSafeAreaView
+                // style={styles.scrollViewContainer}
+            >
+                <>
+                    <View style={style.container}>
+                        <View
+                            style={styles.profileDataContainer}
+                        >
+                            <View
+                                style={{flexDirection: "row", ...styles.usernameContainer}}
+                            >
+                                <MaterialIcons
+                                    name="place"
+                                    size={17}
+                                    color="grey"
+                                />
+                                <Text style={styles.usernameText}>
+                                    {this.props.name}
+                                </Text>
+                            </View>
+                            <Text style={{color: 'lightgrey'}}>
+                                {this.props.address}
+                            </Text>
+                        </View>
+                    </View>
+                    <View
+                        style={{flexDirection: "row", flexGrow: 1, marginHorizontal: 17, marginBottom: 10, justifyContent: "space-between"}}
+                    >
+
+                        <Text
+                        style={{fontSize: 24, color: '#595085',}}
+                        >
+                            Parties
+                        </Text>
+
+                        <ListItemButton
+                            onPress={() => {this.props.onPressPlayHere()}}
+                            title="jouer ici"
+                            selected={false}
+                        />
+
+                    </View>
+                    <SectionList
+                    {...this.sectionListProps(this.props.games)}
+                    />
+                </>
+            </BallerzSafeAreaView>
         )
     }
 }
+

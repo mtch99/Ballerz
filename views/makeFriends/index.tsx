@@ -1,13 +1,13 @@
 import React from "react";
-import SearchBarView from "../../components/SearchBar";
+import SearchBarView from "./SearchBar";
 import InviteYourFriendsFeedBackView from "../FeedBack/inviteYourFriends";
 import BallerzSafeAreaView from "../safeArea";
 import FindYourFriendsView from "../auth/findYourFriends";
 import { SelectableUserProfileListView } from "../userProfileList/selectable";
 import { View } from 'react-native'
-import HeaderView from "../../components/header";
+import BallerzHeaderView from "../../components/header";
 import HeaderCheckButton from "../../components/header/buttons/checkButton";
-import HeaderTextButton from "../../components/header/buttons/textButton";
+import BalerzHeaderTextButton from "../../components/header/buttons/textButton";
 import { IFindYourFriendsViewProps } from "../../screens/userProfileList/findYourFriends/interface";
 
 
@@ -28,13 +28,13 @@ export class MakeFriendsView extends FindYourFriendsView<IMakeFriendsViewProps>{
                 <View 
                     style = {{flex:1}}
                 >
-                    <HeaderView
+                    <BallerzHeaderView
                         title="Personnes"
                         rightButton={HeaderCheckButton}
                         rightButtonProps={{
                             onPress: this.props.onPressContinue
                         }}
-                        leftButton={HeaderTextButton}
+                        leftButton={BalerzHeaderTextButton}
                         leftButtonProps={{
                             onPress: () => {this.props.cancel()},
                             // @ts-ignore

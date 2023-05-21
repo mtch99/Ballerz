@@ -3,11 +3,10 @@ The app for basketball pickup games
 
 
 ## Branch Purpose
-    I want to invite my find my friends ib the app or invite them after creating my profile
+    I want to be able to make friends and accept friendship requests
 ## Next 
 Test these scenarios:
     `TODO: define next scenarios` 
-    - Places and users search
     - I want to add my favorite playground
         
 There must be three different games on three different courts, two at the moment, and one other on saturday
@@ -15,66 +14,121 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 
-- [x] Invite your friends after find Your friends
-    - [x] Styles Find your friends bottom sheet
-        - [x] Display bottom sheet in home page
-    - [x] Invite Your friends Feedback vue
 
-* [x] Fix MakeFriendsScreenNot displaying list of users on first render
-    - [x] Refactor UserProfileListScreen
-        - [x] The view will contain the searchBar
-* [x] Fix FindYourFriendsScreen not srolling
+- [ ] release v2.0.0
+    - [ ] update git ignore
 
-* [ ] TODO: Save userProfile in the local storage upon creation
-
-- [x] Enable seacrh function in FindYourFriendsScreen
-
-- [x] Refactor MakefriendsView to enable FriendsShip Request
-
-* [x] Fix flatlist scrolling bug on FindYourFriends View ... scroll stops before the end of the list
-    - [x] Wrap the safeArea children with a view of flex 1
-
-- [x] Run scenario and test evrything works fine
-    - [x] Fix MakeFriendsViewHeader
-    - [x] disable error log on navigation to place profile screen
-    * [x] disable error logs for uimplemented functions
+- [x] Friend Playing notification
+    - [x] FriendPlaying Notification View
+    - [x] Fix FriendshipRequestNotification Layout
+    - [x] Display
+    - [x] Join button conditionally activated
+        - [x] My PresenceList in authState
+        - [x] isPresent field in IFriendPlayingNotification
 
 
-- [ ] Add friend
+* [x] Add profile picture after profile creation
+    - [x] Load asssets before launch 
+    - [x] Add default profile pic to assets
+        
+
+- [x] Games feature
+    - [x] Undo onNewNotification warning in Notifications repository    
+    - [x] Disable Play button during checkin request
+    - [x] Create Game from feedScreen
+    - [x] Popup after checkin
 
 
-<!-- - [ ] Add place -->
-- [ ] Invitations
+- [x] See Game Participants
+
+- [x] Replace invite button with share button
+
+- [x] Test and refine Discovery flow
+    - [x] DefineUsernameView 
+    - [x] FindYourFriendsView
+
+- [x] ProfilePic
+    - [x] Retrieve user profile on MyProfile screen focus
+    - [x] Make sure profile pic is uploaded on userProfileCreation
+    - [x] Display respective profile pics on all UserList screens
+
+- [x] My Profile
+    - [x] See my friends list
+    - [x] I Want to see my games list
+
+
+- [x] Cache notifications and use it for badge diff
+
+- [x] Place Profile
+    - [x] Sort games by date
+    - [x] Friends there in game
+
+- [x] FeedItemView
+    - [x] Fix layout
+    - [x] Display "Today" when a game is happemimg the same day
+
+
+- [x] Test Joining friends from notifications screen on real device
+    - [x] Fix FriendPlayingNotification bug
+    - [x] Update Notifications query to index the receiverProfile
+    - [x] Fix Joining action logic
+
+
+- [x] Load games on feed screen focus
+
+
 - [ ] Notifications
-- [ ] Comments
+    - [ ] Hot court notification 
+    - [x] Prevent Notifications and feed states from having elements with the same keys
 
+- [ ] I want see a toast message on new notification
+    - [ ] Display a toast message on new received notification 
+        - [ ] yarn add @react-native-material/Snackbar
+        - [ ] Notification UseCase send events to the Notifications controller
+        - [ ] Notification  controller send events to the snackbar 
 
-- [ ] Add Profile Picture
+        
 
-
-
-
-TODO: Fixes
-- [ ] remove trailing space from define username input and search inputs 
+TODO: Display number of games per players
 
 
 
 TODO: scenario10
-- [ ] UserProfileScreen
-            - [ ] add stats
-* [ ] inject profilepic uri
 * [ ] Fix userProfileScreen virtualized list in scrollView Error
 
 
-TODO: auth
-* [ ] Enable email confirmation to allow users to signin 
-- [ ] FeedBack in auth flow, after defining username, befor find your friends screen
+
+TODO: Prevent users from choosing an already used username
 
 
-TODO: Prevent users from sharing a username
+TODO: Post test Rémi
+* [ ] Majuscule activee au onboarding
+* [ ] Mot de passe visible
+* [ ] Pense pas etre capable d emettre de photo... create profile screen figé
 
 
+- [ ] Personne ne lis 
+- [ ] Premoière photo jeu vidéo
+- [ ] Deuxième photo Jeu vidéo
 
+- [ ] Lien d'invitation 
+    C'est écrit desssus
+
+- [ ] En attente 
+
+-[ ] Avancer après 
+
+- [ ] Photo du parc
+
+- [ ] Google maps
+
+- [ ] Photo adresse
+
+- [ ] Photo de profil pas nécessaire
+
+- [ ] Vidéos lie, adresse, googlemaps lorsque que tu clique sur carré vert, 
+
+- [ ] favoris dans les terrains, notifications
 
 
 

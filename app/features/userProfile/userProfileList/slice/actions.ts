@@ -4,3 +4,6 @@ import { IUserProfileListState } from "./interface";
 
 
 export interface INewUserProfileListActionPayload extends IUserProfileListState{}
+export interface INewSentFriendshipRequestActionPayload {
+    receiverProfileID: string
+}

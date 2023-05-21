@@ -1,7 +1,8 @@
+import PlaceRepository from "../../repositories/Place";
 import initialPlaces, { initialPlaceProfiles } from "../data/places";
 import initialUserProfileData from "../data/userProfile";
 import { IPlaceData } from "../types";
-import IPlaceUseCase, { IPlaceModelEventListener } from "./interface";
+import IPlaceUseCase, { IPlaceModelEventListener, IPlaceRepository } from "./interface";
 import { IPlaceProfile } from "./types";
 
 
@@ -11,19 +12,19 @@ export default class PlaceUseCase implements IPlaceUseCase {
     constructor(observer: IPlaceModelEventListener){
         this.observer = observer;
     }
-    getAllPlaces(): IPlaceData[] {
-        const result = initialPlaces
-        this.observer.onNewPlaceList(result)
-        return result
+    repository: IPlaceRepository = new PlaceRepository();
+
+    async getAllPlaces(): Promise<IPlaceData[]> {
+        const response = await this.repository.getAllPlaces()
+        this.observer.onNewPlaceList(response);
+        return response;
     }
 
-    getPlaceProfile(id: string): IPlaceProfile | null {
-        for (let placeProfile of initialPlaceProfiles) {
-            if(placeProfile.id === id) {
-                this.observer.onNewPlaceProfile(placeProfile)
-                return placeProfile;
-            }
+   async getPlaceProfile(id: string, myUserProfileID?: string): Promise<IPlaceProfile | null> {
+        const response = await this.repository.getPlaceProfile(id, myUserProfileID)
+        if(response){
+            this.observer.onNewPlaceProfile(response);
         }
-        return null;
+        return response;
     }
 } 

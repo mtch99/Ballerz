@@ -3,7 +3,7 @@ import PlaceListReducers from "./reducers"
 import { RootState } from "../../../../store";
 import { IPlaceListState } from "../../types";
 
-const initialState: IPlaceListState = { items: []}
+const initialState: IPlaceListState = {items: []}
 
 export const PlaceListSlice = createSlice({
     name: 'groupChat',

@@ -4,6 +4,7 @@ import { IFeed, IUserProfile } from "../../../../domain/use-cases/types";
 
 export interface IFeedState {
     items: IFeedItemState[]
+    myGamesList: Array<{gameID: string}>
 }
 
 
@@ -13,7 +14,7 @@ export interface IFeedItemState {
     place: IPlaceData
     startingTime: string
     endingTime: string
-    attendants: IUserProfileData[],
+    attendants: IFeedItem['attendants'],
     friendsThere: IUserProfileData[],
     comments: IFeedItem['comments']
 }

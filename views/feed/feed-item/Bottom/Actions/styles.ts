@@ -6,12 +6,11 @@ export const styles = StyleSheet.create({
 
   
 	actionsContainer: {
-		width: 127,
-		height: 28,
+		// maxWidth: 40,
 		flexDirection: "row",
 		alignItems: "center",
-		justifyContent: "space-between",
-		marginLeft: 12
+		marginLeft: 10,
+		marginBottom: 5
 	},
 
 	playText: {
@@ -24,6 +23,7 @@ export const styles = StyleSheet.create({
 	},
 	inviteText: {
 		color: "#b26700",
+		marginLeft: 20
 	},
 
 })

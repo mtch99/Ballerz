@@ -2,20 +2,23 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        width: 375,
-        height: 22,
+        flexDirection: "row",
+        alignItems: "center",
+        // width: 375,
+        // height: 22,
       },
       placeNameContainer: {
-        width: 375,
-        height: 22,
+
+        marginLeft: 5,
       },
       placeNameText: {
         // fontFamily: "Manrope",
         fontStyle:'italic',
         marginTop: 6,
-        marginLeft: 12,
         fontWeight: "400",
-        color: '#AAB8C2'
+        color: '#AAB8C2',
+        fontSize: 18,
+
       },
 })
 

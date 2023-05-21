@@ -1,13 +1,13 @@
 import React from "react";
 import { useAppSelector } from "../../../hooks";
 import { IFeed, IFeedItem, IUserProfile, IUserProfileData } from "../../../../domain/use-cases/types";
-import { ADD_ITEM, CHECK_IN, COMMENT, NEW_FEED, selectFeed } from "../slice";
+import { ADD_ITEM, CHECK_IN, CHECK_OUT, COMMENT, NEW_FEED, NEW_PRESENCE, SET_MY_GAME_LIST, selectFeed } from "../slice";
 import { IFeedItemState, IFeedState} from "../slice/interface";
 import { useSelector } from "react-redux";
 import { AppDispatch } from "../../../store";
-import { IAddItemActionPayload, ICheckInActionPayload, ICommentActionPayload, INewFeedActionPayload } from "../slice/actions";
+import { IAddItemActionPayload, ICheckInActionPayload, ICheckOutActionPayload, ICommentActionPayload, INewFeedActionPayload } from "../slice/actions";
 import { feedReducers } from "../slice/reducers";
-import IFeedModel, { ICheckinEventPayload, ICommentEventPayload } from "../../../../domain/use-cases/feed/interface";
+import IFeedModel, { ICheckinEventPayload, ICheckoutInput, ICommentEventPayload } from "../../../../domain/use-cases/feed/interface";
 
 
 
@@ -28,6 +28,10 @@ export const createFeedModel = (input: IFeedModelInput): IFeedModel => {
             const checkInActionPayload: ICheckInActionPayload = FeedModelAdapter.parseCheckinEventPayload(payload)
             input.dispatchFunc(CHECK_IN(checkInActionPayload))
         },
+        onCheckout(payload: ICheckoutInput) : void {
+            const checkoutActionPayload: ICheckOutActionPayload = payload
+            input.dispatchFunc(CHECK_OUT(checkoutActionPayload))
+        },
         commentEventHandler(payload) {
             const commentActionPayload: ICommentActionPayload = FeedModelAdapter.parseCommentEventPayload(payload)
             input.dispatchFunc(COMMENT(commentActionPayload))
@@ -36,6 +40,13 @@ export const createFeedModel = (input: IFeedModelInput): IFeedModel => {
             const addItemActionPayload: IAddItemActionPayload = FeedModelAdapter.parseFeedItem(payload)
             input.dispatchFunc(ADD_ITEM(addItemActionPayload))
         },
+        onNewMyGamesList(payload) {
+            input.dispatchFunc(SET_MY_GAME_LIST(payload))
+        },
+        onNewPresence(payload){
+            input.dispatchFunc(NEW_PRESENCE(payload))
+        }
+
     }
 }
 
@@ -53,7 +64,12 @@ export class FeedModelAdapter {
     static parseCheckinEventPayload(payload: ICheckinEventPayload): ICheckInActionPayload {
         return {
             keyToUpdate: payload.id,
-            userProfileData: payload.userProfile
+            attendance: {
+                id: payload.attendanceID,
+                arrivalDateTime: payload.attendance.arrivalDateTime.toString(),
+                departureDateTime: payload.attendance.departureDateTime.toString(),
+                userProfileData: payload.attendance.userProfileData
+            }
         }
     }
 
@@ -74,10 +90,11 @@ export class FeedModelAdapter {
     static parseFeedItem(feedItem: IFeedItem): IFeedItemState {
         return {
             ...feedItem,
-            startingTime: feedItem.startingTime.toLocaleDateString(),
-            endingTime: feedItem.endingTime.toLocaleDateString()
+            startingTime: feedItem.startingTime.toString(),
+            endingTime: feedItem.endingTime.toString()
         }
     }
+
 }
 
 

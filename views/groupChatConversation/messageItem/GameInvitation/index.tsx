@@ -13,8 +13,8 @@ import Header from "./Header";
 interface IFeedItemViewProps{
 	feedItem: IFeedItemState
 	handleBadgeClick: IFeedScreen['handleBadgeClick']
-	handleFriendsTherePress: IFeedScreen['handleFriendsTherePress']
-	handleInvitePress: IFeedScreen['handleInvitePress']
+	handleFriendsTherePress: IFeedScreen['handleParticipantsPress']
+	handleInvitePress: IFeedScreen['handleSharePress']
 	handlePlayButtonPress: IFeedScreen['handlePlayButtonPress']
 	onPressCommentButton: () => void
 }

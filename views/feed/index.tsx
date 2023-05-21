@@ -10,10 +10,11 @@ import BallerzSafeAreaView from "../safeArea";
 interface IProps {
     feedState: IFeedState
 	handleBadgeClick: IFeedScreen['handleBadgeClick']
-	handleFriendsTherePress: IFeedScreen['handleFriendsTherePress']
-	handleInvitePress: IFeedScreen['handleInvitePress']
+	handleParticipantsPress: IFeedScreen['handleParticipantsPress']
+	handleSharePress: IFeedScreen['handleSharePress']
 	handlePlayButtonPress: IFeedScreen['handlePlayButtonPress']
 	handleCommentButtonPress: (item: IFeedItemState) => void
+	handleCheckoutButtonPress: (item: IFeedItemState) => void
 }
 
 
@@ -24,11 +25,11 @@ class FeedView extends React.Component<IProps> {
 	}
 
 	handleFriendsTherePress(item: IFeedItemState) {
-		this.props.handleFriendsTherePress(item)
+		this.props.handleParticipantsPress(item)
 	}
 
 	handleInvitePress(item: IFeedItemState) {
-		this.props.handleInvitePress(item)
+		this.props.handleSharePress(item)
 	}
 
 	handlePlayButtonPress(item: IFeedItemState) {
@@ -48,9 +49,6 @@ class FeedView extends React.Component<IProps> {
         
     }
 
-	// componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<{}>, snapshot?: any): void {
-	// 	console.error(`FeedItemView updated: \n \n Pevious props: ${JSON.stringify(prevProps)}`)
-	// }
   
     render(): React.ReactNode {
 		return(
@@ -64,9 +62,10 @@ class FeedView extends React.Component<IProps> {
 								feedItem={item}
 								handleBadgeClick={() => {this.handleBadgeClick(item)}}
 								handleFriendsTherePress={() => {this.handleFriendsTherePress(item)}}
-								handleInvitePress={() => {this.handleInvitePress(item)}}
+								handleInvitePress={async(item) => {this.handleInvitePress(item)}}
 								handlePlayButtonPress={() => {this.handlePlayButtonPress(item)}}
 								onPressCommentButton={() => {this.handleCommentButtonPress(item)}}
+								handleCheckoutButtonPress={() => {this.props.handleCheckoutButtonPress(item)}}
 							/>
 						)
 					}}

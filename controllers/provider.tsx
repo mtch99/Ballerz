@@ -1,12 +1,12 @@
 import React from "react";
+import { Image } from "react-native";
+import { Asset } from 'expo-asset';
 import { IAppController, IAppControllerEventListener } from "./interface";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { createFeedModel } from "../app/features/feed/model";
-import { FeedController } from "./feed";
+import feedController from "./feed";
 import { createGroupChatModel } from "../app/features/groupChat/model";
-import GroupChatController from "./groupChat";
 import { createUserProfileModel } from "../app/features/userProfile/model";
-import UserProfileController from "./userProfile";
 import { IFeedState } from "../app/features/feed/slice/interface";
 import { selectFeed } from "../app/features/feed/slice";
 import IFeedModel from "../domain/use-cases/feed/interface";
@@ -23,16 +23,24 @@ import { IPlaceListState, IPlaceMapState } from "../app/features/place/types";
 import { IPlaceModel, createPlaceModel } from "../app/features/place/model";
 import { selectPlaceListState } from "../app/features/place/placeList/slice";
 import { selectPlaceMapState } from "../app/features/place/placeMap/slice";
-import PlaceController from "./place";
 import IPlaceController from "./place/interface";
 import { IUserProfileMapState } from "../app/features/userProfile/types";
 import { selectUserProfileMapState } from "../app/features/userProfile/userProfileMap/slice";
 import { IAuthModel, createAuthModel } from "../app/features/Auth/model";
-import { IAuthUCIEventListener } from "../domain/use-cases/Auth/interface";
-import AuthController from "./auth";
 import IAuthController from "./auth/interface";
 import { AuthState, selectAuth } from "../app/features/Auth/slice";
-import * as SplashScreen from 'expo-splash-screen'
+import * as SplashScreen from 'expo-splash-screen';
+import { INotificationController } from "./notification/interface";
+import { NotificationListState } from "../app/features/notifications/slice/interface";
+import { createNotificationModel } from "../app/features/notifications/model";
+import { selectNotificationList } from "../app/features/notifications/slice";
+
+
+import userProfileController from "./userProfile";
+import placeController from "./place";
+import groupChatController from "./groupChat";
+import authController from "./auth";
+import notificationController from "./notification";
 
 
 
@@ -45,23 +53,25 @@ export interface IAppContext extends IAppController{
     userProfileMapState: IUserProfileMapState
     placeListState: IPlaceListState
     placeMapState: IPlaceMapState,
-    authState: AuthState
+    authState: AuthState,
+    notificationListState: NotificationListState
 }
 
 
 export const AppContext = React.createContext<IAppContext>({
-    authController: {} as AuthController,
+    authController: {} as IAuthController,
     feedController: {} as IFeedController,
     groupChatController: {} as IGroupChatController,
     userProfileController: {} as IUserProfileController,
     placeController: {} as IPlaceController,
-    feedState: {items: []},
+    notificationController: {} as INotificationController,
+    feedState: {items: [], myGamesList:[]},
     groupChatListState: {items: []},
     groupChatMapState: {},
     userProfileListState: {items: []},
     placeListState: {items: []},
     placeMapState: {},
-    userProfileMapState: {},
+    userProfileMapState: {} as IUserProfileMapState,
     authState: {
         user: undefined,
         lastSignupInput: {
@@ -71,9 +81,11 @@ export const AppContext = React.createContext<IAppContext>({
             email: "",
             password: ""
         },
-        isDataPrepared: false
+        isDataPrepared: false,
+        isFirstLaunch: true
     },
     appControllerEventListener: {} as IAppControllerEventListener,
+    notificationListState: {items: [], badge: undefined},
     prepareData: () => {}
 });
 
@@ -83,7 +95,7 @@ interface IProps {
     children?: JSX.Element
 }
 
-export function AppProvider (props: IProps) {
+export default function AppProvider (props: IProps) {
     const selector = useAppSelector;
     const dispatch = useAppDispatch();
     const modelInput = {
@@ -91,40 +103,48 @@ export function AppProvider (props: IProps) {
         dispatchFunc: dispatch
     }
 
-    const [isDataPrepared, setIsDataPrepared] = React.useState(false)
+    // console.info("AppProvider rendering")
+
 
     const authModel: IAuthModel = createAuthModel(modelInput)
     const authState: AuthState = selector(selectAuth)
-    const authController: IAuthController = new AuthController(authModel)
 
     const feedModel: IFeedModel = createFeedModel(modelInput)
     const feedState: IFeedState = selector(selectFeed)
-    const feedController = new FeedController(feedModel, feedState)
+
 
 
     const groupChatModel = createGroupChatModel(modelInput)
     const groupChatListState: IGroupChatListState = selector(selectgroupChatListState)
     const groupChatMapState: IGroupChatMapState = selector(selectGroupChatMapState)
-    const groupChatController = new GroupChatController(groupChatModel, groupChatListState, groupChatMapState)
-
     const userProfileModel = createUserProfileModel(modelInput)
     const userProfileListState = selector(selectUserProfileListState)
     const userProfileMapState = selector(selectUserProfileMapState)
-    const userProfileController = new UserProfileController(userProfileModel, userProfileListState)
+
 
 
     const placeModel: IPlaceModel = createPlaceModel(modelInput)
     const placeListState: IPlaceListState = selector(selectPlaceListState)
     const placeMapState: IPlaceMapState = selector(selectPlaceMapState)
-    const placeController: IPlaceController = new PlaceController(placeModel)
 
-    
-    
-    
+    const notificationModel = createNotificationModel(modelInput)
+    const notificationListState: NotificationListState = selector(selectNotificationList)
+
     const prepareData = async() => {
+        await Promise.all([
+            authController.isFirstLaunch(),
+            loadResources()
+        ])
         const isUserSignedIn = await authController.signinLastUser()
         if(isUserSignedIn){
-            await userProfileController.getMyProfile(isUserSignedIn.user?.email)
+            const userProfile = await userProfileController.getMyProfile(isUserSignedIn.user?.email)
+            if(userProfile){
+                await Promise.all([
+                    notificationController.initNotifications(userProfile.id),
+                    notificationController.subscribeToMyNotifications(userProfile.id),
+                    feedController.getMyGamesList(userProfile.id)
+                ])
+            }
         }
         authModel.onDataPreparedEvent()
         await SplashScreen.hideAsync().then(result => {
@@ -137,6 +157,7 @@ export function AppProvider (props: IProps) {
         groupChatController,
         userProfileController,
         placeController,
+        notificationController,
         authController,
         prepareData,
         appControllerEventListener: authModel
@@ -152,13 +173,17 @@ export function AppProvider (props: IProps) {
         placeListState,
         placeMapState,
         userProfileMapState,
+        notificationListState
     }
 
-    // React.useEffect(() => {
-    //     if(!isDataPrepared){
-    //         prepareData().then(() => {setIsDataPrepared(true)});
-    //     }
-    // }, [])
+    React.useEffect(() => {
+        authController.createUseCase(authModel)
+        userProfileController.createUseCase(userProfileModel)
+        notificationController.createUseCase(notificationModel)  
+        placeController.createUseCase(placeModel)
+        groupChatController.createUseCase(groupChatModel)
+        feedController.createUseCase(feedModel)
+    }, [])
 
 
     return (
@@ -174,6 +199,31 @@ export function AppProvider (props: IProps) {
 
 export const MemoizedAppProvider = React.memo(AppProvider)
 
-export default MemoizedAppProvider;
+
+function getCacheImages(images: any[]) {
+    return images.map(image => {
+      if (typeof image === 'string') {
+        return Image.prefetch(image);
+      } else {
+        return Asset.fromModule(image).downloadAsync();
+      }
+    });
+}
 
 
+async function loadResources(): Promise<void> {
+    try {
+      const imageAssets = await getCacheImages([
+        require('../assets/profilePic.jpg'),
+        require('../assets/onboarding1.jpg'),
+        require('../assets/onboarding2.jpg'),
+        require('../assets/onboarding3.jpg'),
+        require('../assets/blank-pp.jpg'),
+      ]);
+      return
+    } catch (e) {
+      // You might want to provide this error information to an error reporting service
+      console.warn(e);
+    }
+}
+  

@@ -2,8 +2,9 @@ import { NavigatorScreenParams } from '@react-navigation/native';
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { AppTabParamList } from './app/appTab/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { AuthStackParamList } from './app/auth/types';
+import { AuthStackParamList } from './auth/types';
 import { AppStackParamList } from './app/types';
+import { OnboardingStackParamList } from './discovery/types';
 
 /**
  * Learn more about using TypeScript with React Navigation:
@@ -19,8 +20,9 @@ declare global {
 }
 
 export type RootStackParamList = {
+	DiscoveryStack: NavigatorScreenParams<OnboardingStackParamList>
 	AuthStack: NavigatorScreenParams<AuthStackParamList>
-  	AppStack:  NavigatorScreenParams<AppStackParamList>
+  	AppStack:  NavigatorScreenParams<AppStackParamList> | undefined
 };
 
 

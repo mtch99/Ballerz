@@ -5,13 +5,14 @@ import { AppDispatch } from "../../../store"
 import { AuthModelAdapter } from "../../Auth/model"
 import { setUserProfile } from "../../Auth/slice"
 import { UserProfileModelAdapter } from "../../adapters"
+import { ACCEPTED_FRIENDSHIP_REQUEST } from "../../notifications/slice"
 import { parseGame, parseGameList } from "../../place/model"
 import { IGameState, IUserProfileState } from "../../types"
-import { NEW_USERPROFILELIST } from "../userProfileList/slice"
+import { NEW_SENTFRIENDSHIPREQUEST, NEW_USERPROFILELIST } from "../userProfileList/slice"
 import { INewUserProfileListActionPayload } from "../userProfileList/slice/actions"
 import { IUserProfileListState } from "../userProfileList/slice/interface"
-import { NEW_USERPROFILE } from "../userProfileMap/slice"
-import { INewUserProfileProfileActionPayload } from "../userProfileMap/slice/actions"
+import { NEW_USERPROFILE, NEW_SENT_FRIENDSHIPREQUEST_formap } from "../userProfileMap/slice"
+import * as userProfileMapActions from "../userProfileMap/slice/actions"
 
 interface IUserProfileModelInput{
     dispatchFunc: AppDispatch
@@ -29,12 +30,11 @@ export function createUserProfileModel(modelInput: IUserProfileModelInput): IUse
         },
 
         onNewUserProfile(input: IUserProfile) {
-            const payload: INewUserProfileProfileActionPayload = UserProfileModelAdapter.parseUserProfile(input);
+            const payload: userProfileMapActions.INewUserProfileProfileActionPayload = UserProfileModelAdapter.parseUserProfile(input);
             modelInput.dispatchFunc(NEW_USERPROFILE(payload));
         },
 
         setMyProfile(input) {
-            // throw new Error("setMyProfile Method not implemented in createUserProfileModel")
             const actionPayload: IUserProfileState = AuthModelAdapter.parseUserProfile(input)
             modelInput.dispatchFunc(setUserProfile({profile: actionPayload}))
         },
@@ -43,6 +43,15 @@ export function createUserProfileModel(modelInput: IUserProfileModelInput): IUse
             const actionPayload: IUserProfileState = AuthModelAdapter.parseUserProfile(userProfile)
             modelInput.dispatchFunc(setUserProfile({profile: actionPayload}))
         },
+
+        onNewFriendShipRequest(input) {
+            modelInput.dispatchFunc(NEW_SENTFRIENDSHIPREQUEST(input))
+            modelInput.dispatchFunc(NEW_SENT_FRIENDSHIPREQUEST_formap(input))
+        },
+
+        onAcceptedFriendshipRequest(notificationID){
+            modelInput.dispatchFunc(ACCEPTED_FRIENDSHIP_REQUEST({notificationID}))
+        }
     }
 }
 

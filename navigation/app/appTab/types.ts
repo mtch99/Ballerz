@@ -1,3 +1,4 @@
+import { MyProfileStackParamList } from "./myProfile/types";
 import { IUserProfileScreenPropsWithoutNavigation } from "./../../../screens/userProfile/index";
 
 
@@ -11,6 +12,7 @@ import { NavigatorScreenParams } from "@react-navigation/native";
 import { ExploreStackParamList } from "../../explore/types";
 import { FeedStackParamList } from "../../feed/types";
 import { GroupChatStackParamList } from "../../groupChat/types";
+import { NotificationStackParamList } from "./notifications/types";
 
 
  
@@ -21,10 +23,11 @@ declare global {
 }
 
 export type AppTabParamList = {
-	ExploreStack: NavigatorScreenParams<ExploreStackParamList>
+	// ExploreStack: NavigatorScreenParams<ExploreStackParamList>
 	FeedStack: NavigatorScreenParams<FeedStackParamList>
 	GroupChatStack: NavigatorScreenParams<GroupChatStackParamList>
-	MyProfileScreen: IUserProfileScreenPropsWithoutNavigation
+	MyProfileStack: NavigatorScreenParams<MyProfileStackParamList>
+	NotificationStack: NavigatorScreenParams<NotificationStackParamList>
 };
 
 

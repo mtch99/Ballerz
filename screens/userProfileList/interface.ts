@@ -1,10 +1,11 @@
+import { IScreenState } from "./../interface";
 import { IUserProfileDataState } from "../../app/features/types";
 import { IUserProfileListState } from "../../app/features/userProfile/userProfileList/slice/interface";
 import { IUserProfileData } from "../../domain/use-cases/types";
 
 
 
-export interface IUserProfileListScreenState {
+export interface IUserProfileListScreenState extends IScreenState {
     userProfileList: IUserProfileListState['items']
     filteredUserProfileList: IUserProfileListState['items']
     filterInput: string | null
@@ -16,7 +17,7 @@ export interface ISelectableUserProfileListViewProps extends IUserProfileListVie
 
 
 export interface IUserProfileListScreenNavigationController{
-    goToUserProfile(id: IUserProfileDataState['id']): void
+    goToUserProfile(userProfileData: IUserProfileDataState): void
 }
 
 export interface IUserProfileListViewProps {
@@ -36,3 +37,6 @@ export interface ISelectableUserProfileData extends IUserProfileData {
 }
 
 
+export interface IUserProfileListScreenProps {
+    userProfileList: IUserProfileData[]
+}

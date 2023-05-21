@@ -2,6 +2,7 @@ import { IUserProfileListScreenState } from "../interface";
 import { UserProfileSearchView } from "../../../views/userProfileList/userProfileSearch";
 import { IUserProfileData } from "../../../domain/use-cases/types";
 import { AUserProfileListScreen, IUserProfileListScreenProps } from "..";
+import { AppContext, IAppContext } from "../../../controllers/provider";
 
 
 
@@ -9,18 +10,23 @@ import { AUserProfileListScreen, IUserProfileListScreenProps } from "..";
 export default class UserProfileSearchScreen<T extends IUserProfileListScreenProps = IUserProfileListScreenProps> extends AUserProfileListScreen<T, IUserProfileListScreenState>{
     
 
-    state: IUserProfileListScreenState = {
-        userProfileList: [],
-        filteredUserProfileList: [],
-        filterInput: ''
-    }
+    static contextType = AppContext
+    context: React.ContextType<typeof AppContext> = {} as IAppContext
+    // state: IUserProfileListScreenState = {
+    //     userProfileList: this.context.userProfileListState.items,
+    //     filteredUserProfileList: this.context.userProfileListState.items,
+    //     filterInput: '',
+    //     loading: false,
+    // }
     constructor(props: T) {
         super(props);
     }
     
     onPressUserProfile(item: IUserProfileData) {
-        this.props.navigationController.goToUserProfile(item.id)
+        this.props.navigationController.goToUserProfile(item)
     }
+
+
 
     
     __initState(): void {
@@ -28,7 +34,6 @@ export default class UserProfileSearchScreen<T extends IUserProfileListScreenPro
             ...prevState,
             userProfileList: this.context.userProfileListState.items,
             filteredUserProfileList: this.context.userProfileListState.items,
-            filterInput: ''
         }))
     }
 

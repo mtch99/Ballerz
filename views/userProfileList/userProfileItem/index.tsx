@@ -1,10 +1,23 @@
 import React from "react";
 import { IUserProfileItemViewProps } from "../interface";
 import { Text, TouchableOpacity, View, Image, StyleSheet, FlatList } from "react-native";
+import { getProfilePicUri } from "../../../screens/utils/ImagePicker";
 
 
 
 export default class ClickableUserProfileItemView extends React.Component<IUserProfileItemViewProps>{
+
+    state = {
+        profilePicSource: require("../../../assets/blank-pp.jpg")
+    }
+
+    componentDidMount(): void {
+        getProfilePicUri(this.props.userProfile.id).then(uri => {
+            if(uri){
+                this.setState({profilePicSource: {uri}})
+            }
+        })
+    }
 
     username = this.props.userProfile.username
     render(){
@@ -14,7 +27,7 @@ export default class ClickableUserProfileItemView extends React.Component<IUserP
                     onPress={() => {this.props.onPressUserProfileItem(this.props.userProfile.id)}}
                 >
                     <View style={styles.groupPhotoContainer}>
-                        <Image style = {styles.groupPhoto} source = {require("../../../assets/profilePic.jpg")}/>
+                        <Image style = {styles.groupPhoto} source = {this.state.profilePicSource}/>
                     </View> 
                     <View>
                         <Text
@@ -33,7 +46,7 @@ export default class ClickableUserProfileItemView extends React.Component<IUserP
                                 }}
                                 style={{flexDirection: "row"}}
                                 />
-                        <Text style={styles.gameNumText}>4 parties </Text>
+                        {/* <Text style={styles.gameNumText}>4 parties </Text> */}
                     </View>
                 </TouchableOpacity>
         )

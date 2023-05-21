@@ -1,44 +1,112 @@
 import React from "react"
 import { IDefineUsernameViewProps } from "../../../screens/createProfile/DefineUsername/interface"
-import { View, TextInput, Text, StyleSheet } from "react-native"
+import { View, Image, TextInput, Text, StyleSheet } from "react-native"
 import { globalStyles } from "../../styles"
 import { TouchableOpacity } from "react-native-gesture-handler"
+import BallerzSafeAreaView from "../../safeArea"
+import { pickImage } from "../../../screens/utils/ImagePicker"
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { LoadingModalView } from "../../../components/Modals/loadingView"
 
 export class DefineUsernameView extends React.Component<IDefineUsernameViewProps> {
     
 
     render(): React.ReactNode {
         return(
-            <View
-                style={styles.container}
-            >
-                <View
-                    style={styles.titleContainer}
-                >
-                    <Text
-                        style={styles.title}
-                    >
-                        Définissez votre surnom
-                    </Text>
-                </View>
-                <TextInput
-                    placeholder="570016"
-                    placeholderTextColor={"#969696"}
-                    style={styles.confirmationCodeInputContainer}
-                    onChangeText={(input) => {this.props.onUsernameInputChange(input)}}
+            <BallerzSafeAreaView>
+                <>
+                <LoadingModalView
+                    isVisible={this.props.loading}
                 />
-
-
-                <TouchableOpacity
-                    onPress={() => {this.props.onPressConfirm()}}
-                    style={styles.confirmButton}
+                <View
+                    style={styles.container}
                 >
-                    <Text style={styles.confirmButtonText}>
-                        Confirmer
-                    </Text>
-                </TouchableOpacity>
-                {this.props.error?(<Text>{this.props.error}</Text>):(<></>)}
-            </View>
+                    <View
+                        style={styles.titleContainer}
+                    >
+                        <Text
+                            style={styles.title}
+                            numberOfLines={2}
+                            ellipsizeMode="tail"
+                        >
+                            Crée ton profile
+                        </Text>
+                    </View>
+
+                    <View>
+                        <Text
+                            style={styles.subTitle}
+                        >
+                            Définis ton nom
+                        </Text>
+                    </View>
+                    <TextInput
+                        placeholder="Giannis Antetokumpo"
+                        placeholderTextColor={"#969696"}
+                        style={styles.confirmationCodeInputContainer}
+                        onChangeText={(input) => {this.props.onUsernameInputChange(input)}}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        autoComplete="off"
+                    />
+
+                    <View
+                        style={{
+                            margin: 50,
+                            alignItems: "center",
+                        }}
+                    >
+                        <Text
+                            style={styles.subTitle}
+                        >
+                            Ajoute une photo
+                        </Text>
+                        <View
+                                style={{flexDirection:'row', marginTop:10}}
+                            >
+                                <Image
+                                    style={{height: 70, width: 70, borderRadius: 70}}
+                                    source={this.props.profilePicSource}
+                                />
+                                <View
+                                    style={{justifyContent: 'flex-end'}}
+                                >
+                                    <TouchableOpacity
+                                        onPress={() => {this.props.onPressProfilePic()}}
+                                    >
+                                        <MaterialIcons
+                                            name="add-a-photo"
+                                            size={30}
+                                            color={"#969696"}
+                                            style={{alignSelf: "flex-end"}}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                        </View>
+                    </View>
+
+                    <View
+                        style={{
+                            flexGrow: 1,
+                            justifyContent: "center",
+                            marginBottom: 120,
+                        }}
+                    >
+                        <TouchableOpacity
+                            style={styles.buttonLogin}
+                            onPress={() => {this.props.onPressConfirm()}}
+                        >
+                            <Text style={styles.footerCreate}>Continuer</Text>
+                        </TouchableOpacity>
+                    </View>
+                    {this.props.error?
+                        (<Text style={styles.errorText}>
+                            {this.props.error}
+                        </Text>):(<></>)
+                    }
+                </View>
+                </>
+            </BallerzSafeAreaView>
         )
     }
 }
@@ -48,21 +116,25 @@ const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
         alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: globalStyles.global.screenBackGroundColor
     },
 
     titleContainer: {
-        marginHorizontal: 10,
-        width: "90%",
-        alignItems: "center",
+        margin: 10,
+        marginBottom: 40,
+        alignSelf: 'flex-start',
         justifyContent: "center",
     },
 
     title: {
-        fontSize: 18,
-        fontWeight: "bold",
+        fontSize: 34,
+        fontWeight: "500",
         color: "white",
+    },
+
+    subTitle: {
+        fontSize: 25,
+        color: "#B1B1B1",
+        fontWeight: "500",
     },
 
     confirmationCodeInputContainer: {
@@ -71,7 +143,8 @@ const styles = StyleSheet.create({
         borderRadius: 56,
         backgroundColor: globalStyles.global.itemBackgroundColor,
         padding: 10,
-        width: "90%"
+        width: "90%",
+        color: "white",
     },
 
     confirmButton: {
@@ -84,8 +157,22 @@ const styles = StyleSheet.create({
     },
 
     errorText: {
-        marginTop: 5,
-        color: 'red',
+        marginTop: 10,
+        color: globalStyles.global.logoColor,
         fontSize: 12
-    }
+    },
+
+    footerCreate: {
+		color: 'white',
+		fontWeight: '500',
+		fontSize: 15,
+	},
+
+    buttonLogin: {
+		marginTop: 20,
+		alignItems: 'center',
+		backgroundColor: '#e78b2f',
+		borderRadius: 5,
+		padding: 10,
+	},
 })

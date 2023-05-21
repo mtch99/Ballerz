@@ -22,6 +22,6 @@ export default class BallerzSafeAreaView extends React.Component<IProps> {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: globalStyles.global.screenBackGroundColor,
-        flexGrow: 1
+        flex: 1,
     }
 })

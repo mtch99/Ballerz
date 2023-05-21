@@ -1,15 +1,19 @@
 import React, { ContextType } from "react";
+import * as Sharing from 'expo-sharing';
 import FeedView from "../../views/feed";
 import { IFeedItemState, IFeedState} from "../../app/features/feed/slice/interface";
 import IFeedScreen, { IFeedScreenNavigationController, IPostCommentInput } from "./interface";
-import { Modal, View, Text, SafeAreaView, Alert } from "react-native";
+import { Modal, View, Text, SafeAreaView, Alert, Share } from "react-native";
 import IFeedController from "../../controllers/feed/interface";
-import { ICommentInput } from "../../domain/use-cases/feed/interface";
+import { ICheckinEventPayload, ICheckinInput, ICommentInput } from "../../domain/use-cases/feed/interface";
 import { AppContext, IAppContext } from "../../controllers/provider";
 import { globalStyles } from "../../views/styles";
 import FindYourFriendsBottomSheetView from "../../views/makeFriends/findYourFriendsBottomSheet";
+import { IScreenState, Screen } from "../interface";
+import CommunityModal, {ModalProps} from 'react-native-modal';
+import { IUserProfileData } from "../../domain/use-cases/types";
 
-
+const betaAppUrl = "https://testflight.apple.com/join/6GBFVtwg"
 export interface IFeedScreenPropsWithoutNavigation {
 
 }
@@ -18,21 +22,21 @@ export interface IFeedScreenProps extends IFeedScreenPropsWithoutNavigation{
     navigationController: IFeedScreenNavigationController
 }
 
-interface IFeedScreenState{
+interface IFeedScreenState extends IScreenState{
     modalVisible: boolean
+
 }
 
 
-export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenState> implements IFeedScreen{
+export class FeedScreen extends Screen<IFeedScreenProps, IFeedScreenState> implements IFeedScreen{
 
     navigationController: IFeedScreenNavigationController = this.props.navigationController;
     
     state = {
         modalVisible: false,
+        loading: false,
     }
 
-    private feedController: IFeedController = {} as IFeedController
-    private feed: IFeedState = {items: []} 
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
     constructor(props: IFeedScreenProps){
@@ -40,59 +44,107 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
         this.getFeed = this.getFeed.bind(this)
     }
 
+    // Data retrieved on focus, managed by the navigator screen wrapper
     componentDidMount(): void {
-        this.feedController = this.context.feedController
-        this.getFeed();
-        this.feed = this.context.feedState
-        console.log(`Feed Screen just mounted \n
-            authState: ${JSON.stringify(this.context.authState)}`
-        )
+
     }
 
     getFeed() {
-        this.feedController.getFeed()
+        this.context.feedController.getFeed(this.context.authState.profile?.id)
     }
 
     handleBadgeClick = (feedItem: IFeedItemState): void => {
         this.viewBadgeList(feedItem.badges)
     }
 
-    handleFriendsTherePress(feedItem: IFeedItemState): void {
-        this.viewFriendsThere(feedItem)
+    handleParticipantsPress(feedItem: IFeedItemState): void {
+        this.viewParticipants(feedItem)
     }
 
-    handleInvitePress(feedItem: IFeedItemState): void {
-        this.displayNoFriendsToInviteModal()
+    async handleSharePress(feedItem: IFeedItemState): Promise<void>{
+        try {
+            const result = await Share.share({
+                message:'Hey, Rejoins moi sur Ballerz pour être informé lorsque je vais jouer au basketball. \n\nBall is life 🔥',
+			    title: "https://testflight.apple.com/join/6GBFVtwg",
+			    url: "https://testflight.apple.com/join/6GBFVtwg"
+            });
+            if (result.action === Share.sharedAction) {
+              if (result.activityType) {
+                // shared with activity type of result.activityType
+              } else {
+                // shared
+              }
+            } else if (result.action === Share.dismissedAction) {
+              // dismissed
+            }
+        } catch (error: any) {
+            Alert.alert(error.message);
+        }
+        // Sharing.shareAsync(betaAppUrl, {dialogTitle:"aioiwiodshiowdhi"})
     }
 
     handlePlayButtonPress(feedItem: IFeedItemState): void {
-        this.feedController.checkIn({
-            id: feedItem.id,
-            userProfile: {
-                id: "moiId",
-                username: "moi",
-                badges: []
+        const userProfile = this.context.authState.profile
+        if(this.state.loading){
+            console.error("iuhodhdoihwso")
+            return;
+        } 
+        if(userProfile){
+            const input: ICheckinInput = {
+                id: feedItem.id,
+                attendance: {
+                    arrivalDateTime: new Date(feedItem.startingTime),
+                    departureDateTime: new Date(feedItem.endingTime),
+                    userProfileData: userProfile
+                },
+                placeData: feedItem.place
             }
-        }).then(res => {
-            if(res == true){
-                this.showXthGameThisMobthAlert()
+            this.makeRequest(this.context.feedController.checkIn(input))
+        } 
+        else {
+            this.handleNoUserProfile()
+        }
+    }
+
+    isAttending(feedItem: IFeedItemState): boolean {
+        const {attendants} = feedItem
+        let result = false;
+        attendants.forEach((attendant)=> {
+            if(attendant.userProfileData.id){
+                result = true
             }
-        }).catch(err => {
-            // console.error(err)
         })
+		return result 
+    }
+
+    handleCheckoutButtonPress(feedItem: IFeedItemState): void {
+        const userProfile = this.context.authState.profile
+        if(userProfile){
+            const attendanceToDelete = feedItem.attendants.find(attendance => attendance.userProfileData.id == userProfile.id)
+            if(attendanceToDelete){
+                console.log(JSON.stringify(attendanceToDelete))
+                this.context.feedController.checkOut({
+                    feedItemID: feedItem.id,
+                    attendanceID: attendanceToDelete.id,
+                    userProfile
+                })
+            }
+        } 
+        else {
+            this.handleNoUserProfile()
+        }
     }
 
     viewBadgeList(badgeList: IFeedItemState['badges']): void {
         this.navigationController.goToBadgeListScreen(badgeList)
     }
 
-    viewFriendsThere(feedItem: IFeedItemState): void {
-        const friendsThereList = feedItem.friendsThere
-        if(friendsThereList.length>0){
-            this.navigationController.goToAttendantsScreen(feedItem.friendsThere)
-        }else{
-            this.displayNoFriendsHereModal()
-        }
+    viewParticipants(feedItem: IFeedItemState): void {
+        const attendants: IUserProfileData[] = []
+        feedItem.attendants.forEach(attendance => {
+            attendants.push(attendance.userProfileData)
+        })
+        this.navigationController.goToAttendantsScreen(attendants)
     }
 
     
@@ -102,7 +154,8 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
             author: {
                 id: "moiId",
                 username: "moi",
-                badges: []
+                badges: [],
+                isFriend: undefined
             },
             text: input.commentText
         }
@@ -131,6 +184,33 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
     }
 
 
+    render() {
+        return (
+                <FeedView
+                    feedState={this.context.feedState}
+                    handleBadgeClick={(item) => {this.handleBadgeClick(item)}}
+                    handleParticipantsPress={(item) => {this.handleParticipantsPress.bind(this)(item)}}
+                    handleSharePress={(item) => {return this.handleSharePress(item)}}
+                    // handlePlayButtonPress={(item) => {this.handlePlayButtonPress(item)}}
+                    handleCommentButtonPress={(input: IFeedItemState) => {this.handleCommentButtonPress(input)}}
+                    handlePlayButtonPress={this.handlePlayButtonPress.bind(this)}
+                    handleCheckoutButtonPress={this.handleCheckoutButtonPress.bind(this)}
+                />
+        )
+    }
+
+
+    handleNoUserProfile(){
+        Alert.alert(
+            "Créez votre profile",
+            "Vous devez céer un profile pour signaler votre présence sur un terrain",
+            [
+                { text: "OK", onPress: () => console.log("OK Pressed") },
+            ],
+            { cancelable: false }
+        )
+    }
+
     private showNoFriendsAlert(){
         Alert.alert(
           'Fais toi des amis',
@@ -142,31 +222,55 @@ export class FeedScreen extends React.Component<IFeedScreenProps, IFeedScreenSta
           { cancelable: false }
         );
     };
-    
-
-    private showXthGameThisMobthAlert(){
-        Alert.alert(
-            'Nice!!!',
-            "C'est votre 4ième participation ce mois. Vous êtes à une participation de gagner un nouveau badge 🔜🙌🏽",
-            [
-                { text: 'Cool', onPress: () => {}, style: 'cancel' },
-            ],
-            { cancelable: false }
-          );
-    }
+}
 
 
 
-    render() {
-        return (
-                <FeedView
-                    feedState={this.context.feedState}
-                    handleBadgeClick={(item) => {this.handleBadgeClick(item)}}
-                    handleFriendsTherePress={(item) => {this.handleFriendsTherePress(item)}}
-                    handleInvitePress={(item) => {this.handleInvitePress(item)}}
-                    handlePlayButtonPress={(item) => {this.handlePlayButtonPress(item)}}
-                    handleCommentButtonPress={(input: IFeedItemState) => {this.handleCommentButtonPress(input)}}
-                />
-        )
-    }
+
+export interface ILoadingModalProps {
+	isVisible: boolean;
+    onPressOk: () => void;
+}
+export function CreatedGameModal(props: ILoadingModalProps){
+	console.log(`LoadingScreen props: ${JSON.stringify(props)}`)
+	return(
+		<CommunityModal 
+			isVisible={props.isVisible} 
+			style={{ 
+				backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+				margin: 0, 
+				justifyContent: 'center' 
+			}}
+		>
+            <View
+                style={{
+                    flexGrow: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'white'
+                }}
+            >
+                <View
+                    style={{
+                        padding: 10,
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}
+                >
+                    <Text
+                        style={{
+                            fontSize: 17,
+                            fontWeight: "bold",
+                            color: "black",
+                        }}
+                    >
+                        Ball is life 🔥🔥🔥
+                    </Text>
+
+                </View>
+
+            </View>
+			{/* Your modal content here */}
+		</CommunityModal>
+	)
 }

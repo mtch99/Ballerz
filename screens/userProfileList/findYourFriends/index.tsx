@@ -15,6 +15,7 @@ export default class FindYourFriendsScreen<P extends IFindYourFriendsScreenProps
         userProfileList: [],
         filteredUserProfileList: [],
         filterInput: '',
+        loading: false,
     }
 
     constructor(props: P){
@@ -24,6 +25,7 @@ export default class FindYourFriendsScreen<P extends IFindYourFriendsScreenProps
         this.onPressUserProfile = this.onPressUserProfile.bind(this)
         this.onPressContinue = this.onPressContinue.bind(this)
     }
+
 
     onPressUserProfile(pressedItem: ISelectableUserProfileData): void {
         const newUserProfileList = this.__selectItem(pressedItem)
@@ -79,9 +81,10 @@ export default class FindYourFriendsScreen<P extends IFindYourFriendsScreenProps
     
     __initState(): void {
         const initialProfiles: ISelectableUserProfileData[] = []
-
         this.context.userProfileListState.items.forEach((item) => {
-            initialProfiles.push({...item, selected: false})
+            if(!item.isFriend){
+                initialProfiles.push({...item, selected: false})
+            }
         })
 
         const newState: ISelectableUserProfileListScreenState = {
@@ -100,14 +103,14 @@ export default class FindYourFriendsScreen<P extends IFindYourFriendsScreenProps
             const receiverProfiles: ISendFriendshipRequestsInput['receiverProfiles'] = []
             this.state.userProfileList.forEach((item) => {
                 if(item.selected){
-                    receiverProfiles.push({id: item.id, username: item.username, badges: item.badges})
+                    receiverProfiles.push({...item})
                 }
             })
             const input: ISendFriendshipRequestsInput = {
                 myProfileID,
                 receiverProfiles
             }
-            this.context.userProfileController.sendFriendShipRequests(input)
+            this.context.userProfileController.sendMultipleFriendShipRequests(input)
         }
 
         if(!myProfileID){

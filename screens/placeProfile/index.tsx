@@ -4,6 +4,8 @@ import { View, Text } from "react-native";
 import { AppContext, IAppContext } from "../../controllers/provider";
 import { IPlaceMapState, IPlaceProfileState } from "../../app/features/place/types";
 import { PlaceProfileView } from "../../views/placeProfile";
+import { IFeedItemState } from "../../app/features/feed/slice/interface";
+import { IUserProfileData } from "../../domain/use-cases/types";
 // import { PlaceProfileView } from "../../views/placeProfile";
 
 
@@ -47,19 +49,34 @@ export class PlaceProfileScreen extends React.Component<IPlaceProfileScreenProps
     addPicture(): void {
         throw new Error("Method not implemented.");
     }
+    
     play(): void {
         throw new Error("Method not implemented.");
     }
 
 
     componentDidMount(): void {
-        this.context.placeController.getPlaceProfile(this.props.placeId)
+        const myUserProfileID = this.context.authState.profile?.id
         this.setState((prevState) => {
             const placeProfile = this.context.placeMapState[this.props.placeId]
             return {
                 ...prevState,
                 ...placeProfile
-        }})
+            }
+        })
+        this.context.placeController.getPlaceProfile(this.props.placeId, myUserProfileID)
+    }
+
+    onPressPlayHere(): void {
+        this.navigationController.goToCreateTimeSlot(this.context.placeMapState[this.props.placeId])
+    }
+
+    onPressAttendantsNum(feedItem: IFeedItemState): void {
+        const attendants: IUserProfileData[] = []
+        feedItem.attendants.forEach(attendance => {
+            attendants.push(attendance.userProfileData)
+        })    
+        this.navigationController.goToAttendantsScreen(attendants)
     }
 
     viewProps = {...this.state}
@@ -70,20 +87,26 @@ export class PlaceProfileScreen extends React.Component<IPlaceProfileScreenProps
             return( 
                 <PlaceProfileView
                     {...this.context.placeMapState[this.props.placeId]}
+                    onPressPlayHere={this.onPressPlayHere.bind(this)}
+                    onPressAttendantsNum={this.onPressAttendantsNum.bind(this)}
                 />
             )
+        }else{
+            return(
+                <PlaceProfileView
+                    {...this.state}
+                    onPressPlayHere={this.onPressPlayHere.bind(this)}
+                    onPressAttendantsNum={this.onPressAttendantsNum.bind(this)}
+                /> 
+            )
         }
-        return(
-            <PlaceProfileView
-                {...this.placeProfile}
-            />
-        )
     }
 
 } 
 
 export interface IPlaceProfileViewProps extends IPlaceProfileState{
-
+    onPressPlayHere: () => void;
+    onPressAttendantsNum: (item: IFeedItemState) => void
 }
 
 

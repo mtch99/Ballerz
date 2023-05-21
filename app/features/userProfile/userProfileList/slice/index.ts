@@ -20,7 +20,7 @@ const userProfileSlice = createSlice({
 
 
 
-export const {NEW_USERPROFILELIST} = userProfileSlice.actions
+export const {NEW_USERPROFILELIST, NEW_SENTFRIENDSHIPREQUEST} = userProfileSlice.actions
 
 export const selectUserProfileListState = (state: RootState) => state.userProfile
 

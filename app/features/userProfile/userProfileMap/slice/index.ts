@@ -14,7 +14,7 @@ export const UserProfileMapSlice = createSlice({
     }
 })
 
-export const {NEW_USERPROFILE, NEW_USERPROFILEMAP} = UserProfileMapSlice.actions
+export const {NEW_USERPROFILE, NEW_USERPROFILEMAP, NEW_SENT_FRIENDSHIPREQUEST:NEW_SENT_FRIENDSHIPREQUEST_formap} = UserProfileMapSlice.actions
 
 export const selectUserProfileMapState = (state: RootState) => state.userProfileMap
 

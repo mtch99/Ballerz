@@ -3,18 +3,19 @@ import { StyleSheet} from "react-native";
 
 const style = StyleSheet.create({
     dateTimeContatiner: {
+        flex: 1,
         height: 48,
         backgroundColor: "#F12F12F12",
         flexDirection: "column",
         marginLeft: 20,
         alignItems: "center",
-        justifyContent: "center",
-        flexGrow: 1
+        // justifyContent: "center",
+        // flexGrow: 1
     },
-    mardi: {
+    weekDay: {
         color: "#F5F8FA",
         alignSelf: "center",
-        fontWeight: "500"
+        fontWeight: "bold"
     },
     timeContainer: {
         width: 132,
@@ -36,15 +37,13 @@ const style = StyleSheet.create({
       marginLeft: 15
     },
     startingHourText: {
-      fontFamily: "Cochin",
       color: "#F5F8FA",
       fontSize: 17,
       alignSelf: "center",
     },
     endingHourText1: {
-      fontFamily: "Cochin",
       color: "#F5F8FA",
-      fontSize: 16,
+      fontSize: 17,
     },
     endingHourTextContainer: {
       marginRight: 15,

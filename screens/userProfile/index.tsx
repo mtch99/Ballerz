@@ -1,14 +1,15 @@
 import React from "react";
-import IUserProfileScreen, { IUserProfileListScreenNavigationController, IUserProfileScreenNavigationController } from "./interface";
+import IUserProfileScreen, { IUserProfileScreenNavigationController } from "./interface";
 import { View, Text } from "react-native";
 import { AppContext, IAppContext } from "../../controllers/provider";
-import { UserProfileView } from "../../views/userProfile";
-import { IUserProfileState } from "../../app/features/types";
-// import { UserProfileView } from "../../views/UserProfile";
+import { MyProfileView, UserProfileView } from "../../views/userProfile";
+import { IUserProfileDataState, IUserProfileState } from "../../app/features/types";
+import { IScreenState } from "../interface";
+import { Screen } from "../interface";
 
 
 export interface IUserProfileScreenPropsWithoutNavigation {
-    userProfileId: string;
+    userProfileData: IUserProfileDataState
 }
 
 
@@ -16,34 +17,46 @@ export interface IUserProfileScreenProps extends IUserProfileScreenPropsWithoutN
     navigationController: IUserProfileScreenNavigationController
 }
 
-export interface IUserProfileScreenState extends IUserProfileState {
+export interface IUserProfileScreenState extends IUserProfileState, IScreenState {
 
 }
 
 
-export class UserProfileScreen extends React.Component<IUserProfileScreenProps, IUserProfileScreenState> implements IUserProfileScreen {
+export class UserProfileScreen extends Screen<IUserProfileScreenProps, IUserProfileScreenState> implements IUserProfileScreen {
     
     navigationController: IUserProfileScreenNavigationController;
 
     userProfile: IUserProfileState = {
         games: [],
-        id: "",
-        username: "",
-        badges: []
+        id: this.props.userProfileData.id,
+        username: this.props.userProfileData.username,
+        badges: [],
+        isFriend: undefined,
+        friends: [],
     }
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
 
 
     state = {
-        ...this.userProfile
+        ...this.userProfile,
+        loading: false
     }
 
     constructor(props: IUserProfileScreenProps){
         super(props);
         this.navigationController = this.props.navigationController
     }
+
+
+    onPressFriendsNumber(){
+        const userProfile = this.context.userProfileMapState[this.props.userProfileData.id] as IUserProfileState | undefined
+        if(userProfile!== undefined){
+            this.props.navigationController.goToFriendsListScreen(userProfile.friends)
+        }
+    }
     
+
     addPicture(): void {
         throw new Error("Method not implemented.");
     }
@@ -52,53 +65,85 @@ export class UserProfileScreen extends React.Component<IUserProfileScreenProps, 
     }
 
 
-    componentDidMount(): void {
-        this.context.userProfileController.getUserProfile(this.props.userProfileId)
-        this.setState((prevState) => {
-            const UserProfile = this.context.userProfileMapState[this.props.userProfileId]
-            return {
-                ...prevState,
-                ...UserProfile
-        }})
+    async onPressAddButton(userProfile: IUserProfileState): Promise<void> {
+        console.error(`${JSON.stringify(this.context.authState)}`)
+        const senderProfileID = this.context.authState.profile?.id
+        if(userProfile.isFriend){
+            return
+        }
+        if(!senderProfileID){
+            throw new Error("No userProfile in auth state")
+        }else {
+            const input = {
+                senderProfileID,
+                receiverProfileID: userProfile.id,
+            }
+            const request = this.context.userProfileController.sendFriendShipRequest(input)
+            await this.makeRequest(request)
+        }
     }
 
-   
+
+    componentDidMount(): void {
+        const userProfileID = this.props.userProfileData.id
+        this.context.userProfileController.getUserProfile(userProfileID)
+    }
 
 
     render(): React.ReactNode {
-        if(this.context.userProfileMapState[this.props.userProfileId]){
-            console.warn("User profile")
+        const userProfile = this.context.userProfileMapState[this.props.userProfileData.id] as IUserProfileState | undefined
+        // console.warn(`${JSON.stringify(userProfile?.games)}`)
+        if(userProfile){
             return( 
                 <UserProfileView
-                    {...this.context.userProfileMapState[this.props.userProfileId]}
+                    {...userProfile}
+                    onPressAddButton={this.onPressAddButton.bind(this)}
+                    onPressFriendsNumber={this.onPressFriendsNumber.bind(this)}
+                    goBack={this.props.navigationController.goBack}
                 />
             )
         }
         return(
             <UserProfileView
                 {...this.userProfile}
+                onPressAddButton={this.onPressAddButton.bind(this)}
+                onPressFriendsNumber={this.onPressFriendsNumber.bind(this)}
+                goBack={this.props.navigationController.goBack}
             />
         )
     }
 
 } 
 
-export class MyProfileScreen extends React.Component {
+
+
+export interface IMyProfileScreenProps {
+    navigationController: IUserProfileScreenNavigationController
+}
+export class MyProfileScreen extends React.Component<IMyProfileScreenProps> {
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
 
-    // componentDidMount(): void {
-    //     this.context.userProfileController.
-    // }
+    // Effect is run on navigation wrapper
+    componentDidMount(): void {}
 
-
+    onPressFriendsNumber(){
+        const friends = this.context.authState.profile?.friends
+        if(friends){
+            this.props.navigationController.goToFriendsListScreen(friends)
+        }
+    }
 
     render(): React.ReactNode {
         if(this.context.authState.profile){
-            const userProfileId = this.context.authState.profile.id
             return(
-                <UserProfileView
-                    {...this.context.authState.profile}
+                <MyProfileView
+                    {
+                        ...this.context.authState.profile
+                    }
+                    onPressAddButton={() => {}}
+                    onPressFriendsNumber={this.onPressFriendsNumber.bind(this)}
+                    goBack={this.props.navigationController.goBack}
                 />
             )
         }
@@ -106,32 +151,7 @@ export class MyProfileScreen extends React.Component {
 }
 
 export interface IUserProfileViewProps extends IUserProfileState{
-
+    onPressAddButton: (item: IUserProfileState) => void;
+    onPressFriendsNumber: () => void;
+    goBack: () => void;
 }
-
-
-// export class UserProfileView extends React.Component<IUserProfileViewProps>{
-
-
-//     componentDidMount(): void {
-//         console.warn(`Mounting props: ${JSON.stringify(this.props)}`)
-//     }
-
-//     componentDidUpdate(prevProps: Readonly<IUserProfileViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
-//         console.warn(`UserProfileView newProps: ${JSON.stringify(this.props)})`)
-//     }
-
-//     render(): React.ReactNode {
-
-//         // if(this.props.UserMap[this.props.userProfileId]){
-//         //     return <></>
-//         // }
-//         return(
-//             <View>
-//                 <Text style={{color: 'white'}}>
-//                     {this.props.name}
-//                 </Text>
-//             </View>
-//         )
-//     }
-// }

@@ -1,9 +1,12 @@
-import { IGame, IPlaceData, IUserProfileData } from "../../domain/use-cases/types";
+import { IGame, IPlaceData, IUserProfile, IUserProfileData } from "../../domain/use-cases/types";
 
 
-export interface IUserProfileDataState extends IUserProfileData{}
+export interface IUserProfileDataState extends IUserProfileData{
+    friendshipRequestSent?: true
+}
 export interface IUserProfileState extends IUserProfileDataState {
     games: IGameState[]
+    friends: IUserProfile['friends']
 }
 
 export interface IGameState {

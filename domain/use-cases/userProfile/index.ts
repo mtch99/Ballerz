@@ -2,7 +2,7 @@ import { AuthRepository } from "../../repositories/Auth";
 import UserProfileRepository from "../../repositories/UserProfile";
 import initialUserProfileData, { initialUserProfiles } from "../data/userProfile";
 import { IUserProfile, IUserProfileData } from "../types";
-import { IDefineUsernameInput, IDefineUsernameResult, IRequestFriendShipInput, IRequestFriendShipResult, IUserProfileModelEventListener, IUserProfileRepository, IUserProfileUseCase } from "./interface";
+import { IAcceptFriendshipRequestInput, IAcceptFriendshipRequestResult, IDefineUsernameInput, IDefineUsernameResult, IRequestFriendShipInput, IRequestFriendShipResult, IUploadProfilePicInput, IUploadProfilePicResult, IUserProfileModelEventListener, IUserProfileRepository, IUserProfileUseCase } from "./interface";
 
 
 export default class UserProfileUseCase implements IUserProfileUseCase{
@@ -17,8 +17,10 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
 
 
     async getMyUserProfile(email: string): Promise<IUserProfile | null> {
-        const result = await this.repo.getUserProfileByEmail(email)
+        const result = await this.repo.getMyUserProfile(email)
         if(result){
+            // console.warn(`Get my user profile result: ${JSON.stringify(result)}`);
+            this.repo.setMyUserProfileID(result.id)
             this.observer.setMyProfile(result)
         }
         return result
@@ -45,21 +47,16 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
     
     
     async getAllUserProfileData(): Promise<IUserProfileData[]> {
-        const result = initialUserProfileData
+        const result = await this.repo.getAllUserProfileData()
         this.observer.onNewUserProfileList(result);
-        console.warn(`UserProfile Use case getAllUserProfileData using hard coded data`)
         return result
     }
 
     
     async getUserProfile(id: string): Promise<IUserProfile | null> {
         // const response = await this.repo.getUserProfile(id)
-        let response: IUserProfile | null = null 
-        initialUserProfiles.forEach((profile) => {
-            if(profile.id === id){
-                response = profile
-            }
-        })
+        let response: IUserProfile | null = await this.repo.getUserProfile(id)
+        
         if(response){
             this.observer.onNewUserProfile(response)
         }
@@ -69,7 +66,25 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
     
     async requestFriendShip(input: IRequestFriendShipInput): Promise<IRequestFriendShipResult> {
         const response = await this.repo.requestFriendship(input)
+        if(!response.error){
+            this.observer.onNewFriendShipRequest(input)
+        }
         return response
+    }
+
+
+    async acceptFriendshipRequest(input: IAcceptFriendshipRequestInput): Promise<IAcceptFriendshipRequestResult> {
+        const response = await this.repo.acceptFriendshipRequest(input)
+        if(!response.error){
+            this.observer.onAcceptedFriendshipRequest(input.notificationID)
+        }
+        return response
+    }
+
+
+    async uploadProfilePic(input: IUploadProfilePicInput): Promise<IUploadProfilePicResult> {
+        return await this.repo.uploadProfilePic(input)
     }
     
 }
+

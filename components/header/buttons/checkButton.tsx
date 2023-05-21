@@ -12,6 +12,7 @@ export default class HeaderCheckButton extends React.Component<IHeaderButtonProp
                 onPress={() => {this.props.onPress()}}
                 name="checkcircle"
                 backgroundColor={"transparent"}
+                size={24}
                 color={globalStyles.global.logoColor}
             />
         )

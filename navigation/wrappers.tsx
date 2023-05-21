@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthStackNavigator } from "./app/auth";
+import { AuthStackNavigator } from "./auth";
 import { AppStack } from "./app";
 
 

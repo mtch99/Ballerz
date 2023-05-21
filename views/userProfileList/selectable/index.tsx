@@ -3,11 +3,12 @@ import { ISelectableUserProfileItemViewProps, IUserProfileItemViewProps } from "
 import {Dimensions, FlatList, TouchableOpacity, View, Text, StyleSheet, Image, NativeSyntheticEvent, NativeScrollEvent } from "react-native"
 import { CheckBox } from "react-native-btr"
 import { ISelectableUserProfileData, IUserProfileListViewProps } from "../../../screens/interface"
-import AddUserButton from "../../../components/Buttons/addUser"
+import ListItemButton from "../../../components/Buttons/ListItemButton"
 import { AppContext, IAppContext } from "../../../controllers/provider"
 import { BallerzFlatList } from "../../../components/Flatlist"
 import { IUserProfileData } from "../../../domain/use-cases/types"
 import { ISelectableUserProfileListViewProps } from "../../../screens/userProfileList/interface"
+import { getProfilePicUri } from "../../../screens/utils/ImagePicker"
 
 
 
@@ -15,7 +16,7 @@ export class SelectableUserProfileListView extends React.Component<ISelectableUs
 
 
     componentDidUpdate(prevProps: Readonly<ISelectableUserProfileListViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
-        console.warn(`SelectableUserProfileListView did update: ${JSON.stringify(this.props.usersList)}`)
+        // console.warn(`SelectableUserProfileListView did update: ${JSON.stringify(this.props.usersList)}`)
     }
 
 
@@ -43,22 +44,34 @@ export class SelectableUserProfileListView extends React.Component<ISelectableUs
 export class UserProfileItemView extends React.Component<ISelectableUserProfileItemViewProps>{
 
     username = this.props.userProfile.username
-    // onPressUserProfile(){
-    //     this.props.onPressUserProfileItem(this.)
-    // }
+
+    state = {
+        profilePicSource: {uri: ""}
+    }
+
+    componentDidMount(): void {
+        getProfilePicUri(this.props.userProfile.id).then(uri => {
+            this.setState((prevState) => (
+                {
+                    ...prevState,
+                    profilePicUri:{uri}
+                }
+            ))
+        })
+    }
 
 
     render(){
 
-        // if(this.props.userProfile.badges.length > 0){
             return(
                 <View
                     style={styles.container}
                 >
                     <View style={styles.groupPhotoContainer}>
-                        <Image style = {styles.groupPhoto} source = {require("../../../assets/profilePic.jpg")}/>
+                        <Image style = {styles.groupPhoto} source = {this.state.profilePicSource}/>
                     </View> 
-                    <View>
+                    <View
+                    >
                         <Text
                             style={{color:"#F5F8FA", fontSize:16, fontWeight: "500"}}
                             >
@@ -74,14 +87,14 @@ export class UserProfileItemView extends React.Component<ISelectableUserProfileI
 			    				)
                                 }}
                                 style={{flexDirection: "row"}}
-                                />
-                        <Text style={styles.gameNumText}>4 parties </Text>
+                        />
+                        {/* <Text style={styles.gameNumText}>4 parties </Text> */}
                     </View>
 
                     <View
                         style={{alignItems: "flex-end", flexGrow: 1}}
                     > 
-                        <AddUserButton
+                        <ListItemButton
                             selected={this.props.selected}
                             onPress={() => {this.props.onPressCheckBox(this.props.userProfile.id)}}
                         />
@@ -89,7 +102,7 @@ export class UserProfileItemView extends React.Component<ISelectableUserProfileI
 
                 </View>
             )
-        }
+    }
 }
 
 
@@ -99,6 +112,7 @@ const styles = StyleSheet.create({
         borderBottomColor:"#657786",
         borderBottomWidth:0.2,
         marginTop: 15,
+        paddingBottom: 10,
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: 'transparent',
@@ -109,14 +123,13 @@ const styles = StyleSheet.create({
     groupPhotoContainer: {
         paddingRight: 10
     },
-
     
     groupPhoto: {
         width: 50,
 		height: 50,
 		borderRadius: 1000,
 		backgroundColor: "rgba(0,0,0,0)",
-        marginBottom: 10
+        // marginBottom: 10
 	},
     
     gameNumText: {

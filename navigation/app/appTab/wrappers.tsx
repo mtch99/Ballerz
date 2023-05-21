@@ -2,13 +2,26 @@ import React from "react";
 import { ExploreStackNavigator } from "../../explore";
 import { FeedStackNavigator } from "../../feed";
 import { GroupChatStackNavigator } from "../../groupChat";
-import { MyProfileScreen, UserProfileScreen } from "../../../screens/userProfile";
 import { IUserProfileScreenNavigationController } from "../../../screens/userProfile/interface";
 import { AppContext } from "../../../controllers/provider";
+import { IUserProfileDataState } from "../../../app/features/types";
+import { AppTabScreenProps } from "./types";
+import { MyProfileStackNavigator } from "./myProfile";
+import { NotificationStackNavigator } from "./notifications";
 
 
 
-export function FeedStackWrapper(){
+export function FeedStackWrapper(props: AppTabScreenProps<'FeedStack'>) {
+    const { navigation } = props
+    // const {} = React.useContext(AppContext)
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            console.log("User is logged in")
+            //TODO: next line ---> GameController.getAllGames() instead
+            // userProfileController.getMyProfile(authState.user.email)
+        });
+        return unsubscribe;
+    }, [navigation])
     return(
         <FeedStackNavigator/>
     )
@@ -20,21 +33,27 @@ export function GroupChatStackWrapper(){
     )
 }
 
-export function UserProfileScreenWrapper(){
+export function MyProfileStackWrapper(props: AppTabScreenProps<'MyProfileStack'>){
 
-    const [userProfileId, setUserProfileId] = React.useState("")
-    const {authState} = React.useContext(AppContext)
+    const {authState, userProfileController} = React.useContext(AppContext)
+    const {navigation, route} = props
 
 
     React.useEffect(() => {
-        if(authState.profile){
-            console.warn("User profile is " + JSON.stringify(authState.profile))
-            setUserProfileId(authState.profile.id)
-        }
-    }, [authState])
+        const unsubscribe = navigation.addListener('focus', () => {
+            if(authState.user){
+                console.log("User is logged in")
+                userProfileController.getMyProfile(authState.user.email)
+            }
+            else{
+                throw new Error('No profile found')
+            }
+        });
+        return unsubscribe;
+    }, [navigation])
 
     const navigationController: IUserProfileScreenNavigationController = {
-        goToUserProfile: function (id: string): void {
+        goToUserProfile: function (userProfileData: IUserProfileDataState): void {
             console.log("Function not implemented.");
         },
         goToPlaceProfile: function (id: string): void {
@@ -45,18 +64,21 @@ export function UserProfileScreenWrapper(){
         },
         goToAttendantsListScreen: function (gameId: string): void {
             console.log("Function not implemented.");
+        },
+        goToFriendsListScreen: function (userProfileList: IUserProfileDataState[]): void {
+            throw new Error("Function not implemented.");
+        },
+        goBack: function (): void {
+            throw new Error("Function not implemented.");
         }
     }
 
     return(
-        <MyProfileScreen
-            // navigationController={navigationController}
-        />
+        <MyProfileStackNavigator/>
     )
 }
 
-
-export function ExploreStackWrapper(){
-    return(<ExploreStackNavigator/>)
+export function NotificationStackWrapper(props: AppTabScreenProps<'NotificationStack'>){
+    return <NotificationStackNavigator/>
 }
 
