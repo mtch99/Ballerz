@@ -15,6 +15,9 @@ There must be three different games on three different courts, two at the moment
 ## How? (technical)
 
 
+- [ ] release v2.0.0
+    - [ ] update git ignore
+
 - [x] Friend Playing notification
     - [x] FriendPlaying Notification View
     - [x] Fix FriendshipRequestNotification Layout
@@ -76,14 +79,13 @@ There must be three different games on three different courts, two at the moment
 
 - [ ] Notifications
     - [ ] Hot court notification 
-    - [x] Prevent Notifications and feed states from having elaments with the same keys
+    - [x] Prevent Notifications and feed states from having elements with the same keys
 
 - [ ] I want see a toast message on new notification
     - [ ] Display a toast message on new received notification 
         - [ ] yarn add @react-native-material/Snackbar
         - [ ] Notification UseCase send events to the Notifications controller
         - [ ] Notification  controller send events to the snackbar 
-
 
         
 
@@ -102,7 +104,31 @@ TODO: Prevent users from choosing an already used username
 TODO: Post test Rémi
 * [ ] Majuscule activee au onboarding
 * [ ] Mot de passe visible
-* [ ] Pense pas etre capable d emettre de photo
+* [ ] Pense pas etre capable d emettre de photo... create profile screen figé
+
+
+- [ ] Personne ne lis 
+- [ ] Premoière photo jeu vidéo
+- [ ] Deuxième photo Jeu vidéo
+
+- [ ] Lien d'invitation 
+    C'est écrit desssus
+
+- [ ] En attente 
+
+-[ ] Avancer après 
+
+- [ ] Photo du parc
+
+- [ ] Google maps
+
+- [ ] Photo adresse
+
+- [ ] Photo de profil pas nécessaire
+
+- [ ] Vidéos lie, adresse, googlemaps lorsque que tu clique sur carré vert, 
+
+- [ ] favoris dans les terrains, notifications
 
 
 

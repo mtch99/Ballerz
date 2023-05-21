@@ -55,7 +55,6 @@ const addItemReducer: FeedReducer<IAddItemActionPayload> = (state, action) => {
 			...state,
 		}
 	} else {
-		console.warn("Game does not exits")
 		return {
 			...state,
 			items: [action.payload, ...state.items],

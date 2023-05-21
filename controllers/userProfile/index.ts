@@ -43,7 +43,7 @@ export class UserProfileController implements IUserProfileController{
         })
 
         const result = await Promise.all(promises)
-        console.warn(`Result of senndFriendshipRequests function: ${JSON.stringify(result)}`) 
+        // console.warn(`Result of senndFriendshipRequests function: ${JSON.stringify(result)}`) 
     }
 
     async sendFriendShipRequest(input: {senderProfileID: string, receiverProfileID: string}): Promise<IRequestFriendShipResult> {
