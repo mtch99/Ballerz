@@ -16,7 +16,8 @@ There must be three different games on three different courts, two at the moment
 
 
 - [ ] release v2.0.0
-    - [ ] update git ignore
+    - [x] update git ignore
+    - [x] setup backend prod env config
 
 - [x] Friend Playing notification
     - [x] FriendPlaying Notification View
