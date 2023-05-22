@@ -10,9 +10,16 @@
     "preview": {
       "distribution": "internal"
     },
-    "production": {}
+    "production":{
+
+    }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "ascAppId":"1636217466"
+      }
+      
+    }
   }
 }

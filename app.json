@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "ballerz",
-    "slug": "ballerz",
-    "version": "2.0.0",
+    "name": "Ballerz",
+    "slug": "Ballerz",
+    "version": "2.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -18,8 +18,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.mtch99.ballerz"
+      "supportsTablet": false,
+      "bundleIdentifier": "com.mtch99.BallerAlpha",
+      "buildNumber":"2"
     },
     "android": {
       "adaptiveIcon": {

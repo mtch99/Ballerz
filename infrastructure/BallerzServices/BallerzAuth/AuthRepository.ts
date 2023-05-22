@@ -101,6 +101,7 @@ export class AuthRepository implements IAuthRepository {
         let email: string = creds.email
         let password: string = creds.password
 
+        // Simulatore use case
         if(!isDevice){
             console.log(`Auth Repository detected simulator. Auto signing in default user`)
             email = creds.email
@@ -110,14 +111,17 @@ export class AuthRepository implements IAuthRepository {
             result = {...result, user:SignupAdapter.parseCognitoUser(user)}
             return result
         }
+
         
         await Auth.signIn(email, password)
         .then((result: CognitoUser) => {
+            console.warn(`SigninResponse: ${JSON.stringify(result)}`)
             this.__setCurrentUser(result)
         })
         .catch((error) => {
             result.error = SigninAdapter.parseCognitoSigninError(error)
             if(result.error.reason == struct.LoginErrorReason['USER_NOT_CONFIRMED']){
+                console.log("Not confirmed")
                 result = {
                     error: false,
                     user: {

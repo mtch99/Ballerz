@@ -3,7 +3,6 @@ import { ILoginInput, ILoginRejection, ILoginResult } from "../../../domain/use-
 import { ISigninScreen, ISigninScreenProps, ISigninScreenState } from "./interface";
 import { AppContext, IAppContext } from "../../../controllers/provider";
 import IAuthController from "../../../controllers/auth/interface";
-import SigninScreenView from "../../../views/auth/signIn";
 import SigninView from "../../../views/auth/signIn";
 
 
@@ -11,7 +10,7 @@ import SigninView from "../../../views/auth/signIn";
 
 export default class SigninScreen extends React.Component<ISigninScreenProps, ISigninScreenState> implements ISigninScreen {
     
-    authController: IAuthController = {} as IAuthController;
+    // authController: IAuthController = {} as IAuthController;
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext
 
@@ -26,21 +25,21 @@ export default class SigninScreen extends React.Component<ISigninScreenProps, IS
 
     state: ISigninScreenState = {
         emailInput: "stephcurry30@gmail.com",
-        passworInput: "stephcurrY30@mailcom",
+        passwordInput: "stephcurrY30@mailcom",
         error: undefined
     }
 
 
     componentDidMount(): void {
-        this.authController = this.context.authController
+        // this.authController = this.context.authController
     }
     
     async signIn(): Promise<void> {
         const loginInput: ILoginInput = {
             email: this.state.emailInput,
-            password: this.state.passworInput
+            password: this.state.passwordInput
         }
-        this.authController.login(loginInput).then((response) => {
+        this.context.authController.login(loginInput).then((response) => {
             this.handleSigninResponse(response)
         })
     }
@@ -63,7 +62,7 @@ export default class SigninScreen extends React.Component<ISigninScreenProps, IS
         this.props.navigationController.goToSignup()
     }
 
-    private handleSigninResponse(response: ILoginResult): void {
+    private async handleSigninResponse(response: ILoginResult): Promise<void> {
         if(response.error != false){
             const error: ILoginRejection = response.error
             this.setState((prevState) => ({
@@ -74,8 +73,9 @@ export default class SigninScreen extends React.Component<ISigninScreenProps, IS
         else{
             const signinInput = {
                 email: this.state.emailInput,
-                password: this.state.passworInput
+                password: this.state.passwordInput
             }
+            await this.context.userProfileController.getMyProfile(signinInput.email)
             this.props.navigationController.onSigninSuccess(signinInput)
         }
     }

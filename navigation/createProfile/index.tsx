@@ -57,6 +57,7 @@ import { Keyboard, TouchableNativeFeedback } from 'react-native';
 							}}
 							component={FindYourFriendsScreenWrapper}
 						/>
+						
 					</Stack.Navigator>
 				</TouchableNativeFeedback>
     	  	)

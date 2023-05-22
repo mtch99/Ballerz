@@ -18,10 +18,15 @@ There must be three different games on three different courts, two at the moment
 - [ ] release v2.0.0
     * [ ] Last adjustments:
         - [x] Signin View Title
-        - [ ] Get places and users on Search View focus
-        - [ ] (Find your friends view)'s "continue" top right corner icon
-    - [ ] update git ignore
+        - [x] Get places and users on Search View focus
+        - [x] (Find your friends view)'s "continue" top right corner icon
+    - [x] update git ignore
     - [x] setup backend prod env config
+    - [x] create build
+    - [x] test
+        - [x] Fix signin flow... Fetch user profile after signin
+
+* [x] Make sure Qc places are uploaded to the database
 
 - [x] Friend Playing notification
     - [x] FriendPlaying Notification View

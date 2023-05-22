@@ -11,7 +11,7 @@ export interface ISigninScreenProps extends ISigninScreenPropsWithoutNavigation 
 
 export interface ISigninScreenState {
     emailInput: string
-    passworInput: string
+    passwordInput: string
     error: string | undefined
 }
 

@@ -10,7 +10,9 @@ import { IPlaceSearchScreenNavigationController } from "../../screens/placeList/
 import { IUserProfileDataState } from "../../app/features/types";
 import { BaseStackNavigator } from "../base";
 import { IUserProfileListScreenNavigationController } from "../../screens/userProfileList/interface";
-import { IPlaceData } from "../../domain/use-cases/types";
+import { IPlaceData, IUserProfileData } from "../../domain/use-cases/types";
+import React from "react";
+import { AppContext } from "../../controllers/provider";
 
 
 
@@ -20,6 +22,9 @@ export function PlaceProfileScreenWrapper(props: BaseStackScreenProps<'PlaceProf
 
     const navigationController: IPlaceProfileScreenNavigationController = {
         goToCreateTimeSlot: function (placeDate: IPlaceData): void {
+            throw new Error("Function not implemented.");
+        },
+        goToAttendantsScreen: function (attendantsList: IUserProfileData[]): void {
             throw new Error("Function not implemented.");
         }
     }
@@ -82,6 +87,17 @@ export function UserProfileScreenWrapper(props: ExploreStackScreenProps<'UserPro
 export function ExploreTabScreenWrapper(props: ExploreStackScreenProps<'SearchStack'>){
    
     const {navigation} = props
+
+    const {placeController, userProfileController, authState} = React.useContext(AppContext)
+
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            console.log(`My UserProfile ID: ${authState.profile?.id}`)
+            userProfileController.getAllUserProfiles()
+            placeController.getAllPlaces()
+        });
+        return unsubscribe;
+    }, [navigation])
 
     const placeSearcScreenNavigationController: IPlaceSearchScreenNavigationController = {
         goToPlaceProfile: function (id: string): void {
