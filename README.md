@@ -15,8 +15,8 @@ There must be three different games on three different courts, two at the moment
 ## How? (technical)
 
 
-- [ ] release v2.0.0
-    * [ ] Last adjustments:
+- [x] release v2.0.0
+    * [x] Last adjustments:
         - [x] Signin View Title
         - [x] Get places and users on Search View focus
         - [x] (Find your friends view)'s "continue" top right corner icon
