@@ -131,6 +131,7 @@ export default function AppProvider (props: IProps) {
     const notificationListState: NotificationListState = selector(selectNotificationList)
 
     const prepareData = async() => {
+        console.log("apokqsokjdpoedk")
         await Promise.all([
             authController.isFirstLaunch(),
             loadResources()
@@ -147,9 +148,9 @@ export default function AppProvider (props: IProps) {
             }
         }
         authModel.onDataPreparedEvent()
-        await SplashScreen.hideAsync().then(result => {
-            if(result){console.log(`Splashscreen hidden`)}
-        })
+        // await SplashScreen.hideAsync().then(result => {
+        //     if(result){console.log(`Splashscreen hidden`)}
+        // })
     }
     
     const controller: IAppController = {
