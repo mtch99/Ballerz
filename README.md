@@ -15,76 +15,15 @@ There must be three different games on three different courts, two at the moment
 ## How? (technical)
 
 
-- [x] release v2.0.0
-    * [x] Last adjustments:
-        - [x] Signin View Title
-        - [x] Get places and users on Search View focus
-        - [x] (Find your friends view)'s "continue" top right corner icon
-    - [x] update git ignore
-    - [x] setup backend prod env config
-    - [x] create build
-    - [x] test
-        - [x] Fix signin flow... Fetch user profile after signin
+- [ ] release v2.0.0-2
+    - [x] FeedItemView
+        - [x] Display "Today" when a game is happemimg the same day
+    - [ ] update notifications when device connects back to network
+        - [ ] Listen to network status events in Notifications use case
+        - [ ] Fetch unreceived notifications 
+            - [ ] Filter notifications by createdAt
+            - [ ] Get last notitification creatio date
 
-* [x] Make sure Qc places are uploaded to the database
-
-- [x] Friend Playing notification
-    - [x] FriendPlaying Notification View
-    - [x] Fix FriendshipRequestNotification Layout
-    - [x] Display
-    - [x] Join button conditionally activated
-        - [x] My PresenceList in authState
-        - [x] isPresent field in IFriendPlayingNotification
-
-
-* [x] Add profile picture after profile creation
-    - [x] Load asssets before launch 
-    - [x] Add default profile pic to assets
-        
-
-- [x] Games feature
-    - [x] Undo onNewNotification warning in Notifications repository    
-    - [x] Disable Play button during checkin request
-    - [x] Create Game from feedScreen
-    - [x] Popup after checkin
-
-
-- [x] See Game Participants
-
-- [x] Replace invite button with share button
-
-- [x] Test and refine Discovery flow
-    - [x] DefineUsernameView 
-    - [x] FindYourFriendsView
-
-- [x] ProfilePic
-    - [x] Retrieve user profile on MyProfile screen focus
-    - [x] Make sure profile pic is uploaded on userProfileCreation
-    - [x] Display respective profile pics on all UserList screens
-
-- [x] My Profile
-    - [x] See my friends list
-    - [x] I Want to see my games list
-
-
-- [x] Cache notifications and use it for badge diff
-
-- [x] Place Profile
-    - [x] Sort games by date
-    - [x] Friends there in game
-
-- [x] FeedItemView
-    - [x] Fix layout
-    - [x] Display "Today" when a game is happemimg the same day
-
-
-- [x] Test Joining friends from notifications screen on real device
-    - [x] Fix FriendPlayingNotification bug
-    - [x] Update Notifications query to index the receiverProfile
-    - [x] Fix Joining action logic
-
-
-- [x] Load games on feed screen focus
 
 
 - [ ] Notifications

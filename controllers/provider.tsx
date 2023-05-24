@@ -131,7 +131,6 @@ export default function AppProvider (props: IProps) {
     const notificationListState: NotificationListState = selector(selectNotificationList)
 
     const prepareData = async() => {
-        console.log("apokqsokjdpoedk")
         await Promise.all([
             authController.isFirstLaunch(),
             loadResources()

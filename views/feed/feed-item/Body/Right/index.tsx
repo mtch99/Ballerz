@@ -81,7 +81,10 @@ export default class BodyRightView extends React.Component<IBodyRightViewProps> 
             }
         }
         else if(this.startingDate.getTime() > todayAtMidnight.getTime()){
-            if(dateDifferenceInDays <= 1){
+            if(dateDifferenceInDays < 1){
+                DateView = () => (<Text style={style.weekDay}>Aujourd'hui</Text>)
+            }
+            if(dateDifferenceInDays < 2){
                 DateView = () => (<Text style={style.weekDay}>Demain</Text>)
             }
             else {
