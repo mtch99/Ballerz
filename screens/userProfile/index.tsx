@@ -92,7 +92,6 @@ export class UserProfileScreen extends Screen<IUserProfileScreenProps, IUserProf
 
     render(): React.ReactNode {
         const userProfile = this.context.userProfileMapState[this.props.userProfileData.id] as IUserProfileState | undefined
-        // console.warn(`${JSON.stringify(userProfile?.games)}`)
         if(userProfile){
             return( 
                 <UserProfileView
@@ -125,7 +124,9 @@ export class MyProfileScreen extends React.Component<IMyProfileScreenProps> {
     context: React.ContextType<typeof AppContext> = {} as IAppContext
 
     // Effect is run on navigation wrapper
-    componentDidMount(): void {}
+    componentDidMount(): void {
+        
+    }
 
     onPressFriendsNumber(){
         const friends = this.context.authState.profile?.friends

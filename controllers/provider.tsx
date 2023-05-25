@@ -187,7 +187,7 @@ export default function AppProvider (props: IProps) {
 
         const netWorkSubscription = NetInfo.addEventListener((state: NetInfoState) => {
             if(state.isConnected){
-                console.warn("Network State switched to connected")
+                console.log("Network State switched to connected")
                 if(authState.profile){
                     notificationController.initNotifications(authState.profile.id)
                 }

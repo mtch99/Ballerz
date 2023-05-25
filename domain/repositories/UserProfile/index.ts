@@ -17,7 +17,6 @@ import { parseGameList, parsePresenceList } from "../adapter";
 export default class UserProfileRepository implements IUserProfileRepository {
 
     client: UserProfileClient
-    myUserProfileID: string = "dumbID1210e8934"
     userProfilePicUri: ImageSourcePropType = {uri:""}
     constructor(){
         this.client = new UserProfileClient()
@@ -32,9 +31,6 @@ export default class UserProfileRepository implements IUserProfileRepository {
         return result
     }
 
-    setMyUserProfileID(id: string): void{
-        this.myUserProfileID = id
-    }
 
 
     async getMyUserProfileData(): Promise<IMyUserProfileData | null> {
@@ -48,7 +44,6 @@ export default class UserProfileRepository implements IUserProfileRepository {
 
     async getMyUserProfile(email: string): Promise<IUserProfile | null> {
         const cache: IUserProfile | null = await this.__getCachedMyUserProfile()
-
         const variables: ListUserProfileDataQueryVariables = {
             filter: {
                 email: {
@@ -61,7 +56,7 @@ export default class UserProfileRepository implements IUserProfileRepository {
                 }
             }
         }
-
+        
         const response = await this.client.listUserProfilesByEmail(variables).then((data) => {
             return data
         })
@@ -69,12 +64,12 @@ export default class UserProfileRepository implements IUserProfileRepository {
             console.error(err)
             return undefined
         })
-
+        
         if(!response){
             return cache
         }
         
-
+        
         let userProfile = IUserProfileDataAdapter.parseListUserProfileByEmailResponse(response)
         if(!userProfile){
             console.log("Could not find a user profile with the email: " + email)
@@ -88,6 +83,7 @@ export default class UserProfileRepository implements IUserProfileRepository {
     
 
     async getAllUserProfileData(): Promise<IUserProfileData[]> {
+        const myUserProfileID = await this.__getCachedMyUserProfile().then(res => (res?.id)) || "123"
         const variables: ListUserProfileDataQueryVariables = {
             frendshipFilter: {
                 id: {
@@ -98,7 +94,7 @@ export default class UserProfileRepository implements IUserProfileRepository {
         const response: IUserProfileData[] | undefined = await this.client.listUserProfileData(variables)
         .then(response => {
             if(response){
-                let res = IUserProfileDataAdapter.parseListUserProfileDataResponse(response, this.myUserProfileID)
+                let res = IUserProfileDataAdapter.parseListUserProfileDataResponse(response, myUserProfileID)
                 this.__cacheUserProfileDataList(res)
                 return res
             }
@@ -134,7 +130,7 @@ export default class UserProfileRepository implements IUserProfileRepository {
             return undefined
         })
 
-        return IUserProfileDataAdapter.parseGetUserProfileResponse(response, this.myUserProfileID)
+        return IUserProfileDataAdapter.parseGetUserProfileResponse(response, myUserProfileID)
     }
 
 
@@ -158,14 +154,12 @@ export default class UserProfileRepository implements IUserProfileRepository {
         
         if(!result.error && result.userProfile){
             this.__cacheMyUserProfile(result.userProfile)
-            this.setMyUserProfileID(result.userProfile.id)
         }
 
 
         return result
     }
     
-
     async requestFriendship(input: IRequestFriendShipInput): Promise<IRequestFriendShipResult> {
         let result: IRequestFriendShipResult = {error: false}
         // console.log(`AuthRepository: Request FriendShip input: \n ${JSON.stringify(input)}`)
@@ -207,9 +201,10 @@ export default class UserProfileRepository implements IUserProfileRepository {
         return result
     }
 
+
+
     private __cacheMyUserProfileData(myUserProfileData: IMyUserProfileData): void {
         AsyncStorage.setItem("myUserProfileData", JSON.stringify(myUserProfileData))
-        this.myUserProfileID = myUserProfileData.id
     }
     private async __getCachedUserProfileData(): Promise<IMyUserProfileData | null> {
         let result =  await AsyncStorage.getItem("myUserProfileData");
@@ -223,7 +218,6 @@ export default class UserProfileRepository implements IUserProfileRepository {
 
     private __cacheMyUserProfile(myUserProfile: IUserProfile): void {
         AsyncStorage.setItem("myUserProfile", JSON.stringify(myUserProfile))
-        this.myUserProfileID = myUserProfile.id
     }
     private async __getCachedMyUserProfile(): Promise<IUserProfile | null> {
         let result =  await AsyncStorage.getItem("myUserProfile");
@@ -331,6 +325,7 @@ class IUserProfileDataAdapter {
 
     static parseGetUserProfileResponse(response: queries.GetUserProfileQuery | undefined, myUserProfileID: string): IUserProfile | null {
         let result: IUserProfile | null = null
+        console.log(`MyUserProfileID in parseGetUserProfileResponse function: ${myUserProfileID}`)
         
         if(response?.getUserProfile){
             let isFriend: IUserProfileData['isFriend'] = false

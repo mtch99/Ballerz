@@ -20,7 +20,6 @@ export default class UserProfileUseCase implements IUserProfileUseCase{
         const result = await this.repo.getMyUserProfile(email)
         if(result){
             // console.warn(`Get my user profile result: ${JSON.stringify(result)}`);
-            this.repo.setMyUserProfileID(result.id)
             this.observer.setMyProfile(result)
         }
         return result

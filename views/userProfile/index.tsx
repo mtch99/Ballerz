@@ -25,15 +25,17 @@ export class UserProfileView extends React.Component<IUserProfileViewProps, IPro
     }
 
     state = {
-        profilePicSource: {uri:""}, 
+        profilePicSource: {uri:"123"}, 
     }
 
     componentDidMount(): void {
+        console.log(this.props.isFriend)
         getProfilePicUri(this.props.id).then(uri => {
             if(uri){
                 this.setState({profilePicSource: {uri}})
             }
         })
+
     }
 
     render(){
