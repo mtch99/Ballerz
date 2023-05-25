@@ -189,7 +189,8 @@ export default function AppProvider (props: IProps) {
             if(state.isConnected){
                 console.log("Network State switched to connected")
                 if(authState.profile){
-                    notificationController.initNotifications(authState.profile.id)
+                    const myUserProfileID = authState.profile.id
+                    notificationController.updateNotificationList(myUserProfileID)
                 }
             }
         })

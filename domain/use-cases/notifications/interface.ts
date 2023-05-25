@@ -5,6 +5,7 @@ export interface INotificationsUseCase{
     onNewNotificationReceived(notification: Notification): Promise<void>
     subscribeToMyNotifications(myProfileID: string): void
     initNotifications(myProfileID: string): Promise<void>
+    updateNotifications(myProfileID: string): Promise<void>
 }
 
 

@@ -18,7 +18,7 @@ There must be three different games on three different courts, two at the moment
 - [ ] release v2.0.0-2
     - [x] FeedItemView
         - [x] Display "Today" when a game is happemimg the same day
-    - [ ] update notifications when device connects back to network
+    - [x] update notifications when device connects back to network
         - [x] Listen to network status events in Controller
         - [x] Fetch unreceived notifications 
             - [x] Filter notifications by createdAt
@@ -26,11 +26,11 @@ There must be three different games on three different courts, two at the moment
         * [x] isFriend property is false even although the friendship is true
         - [x] Repo, use case and model logic
             [x] ...
-            - [ ] Update cache notifications on newNotification received
-                * [ ] Check that the notification is not already present
-        - [ ] implement network event listener logic
-            - [ ] UpdateNotifications Function in Notifications Controller
-            - [ ] Call it in network event listener
+            - [x] Update cache notifications on newNotification received
+                * [x] Check that the notification is not already present
+        - [x] implement network event listener logic
+            - [x] UpdateNotifications Function in Notifications Controller
+            - [x] Call it in network event listener
 
 
 
