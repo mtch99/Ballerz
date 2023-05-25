@@ -22,13 +22,12 @@ There must be three different games on three different courts, two at the moment
         - [x] Listen to network status events in Controller
         - [x] Fetch unreceived notifications 
             - [x] Filter notifications by createdAt
-            - [ ] Notifications syncing
-                - [x] Repo, use case and model logic
-                    [x] ...
-                    - [ ] Update cache notifications on newNotification received
-                - [ ] implement network event listener logic
-                    - [ ] UpdateNotifications Function in Notifications Controller
-                    - [ ] Call it in network event listener
+        - [x] Repo, use case and model logic
+            [x] ...
+            - [ ] Update cache notifications on newNotification received
+        - [ ] implement network event listener logic
+            - [ ] UpdateNotifications Function in Notifications Controller
+            - [ ] Call it in network event listener
 
 
 
