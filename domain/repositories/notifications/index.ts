@@ -14,10 +14,13 @@ export class NotificationsRepository implements INotificationsRepository {
     observer: INotificationsUseCase;
     client: INotificationsClient
     userProfileID: string | undefined;
+    currentNotificationsList: Notification[]
 
     constructor(observer: INotificationsUseCase) {
         this.observer = observer;
         this.client = new NotificationsClient(undefined,"API_KEY");
+        this.currentNotificationsList = []
+        this.__getCacheNotifications().then(result => this.currentNotificationsList = result)
     }
 
     
@@ -33,8 +36,33 @@ export class NotificationsRepository implements INotificationsRepository {
             }
         } else {
             const result = ResponseHandler.handleFilterNotificationsByReceiverResponse(response);
-            this.__cacheNotifications(result.notifications);
+            this.__updateNotifications(result.notifications);
             return result
+        }
+    }
+
+
+
+    async getUnReceivedNotifications(userProfileID: string): Promise<Notification[]>{
+        const currentNotifications = await this.__getCacheNotifications()
+        let minCreationDate: string | undefined = undefined;
+        if(currentNotifications){
+            currentNotifications.sort((a, b) => {
+                return new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf()
+            })
+            const notificationCount = currentNotifications.length
+            if(notificationCount> 0){
+                minCreationDate = currentNotifications[0].createdAt
+            }
+        }
+        const response = await this.client.filterNotificationsByReceiver(userProfileID, minCreationDate)
+        if(response){
+            const result = ResponseHandler.handleFilterNotificationsByReceiverResponse(response)
+            const newNotificationList = [...result.notifications, ...currentNotifications]
+            this.__updateNotifications(newNotificationList)
+            return result.notifications
+        } else {
+            return []
         }
     }
 
@@ -72,8 +100,10 @@ export class NotificationsRepository implements INotificationsRepository {
         return notificationList
     }
 
-    __cacheNotifications(notificationList: Notification[]): void{
+
+    __updateNotifications(notificationList: Notification[]): void{
         AsyncStorage.setItem("notificationList", JSON.stringify(notificationList))
+        this.currentNotificationsList = notificationList
     }
 
 

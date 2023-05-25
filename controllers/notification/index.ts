@@ -29,7 +29,7 @@ class NotificationController implements INotificationController{
     
     
     async getMyNotifications(userProfileID: string) : Promise<GetMyNotificationsResult>{
-        const response = await this.useCase.getMyReceivedNotifications(userProfileID)
+        const response = await this.useCase.getMyNotifications(userProfileID)
         let result = {
             error: response.error?true:false,
             notifications: response.notifications
@@ -56,7 +56,7 @@ export default notificationController;
 
 
 const fakeNotificationUseCase: INotificationsUseCase = {
-    getMyReceivedNotifications: function (myProfileID: string): Promise<usecase_types.IGetMyNotificationsResult> {
+    getMyNotifications: function (myProfileID: string): Promise<usecase_types.IGetMyNotificationsResult> {
         throw new Error("UseCase not initialized");
     },
     onNewNotificationReceived: function (notification: IFriendShipRequestNotification): Promise<void> {

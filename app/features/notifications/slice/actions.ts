@@ -10,3 +10,7 @@ export type InitNotificationStatePayload = {
     notifications: NotificationState[]
     badge: number
 }
+
+export type SyncNotificationsPayload = {
+    deltaNotificationList: NotificationState[]
+}
