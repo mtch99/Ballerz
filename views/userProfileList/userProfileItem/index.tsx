@@ -8,7 +8,7 @@ import { getProfilePicUri } from "../../../screens/utils/ImagePicker";
 export default class ClickableUserProfileItemView extends React.Component<IUserProfileItemViewProps>{
 
     state = {
-        profilePicSource: require("../../../assets/blank-pp.jpg")
+        profilePicSource: {uri:"1234"}
     }
 
     componentDidMount(): void {
@@ -43,10 +43,9 @@ export default class ClickableUserProfileItemView extends React.Component<IUserP
 			    						{item.symbol}
 			    					</Text>
 			    				)
-                                }}
-                                style={{flexDirection: "row"}}
-                                />
-                        {/* <Text style={styles.gameNumText}>4 parties </Text> */}
+                            }}
+                            style={{flexDirection: "row"}}
+                            />
                     </View>
                 </TouchableOpacity>
         )

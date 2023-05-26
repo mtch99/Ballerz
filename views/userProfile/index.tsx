@@ -81,7 +81,7 @@ export interface IProfileViewState {
 
 export class MyProfileView extends React.Component<IUserProfileViewProps, IProfileViewState> {
     state = {
-        profilePicSource: require('../../assets/profilePic.jpg'), 
+        profilePicSource: {uri: "1234"}, 
     }
 
     componentDidMount(): void {
@@ -103,7 +103,6 @@ export class MyProfileView extends React.Component<IUserProfileViewProps, IProfi
                 <HeaderView
                     username={this.props.username}
                     friendsList={this.props.friends}
-                    // profilePicUri={'../../assets/profilePic'}
                     profilePicSource={this.state.profilePicSource}
                     isFriend={this.props.isFriend}
                     onPressFriendsNumber={this.props.onPressFriendsNumber}

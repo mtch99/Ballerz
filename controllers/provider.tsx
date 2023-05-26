@@ -200,7 +200,7 @@ export default function AppProvider (props: IProps) {
         )
 
 
-    }, [authState.profile])
+    }, [authState.user])
 
 
     return (

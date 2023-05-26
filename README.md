@@ -32,6 +32,12 @@ There must be three different games on three different courts, two at the moment
             - [x] UpdateNotifications Function in Notifications Controller
             - [x] Call it in network event listener
 
+        - [x] Change Controller useEffect dependancy to userState
+        
+    - [x] Fix default profile picture source
+        - [x] in user profile screen
+        - [x] in userProfile List screen
+
     - [x] Update share link to new version
     - [x] Fix Place Profile view
         - [x] Add header view 

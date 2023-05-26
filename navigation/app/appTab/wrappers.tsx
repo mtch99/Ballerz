@@ -12,16 +12,7 @@ import { NotificationStackNavigator } from "./notifications";
 
 
 export function FeedStackWrapper(props: AppTabScreenProps<'FeedStack'>) {
-    const { navigation } = props
-    // const {} = React.useContext(AppContext)
-    React.useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => {
-            console.log("User is logged in")
-            //TODO: next line ---> GameController.getAllGames() instead
-            // userProfileController.getMyProfile(authState.user.email)
-        });
-        return unsubscribe;
-    }, [navigation])
+
     return(
         <FeedStackNavigator/>
     )
@@ -42,7 +33,7 @@ export function MyProfileStackWrapper(props: AppTabScreenProps<'MyProfileStack'>
     React.useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
             if(authState.user){
-                console.log("User is logged in")
+                console.log("MyProfileStack focus")
                 userProfileController.getMyProfile(authState.user.email)
             }
             else{
