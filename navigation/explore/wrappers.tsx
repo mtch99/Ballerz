@@ -92,7 +92,7 @@ export function ExploreTabScreenWrapper(props: ExploreStackScreenProps<'SearchSt
 
     React.useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
-            console.log(`My UserProfile ID: ${authState.profile?.id}`)
+            // console.log(`My UserProfile ID: ${authState.profile?.id}`)
             userProfileController.getAllUserProfiles()
             placeController.getAllPlaces()
         });

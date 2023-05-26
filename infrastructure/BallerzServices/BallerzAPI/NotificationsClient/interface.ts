@@ -5,7 +5,7 @@ import { listNotificationsByReceiverQuery } from "./queries"
 
 
 export interface INotificationsClient {
-    filterNotificationsByReceiver(receiverProfileID: string): Promise<listNotificationsByReceiverQuery | undefined>
+    filterNotificationsByReceiver(receiverProfileID: string, minCreationDate?:string): Promise<listNotificationsByReceiverQuery | undefined>
     subscribeToNotifications(receiverProfileID: string, callback: (notification: Notification) => void): void
 }
 

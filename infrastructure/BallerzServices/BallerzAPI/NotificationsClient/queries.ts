@@ -104,5 +104,3 @@ export const listNotificationsByReceiver_gql = /* GraphQL */ `
       }
     }
 `;
-
-

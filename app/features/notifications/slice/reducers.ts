@@ -1,7 +1,8 @@
+import { action } from "mobx";
 import { IFriendShipRequestNotification } from "./../../../../domain/use-cases/types";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { NotificationListState, NotificationState } from "./interface";
-import { INewNotificationPayload, INewNotificationListPayload, AcceptedFriendshipRequestNotificationPayload, InitNotificationStatePayload } from "./actions";
+import { INewNotificationPayload, INewNotificationListPayload, AcceptedFriendshipRequestNotificationPayload, InitNotificationStatePayload, SyncNotificationsPayload } from "./actions";
 import { NotificationType } from "../../../../domain/use-cases/types";
 
 
@@ -10,7 +11,8 @@ export enum UserProfileActionType{
     NEW_NOTIFICATION="NEW_NOTIFICATION",
     REINIT_BADGE="REINIT_BADGE",
     ACCEPTED_FRIENDSHIP_REQUEST="ACCEPTED_FRIENDSHIP_FRIENDSHIP_REQUEST",
-    INIT_NOTIFICATIONSTATE="INIT_NOTIFICATIONSTATE"
+    INIT_NOTIFICATIONSTATE="INIT_NOTIFICATIONSTATE",
+    SYNC_NOTIFICATIONS="SYNC_NOTIFICATIONS",
 }
 
 
@@ -75,6 +77,23 @@ const initNotificationStateReducer: INotificationReducer<InitNotificationStatePa
     }
 }
 
+const syncNotificationsReducer: INotificationReducer<SyncNotificationsPayload> = (state, action) => {
+    const deltaNotificationList = action.payload.deltaNotificationList
+    const deltaLength = deltaNotificationList.length
+    let newBadgeState: NotificationListState['badge']
+    if(deltaLength > 0){
+        newBadgeState = deltaLength
+    }
+
+    const newNotificationList = [...deltaNotificationList, ...state.items]
+
+    return {
+        ...state,
+        badge: newBadgeState,
+        items: newNotificationList
+    }
+}
+
 
 
 
@@ -84,7 +103,8 @@ const userProfileListReducers = {
     NEW_NOTIFICATION: newNotificationReducer,
     REINIT_BADGE: reinitBadgeReducer,
     ACCEPTED_FRIENDSHIP_REQUEST: acceptedFriendshipRequestReducer,
-    INIT_NOTIFICATIONSTATE: initNotificationStateReducer
+    INIT_NOTIFICATIONSTATE: initNotificationStateReducer,
+    SYNC_NOTIFICATIONS: syncNotificationsReducer,
 }
 
 export default userProfileListReducers

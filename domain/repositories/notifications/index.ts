@@ -39,6 +39,31 @@ export class NotificationsRepository implements INotificationsRepository {
     }
 
 
+
+    async getUnReceivedNotifications(userProfileID: string): Promise<Notification[]>{
+        const currentNotifications = await this.__getCacheNotifications()
+        let minCreationDate: string | undefined = undefined;
+        if(currentNotifications){
+            currentNotifications.sort((a, b) => {
+                return new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf()
+            })
+            const notificationCount = currentNotifications.length
+            if(notificationCount> 0){
+                minCreationDate = currentNotifications[0].createdAt
+            }
+        }
+        const response = await this.client.filterNotificationsByReceiver(userProfileID, minCreationDate)
+        if(response){
+            const result = ResponseHandler.handleFilterNotificationsByReceiverResponse(response)
+            const newNotificationList = [...result.notifications, ...currentNotifications]
+            this.__cacheNotifications(newNotificationList)
+            return result.notifications
+        } else {
+            return []
+        }
+    }
+
+
     private notificationsSubscriptionHandler(clientNotification: ClientNotification): void {
         const notification = ResponseHandler.parseClientNotification(clientNotification)
         console.log(`New Notification received: ${JSON.stringify(notification)}`)
@@ -51,6 +76,18 @@ export class NotificationsRepository implements INotificationsRepository {
     onNewNotification(notification: Notification): void {
         // console.warn(`Notification bien recue: ${JSON.stringify(notification)}`);
         this.observer.onNewNotificationReceived(notification)
+        
+        // Add new notification to cache
+        this.__getCacheNotifications().then(res => {
+            if(res){
+                const newNotificationID = notification.id
+                const notificationIsPresent = res.find((value, index) => {return value.id == newNotificationID})
+                if(!notificationIsPresent){
+                    const newNotificationList = [notification, ...res]
+                    this.__cacheNotifications(newNotificationList)
+                }
+            }
+        })
     }
 
 
@@ -72,7 +109,8 @@ export class NotificationsRepository implements INotificationsRepository {
         return notificationList
     }
 
-    __cacheNotifications(notificationList: Notification[]): void{
+
+    private __cacheNotifications(notificationList: Notification[]): void{
         AsyncStorage.setItem("notificationList", JSON.stringify(notificationList))
     }
 

@@ -9,6 +9,7 @@ import { Notification } from "./types";
 import { subscriptionClient } from "../subscriptionClient";
 import { gql } from "@apollo/client";
 import {Subscription} from "@apollo/client/node_modules/zen-observable-ts";
+import { ModelSortDirection } from "../API";
 
 
 
@@ -61,8 +62,8 @@ export default class NotificationsClient extends BallerzApiClient implements INo
 	}
 
 
-    async filterNotificationsByReceiver(receiverProfileID: string): Promise<listNotificationsByReceiverQuery | undefined> {
-        const variables = genNotificationsByReceiverVariables(receiverProfileID)
+    async filterNotificationsByReceiver(receiverProfileID: string, minCreationDate?: string): Promise<listNotificationsByReceiverQuery | undefined> {
+        const variables = genNotificationsByReceiverVariables(receiverProfileID, minCreationDate)
         const payload = this.genRequestPayload(listNotificationsByReceiver_gql, variables)
         const response = await API.graphql<GraphQLQuery<listNotificationsByReceiverQuery>>(payload)
         const result = this._handleResponse(response)
@@ -73,15 +74,23 @@ export default class NotificationsClient extends BallerzApiClient implements INo
 }
 
 
-function genNotificationsByReceiverVariables(receiverProfileID: string): NotificationsByReceiverQueryVariables{
-    return {
+function genNotificationsByReceiverVariables(receiverProfileID: string, minCreationDate?: string): NotificationsByReceiverQueryVariables{
+    const variables: NotificationsByReceiverQueryVariables = {
       receiverProfileID,
       frendshipFilter: {
         friendProfileID: {
           eq: receiverProfileID
         }
-      }
+      },
+      sortDirection: ModelSortDirection.DESC
     };
+    if(minCreationDate){
+        variables.createdAt = {
+            gt: minCreationDate
+        }
+    }
+
+    return variables
 }
 function genMyNotificationsSubscriptionVariables(receiverProfileID: string): FilterNotificationsByUserQueryVariables{
   return {

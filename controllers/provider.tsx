@@ -1,6 +1,7 @@
 import React from "react";
 import { Image } from "react-native";
 import { Asset } from 'expo-asset';
+import NetInfo, { NetInfoState } from "@react-native-community/netinfo";
 import { IAppController, IAppControllerEventListener } from "./interface";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { createFeedModel } from "../app/features/feed/model";
@@ -131,7 +132,6 @@ export default function AppProvider (props: IProps) {
     const notificationListState: NotificationListState = selector(selectNotificationList)
 
     const prepareData = async() => {
-        console.log("apokqsokjdpoedk")
         await Promise.all([
             authController.isFirstLaunch(),
             loadResources()
@@ -184,7 +184,23 @@ export default function AppProvider (props: IProps) {
         placeController.createUseCase(placeModel)
         groupChatController.createUseCase(groupChatModel)
         feedController.createUseCase(feedModel)
-    }, [])
+
+        const netWorkSubscription = NetInfo.addEventListener((state: NetInfoState) => {
+            if(state.isConnected){
+                console.log("Network State switched to connected")
+                if(authState.profile){
+                    const myUserProfileID = authState.profile.id
+                    notificationController.updateNotificationList(myUserProfileID)
+                }
+            }
+        })
+
+        return(
+            netWorkSubscription()
+        )
+
+
+    }, [authState.profile])
 
 
     return (
@@ -199,6 +215,9 @@ export default function AppProvider (props: IProps) {
 
 
 export const MemoizedAppProvider = React.memo(AppProvider)
+
+
+
 
 
 function getCacheImages(images: any[]) {
