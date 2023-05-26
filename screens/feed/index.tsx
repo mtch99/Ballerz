@@ -13,7 +13,7 @@ import { IScreenState, Screen } from "../interface";
 import CommunityModal, {ModalProps} from 'react-native-modal';
 import { IUserProfileData } from "../../domain/use-cases/types";
 
-const betaAppUrl = "https://testflight.apple.com/join/6GBFVtwg"
+const betaAppUrl = "https://testflight.apple.com/join/cYonaub5"
 export interface IFeedScreenPropsWithoutNavigation {
 
 }
@@ -65,8 +65,8 @@ export class FeedScreen extends Screen<IFeedScreenProps, IFeedScreenState> imple
         try {
             const result = await Share.share({
                 message:'Hey, Rejoins moi sur Ballerz pour être informé lorsque je vais jouer au basketball. \n\nBall is life 🔥',
-			    title: "https://testflight.apple.com/join/6GBFVtwg",
-			    url: "https://testflight.apple.com/join/6GBFVtwg"
+			    title: betaAppUrl,
+			    url: betaAppUrl
             });
             if (result.action === Share.sharedAction) {
               if (result.activityType) {

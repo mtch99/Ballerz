@@ -32,6 +32,11 @@ There must be three different games on three different courts, two at the moment
             - [x] UpdateNotifications Function in Notifications Controller
             - [x] Call it in network event listener
 
+    - [x] Update share link to new version
+    - [x] Fix Place Profile view
+        - [x] Add header view 
+        - [x] Fix layout
+
 
 
 - [ ] Notifications

@@ -13,6 +13,8 @@ import { FlatList } from "react-native-gesture-handler"
 import FeedItemView from "../feed/feed-item"
 import ListItemButton from "../../components/Buttons/ListItemButton"
 import { handleSharePress } from "../../screens/utils"
+import BallerzHeaderView, { IBallerzHeaderViewProps } from "../../components/header"
+import BallerzHeaderBackButton from "../../components/header/buttons/headerBackButton"
 
 
 
@@ -66,6 +68,7 @@ export class PlaceProfileView extends React.Component<IPlaceProfileViewProps>{
                 // style={styles.scrollViewContainer}
             >
                 <>
+                    <HeaderView/>
                     <View style={style.container}>
                         <View
                             style={styles.profileDataContainer}
@@ -88,11 +91,11 @@ export class PlaceProfileView extends React.Component<IPlaceProfileViewProps>{
                         </View>
                     </View>
                     <View
-                        style={{flexDirection: "row", flexGrow: 1, marginHorizontal: 17, marginBottom: 10, justifyContent: "space-between"}}
+                        style={{flexDirection: "row", marginHorizontal: 17, marginBottom: 10, justifyContent: "space-between"}}
                     >
 
                         <Text
-                        style={{fontSize: 24, color: '#595085',}}
+                            style={{fontSize: 24, color: '#595085',}}
                         >
                             Parties
                         </Text>
@@ -113,3 +116,19 @@ export class PlaceProfileView extends React.Component<IPlaceProfileViewProps>{
     }
 }
 
+
+
+function HeaderView(){
+    const props: IBallerzHeaderViewProps = {
+        title: "Recherche",
+        leftButton: <BallerzHeaderBackButton />,
+        rightButton: <></>
+    }
+    return(
+        <BallerzHeaderView
+        {...props}
+        >
+
+        </BallerzHeaderView>
+    )
+}
