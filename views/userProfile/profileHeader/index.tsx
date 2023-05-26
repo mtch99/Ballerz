@@ -9,31 +9,6 @@ import * as Storage from '@aws-amplify/storage'
 
 export class HeaderView extends React.Component<IHeaderViewProps>{
 
-
-    state = {
-        imageUrl: ""
-    }
-
-
-    // componentDidMount(): void {
-    //     this.fetchImageUrl("demo.jpg")
-    // }
-
-    // async fetchImageUrl(key: string): Promise<string> {
-    //     const allKeys  = await Storage.Storage.list('');
-    //     allKeys.results.forEach((currentKey) => {
-    //         console.warn(currentKey);
-    //     })
-    //     const signedUrl = await Storage.Storage.get(key)
-    //     this.setState((prevState) => ({
-    //         ...prevState,
-    //         imageUrl: signedUrl
-    //     }))
-    //     console.log(signedUrl)
-    //     return signedUrl
-    // }
-
-
     constructor(props: IHeaderViewProps){
         super(props);
     }
