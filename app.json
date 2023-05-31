@@ -20,7 +20,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.mtch99.BallerAlpha",
-      "buildNumber":"2"
+      "buildNumber":"4"
     },
     "android": {
       "adaptiveIcon": {

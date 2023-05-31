@@ -16,32 +16,9 @@ There must be three different games on three different courts, two at the moment
 
 
 - [ ] release v2.0.0-2
-    - [x] FeedItemView
-        - [x] Display "Today" when a game is happemimg the same day
-    - [x] update notifications when device connects back to network
-        - [x] Listen to network status events in Controller
-        - [x] Fetch unreceived notifications 
-            - [x] Filter notifications by createdAt
-
-        * [x] isFriend property is false even although the friendship is true
-        - [x] Repo, use case and model logic
-            [x] ...
-            - [x] Update cache notifications on newNotification received
-                * [x] Check that the notification is not already present
-        - [x] implement network event listener logic
-            - [x] UpdateNotifications Function in Notifications Controller
-            - [x] Call it in network event listener
-
-        - [x] Change Controller useEffect dependancy to userState
-        
-    - [x] Fix default profile picture source
-        - [x] in user profile screen
-        - [x] in userProfile List screen
-
-    - [x] Update share link to new version
-    - [x] Fix Place Profile view
-        - [x] Add header view 
-        - [x] Fix layout
+    - [ ] Increment version the buildNumber in package.json
+    - [ ] Update git ignore to consider node_modules
+    - [ ] build archive
 
 
 
