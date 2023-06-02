@@ -14,9 +14,19 @@ There must be three different games on three different courts, two at the moment
 
 ## How? (technical)
 - [x] Update graphql folder and API.ts
+
 - [ ] Update use case
+    - [ ] UserProfileUseCase and entities
+    - [ ] PLace use case and entities
+    - [ ] Game use case and entities
+
 - [ ] Update client queries
+
 - [ ] Update model
+    - [ ] Auth
+    - [ ] userProfile
+    - [ ] place
+    - [ ] Game
 - [ ] Update controller
 - [ ] Update feed screen
 
