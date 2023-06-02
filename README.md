@@ -3,7 +3,7 @@ The app for basketball pickup games
 
 
 ## Branch Purpose
-    I want to be able to make friends and accept friendship requests
+    I want to be able to switch between Quebec city and montreal
 ## Next 
 Test these scenarios:
     `TODO: define next scenarios` 
@@ -13,12 +13,12 @@ There must be three different games on three different courts, two at the moment
 
 
 ## How? (technical)
-
-
-- [ ] release v2.0.0-2
-    - [ ] Increment version the buildNumber in package.json
-    - [ ] Update git ignore to consider node_modules
-    - [ ] build archive
+- [ ] Update graphql queries
+- [ ] Update date use case
+- [ ] Update client queries
+- [ ] Update model
+- [ ] Update controller
+- [ ] Update feed screen
 
 
 
