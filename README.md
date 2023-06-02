@@ -13,8 +13,8 @@ There must be three different games on three different courts, two at the moment
 
 
 ## How? (technical)
-- [ ] Update graphql queries
-- [ ] Update date use case
+- [x] Update graphql folder and API.ts
+- [ ] Update use case
 - [ ] Update client queries
 - [ ] Update model
 - [ ] Update controller

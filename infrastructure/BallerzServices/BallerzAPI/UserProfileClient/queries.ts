@@ -1,4 +1,3 @@
-import { EmailInput } from "./../../../../views/auth/signIn/index";
 import { ModelFriendshipFilterInput, ModelUserProfileFilterInput } from "../API";
 import { ModelFriendshipConnection, UserProfile } from "../types";
 import { Presence, Friendship, GroupChatDataWithMembers, GroupChatUserProfileConnectionConnection, GroupChatData, UserProfileData } from "../types";
