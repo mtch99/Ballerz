@@ -74,6 +74,8 @@ export type UserProfileData = {
     id: string,
     username: string
     email: string
+    cityID: string
+    city: CityData | null
     friends?: {
         items: Array<UserProfileData | null>
         nextToken: string | null
@@ -94,6 +96,8 @@ export type UserProfile = {
         items: Array<Presence | null>
         nextToken: string | null
     }
+    cityID: string,
+    city: CityData | null
 }
 
 
@@ -117,3 +121,9 @@ export type GroupChatUserProfileConnection = {
 	groupChat: GroupChatData
 }
 
+
+
+export type CityData = {
+    id: string,
+    name: string
+}

@@ -24,7 +24,7 @@ export default class UserProfileClient extends BallerzApiClient implements IUser
     }
 
     async listUserProfileData(input: ListUserProfileDataQueryVariables): Promise<queries.ListUserProfileDataQuery | undefined> {
-        const payload = this.genRequestPayload(queries.listUserProfileData, input)
+        const payload = this.genRequestPayload(queries.listUserProfileData_gql, input)
         const response = await API.graphql<GraphQLQuery<queries.ListUserProfileDataQuery>>(payload)
 
         return this._handleResponse<queries.ListUserProfileDataQuery>(response)

@@ -1,4 +1,4 @@
-import { IGame, IPlaceData, IUserProfile, IUserProfileData } from "../../domain/use-cases/types";
+import { ICity, IGame, IPlaceData, IUserProfile, IUserProfileData } from "../../domain/use-cases/types";
 
 
 export interface IUserProfileDataState extends IUserProfileData{

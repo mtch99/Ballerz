@@ -16,15 +16,18 @@ There must be three different games on three different courts, two at the moment
 - [x] Update graphql folder and API.ts
 
 - [ ] Update use case
-    - [ ] UserProfileUseCase and entities
+    - [x] UserProfileUseCase and entities
     - [ ] PLace use case and entities
     - [ ] Game use case and entities
 
 - [ ] Update client queries
+    - [x] UserProfileClient
+    - [ ] Place client
+    - [ ] GameClient
 
 - [ ] Update model
     - [ ] Auth
-    - [ ] userProfile
+    - [x] userProfile
     - [ ] place
     - [ ] Game
 - [ ] Update controller

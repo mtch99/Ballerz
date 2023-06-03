@@ -2,6 +2,10 @@
 export interface IFeed extends Array<IFeedItem>{}
 
 
+export interface ICity{
+    id: string;
+    name: string;
+}
 
 export interface IComment{
     id: string;
@@ -57,6 +61,7 @@ export interface IUserProfileData{
     username: string
     badges: IBadge[]
     isFriend: boolean | undefined
+    city: ICity
 }
 
 

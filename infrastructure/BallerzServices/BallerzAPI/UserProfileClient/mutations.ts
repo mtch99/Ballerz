@@ -1,3 +1,4 @@
+import { CityData } from "../types";
 
 export const createUserProfile = /* GraphQL */ `
 mutation CreateUserProfile(
@@ -8,6 +9,8 @@ mutation CreateUserProfile(
     id
     email
     username
+    cityID
+    city
   }
 }
 `;
@@ -18,6 +21,8 @@ export type CreateUserProfileMutation = {
         id: string,
         email: string,
         username: string,
+        cityID: string,
+        city: CityData
     } | null,
 };
 export type CreateUserProfileMutationVariables = {
