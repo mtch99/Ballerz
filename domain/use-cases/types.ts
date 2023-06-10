@@ -29,6 +29,8 @@ export interface IGameData {
     place: IPlaceData
     startingTime: string
     endingTime: string
+    city: ICity
+    comments: Array<IComment>
 }
 
 export interface IGame extends IGameData {
@@ -38,15 +40,6 @@ export interface IGame extends IGameData {
     attendants: IAttendance[]
     place: IPlaceData
 }
-
-
-
-export interface IPlaceData {
-    id: string;
-    name: string
-    address: string
-}
-
 
 
 export interface IUserProfile extends IUserProfileData {
@@ -66,9 +59,10 @@ export interface IUserProfileData{
 
 
 export interface IPlaceData {
-    id: string;
-    name: string;
+    id: string
+    name: string
     address: string
+    city: ICity
 }
 
 

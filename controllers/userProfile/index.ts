@@ -53,7 +53,7 @@ export class UserProfileController implements IUserProfileController{
     async getAllUserProfiles(): Promise<void>{
         await this.userProfileUseCase.getAllUserProfileData().then(
             resp => {
-                console.log(`Response of getAllUserProfiles: \n ${JSON.stringify(resp, null, 2)}`)
+                // console.log(`Response of getAllUserProfiles: \n ${JSON.stringify(resp, null, 2)}`)
             }
         )
     }
