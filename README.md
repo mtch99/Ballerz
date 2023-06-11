@@ -8,27 +8,24 @@ The app for basketball pickup games
 Test these scenarios:
     `TODO: define next scenarios` 
     - I want to add my favorite playground
-        
-There must be three different games on three different courts, two at the moment, and one other on saturday
-
 
 ## How? (technical)
 - [x] Update graphql folder and API.ts
 
 - [ ] Update use case
     - [x] UserProfileUseCase and entities
-    - [ ] PLace use case and entities
+    - [x] PLace use case and entities
     - [ ] Game use case and entities
 
 - [ ] Update client queries
     - [x] UserProfileClient
-    - [ ] Place client
+    - [x] Place client
     - [ ] GameClient
 
 - [ ] Update model
     - [ ] Auth
     - [x] userProfile
-    - [ ] place
+    - [x] place
     - [ ] Game
 - [ ] Update controller
 - [ ] Update feed screen
@@ -74,7 +71,7 @@ TODO: Post test Rémi
 
 - [ ] En attente 
 
--[ ] Avancer après 
+- [ ] Avancer après 
 
 - [ ] Photo du parc
 
@@ -84,7 +81,7 @@ TODO: Post test Rémi
 
 - [ ] Photo de profil pas nécessaire
 
-- [ ] Vidéos lie, adresse, googlemaps lorsque que tu clique sur carré vert, 
+- [ ] Vidéos lieu, adresse, googlemaps lorsque que tu clique sur carré vert, 
 
 - [ ] favoris dans les terrains, notifications
 

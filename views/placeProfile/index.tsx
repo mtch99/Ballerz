@@ -25,8 +25,15 @@ export class PlaceProfileView extends React.Component<IPlaceProfileViewProps>{
         games: [],
         id: "",
         name: "",
-        address: ""
+        address: "",
+        city: {
+            id: "",
+            name: "",
+        }
     }
+
+
+
 
     sectionListProps(games: IPlaceProfileState['games']): SectionListProps<IFeedItemState> {
         return (
@@ -60,6 +67,7 @@ export class PlaceProfileView extends React.Component<IPlaceProfileViewProps>{
     }
 
     componentDidUpdate(prevProps: Readonly<IPlaceProfileViewProps>, prevState: Readonly<{}>, snapshot?: any): void {
+        console.error(`City: ${this.props.city.name}`)
     }
 
     render(): React.ReactNode {

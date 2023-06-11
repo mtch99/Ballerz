@@ -4,11 +4,13 @@ import { Text, TouchableOpacity, View, Image, StyleSheet, FlatList } from "react
 import { getProfilePicUri } from "../../../screens/utils/ImagePicker";
 
 
-
+interface IState { 
+    profilePicSource: {uri: string},
+}
 export default class ClickableUserProfileItemView extends React.Component<IUserProfileItemViewProps>{
 
     state = {
-        profilePicSource: {uri:"1234"}
+        profilePicSource: {uri: ""}
     }
 
     componentDidMount(): void {
@@ -27,7 +29,14 @@ export default class ClickableUserProfileItemView extends React.Component<IUserP
                     onPress={() => {this.props.onPressUserProfileItem(this.props.userProfile.id)}}
                 >
                     <View style={styles.groupPhotoContainer}>
-                        <Image style = {styles.groupPhoto} source = {this.state.profilePicSource}/>
+                        {this.state.profilePicSource.uri == ""?
+                            (
+                                <></>
+                            ):(
+                                <Image style = {styles.groupPhoto} source={this.state.profilePicSource}/>
+                            )
+                        }
+                        
                     </View> 
                     <View>
                         <Text
