@@ -42,6 +42,10 @@ export type PlaceData = {
     id: string,
     name: string
     address: string
+    city: {
+        id: string,
+        name: string
+    }
 }
 
 

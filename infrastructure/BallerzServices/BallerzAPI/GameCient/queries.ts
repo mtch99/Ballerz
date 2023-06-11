@@ -1,4 +1,5 @@
-import { Game } from "../types";
+import { isDevice } from "expo-device";
+import { Game, PlaceData } from "../types";
 import { ModelFriendshipFilterInput, ModelGameFilterInput, ModelPresenceFilterInput, presenceType } from "./../API";
 import { GameDoc } from "./types";
 
@@ -20,6 +21,10 @@ query ListGames(
         id
         name
         address
+        city {
+          id
+          name
+        }
       }
       presenceList{
         items{
@@ -30,6 +35,10 @@ query ListGames(
               id
               name
               address
+              city{
+                id
+                name
+              }
             }
             userProfile{
               id
@@ -72,6 +81,10 @@ export const getGame_gql = /* GraphQL */ `
         address
         createdAt
         updatedAt
+        city {
+          id
+          name
+        }
       }
       createdAt
       updatedAt
@@ -97,12 +110,13 @@ export type GetGameQuery = {
 	  startingDateTime: string,
 	  endingDateTime: string,
 	  place?:  {
-		__typename: "Place",
-		id: string,
-		name: string,
-		address: string,
-		createdAt: string,
-		updatedAt: string,
+		  __typename: "Place",
+		  id: string,
+		  name: string,
+		  address: string,
+		  createdAt: string,
+		  updatedAt: string,
+      city: PlaceData| null
 	  } | null,
 	  createdAt: string,
 	  updatedAt: string,

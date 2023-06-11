@@ -20,13 +20,15 @@ Test these scenarios:
 - [ ] Update client queries
     - [x] UserProfileClient
     - [x] Place client
-    - [ ] GameClient
+    - [x] GameClient
 
 - [ ] Update model
     - [ ] Auth
     - [x] userProfile
     - [x] place
-    - [ ] Game
+    - [x] Game
+
+
 - [ ] Update controller
 - [ ] Update feed screen
 

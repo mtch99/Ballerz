@@ -61,8 +61,9 @@ export function FeedStackNavigator(): JSX.Element {
 							<TouchableOpacity
 								//@ts-ignore
 								onPress={() => {navigation.navigate("ExploreStack")}}
+								style={{padding: 9}}
 							>
-								<Icon name="search1" size={18} 
+								<Icon name="search1" size={20} 
 									color={globalStyles.global.logoColor}
 								/>
 							</TouchableOpacity>
