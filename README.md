@@ -24,6 +24,18 @@ Test these scenarios:
 
 * [x] fix My friends bug in myProfileScreen
 
+
+- [ ] City entity
+    - [ ] UseCase
+    - [ ] Repos
+    - [ ] Model
+    - [ ] Controller + integration un global controller
+
+- [ ] Chooose your City screen
+    - [ ] Navigation
+    - [ ] Screen
+    - [ ]
+
 - [ ] Update model
     - [ ] Auth
     - [x] userProfile

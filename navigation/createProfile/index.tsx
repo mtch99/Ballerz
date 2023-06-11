@@ -8,6 +8,7 @@ import { CreateProfileStackParamList } from './types';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { DefineUsernameScreenWrapper, FindYourFriendsScreenWrapper } from './wrappers';
 import { Keyboard, TouchableNativeFeedback } from 'react-native';
+import BallerzHeaderBackButton from '../../components/header/buttons/headerBackButton';
  
  // import LinkingConfiguration from './LinkingConfiguration';
  
@@ -41,14 +42,24 @@ import { Keyboard, TouchableNativeFeedback } from 'react-native';
 					onPress={Keyboard.dismiss}
 				>
 					<Stack.Navigator
-					initialRouteName={_initialRouteName}
+						initialRouteName={_initialRouteName}
 					>
+
 						<Stack.Screen
 							name='DefineUsername'
 							options={{
 								headerShown: false,
 							}}
 							component={DefineUsernameScreenWrapper}
+						/>
+
+						<Stack.Screen
+                            name='ChooseYourCity'
+                            options={{
+								headerTitle: "Quelle est ta ville?",
+								headerLeft: BallerzHeaderBackButton,		
+							}}
+							component={FindYourFriendsScreenWrapper}
 						/>
 						<Stack.Screen
 							name='FindYourFriends'

@@ -55,7 +55,7 @@ class FeedView extends React.Component<IProps> {
 			<BallerzSafeAreaView>
 				<FlatList
 					data={this.props.feedState.items}
-					style={{backgroundColor: globalStyles.global.screenBackGroundColor}}
+					style={{backgroundColor: globalStyles.global.screenBackgroundColor}}
 					renderItem={({item, index}) => {
 						return(
 							<FeedItemView

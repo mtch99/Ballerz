@@ -37,7 +37,7 @@ export class BallerzFlatList<ItemType> extends React.Component<IProps<ItemType>>
                 <FlatList
                     data={this.props.data}
                     extraData={this.props.extraData}
-                    style={{flexGrow:1, backgroundColor: globalStyles.global.screenBackGroundColor}}
+                    style={{flexGrow:1, backgroundColor: globalStyles.global.screenBackgroundColor}}
                     renderItem={this.props.renderItem}
                     bounces={true}
                     onScroll={this._onScroll.bind(this)}

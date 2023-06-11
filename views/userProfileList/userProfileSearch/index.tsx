@@ -35,7 +35,7 @@ export class UserProfileSearchView extends React.Component<IUserProfileSearchVie
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: globalStyles.global.screenBackGroundColor,
+        backgroundColor: globalStyles.global.screenBackgroundColor,
         flexGrow: 1
     }
 })

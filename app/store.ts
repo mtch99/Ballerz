@@ -8,6 +8,7 @@ import placeMapSliceReducer from './features/place/placeMap/slice'
 import placeListSliceReducer from './features/place/placeList/slice'
 import userProfileMapSliceReducer from './features/userProfile/userProfileMap/slice'
 import notificationSliceReducer from './features/notifications/slice'
+import cityListSliceReducer from './features/city/slice'
 // ...
 
 export const store = configureStore({
@@ -21,6 +22,7 @@ export const store = configureStore({
 		placeMap: placeMapSliceReducer,
 		placeList: placeListSliceReducer,
 		notifications: notificationSliceReducer,
+		cityList: cityListSliceReducer
 	}
 })
 

@@ -3,7 +3,7 @@ import { globalStyles } from '../styles'
 
 export const styles = StyleSheet.create({
     scrollViewContainer: {
-        backgroundColor: globalStyles.global.screenBackGroundColor,
+        backgroundColor: globalStyles.global.screenBackgroundColor,
         flexGrow: 1
     },
     container: {

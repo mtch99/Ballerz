@@ -24,6 +24,7 @@ import { IFindYourFriendsScreenProps } from "../../screens/userProfileList/findY
  export type CreateProfileStackParamList = {
     DefineUsername: IDefineUsernameScreenProps
     FindYourFriends: IFindYourFriendsScreenProps
+    ChooseYourCity: {}
  };
  
  

@@ -42,7 +42,7 @@ export default class ExploreTabScreen extends React.Component<IExploreTabScreenP
             <TabBar
                 {...props}
                 indicatorStyle={{ backgroundColor: globalStyles.global.logoColor }}
-                style={{ backgroundColor: globalStyles.global.screenBackGroundColor}}
+                style={{ backgroundColor: globalStyles.global.screenBackgroundColor}}
                 activeColor={globalStyles.global.logoColor}
             />
         )

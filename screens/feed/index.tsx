@@ -155,7 +155,11 @@ export class FeedScreen extends Screen<IFeedScreenProps, IFeedScreenState> imple
                 id: "moiId",
                 username: "moi",
                 badges: [],
-                isFriend: undefined
+                isFriend: undefined,
+                city: {
+                    id: "",
+                    name: ""
+                }
             },
             text: input.commentText
         }

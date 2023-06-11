@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: globalStyles.global.screenBackGroundColor
+        backgroundColor: globalStyles.global.screenBackgroundColor
     },
 
     titleContainer: {

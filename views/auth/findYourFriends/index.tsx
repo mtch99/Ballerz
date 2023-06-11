@@ -75,7 +75,7 @@ export default class FindYourFriendsView<P extends IFindYourFriendsViewProps = I
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: globalStyles.global.screenBackGroundColor,
+        backgroundColor: globalStyles.global.screenBackgroundColor,
         flexGrow: 1
     }
 })

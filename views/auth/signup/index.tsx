@@ -134,7 +134,7 @@ export default function SignupView(props: ISignupViewProps) {
 const styles = StyleSheet.create({
 	container: {		
 		flexGrow: 1,
-	  	backgroundColor: globalStyles.global.screenBackGroundColor,
+	  	backgroundColor: globalStyles.global.screenBackgroundColor,
 		justifyContent: "space-between"
 	},
 	logoContainer: {		
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
 		borderBottomColor: "white",
 		paddingBottom: 100,
 		// borderBottomWidth: 5,
-		backgroundColor: globalStyles.global.screenBackGroundColor,
+		backgroundColor: globalStyles.global.screenBackgroundColor,
 	},	
 
 

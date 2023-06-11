@@ -43,3 +43,16 @@ export function FindYourFriendsScreenWrapper(){
     />
 
 }
+
+
+
+export function ChooseYourCityScreenWrapper(){
+    const navigation = useNavigation<CreateProfileStackNavigationProp<'ChooseYourCity'>>()
+    // const navigationController: IChooseYourCityScreenNavigationController = {
+        
+    // }
+
+    return <ChooseYourCityScreen
+        
+    />
+}
