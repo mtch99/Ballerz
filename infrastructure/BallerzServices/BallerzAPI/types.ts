@@ -17,25 +17,33 @@ export type Game = {
     startingDateTime: string
     endingDateTime: string
     placeID: string
-    place: PlaceData
+    place: PlaceData | null
+    cityID: string
+    city: CityData | null
     presenceList: {
-        items: Array<Presence | null>
+        items: Array<PresenceWithoutGame | null>
         nextToken: string | null
     }
 }
 
 
-export type Presence = {
+export type PresenceWithoutGame = {
     __typename: "Presence",
     id: string
     placeID: string
     userProfileID: string
-    userProfile: UserProfileData
-	place: PlaceData
+    userProfile: UserProfileData | null
+	place: PlaceData | null
 	startingDateTime: string
 	endingDateTime: string
-    game: Game
+    gameID: string
 }
+
+export type PresenceWithGame = PresenceWithoutGame & {
+    game: Game | null
+}
+
+
 
 export type PlaceData = {
     __typename: "Place",
@@ -97,7 +105,7 @@ export type UserProfile = {
     createdAt: string,
     updatedAt: string,
     presenceList: {
-        items: Array<Presence | null>
+        items: Array<PresenceWithGame | null>
         nextToken: string | null
     }
     cityID: string,

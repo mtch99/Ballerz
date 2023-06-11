@@ -616,7 +616,7 @@ export enum ModelSortDirection {
 
 
 export type ModelFriendshipFilterInput = {
-  id?: ModelIDInput | null,
+  friendProfileID?: ModelIDInput | null,
   userProfileID?: ModelIDInput | null,
   friendProfileID?: ModelIDInput | null,
   and?: Array< ModelFriendshipFilterInput | null > | null,

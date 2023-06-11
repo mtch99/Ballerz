@@ -25,7 +25,7 @@ export class UserProfileView extends React.Component<IUserProfileViewProps, IPro
     }
 
     state = {
-        profilePicSource: {uri:"123"}, 
+        profilePicSource: {uri:""}, 
     }
 
     componentDidMount(): void {

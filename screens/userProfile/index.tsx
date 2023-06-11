@@ -33,6 +33,10 @@ export class UserProfileScreen extends Screen<IUserProfileScreenProps, IUserProf
         badges: [],
         isFriend: undefined,
         friends: [],
+        city: {
+            id: "",
+            name: ""
+        }
     }
     static contextType = AppContext
     context: React.ContextType<typeof AppContext> = {} as IAppContext

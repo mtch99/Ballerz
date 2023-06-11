@@ -54,10 +54,15 @@ export class HeaderView extends React.Component<IHeaderViewProps>{
                 style={styles.container}
             >
                 <View style={styles.profilePicContainer}>
-                    <Image
-                        style={styles.profilePic}
-                        source={this.props.profilePicSource}
-                    />
+                    
+                    {// @ts-ignore
+                        this.props.profilePicSource.uri == ""?(<></>)
+                        :(
+                        <Image
+                            style={styles.profilePic}
+                            source={this.props.profilePicSource}
+                        />)
+                    }
                 </View>
 
                 <View

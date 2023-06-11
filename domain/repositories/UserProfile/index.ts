@@ -1,5 +1,5 @@
 import { IAttendance, ICity, IGame } from "./../../use-cases/types";
-import { Game, Presence, UserProfile } from "./../../../infrastructure/BallerzServices/BallerzAPI/types";
+import { Game, PresenceWithGame, PresenceWithoutGame, UserProfile } from "./../../../infrastructure/BallerzServices/BallerzAPI/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FriendshipRequestStatus } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
 import UserProfileClient from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient";
@@ -43,7 +43,8 @@ export default class UserProfileRepository implements IUserProfileRepository {
     
 
     async getMyUserProfile(email: string): Promise<IUserProfile | null> {
-        const cache: IUserProfile | null = await this.__getCachedMyUserProfile()
+        const cachedMyUserProfile: IUserProfile | null = await this.__getCachedMyUserProfile()
+
         const variables: ListUserProfileDataQueryVariables = {
             filter: {
                 email: {
@@ -51,14 +52,13 @@ export default class UserProfileRepository implements IUserProfileRepository {
                 }
             },
             frendshipFilter: {
-                id: {
-                    eq: "123"
+                friendProfileID: {
+                    eq: cachedMyUserProfile?.id || " jkbbb "
                 }
             }
         }
         
         const response = await this.client.listUserProfilesByEmail(variables).then((data) => {
-            // console.log(`SINSN: ${JSON.stringify(data, null, 2)}`)
             return data
         })
         .catch(async(err) => {
@@ -67,14 +67,14 @@ export default class UserProfileRepository implements IUserProfileRepository {
         })
         
         if(!response){
-            return cache
+            return cachedMyUserProfile
         }
         
         
         let userProfile = IUserProfileDataAdapter.parseListUserProfileByEmailResponse(response)
         if(!userProfile){
             console.log("Could not find a user profile with the email: " + email)
-            return cache
+            return cachedMyUserProfile
         }else{
             this.__cacheMyUserProfileData(userProfile)
             this.__cacheMyUserProfile(userProfile)
@@ -87,7 +87,7 @@ export default class UserProfileRepository implements IUserProfileRepository {
         const myUserProfileID = await this.__getCachedMyUserProfile().then(res => (res?.id)) || "123"
         const variables: ListUserProfileDataQueryVariables = {
             frendshipFilter: {
-                id: {
+                friendProfileID: {
                     eq: "123"
                 }
             }
@@ -391,10 +391,10 @@ class IUserProfileDataAdapter {
         return result
     }
 
-    static parseGameListFromPresenceList(presenceList: Array<Presence|null>): IGame[] {
+    static parseGameListFromPresenceList(presenceList: Array<PresenceWithGame|null>): IGame[] {
         const result: IGame[] = []
         presenceList.forEach((presence) => {
-            if(presence){
+            if(presence && presence.game && presence.place){
                 const game: IGame = {
                     friendsThere: this.parseFriendsThere(presence.game),
                     comments: [],
@@ -404,7 +404,8 @@ class IUserProfileDataAdapter {
                     id: presence.game.id,
                     placeID: presence.placeID,
                     startingTime: presence.game.startingDateTime,
-                    endingTime: presence.game.endingDateTime
+                    endingTime: presence.game.endingDateTime,
+                    city: presence.place.city,
                 }
                 result.push(game)
             }
@@ -416,7 +417,7 @@ class IUserProfileDataAdapter {
     static parseFriendsThere(game: Game): IUserProfileData[]{
         const friendsThere: IUserProfileData[] = [] 
         game.presenceList.items.forEach((item) => {
-            if(item){
+            if(item && item.userProfile){
                 if(item.userProfile.friends){
                     // Friends list is filtered in the query
                     // Here the filter is supposed to be the current user email

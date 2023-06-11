@@ -1,4 +1,4 @@
-import { Game, Presence } from "../../infrastructure/BallerzServices/BallerzAPI/types"
+import { Game, PresenceWithoutGame } from "../../infrastructure/BallerzServices/BallerzAPI/types"
 import { IAttendance, IGame, IUserProfileData } from "../use-cases/types"
 
 
@@ -30,7 +30,7 @@ export function parseGameList(items: (Game | null)[]): IGame[] {
 
 
 
-export function parsePresenceList(presenceList: (Presence|null)[]): IGame['attendants']{
+export function parsePresenceList(presenceList: (PresenceWithoutGame|null)[]): IGame['attendants']{
     const result: IGame['attendants'] = []
     presenceList.forEach((presenceDoc) => {
         if(presenceDoc){
@@ -44,7 +44,7 @@ export function parsePresenceList(presenceList: (Presence|null)[]): IGame['atten
 }
 
 
-export function parsePresenceDoc(presenceDoc: Presence): IAttendance | null{
+export function parsePresenceDoc(presenceDoc: PresenceWithoutGame): IAttendance | null{
     if(presenceDoc.userProfile){
         let isFriend = false
         if(presenceDoc.userProfile.friends){
@@ -70,7 +70,7 @@ export function parsePresenceDoc(presenceDoc: Presence): IAttendance | null{
 }
 
 
-export function getFriendsThereListFromPresenceList(presenceList: (Presence|null)[]): IUserProfileData[] {
+export function getFriendsThereListFromPresenceList(presenceList: (PresenceWithoutGame|null)[]): IUserProfileData[] {
     const friendsThere: IUserProfileData[] = []
     presenceList.forEach(attendant => {
         const attendantProfile = attendant?.userProfile

@@ -1,6 +1,6 @@
 import { ModelFriendshipFilterInput, ModelUserProfileFilterInput } from "../API";
 import { ModelFriendshipConnection, UserProfile } from "../types";
-import { Presence, Friendship, GroupChatDataWithMembers, GroupChatUserProfileConnectionConnection, GroupChatData, UserProfileData } from "../types";
+import { PresenceWithoutGame, Friendship, GroupChatDataWithMembers, GroupChatUserProfileConnectionConnection, GroupChatData, UserProfileData } from "../types";
 
 export const getUserProfile_gql = /* GraphQL */ `
   query GetUserProfile(
@@ -141,6 +141,11 @@ export const listUserProfilesByEmail_gql = /* GraphQL */ `
               id
               username
               email
+              cityID
+              city{
+                id
+                name
+              }
             }
             createdAt
             updatedAt

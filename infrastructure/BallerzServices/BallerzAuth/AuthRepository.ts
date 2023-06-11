@@ -121,7 +121,7 @@ export class AuthRepository implements IAuthRepository {
         .catch((error) => {
             result.error = SigninAdapter.parseCognitoSigninError(error)
             if(result.error.reason == struct.LoginErrorReason['USER_NOT_CONFIRMED']){
-                console.log("Not confirmed")
+                console.log("User Not confirmed")
                 result = {
                     error: false,
                     user: {

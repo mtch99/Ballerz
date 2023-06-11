@@ -29,7 +29,6 @@ export interface IGameData {
     place: IPlaceData
     startingTime: string
     endingTime: string
-    city: ICity
     comments: Array<IComment>
 }
 
@@ -39,6 +38,7 @@ export interface IGame extends IGameData {
     badges: IBadge[]
     attendants: IAttendance[]
     place: IPlaceData
+    city: ICity
 }
 
 

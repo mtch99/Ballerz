@@ -12,21 +12,25 @@ Test these scenarios:
 ## How? (technical)
 - [x] Update graphql folder and API.ts
 
-- [ ] Update use case
+- [x] Update use case
     - [x] UserProfileUseCase and entities
     - [x] PLace use case and entities
-    - [ ] Game use case and entities
+    - [x] Game use case and entities
 
-- [ ] Update client queries
+- [x] Update client queries
     - [x] UserProfileClient
     - [x] Place client
     - [x] GameClient
+
+* [x] fix My friends bug in myProfileScreen
 
 - [ ] Update model
     - [ ] Auth
     - [x] userProfile
     - [x] place
     - [x] Game
+
+
 
 
 - [ ] Update controller
