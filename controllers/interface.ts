@@ -5,6 +5,7 @@ import IFeedController from "./feed/interface";
 import IGroupChatController from "./groupChat/interface";
 import IPlaceController from "./place/interface";
 import IAuthController from "./auth/interface";
+import ICityController from "./city/interface";
 
 
 export interface IAppController {
@@ -13,9 +14,10 @@ export interface IAppController {
     groupChatController: IGroupChatController
     userProfileController: IUserProfileController,
     placeController: IPlaceController,
+    notificationController: INotificationController
+    cityController: ICityController
     prepareData: () => void
     appControllerEventListener: IAppControllerEventListener
-    notificationController: INotificationController
 }
 
 

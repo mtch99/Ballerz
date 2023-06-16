@@ -2,11 +2,11 @@ import { RootState } from "../../../store";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ICity } from "../../../../domain/use-cases/types";
 
-
-export type ICityListState = {items: ICity[]};
+export interface ICityState extends ICity{}
+export type ICityListState = {items: ICityState[]};
 const initialState: ICityListState = {items:[]};
 
-export const citySlice = createSlice({
+export const cityListSlice = createSlice({
     name: "city", 
     initialState,
     reducers: {
@@ -19,7 +19,7 @@ export const citySlice = createSlice({
     }
 })
 
-export const {setCityList} = citySlice.actions
-export const selectCityList = (state: RootState) => state.cityList
+export const {setCityList} = cityListSlice.actions
+export const selectCityListState = (state: RootState) => state.cityList
 
-export default citySlice.reducer
+export default cityListSlice.reducer

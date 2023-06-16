@@ -26,22 +26,23 @@ Test these scenarios:
 
 
 - [ ] City entity
-    - [ ] UseCase
-    - [ ] Repos
-    - [ ] Model
-    - [ ] Controller + integration un global controller
+    - [x] UseCase
+    - [x] Repo
+    - [x] Model
+    - [x] Controller + integration un global controller
+    - [ ] Test CityClient
+
+- [ ] Store every model's data in asyncStorage
+
 
 - [ ] Chooose your City screen
     - [ ] Navigation
-    - [ ] Screen
-    - [ ]
+    - [x] Screen
 
-- [ ] Update model
-    - [ ] Auth
+- [x] Update model
     - [x] userProfile
     - [x] place
     - [x] Game
-
 
 
 

@@ -21,9 +21,10 @@ export default class ChooseYourCityScreen extends React.Component {
         return (
             <View style={styles.container}>
                 <FlatList
-                    data={this.context}
-                    renderItem={({ item }) => (
+                    data={this.context.cityListState.items}
+                    renderItem={({ item: city }) => (
                          <CityItemView
+                            {...city}
                          />
                     )}
                 />
