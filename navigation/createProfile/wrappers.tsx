@@ -1,11 +1,12 @@
 import React from "react";
-import DefineUsernameScreen from "../../screens/createProfile/DefineUsername";
-import { IDefineUsernameScreenNavigationController } from "../../screens/createProfile/DefineUsername/interface";
+import DefineUsernameScreen from "../../screens/user/createProfile/DefineUsername";
+import { IDefineUsernameScreenNavigationController } from "../../screens/user/createProfile/DefineUsername/interface";
 import { CreateProfileStackNavigationProp } from "./types";
 import { useNavigation } from "@react-navigation/native";
 import { AppStackNavigationProp } from "../app/types";
-import FindYourFriendsScreen from "../../screens/userProfileList/findYourFriends";
-import { IFindYourFriendsScreenNavigationController } from "../../screens/userProfileList/findYourFriends/interface";
+import FindYourFriendsScreen from "../../screens/user/userProfileList/findYourFriends";
+import { IFindYourFriendsScreenNavigationController } from "../../screens/user/userProfileList/findYourFriends/interface";
+import ChooseYourCityScreen from "../../screens/auth/chooseYourCity";
 
 
 
@@ -48,11 +49,6 @@ export function FindYourFriendsScreenWrapper(){
 
 export function ChooseYourCityScreenWrapper(){
     const navigation = useNavigation<CreateProfileStackNavigationProp<'ChooseYourCity'>>()
-    // const navigationController: IChooseYourCityScreenNavigationController = {
-        
-    // }
 
-    return <ChooseYourCityScreen
-        
-    />
+    return <ChooseYourCityScreen/>
 }

@@ -1,13 +1,13 @@
 import React from "react";
 import { TabView, SceneMap, TabBar, SceneRendererProps, TabBarProps } from 'react-native-tab-view'
-import PlaceSearchScreen from "../placeList";
-import { IPlaceSearchScreenNavigationController } from "../placeList/interface";
-import UserProfileSearchScreen from "../userProfileList/userProfileSearch";
+import PlaceSearchScreen from "../place/placeList";
 import { globalStyles } from "../../views/styles";
-import { IUserProfileListScreenNavigationController } from "../userProfileList/interface";
 import BallerzSafeAreaView from "../../views/safeArea";
 import BallerzHeaderView from "../../components/header";
 import BallerzHeaderBackButton from "../../components/header/buttons/headerBackButton";
+import { IUserProfileListScreenNavigationController } from "../user/userProfileList/interface";
+import UserProfileSearchScreen from "../user/userProfileList/userProfileSearch"
+import { IPlaceSearchScreenNavigationController } from "../place/placeList/interface";
 
 
 export interface IExploreTabScreenProps {

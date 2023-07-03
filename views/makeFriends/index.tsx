@@ -3,12 +3,12 @@ import SearchBarView from "./SearchBar";
 import InviteYourFriendsFeedBackView from "../FeedBack/inviteYourFriends";
 import BallerzSafeAreaView from "../safeArea";
 import FindYourFriendsView from "../auth/findYourFriends";
-import { SelectableUserProfileListView } from "../userProfileList/selectable";
+import { SelectableUserProfileListView } from "../userProfile/userProfileList/selectable";
 import { View } from 'react-native'
 import BallerzHeaderView from "../../components/header";
 import HeaderCheckButton from "../../components/header/buttons/checkButton";
 import BalerzHeaderTextButton from "../../components/header/buttons/textButton";
-import { IFindYourFriendsViewProps } from "../../screens/userProfileList/findYourFriends/interface";
+import { IFindYourFriendsViewProps } from "../../screens/user/userProfileList/findYourFriends/interface";
 
 
 export interface IMakeFriendsViewProps extends IFindYourFriendsViewProps {

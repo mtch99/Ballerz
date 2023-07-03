@@ -32,6 +32,7 @@ Test these scenarios:
     - [x] Controller + integration un global controller
     - [ ] Test CityClient
 
+
 - [ ] Store every model's data in asyncStorage
 
 

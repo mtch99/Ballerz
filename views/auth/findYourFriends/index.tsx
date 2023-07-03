@@ -1,6 +1,6 @@
 import React from "react";
-import { IFindYourFriendsViewProps } from "../../../screens/userProfileList/findYourFriends/interface";
-import {SelectableUserProfileListView, UserProfileItemView} from "../../userProfileList/selectable";
+import { IFindYourFriendsViewProps } from "../../../screens/user/userProfileList/findYourFriends/interface";
+import {SelectableUserProfileListView, UserProfileItemView} from "../../userProfile/userProfileList/selectable";
 import BallerzHeaderView from "../../../components/header";
 import HeaderCheckButton from "../../../components/header/buttons/checkButton"
 import { globalStyles } from "../../styles";

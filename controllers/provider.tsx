@@ -160,6 +160,7 @@ export default function AppProvider (props: IProps) {
             }
         }
         authModel.onDataPreparedEvent()
+        SplashScreen.hideAsync()
     }
     
     const controller: IAppController = {
@@ -198,7 +199,7 @@ export default function AppProvider (props: IProps) {
         cityController.createUseCase(cityModel)
 
 
-        const netWorkSubscription = NetInfo.addEventListener((state: NetInfoState) => {
+        const netWorkStateSubscription = NetInfo.addEventListener((state: NetInfoState) => {
             if(state.isConnected){
                 console.log("Network State switched to connected")
                 if(authState.profile){
@@ -209,7 +210,7 @@ export default function AppProvider (props: IProps) {
         })
 
         return(
-            netWorkSubscription()
+            netWorkStateSubscription()
         )
 
 
@@ -228,6 +229,7 @@ export default function AppProvider (props: IProps) {
 
 
 export const MemoizedAppProvider = React.memo(AppProvider)
+
 
 
 

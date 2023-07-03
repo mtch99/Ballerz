@@ -1,5 +1,5 @@
 import React from "react";
-import { IPlaceListViewProps } from "../../../screens/placeList/interface";
+import { IPlaceListViewProps } from "../../../screens/place/placeList/interface";
 import { FlatList, KeyboardAvoidingView } from "react-native";
 import PlaceItemView from "./placeItem";
 import { globalStyles } from "../../styles";

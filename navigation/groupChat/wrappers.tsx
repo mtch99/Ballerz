@@ -2,8 +2,8 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import GroupChatListScreen, { IGroupChatListScreenPropsWithoutNavigation } from "../../screens/groupChat";
 import { GroupChatStackNavigationProp, GroupChatStackScreenProps } from "./types";
 import { IGroupChatNavigationController } from "../../screens/groupChat/interface";
-import GroupChatConversationScreen, { IGroupChatConversationScreenPropsWithoutNavigation } from "../../screens/groupChatConversation";
-import { IGroupChatConversationNavigationController } from "../../screens/groupChatConversation/interface";
+import GroupChatConversationScreen, { IGroupChatConversationScreenPropsWithoutNavigation } from "../../screens/groupChat/groupChatConversation";
+import { IGroupChatConversationNavigationController } from "../../screens/groupChat/groupChatConversation/interface";
 import { IGroupChatState } from "../../app/features/groupChat/types";
 
 

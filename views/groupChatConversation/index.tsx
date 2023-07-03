@@ -1,5 +1,5 @@
 import React from "react";
-import { IGroupChatConversationViewProps } from "../../screens/groupChatConversation/interface";
+import { IGroupChatConversationViewProps } from "../../screens/groupChat/groupChatConversation/interface";
 import { View, Text, FlatList, KeyboardAvoidingView, Platform } from "react-native";
 import { MessageItemView } from "./messageItem";
 import MessageInputView from "./messageInputView";

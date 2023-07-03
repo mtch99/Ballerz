@@ -1,5 +1,5 @@
 import React from "react"
-import { IDefineUsernameViewProps } from "../../../screens/createProfile/DefineUsername/interface"
+import { IDefineUsernameViewProps } from "../../../screens/user/createProfile/DefineUsername/interface"
 import { View, Image, TextInput, Text, StyleSheet, Keyboard } from "react-native"
 import { globalStyles } from "../../styles"
 import { TouchableOpacity, TouchableWithoutFeedback } from "react-native-gesture-handler"
@@ -18,45 +18,45 @@ export class DefineUsernameView extends React.Component<IDefineUsernameViewProps
                 <LoadingModalView
                     isVisible={this.props.loading}
                 />
-                <View
-                    style={styles.container}
+                <TouchableWithoutFeedback
+                    onPress={() => {
+                        console.log("Pressed touchand without feedback")
+                        Keyboard.dismiss()}
+                    }
+                >
+                    <View
+                        style={styles.container}
                     >
-                    <TouchableWithoutFeedback
-                        onPress={Keyboard.dismiss}
-                    >
-                        <View
-                            style={styles.titleContainer}
-                        >
-                                <Text
-                                    style={styles.title}
-                                    numberOfLines={2}
-                                    ellipsizeMode="tail"
-                                >
-                                    Crée ton profile
-                                </Text>
-                        </View>
-
-                        <View>
-                            <Text
-                                style={styles.subTitle}
+                            <View
+                                style={styles.titleContainer}
                             >
-                                Définis ton nom
-                            </Text>
-                        </View>
-                    </TouchableWithoutFeedback>
-                    <TextInput
-                        placeholder="Giannis Antetokumpo"
-                        placeholderTextColor={"#969696"}
-                        style={styles.confirmationCodeInputContainer}
-                        onChangeText={(input) => {this.props.onUsernameInputChange(input)}}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        autoComplete="off"
-                    />
+                                    <Text
+                                        style={styles.title}
+                                        numberOfLines={2}
+                                        ellipsizeMode="tail"
+                                    >
+                                        Crée ton profile
+                                    </Text>
+                            </View>
 
-                    <TouchableWithoutFeedback
-                        onPress={Keyboard.dismiss}
-                    >
+                            <View
+                            >
+                                <Text
+                                    style={styles.subTitle}
+                                >
+                                    Nom d'utilisateur
+                                </Text>
+                            </View>
+                        <TextInput
+                            placeholder="Giannis Antetokumpo"
+                            placeholderTextColor={"#969696"}
+                            style={styles.confirmationCodeInputContainer}
+                            onChangeText={(input) => {this.props.onUsernameInputChange(input)}}
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            autoComplete="off"
+                        />
+
                         <>
                         <View
                             style={{
@@ -65,44 +65,41 @@ export class DefineUsernameView extends React.Component<IDefineUsernameViewProps
                             }}
                         >
 
-                                <Text
+                            <Text
                                 style={styles.subTitle}
                             >
                                 Ajoute une photo
-                                </Text>
+                            </Text>
+
+                            <View
+                                style={{flexDirection:'row', marginTop:10}}
+                            >
+                                <Image
+                                    style={{height: 70, width: 70, borderRadius: 70}}
+                                    source={this.props.profilePicSource}
+                                />
+
                                 <View
-                                    style={{flexDirection:'row', marginTop:10}}
+                                    style={{justifyContent: 'flex-end'}}
                                 >
-                                    <Image
-                                        style={{height: 70, width: 70, borderRadius: 70}}
-                                        source={this.props.profilePicSource}
-                                    />
-                                    <View
-                                        style={{justifyContent: 'flex-end'}}
+                                    <TouchableOpacity
+                                        onPress={() => {this.props.onPressProfilePic()}}
                                     >
-                                        <TouchableOpacity
-                                            onPress={() => {this.props.onPressProfilePic()}}
-                                        >
-                                            <MaterialIcons
-                                                name="add-a-photo"
-                                                size={30}
-                                                color={"#969696"}
-                                                style={{alignSelf: "flex-end"}}
-                                            />
-                                        </TouchableOpacity>
-                                    </View>
+                                        <MaterialIcons
+                                            name="add-a-photo"
+                                            size={30}
+                                            color={"#969696"}
+                                            style={{alignSelf: "flex-end"}}
+                                        />
+                                    </TouchableOpacity>
                                 </View>
+                                
+                            </View>
                         </View>
-                    
+                        
 
                         <View
-                            style={{
-                                flexGrow: 1,
-                                // justifyContent: "center",
-                                marginBottom: 120,
-                                marginTop: 40
-                                // alignItems:"center"
-                            }}
+                            style={{width: "66%"}}
                         >
                             <TouchableOpacity
                                 style={styles.buttonLogin}
@@ -113,14 +110,14 @@ export class DefineUsernameView extends React.Component<IDefineUsernameViewProps
                             </TouchableOpacity>
                         </View>
                         </>
-                    </TouchableWithoutFeedback>
 
-                    {this.props.error?
-                        (<Text style={styles.errorText}>
-                            {this.props.error}
-                        </Text>):(<></>)
-                    }
-                </View>
+                        {this.props.error?
+                            (<Text style={styles.errorText}>
+                                {this.props.error}
+                            </Text>):(<></>)
+                        }
+                    </View>
+                </TouchableWithoutFeedback>
                 </>
             </BallerzSafeAreaView>
         )
@@ -137,7 +134,6 @@ const styles = StyleSheet.create({
     titleContainer: {
         margin: 10,
         marginBottom: 40,
-        alignSelf: 'flex-start',
         justifyContent: "center",
     },
 

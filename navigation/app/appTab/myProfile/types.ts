@@ -8,7 +8,7 @@ import { BaseStackParamList } from "./../../../base/types";
 
 import { BottomTabScreenProps, BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { NavigatorScreenParams } from "@react-navigation/native";
-import { IUserProfileScreenPropsWithoutNavigation } from "../../../../screens/userProfile";
+import { IUserProfileScreenPropsWithoutNavigation } from "../../../../screens/user/userProfile";
 
 
 

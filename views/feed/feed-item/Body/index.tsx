@@ -5,7 +5,7 @@ import React from "react"
 import LeftBodyView from "./Left"
 import BodyRightView from "./Right"
 import { IBadgeData } from "../../../../app/features/feed/slice/interface"
-import IFeedScreen from "../../../../screens/feed/interface"
+import IFeedScreen from "../../../../screens/game/feed/interface"
 import { IUserProfileDataState } from "../../../../app/features/types"
 
 export interface IBodyContainerProps{

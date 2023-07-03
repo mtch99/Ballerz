@@ -1,12 +1,12 @@
 import React from "react";
 import { IUserProfileDataState } from "../../../../app/features/types";
-import { IUserProfileScreenNavigationController } from "../../../../screens/userProfile/interface";
+import { IUserProfileScreenNavigationController } from "../../../../screens/user/userProfile/interface";
 import { BaseStackNavigator } from "../../../base";
 import { NotificationStackScreenProps } from "./types";
 import { AppContext } from "../../../../controllers/provider";
 import { NavigatorScreenParams } from "@react-navigation/native";
 import { BaseStackParamList } from "../../../base/types";
-import NotificationScreen, { INotificationScreenNavigationController } from "../../../../screens/Notification";
+import NotificationScreen, { INotificationScreenNavigationController } from "../../../../screens/notification";
 
 
 

@@ -43,10 +43,6 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 export function RootStackNavigator(): JSX.Element {
 
 	const {authState, prepareData} = React.useContext(AppContext)
-	const _initialRouteName: keyof RootStackParamList = 'AuthStack'
-	// const [isSignedIn, setIsSignedIn] = React.useState(false)
-	let isSignedIn = false
-	const [initialRouteName, setInitialRouteName] = React.useState<keyof RootStackParamList>('AuthStack')
 
 	React.useEffect(() => {
 		prepareData()
@@ -55,11 +51,10 @@ export function RootStackNavigator(): JSX.Element {
 		// 	setInitialRouteName('AppStack')
 		// 	setIsSignedIn(true)
 		// }
+
 	}, [])
 
-	if(!authState.isDataPrepared && authState.user){
-		isSignedIn = true
-	}
+
 
 	const render = () => {
 		if(!authState.isDataPrepared){

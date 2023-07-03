@@ -1,6 +1,6 @@
 import React from "react"
 import { View, Text, ScrollView, ImageSourcePropType } from "react-native"
-import { IUserProfileViewProps } from "../../screens/userProfile"
+import { IUserProfileViewProps } from "../../screens/user/userProfile"
 import { styles } from "./styles"
 import { HeaderView } from "./profileHeader"
 import BallerzHeaderView from "../../components/header"

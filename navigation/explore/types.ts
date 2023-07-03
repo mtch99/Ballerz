@@ -1,10 +1,10 @@
-import { IUserProfileScreenPropsWithoutNavigation } from "./../../screens/userProfile/index";
+import { IUserProfileScreenPropsWithoutNavigation } from "../../screens/user/userProfile/index";
 import { NavigatorScreenParams } from "@react-navigation/native";
-import { IPlaceProfileScreenPropsWithoutNavigation } from "./../../screens/placeProfile/index";
-import { IUserProfileSearchScreenProps, IUserProfileSearchScreenPropsWithoutNavigation } from "../../screens/userProfileList/index";
+import { IPlaceProfileScreenPropsWithoutNavigation } from "../../screens/place/placeProfile/index";
+import { IUserProfileSearchScreenProps, IUserProfileSearchScreenPropsWithoutNavigation } from "../../screens/user/userProfileList/index";
 import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
 import { BaseStackParamList } from "../base/types";
-import { IFriendListScreenPropsWithoutNavigation } from "../../screens/userProfileList/friendsList";
+import { IFriendListScreenPropsWithoutNavigation } from "../../screens/user/userProfileList/friendsList";
 
 declare global {
     namespace ReactNavigation {

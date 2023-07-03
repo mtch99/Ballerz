@@ -2,7 +2,7 @@ import React from "react";
 import { ExploreStackNavigator } from "../../explore";
 import { FeedStackNavigator } from "../../feed";
 import { GroupChatStackNavigator } from "../../groupChat";
-import { IUserProfileScreenNavigationController } from "../../../screens/userProfile/interface";
+import { IUserProfileScreenNavigationController } from "../../../screens/user/userProfile/interface";
 import { AppContext } from "../../../controllers/provider";
 import { IUserProfileDataState } from "../../../app/features/types";
 import { AppTabScreenProps } from "./types";

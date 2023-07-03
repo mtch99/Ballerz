@@ -1,5 +1,5 @@
 import { MyProfileStackParamList } from "./myProfile/types";
-import { IUserProfileScreenPropsWithoutNavigation } from "./../../../screens/userProfile/index";
+import { IUserProfileScreenPropsWithoutNavigation } from "../../../screens/user/userProfile/index";
 
 
 /**
