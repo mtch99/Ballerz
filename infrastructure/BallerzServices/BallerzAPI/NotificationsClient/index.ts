@@ -33,10 +33,10 @@ export default class NotificationsClient extends BallerzApiClient implements INo
             variables: genMyNotificationsSubscriptionVariables(userProfileID),
         }).subscribe({
             next: ({data}) => {
-            const subscription: MyNotificationsSubscription = data
-			if(subscription.onCreateNotification){
-				callback(subscription.onCreateNotification)
-			}
+                const subscription: MyNotificationsSubscription = data
+                if(subscription.onCreateNotification){
+                    callback(subscription.onCreateNotification)
+                }
             },
             error: (err) => {
                 try {
