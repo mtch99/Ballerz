@@ -18,7 +18,7 @@ There must be three different games on three different courts, two at the moment
 - [ ] release v2.0.0-2
     - [ ] Increment version the buildNumber in package.json
     - [ ] Update git ignore to consider node_modules
-    - [ ] build archive
+    - [x] build archive
 
 
 
