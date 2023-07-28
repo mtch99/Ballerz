@@ -46,10 +46,8 @@ Test these scenarios:
     - [x] Game
 
 
-
 - [ ] Update controller
 - [ ] Update feed screen
-
 
 
 - [ ] Notifications
