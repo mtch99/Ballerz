@@ -6,6 +6,7 @@ import IFeedController from "./interface";
 import { IFeedState } from "../../app/features/feed/slice/interface";
 
 
+
 class FeedController implements IFeedController {
     
     getMyGamesList(userProfileID: string) : Promise<{ gameID: string; }[]> {
@@ -13,7 +14,7 @@ class FeedController implements IFeedController {
     }
 
 
-    private feedUseCase: IFeedUseCase = fakeUseCase
+    private feedUseCase: IFeedUseCase = emptyUseCase
 
     createUseCase(model: IFeedModelEventListener){
         this.feedUseCase = new FeedUseCase(model)
@@ -46,11 +47,7 @@ class FeedController implements IFeedController {
 }
 
 
-const feedController = new FeedController()
-export default feedController
-
-
-const fakeUseCase: IFeedUseCase = {
+const emptyUseCase: IFeedUseCase = {
     getFeed: function (): Promise<IFeedItem[]> {
         throw new Error("Function not implemented.");
     },
@@ -70,3 +67,7 @@ const fakeUseCase: IFeedUseCase = {
         throw new Error("Function not implemented.");
     }
 }
+
+
+const feedController = new FeedController()
+export default feedController

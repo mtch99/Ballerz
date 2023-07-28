@@ -9,6 +9,11 @@ export const getPlace_gql = /* GraphQL */ `
       id
       name
       address
+      cityID
+      city{
+        id
+        name
+      }
       gameList {
         items{
             id
@@ -64,8 +69,11 @@ export const listPlaces_gql = /* GraphQL */ `
         id
         name
         address
-        createdAt
-        updatedAt
+        cityID
+        city{
+          id
+          name
+        }
       }
       nextToken
     }
@@ -83,9 +91,14 @@ export type ListPlacesQuery = {
         address: string,
         createdAt: string,
         updatedAt: string,
-      } | null >,
+        cityID: string,
+        city: {
+          id: string,
+          name: string,
+        } | null
+      }> | null,
       nextToken?: string | null,
-    } | null,
+    },
 };
 
 export type GetPlaceQueryVariables = {
@@ -100,6 +113,10 @@ export type GetPlaceQuery = {
       id: string,
       name: string,
       address: string,
+      city: {
+        id: string,
+        name: string,
+      } | null
       gameList:  {
         __typename: "ModelGameConnection",
         items: Array< Game | null>

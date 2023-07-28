@@ -1,6 +1,6 @@
 import {View, Text, StyleSheet} from 'react-native'
 import { IEditTimeViewProps } from '../../interface'
-import { ITime } from '../../../../screens/createGame/selectTimeSlot'
+import { ITime } from '../../../../screens/game/createGame/selectTimeSlot'
 
 
 const TimeView = (props: {time: ITime}) => {

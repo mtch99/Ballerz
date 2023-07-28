@@ -6,7 +6,7 @@ import { globalStyles } from "../../views/styles";
 import { Text } from "react-native";
 import { HeaderBackButton } from "@react-navigation/elements";
 import { useNavigation } from "@react-navigation/native";
-import AttendantsListScreen from "../../screens/userProfileList/attendantsList";
+import AttendantsListScreen from "../../screens/user/userProfileList/attendantsList";
 
 
 const Stack = createNativeStackNavigator<BaseStackParamList>();

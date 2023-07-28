@@ -131,7 +131,7 @@ export default class SignupScreen extends React.Component<ISignupScreenProps, IS
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: globalStyles.global.screenBackGroundColor,
+        backgroundColor: globalStyles.global.screenBackgroundColor,
         alignItems: "center",
         justifyContent: 'center',
     },

@@ -1,7 +1,7 @@
-import { IUserProfileScreenPropsWithoutNavigation } from "./../../screens/userProfile/index";
-import { IPlaceProfileScreenPropsWithoutNavigation } from "./../../screens/placeProfile/index";
+import { IUserProfileScreenPropsWithoutNavigation } from "../../screens/user/userProfile/index";
+import { IPlaceProfileScreenPropsWithoutNavigation } from "../../screens/place/placeProfile/index";
 import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
-import { IFriendListScreenPropsWithoutNavigation } from "../../screens/userProfileList/friendsList";
+import { IFriendListScreenPropsWithoutNavigation } from "../../screens/user/userProfileList/friendsList";
 import { CreateGameStackParamList } from "./createGameStack/types";
 import { NavigatorScreenParams } from "@react-navigation/native";
 

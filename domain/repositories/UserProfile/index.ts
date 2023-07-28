@@ -1,5 +1,5 @@
-import { IAttendance, IGame } from "./../../use-cases/types";
-import { Game, Presence, UserProfile } from "./../../../infrastructure/BallerzServices/BallerzAPI/types";
+import { IAttendance, ICity, IGame } from "./../../use-cases/types";
+import { Game, PresenceWithGame, PresenceWithoutGame, UserProfile } from "./../../../infrastructure/BallerzServices/BallerzAPI/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FriendshipRequestStatus } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
 import UserProfileClient from "../../../infrastructure/BallerzServices/BallerzAPI/UserProfileClient";
@@ -43,7 +43,8 @@ export default class UserProfileRepository implements IUserProfileRepository {
     
 
     async getMyUserProfile(email: string): Promise<IUserProfile | null> {
-        const cache: IUserProfile | null = await this.__getCachedMyUserProfile()
+        const cachedMyUserProfile: IUserProfile | null = await this.__getCachedMyUserProfile()
+
         const variables: ListUserProfileDataQueryVariables = {
             filter: {
                 email: {
@@ -51,8 +52,8 @@ export default class UserProfileRepository implements IUserProfileRepository {
                 }
             },
             frendshipFilter: {
-                id: {
-                    eq: "123"
+                friendProfileID: {
+                    eq: cachedMyUserProfile?.id || " jkbbb "
                 }
             }
         }
@@ -66,14 +67,14 @@ export default class UserProfileRepository implements IUserProfileRepository {
         })
         
         if(!response){
-            return cache
+            return cachedMyUserProfile
         }
         
         
         let userProfile = IUserProfileDataAdapter.parseListUserProfileByEmailResponse(response)
         if(!userProfile){
             console.log("Could not find a user profile with the email: " + email)
-            return cache
+            return cachedMyUserProfile
         }else{
             this.__cacheMyUserProfileData(userProfile)
             this.__cacheMyUserProfile(userProfile)
@@ -86,7 +87,7 @@ export default class UserProfileRepository implements IUserProfileRepository {
         const myUserProfileID = await this.__getCachedMyUserProfile().then(res => (res?.id)) || "123"
         const variables: ListUserProfileDataQueryVariables = {
             frendshipFilter: {
-                id: {
+                friendProfileID: {
                     eq: "123"
                 }
             }
@@ -275,7 +276,7 @@ class IUserProfileDataAdapter {
         if(response){
             if(response.listUserProfiles){
                 response.listUserProfiles.items.forEach((userProfileData) => {
-                    if(userProfileData){
+                    if(userProfileData?.city){
                         if(userProfileData.id != myProfileID){
                             let isFriend = false
                             if(userProfileData.friends){
@@ -287,10 +288,14 @@ class IUserProfileDataAdapter {
                             const newItem: IUserProfileData = {
                                 ...userProfileData,
                                 isFriend,
-                                badges: []
+                                badges: [],
+                                city: userProfileData.city,
                             }
                             result.push(newItem)
                         }
+                    }
+                    else{
+                       console.log(`Could not parse user profile data: ${JSON.stringify(userProfileData, null, 2)}`) 
                     }
                 })
                 return result
@@ -305,20 +310,32 @@ class IUserProfileDataAdapter {
         userProfileDoc.friends.items.forEach((item) => {
             if(item){
                 const friendProfile = item.friendProfile
-                friends.push({
-                    id: friendProfile.id,
-                    username: friendProfile.username,
-                    badges: [],
-                    isFriend: undefined
-                })
+                if(friendProfile.city){
+                    friends.push({
+                        ...friendProfile,
+                        badges: [],
+                        isFriend: undefined,
+                        city: friendProfile.city,
+                    })
+                }
             }
         })
+        let city: ICity = {
+            id: userProfileDoc.cityID,
+            name: "unknown city"
+        }
+
+        if(userProfileDoc.city){
+            city = userProfileDoc.city
+        }
+   
         return {
             ...userProfileDoc,
             badges: [],
             friends,
             games: this.parseGameListFromPresenceList(userProfileDoc.presenceList.items),
-            isFriend: undefined
+            isFriend: undefined,
+            city
         }
     }
 
@@ -328,16 +345,31 @@ class IUserProfileDataAdapter {
         console.log(`MyUserProfileID in parseGetUserProfileResponse function: ${myUserProfileID}`)
         
         if(response?.getUserProfile){
+            let city: ICity = {
+                id: response.getUserProfile.cityID,
+                name: "unknown city"
+            }
+            if(response?.getUserProfile.city){
+                city = response.getUserProfile.city
+            }
             let isFriend: IUserProfileData['isFriend'] = false
             const friends: IUserProfileData[] = []
             response.getUserProfile.friends.items.forEach((item) => {
                 if(item){
                     const friendProfile = item.friendProfile
+                    let city: ICity = {
+                        id: friendProfile.cityID,
+                        name: "unknown city"
+                    }
+                    if(friendProfile.city){
+                        city = friendProfile.city
+                    } 
                     friends.push({
                         id: friendProfile.id,
                         username: friendProfile.username,
                         badges: [],
-                        isFriend: undefined
+                        isFriend: undefined,
+                        city,
                     })
                     if(friendProfile.id == myUserProfileID){
                         isFriend = true
@@ -352,16 +384,17 @@ class IUserProfileDataAdapter {
                 badges: [],
                 games: this.parseGameListFromPresenceList(response.getUserProfile.presenceList.items),
                 email: "",
+                city,
             }
         }
 
         return result
     }
 
-    static parseGameListFromPresenceList(presenceList: Array<Presence|null>): IGame[] {
+    static parseGameListFromPresenceList(presenceList: Array<PresenceWithGame|null>): IGame[] {
         const result: IGame[] = []
         presenceList.forEach((presence) => {
-            if(presence){
+            if(presence && presence.game && presence.place){
                 const game: IGame = {
                     friendsThere: this.parseFriendsThere(presence.game),
                     comments: [],
@@ -371,7 +404,8 @@ class IUserProfileDataAdapter {
                     id: presence.game.id,
                     placeID: presence.placeID,
                     startingTime: presence.game.startingDateTime,
-                    endingTime: presence.game.endingDateTime
+                    endingTime: presence.game.endingDateTime,
+                    city: presence.place.city,
                 }
                 result.push(game)
             }
@@ -383,18 +417,26 @@ class IUserProfileDataAdapter {
     static parseFriendsThere(game: Game): IUserProfileData[]{
         const friendsThere: IUserProfileData[] = [] 
         game.presenceList.items.forEach((item) => {
-            if(item){
+            if(item && item.userProfile){
                 if(item.userProfile.friends){
                     // Friends list is filtered in the query
                     // Here the filter is supposed to be the current user email
                     const filteredFriendList = item.userProfile.friends
                     const isFriend =  filteredFriendList.items.length > 0
+                    let city: ICity = {
+                        id: item.userProfile.cityID,
+                        name: "unknown city"
+                    }
+                    if(item.userProfile.city){
+                        city = item.userProfile.city
+                    }
                     if(isFriend){
                         const userProfileData: IUserProfileData = {
                             id: item.userProfile.id,
                             username: item.userProfile.username,
                             badges: [],
-                            isFriend: true
+                            isFriend: true,
+                            city
                         }
                         friendsThere.push(userProfileData)
                     }
@@ -415,11 +457,14 @@ class IUserProfileDataAdapter {
         if(response){
             if(response.createUserProfile){
                 result.error = false
+                let city: ICity = {
+                    id: response.createUserProfile.cityID,
+                    name: "unknown city"
+                }
                 const userProfile: IUserProfile = {
+                    ...response.createUserProfile,
                     games: [],
                     friends: [],
-                    id: response.createUserProfile.id,
-                    username: response.createUserProfile.username,
                     badges: [],
                     email: response.createUserProfile.email,
                     isFriend: undefined

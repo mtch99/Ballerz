@@ -1,7 +1,7 @@
 import { PlayMutationInput, presenceType } from "../../../infrastructure/BallerzServices/BallerzAPI/API";
 import BallerzGameClient from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient";
 import { GetMyPresencesQuery } from "../../../infrastructure/BallerzServices/BallerzAPI/GameCient/queries";
-import { Game, Presence } from "../../../infrastructure/BallerzServices/BallerzAPI/types";
+import { Game, PresenceWithoutGame } from "../../../infrastructure/BallerzServices/BallerzAPI/types";
 import { CreateGameErrorReason, ICheckInResult, ICheckinInput, ICheckoutInput, ICommentInput, ICreateGameInput, ICreateGameResult, IGameRepository } from "../../use-cases/feed/interface";
 import { IAttendance, IFeedItem, IGame, IUserProfileData } from "../../use-cases/types";
 
@@ -182,7 +182,7 @@ export class GameAdapter {
     }
 
 
-    static parsePresenceDoc(presenceDoc: Presence): IAttendance | null {
+    static parsePresenceDoc(presenceDoc: PresenceWithoutGame): IAttendance | null {
         if(presenceDoc?.userProfile){
             let isFriend = false
             if(presenceDoc.userProfile.friends){
@@ -209,7 +209,7 @@ export class GameAdapter {
 
     }
 
-    static parsePresenceList(presenceList: Array<Presence | null>): IGame['attendants'] {
+    static parsePresenceList(presenceList: Array<PresenceWithoutGame | null>): IGame['attendants'] {
         const result: IGame['attendants'] = []
         presenceList?.forEach((presenceDoc) => {
             if(presenceDoc){

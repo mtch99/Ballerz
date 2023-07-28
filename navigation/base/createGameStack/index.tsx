@@ -41,7 +41,7 @@ export function CreateGameStackNavigator(): JSX.Element {
 						)
 					},
 					headerStyle: {
-						backgroundColor: globalStyles.global.screenBackGroundColor
+						backgroundColor: globalStyles.global.screenBackgroundColor
 					}
 				}}
 				component={SelectPlaceScreenWrapper}
@@ -52,7 +52,7 @@ export function CreateGameStackNavigator(): JSX.Element {
 				options={{
 					headerTitle: "Choisissez un horaire",
 					headerStyle: {
-						backgroundColor: globalStyles.global.screenBackGroundColor
+						backgroundColor: globalStyles.global.screenBackgroundColor
 					},
 					headerLeft: () => (<BallerzHeaderBackButton/>)
 				}}

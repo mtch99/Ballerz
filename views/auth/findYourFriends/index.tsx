@@ -1,6 +1,6 @@
 import React from "react";
-import { IFindYourFriendsViewProps } from "../../../screens/userProfileList/findYourFriends/interface";
-import {SelectableUserProfileListView, UserProfileItemView} from "../../userProfileList/selectable";
+import { IFindYourFriendsViewProps } from "../../../screens/user/userProfileList/findYourFriends/interface";
+import {SelectableUserProfileListView, UserProfileItemView} from "../../userProfile/userProfileList/selectable";
 import BallerzHeaderView from "../../../components/header";
 import HeaderCheckButton from "../../../components/header/buttons/checkButton"
 import { globalStyles } from "../../styles";
@@ -75,7 +75,7 @@ export default class FindYourFriendsView<P extends IFindYourFriendsViewProps = I
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: globalStyles.global.screenBackGroundColor,
+        backgroundColor: globalStyles.global.screenBackgroundColor,
         flexGrow: 1
     }
 })

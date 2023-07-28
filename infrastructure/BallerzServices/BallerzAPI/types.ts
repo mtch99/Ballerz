@@ -17,31 +17,43 @@ export type Game = {
     startingDateTime: string
     endingDateTime: string
     placeID: string
-    place: PlaceData
+    place: PlaceData | null
+    cityID: string
+    city: CityData | null
     presenceList: {
-        items: Array<Presence | null>
+        items: Array<PresenceWithoutGame | null>
         nextToken: string | null
     }
 }
 
 
-export type Presence = {
+export type PresenceWithoutGame = {
     __typename: "Presence",
     id: string
     placeID: string
     userProfileID: string
-    userProfile: UserProfileData
-	place: PlaceData
+    userProfile: UserProfileData | null
+	place: PlaceData | null
 	startingDateTime: string
 	endingDateTime: string
-    game: Game
+    gameID: string
 }
+
+export type PresenceWithGame = PresenceWithoutGame & {
+    game: Game | null
+}
+
+
 
 export type PlaceData = {
     __typename: "Place",
     id: string,
     name: string
     address: string
+    city: {
+        id: string,
+        name: string
+    }
 }
 
 
@@ -74,6 +86,8 @@ export type UserProfileData = {
     id: string,
     username: string
     email: string
+    cityID: string
+    city: CityData | null
     friends?: {
         items: Array<UserProfileData | null>
         nextToken: string | null
@@ -91,9 +105,11 @@ export type UserProfile = {
     createdAt: string,
     updatedAt: string,
     presenceList: {
-        items: Array<Presence | null>
+        items: Array<PresenceWithGame | null>
         nextToken: string | null
     }
+    cityID: string,
+    city: CityData | null
 }
 
 
@@ -117,3 +133,9 @@ export type GroupChatUserProfileConnection = {
 	groupChat: GroupChatData
 }
 
+
+
+export type CityData = {
+    id: string,
+    name: string
+}

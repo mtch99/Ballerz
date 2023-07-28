@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: globalStyles.global.screenBackGroundColor
+        backgroundColor: globalStyles.global.screenBackgroundColor
     },
 
     inputsContainer: {

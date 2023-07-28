@@ -2,7 +2,7 @@ import React from "react";
 import {FlatList, SafeAreaView, View } from "react-native";
 import { IFeedItemState } from "../../../../app/features/feed/slice/interface";
 
-import IFeedScreen, { IPostCommentInput } from "../../../../screens/feed/interface";
+import IFeedScreen, { IPostCommentInput } from "../../../../screens/game/feed/interface";
 import { style } from "./styles";
 import { BodyView } from "./Body";
 import BottomView from "./Bottom";

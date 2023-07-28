@@ -17,7 +17,10 @@ export class PlaceController implements IPlaceController{
     }
 
     async getAllPlaces(): Promise<void> {
-        await this.placeUseCase.getAllPlaces()
+        await this.placeUseCase.getAllPlaces().then(resp => 
+            {
+                console.log(`Get all places: \n ${JSON.stringify(resp, null, 2)}`)
+            })
         return;
     }
 

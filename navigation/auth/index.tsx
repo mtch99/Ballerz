@@ -39,7 +39,7 @@ export function AuthStackNavigator(): JSX.Element {
                 <Stack.Screen
                     name="SignupScreen"
                     options={{
-                        headerStyle: {backgroundColor: globalStyles.global.screenBackGroundColor},
+                        headerStyle: {backgroundColor: globalStyles.global.screenBackgroundColor},
                         title: "Inscris toi",
                         headerShown: false,
                     }}
@@ -64,6 +64,6 @@ export function AuthStackNavigator(): JSX.Element {
 const styles = StyleSheet.create({
     container: {
 		flexGrow: 1,
-		backgroundColor: globalStyles.global.screenBackGroundColor,
+		backgroundColor: globalStyles.global.screenBackgroundColor,
 	},
 })

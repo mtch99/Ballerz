@@ -2,6 +2,10 @@
 export interface IFeed extends Array<IFeedItem>{}
 
 
+export interface ICity{
+    id: string;
+    name: string;
+}
 
 export interface IComment{
     id: string;
@@ -25,6 +29,7 @@ export interface IGameData {
     place: IPlaceData
     startingTime: string
     endingTime: string
+    comments: Array<IComment>
 }
 
 export interface IGame extends IGameData {
@@ -33,16 +38,8 @@ export interface IGame extends IGameData {
     badges: IBadge[]
     attendants: IAttendance[]
     place: IPlaceData
+    city: ICity
 }
-
-
-
-export interface IPlaceData {
-    id: string;
-    name: string
-    address: string
-}
-
 
 
 export interface IUserProfile extends IUserProfileData {
@@ -57,13 +54,15 @@ export interface IUserProfileData{
     username: string
     badges: IBadge[]
     isFriend: boolean | undefined
+    city: ICity
 }
 
 
 export interface IPlaceData {
-    id: string;
-    name: string;
+    id: string
+    name: string
     address: string
+    city: ICity
 }
 
 

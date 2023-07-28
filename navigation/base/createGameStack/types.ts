@@ -1,5 +1,5 @@
-import { ISelectTimeSlotScreenPropsWithoutNavigation } from "../../../screens/createGame/selectTimeSlot/index";
-import { IPlaceListScreenPropsWithoutNavigation } from "../../../screens/placeList/index";
+import { ISelectTimeSlotScreenPropsWithoutNavigation } from "../../../screens/game/createGame/selectTimeSlot/index";
+import { IPlaceListScreenPropsWithoutNavigation } from "../../../screens/place/placeList/index";
 
 /**
  * Learn more about using TypeScript with React Navigation:

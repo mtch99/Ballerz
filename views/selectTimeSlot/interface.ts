@@ -1,4 +1,4 @@
-import { ITime } from "../../screens/createGame/selectTimeSlot"
+import { ITime } from "../../screens/game/createGame/selectTimeSlot"
 
 
 

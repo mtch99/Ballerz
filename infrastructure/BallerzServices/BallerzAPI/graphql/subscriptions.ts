@@ -32,6 +32,13 @@ export const onCreateNotificationByReceiver = /* GraphQL */ `
           presenceList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
           userProfileUserId
@@ -53,6 +60,13 @@ export const onCreateNotificationByReceiver = /* GraphQL */ `
           }
           presenceList {
             nextToken
+          }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
           }
           createdAt
           updatedAt
@@ -81,6 +95,14 @@ export const onCreateNotificationByReceiver = /* GraphQL */ `
             id
             name
             address
+            cityID
+            createdAt
+            updatedAt
+          }
+          cityID
+          city {
+            id
+            name
             createdAt
             updatedAt
           }
@@ -93,6 +115,13 @@ export const onCreateNotificationByReceiver = /* GraphQL */ `
           address
           gameList {
             nextToken
+          }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
           }
           createdAt
           updatedAt
@@ -115,12 +144,66 @@ export const onCreateNotificationByReceiver = /* GraphQL */ `
           presenceList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
           userProfileUserId
         }
         startingDateTime
         endingDateTime
+        createdAt
+        updatedAt
+      }
+      gameID
+      game {
+        id
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        placeID
+        startingDateTime
+        endingDateTime
+        place {
+          id
+          name
+          address
+          gameList {
+            nextToken
+          }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -137,6 +220,7 @@ export const onCreateNotificationByReceiver = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -167,6 +251,13 @@ export const onCreateNotificationByReceiver = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -185,6 +276,7 @@ export const onCreateNotificationByReceiver = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -215,6 +307,13 @@ export const onCreateNotificationByReceiver = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -245,6 +344,7 @@ export const onCreateUser = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -275,6 +375,13 @@ export const onCreateUser = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -305,6 +412,7 @@ export const onUpdateUser = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -335,6 +443,13 @@ export const onUpdateUser = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -365,6 +480,7 @@ export const onDeleteUser = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -395,6 +511,13 @@ export const onDeleteUser = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -436,6 +559,13 @@ export const onCreateUserProfile = /* GraphQL */ `
           presenceList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
           userProfileUserId
@@ -452,6 +582,7 @@ export const onCreateUserProfile = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -473,6 +604,7 @@ export const onCreateUserProfile = /* GraphQL */ `
             placeID
             startingDateTime
             endingDateTime
+            cityID
             createdAt
             updatedAt
           }
@@ -480,6 +612,7 @@ export const onCreateUserProfile = /* GraphQL */ `
             id
             name
             address
+            cityID
             createdAt
             updatedAt
           }
@@ -487,6 +620,7 @@ export const onCreateUserProfile = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -497,6 +631,13 @@ export const onCreateUserProfile = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      cityID
+      city {
+        id
+        name
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -535,6 +676,13 @@ export const onUpdateUserProfile = /* GraphQL */ `
           presenceList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
           userProfileUserId
@@ -551,6 +699,7 @@ export const onUpdateUserProfile = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -572,6 +721,7 @@ export const onUpdateUserProfile = /* GraphQL */ `
             placeID
             startingDateTime
             endingDateTime
+            cityID
             createdAt
             updatedAt
           }
@@ -579,6 +729,7 @@ export const onUpdateUserProfile = /* GraphQL */ `
             id
             name
             address
+            cityID
             createdAt
             updatedAt
           }
@@ -586,6 +737,7 @@ export const onUpdateUserProfile = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -596,6 +748,13 @@ export const onUpdateUserProfile = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      cityID
+      city {
+        id
+        name
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -634,6 +793,13 @@ export const onDeleteUserProfile = /* GraphQL */ `
           presenceList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
           userProfileUserId
@@ -650,6 +816,7 @@ export const onDeleteUserProfile = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -671,6 +838,7 @@ export const onDeleteUserProfile = /* GraphQL */ `
             placeID
             startingDateTime
             endingDateTime
+            cityID
             createdAt
             updatedAt
           }
@@ -678,6 +846,7 @@ export const onDeleteUserProfile = /* GraphQL */ `
             id
             name
             address
+            cityID
             createdAt
             updatedAt
           }
@@ -685,6 +854,7 @@ export const onDeleteUserProfile = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -695,6 +865,13 @@ export const onDeleteUserProfile = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      cityID
+      city {
+        id
+        name
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -723,6 +900,7 @@ export const onCreateFriendship = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -753,6 +931,13 @@ export const onCreateFriendship = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -784,6 +969,7 @@ export const onUpdateFriendship = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -814,6 +1000,13 @@ export const onUpdateFriendship = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -845,6 +1038,7 @@ export const onDeleteFriendship = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -875,6 +1069,13 @@ export const onDeleteFriendship = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -907,6 +1108,7 @@ export const onCreateFriendshipRequest = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -937,6 +1139,13 @@ export const onCreateFriendshipRequest = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -955,6 +1164,7 @@ export const onCreateFriendshipRequest = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -985,6 +1195,13 @@ export const onCreateFriendshipRequest = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -1017,6 +1234,7 @@ export const onUpdateFriendshipRequest = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -1047,6 +1265,13 @@ export const onUpdateFriendshipRequest = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -1065,6 +1290,7 @@ export const onUpdateFriendshipRequest = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -1095,6 +1321,13 @@ export const onUpdateFriendshipRequest = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -1127,6 +1360,7 @@ export const onDeleteFriendshipRequest = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -1157,6 +1391,13 @@ export const onDeleteFriendshipRequest = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -1175,6 +1416,7 @@ export const onDeleteFriendshipRequest = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -1206,10 +1448,47 @@ export const onDeleteFriendshipRequest = /* GraphQL */ `
           }
           nextToken
         }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         userProfileUserId
       }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateCity = /* GraphQL */ `
+  subscription OnCreateCity($filter: ModelSubscriptionCityFilterInput) {
+    onCreateCity(filter: $filter) {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCity = /* GraphQL */ `
+  subscription OnUpdateCity($filter: ModelSubscriptionCityFilterInput) {
+    onUpdateCity(filter: $filter) {
+      id
+      name
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCity = /* GraphQL */ `
+  subscription OnDeleteCity($filter: ModelSubscriptionCityFilterInput) {
+    onDeleteCity(filter: $filter) {
+      id
+      name
       createdAt
       updatedAt
     }
@@ -1234,6 +1513,14 @@ export const onCreatePlace = /* GraphQL */ `
             id
             name
             address
+            cityID
+            createdAt
+            updatedAt
+          }
+          cityID
+          city {
+            id
+            name
             createdAt
             updatedAt
           }
@@ -1241,6 +1528,13 @@ export const onCreatePlace = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      cityID
+      city {
+        id
+        name
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -1266,6 +1560,14 @@ export const onUpdatePlace = /* GraphQL */ `
             id
             name
             address
+            cityID
+            createdAt
+            updatedAt
+          }
+          cityID
+          city {
+            id
+            name
             createdAt
             updatedAt
           }
@@ -1273,6 +1575,13 @@ export const onUpdatePlace = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      cityID
+      city {
+        id
+        name
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -1298,6 +1607,14 @@ export const onDeletePlace = /* GraphQL */ `
             id
             name
             address
+            cityID
+            createdAt
+            updatedAt
+          }
+          cityID
+          city {
+            id
+            name
             createdAt
             updatedAt
           }
@@ -1305,6 +1622,13 @@ export const onDeletePlace = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      cityID
+      city {
+        id
+        name
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
@@ -1327,6 +1651,7 @@ export const onCreateGame = /* GraphQL */ `
             placeID
             startingDateTime
             endingDateTime
+            cityID
             createdAt
             updatedAt
           }
@@ -1334,6 +1659,7 @@ export const onCreateGame = /* GraphQL */ `
             id
             name
             address
+            cityID
             createdAt
             updatedAt
           }
@@ -1341,6 +1667,7 @@ export const onCreateGame = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -1365,11 +1692,26 @@ export const onCreateGame = /* GraphQL */ `
             placeID
             startingDateTime
             endingDateTime
+            cityID
             createdAt
             updatedAt
           }
           nextToken
         }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      cityID
+      city {
+        id
+        name
         createdAt
         updatedAt
       }
@@ -1394,6 +1736,7 @@ export const onUpdateGame = /* GraphQL */ `
             placeID
             startingDateTime
             endingDateTime
+            cityID
             createdAt
             updatedAt
           }
@@ -1401,6 +1744,7 @@ export const onUpdateGame = /* GraphQL */ `
             id
             name
             address
+            cityID
             createdAt
             updatedAt
           }
@@ -1408,6 +1752,7 @@ export const onUpdateGame = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -1432,11 +1777,26 @@ export const onUpdateGame = /* GraphQL */ `
             placeID
             startingDateTime
             endingDateTime
+            cityID
             createdAt
             updatedAt
           }
           nextToken
         }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      cityID
+      city {
+        id
+        name
         createdAt
         updatedAt
       }
@@ -1461,6 +1821,7 @@ export const onDeleteGame = /* GraphQL */ `
             placeID
             startingDateTime
             endingDateTime
+            cityID
             createdAt
             updatedAt
           }
@@ -1468,6 +1829,7 @@ export const onDeleteGame = /* GraphQL */ `
             id
             name
             address
+            cityID
             createdAt
             updatedAt
           }
@@ -1475,6 +1837,7 @@ export const onDeleteGame = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -1499,11 +1862,26 @@ export const onDeleteGame = /* GraphQL */ `
             placeID
             startingDateTime
             endingDateTime
+            cityID
             createdAt
             updatedAt
           }
           nextToken
         }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      cityID
+      city {
+        id
+        name
         createdAt
         updatedAt
       }
@@ -1546,6 +1924,20 @@ export const onCreatePresence = /* GraphQL */ `
           gameList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        cityID
+        city {
+          id
+          name
           createdAt
           updatedAt
         }
@@ -1562,10 +1954,18 @@ export const onCreatePresence = /* GraphQL */ `
             placeID
             startingDateTime
             endingDateTime
+            cityID
             createdAt
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -1583,6 +1983,7 @@ export const onCreatePresence = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -1613,6 +2014,13 @@ export const onCreatePresence = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -1659,6 +2067,20 @@ export const onUpdatePresence = /* GraphQL */ `
           gameList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        cityID
+        city {
+          id
+          name
           createdAt
           updatedAt
         }
@@ -1675,10 +2097,18 @@ export const onUpdatePresence = /* GraphQL */ `
             placeID
             startingDateTime
             endingDateTime
+            cityID
             createdAt
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -1696,6 +2126,7 @@ export const onUpdatePresence = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -1726,6 +2157,13 @@ export const onUpdatePresence = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -1772,6 +2210,20 @@ export const onDeletePresence = /* GraphQL */ `
           gameList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        cityID
+        city {
+          id
+          name
           createdAt
           updatedAt
         }
@@ -1788,10 +2240,18 @@ export const onDeletePresence = /* GraphQL */ `
             placeID
             startingDateTime
             endingDateTime
+            cityID
             createdAt
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -1809,6 +2269,7 @@ export const onDeletePresence = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -1839,6 +2300,13 @@ export const onDeletePresence = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -1883,6 +2351,13 @@ export const onCreateNotification = /* GraphQL */ `
           presenceList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
           userProfileUserId
@@ -1904,6 +2379,13 @@ export const onCreateNotification = /* GraphQL */ `
           }
           presenceList {
             nextToken
+          }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
           }
           createdAt
           updatedAt
@@ -1932,6 +2414,14 @@ export const onCreateNotification = /* GraphQL */ `
             id
             name
             address
+            cityID
+            createdAt
+            updatedAt
+          }
+          cityID
+          city {
+            id
+            name
             createdAt
             updatedAt
           }
@@ -1944,6 +2434,13 @@ export const onCreateNotification = /* GraphQL */ `
           address
           gameList {
             nextToken
+          }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
           }
           createdAt
           updatedAt
@@ -1966,12 +2463,66 @@ export const onCreateNotification = /* GraphQL */ `
           presenceList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
           userProfileUserId
         }
         startingDateTime
         endingDateTime
+        createdAt
+        updatedAt
+      }
+      gameID
+      game {
+        id
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        placeID
+        startingDateTime
+        endingDateTime
+        place {
+          id
+          name
+          address
+          gameList {
+            nextToken
+          }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -1988,6 +2539,7 @@ export const onCreateNotification = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -2018,6 +2570,13 @@ export const onCreateNotification = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -2036,6 +2595,7 @@ export const onCreateNotification = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -2066,6 +2626,13 @@ export const onCreateNotification = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -2108,6 +2675,13 @@ export const onUpdateNotification = /* GraphQL */ `
           presenceList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
           userProfileUserId
@@ -2129,6 +2703,13 @@ export const onUpdateNotification = /* GraphQL */ `
           }
           presenceList {
             nextToken
+          }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
           }
           createdAt
           updatedAt
@@ -2157,6 +2738,14 @@ export const onUpdateNotification = /* GraphQL */ `
             id
             name
             address
+            cityID
+            createdAt
+            updatedAt
+          }
+          cityID
+          city {
+            id
+            name
             createdAt
             updatedAt
           }
@@ -2169,6 +2758,13 @@ export const onUpdateNotification = /* GraphQL */ `
           address
           gameList {
             nextToken
+          }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
           }
           createdAt
           updatedAt
@@ -2191,12 +2787,66 @@ export const onUpdateNotification = /* GraphQL */ `
           presenceList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
           userProfileUserId
         }
         startingDateTime
         endingDateTime
+        createdAt
+        updatedAt
+      }
+      gameID
+      game {
+        id
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        placeID
+        startingDateTime
+        endingDateTime
+        place {
+          id
+          name
+          address
+          gameList {
+            nextToken
+          }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -2213,6 +2863,7 @@ export const onUpdateNotification = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -2243,6 +2894,13 @@ export const onUpdateNotification = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -2261,6 +2919,7 @@ export const onUpdateNotification = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -2291,6 +2950,13 @@ export const onUpdateNotification = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -2333,6 +2999,13 @@ export const onDeleteNotification = /* GraphQL */ `
           presenceList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
           userProfileUserId
@@ -2354,6 +3027,13 @@ export const onDeleteNotification = /* GraphQL */ `
           }
           presenceList {
             nextToken
+          }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
           }
           createdAt
           updatedAt
@@ -2382,6 +3062,14 @@ export const onDeleteNotification = /* GraphQL */ `
             id
             name
             address
+            cityID
+            createdAt
+            updatedAt
+          }
+          cityID
+          city {
+            id
+            name
             createdAt
             updatedAt
           }
@@ -2394,6 +3082,13 @@ export const onDeleteNotification = /* GraphQL */ `
           address
           gameList {
             nextToken
+          }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
           }
           createdAt
           updatedAt
@@ -2416,12 +3111,66 @@ export const onDeleteNotification = /* GraphQL */ `
           presenceList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
           createdAt
           updatedAt
           userProfileUserId
         }
         startingDateTime
         endingDateTime
+        createdAt
+        updatedAt
+      }
+      gameID
+      game {
+        id
+        presenceList {
+          items {
+            id
+            type
+            placeID
+            userProfileID
+            gameID
+            startingDateTime
+            endingDateTime
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        placeID
+        startingDateTime
+        endingDateTime
+        place {
+          id
+          name
+          address
+          gameList {
+            nextToken
+          }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -2438,6 +3187,7 @@ export const onDeleteNotification = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -2468,6 +3218,13 @@ export const onDeleteNotification = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -2486,6 +3243,7 @@ export const onDeleteNotification = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -2516,6 +3274,13 @@ export const onDeleteNotification = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -2550,6 +3315,7 @@ export const onCreateJoinMeInvitation = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -2580,6 +3346,13 @@ export const onCreateJoinMeInvitation = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -2598,6 +3371,7 @@ export const onCreateJoinMeInvitation = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -2628,6 +3402,13 @@ export const onCreateJoinMeInvitation = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -2659,6 +3440,20 @@ export const onCreateJoinMeInvitation = /* GraphQL */ `
           gameList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        cityID
+        city {
+          id
+          name
           createdAt
           updatedAt
         }
@@ -2694,6 +3489,7 @@ export const onUpdateJoinMeInvitation = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -2724,6 +3520,13 @@ export const onUpdateJoinMeInvitation = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -2742,6 +3545,7 @@ export const onUpdateJoinMeInvitation = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -2772,6 +3576,13 @@ export const onUpdateJoinMeInvitation = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -2803,6 +3614,20 @@ export const onUpdateJoinMeInvitation = /* GraphQL */ `
           gameList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        cityID
+        city {
+          id
+          name
           createdAt
           updatedAt
         }
@@ -2838,6 +3663,7 @@ export const onDeleteJoinMeInvitation = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -2868,6 +3694,13 @@ export const onDeleteJoinMeInvitation = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -2886,6 +3719,7 @@ export const onDeleteJoinMeInvitation = /* GraphQL */ `
             id
             email
             username
+            cityID
             createdAt
             updatedAt
             userProfileUserId
@@ -2916,6 +3750,13 @@ export const onDeleteJoinMeInvitation = /* GraphQL */ `
             updatedAt
           }
           nextToken
+        }
+        cityID
+        city {
+          id
+          name
+          createdAt
+          updatedAt
         }
         createdAt
         updatedAt
@@ -2947,6 +3788,20 @@ export const onDeleteJoinMeInvitation = /* GraphQL */ `
           gameList {
             nextToken
           }
+          cityID
+          city {
+            id
+            name
+            createdAt
+            updatedAt
+          }
+          createdAt
+          updatedAt
+        }
+        cityID
+        city {
+          id
+          name
           createdAt
           updatedAt
         }

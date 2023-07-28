@@ -2,7 +2,7 @@ import React from "react";
 import {FlatList, SafeAreaView } from "react-native";
 import { IFeedItemState, IFeedState } from "../../app/features/feed/slice/interface";
 import FeedItemView from "./feed-item/index";
-import IFeedScreen, { IPostCommentInput } from "../../screens/feed/interface";
+import IFeedScreen, { IPostCommentInput } from "../../screens/game/feed/interface";
 import { globalStyles } from "../styles";
 import BallerzSafeAreaView from "../safeArea";
 
@@ -55,7 +55,7 @@ class FeedView extends React.Component<IProps> {
 			<BallerzSafeAreaView>
 				<FlatList
 					data={this.props.feedState.items}
-					style={{backgroundColor: globalStyles.global.screenBackGroundColor}}
+					style={{backgroundColor: globalStyles.global.screenBackgroundColor}}
 					renderItem={({item, index}) => {
 						return(
 							<FeedItemView

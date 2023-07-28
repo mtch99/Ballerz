@@ -55,14 +55,15 @@ export function FeedStackNavigator(): JSX.Element {
 					options={{
 						headerShown: true,
 						headerTitle: 'Ballerz',
-						headerStyle: { backgroundColor: globalStyles.global.screenBackGroundColor},
+						headerStyle: { backgroundColor: globalStyles.global.screenBackgroundColor},
 						headerLeft: () => (<LeftHeader/>),
 						headerRight: () => (
 							<TouchableOpacity
 								//@ts-ignore
 								onPress={() => {navigation.navigate("ExploreStack")}}
+								style={{padding: 9}}
 							>
-								<Icon name="search1" size={18} 
+								<Icon name="search1" size={20} 
 									color={globalStyles.global.logoColor}
 								/>
 							</TouchableOpacity>
@@ -77,7 +78,7 @@ export function FeedStackNavigator(): JSX.Element {
 						headerShown: true,
 						headerTitle: 'Badges',
 						headerBackTitleVisible: false,
-						headerStyle: { backgroundColor: globalStyles.global.screenBackGroundColor},
+						headerStyle: { backgroundColor: globalStyles.global.screenBackgroundColor},
 
 					}}
 					component={BadgeListScreenWrapper}
@@ -90,7 +91,7 @@ export function FeedStackNavigator(): JSX.Element {
 						headerShown: true,
 						headerTitle: 'Commentaires',
 						headerBackTitleVisible: false,
-						headerStyle: { backgroundColor: globalStyles.global.screenBackGroundColor},
+						headerStyle: { backgroundColor: globalStyles.global.screenBackgroundColor},
 
 					}}
 					component={CommentsScreenWrapper}

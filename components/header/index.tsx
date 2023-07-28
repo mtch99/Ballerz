@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   header: {
     height: 45,
     // paddingTop: 36,
-    backgroundColor: globalStyles.global.screenBackGroundColor,
+    backgroundColor: globalStyles.global.screenBackgroundColor,
     flexDirection: 'row',
     alignItems: 'center',
     // justifyContent: 'center',

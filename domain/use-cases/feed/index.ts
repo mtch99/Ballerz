@@ -21,9 +21,7 @@ export class FeedUseCase implements IFeedUseCase {
 
     async getMyGamesList(userProfileID: string): Promise<{ gameID: string; }[]> {
         const response = await this.repo.getMyGamesList(userProfileID)
-        if(response.length > 0){
-            this.observer.onNewMyGamesList(response)
-        }
+        this.observer.onNewMyGamesList(response)
         return response
     }
     

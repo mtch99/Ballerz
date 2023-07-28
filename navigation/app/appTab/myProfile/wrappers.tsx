@@ -1,7 +1,7 @@
 import React from "react";
 import { IUserProfileDataState } from "../../../../app/features/types";
-import { MyProfileScreen } from "../../../../screens/userProfile";
-import { IUserProfileScreenNavigationController } from "../../../../screens/userProfile/interface";
+import { MyProfileScreen } from "../../../../screens/user/userProfile";
+import { IUserProfileScreenNavigationController } from "../../../../screens/user/userProfile/interface";
 import { BaseStackNavigator } from "../../../base";
 import { MyProfileStackScreenProps } from "./types";
 import { AppContext } from "../../../../controllers/provider";

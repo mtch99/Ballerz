@@ -42,6 +42,10 @@ import placeController from "./place";
 import groupChatController from "./groupChat";
 import authController from "./auth";
 import notificationController from "./notification";
+import { ICityListState, selectCityListState } from "../app/features/city/slice";
+import { createCityModel } from "../app/features/city/model";
+import cityController from "./city";
+import ICityController from "./city/interface";
 
 
 
@@ -56,16 +60,18 @@ export interface IAppContext extends IAppController{
     placeMapState: IPlaceMapState,
     authState: AuthState,
     notificationListState: NotificationListState
+    cityListState: ICityListState
 }
 
 
 export const AppContext = React.createContext<IAppContext>({
-    authController: {} as IAuthController,
-    feedController: {} as IFeedController,
-    groupChatController: {} as IGroupChatController,
-    userProfileController: {} as IUserProfileController,
-    placeController: {} as IPlaceController,
-    notificationController: {} as INotificationController,
+    authController: authController,
+    feedController: feedController,
+    groupChatController: groupChatController,
+    userProfileController: userProfileController,
+    placeController: placeController,
+    cityController: cityController,
+    notificationController: notificationController,
     feedState: {items: [], myGamesList:[]},
     groupChatListState: {items: []},
     groupChatMapState: {},
@@ -85,8 +91,10 @@ export const AppContext = React.createContext<IAppContext>({
         isDataPrepared: false,
         isFirstLaunch: true
     },
+    cityListState: {items: []},
     appControllerEventListener: {} as IAppControllerEventListener,
     notificationListState: {items: [], badge: undefined},
+
     prepareData: () => {}
 });
 
@@ -131,6 +139,10 @@ export default function AppProvider (props: IProps) {
     const notificationModel = createNotificationModel(modelInput)
     const notificationListState: NotificationListState = selector(selectNotificationList)
 
+    const cityModel = createCityModel(modelInput)
+    const cityListState: ICityListState = selector(selectCityListState)
+    
+
     const prepareData = async() => {
         await Promise.all([
             authController.isFirstLaunch(),
@@ -148,9 +160,7 @@ export default function AppProvider (props: IProps) {
             }
         }
         authModel.onDataPreparedEvent()
-        // await SplashScreen.hideAsync().then(result => {
-        //     if(result){console.log(`Splashscreen hidden`)}
-        // })
+        SplashScreen.hideAsync()
     }
     
     const controller: IAppController = {
@@ -160,6 +170,7 @@ export default function AppProvider (props: IProps) {
         placeController,
         notificationController,
         authController,
+        cityController,
         prepareData,
         appControllerEventListener: authModel
     }
@@ -174,7 +185,8 @@ export default function AppProvider (props: IProps) {
         placeListState,
         placeMapState,
         userProfileMapState,
-        notificationListState
+        notificationListState,
+        cityListState
     }
 
     React.useEffect(() => {
@@ -184,8 +196,10 @@ export default function AppProvider (props: IProps) {
         placeController.createUseCase(placeModel)
         groupChatController.createUseCase(groupChatModel)
         feedController.createUseCase(feedModel)
+        cityController.createUseCase(cityModel)
 
-        const netWorkSubscription = NetInfo.addEventListener((state: NetInfoState) => {
+
+        const netWorkStateSubscription = NetInfo.addEventListener((state: NetInfoState) => {
             if(state.isConnected){
                 console.log("Network State switched to connected")
                 if(authState.profile){
@@ -196,7 +210,7 @@ export default function AppProvider (props: IProps) {
         })
 
         return(
-            netWorkSubscription()
+            netWorkStateSubscription()
         )
 
 
@@ -215,6 +229,7 @@ export default function AppProvider (props: IProps) {
 
 
 export const MemoizedAppProvider = React.memo(AppProvider)
+
 
 
 

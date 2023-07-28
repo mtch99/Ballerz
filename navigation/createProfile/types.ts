@@ -1,4 +1,4 @@
-import { IDefineUsernameScreenProps } from "../../screens/createProfile/DefineUsername/interface";
+import { IDefineUsernameScreenProps } from "../../screens/user/createProfile/DefineUsername/interface";
 
 
 /**
@@ -11,7 +11,7 @@ import { IDefineUsernameScreenProps } from "../../screens/createProfile/DefineUs
  import { ExploreStackParamList } from "../explore/types";
  import { FeedStackParamList } from "../feed/types";
  import { GroupChatStackParamList } from "../groupChat/types";
-import { IFindYourFriendsScreenProps } from "../../screens/userProfileList/findYourFriends/interface";
+import { IFindYourFriendsScreenProps } from "../../screens/user/userProfileList/findYourFriends/interface";
  
  
   
@@ -24,6 +24,7 @@ import { IFindYourFriendsScreenProps } from "../../screens/userProfileList/findY
  export type CreateProfileStackParamList = {
     DefineUsername: IDefineUsernameScreenProps
     FindYourFriends: IFindYourFriendsScreenProps
+    ChooseYourCity: {}
  };
  
  

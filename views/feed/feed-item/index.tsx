@@ -4,7 +4,7 @@ import { IFeedItemState} from "../../../app/features/feed/slice/interface";
 import BottomView from "./Bottom";
 import Header from "./Header";
 import { BodyView } from "./Body";
-import IFeedScreen, { IPostCommentInput } from "../../../screens/feed/interface";
+import IFeedScreen, { IPostCommentInput } from "../../../screens/game/feed/interface";
 import { style } from "./styles";
 import CommentsView from "./Bottom/Comments";
 import { AppContext } from "../../../controllers/provider";

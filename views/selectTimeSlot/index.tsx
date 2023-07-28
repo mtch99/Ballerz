@@ -2,7 +2,7 @@ import React from "react";
 import { Text, Appearance, View} from "react-native";
 import styles from "./styles";
 import DateTimePickerModal, {ReactNativeModalDateTimePickerProps} from "react-native-modal-datetime-picker";
-import { ISelectTimeSlotViewProps, ITime } from "../../screens/createGame/selectTimeSlot";
+import { ISelectTimeSlotViewProps, ITime } from "../../screens/game/createGame/selectTimeSlot";
 import EditPlaceView from "./EditPlace";
 import { ISelectTimeSlotViewState, IDateTimePickerState, EditState, TimeEditActionType } from "./interface";
 import { EditDateView, EditEndingTimeView, EditStartingTimeView } from "./EditTime";

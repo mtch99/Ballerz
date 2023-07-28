@@ -3,23 +3,51 @@ The app for basketball pickup games
 
 
 ## Branch Purpose
-    I want to be able to make friends and accept friendship requests
+    I want to be able to switch between Quebec city and montreal
 ## Next 
 Test these scenarios:
     `TODO: define next scenarios` 
     - I want to add my favorite playground
-        
-There must be three different games on three different courts, two at the moment, and one other on saturday
-
 
 ## How? (technical)
+- [x] Update graphql folder and API.ts
+
+- [x] Update use case
+    - [x] UserProfileUseCase and entities
+    - [x] PLace use case and entities
+    - [x] Game use case and entities
+
+- [x] Update client queries
+    - [x] UserProfileClient
+    - [x] Place client
+    - [x] GameClient
+
+* [x] fix My friends bug in myProfileScreen
 
 
-- [ ] release v2.0.0-2
-    - [ ] Increment version the buildNumber in package.json
-    - [ ] Update git ignore to consider node_modules
-    - [x] build archive
+- [ ] City entity
+    - [x] UseCase
+    - [x] Repo
+    - [x] Model
+    - [x] Controller + integration un global controller
+    - [ ] Test CityClient
 
+
+- [ ] Store every model's data in asyncStorage
+
+
+- [ ] Chooose your City screen
+    - [ ] Navigation
+    - [x] Screen
+
+- [x] Update model
+    - [x] userProfile
+    - [x] place
+    - [x] Game
+
+
+- [ ] Update controller
+- [ ] Update feed screen
 
 
 - [ ] Notifications
@@ -61,7 +89,7 @@ TODO: Post test Rémi
 
 - [ ] En attente 
 
--[ ] Avancer après 
+- [ ] Avancer après 
 
 - [ ] Photo du parc
 
@@ -71,7 +99,7 @@ TODO: Post test Rémi
 
 - [ ] Photo de profil pas nécessaire
 
-- [ ] Vidéos lie, adresse, googlemaps lorsque que tu clique sur carré vert, 
+- [ ] Vidéos lieu, adresse, googlemaps lorsque que tu clique sur carré vert, 
 
 - [ ] favoris dans les terrains, notifications
 

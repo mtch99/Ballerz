@@ -135,7 +135,7 @@ export default function SigninView(props: ISigninViewProps) {
 const styles = StyleSheet.create({
 	container: {		
 		flexGrow: 1,
-	  	backgroundColor: globalStyles.global.screenBackGroundColor,
+	  	backgroundColor: globalStyles.global.screenBackgroundColor,
 		justifyContent: "space-between",
 		// alignItems:"center",
 
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		borderBottomColor: "white",
 		paddingBottom: 100,
-		backgroundColor: globalStyles.global.screenBackGroundColor,
+		backgroundColor: globalStyles.global.screenBackgroundColor,
 	},	
 
 

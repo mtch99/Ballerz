@@ -1,7 +1,6 @@
-import { EmailInput } from "./../../../../views/auth/signIn/index";
 import { ModelFriendshipFilterInput, ModelUserProfileFilterInput } from "../API";
 import { ModelFriendshipConnection, UserProfile } from "../types";
-import { Presence, Friendship, GroupChatDataWithMembers, GroupChatUserProfileConnectionConnection, GroupChatData, UserProfileData } from "../types";
+import { PresenceWithoutGame, Friendship, GroupChatDataWithMembers, GroupChatUserProfileConnectionConnection, GroupChatData, UserProfileData } from "../types";
 
 export const getUserProfile_gql = /* GraphQL */ `
   query GetUserProfile(
@@ -11,6 +10,11 @@ export const getUserProfile_gql = /* GraphQL */ `
     getUserProfile(id: $id) {
         id
         email
+        cityID
+        city{
+          id
+          name
+        }
         username
         friends {
           items {
@@ -123,6 +127,11 @@ export const listUserProfilesByEmail_gql = /* GraphQL */ `
         id
         email
         username
+        cityID
+        city{
+          id
+          name
+        }
         friends {
           items {
             id
@@ -132,6 +141,11 @@ export const listUserProfilesByEmail_gql = /* GraphQL */ `
               id
               username
               email
+              cityID
+              city{
+                id
+                name
+              }
             }
             createdAt
             updatedAt
@@ -191,7 +205,7 @@ export const listUserProfilesByEmail_gql = /* GraphQL */ `
 
 
 
-export const listUserProfileData = /* GraphQL */ `
+export const listUserProfileData_gql = /* GraphQL */ `
   query ListUserProfiles(
     $filter: ModelUserProfileFilterInput
     $frendshipFilter: ModelFriendshipFilterInput
@@ -203,6 +217,11 @@ export const listUserProfileData = /* GraphQL */ `
         id
         username
         email
+        cityID
+        city{
+          id
+          name
+        }
         friends(filter: $frendshipFilter) {
           items {
             id
