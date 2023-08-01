@@ -9,7 +9,7 @@ import { API } from "aws-amplify";
 export class BallerzCityClient extends BallerzApiClient {
 
     async listAllCities(): Promise<ListCitiesQuery | undefined> {
-        const payload = this.genRequestPayload(listCities, {})
+        const payload = this.genGqlOptions(listCities, {})
         const response = await API.graphql<GraphQLQuery<ListCitiesQuery>>(payload)
         const result = this._handleResponse(response)
         return result

@@ -4,7 +4,6 @@ import BallerzApiClient from "../client";
 import { INotificationsClient} from "./interface";
 import { FilterNotificationsByUserQueryVariables, NotificationsByReceiverQueryVariables, listNotificationsByReceiverQuery, listNotificationsByReceiver_gql} from "./queries";
 import {GraphQLQuery} from "@aws-amplify/api"
-import { awsmobileAPIMock } from "../../aws-exports";
 import { Notification } from "./types";
 import { subscriptionClient } from "../subscriptionClient";
 import { gql } from "@apollo/client";
@@ -16,13 +15,8 @@ import { ModelSortDirection } from "../API";
 
 export default class NotificationsClient extends BallerzApiClient implements INotificationsClient{
     
-    lastNotification: Notification | null
-    subscription: Subscription | null = null;
-    
-    constructor(config?:any , authMode?: "API_KEY"){
-        super(config, authMode);
-        this.lastNotification = null  
-    }
+    lastNotification?: Notification
+    subscription?: Subscription
     
 
     async subscribeToNotifications(userProfileID: string, callback: (value: Notification) => void): Promise<void> {
@@ -64,7 +58,7 @@ export default class NotificationsClient extends BallerzApiClient implements INo
 
     async filterNotificationsByReceiver(receiverProfileID: string, minCreationDate?: string): Promise<listNotificationsByReceiverQuery | undefined> {
         const variables = genNotificationsByReceiverVariables(receiverProfileID, minCreationDate)
-        const payload = this.genRequestPayload(listNotificationsByReceiver_gql, variables)
+        const payload = this.genGqlOptions(listNotificationsByReceiver_gql, variables)
         const response = await API.graphql<GraphQLQuery<listNotificationsByReceiverQuery>>(payload)
         const result = this._handleResponse(response)
         // console.error(`${JSON.stringify(result)}`)
@@ -101,16 +95,3 @@ function genMyNotificationsSubscriptionVariables(receiverProfileID: string): Fil
     }
   };
 }
-
-
-
-
-
-export class NotificationsClientMock extends NotificationsClient {
-    constructor(){
-        super(awsmobileAPIMock, "API_KEY")
-    }
-}
-
-
-

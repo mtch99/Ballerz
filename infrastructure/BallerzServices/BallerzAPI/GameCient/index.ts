@@ -29,7 +29,7 @@ export default class BallerzGameClient extends BallerzApiClient{
             }
         }
 
-        const payload = this.genRequestPayload(getAllGames_gql, variables)
+        const payload = this.genGqlOptions(getAllGames_gql, variables)
         const response = await API.graphql<GraphQLQuery<GetAllGamesQuery>>(payload)
         const result = this._handleResponse(response)
         return result
@@ -42,7 +42,7 @@ export default class BallerzGameClient extends BallerzApiClient{
             }
         }
 
-        const payload = this.genRequestPayload(deletePresence_gql, variables)
+        const payload = this.genGqlOptions(deletePresence_gql, variables)
         const response = await API.graphql<GraphQLQuery<DeletePresenceMutation>>(payload)
         const result = this._handleResponse(response)
         return result
@@ -58,7 +58,7 @@ export default class BallerzGameClient extends BallerzApiClient{
             }
         }
 
-        const payload = this.genRequestPayload(getGame_gql, variables)
+        const payload = this.genGqlOptions(getGame_gql, variables)
         const response = await API.graphql<GraphQLQuery<GetGameQuery>>(payload)
         const result = this._handleResponse(response)
         return result
@@ -72,7 +72,7 @@ export default class BallerzGameClient extends BallerzApiClient{
 
         console.log(`Play Mutaion Input: ${JSON.stringify(variables.input)}`)
 
-        const payload = this.genRequestPayload(playMutation_gql, variables)
+        const payload = this.genGqlOptions(playMutation_gql, variables)
         const response = await API.graphql<GraphQLQuery<PlayMutation>>(payload)
         const result = this._handleResponse(response)
         return result
@@ -86,7 +86,7 @@ export default class BallerzGameClient extends BallerzApiClient{
                 }
             }
         }
-        const payload = this.genRequestPayload(listPresences_gql, variables)
+        const payload = this.genGqlOptions(listPresences_gql, variables)
         const response = await API.graphql<GraphQLQuery<GetMyPresencesQuery>>(payload)
         const result = this._handleResponse(response)
         return result

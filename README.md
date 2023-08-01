@@ -9,7 +9,13 @@ Test these scenarios:
     `TODO: define next scenarios` 
     - I want to add my favorite playground
 
+
+## Fixes
+- [x] Refactor ApiClient to be flexible with authentication methods
+- [ ] Load prod data into the rinku environment
+
 ## How? (technical)
+
 - [x] Update graphql folder and API.ts
 
 - [x] Update use case
@@ -52,7 +58,7 @@ Test these scenarios:
 
 - [ ] Notifications
     - [ ] Hot court notification 
-    - [x] Prevent Notifications and feed states from having elements with the same keys
+    - [x] Prevent Notifications and feed states from having elements with the same id keys
 
 - [ ] I want see a toast message on new notification
     - [ ] Display a toast message on new received notification 
